@@ -1,0 +1,24 @@
+horstoeko\orderx\entities\basic\ram\TradePriceType:
+    properties:
+        chargeAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: ChargeAmount
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getChargeAmount
+                setter: setChargeAmount
+            type: horstoeko\orderx\entities\basic\udt\AmountType
+        basisQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: BasisQuantity
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getBasisQuantity
+                setter: setBasisQuantity
+            type: horstoeko\orderx\entities\basic\udt\QuantityType

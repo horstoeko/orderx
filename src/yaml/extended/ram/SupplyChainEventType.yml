@@ -1,0 +1,35 @@
+horstoeko\orderx\entities\extended\ram\SupplyChainEventType:
+    properties:
+        occurrenceDateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: OccurrenceDateTime
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getOccurrenceDateTime
+                setter: setOccurrenceDateTime
+            type: horstoeko\orderx\entities\extended\udt\DateTimeType
+        unitQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: UnitQuantity
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getUnitQuantity
+                setter: setUnitQuantity
+            type: horstoeko\orderx\entities\extended\udt\QuantityType
+        occurrenceSpecifiedPeriod:
+            expose: true
+            access_type: public_method
+            serialized_name: OccurrenceSpecifiedPeriod
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getOccurrenceSpecifiedPeriod
+                setter: setOccurrenceSpecifiedPeriod
+            type: horstoeko\orderx\entities\extended\ram\SpecifiedPeriodType

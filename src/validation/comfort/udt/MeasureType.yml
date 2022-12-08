@@ -1,0 +1,7 @@
+horstoeko\orderx\entities\comfort\udt\MeasureType:
+    properties:
+        unitCode:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules

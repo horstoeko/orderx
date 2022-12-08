@@ -1,0 +1,65 @@
+horstoeko\orderx\entities\extended\ram\HeaderTradeDeliveryType:
+    properties:
+        shipToTradeParty:
+            expose: true
+            access_type: public_method
+            serialized_name: ShipToTradeParty
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getShipToTradeParty
+                setter: setShipToTradeParty
+            type: horstoeko\orderx\entities\extended\ram\TradePartyType
+        ultimateShipToTradeParty:
+            expose: true
+            access_type: public_method
+            serialized_name: UltimateShipToTradeParty
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getUltimateShipToTradeParty
+                setter: setUltimateShipToTradeParty
+            type: horstoeko\orderx\entities\extended\ram\TradePartyType
+        shipFromTradeParty:
+            expose: true
+            access_type: public_method
+            serialized_name: ShipFromTradeParty
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getShipFromTradeParty
+                setter: setShipFromTradeParty
+            type: horstoeko\orderx\entities\extended\ram\TradePartyType
+        requestedDeliverySupplyChainEvent:
+            expose: true
+            access_type: public_method
+            serialized_name: RequestedDeliverySupplyChainEvent
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getRequestedDeliverySupplyChainEvent
+                setter: setRequestedDeliverySupplyChainEvent
+            xml_list:
+                inline: true
+                entry_name: RequestedDeliverySupplyChainEvent
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            type: array<horstoeko\orderx\entities\extended\ram\SupplyChainEventType>
+        requestedDespatchSupplyChainEvent:
+            expose: true
+            access_type: public_method
+            serialized_name: RequestedDespatchSupplyChainEvent
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getRequestedDespatchSupplyChainEvent
+                setter: setRequestedDespatchSupplyChainEvent
+            xml_list:
+                inline: true
+                entry_name: RequestedDespatchSupplyChainEvent
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            type: array<horstoeko\orderx\entities\extended\ram\SupplyChainEventType>

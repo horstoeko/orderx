@@ -1,0 +1,35 @@
+horstoeko\orderx\entities\comfort\ram\ExchangedDocumentContextType:
+    properties:
+        testIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: TestIndicator
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getTestIndicator
+                setter: setTestIndicator
+            type: horstoeko\orderx\entities\comfort\udt\IndicatorType
+        businessProcessSpecifiedDocumentContextParameter:
+            expose: true
+            access_type: public_method
+            serialized_name: BusinessProcessSpecifiedDocumentContextParameter
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getBusinessProcessSpecifiedDocumentContextParameter
+                setter: setBusinessProcessSpecifiedDocumentContextParameter
+            type: horstoeko\orderx\entities\comfort\ram\DocumentContextParameterType
+        guidelineSpecifiedDocumentContextParameter:
+            expose: true
+            access_type: public_method
+            serialized_name: GuidelineSpecifiedDocumentContextParameter
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getGuidelineSpecifiedDocumentContextParameter
+                setter: setGuidelineSpecifiedDocumentContextParameter
+            type: horstoeko\orderx\entities\comfort\ram\DocumentContextParameterType

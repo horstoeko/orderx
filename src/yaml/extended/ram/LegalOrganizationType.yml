@@ -1,0 +1,35 @@
+horstoeko\orderx\entities\extended\ram\LegalOrganizationType:
+    properties:
+        iD:
+            expose: true
+            access_type: public_method
+            serialized_name: ID
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getID
+                setter: setID
+            type: horstoeko\orderx\entities\extended\udt\IDType
+        tradingBusinessName:
+            expose: true
+            access_type: public_method
+            serialized_name: TradingBusinessName
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getTradingBusinessName
+                setter: setTradingBusinessName
+            type: string
+        postalTradeAddress:
+            expose: true
+            access_type: public_method
+            serialized_name: PostalTradeAddress
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getPostalTradeAddress
+                setter: setPostalTradeAddress
+            type: horstoeko\orderx\entities\extended\ram\TradeAddressType

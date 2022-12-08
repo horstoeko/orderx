@@ -1,0 +1,24 @@
+horstoeko\orderx\entities\extended\ram\SupplyChainPackagingType:
+    properties:
+        typeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TypeCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getTypeCode
+                setter: setTypeCode
+            type: string
+        linearSpatialDimension:
+            expose: true
+            access_type: public_method
+            serialized_name: LinearSpatialDimension
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getLinearSpatialDimension
+                setter: setLinearSpatialDimension
+            type: horstoeko\orderx\entities\extended\ram\SpatialDimensionType

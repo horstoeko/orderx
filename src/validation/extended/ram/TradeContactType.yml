@@ -1,0 +1,11 @@
+horstoeko\orderx\entities\extended\ram\TradeContactType:
+    properties:
+        telephoneUniversalCommunication:
+            -
+                Valid: null
+        faxUniversalCommunication:
+            -
+                Valid: null
+        emailURIUniversalCommunication:
+            -
+                Valid: null

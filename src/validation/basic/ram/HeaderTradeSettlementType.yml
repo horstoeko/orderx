@@ -1,0 +1,17 @@
+horstoeko\orderx\entities\basic\ram\HeaderTradeSettlementType:
+    properties:
+        orderCurrencyCode:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+        specifiedTradeSettlementHeaderMonetarySummation:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+            -
+                Valid: null
+        receivableSpecifiedTradeAccountingAccount:
+            -
+                Valid: null

@@ -1,0 +1,15 @@
+horstoeko\orderx\entities\basic\ram\LineTradeAgreementType:
+    properties:
+        buyerOrderReferencedDocument:
+            -
+                Valid: null
+        netPriceProductTradePrice:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+            -
+                Valid: null
+        blanketOrderReferencedDocument:
+            -
+                Valid: null

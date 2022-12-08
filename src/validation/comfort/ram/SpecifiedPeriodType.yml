@@ -1,0 +1,8 @@
+horstoeko\orderx\entities\comfort\ram\SpecifiedPeriodType:
+    properties:
+        startDateTime:
+            -
+                Valid: null
+        endDateTime:
+            -
+                Valid: null

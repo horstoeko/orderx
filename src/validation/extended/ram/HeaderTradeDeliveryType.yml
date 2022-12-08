@@ -1,0 +1,17 @@
+horstoeko\orderx\entities\extended\ram\HeaderTradeDeliveryType:
+    properties:
+        shipToTradeParty:
+            -
+                Valid: null
+        ultimateShipToTradeParty:
+            -
+                Valid: null
+        shipFromTradeParty:
+            -
+                Valid: null
+        requestedDeliverySupplyChainEvent:
+            -
+                Valid: null
+        requestedDespatchSupplyChainEvent:
+            -
+                Valid: null

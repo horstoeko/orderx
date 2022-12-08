@@ -1,0 +1,83 @@
+horstoeko\orderx\entities\comfort\ram\HeaderTradeSettlementType:
+    properties:
+        orderCurrencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: OrderCurrencyCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getOrderCurrencyCode
+                setter: setOrderCurrencyCode
+            type: string
+        invoiceeTradeParty:
+            expose: true
+            access_type: public_method
+            serialized_name: InvoiceeTradeParty
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getInvoiceeTradeParty
+                setter: setInvoiceeTradeParty
+            type: horstoeko\orderx\entities\comfort\ram\TradePartyType
+        specifiedTradeSettlementPaymentMeans:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedTradeSettlementPaymentMeans
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSpecifiedTradeSettlementPaymentMeans
+                setter: setSpecifiedTradeSettlementPaymentMeans
+            type: horstoeko\orderx\entities\comfort\ram\TradeSettlementPaymentMeansType
+        specifiedTradeAllowanceCharge:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedTradeAllowanceCharge
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSpecifiedTradeAllowanceCharge
+                setter: setSpecifiedTradeAllowanceCharge
+            xml_list:
+                inline: true
+                entry_name: SpecifiedTradeAllowanceCharge
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            type: array<horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType>
+        specifiedTradePaymentTerms:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedTradePaymentTerms
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSpecifiedTradePaymentTerms
+                setter: setSpecifiedTradePaymentTerms
+            type: horstoeko\orderx\entities\comfort\ram\TradePaymentTermsType
+        specifiedTradeSettlementHeaderMonetarySummation:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedTradeSettlementHeaderMonetarySummation
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSpecifiedTradeSettlementHeaderMonetarySummation
+                setter: setSpecifiedTradeSettlementHeaderMonetarySummation
+            type: horstoeko\orderx\entities\comfort\ram\TradeSettlementHeaderMonetarySummationType
+        receivableSpecifiedTradeAccountingAccount:
+            expose: true
+            access_type: public_method
+            serialized_name: ReceivableSpecifiedTradeAccountingAccount
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getReceivableSpecifiedTradeAccountingAccount
+                setter: setReceivableSpecifiedTradeAccountingAccount
+            type: horstoeko\orderx\entities\comfort\ram\TradeAccountingAccountType

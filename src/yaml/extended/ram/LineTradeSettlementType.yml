@@ -1,0 +1,50 @@
+horstoeko\orderx\entities\extended\ram\LineTradeSettlementType:
+    properties:
+        applicableTradeTax:
+            expose: true
+            access_type: public_method
+            serialized_name: ApplicableTradeTax
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getApplicableTradeTax
+                setter: setApplicableTradeTax
+            type: horstoeko\orderx\entities\extended\ram\TradeTaxType
+        specifiedTradeAllowanceCharge:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedTradeAllowanceCharge
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSpecifiedTradeAllowanceCharge
+                setter: setSpecifiedTradeAllowanceCharge
+            xml_list:
+                inline: true
+                entry_name: SpecifiedTradeAllowanceCharge
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            type: array<horstoeko\orderx\entities\extended\ram\TradeAllowanceChargeType>
+        specifiedTradeSettlementLineMonetarySummation:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedTradeSettlementLineMonetarySummation
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSpecifiedTradeSettlementLineMonetarySummation
+                setter: setSpecifiedTradeSettlementLineMonetarySummation
+            type: horstoeko\orderx\entities\extended\ram\TradeSettlementLineMonetarySummationType
+        receivableSpecifiedTradeAccountingAccount:
+            expose: true
+            access_type: public_method
+            serialized_name: ReceivableSpecifiedTradeAccountingAccount
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getReceivableSpecifiedTradeAccountingAccount
+                setter: setReceivableSpecifiedTradeAccountingAccount
+            type: horstoeko\orderx\entities\extended\ram\TradeAccountingAccountType

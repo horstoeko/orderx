@@ -1,0 +1,24 @@
+horstoeko\orderx\entities\comfort\ram\UniversalCommunicationType:
+    properties:
+        uRIID:
+            expose: true
+            access_type: public_method
+            serialized_name: URIID
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getURIID
+                setter: setURIID
+            type: horstoeko\orderx\entities\comfort\udt\IDType
+        completeNumber:
+            expose: true
+            access_type: public_method
+            serialized_name: CompleteNumber
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getCompleteNumber
+                setter: setCompleteNumber
+            type: string

@@ -1,0 +1,24 @@
+horstoeko\orderx\entities\extended\udt\DateTimeType:
+    properties:
+        dateTimeString:
+            expose: true
+            access_type: public_method
+            serialized_name: DateTimeString
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:UnqualifiedDataType:128'
+            accessor:
+                getter: getDateTimeString
+                setter: setDateTimeString
+            type: horstoeko\orderx\entities\extended\udt\DateTimeType\DateTimeStringAType
+        dateTime:
+            expose: true
+            access_type: public_method
+            serialized_name: DateTime
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:UnqualifiedDataType:128'
+            accessor:
+                getter: getDateTime
+                setter: setDateTime
+            type: GoetasWebservices\Xsd\XsdToPhp\XMLSchema\DateTime

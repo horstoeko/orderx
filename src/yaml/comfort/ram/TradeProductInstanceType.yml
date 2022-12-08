@@ -1,0 +1,24 @@
+horstoeko\orderx\entities\comfort\ram\TradeProductInstanceType:
+    properties:
+        batchID:
+            expose: true
+            access_type: public_method
+            serialized_name: BatchID
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getBatchID
+                setter: setBatchID
+            type: horstoeko\orderx\entities\comfort\udt\IDType
+        serialID:
+            expose: true
+            access_type: public_method
+            serialized_name: SerialID
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSerialID
+                setter: setSerialID
+            type: horstoeko\orderx\entities\comfort\udt\IDType

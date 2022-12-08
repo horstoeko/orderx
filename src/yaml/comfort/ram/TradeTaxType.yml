@@ -1,0 +1,35 @@
+horstoeko\orderx\entities\comfort\ram\TradeTaxType:
+    properties:
+        typeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TypeCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getTypeCode
+                setter: setTypeCode
+            type: string
+        categoryCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CategoryCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getCategoryCode
+                setter: setCategoryCode
+            type: string
+        rateApplicablePercent:
+            expose: true
+            access_type: public_method
+            serialized_name: RateApplicablePercent
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getRateApplicablePercent
+                setter: setRateApplicablePercent
+            type: float

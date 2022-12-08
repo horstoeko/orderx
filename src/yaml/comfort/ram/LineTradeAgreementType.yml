@@ -1,0 +1,83 @@
+horstoeko\orderx\entities\comfort\ram\LineTradeAgreementType:
+    properties:
+        buyerOrderReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: BuyerOrderReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getBuyerOrderReferencedDocument
+                setter: setBuyerOrderReferencedDocument
+            type: horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType
+        quotationReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: QuotationReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getQuotationReferencedDocument
+                setter: setQuotationReferencedDocument
+            type: horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType
+        additionalReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: AdditionalReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getAdditionalReferencedDocument
+                setter: setAdditionalReferencedDocument
+            xml_list:
+                inline: true
+                entry_name: AdditionalReferencedDocument
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            type: array<horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType>
+        grossPriceProductTradePrice:
+            expose: true
+            access_type: public_method
+            serialized_name: GrossPriceProductTradePrice
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getGrossPriceProductTradePrice
+                setter: setGrossPriceProductTradePrice
+            type: horstoeko\orderx\entities\comfort\ram\TradePriceType
+        netPriceProductTradePrice:
+            expose: true
+            access_type: public_method
+            serialized_name: NetPriceProductTradePrice
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getNetPriceProductTradePrice
+                setter: setNetPriceProductTradePrice
+            type: horstoeko\orderx\entities\comfort\ram\TradePriceType
+        catalogueReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: CatalogueReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getCatalogueReferencedDocument
+                setter: setCatalogueReferencedDocument
+            type: horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType
+        blanketOrderReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: BlanketOrderReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getBlanketOrderReferencedDocument
+                setter: setBlanketOrderReferencedDocument
+            type: horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType

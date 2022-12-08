@@ -1,0 +1,23 @@
+horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructureType:
+    properties:
+        exchangedDocumentContext:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+            -
+                Valid: null
+        exchangedDocument:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+            -
+                Valid: null
+        supplyChainTradeTransaction:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+            -
+                Valid: null

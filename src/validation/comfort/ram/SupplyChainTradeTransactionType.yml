@@ -1,0 +1,26 @@
+horstoeko\orderx\entities\comfort\ram\SupplyChainTradeTransactionType:
+    properties:
+        includedSupplyChainTradeLineItem:
+            -
+                Valid: null
+        applicableHeaderTradeAgreement:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+            -
+                Valid: null
+        applicableHeaderTradeDelivery:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+            -
+                Valid: null
+        applicableHeaderTradeSettlement:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+            -
+                Valid: null

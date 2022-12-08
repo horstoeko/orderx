@@ -1,0 +1,35 @@
+horstoeko\orderx\entities\basic\ram\LineTradeAgreementType:
+    properties:
+        buyerOrderReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: BuyerOrderReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getBuyerOrderReferencedDocument
+                setter: setBuyerOrderReferencedDocument
+            type: horstoeko\orderx\entities\basic\ram\ReferencedDocumentType
+        netPriceProductTradePrice:
+            expose: true
+            access_type: public_method
+            serialized_name: NetPriceProductTradePrice
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getNetPriceProductTradePrice
+                setter: setNetPriceProductTradePrice
+            type: horstoeko\orderx\entities\basic\ram\TradePriceType
+        blanketOrderReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: BlanketOrderReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getBlanketOrderReferencedDocument
+                setter: setBlanketOrderReferencedDocument
+            type: horstoeko\orderx\entities\basic\ram\ReferencedDocumentType

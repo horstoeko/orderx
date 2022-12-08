@@ -1,0 +1,7 @@
+horstoeko\orderx\entities\basic\udt\QuantityType:
+    properties:
+        unitCode:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules

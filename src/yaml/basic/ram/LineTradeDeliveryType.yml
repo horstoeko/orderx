@@ -1,0 +1,35 @@
+horstoeko\orderx\entities\basic\ram\LineTradeDeliveryType:
+    properties:
+        partialDeliveryAllowedIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: PartialDeliveryAllowedIndicator
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getPartialDeliveryAllowedIndicator
+                setter: setPartialDeliveryAllowedIndicator
+            type: horstoeko\orderx\entities\basic\udt\IndicatorType
+        requestedQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: RequestedQuantity
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getRequestedQuantity
+                setter: setRequestedQuantity
+            type: horstoeko\orderx\entities\basic\udt\QuantityType
+        agreedQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: AgreedQuantity
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getAgreedQuantity
+                setter: setAgreedQuantity
+            type: horstoeko\orderx\entities\basic\udt\QuantityType

@@ -1,0 +1,28 @@
+horstoeko\orderx\entities\extended\ram\TradeSettlementPaymentMeansType:
+    properties:
+        typeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TypeCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getTypeCode
+                setter: setTypeCode
+            type: string
+        information:
+            expose: true
+            access_type: public_method
+            serialized_name: Information
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getInformation
+                setter: setInformation
+            xml_list:
+                inline: true
+                entry_name: Information
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            type: array<string>

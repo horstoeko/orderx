@@ -1,0 +1,24 @@
+horstoeko\orderx\entities\extended\udt\IndicatorType:
+    properties:
+        indicatorString:
+            expose: true
+            access_type: public_method
+            serialized_name: IndicatorString
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:UnqualifiedDataType:128'
+            accessor:
+                getter: getIndicatorString
+                setter: setIndicatorString
+            type: string
+        indicator:
+            expose: true
+            access_type: public_method
+            serialized_name: Indicator
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:UnqualifiedDataType:128'
+            accessor:
+                getter: getIndicator
+                setter: setIndicator
+            type: bool

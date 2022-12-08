@@ -1,0 +1,68 @@
+horstoeko\orderx\entities\basic\ram\SupplyChainTradeLineItemType:
+    properties:
+        associatedDocumentLineDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: AssociatedDocumentLineDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getAssociatedDocumentLineDocument
+                setter: setAssociatedDocumentLineDocument
+            type: horstoeko\orderx\entities\basic\ram\DocumentLineDocumentType
+        specifiedTradeProduct:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedTradeProduct
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSpecifiedTradeProduct
+                setter: setSpecifiedTradeProduct
+            type: horstoeko\orderx\entities\basic\ram\TradeProductType
+        substitutedReferencedProduct:
+            expose: true
+            access_type: public_method
+            serialized_name: SubstitutedReferencedProduct
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSubstitutedReferencedProduct
+                setter: setSubstitutedReferencedProduct
+            type: horstoeko\orderx\entities\basic\ram\ReferencedProductType
+        specifiedLineTradeAgreement:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedLineTradeAgreement
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSpecifiedLineTradeAgreement
+                setter: setSpecifiedLineTradeAgreement
+            type: horstoeko\orderx\entities\basic\ram\LineTradeAgreementType
+        specifiedLineTradeDelivery:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedLineTradeDelivery
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSpecifiedLineTradeDelivery
+                setter: setSpecifiedLineTradeDelivery
+            type: horstoeko\orderx\entities\basic\ram\LineTradeDeliveryType
+        specifiedLineTradeSettlement:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedLineTradeSettlement
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSpecifiedLineTradeSettlement
+                setter: setSpecifiedLineTradeSettlement
+            type: horstoeko\orderx\entities\basic\ram\LineTradeSettlementType

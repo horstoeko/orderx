@@ -1,0 +1,54 @@
+horstoeko\orderx\entities\extended\ram\ProductCharacteristicType:
+    properties:
+        typeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TypeCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getTypeCode
+                setter: setTypeCode
+            type: horstoeko\orderx\entities\extended\udt\CodeType
+        description:
+            expose: true
+            access_type: public_method
+            serialized_name: Description
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getDescription
+                setter: setDescription
+            xml_list:
+                inline: true
+                entry_name: Description
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            type: array<string>
+        valueMeasure:
+            expose: true
+            access_type: public_method
+            serialized_name: ValueMeasure
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getValueMeasure
+                setter: setValueMeasure
+            type: horstoeko\orderx\entities\extended\udt\MeasureType
+        value:
+            expose: true
+            access_type: public_method
+            serialized_name: Value
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getValue
+                setter: setValue
+            xml_list:
+                inline: true
+                entry_name: Value
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            type: array<string>

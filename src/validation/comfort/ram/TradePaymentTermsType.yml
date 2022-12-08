@@ -1,0 +1,7 @@
+horstoeko\orderx\entities\comfort\ram\TradePaymentTermsType:
+    properties:
+        description:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules

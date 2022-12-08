@@ -1,0 +1,10 @@
+horstoeko\orderx\entities\comfort\ram\DocumentLineDocumentType:
+    properties:
+        lineID:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+        includedNote:
+            -
+                Valid: null

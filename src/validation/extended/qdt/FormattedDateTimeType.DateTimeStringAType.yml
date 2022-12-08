@@ -1,0 +1,18 @@
+horstoeko\orderx\entities\extended\qdt\FormattedDateTimeType\DateTimeStringAType:
+    properties:
+        format:
+            -
+                Choice:
+                    choices:
+                        - '102'
+                        - '203'
+                        - '205'
+                        - '209'
+                        - '502'
+                        - '602'
+                    groups:
+                        - xsd_rules
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules

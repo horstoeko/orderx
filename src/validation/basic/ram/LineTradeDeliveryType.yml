@@ -1,0 +1,10 @@
+horstoeko\orderx\entities\basic\ram\LineTradeDeliveryType:
+    properties:
+        partialDeliveryAllowedIndicator:
+            -
+                Valid: null
+        requestedQuantity:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules

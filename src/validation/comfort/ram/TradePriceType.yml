@@ -1,0 +1,10 @@
+horstoeko\orderx\entities\comfort\ram\TradePriceType:
+    properties:
+        chargeAmount:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+        appliedTradeAllowanceCharge:
+            -
+                Valid: null

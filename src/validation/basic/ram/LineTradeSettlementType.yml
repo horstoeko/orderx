@@ -1,0 +1,9 @@
+horstoeko\orderx\entities\basic\ram\LineTradeSettlementType:
+    properties:
+        specifiedTradeSettlementLineMonetarySummation:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+            -
+                Valid: null

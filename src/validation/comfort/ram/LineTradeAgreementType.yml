@@ -1,0 +1,27 @@
+horstoeko\orderx\entities\comfort\ram\LineTradeAgreementType:
+    properties:
+        buyerOrderReferencedDocument:
+            -
+                Valid: null
+        quotationReferencedDocument:
+            -
+                Valid: null
+        additionalReferencedDocument:
+            -
+                Valid: null
+        grossPriceProductTradePrice:
+            -
+                Valid: null
+        netPriceProductTradePrice:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+            -
+                Valid: null
+        catalogueReferencedDocument:
+            -
+                Valid: null
+        blanketOrderReferencedDocument:
+            -
+                Valid: null

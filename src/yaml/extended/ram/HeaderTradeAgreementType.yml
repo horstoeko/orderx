@@ -1,0 +1,230 @@
+horstoeko\orderx\entities\extended\ram\HeaderTradeAgreementType:
+    properties:
+        buyerReference:
+            expose: true
+            access_type: public_method
+            serialized_name: BuyerReference
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getBuyerReference
+                setter: setBuyerReference
+            type: string
+        sellerTradeParty:
+            expose: true
+            access_type: public_method
+            serialized_name: SellerTradeParty
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSellerTradeParty
+                setter: setSellerTradeParty
+            type: horstoeko\orderx\entities\extended\ram\TradePartyType
+        buyerTradeParty:
+            expose: true
+            access_type: public_method
+            serialized_name: BuyerTradeParty
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getBuyerTradeParty
+                setter: setBuyerTradeParty
+            type: horstoeko\orderx\entities\extended\ram\TradePartyType
+        buyerRequisitionerTradeParty:
+            expose: true
+            access_type: public_method
+            serialized_name: BuyerRequisitionerTradeParty
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getBuyerRequisitionerTradeParty
+                setter: setBuyerRequisitionerTradeParty
+            type: horstoeko\orderx\entities\extended\ram\TradePartyType
+        productEndUserTradeParty:
+            expose: true
+            access_type: public_method
+            serialized_name: ProductEndUserTradeParty
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getProductEndUserTradeParty
+                setter: setProductEndUserTradeParty
+            type: horstoeko\orderx\entities\extended\ram\TradePartyType
+        applicableTradeDeliveryTerms:
+            expose: true
+            access_type: public_method
+            serialized_name: ApplicableTradeDeliveryTerms
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getApplicableTradeDeliveryTerms
+                setter: setApplicableTradeDeliveryTerms
+            type: horstoeko\orderx\entities\extended\ram\TradeDeliveryTermsType
+        sellerOrderReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: SellerOrderReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSellerOrderReferencedDocument
+                setter: setSellerOrderReferencedDocument
+            type: horstoeko\orderx\entities\extended\ram\ReferencedDocumentType
+        buyerOrderReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: BuyerOrderReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getBuyerOrderReferencedDocument
+                setter: setBuyerOrderReferencedDocument
+            type: horstoeko\orderx\entities\extended\ram\ReferencedDocumentType
+        quotationReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: QuotationReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getQuotationReferencedDocument
+                setter: setQuotationReferencedDocument
+            type: horstoeko\orderx\entities\extended\ram\ReferencedDocumentType
+        contractReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: ContractReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getContractReferencedDocument
+                setter: setContractReferencedDocument
+            type: horstoeko\orderx\entities\extended\ram\ReferencedDocumentType
+        requisitionReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: RequisitionReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getRequisitionReferencedDocument
+                setter: setRequisitionReferencedDocument
+            type: horstoeko\orderx\entities\extended\ram\ReferencedDocumentType
+        additionalReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: AdditionalReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getAdditionalReferencedDocument
+                setter: setAdditionalReferencedDocument
+            xml_list:
+                inline: true
+                entry_name: AdditionalReferencedDocument
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            type: array<horstoeko\orderx\entities\extended\ram\ReferencedDocumentType>
+        buyerAgentTradeParty:
+            expose: true
+            access_type: public_method
+            serialized_name: BuyerAgentTradeParty
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getBuyerAgentTradeParty
+                setter: setBuyerAgentTradeParty
+            type: horstoeko\orderx\entities\extended\ram\TradePartyType
+        catalogueReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: CatalogueReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getCatalogueReferencedDocument
+                setter: setCatalogueReferencedDocument
+            type: horstoeko\orderx\entities\extended\ram\ReferencedDocumentType
+        blanketOrderReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: BlanketOrderReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getBlanketOrderReferencedDocument
+                setter: setBlanketOrderReferencedDocument
+            type: horstoeko\orderx\entities\extended\ram\ReferencedDocumentType
+        previousOrderReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: PreviousOrderReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getPreviousOrderReferencedDocument
+                setter: setPreviousOrderReferencedDocument
+            type: horstoeko\orderx\entities\extended\ram\ReferencedDocumentType
+        previousOrderChangeReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: PreviousOrderChangeReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getPreviousOrderChangeReferencedDocument
+                setter: setPreviousOrderChangeReferencedDocument
+            type: horstoeko\orderx\entities\extended\ram\ReferencedDocumentType
+        previousOrderResponseReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: PreviousOrderResponseReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getPreviousOrderResponseReferencedDocument
+                setter: setPreviousOrderResponseReferencedDocument
+            type: horstoeko\orderx\entities\extended\ram\ReferencedDocumentType
+        specifiedProcuringProject:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedProcuringProject
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSpecifiedProcuringProject
+                setter: setSpecifiedProcuringProject
+            type: horstoeko\orderx\entities\extended\ram\ProcuringProjectType
+        ultimateCustomerOrderReferencedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: UltimateCustomerOrderReferencedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getUltimateCustomerOrderReferencedDocument
+                setter: setUltimateCustomerOrderReferencedDocument
+            xml_list:
+                inline: true
+                entry_name: UltimateCustomerOrderReferencedDocument
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            type: array<horstoeko\orderx\entities\extended\ram\ReferencedDocumentType>

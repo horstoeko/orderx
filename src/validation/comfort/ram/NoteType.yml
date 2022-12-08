@@ -1,0 +1,7 @@
+horstoeko\orderx\entities\comfort\ram\NoteType:
+    properties:
+        content:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules

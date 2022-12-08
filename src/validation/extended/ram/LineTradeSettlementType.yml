@@ -1,0 +1,18 @@
+horstoeko\orderx\entities\extended\ram\LineTradeSettlementType:
+    properties:
+        applicableTradeTax:
+            -
+                Valid: null
+        specifiedTradeAllowanceCharge:
+            -
+                Valid: null
+        specifiedTradeSettlementLineMonetarySummation:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+            -
+                Valid: null
+        receivableSpecifiedTradeAccountingAccount:
+            -
+                Valid: null

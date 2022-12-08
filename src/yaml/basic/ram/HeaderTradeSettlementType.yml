@@ -1,0 +1,35 @@
+horstoeko\orderx\entities\basic\ram\HeaderTradeSettlementType:
+    properties:
+        orderCurrencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: OrderCurrencyCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getOrderCurrencyCode
+                setter: setOrderCurrencyCode
+            type: string
+        specifiedTradeSettlementHeaderMonetarySummation:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedTradeSettlementHeaderMonetarySummation
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSpecifiedTradeSettlementHeaderMonetarySummation
+                setter: setSpecifiedTradeSettlementHeaderMonetarySummation
+            type: horstoeko\orderx\entities\basic\ram\TradeSettlementHeaderMonetarySummationType
+        receivableSpecifiedTradeAccountingAccount:
+            expose: true
+            access_type: public_method
+            serialized_name: ReceivableSpecifiedTradeAccountingAccount
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getReceivableSpecifiedTradeAccountingAccount
+                setter: setReceivableSpecifiedTradeAccountingAccount
+            type: horstoeko\orderx\entities\basic\ram\TradeAccountingAccountType

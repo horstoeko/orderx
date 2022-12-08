@@ -1,0 +1,76 @@
+horstoeko\orderx\entities\extended\ram\TradePriceType:
+    properties:
+        chargeAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: ChargeAmount
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getChargeAmount
+                setter: setChargeAmount
+            type: horstoeko\orderx\entities\extended\udt\AmountType
+        basisQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: BasisQuantity
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getBasisQuantity
+                setter: setBasisQuantity
+            type: horstoeko\orderx\entities\extended\udt\QuantityType
+        minimumQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: MinimumQuantity
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getMinimumQuantity
+                setter: setMinimumQuantity
+            type: horstoeko\orderx\entities\extended\udt\QuantityType
+        maximumQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: MaximumQuantity
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getMaximumQuantity
+                setter: setMaximumQuantity
+            type: horstoeko\orderx\entities\extended\udt\QuantityType
+        appliedTradeAllowanceCharge:
+            expose: true
+            access_type: public_method
+            serialized_name: AppliedTradeAllowanceCharge
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getAppliedTradeAllowanceCharge
+                setter: setAppliedTradeAllowanceCharge
+            xml_list:
+                inline: true
+                entry_name: AppliedTradeAllowanceCharge
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            type: array<horstoeko\orderx\entities\extended\ram\TradeAllowanceChargeType>
+        includedTradeTax:
+            expose: true
+            access_type: public_method
+            serialized_name: IncludedTradeTax
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getIncludedTradeTax
+                setter: setIncludedTradeTax
+            xml_list:
+                inline: true
+                entry_name: IncludedTradeTax
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            type: array<horstoeko\orderx\entities\extended\ram\TradeTaxType>

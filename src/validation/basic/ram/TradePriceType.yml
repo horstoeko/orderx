@@ -1,0 +1,7 @@
+horstoeko\orderx\entities\basic\ram\TradePriceType:
+    properties:
+        chargeAmount:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules

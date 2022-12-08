@@ -1,0 +1,36 @@
+horstoeko\orderx\entities\extended\ram\LineTradeAgreementType:
+    properties:
+        buyerRequisitionerTradeParty:
+            -
+                Valid: null
+        buyerOrderReferencedDocument:
+            -
+                Valid: null
+        quotationReferencedDocument:
+            -
+                Valid: null
+        contractReferencedDocument:
+            -
+                Valid: null
+        additionalReferencedDocument:
+            -
+                Valid: null
+        grossPriceProductTradePrice:
+            -
+                Valid: null
+        netPriceProductTradePrice:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+            -
+                Valid: null
+        catalogueReferencedDocument:
+            -
+                Valid: null
+        blanketOrderReferencedDocument:
+            -
+                Valid: null
+        ultimateCustomerOrderReferencedDocument:
+            -
+                Valid: null

@@ -1,0 +1,16 @@
+horstoeko\orderx\entities\comfort\ram\LineTradeDeliveryType:
+    properties:
+        partialDeliveryAllowedIndicator:
+            -
+                Valid: null
+        requestedQuantity:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+        requestedDespatchSupplyChainEvent:
+            -
+                Valid: null
+        requestedDeliverySupplyChainEvent:
+            -
+                Valid: null

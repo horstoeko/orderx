@@ -1,0 +1,7 @@
+horstoeko\orderx\entities\comfort\ram\TradeAccountingAccountType:
+    properties:
+        iD:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules

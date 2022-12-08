@@ -1,0 +1,3 @@
+horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure:
+    xml_root_name: SCRDMCCBDACIOMessageStructure
+    xml_root_namespace: 'urn:un:unece:uncefact:data:SCRDMCCBDACIOMessageStructure:100'

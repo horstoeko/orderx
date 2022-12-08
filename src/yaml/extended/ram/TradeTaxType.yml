@@ -1,0 +1,112 @@
+horstoeko\orderx\entities\extended\ram\TradeTaxType:
+    properties:
+        calculatedAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: CalculatedAmount
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getCalculatedAmount
+                setter: setCalculatedAmount
+            type: horstoeko\orderx\entities\extended\udt\AmountType
+        typeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TypeCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getTypeCode
+                setter: setTypeCode
+            type: string
+        exemptionReason:
+            expose: true
+            access_type: public_method
+            serialized_name: ExemptionReason
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getExemptionReason
+                setter: setExemptionReason
+            type: string
+        basisAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: BasisAmount
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getBasisAmount
+                setter: setBasisAmount
+            type: horstoeko\orderx\entities\extended\udt\AmountType
+        lineTotalBasisAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: LineTotalBasisAmount
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getLineTotalBasisAmount
+                setter: setLineTotalBasisAmount
+            type: horstoeko\orderx\entities\extended\udt\AmountType
+        allowanceChargeBasisAmount:
+            expose: true
+            access_type: public_method
+            serialized_name: AllowanceChargeBasisAmount
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getAllowanceChargeBasisAmount
+                setter: setAllowanceChargeBasisAmount
+            type: horstoeko\orderx\entities\extended\udt\AmountType
+        categoryCode:
+            expose: true
+            access_type: public_method
+            serialized_name: CategoryCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getCategoryCode
+                setter: setCategoryCode
+            type: string
+        exemptionReasonCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ExemptionReasonCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getExemptionReasonCode
+                setter: setExemptionReasonCode
+            type: horstoeko\orderx\entities\extended\udt\CodeType
+        dueDateTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: DueDateTypeCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getDueDateTypeCode
+                setter: setDueDateTypeCode
+            type: string
+        rateApplicablePercent:
+            expose: true
+            access_type: public_method
+            serialized_name: RateApplicablePercent
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getRateApplicablePercent
+                setter: setRateApplicablePercent
+            type: float

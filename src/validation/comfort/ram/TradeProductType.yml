@@ -1,0 +1,20 @@
+horstoeko\orderx\entities\comfort\ram\TradeProductType:
+    properties:
+        applicableProductCharacteristic:
+            -
+                Valid: null
+        designatedProductClassification:
+            -
+                Valid: null
+        individualTradeProductInstance:
+            -
+                Valid: null
+        applicableSupplyChainPackaging:
+            -
+                Valid: null
+        originTradeCountry:
+            -
+                Valid: null
+        additionalReferenceReferencedDocument:
+            -
+                Valid: null

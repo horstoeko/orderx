@@ -1,0 +1,8 @@
+horstoeko\orderx\entities\basic\ram\SupplyChainEventType:
+    properties:
+        occurrenceDateTime:
+            -
+                Valid: null
+        occurrenceSpecifiedPeriod:
+            -
+                Valid: null

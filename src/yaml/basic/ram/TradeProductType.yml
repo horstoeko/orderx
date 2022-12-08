@@ -1,0 +1,46 @@
+horstoeko\orderx\entities\basic\ram\TradeProductType:
+    properties:
+        globalID:
+            expose: true
+            access_type: public_method
+            serialized_name: GlobalID
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getGlobalID
+                setter: setGlobalID
+            type: horstoeko\orderx\entities\basic\udt\IDType
+        sellerAssignedID:
+            expose: true
+            access_type: public_method
+            serialized_name: SellerAssignedID
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSellerAssignedID
+                setter: setSellerAssignedID
+            type: horstoeko\orderx\entities\basic\udt\IDType
+        buyerAssignedID:
+            expose: true
+            access_type: public_method
+            serialized_name: BuyerAssignedID
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getBuyerAssignedID
+                setter: setBuyerAssignedID
+            type: horstoeko\orderx\entities\basic\udt\IDType
+        name:
+            expose: true
+            access_type: public_method
+            serialized_name: Name
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getName
+                setter: setName
+            type: string

@@ -1,0 +1,35 @@
+horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructureType:
+    properties:
+        exchangedDocumentContext:
+            expose: true
+            access_type: public_method
+            serialized_name: ExchangedDocumentContext
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:SCRDMCCBDACIOMessageStructure:100'
+            accessor:
+                getter: getExchangedDocumentContext
+                setter: setExchangedDocumentContext
+            type: horstoeko\orderx\entities\comfort\ram\ExchangedDocumentContextType
+        exchangedDocument:
+            expose: true
+            access_type: public_method
+            serialized_name: ExchangedDocument
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:SCRDMCCBDACIOMessageStructure:100'
+            accessor:
+                getter: getExchangedDocument
+                setter: setExchangedDocument
+            type: horstoeko\orderx\entities\comfort\ram\ExchangedDocumentType
+        supplyChainTradeTransaction:
+            expose: true
+            access_type: public_method
+            serialized_name: SupplyChainTradeTransaction
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:SCRDMCCBDACIOMessageStructure:100'
+            accessor:
+                getter: getSupplyChainTradeTransaction
+                setter: setSupplyChainTradeTransaction
+            type: horstoeko\orderx\entities\comfort\ram\SupplyChainTradeTransactionType

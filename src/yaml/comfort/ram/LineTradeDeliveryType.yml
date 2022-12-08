@@ -1,0 +1,79 @@
+horstoeko\orderx\entities\comfort\ram\LineTradeDeliveryType:
+    properties:
+        partialDeliveryAllowedIndicator:
+            expose: true
+            access_type: public_method
+            serialized_name: PartialDeliveryAllowedIndicator
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getPartialDeliveryAllowedIndicator
+                setter: setPartialDeliveryAllowedIndicator
+            type: horstoeko\orderx\entities\comfort\udt\IndicatorType
+        requestedQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: RequestedQuantity
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getRequestedQuantity
+                setter: setRequestedQuantity
+            type: horstoeko\orderx\entities\comfort\udt\QuantityType
+        agreedQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: AgreedQuantity
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getAgreedQuantity
+                setter: setAgreedQuantity
+            type: horstoeko\orderx\entities\comfort\udt\QuantityType
+        packageQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: PackageQuantity
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getPackageQuantity
+                setter: setPackageQuantity
+            type: horstoeko\orderx\entities\comfort\udt\QuantityType
+        perPackageUnitQuantity:
+            expose: true
+            access_type: public_method
+            serialized_name: PerPackageUnitQuantity
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getPerPackageUnitQuantity
+                setter: setPerPackageUnitQuantity
+            type: horstoeko\orderx\entities\comfort\udt\QuantityType
+        requestedDespatchSupplyChainEvent:
+            expose: true
+            access_type: public_method
+            serialized_name: RequestedDespatchSupplyChainEvent
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getRequestedDespatchSupplyChainEvent
+                setter: setRequestedDespatchSupplyChainEvent
+            type: horstoeko\orderx\entities\comfort\ram\SupplyChainEventType
+        requestedDeliverySupplyChainEvent:
+            expose: true
+            access_type: public_method
+            serialized_name: RequestedDeliverySupplyChainEvent
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getRequestedDeliverySupplyChainEvent
+                setter: setRequestedDeliverySupplyChainEvent
+            type: horstoeko\orderx\entities\comfort\ram\SupplyChainEventType

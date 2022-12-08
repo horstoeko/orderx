@@ -1,0 +1,35 @@
+horstoeko\orderx\entities\comfort\ram\SpatialDimensionType:
+    properties:
+        widthMeasure:
+            expose: true
+            access_type: public_method
+            serialized_name: WidthMeasure
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getWidthMeasure
+                setter: setWidthMeasure
+            type: horstoeko\orderx\entities\comfort\udt\MeasureType
+        lengthMeasure:
+            expose: true
+            access_type: public_method
+            serialized_name: LengthMeasure
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getLengthMeasure
+                setter: setLengthMeasure
+            type: horstoeko\orderx\entities\comfort\udt\MeasureType
+        heightMeasure:
+            expose: true
+            access_type: public_method
+            serialized_name: HeightMeasure
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getHeightMeasure
+                setter: setHeightMeasure
+            type: horstoeko\orderx\entities\comfort\udt\MeasureType

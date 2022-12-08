@@ -1,0 +1,79 @@
+horstoeko\orderx\entities\comfort\ram\TradeAddressType:
+    properties:
+        postcodeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: PostcodeCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getPostcodeCode
+                setter: setPostcodeCode
+            type: horstoeko\orderx\entities\comfort\udt\CodeType
+        lineOne:
+            expose: true
+            access_type: public_method
+            serialized_name: LineOne
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getLineOne
+                setter: setLineOne
+            type: string
+        lineTwo:
+            expose: true
+            access_type: public_method
+            serialized_name: LineTwo
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getLineTwo
+                setter: setLineTwo
+            type: string
+        lineThree:
+            expose: true
+            access_type: public_method
+            serialized_name: LineThree
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getLineThree
+                setter: setLineThree
+            type: string
+        cityName:
+            expose: true
+            access_type: public_method
+            serialized_name: CityName
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getCityName
+                setter: setCityName
+            type: string
+        countryID:
+            expose: true
+            access_type: public_method
+            serialized_name: CountryID
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getCountryID
+                setter: setCountryID
+            type: string
+        countrySubDivisionName:
+            expose: true
+            access_type: public_method
+            serialized_name: CountrySubDivisionName
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getCountrySubDivisionName
+                setter: setCountrySubDivisionName
+            type: string

@@ -1,0 +1,151 @@
+horstoeko\orderx\entities\extended\ram\HeaderTradeSettlementType:
+    properties:
+        taxCurrencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TaxCurrencyCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getTaxCurrencyCode
+                setter: setTaxCurrencyCode
+            type: string
+        orderCurrencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: OrderCurrencyCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getOrderCurrencyCode
+                setter: setOrderCurrencyCode
+            type: string
+        invoiceCurrencyCode:
+            expose: true
+            access_type: public_method
+            serialized_name: InvoiceCurrencyCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getInvoiceCurrencyCode
+                setter: setInvoiceCurrencyCode
+            type: string
+        invoicerTradeParty:
+            expose: true
+            access_type: public_method
+            serialized_name: InvoicerTradeParty
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getInvoicerTradeParty
+                setter: setInvoicerTradeParty
+            type: horstoeko\orderx\entities\extended\ram\TradePartyType
+        invoiceeTradeParty:
+            expose: true
+            access_type: public_method
+            serialized_name: InvoiceeTradeParty
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getInvoiceeTradeParty
+                setter: setInvoiceeTradeParty
+            type: horstoeko\orderx\entities\extended\ram\TradePartyType
+        specifiedTradeSettlementPaymentMeans:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedTradeSettlementPaymentMeans
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSpecifiedTradeSettlementPaymentMeans
+                setter: setSpecifiedTradeSettlementPaymentMeans
+            type: horstoeko\orderx\entities\extended\ram\TradeSettlementPaymentMeansType
+        applicableTradeTax:
+            expose: true
+            access_type: public_method
+            serialized_name: ApplicableTradeTax
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getApplicableTradeTax
+                setter: setApplicableTradeTax
+            xml_list:
+                inline: true
+                entry_name: ApplicableTradeTax
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            type: array<horstoeko\orderx\entities\extended\ram\TradeTaxType>
+        specifiedTradeAllowanceCharge:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedTradeAllowanceCharge
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSpecifiedTradeAllowanceCharge
+                setter: setSpecifiedTradeAllowanceCharge
+            xml_list:
+                inline: true
+                entry_name: SpecifiedTradeAllowanceCharge
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            type: array<horstoeko\orderx\entities\extended\ram\TradeAllowanceChargeType>
+        specifiedLogisticsServiceCharge:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedLogisticsServiceCharge
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSpecifiedLogisticsServiceCharge
+                setter: setSpecifiedLogisticsServiceCharge
+            xml_list:
+                inline: true
+                entry_name: SpecifiedLogisticsServiceCharge
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            type: array<horstoeko\orderx\entities\extended\ram\LogisticsServiceChargeType>
+        specifiedTradePaymentTerms:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedTradePaymentTerms
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSpecifiedTradePaymentTerms
+                setter: setSpecifiedTradePaymentTerms
+            type: array<string>
+            xml_list:
+                inline: false
+                entry_name: Description
+                skip_when_empty: true
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+        specifiedTradeSettlementHeaderMonetarySummation:
+            expose: true
+            access_type: public_method
+            serialized_name: SpecifiedTradeSettlementHeaderMonetarySummation
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSpecifiedTradeSettlementHeaderMonetarySummation
+                setter: setSpecifiedTradeSettlementHeaderMonetarySummation
+            type: horstoeko\orderx\entities\extended\ram\TradeSettlementHeaderMonetarySummationType
+        receivableSpecifiedTradeAccountingAccount:
+            expose: true
+            access_type: public_method
+            serialized_name: ReceivableSpecifiedTradeAccountingAccount
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getReceivableSpecifiedTradeAccountingAccount
+                setter: setReceivableSpecifiedTradeAccountingAccount
+            type: horstoeko\orderx\entities\extended\ram\TradeAccountingAccountType

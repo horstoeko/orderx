@@ -1,0 +1,24 @@
+horstoeko\orderx\entities\comfort\ram\NoteType:
+    properties:
+        content:
+            expose: true
+            access_type: public_method
+            serialized_name: Content
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getContent
+                setter: setContent
+            type: string
+        subjectCode:
+            expose: true
+            access_type: public_method
+            serialized_name: SubjectCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getSubjectCode
+                setter: setSubjectCode
+            type: horstoeko\orderx\entities\comfort\udt\CodeType

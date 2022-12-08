@@ -1,0 +1,5 @@
+horstoeko\orderx\entities\comfort\ram\TradeDeliveryTermsType:
+    properties:
+        relevantTradeLocation:
+            -
+                Valid: null

@@ -1,0 +1,40 @@
+horstoeko\orderx\entities\basic\ram\HeaderTradeAgreementType:
+    properties:
+        sellerTradeParty:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+            -
+                Valid: null
+        buyerTradeParty:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+            -
+                Valid: null
+        applicableTradeDeliveryTerms:
+            -
+                Valid: null
+        buyerOrderReferencedDocument:
+            -
+                Valid: null
+        quotationReferencedDocument:
+            -
+                Valid: null
+        contractReferencedDocument:
+            -
+                Valid: null
+        blanketOrderReferencedDocument:
+            -
+                Valid: null
+        previousOrderReferencedDocument:
+            -
+                Valid: null
+        previousOrderChangeReferencedDocument:
+            -
+                Valid: null
+        previousOrderResponseReferencedDocument:
+            -
+                Valid: null

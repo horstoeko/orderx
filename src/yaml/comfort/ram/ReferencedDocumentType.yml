@@ -1,0 +1,79 @@
+horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType:
+    properties:
+        issuerAssignedID:
+            expose: true
+            access_type: public_method
+            serialized_name: IssuerAssignedID
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getIssuerAssignedID
+                setter: setIssuerAssignedID
+            type: horstoeko\orderx\entities\comfort\udt\IDType
+        uRIID:
+            expose: true
+            access_type: public_method
+            serialized_name: URIID
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getURIID
+                setter: setURIID
+            type: horstoeko\orderx\entities\comfort\udt\IDType
+        lineID:
+            expose: true
+            access_type: public_method
+            serialized_name: LineID
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getLineID
+                setter: setLineID
+            type: horstoeko\orderx\entities\comfort\udt\IDType
+        typeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: TypeCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getTypeCode
+                setter: setTypeCode
+            type: string
+        name:
+            expose: true
+            access_type: public_method
+            serialized_name: Name
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getName
+                setter: setName
+            type: string
+        attachmentBinaryObject:
+            expose: true
+            access_type: public_method
+            serialized_name: AttachmentBinaryObject
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getAttachmentBinaryObject
+                setter: setAttachmentBinaryObject
+            type: horstoeko\orderx\entities\comfort\udt\BinaryObjectType
+        referenceTypeCode:
+            expose: true
+            access_type: public_method
+            serialized_name: ReferenceTypeCode
+            xml_element:
+                cdata: false
+                namespace: 'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128'
+            accessor:
+                getter: getReferenceTypeCode
+                setter: setReferenceTypeCode
+            type: string

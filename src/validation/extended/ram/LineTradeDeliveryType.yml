@@ -1,0 +1,25 @@
+horstoeko\orderx\entities\extended\ram\LineTradeDeliveryType:
+    properties:
+        partialDeliveryAllowedIndicator:
+            -
+                Valid: null
+        requestedQuantity:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+        shipToTradeParty:
+            -
+                Valid: null
+        ultimateShipToTradeParty:
+            -
+                Valid: null
+        shipFromTradeParty:
+            -
+                Valid: null
+        requestedDespatchSupplyChainEvent:
+            -
+                Valid: null
+        requestedDeliverySupplyChainEvent:
+            -
+                Valid: null

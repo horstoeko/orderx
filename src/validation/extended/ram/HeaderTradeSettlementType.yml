@@ -1,0 +1,38 @@
+horstoeko\orderx\entities\extended\ram\HeaderTradeSettlementType:
+    properties:
+        orderCurrencyCode:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+        invoicerTradeParty:
+            -
+                Valid: null
+        invoiceeTradeParty:
+            -
+                Valid: null
+        specifiedTradeSettlementPaymentMeans:
+            -
+                Valid: null
+        applicableTradeTax:
+            -
+                Valid: null
+        specifiedTradeAllowanceCharge:
+            -
+                Valid: null
+        specifiedLogisticsServiceCharge:
+            -
+                Valid: null
+        specifiedTradePaymentTerms:
+            -
+                Valid: null
+        specifiedTradeSettlementHeaderMonetarySummation:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+            -
+                Valid: null
+        receivableSpecifiedTradeAccountingAccount:
+            -
+                Valid: null

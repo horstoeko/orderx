@@ -1,0 +1,12 @@
+horstoeko\orderx\entities\comfort\ram\TradeSettlementHeaderMonetarySummationType:
+    properties:
+        lineTotalAmount:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
+        taxBasisTotalAmount:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules

@@ -1,0 +1,7 @@
+horstoeko\orderx\entities\extended\ram\TradeAddressType:
+    properties:
+        countryID:
+            -
+                NotNull:
+                    groups:
+                        - xsd_rules
