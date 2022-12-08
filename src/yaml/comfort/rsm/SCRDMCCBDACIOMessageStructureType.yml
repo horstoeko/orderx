@@ -1,4 +1,12 @@
 horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructureType:
+    xml_namespaces:
+        a: urn:un:unece:uncefact:data:standard:QualifiedDataType:100
+        rsm: urn:un:unece:uncefact:data:SCRDMCCBDACIOMessageStructure:100
+        qdt: urn:un:unece:uncefact:data:standard:QualifiedDataType:128
+        ram: urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128
+        xs: http://www.w3.org/2001/XMLSchema
+        udt: urn:un:unece:uncefact:data:standard:UnqualifiedDataType:128
+        xsi: http://www.w3.org/2001/XMLSchema-instance
     properties:
         exchangedDocumentContext:
             expose: true
