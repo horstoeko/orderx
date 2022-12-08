@@ -13,14 +13,14 @@ This package makes use of [JMS Serializer](http://jmsyst.com/libs/serializer), [
 
 ## Installation
 
-There is one recommended way to install `horstoeko/ubl` via [Composer](https://getcomposer.org/):
+There is one recommended way to install `horstoeko/orderx` via [Composer](https://getcomposer.org/):
 
 * adding the dependency to your ``composer.json`` file:
 
 ```js
   "require": {
       ..
-      "horstoeko/ubl":"^1",
+      "horstoeko/orderx":"^1",
       ..
   },
 ```
