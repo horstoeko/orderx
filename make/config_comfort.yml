@@ -1,0 +1,51 @@
+xsd2php:
+  namespaces:
+    'urn:un:unece:uncefact:data:SCRDMCCBDACIOMessageStructure:100': 'horstoeko\orderx\entities\comfort\rsm'
+    'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128': 'horstoeko\orderx\entities\comfort\ram'
+    'urn:un:unece:uncefact:data:standard:UnqualifiedDataType:128': 'horstoeko\orderx\entities\comfort\udt'
+    'urn:un:unece:uncefact:data:standard:QualifiedDataType:128': 'horstoeko\orderx\entities\comfort\qdt'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:DocumentNameCode:D20A': 'horstoeko\orderx\entities\comfort\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:DocumentStatusCode:D20A': 'horstoeko\orderx\entities\comfort\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:MessageFunctionCode:D20A': 'horstoeko\orderx\entities\comfort\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:ActionCode:D20A': 'horstoeko\orderx\entities\comfort\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:PackageTypeCode:2006': 'horstoeko\orderx\entities\comfort\unknown'
+    'urn:un:unece:uncefact:identifierlist:standard:ISO:ISOTwo-letterCountryCode:SecondEdition2006': 'horstoeko\orderx\entities\comfort\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:ReferenceTypeCode:D20A': 'horstoeko\orderx\entities\comfort\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:TimePointFormatCode:D19B': 'horstoeko\orderx\entities\comfort\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:ContactFunctionCode:D20A': 'horstoeko\orderx\entities\comfort\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:AllowanceChargeReasonCode:D20A': 'horstoeko\orderx\entities\comfort\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:DutyTaxFeeTypeCode:D20A': 'horstoeko\orderx\entities\comfort\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:DutyorTaxorFeeCategoryCode:D20A': 'horstoeko\orderx\entities\comfort\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:EventTimeReferenceCode:D20A': 'horstoeko\orderx\entities\comfort\unknown'
+    'urn:un:unece:uncefact:codelist:standard:EDIFICAS-EU:AccountingAccountType:D11A': 'horstoeko\orderx\entities\comfort\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:DeliveryTermsCode:2010': 'horstoeko\orderx\entities\comfort\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:DeliveryTermsFunctionCode:D20A': 'horstoeko\orderx\entities\comfort\unknown'
+    'urn:un:unece:uncefact:codelist:standard:ISO:ISO3AlphaCurrencyCode:2012-08-31': 'horstoeko\orderx\entities\comfort\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:PaymentMeansCode:D20A': 'horstoeko\orderx\entities\comfort\unknown'
+  destinations_php: 
+    'horstoeko\orderx\entities\comfort\rsm': '../src/entities/comfort/rsm'
+    'horstoeko\orderx\entities\comfort\ram': '../src/entities/comfort/ram'
+    'horstoeko\orderx\entities\comfort\udt': '../src/entities/comfort/udt'
+    'horstoeko\orderx\entities\comfort\qdt': '../src/entities/comfort/qdt'
+    'horstoeko\orderx\entities\comfort\unknown': '../src/entities/comfort/unknown'
+  destinations_jms: 
+    'horstoeko\orderx\entities\comfort\rsm': '../src/yaml/comfort/rsm'
+    'horstoeko\orderx\entities\comfort\ram': '../src/yaml/comfort/ram'
+    'horstoeko\orderx\entities\comfort\udt': '../src/yaml/comfort/udt'
+    'horstoeko\orderx\entities\comfort\qdt': '../src/yaml/comfort/qdt'
+    'horstoeko\orderx\entities\comfort\unknown': '../src/yaml/comfort/unknown'
+  destinations_validation:
+    'horstoeko\orderx\entities\comfort\rsm': '../src/validation/comfort/rsm'
+    'horstoeko\orderx\entities\comfort\ram': '../src/validation/comfort/ram'
+    'horstoeko\orderx\entities\comfort\udt': '../src/validation/comfort/udt'
+    'horstoeko\orderx\entities\comfort\qdt': '../src/validation/comfort/qdt'
+    'horstoeko\orderx\entities\comfort\unknown': '../src/validation/comfort/unknown'
+  configs_jms:
+    xml_cdata: false
+  aliases:
+    'http://www.w3.org/2001/XMLSchema':
+      anyType: 'string'
+      anySimpleType: 'string'
+    'http://www.w3.org/2001/XMLSchema-Instance':
+      anyType: 'string'
+      anySimpleType: 'string'

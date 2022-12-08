@@ -1,0 +1,13 @@
+#!/bin/bash
+
+CURRENTUSER=$(id -u -n)
+
+if [ "$CURRENTUSER" != "www-data" ]; then
+    echo "Not the right user"
+    exit 1
+fi
+
+./../vendor/bin/xsd2php convert ./config_basic.yml ./../src/schema/basic/SCRDMCCBDACIOMessageStructure_100pD20B.xsd -vvv
+./../vendor/bin/xsd2php convert ./config_comfort.yml ./../src/schema/comfort/SCRDMCCBDACIOMessageStructure_100pD20B.xsd -vvv
+./../vendor/bin/xsd2php convert ./config_extended.yml ./../src/schema/extended/SCRDMCCBDACIOMessageStructure_100pD20B.xsd
+

@@ -1,0 +1,51 @@
+xsd2php:
+  namespaces:
+    'urn:un:unece:uncefact:data:SCRDMCCBDACIOMessageStructure:100': 'horstoeko\orderx\entities\basic\rsm'
+    'urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:128': 'horstoeko\orderx\entities\basic\ram'
+    'urn:un:unece:uncefact:data:standard:UnqualifiedDataType:128': 'horstoeko\orderx\entities\basic\udt'
+    'urn:un:unece:uncefact:data:standard:QualifiedDataType:128': 'horstoeko\orderx\entities\basic\qdt'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:DocumentNameCode:D20A': 'horstoeko\orderx\entities\basic\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:DocumentStatusCode:D20A': 'horstoeko\orderx\entities\basic\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:MessageFunctionCode:D20A': 'horstoeko\orderx\entities\basic\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:ActionCode:D20A': 'horstoeko\orderx\entities\basic\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:PackageTypeCode:2006': 'horstoeko\orderx\entities\basic\unknown'
+    'urn:un:unece:uncefact:identifierlist:standard:ISO:ISOTwo-letterCountryCode:SecondEdition2006': 'horstoeko\orderx\entities\basic\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:ReferenceTypeCode:D20A': 'horstoeko\orderx\entities\basic\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:TimePointFormatCode:D19B': 'horstoeko\orderx\entities\basic\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:ContactFunctionCode:D20A': 'horstoeko\orderx\entities\basic\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:AllowanceChargeReasonCode:D20A': 'horstoeko\orderx\entities\basic\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:DutyTaxFeeTypeCode:D20A': 'horstoeko\orderx\entities\basic\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:DutyorTaxorFeeCategoryCode:D20A': 'horstoeko\orderx\entities\basic\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:EventTimeReferenceCode:D20A': 'horstoeko\orderx\entities\basic\unknown'
+    'urn:un:unece:uncefact:codelist:standard:EDIFICAS-EU:AccountingAccountType:D11A': 'horstoeko\orderx\entities\basic\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:DeliveryTermsCode:2010': 'horstoeko\orderx\entities\basic\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:DeliveryTermsFunctionCode:D20A': 'horstoeko\orderx\entities\basic\unknown'
+    'urn:un:unece:uncefact:codelist:standard:ISO:ISO3AlphaCurrencyCode:2012-08-31': 'horstoeko\orderx\entities\basic\unknown'
+    'urn:un:unece:uncefact:codelist:standard:UNECE:PaymentMeansCode:D20A': 'horstoeko\orderx\entities\basic\unknown'
+  destinations_php: 
+    'horstoeko\orderx\entities\basic\rsm': '../src/entities/basic/rsm'
+    'horstoeko\orderx\entities\basic\ram': '../src/entities/basic/ram'
+    'horstoeko\orderx\entities\basic\udt': '../src/entities/basic/udt'
+    'horstoeko\orderx\entities\basic\qdt': '../src/entities/basic/qdt'
+    'horstoeko\orderx\entities\basic\unknown': '../src/entities/basic/unknown'
+  destinations_jms: 
+    'horstoeko\orderx\entities\basic\rsm': '../src/yaml/basic/rsm'
+    'horstoeko\orderx\entities\basic\ram': '../src/yaml/basic/ram'
+    'horstoeko\orderx\entities\basic\udt': '../src/yaml/basic/udt'
+    'horstoeko\orderx\entities\basic\qdt': '../src/yaml/basic/qdt'
+    'horstoeko\orderx\entities\basic\unknown': '../src/yaml/basic/unknown'
+  destinations_validation:
+    'horstoeko\orderx\entities\basic\rsm': '../src/validation/basic/rsm'
+    'horstoeko\orderx\entities\basic\ram': '../src/validation/basic/ram'
+    'horstoeko\orderx\entities\basic\udt': '../src/validation/basic/udt'
+    'horstoeko\orderx\entities\basic\qdt': '../src/validation/basic/qdt'
+    'horstoeko\orderx\entities\basic\unknown': '../src/validation/basic/unknown'
+  configs_jms:
+    xml_cdata: false
+  aliases:
+    'http://www.w3.org/2001/XMLSchema':
+      anyType: 'string'
+      anySimpleType: 'string'
+    'http://www.w3.org/2001/XMLSchema-Instance':
+      anyType: 'string'
+      anySimpleType: 'string'
