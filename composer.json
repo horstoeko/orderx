@@ -1,0 +1,66 @@
+{
+    "name": "horstoeko/orderx",
+    "keywords": ["orderx","order-x","electronic","order"],
+    "description": "A library for creating and reading Order-X document",
+    "homepage": "https://github.com/horstoeko/orderx",
+    "type": "package",
+    "license": "MIT",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "Daniel Erling",
+            "email": "daniel@erling.com.de",
+            "role": "lead"
+        }
+    ],
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "horstoeko\\orderx\\": "src",
+            "horstoeko\\orderx\\rsm\\": "src/entities/rsm",
+            "horstoeko\\orderx\\qdt\\": "src/entities/qdt",
+            "horstoeko\\orderx\\ram\\": "src/entities/ram",
+            "horstoeko\\orderx\\udt\\": "src/entities/udt"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "horstoeko\\orderx\\tests\\": "tests"
+        }
+    },
+    "require": {
+        "php": "^7.3|^8.0|^8.1",
+        "jms/serializer": "^3",
+        "adrienrn/php-mimetyper": "^0.2",
+        "goetas-webservices/xsd2php-runtime": "^0.2.13",
+        "ext-simplexml": "*",
+        "symfony/validator": "^5|^6",
+        "smalot/pdfparser": "^0",
+        "setasign/fpdf": "^1",
+        "setasign/fpdi": "^2",
+        "symfony/yaml": "^5|^6",
+        "horstoeko/stringmanagement": "^1"
+    },
+    "require-dev": {
+        "clean/phpdoc-md": "^0",
+        "goetas-webservices/xsd2php": "^0",
+        "pdepend/pdepend": "^2",
+        "phploc/phploc": "^7",
+        "phpmd/phpmd": "^2",
+        "phpstan/phpstan": "^0.12.59",
+        "phpunit/phpunit": "^9",
+        "sebastian/phpcpd": "^6",
+        "squizlabs/php_codesniffer": "^3",
+        "theseer/phpdox": "^0"
+    },
+    "scripts": {
+        "tests": "./vendor/bin/phpunit ./tests/",
+        "phpcs": "./vendor/bin/phpcs --standard=./build/phpcsrules.xml --extensions=php --ignore=autoload.php ./src ./tests",
+        "phpcbf": "./vendor/bin/phpcbf --ignore=/src/entities/* -q ./src ./tests",
+        "phpstan": "./vendor/bin/phpstan analyze -c ./build/phpstan.neon --autoload-file=vendor/autoload.php --no-interaction --no-progress --xdebug",
+        "phpstan_cs": "./vendor/bin/phpstan analyze -c ./build/phpstan.neon --autoload-file=vendor/autoload.php --no-interaction --no-progress --error-format=checkstyle --xdebug"
+    }
+}
