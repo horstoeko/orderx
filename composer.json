@@ -59,7 +59,9 @@
     "scripts": {
         "tests": "./vendor/bin/phpunit ./tests/",
         "phpcs": "./vendor/bin/phpcs --standard=./build/phpcsrules.xml --extensions=php --ignore=autoload.php ./src ./tests",
+        "phpcs12": "./vendor/bin/phpcs --standard=./build/phpcsrules_psr12.xml --extensions=php --ignore=autoload.php ./src ./tests",
         "phpcbf": "./vendor/bin/phpcbf --ignore=/src/entities/* -q ./src ./tests",
+        "phpcbf12": "./vendor/bin/phpcbf --standard=./build/phpcsrules_psr12.xml --ignore=/src/entities/* -q ./src ./tests",
         "phpstan": "./vendor/bin/phpstan analyze -c ./build/phpstan.neon --autoload-file=vendor/autoload.php --no-interaction --no-progress --xdebug",
         "phpstan_cs": "./vendor/bin/phpstan analyze -c ./build/phpstan.neon --autoload-file=vendor/autoload.php --no-interaction --no-progress --error-format=checkstyle --xdebug",
         "orderxdoc": "phing -f ./build.xml projectdocstandalone"
