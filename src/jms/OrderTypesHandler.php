@@ -53,13 +53,7 @@ class OrderTypesHandler implements SubscribingHandlerInterface
             [
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
                 'format' => 'xml',
-                'type' => 'horstoeko\orderx\entities\basicwl\udt\AmountType',
-                'method' => 'serializeAmountType'
-            ],
-            [
-                'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
-                'format' => 'xml',
-                'type' => 'horstoeko\orderx\entities\en16931\udt\AmountType',
+                'type' => 'horstoeko\orderx\entities\comfort\udt\AmountType',
                 'method' => 'serializeAmountType'
             ],
             [
@@ -77,13 +71,7 @@ class OrderTypesHandler implements SubscribingHandlerInterface
             [
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
                 'format' => 'xml',
-                'type' => 'horstoeko\orderx\entities\basicwl\udt\QuantityType',
-                'method' => 'serializeQuantityType'
-            ],
-            [
-                'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
-                'format' => 'xml',
-                'type' => 'horstoeko\orderx\entities\en16931\udt\QuantityType',
+                'type' => 'horstoeko\orderx\entities\comfort\udt\QuantityType',
                 'method' => 'serializeQuantityType'
             ],
             [
@@ -101,13 +89,7 @@ class OrderTypesHandler implements SubscribingHandlerInterface
             [
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
                 'format' => 'xml',
-                'type' => 'horstoeko\orderx\entities\basicwl\udt\PercentType',
-                'method' => 'serializePercentType'
-            ],
-            [
-                'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
-                'format' => 'xml',
-                'type' => 'horstoeko\orderx\entities\en16931\udt\PercentType',
+                'type' => 'horstoeko\orderx\entities\comfort\udt\PercentType',
                 'method' => 'serializePercentType'
             ],
             [
@@ -125,13 +107,7 @@ class OrderTypesHandler implements SubscribingHandlerInterface
             [
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
                 'format' => 'xml',
-                'type' => 'horstoeko\orderx\entities\basicwl\udt\IndicatorType',
-                'method' => 'serializeIndicatorType'
-            ],
-            [
-                'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
-                'format' => 'xml',
-                'type' => 'horstoeko\orderx\entities\en16931\udt\IndicatorType',
+                'type' => 'horstoeko\orderx\entities\comfort\udt\IndicatorType',
                 'method' => 'serializeIndicatorType'
             ],
             [

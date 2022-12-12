@@ -26,7 +26,7 @@ class OrderProfiles
     const PROFILE_BASIC = 0;
 
     /**
-     * Internal constant that identifies the EN16931 profile
+     * Internal constant that identifies the COMFORT profile
      */
     const PROFILE_COMFORT = 2;
 
