@@ -166,7 +166,7 @@ class OrderDocumentBuilder extends OrderDocument
      * response requested for this exchanged document. Value = AC to request an Order_Response
      * @return OrderDocumentBuilder
      */
-    public function setDocumentInformation(string $documentno, string $documenttypecode, DateTime $documentdate, string $orderCurrency, ?string $documentname = null, ?string $documentlanguage = null, ?DateTime $effectiveSpecifiedPeriod = null, ?string $purposeCode = null, ?string $requestedResponseTypeCode= null): OrderDocumentBuilder
+    public function setDocumentInformation(string $documentno, string $documenttypecode, DateTime $documentdate, string $orderCurrency, ?string $documentname = null, ?string $documentlanguage = null, ?DateTime $effectiveSpecifiedPeriod = null, ?string $purposeCode = null, ?string $requestedResponseTypeCode = null): OrderDocumentBuilder
     {
         $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setID", $this->objectHelper->getIdType($documentno));
         $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setName", $this->objectHelper->getTextType($documentname));
@@ -1608,7 +1608,11 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPaymentTerm(string $paymentTermsDescription): OrderDocumentBuilder
     {
-        $paymentTerms = $this->objectHelper->getTradePaymentTermsType($paymentTermsDescription);
+        if ($this->profile == OrderProfiles::PROFILE_EXTENDED) {
+            $paymentTerms = $paymentTermsDescription;
+        } else {
+            $paymentTerms = $this->objectHelper->getTradePaymentTermsType($paymentTermsDescription);
+        }
         $this->objectHelper->tryCallAll($this->headerTradeSettlement, ["addToSpecifiedTradePaymentTerms", "setSpecifiedTradePaymentTerms"], $paymentTerms);
         $this->currentPaymentTerms = $paymentTerms;
         return $this;
@@ -1887,7 +1891,7 @@ class OrderDocumentBuilder extends OrderDocument
      * The unique supplier assigned serial identifier for this trade product instance.
      * @return OrderDocumentBuilder
      */
-    public function setDocumentPositionProductInstance(?string $batchID= null, ?string $serialId = null): OrderDocumentBuilder
+    public function setDocumentPositionProductInstance(?string $batchID = null, ?string $serialId = null): OrderDocumentBuilder
     {
         $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
         $productInstance = $this->objectHelper->getTradeProductInstanceType($batchID, $serialId);
@@ -1905,7 +1909,7 @@ class OrderDocumentBuilder extends OrderDocument
      * The unique supplier assigned serial identifier for this trade product instance.
      * @return OrderDocumentBuilder
      */
-    public function addDocumentPositionProductInstance(?string $batchID= null, ?string $serialId = null): OrderDocumentBuilder
+    public function addDocumentPositionProductInstance(?string $batchID = null, ?string $serialId = null): OrderDocumentBuilder
     {
         $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
         $productInstance = $this->objectHelper->getTradeProductInstanceType($batchID, $serialId);
