@@ -38,7 +38,7 @@ class HeaderTradeSettlementType
      * @var \horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType[] $specifiedTradeAllowanceCharge
      */
     private $specifiedTradeAllowanceCharge = [
-        
+
     ];
 
     /**
