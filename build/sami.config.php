@@ -12,7 +12,7 @@ $iterator = Finder::create()
     ->in($dir = dirname(__FILE__) . '/../src');
 
 return new Sami($iterator, array(
-    'title'                => 'horstoeko/zugferd API',
+    'title'                => 'horstoeko/Order-X API',
     'build_dir'            => dirname(__FILE__) . '/doc',
     'cache_dir'            => dirname(__FILE__) . '/cache',
     'include_parent_data'  => false,

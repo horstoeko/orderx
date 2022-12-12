@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <phpdox xmlns="http://xml.phpdox.net/config">
-    <project name="Easy ZUGFeRD for PHP" source="../src" workdir="../build/phpdox">
+    <project name="Easy Order-X for PHP" source="../src" workdir="../build/phpdox">
         <collector backend="parser" publiconly="true">
             <include mask="*.php"/>
             <exclude mask="**entities**"/>
