@@ -143,17 +143,17 @@ class OrderDocumentBuilder extends OrderDocument
     /**
      * Set main information about this document
      *
-     * @param string $documentno
+     * @param string $documentNo
      * The document no issued by the seller
-     * @param string $documenttypecode
+     * @param string $documentTypeCode
      * The type of the document, See \horstoeko\codelists\OrderInvoiceType for details
-     * @param DateTime $documentdate Date of order
+     * @param DateTime $documentDate Date of order
      * The date when the document was issued by the seller
      * @param string $orderCurrency Code for the order currency
      * The code for the order currency
-     * @param string|null $documentname Document Type
+     * @param string|null $documentName Document Type
      * The document type (free text)
-     * @param string|null $documentlanguage Language indicator
+     * @param string|null $documentLanguage Language indicator
      * The language code in which the document was written
      * @param DateTime|null $effectiveSpecifiedPeriod
      * The contractual due date of the order
@@ -166,13 +166,13 @@ class OrderDocumentBuilder extends OrderDocument
      * response requested for this exchanged document. Value = AC to request an Order_Response
      * @return OrderDocumentBuilder
      */
-    public function setDocumentInformation(string $documentno, string $documenttypecode, DateTime $documentdate, string $orderCurrency, ?string $documentname = null, ?string $documentlanguage = null, ?DateTime $effectiveSpecifiedPeriod = null, ?string $purposeCode = null, ?string $requestedResponseTypeCode = null): OrderDocumentBuilder
+    public function setDocumentInformation(string $documentNo, string $documentTypeCode, DateTime $documentDate, string $orderCurrency, ?string $documentName = null, ?string $documentLanguage = null, ?DateTime $effectiveSpecifiedPeriod = null, ?string $purposeCode = null, ?string $requestedResponseTypeCode = null): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setID", $this->objectHelper->getIdType($documentno));
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setName", $this->objectHelper->getTextType($documentname));
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setTypeCode", $this->objectHelper->getCodeType($documenttypecode));
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setIssueDateTime", $this->objectHelper->getDateTimeType($documentdate));
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "addToLanguageID", $this->objectHelper->getIdType($documentlanguage));
+        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setID", $this->objectHelper->getIdType($documentNo));
+        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setName", $this->objectHelper->getTextType($documentName));
+        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setTypeCode", $this->objectHelper->getCodeType($documentTypeCode));
+        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setIssueDateTime", $this->objectHelper->getDateTimeType($documentDate));
+        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "addToLanguageID", $this->objectHelper->getIdType($documentLanguage));
         $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setEffectiveSpecifiedPeriod", $this->objectHelper->getSpecifiedPeriodType($effectiveSpecifiedPeriod, $effectiveSpecifiedPeriod));
         $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setPurposeCode", $this->objectHelper->getCodeType($purposeCode));
         $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setRequestedResponseTypeCode", $this->objectHelper->getCodeType($requestedResponseTypeCode));
@@ -228,13 +228,12 @@ class OrderDocumentBuilder extends OrderDocument
      * Add a note to the docuzment
      *
      * @param string $content Free text on the order
-     * @param string|null $contentCode Free text at document level
      * @param string|null $subjectCode Code to qualify the free text for the order
      * @return OrderDocumentBuilder
      */
-    public function addDocumentNote(string $content, ?string $contentCode = null, ?string $subjectCode = null): OrderDocumentBuilder
+    public function addDocumentNote(string $content, ?string $subjectCode = null): OrderDocumentBuilder
     {
-        $note = $this->objectHelper->getNoteType($content, $contentCode, $subjectCode);
+        $note = $this->objectHelper->getNoteType($content, null, $subjectCode);
         $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "addToIncludedNote", $note);
         return $this;
     }
@@ -393,7 +392,7 @@ class OrderDocumentBuilder extends OrderDocument
      * the company name). Note: This may be used if different from the seller's name.
      * @return OrderDocumentBuilder
      */
-    public function setDocumentSellerLegalOrganisation(?string $legalorgid, ?string $legalorgtype, ?string $legalorgname): OrderDocumentBuilder
+    public function setDocumentSellerLegalOrganisation(?string $legalorgid = null, ?string $legalorgtype = null, ?string $legalorgname = null): OrderDocumentBuilder
     {
         $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
         $legalorg = $this->objectHelper->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
@@ -419,11 +418,26 @@ class OrderDocumentBuilder extends OrderDocument
      * Type of the contact
      * @return OrderDocumentBuilder
      */
-    public function setDocumentSellerContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd, ?string $contactTypeCode = null): OrderDocumentBuilder
+    public function setDocumentSellerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
     {
         $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
         $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
         $this->objectHelper->tryCallIfMethodExists($sellerTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
+        return $this;
+    }
+
+    /**
+     * Set the universal communication info for the seller
+     *
+     * @param string|null $uriType
+     * @param string|null $uriId
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentSellerUniversalCommunication(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
+    {
+        $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
+        $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
+        $this->objectHelper->tryCall($sellerTradeParty, "setURIUniversalCommunication", $universalCommunication);
         return $this;
     }
 
@@ -445,10 +459,10 @@ class OrderDocumentBuilder extends OrderDocument
      * Type of the contact
      * @return OrderDocumentBuilder
      */
-    public function addDocumentSellerContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd, ?string $contactTypeCode = null): OrderDocumentBuilder
+    public function addDocumentSellerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
     {
         $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
         $this->objectHelper->tryCall($sellerTradeParty, "addToDefinedTradeContact", $contact);
         return $this;
     }
@@ -563,7 +577,7 @@ class OrderDocumentBuilder extends OrderDocument
      * (also known as the company name)
      * @return OrderDocumentBuilder
      */
-    public function setDocumentBuyerLegalOrganisation(?string $legalorgid, ?string $legalorgtype, ?string $legalorgname): OrderDocumentBuilder
+    public function setDocumentBuyerLegalOrganisation(?string $legalorgid = null, ?string $legalorgtype = null, ?string $legalorgname = null): OrderDocumentBuilder
     {
         $buyerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
         $legalorg = $this->objectHelper->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
@@ -584,12 +598,14 @@ class OrderDocumentBuilder extends OrderDocument
      * Detailed information on the buyer's fax number
      * @param string|null $contactemailadd
      * Detailed information on the buyer's email address
+     * @param string|null $contactTypeCode
+     *
      * @return OrderDocumentBuilder
      */
-    public function setDocumentBuyerContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd): OrderDocumentBuilder
+    public function setDocumentBuyerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
     {
         $buyerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
         $this->objectHelper->tryCallIfMethodExists($buyerTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
         return $this;
     }
@@ -607,13 +623,30 @@ class OrderDocumentBuilder extends OrderDocument
      * Detailed information on the buyer's fax number
      * @param string|null $contactemailadd
      * Detailed information on the buyer's email address
+     * @param string|null $contactTypeCode
+     *
      * @return OrderDocumentBuilder
      */
-    public function addDocumentBuyerContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd): OrderDocumentBuilder
+    public function addDocumentBuyerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
     {
         $buyerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
         $this->objectHelper->tryCall($buyerTradeParty, "addToDefinedTradeContact", $contact);
+        return $this;
+    }
+
+    /**
+     * Set the universal communication info for the Buyer
+     *
+     * @param string|null $uriType
+     * @param string|null $uriId
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentBuyerUniversalCommunication(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
+    {
+        $buyerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
+        $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
+        $this->objectHelper->tryCall($buyerTradeParty, "setURIUniversalCommunication", $universalCommunication);
         return $this;
     }
 
@@ -727,7 +760,7 @@ class OrderDocumentBuilder extends OrderDocument
      * (also known as the company name)
      * @return OrderDocumentBuilder
      */
-    public function setDocumentBuyerRequisitionerLegalOrganisation(?string $legalorgid, ?string $legalorgtype, ?string $legalorgname): OrderDocumentBuilder
+    public function setDocumentBuyerRequisitionerLegalOrganisation(?string $legalorgid = null, ?string $legalorgtype = null, ?string $legalorgname = null): OrderDocumentBuilder
     {
         $buyerRequisitionerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
         $legalorg = $this->objectHelper->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
@@ -748,12 +781,14 @@ class OrderDocumentBuilder extends OrderDocument
      * Detailed information on the buyer's fax number
      * @param string|null $contactemailadd
      * Detailed information on the buyer's email address
+     * @param string|null $contactTypeCode
+     * Type Code of the contact
      * @return OrderDocumentBuilder
      */
-    public function setDocumentBuyerRequisitionerContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd): OrderDocumentBuilder
+    public function setDocumentBuyerRequisitionerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
     {
         $buyerRequisitionerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
         $this->objectHelper->tryCallIfMethodExists($buyerRequisitionerTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
         return $this;
     }
@@ -773,11 +808,26 @@ class OrderDocumentBuilder extends OrderDocument
      * Detailed information on the buyer's email address
      * @return OrderDocumentBuilder
      */
-    public function addDocumentBuyerRequisitionerContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd): OrderDocumentBuilder
+    public function addDocumentBuyerRequisitionerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null): OrderDocumentBuilder
     {
         $buyerRequisitionerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
         $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd);
         $this->objectHelper->tryCall($buyerRequisitionerTradeParty, "addToDefinedTradeContact", $contact);
+        return $this;
+    }
+
+    /**
+     * Set the universal communication info for the Buyer Requisitioner
+     *
+     * @param string|null $uriType
+     * @param string|null $uriId
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentBuyerRequisitionerUniversalCommunication(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
+    {
+        $buyerRequisitionerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
+        $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
+        $this->objectHelper->tryCall($buyerRequisitionerTradeParty, "setURIUniversalCommunication", $universalCommunication);
         return $this;
     }
 
@@ -807,7 +857,7 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string|null $relevantTradeLocationName
      * @return OrderDocumentBuilder
      */
-    public function setDocumentDeliveryTerms(?string $code, ?string $description, ?string $functionCode, ?string $relevantTradeLocationId, ?string $relevantTradeLocationName): OrderDocumentBuilder
+    public function setDocumentDeliveryTerms(?string $code = null, ?string $description = null, ?string $functionCode = null, ?string $relevantTradeLocationId = null, ?string $relevantTradeLocationName = null): OrderDocumentBuilder
     {
         $deliveryterms = $this->objectHelper->getTradeDeliveryTermsType($code, $description, $functionCode, $relevantTradeLocationId, $relevantTradeLocationName);
         $this->objectHelper->tryCall($this->headerTradeAgreement, "setApplicableTradeDeliveryTerms", $deliveryterms);
@@ -939,14 +989,14 @@ class OrderDocumentBuilder extends OrderDocument
      * will be needed, for example in the case of large attachments and/or when sensitive information,
      * e.g. person-related services, has to be separated from the order itself.
      *
-     * @param string|null $additionalRefId
-     * The identifier of the tender or lot to which the invoice relates, or an identifier specified by the seller for
-     * an object on which the invoice is based, or an identifier of the document on which the invoice is based.
      * @param string $additionalRefTypeCode
      * Type of referenced document (See codelist UNTDID 1001)
      *  - Code 916 "reference paper" is used to reference the identification of the document on which the invoice is based
      *  - Code 50 "Price / sales catalog response" is used to reference the tender or the lot
      *  - Code 130 "invoice data sheet" is used to reference an identifier for an object specified by the seller.
+     * @param string|null $additionalRefId
+     * The identifier of the tender or lot to which the invoice relates, or an identifier specified by the seller for
+     * an object on which the invoice is based, or an identifier of the document on which the invoice is based.
      * @param string|null $additionalRefURIID
      * The Uniform Resource Locator (URL) at which the external document is available. A means of finding the resource
      * including the primary access method intended for it, e.g. http: // or ftp: //. The location of the external document
@@ -964,7 +1014,7 @@ class OrderDocumentBuilder extends OrderDocument
      * Contains a file name of an attachment document embedded as a binary object
      * @return OrderDocumentBuilder
      */
-    public function addDocumentAdditionalReferencedDocument(?string $additionalRefId, string $additionalRefTypeCode, ?string $additionalRefURIID = null, $additionalRefName = null, ?string $additionalRefRefTypeCode = null, ?DateTime $additionalRefDate = null, ?string $binarydatafilename = null): OrderDocumentBuilder
+    public function addDocumentAdditionalReferencedDocument(string $additionalRefTypeCode, ?string $additionalRefId, ?string $additionalRefURIID = null, $additionalRefName = null, ?string $additionalRefRefTypeCode = null, ?DateTime $additionalRefDate = null, ?string $binarydatafilename = null): OrderDocumentBuilder
     {
         $additionalRefDoc = $this->objectHelper->getReferencedDocumentType($additionalRefId, $additionalRefURIID, null, $additionalRefTypeCode, $additionalRefName, $additionalRefRefTypeCode, $additionalRefDate, $binarydatafilename);
         $this->objectHelper->tryCall($this->headerTradeAgreement, "addToAdditionalReferencedDocument", $additionalRefDoc);
@@ -1203,13 +1253,30 @@ class OrderDocumentBuilder extends OrderDocument
      * Detailed information on the party's fax number
      * @param string|null $contactemailadd
      * Detailed information on the party's email address
+     * @param string|null $contactTypeCode
+     * Type (Code) of the contach
      * @return OrderDocumentBuilder
      */
-    public function setDocumentShipToContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd): OrderDocumentBuilder
+    public function setDocumentShipToContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd, ?string $contactTypeCode): OrderDocumentBuilder
     {
         $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
         $this->objectHelper->tryCallIfMethodExists($shipToTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
+        return $this;
+    }
+
+    /**
+     * Set the universal communication info for the Buyer Requisitioner
+     *
+     * @param string|null $uriType
+     * @param string|null $uriId
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentShipToUniversalCommunication(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
+    {
+        $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
+        $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
+        $this->objectHelper->tryCall($shipToTradeParty, "setURIUniversalCommunication", $universalCommunication);
         return $this;
     }
 
@@ -1357,12 +1424,14 @@ class OrderDocumentBuilder extends OrderDocument
      * Detailed information on the party's fax number
      * @param string|null $contactemailadd
      * Detailed information on the party's email address
+     * @param string|null $contactTypeCode
+     * Contact type
      * @return OrderDocumentBuilder
      */
-    public function setDocumentShipFromContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd): OrderDocumentBuilder
+    public function setDocumentShipFromContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd, ?string $contactTypeCode): OrderDocumentBuilder
     {
         $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
         $this->objectHelper->tryCallIfMethodExists($shipFromTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
         return $this;
     }
@@ -1380,13 +1449,30 @@ class OrderDocumentBuilder extends OrderDocument
      * Detailed information on the party's fax number
      * @param string|null $contactemailadd
      * Detailed information on the party's email address
+     * @param string|null $contactTypeCode
+     * Contact type
      * @return OrderDocumentBuilder
      */
-    public function addDocumentShipFromContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd): OrderDocumentBuilder
+    public function addDocumentShipFromContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd, ?string $contactTypeCode): OrderDocumentBuilder
     {
         $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
         $this->objectHelper->tryCall($shipFromTradeParty, "addToDefinedTradeContact", $contact);
+        return $this;
+    }
+
+    /**
+     * Set the universal communication info for the Buyer Requisitioner
+     *
+     * @param string|null $uriType
+     * @param string|null $uriId
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentShipFromUniversalCommunication(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
+    {
+        $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
+        $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
+        $this->objectHelper->tryCall($shipFromTradeParty, "setURIUniversalCommunication", $universalCommunication);
         return $this;
     }
 
@@ -1398,11 +1484,9 @@ class OrderDocumentBuilder extends OrderDocument
      * @param DateTime|null $endDateTime
      * @return OrderDocumentBuilder
      */
-    public function setDocumentRequestedDeliverySupplyChainEvent(DateTime $occurrenceDateTime, ?DateTime $startDateTime, ?DateTime $endDateTime): OrderDocumentBuilder
+    public function setDocumentRequestedDeliverySupplyChainEvent(?DateTime $occurrenceDateTime, ?DateTime $startDateTime, ?DateTime $endDateTime): OrderDocumentBuilder
     {
-        $supplychainevent = $this->objectHelper->getSupplyChainEventType($occurrenceDateTime);
-        $period = $this->objectHelper->getSpecifiedPeriodType($startDateTime, $endDateTime);
-        $this->objectHelper->tryCall($supplychainevent, 'setOccurrenceSpecifiedPeriod', $period);
+        $supplychainevent = $this->objectHelper->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
         $this->objectHelper->tryCallIfMethodExists($this->headerTradeDelivery, "addToRequestedDeliverySupplyChainEvent", "setRequestedDeliverySupplyChainEvent", [$supplychainevent], $supplychainevent);
         return $this;
     }
@@ -1530,10 +1614,10 @@ class OrderDocumentBuilder extends OrderDocument
      * Detailed information on the party's email address
      * @return OrderDocumentBuilder
      */
-    public function setDocumentInvoiceeContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd): OrderDocumentBuilder
+    public function setDocumentInvoiceeContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd, ?string $contactTypeCode): OrderDocumentBuilder
     {
         $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
         $this->objectHelper->tryCallIfMethodExists($invoiceeTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
         return $this;
     }
@@ -1553,11 +1637,26 @@ class OrderDocumentBuilder extends OrderDocument
      * Detailed information on the party's email address
      * @return OrderDocumentBuilder
      */
-    public function addDocumentInvoiceeContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd): OrderDocumentBuilder
+    public function addDocumentInvoiceeContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd, ?string $contactTypeCode): OrderDocumentBuilder
     {
         $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
         $this->objectHelper->tryCall($invoiceeTradeParty, "addToDefinedTradeContact", $contact);
+        return $this;
+    }
+
+    /**
+     * Set the universal communication info for the Invoicee
+     *
+     * @param string|null $uriType
+     * @param string|null $uriId
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentInvoiceeUniversalCommunication(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
+    {
+        $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
+        $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
+        $this->objectHelper->tryCall($invoiceeTradeParty, "setURIUniversalCommunication", $universalCommunication);
         return $this;
     }
 
@@ -1717,7 +1816,7 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string|null $typeCode
      * @return OrderDocumentBuilder
      */
-    public function setDocumentReceivableSpecifiedTradeAccountingAccount(string $id, ?string $typeCode): OrderDocumentBuilder
+    public function setDocumentReceivableSpecifiedTradeAccountingAccount(string $id, ?string $typeCode = null): OrderDocumentBuilder
     {
         $account = $this->objectHelper->getTradeAccountingAccountType($id, $typeCode);
         $this->objectHelper->tryCall($this->headerTradeSettlement, "setReceivableSpecifiedTradeAccountingAccount", $account);
@@ -2006,16 +2105,6 @@ class OrderDocumentBuilder extends OrderDocument
     /**
      * Add an additional Document reference on a position
      *
-     * __Notes__
-     *  - The documents justifying the invoice can be used to reference a document number, which should be
-     *    known to the recipient, as well as an external document (referenced by a URL) or an embedded document (such
-     *    as a timesheet as a PDF file). The option of linking to an external document is e.g. required when it comes
-     *    to large attachments and / or sensitive information, e.g. for personal services, which must be separated
-     *    from the bill
-     *  - Use ZugferdDocumentReader::firstDocumentAdditionalReferencedDocument and
-     *    ZugferdDocumentReader::nextDocumentAdditionalReferencedDocument to seek between multiple additional referenced
-     *    documents
-     *
      * @param string|null $issuerassignedid
      * The identifier of the tender or lot to which the invoice relates, or an identifier specified by the seller for
      * an object on which the invoice is based, or an identifier of the document on which the invoice is based.
@@ -2054,14 +2143,14 @@ class OrderDocumentBuilder extends OrderDocument
     /**
      * Set details of the related buyer order position
      *
-     * @param string $lineid
+     * @param string $buyerOrderRefLineId
      * An identifier for a position within an order placed by the buyer. Note: Reference is made to the order
      * reference at the document level.
      * @return OrderDocumentBuilder
      */
-    public function setDocumentPositionBuyerOrderReferencedDocument(string $lineid): OrderDocumentBuilder
+    public function setDocumentPositionBuyerOrderReferencedDocument(string $buyerOrderRefLineId): OrderDocumentBuilder
     {
-        $buyerorderrefdoc = $this->objectHelper->getReferencedDocumentType(null, null, $lineid, null, null, null, null, null);
+        $buyerorderrefdoc = $this->objectHelper->getReferencedDocumentType(null, null, $buyerOrderRefLineId, null, null, null, null, null);
         $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
         $this->objectHelper->tryCall($positionAgreement, "setBuyerOrderReferencedDocument", $buyerorderrefdoc);
         return $this;
@@ -2087,7 +2176,7 @@ class OrderDocumentBuilder extends OrderDocument
     /**
      * Set the unit price excluding sales tax before deduction of the discount on the item price.
      *
-     * @param float $amount
+     * @param float $chargeAmount
      * The unit price excluding sales tax before deduction of the discount on the item price.
      * Note: If the price is shown according to the net calculation, the price must also be shown
      * according to the gross calculation.
@@ -2097,9 +2186,9 @@ class OrderDocumentBuilder extends OrderDocument
      * The unit code of the number of item units for which the price applies (price base quantity)
      * @return OrderDocumentBuilder
      */
-    public function setDocumentPositionGrossPrice(float $amount, ?float $basisQuantity = null, ?string $basisQuantityUnitCode = null): OrderDocumentBuilder
+    public function setDocumentPositionGrossPrice(float $chargeAmount, ?float $basisQuantity = null, ?string $basisQuantityUnitCode = null): OrderDocumentBuilder
     {
-        $grossPrice = $this->objectHelper->getTradePriceType($amount, $basisQuantity, $basisQuantityUnitCode);
+        $grossPrice = $this->objectHelper->getTradePriceType($chargeAmount, $basisQuantity, $basisQuantityUnitCode);
         $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
         $this->objectHelper->tryCall($positionAgreement, "setGrossPriceProductTradePrice", $grossPrice);
         return $this;
@@ -2113,24 +2202,20 @@ class OrderDocumentBuilder extends OrderDocument
      * net price. Note: Only applies if the discount is given per unit and is not included in the gross price.
      * @param boolean $isCharge
      * Switch for surcharge/discount, if true then its an charge
-     * @param float|null $calculationPercent
-     * Discount/surcharge in percent. Up to level EN16931, only the final result of the discount (ActualAmount)
-     * is transferred
-     * @param float|null $basisAmount
-     * Base amount of the discount/surcharge
      * @param string|null $reason
-     * Reason for surcharge/discount (free text)
-     * @param float|null $sequence
-     * @param float|null $basisQuantity
-     * @param string|null $basisQuantityUnitCode
+     * The reason for the order line item trade price charge expressed as text.
      * @param string|null $reasonCode
+     * The reason for the order line item trade price charge, expressed as a code.
+     * Use entries of the UNTDID 7161 code list . The order line level item trade price discount reason code
+     * and the order line level item trade price discount reason shall indicate the same item trade price
+     * charge reason. Example AEW for WEEE.
      * @return OrderDocumentBuilder
      */
-    public function addDocumentPositionGrossPriceAllowanceCharge(float $actualAmount, bool $isCharge, ?float $calculationPercent = null, ?float $basisAmount = null, ?string $reason = null, ?float $sequence = null, ?float $basisQuantity = null, ?string $basisQuantityUnitCode = null, ?string $reasonCode = null): OrderDocumentBuilder
+    public function addDocumentPositionGrossPriceAllowanceCharge(float $actualAmount, bool $isCharge, ?string $reason = null, ?string $reasonCode = null): OrderDocumentBuilder
     {
         $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
         $grossPrice = $this->objectHelper->tryCallAndReturn($positionAgreement, "getGrossPriceProductTradePrice");
-        $allowanceCharge = $this->objectHelper->getTradeAllowanceChargeType($actualAmount, $isCharge, null, null, null, $sequence, $calculationPercent, $basisAmount, $basisQuantity, $basisQuantityUnitCode, $reasonCode, $reason);
+        $allowanceCharge = $this->objectHelper->getTradeAllowanceChargeType($actualAmount, $isCharge, null, null, null, null, null, null, null, null, $reasonCode, $reason);
         $this->objectHelper->tryCallAll($grossPrice, ["addToAppliedTradeAllowanceCharge", "setAppliedTradeAllowanceCharge"], $allowanceCharge);
         return $this;
     }
@@ -2138,7 +2223,7 @@ class OrderDocumentBuilder extends OrderDocument
     /**
      * Set detailed information on the net price of the item
      *
-     * @param float $amount
+     * @param float $chargeAmount
      * Net price of the item
      * @param float|null $basisQuantity
      * Base quantity at the item price
@@ -2146,9 +2231,9 @@ class OrderDocumentBuilder extends OrderDocument
      * Code of the unit of measurement of the base quantity at the item price
      * @return OrderDocumentBuilder
      */
-    public function setDocumentPositionNetPrice(float $amount, ?float $basisQuantity = null, ?string $basisQuantityUnitCode = null): OrderDocumentBuilder
+    public function setDocumentPositionNetPrice(float $chargeAmount, ?float $basisQuantity = null, ?string $basisQuantityUnitCode = null): OrderDocumentBuilder
     {
-        $netPrice = $this->objectHelper->getTradePriceType($amount, $basisQuantity, $basisQuantityUnitCode);
+        $netPrice = $this->objectHelper->getTradePriceType($chargeAmount, $basisQuantity, $basisQuantityUnitCode);
         $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
         $this->objectHelper->tryCall($positionAgreement, "setNetPriceProductTradePrice", $netPrice);
         return $this;
@@ -2157,13 +2242,13 @@ class OrderDocumentBuilder extends OrderDocument
     /**
      * Set the Referenced Catalog ID applied to this line
      *
-     * @param string|null $issuerassignedid
-     * @param string|null $line
+     * @param string|null $catalogueRefId
+     * @param string|null $catalogueRefLineId
      * @return OrderDocumentBuilder
      */
-    public function setDocumentPositionCatalogueReferencedDocument(?string $issuerassignedid = null, ?string $line = null): OrderDocumentBuilder
+    public function setDocumentPositionCatalogueReferencedDocument(?string $catalogueRefId = null, ?string $catalogueRefLineId = null): OrderDocumentBuilder
     {
-        $quotationrefdoc = $this->objectHelper->getReferencedDocumentType($issuerassignedid, null, $line, null, null, null, null, null);
+        $quotationrefdoc = $this->objectHelper->getReferencedDocumentType($catalogueRefId, null, $catalogueRefLineId, null, null, null, null, null);
         $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
         $this->objectHelper->tryCallIfMethodExists($positionAgreement, "addToCatalogueReferencedDocument", "setCatalogueReferencedDocument", [$quotationrefdoc], $quotationrefdoc);
         return $this;
@@ -2172,13 +2257,13 @@ class OrderDocumentBuilder extends OrderDocument
     /**
      * Set the Referenced Catalog ID applied to this line
      *
-     * @param string|null $issuerassignedid
-     * @param string|null $line
+     * @param string|null $catalogueRefId
+     * @param string|null $catalogueRefLineId
      * @return OrderDocumentBuilder
      */
-    public function addDocumentPositionCatalogueReferencedDocument(?string $issuerassignedid = null, ?string $line = null): OrderDocumentBuilder
+    public function addDocumentPositionCatalogueReferencedDocument(?string $catalogueRefId = null, ?string $catalogueRefLineId = null): OrderDocumentBuilder
     {
-        $quotationrefdoc = $this->objectHelper->getReferencedDocumentType($issuerassignedid, null, $line, null, null, null, null, null);
+        $quotationrefdoc = $this->objectHelper->getReferencedDocumentType($catalogueRefId, null, $catalogueRefLineId, null, null, null, null, null);
         $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
         $this->objectHelper->tryCall($positionAgreement, "addToCatalogueReferencedDocument", $quotationrefdoc);
         return $this;
@@ -2187,15 +2272,280 @@ class OrderDocumentBuilder extends OrderDocument
     /**
      * Set details of a blanket order referenced document on position-level
      *
-     * @param string $line
+     * @param string $blanketOrderRefLineId
      * The unique identifier of a line in the Blanketl Order referenced document
      * @return OrderDocumentBuilder
      */
-    public function setDocumentPositionBlanketOrderReferencedDocument(string $line): OrderDocumentBuilder
+    public function setDocumentPositionBlanketOrderReferencedDocument(string $blanketOrderRefLineId): OrderDocumentBuilder
     {
-        $blanketOrderRefDoc = $this->objectHelper->getReferencedDocumentType(null, null, $line, null, null, null, null);
+        $blanketOrderRefDoc = $this->objectHelper->getReferencedDocumentType(null, null, $blanketOrderRefLineId, null, null, null, null);
         $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
         $this->objectHelper->tryCall($positionAgreement, "setBlanketOrderReferencedDocument", $blanketOrderRefDoc);
+        return $this;
+    }
+
+    /**
+     * The indication, at line level, of whether or not this trade delivery can be partially delivered.
+     *
+     * @param boolean $partialDelivery
+     * If TRUE partial delivery is allowed
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentPositionPartialDelivery(bool $partialDelivery = false): OrderDocumentBuilder
+    {
+        $indicator = $this->objectHelper->getIndicatorType($partialDelivery);
+        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->objectHelper->tryCall($positionDelivery, "setPartialDeliveryAllowedIndicator", $indicator);
+        return $this;
+    }
+
+    /**
+     * Set the quantity, at line level, requested for this trade delivery.
+     *
+     * @param float $requestedQuantity
+     * The quantity, at line level, requested for this trade delivery.
+     * @param string $requestedQuantityUnitCode
+     * Unit Code for the requested quantity.
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentPositionDeliverReqQuantity(float $requestedQuantity, string $requestedQuantityUnitCode): OrderDocumentBuilder
+    {
+        $quantity = $this->objectHelper->getQuantityType($requestedQuantity, $requestedQuantityUnitCode);
+        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->objectHelper->tryCall($positionDelivery, "setRequestedQuantity", $quantity);
+        return $this;
+    }
+
+    /**
+     * Set the number of packages, at line level, in this trade delivery.
+     *
+     * @param float $packageQuantity
+     * The number of packages, at line level, in this trade delivery.
+     * @param string $packageQuantityUnitCode
+     * Unit Code for the package quantity.
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentPositionDeliverPackageQuantity(float $packageQuantity, string $packageQuantityUnitCode): OrderDocumentBuilder
+    {
+        $quantity = $this->objectHelper->getQuantityType($packageQuantity, $packageQuantityUnitCode);
+        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->objectHelper->tryCall($positionDelivery, "setPackageQuantity", $quantity);
+        return $this;
+    }
+
+    /**
+     * Set the number of packages, at line level, in this trade delivery.
+     *
+     * @param float $perPackageQuantity
+     * The number of packages, at line level, in this trade delivery.
+     * @param string $perPackageQuantityUnitCode
+     * Unit Code for the package quantity.
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentPositionDeliverPerPackageQuantity(float $perPackageQuantity, string $perPackageQuantityUnitCode): OrderDocumentBuilder
+    {
+        $quantity = $this->objectHelper->getQuantityType($perPackageQuantity, $perPackageQuantityUnitCode);
+        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->objectHelper->tryCall($positionDelivery, "setPerPackageUnitQuantity", $quantity);
+        return $this;
+    }
+
+    /**
+     * Set the quantity, at line level, agreed for this trade delivery.
+     *
+     * @param float $agreedQuantity
+     * The quantity, at line level, agreed for this trade delivery.
+     * @param string $agreedQuantityUnitCode
+     * Unit Code for the package quantity.
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentPositionDeliverAgreedQuantity(float $agreedQuantity, string $agreedQuantityUnitCode): OrderDocumentBuilder
+    {
+        $quantity = $this->objectHelper->getQuantityType($agreedQuantity, $agreedQuantityUnitCode);
+        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->objectHelper->tryCall($positionDelivery, "setAgreedQuantity", $quantity);
+        return $this;
+    }
+
+    /**
+     * Supply chain event on position level
+     *
+     * @param DateTime|null $occurrenceDateTime
+     * @param DateTime|null $startDateTime
+     * @param DateTime|null $endDateTime
+     * @return OrderDocumentBuilder
+     */
+    public function addDocumentPositionRequestedDeliverySupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): OrderDocumentBuilder
+    {
+        $supplychainevent = $this->objectHelper->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->objectHelper->tryCall($positionDelivery, "addToRequestedDeliverySupplyChainEvent", $supplychainevent);
+        return $this;
+    }
+
+    /**
+     * Add information about the sales tax that applies to the goods and services invoiced
+     * in the relevant invoice line
+     *
+     * @param string $categoryCode
+     * Coded description of a sales tax category
+     *
+     * The following entries from UNTDID 5305 are used (details in brackets):
+     *  - Standard rate (sales tax is due according to the normal procedure)
+     *  - Goods to be taxed according to the zero rate (sales tax is charged with a percentage of zero)
+     *  - Tax exempt (USt./IGIC/IPSI)
+     *  - Reversal of the tax liability (the rules for reversing the tax liability at USt./IGIC/IPSI apply)
+     *  - VAT exempt for intra-community deliveries of goods (USt./IGIC/IPSI not levied due to rules on intra-community deliveries)
+     *  - Free export item, tax not levied (VAT / IGIC/IPSI not levied due to export outside the EU)
+     *  - Services outside the tax scope (sales are not subject to VAT / IGIC/IPSI)
+     *  - Canary Islands general indirect tax (IGIC tax applies)
+     *  - IPSI (tax for Ceuta / Melilla) applies.
+     *
+     * The codes for the VAT category are as follows:
+     *  - S = sales tax is due at the normal rate
+     *  - Z = goods to be taxed according to the zero rate
+     *  - E = tax exempt
+     *  - AE = reversal of tax liability
+     *  - K = VAT is not shown for intra-community deliveries
+     *  - G = tax not levied due to export outside the EU
+     *  - O = Outside the tax scope
+     *  - L = IGIC (Canary Islands)
+     *  - M = IPSI (Ceuta / Melilla)
+     * @param string $typeCode
+     * In EN 16931 only the tax type “sales tax” with the code “VAT” is supported. Should other types of tax be
+     * specified, such as an insurance tax or a mineral oil tax the EXTENDED profile must be used. The code for
+     * the tax type must then be taken from the code list UNTDID 5153.
+     * @param float $rateApplicablePercent
+     * The VAT rate applicable to the item invoiced and expressed as a percentage. Note: The code of the sales
+     * tax category and the category-specific sales tax rate  must correspond to one another. The value to be
+     * given is the percentage. For example, the value 20 is given for 20% (and not 0.2)
+     * @param float|null $calculatedAmount
+     * Tax amount. Information only for taxes that are not VAT.
+     * @param string|null $exemptionReason
+     * Reason for tax exemption (free text)
+     * @param string|null $exemptionReasonCode
+     * Reason given in code form for the exemption of the amount from VAT. Note: Code list issued
+     * and maintained by the Connecting Europe Facility.
+     * @return OrderDocumentBuilder
+     */
+    public function addDocumentPositionTax(string $categoryCode, string $typeCode, float $rateApplicablePercent, ?float $calculatedAmount = null, ?string $exemptionReason = null, ?string $exemptionReasonCode = null): OrderDocumentBuilder
+    {
+        $tax = $this->objectHelper->getTradeTaxType($categoryCode, $typeCode, null, $calculatedAmount, $rateApplicablePercent, $exemptionReason, $exemptionReasonCode, null, null, null, null);
+        $positionsettlement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
+        $this->objectHelper->tryCallAll($positionsettlement, ["addToApplicableTradeTax", "setApplicableTradeTax"], $tax);
+        return $this;
+    }
+
+    /**
+     * Add surcharges and discounts on position level
+     *
+     * @param float $actualAmount
+     * The surcharge/discount amount excluding sales tax
+     * @param boolean $isCharge
+     * Switch that indicates whether the following data refer to an allowance or a discount,
+     * true means that
+     * @param float|null $calculationPercent
+     * The percentage that may be used in conjunction with the base invoice line discount
+     * amount to calculate the invoice line discount amount
+     * @param float|null $basisAmount
+     * The base amount that may be used in conjunction with the invoice line discount percentage
+     * to calculate the invoice line discount amount
+     * @param string|null $reasonCode
+     * The reason given as a code for the invoice line discount
+     *
+     * __Notes__
+     *  - Use entries from the UNTDID 5189 code list (discounts) or the UNTDID 7161 code list
+     *    (surcharges). The invoice line discount reason code and the invoice line discount reason must
+     *    match.
+     *  - In the case of a discount, the code list UNTDID 5189 must be used.
+     *  - In the event of a surcharge, the code list UNTDID 7161 must be used.
+     *
+     * In particular, the following codes can be used:
+     *  - AA = Advertising
+     *  - ABL = Additional packaging
+     *  - ADR = Other services
+     *  - ADT = Pick-up
+     *  - FC = Freight service
+     *  - FI = Financing
+     *  - LA = Labelling
+     *
+     * Include PEPPOL subset:
+     *  - 41 - Bonus for works ahead of schedule
+     *  - 42 - Other bonus
+     *  - 60 - Manufacturer’s consumer discount
+     *  - 62 - Due to military status
+     *  - 63 - Due to work accident
+     *  - 64 - Special agreement
+     *  - 65 - Production error discount
+     *  - 66 - New outlet discount
+     *  - 67 - Sample discount
+     *  - 68 - End-of-range discount
+     *  - 70 - Incoterm discount
+     *  - 71 - Point of sales threshold allowance
+     *  - 88 - Material surcharge/deduction
+     *  - 95 - Discount
+     *  - 100 - Special rebate
+     *  - 102 - Fixed long term
+     *  - 103 - Temporary
+     *  - 104 - Standard
+     *  - 105 - Yearly turnover
+     *
+     * Codelists: UNTDID 7161 (Complete list), UNTDID 5189 (Restricted)
+     * @param string|null $reason
+     * The reason given in text form for the invoice item discount/surcharge
+     *
+     * __Notes__
+     *  - The invoice line discount reason code (BT-140) and the invoice line discount reason
+     *    (BT-139) must show the same allowance type.
+     *  - Each line item discount (BG-27) must include a corresponding line discount reason
+     *    (BT-139) or an appropriate line discount reason code (BT-140), or both.
+     *  - The code for the reason for the charge at the invoice line level (BT-145) and the
+     *    reason for the invoice line discount (BT-144) must show the same discount type
+     * @return OrderDocumentBuilder
+     */
+    public function addDocumentPositionAllowanceCharge(float $actualAmount, bool $isCharge, ?float $calculationPercent = null, ?float $basisAmount = null, ?string $reasonCode = null, ?string $reason = null): OrderDocumentBuilder
+    {
+        $positionsettlement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
+        $allowanceCharge = $this->objectHelper->getTradeAllowanceChargeType($actualAmount, $isCharge, null, null, null, null, $calculationPercent, $basisAmount, null, null, $reasonCode, $reason);
+        $this->objectHelper->tryCall($positionsettlement, "addToSpecifiedTradeAllowanceCharge", $allowanceCharge);
+        return $this;
+    }
+
+    /**
+     * Set information on item totals
+     *
+     * @param float $lineTotalAmount
+     * The total amount of the invoice item.
+     * __Note:__ This is the "net" amount, that is, excluding sales tax, but including all surcharges
+     * and discounts applicable to the item level, as well as other taxes.
+     * @param float|null $totalAllowanceChargeAmount
+     * Total amount of item surcharges and discounts
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentPositionLineSummation(float $lineTotalAmount, ?float $totalAllowanceChargeAmount = null): OrderDocumentBuilder
+    {
+        $positionsettlement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
+        $summation = $this->objectHelper->getTradeSettlementLineMonetarySummationType($lineTotalAmount, $totalAllowanceChargeAmount);
+        $this->objectHelper->tryCall($positionsettlement, "setSpecifiedTradeSettlementLineMonetarySummation", $summation);
+        return $this;
+    }
+
+    /**
+     * Set an AccountingAccount on item level
+     * Detailinformationen zur Buchungsreferenz
+     *
+     * @param string $id
+     * The unique identifier for this trade accounting account.
+     * @param string|null $typeCode
+     * The code specifying the type of trade accounting account, such as
+     * general (main), secondary, cost accounting or budget account.
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentPositionReceivableTradeAccountingAccount(string $id, ?string $typeCode = null): OrderDocumentBuilder
+    {
+        $positionsettlement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
+        $account = $this->objectHelper->getTradeAccountingAccountType($id, $typeCode);
+        $this->objectHelper->tryCall($positionsettlement, "setReceivableSpecifiedTradeAccountingAccount", $account);
         return $this;
     }
 }

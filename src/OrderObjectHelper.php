@@ -794,10 +794,10 @@ class OrderObjectHelper
     /**
      * Undocumented function
      *
-     * @param DateTime|null $date
+     * @param DateTime|null $occurrenceDateTime
      * @return object|null
      */
-    public function getSupplyChainEventType(?DateTime $date = null): ?object
+    public function getSupplyChainEventType(?DateTime $occurrenceDateTime = null): ?object
     {
         if (self::isAllNullOrEmpty(func_get_args())) {
             return null;
@@ -805,7 +805,45 @@ class OrderObjectHelper
 
         $supplychainevent = $this->createClassInstance('ram\SupplyChainEventType');
 
-        $this->tryCall($supplychainevent, "setOccurrenceDateTime", $this->getDateTimeType($date));
+        $this->tryCall($supplychainevent, "setOccurrenceDateTime", $this->getDateTimeType($occurrenceDateTime));
+
+        return $supplychainevent;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param DateTime|null $occurrenceDateTime
+     * @return object|null
+     */
+    public function getSupplyChainEventType2(?DateTime $occurrenceDateTime = null): ?object
+    {
+        $supplychainevent = $this->createClassInstance('ram\SupplyChainEventType');
+
+        $this->tryCall($supplychainevent, "setOccurrenceDateTime", $this->getDateTimeType($occurrenceDateTime));
+
+        return $supplychainevent;
+    }
+
+    /**
+     * Get a DeliverySupplyChainEvent
+     *
+     * @param DateTime|null $occurrenceDateTime
+     * @param DateTime|null $startDateTime
+     * @param DateTime|null $endDateTime
+     * @return object|null
+     */
+    public function getDeliverySupplyChainEvent(?DateTime $occurrenceDateTime, ?DateTime $startDateTime, ?DateTime $endDateTime): ?object
+    {
+        if (self::isAllNullOrEmpty(func_get_args())) {
+            return null;
+        }
+
+        $supplychainevent = $this->createClassInstance('ram\SupplyChainEventType');
+        $period = $this->getSpecifiedPeriodType($startDateTime, $endDateTime);
+
+        $this->tryCall($supplychainevent, "setOccurrenceDateTime", $this->getDateTimeType($occurrenceDateTime));
+        $this->tryCall($supplychainevent, 'setOccurrenceSpecifiedPeriod', $period);
 
         return $supplychainevent;
     }
@@ -918,11 +956,9 @@ class OrderObjectHelper
      * Get instance of TradePaymentTermsType
      *
      * @param string|null $description
-     * @param DateTime|null $dueDate
-     * @param string|null $directDebitMandateID
      * @return object|null
      */
-    public function getTradePaymentTermsType(?string $description = null, ?DateTime $dueDate = null, ?string $directDebitMandateID = null): ?object
+    public function getTradePaymentTermsType(?string $description = null): ?object
     {
         if (self::isAllNullOrEmpty(func_get_args())) {
             return null;
@@ -931,8 +967,6 @@ class OrderObjectHelper
         $paymentTerms = $this->createClassInstance('ram\TradePaymentTermsType');
 
         $this->tryCallIfMethodExists($paymentTerms, "unsetDescription", "setDescription", [$this->getTextType($description)], $this->getTextType($description));
-        $this->tryCall($paymentTerms, "setDueDateDateTime", $this->getDateTimeType($dueDate));
-        $this->tryCall($paymentTerms, "setDirectDebitMandateID", $this->getIdType($directDebitMandateID));
 
         return $paymentTerms;
     }
@@ -1416,8 +1450,6 @@ class OrderObjectHelper
 
         return $currencyExchange;
     }
-
-
 
     /**
      * Set contect parameter
