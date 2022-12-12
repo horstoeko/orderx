@@ -811,21 +811,6 @@ class OrderObjectHelper
     }
 
     /**
-     * Undocumented function
-     *
-     * @param DateTime|null $occurrenceDateTime
-     * @return object|null
-     */
-    public function getSupplyChainEventType2(?DateTime $occurrenceDateTime = null): ?object
-    {
-        $supplychainevent = $this->createClassInstance('ram\SupplyChainEventType');
-
-        $this->tryCall($supplychainevent, "setOccurrenceDateTime", $this->getDateTimeType($occurrenceDateTime));
-
-        return $supplychainevent;
-    }
-
-    /**
      * Get a DeliverySupplyChainEvent
      *
      * @param DateTime|null $occurrenceDateTime

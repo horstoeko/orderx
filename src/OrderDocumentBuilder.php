@@ -1231,7 +1231,7 @@ class OrderDocumentBuilder extends OrderDocument
      * (also known as the company name)
      * @return OrderDocumentBuilder
      */
-    public function setDocumentShipToLegalOrganisation(?string $legalorgid, ?string $legalorgtype, ?string $legalorgname): OrderDocumentBuilder
+    public function setDocumentShipToLegalOrganisation(?string $legalorgid = null, ?string $legalorgtype = null, ?string $legalorgname = null): OrderDocumentBuilder
     {
         $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
         $legalorg = $this->objectHelper->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
@@ -1257,7 +1257,7 @@ class OrderDocumentBuilder extends OrderDocument
      * Type (Code) of the contach
      * @return OrderDocumentBuilder
      */
-    public function setDocumentShipToContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd, ?string $contactTypeCode): OrderDocumentBuilder
+    public function setDocumentShipToContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
     {
         $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
         $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
@@ -1295,10 +1295,10 @@ class OrderDocumentBuilder extends OrderDocument
      * Detailed information on the party's email address
      * @return OrderDocumentBuilder
      */
-    public function addDocumentShipToContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd): OrderDocumentBuilder
+    public function addDocumentShipToContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCpde = null): OrderDocumentBuilder
     {
         $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCpde);
         $this->objectHelper->tryCall($shipToTradeParty, "addToDefinedTradeContact", $contact);
         return $this;
     }
@@ -1403,7 +1403,7 @@ class OrderDocumentBuilder extends OrderDocument
      * A name by which the party is known, if different from the party's name (also known as the company name)
      * @return OrderDocumentBuilder
      */
-    public function setDocumentShipFromLegalOrganisation(?string $legalorgid, ?string $legalorgtype, ?string $legalorgname): OrderDocumentBuilder
+    public function setDocumentShipFromLegalOrganisation(?string $legalorgid = null, ?string $legalorgtype = null, ?string $legalorgname = null): OrderDocumentBuilder
     {
         $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
         $legalorg = $this->objectHelper->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
@@ -1428,7 +1428,7 @@ class OrderDocumentBuilder extends OrderDocument
      * Contact type
      * @return OrderDocumentBuilder
      */
-    public function setDocumentShipFromContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd, ?string $contactTypeCode): OrderDocumentBuilder
+    public function setDocumentShipFromContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
     {
         $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
         $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
@@ -1453,7 +1453,7 @@ class OrderDocumentBuilder extends OrderDocument
      * Contact type
      * @return OrderDocumentBuilder
      */
-    public function addDocumentShipFromContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd, ?string $contactTypeCode): OrderDocumentBuilder
+    public function addDocumentShipFromContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
     {
         $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
         $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
@@ -1484,7 +1484,7 @@ class OrderDocumentBuilder extends OrderDocument
      * @param DateTime|null $endDateTime
      * @return OrderDocumentBuilder
      */
-    public function setDocumentRequestedDeliverySupplyChainEvent(?DateTime $occurrenceDateTime, ?DateTime $startDateTime, ?DateTime $endDateTime): OrderDocumentBuilder
+    public function setDocumentRequestedDeliverySupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): OrderDocumentBuilder
     {
         $supplychainevent = $this->objectHelper->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
         $this->objectHelper->tryCallIfMethodExists($this->headerTradeDelivery, "addToRequestedDeliverySupplyChainEvent", "setRequestedDeliverySupplyChainEvent", [$supplychainevent], $supplychainevent);
@@ -1591,7 +1591,7 @@ class OrderDocumentBuilder extends OrderDocument
      * A name by which the party is known, if different from the party's name (also known as the company name)
      * @return OrderDocumentBuilder
      */
-    public function setDocumentInvoiceeLegalOrganisation(?string $legalorgid, ?string $legalorgtype, ?string $legalorgname): OrderDocumentBuilder
+    public function setDocumentInvoiceeLegalOrganisation(?string $legalorgid = null, ?string $legalorgtype = null, ?string $legalorgname = null): OrderDocumentBuilder
     {
         $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
         $legalorg = $this->objectHelper->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
@@ -1614,7 +1614,7 @@ class OrderDocumentBuilder extends OrderDocument
      * Detailed information on the party's email address
      * @return OrderDocumentBuilder
      */
-    public function setDocumentInvoiceeContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd, ?string $contactTypeCode): OrderDocumentBuilder
+    public function setDocumentInvoiceeContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
     {
         $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
         $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
