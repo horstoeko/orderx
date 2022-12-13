@@ -42,6 +42,20 @@ class OrderSettings
     protected static $percentDecimals = 2;
 
     /**
+     * The decimal separator
+     *
+     * @var string
+     */
+    protected static $decimalSeparator = ".";
+
+    /**
+     * The thousands seperator
+     *
+     * @var string
+     */
+    protected static $thousandsSeparator = "";
+
+    /**
      * Get the number of decimals to use for amount values
      *
      * @return integer
@@ -102,5 +116,47 @@ class OrderSettings
     public static function setPercentDecimals(int $percentDecimals): void
     {
         self::$percentDecimals = $percentDecimals;
+    }
+
+    /**
+     * Get the decimal separator
+     *
+     * @return string
+     */
+    public static function getDecimalSeparator(): string
+    {
+        return self::$decimalSeparator;
+    }
+
+    /**
+     * Set the decimal separator
+     *
+     * @param string $decimalSeparator
+     * @return void
+     */
+    public static function setDecimalSeparator(string $decimalSeparator): void
+    {
+        self::$decimalSeparator = $decimalSeparator;
+    }
+
+    /**
+     * Get the thousands separator
+     *
+     * @return string
+     */
+    public static function getThousandsSeparator(): string
+    {
+        return self::$thousandsSeparator;
+    }
+
+    /**
+     * Set the thousands separator
+     *
+     * @param string $thousandsSeparator
+     * @return void
+     */
+    public static function setThousandsSeparator(string $thousandsSeparator): void
+    {
+        self::$thousandsSeparator = $thousandsSeparator;
     }
 }

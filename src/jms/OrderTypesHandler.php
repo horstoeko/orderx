@@ -132,7 +132,14 @@ class OrderTypesHandler implements SubscribingHandlerInterface
      */
     public function serializeAmountType(XmlSerializationVisitor $visitor, $data, array $type, Context $context)
     {
-        $node = $visitor->getDocument()->createTextNode(number_format($data->value(), OrderSettings::getAmountDecimals(), ".", ""));
+        $node = $visitor->getDocument()->createTextNode(
+            number_format(
+                $data->value(),
+                OrderSettings::getAmountDecimals(),
+                OrderSettings::getDecimalSeparator(),
+                OrderSettings::getThousandsSeparator()
+            )
+        );
 
         if ($data->getCurrencyID() != null) {
             $attr = $visitor->getDocument()->createAttribute("currencyID");
@@ -155,7 +162,14 @@ class OrderTypesHandler implements SubscribingHandlerInterface
      */
     public function serializeQuantityType(XmlSerializationVisitor $visitor, $data, array $type, Context $context)
     {
-        $node = $visitor->getDocument()->createTextNode(number_format($data->value(), OrderSettings::getQuantityDecimals(), ".", ""));
+        $node = $visitor->getDocument()->createTextNode(
+            number_format(
+                $data->value(),
+                OrderSettings::getQuantityDecimals(),
+                OrderSettings::getDecimalSeparator(),
+                OrderSettings::getThousandsSeparator()
+            )
+        );
 
         if ($data->getUnitCode() != null) {
             $attr = $visitor->getDocument()->createAttribute("unitCode");
@@ -178,7 +192,14 @@ class OrderTypesHandler implements SubscribingHandlerInterface
      */
     public function serializePercentType(XmlSerializationVisitor $visitor, $data, array $type, Context $context)
     {
-        $node = $visitor->getDocument()->createTextNode(number_format($data->value(), OrderSettings::getPercentDecimals(), ".", ""));
+        $node = $visitor->getDocument()->createTextNode(
+            number_format(
+                $data->value(),
+                OrderSettings::getPercentDecimals(),
+                OrderSettings::getDecimalSeparator(),
+                OrderSettings::getThousandsSeparator()
+            )
+        );
         return $node;
     }
 
