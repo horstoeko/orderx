@@ -28,7 +28,7 @@ class TradeAllowanceChargeType
     /**
      * Calculation Percent
      *
-     * @var float $calculationPercent
+     * @var \horstoeko\orderx\entities\extended\udt\PercentType $calculationPercent
      */
     private $calculationPercent = null;
 
@@ -131,7 +131,7 @@ class TradeAllowanceChargeType
      *
      * Calculation Percent
      *
-     * @return float
+     * @return \horstoeko\orderx\entities\extended\udt\PercentType
      */
     public function getCalculationPercent()
     {
@@ -143,7 +143,7 @@ class TradeAllowanceChargeType
      *
      * Calculation Percent
      *
-     * @param float $calculationPercent
+     * @param \horstoeko\orderx\entities\extended\udt\PercentType $calculationPercent
      * @return self
      */
     public function setCalculationPercent($calculationPercent)

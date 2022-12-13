@@ -109,4 +109,4 @@ horstoeko\orderx\entities\extended\ram\TradeTaxType:
             accessor:
                 getter: getRateApplicablePercent
                 setter: setRateApplicablePercent
-            type: float
+            type: horstoeko\orderx\entities\extended\udt\PercentType

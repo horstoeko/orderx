@@ -32,4 +32,4 @@ horstoeko\orderx\entities\comfort\ram\TradeTaxType:
             accessor:
                 getter: getRateApplicablePercent
                 setter: setRateApplicablePercent
-            type: float
+            type: horstoeko\orderx\entities\comfort\udt\PercentType

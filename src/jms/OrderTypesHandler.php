@@ -11,6 +11,7 @@ namespace horstoeko\orderx\jms;
 
 use \DOMText;
 use \DOMElement;
+use horstoeko\orderx\OrderSettings;
 use JMS\Serializer\XmlSerializationVisitor;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
 use JMS\Serializer\GraphNavigator;
@@ -131,7 +132,7 @@ class OrderTypesHandler implements SubscribingHandlerInterface
      */
     public function serializeAmountType(XmlSerializationVisitor $visitor, $data, array $type, Context $context)
     {
-        $node = $visitor->getDocument()->createTextNode(number_format($data->value(), 2, ".", ""));
+        $node = $visitor->getDocument()->createTextNode(number_format($data->value(), OrderSettings::getAmountDecimals(), ".", ""));
 
         if ($data->getCurrencyID() != null) {
             $attr = $visitor->getDocument()->createAttribute("currencyID");
@@ -154,7 +155,7 @@ class OrderTypesHandler implements SubscribingHandlerInterface
      */
     public function serializeQuantityType(XmlSerializationVisitor $visitor, $data, array $type, Context $context)
     {
-        $node = $visitor->getDocument()->createTextNode(number_format($data->value(), 4, ".", ""));
+        $node = $visitor->getDocument()->createTextNode(number_format($data->value(), OrderSettings::getQuantityDecimals(), ".", ""));
 
         if ($data->getUnitCode() != null) {
             $attr = $visitor->getDocument()->createAttribute("unitCode");
@@ -177,7 +178,7 @@ class OrderTypesHandler implements SubscribingHandlerInterface
      */
     public function serializePercentType(XmlSerializationVisitor $visitor, $data, array $type, Context $context)
     {
-        $node = $visitor->getDocument()->createTextNode(number_format($data->value(), 2, ".", ""));
+        $node = $visitor->getDocument()->createTextNode(number_format($data->value(), OrderSettings::getPercentDecimals(), ".", ""));
         return $node;
     }
 

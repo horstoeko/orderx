@@ -32,7 +32,7 @@ horstoeko\orderx\entities\extended\ram\TradeAllowanceChargeType:
             accessor:
                 getter: getCalculationPercent
                 setter: setCalculationPercent
-            type: float
+            type: horstoeko\orderx\entities\extended\udt\PercentType
         basisAmount:
             expose: true
             access_type: public_method

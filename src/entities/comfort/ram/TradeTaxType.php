@@ -28,7 +28,7 @@ class TradeTaxType
     /**
      * Applicable Rate Percent
      *
-     * @var float $rateApplicablePercent
+     * @var \horstoeko\orderx\entities\comfort\udt\PercentType $rateApplicablePercent
      */
     private $rateApplicablePercent = null;
 
@@ -89,7 +89,7 @@ class TradeTaxType
      *
      * Applicable Rate Percent
      *
-     * @return float
+     * @return \horstoeko\orderx\entities\comfort\udt\PercentType
      */
     public function getRateApplicablePercent()
     {
@@ -101,7 +101,7 @@ class TradeTaxType
      *
      * Applicable Rate Percent
      *
-     * @param float $rateApplicablePercent
+     * @param \horstoeko\orderx\entities\comfort\udt\PercentType $rateApplicablePercent
      * @return self
      */
     public function setRateApplicablePercent($rateApplicablePercent)

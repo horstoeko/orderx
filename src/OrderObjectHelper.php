@@ -1019,7 +1019,7 @@ class OrderObjectHelper
         $this->tryCall($taxBreakdown, "setExemptionReasonCode", $this->getCodeType($exemptionReasonCode));
         $this->tryCall($taxBreakdown, "setTaxPointDate", $this->getDateType($taxPointDate));
         $this->tryCall($taxBreakdown, "setDueDateTypeCode", $this->getTimeReferenceCodeType($dueDateTypeCode));
-        $this->tryCall($taxBreakdown, "setRateApplicablePercent", $rateApplicablePercent);
+        $this->tryCall($taxBreakdown, "setRateApplicablePercent", $this->getPercentType($rateApplicablePercent));
 
         return $taxBreakdown;
     }
@@ -1052,7 +1052,7 @@ class OrderObjectHelper
 
         $this->tryCall($allowanceCharge, "setChargeIndicator", $this->getIndicatorType($isCharge));
         $this->tryCall($allowanceCharge, "setSequenceNumeric", $sequence);
-        $this->tryCall($allowanceCharge, "setCalculationPercent", $calculationPercent);
+        $this->tryCall($allowanceCharge, "setCalculationPercent", $this->getPercentType($calculationPercent));
         $this->tryCall($allowanceCharge, "setBasisAmount", $this->getAmountType($basisAmount));
         $this->tryCall($allowanceCharge, "setBasisQuantity", $this->getQuantityType($basisQuantity, $basisQuantityUnitCode));
         $this->tryCall($allowanceCharge, "setActualAmount", $this->getAmountType($actualAmount));
