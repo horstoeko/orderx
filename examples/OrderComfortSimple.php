@@ -22,7 +22,7 @@ $document
     ->setDocumentSellerAddress("SELLER_ADDR_1", "SELLER_ADDR_2", "SELLER_ADDR_3", "75001", "SELLER_CITY", "FR")
     ->setDocumentSellerLegalOrganisation("123456789", "0002", "SELLER_TRADING_NAME")
     ->setDocumentSellerContact("SELLER_CONTACT_NAME", "SELLER_CONTACT_DEP", "+33 6 25 64 98 75", null, "contact@seller.com", "SR")
-    ->setDocumentSellerUniversalCommunication("EM", "sales@seller.com")
+    ->setDocumentSellerElectronicAddress("EM", "sales@seller.com")
 
     ->setDocumentBuyer("BUYER_NAME", "BY_ID_9587456")
     ->addDocumentBuyerGlobalId("98765432179", "0088")
@@ -30,7 +30,7 @@ $document
     ->setDocumentBuyerAddress("BUYER_ADDR_1", "BUYER_ADDR_2", "BUYER_ADDR_3", "69001", "BUYER_CITY", "FR")
     ->setDocumentBuyerLegalOrganisation("987654321", "0002", "BUYER_TRADING_NAME")
     ->setDocumentBuyerContact("BUYER_CONTACT_NAME", "BUYER_CONTACT_DEP", "+33 6 65 98 75 32", null, "contact@buyer.com", "LB")
-    ->setDocumentBuyerUniversalCommunication("EM", "operation@buyer.com")
+    ->setDocumentBuyerElectronicAddress("EM", "operation@buyer.com")
 
     ->setDocumentBuyerRequisitioner("BUYER_REQ_NAME", "BUYER_REQ_ID_25987")
     ->addDocumentBuyerRequisitionerGlobalId("654987321", "0088")
@@ -38,7 +38,7 @@ $document
     ->setDocumentBuyerRequisitionerAddress("BUYER_REQ_ADDR_1", "BUYER_REQ_ADDR_2", "BUYER_REQ_ADDR_3", "69001", "BUYER_REQ_CITY", "FR")
     ->setDocumentBuyerRequisitionerLegalOrganisation("654987321", "0022", "BUYER_REQ_TRADING_NAME")
     ->setDocumentBuyerRequisitionerContact("BUYER_REQ_CONTACT_NAME", "BUYER_REQ_CONTACT_DEP", "+33 6 54 98 65 32", null, "requisitioner@buyer.com", "PD")
-    ->setDocumentBuyerRequisitionerUniversalCommunication("EM", "purchase@buyer.com")
+    ->setDocumentBuyerRequisitionerElectronicAddress("EM", "purchase@buyer.com")
 
     ->setDocumentDeliveryTerms("FCA", "Free Carrier", "7", "DEL_TERMS_LOC_ID", "DEL_TERMS_LOC_Name")
 
@@ -61,7 +61,7 @@ $document
     ->setDocumentShipToAddress("SHIP_TO_ADDR_1", "SHIP_TO_ADDR_2", "SHIP_TO_ADDR_3", "69003", "SHIP_TO_CITY", "FR")
     ->setDocumentShipToLegalOrganisation("951632874", "0002", "SHIP_TO_TRADING_NAME")
     ->setDocumentShipToContact("SHIP_TO_CONTACT_NAME", "SHIP_TO_CONTACT_DEP", "+33 6 85 96 32 41", null, "shipto@customer.com", "SD")
-    ->setDocumentShipToUniversalCommunication("EM", "delivery@buyer.com")
+    ->setDocumentShipToElectronicAddress("EM", "delivery@buyer.com")
 
     ->setDocumentShipFrom("SHIP_FROM_NAME", "SHIP_FROM_ID")
     ->addDocumentShipFromGlobalId("875496123", "0088")
@@ -69,7 +69,7 @@ $document
     ->setDocumentShipFromAddress("SHIP_FROM_ADDR_1", "SHIP_FROM_ADDR_2", "SHIP_FROM_ADDR_3", "75003", "SHIP_FROM_CITY", "FR")
     ->setDocumentShipFromLegalOrganisation("548963127", "0002", "SHIP_FROM_TRADING_NAME")
     ->setDocumentShipFromContact("SHIP_FROM_CONTACT_NAME", "SHIP_FROM_CONTACT_DEP", "+33 6 85 96 32 41", null, "shipfrom@seller.com", "SD")
-    ->setDocumentShipFromUniversalCommunication("EM", "warehouse@seller.com")
+    ->setDocumentShipFromElectronicAddress("EM", "warehouse@seller.com")
 
     ->setDocumentRequestedDeliverySupplyChainEvent(new \DateTime(), new \DateTime(), new \DateTime())
 
@@ -80,7 +80,7 @@ $document
     ->setDocumentInvoiceeAddress("INVOICEE_ADDR_1", "INVOICEE_ADDR_2", "INVOICEE_ADDR_3", "69001", "INVOICEE_CITY", "FR")
     ->setDocumentInvoiceeLegalOrganisation("987654321", "0002", "INVOICEE_TRADING_NAME")
     ->setDocumentInvoiceeContact("INVOICEE_CONTACT_NAME", "INVOICEE_CONTACT_DEP", "+33 6 65 98 75 32", null, "invoicee@buyer.com", "LB")
-    ->setDocumentInvoiceeUniversalCommunication("EM", "invoicee@buyer.com")
+    ->setDocumentInvoiceeElectronicAddress("EM", "invoicee@buyer.com")
 
     ->setDocumentPaymentMean("30", "Credit Transfer")
     ->addDocumentPaymentTerm("PAYMENT_TERMS_DESC")

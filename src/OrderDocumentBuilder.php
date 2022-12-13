@@ -551,21 +551,6 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set the universal communication info for the seller
-     *
-     * @param string|null $uriType
-     * @param string|null $uriId
-     * @return OrderDocumentBuilder
-     */
-    public function setDocumentSellerUniversalCommunication(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
-    {
-        $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
-        $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
-        $this->objectHelper->tryCall($sellerTradeParty, "setURIUniversalCommunication", $universalCommunication);
-        return $this;
-    }
-
-    /**
      * Add additional detailed information on the seller's contact person.
      *
      * @param string|null $contactpersonname
@@ -588,6 +573,21 @@ class OrderDocumentBuilder extends OrderDocument
         $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
         $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
         $this->objectHelper->tryCall($sellerTradeParty, "addToDefinedTradeContact", $contact);
+        return $this;
+    }
+
+    /**
+     * Set the universal communication info for the seller
+     *
+     * @param string|null $uriType
+     * @param string|null $uriId
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentSellerElectronicAddress(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
+    {
+        $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
+        $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
+        $this->objectHelper->tryCall($sellerTradeParty, "setURIUniversalCommunication", $universalCommunication);
         return $this;
     }
 
@@ -766,7 +766,7 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string|null $uriId
      * @return OrderDocumentBuilder
      */
-    public function setDocumentBuyerUniversalCommunication(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
+    public function setDocumentBuyerElectronicAddress(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
     {
         $buyerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
         $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
@@ -947,7 +947,7 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string|null $uriId
      * @return OrderDocumentBuilder
      */
-    public function setDocumentBuyerRequisitionerUniversalCommunication(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
+    public function setDocumentBuyerRequisitionerElectronicAddress(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
     {
         $buyerRequisitionerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
         $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
@@ -1396,7 +1396,7 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string|null $uriId
      * @return OrderDocumentBuilder
      */
-    public function setDocumentShipToUniversalCommunication(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
+    public function setDocumentShipToElectronicAddress(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
     {
         $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
         $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
@@ -1592,7 +1592,7 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string|null $uriId
      * @return OrderDocumentBuilder
      */
-    public function setDocumentShipFromUniversalCommunication(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
+    public function setDocumentShipFromElectronicAddress(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
     {
         $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
         $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
@@ -1776,7 +1776,7 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string|null $uriId
      * @return OrderDocumentBuilder
      */
-    public function setDocumentInvoiceeUniversalCommunication(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
+    public function setDocumentInvoiceeElectronicAddress(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
     {
         $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
         $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
