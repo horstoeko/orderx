@@ -344,7 +344,9 @@ class OrderDocumentBuilder extends OrderDocument
      * Add a note to the docuzment
      *
      * @param string $content Free text on the order
+     * A textual note that gives unstructured information that is relevant to the order as a whole.
      * @param string|null $subjectCode Code to qualify the free text for the order
+     * The subject of the textual note in BT-22. To be chosen from the entries in UNTDID 4451
      * @return OrderDocumentBuilder
      */
     public function addDocumentNote(string $content, ?string $subjectCode = null): OrderDocumentBuilder
@@ -357,15 +359,21 @@ class OrderDocumentBuilder extends OrderDocument
     /**
      * Document money summation
      *
-     * @param float $grandTotalAmount Total order amount including sales tax
-     * @param float|null $lineTotalAmount Sum of the net amounts of all prder items
+     * @param float $lineTotalAmount Sum of the net amounts of all prder items
+     * Sum of all order line net amounts in the order.
+     * @param float|null $grandTotalAmount Total order amount including sales tax
+     * The total amount of the order with VAT.
      * @param float|null $chargeTotalAmount Sum of the surcharges at document level
+     * Sum of all charges on document level in the order.
      * @param float|null $allowanceTotalAmount Sum of the discounts at document level
+     * Sum of all allowances on document level in the order.
      * @param float|null $taxBasisTotalAmount Total order amount excluding sales tax
+     * The total amount of the order without VAT.
      * @param float|null $taxTotalAmount Total amount of the order tax, Total tax amount in the booking currency
+     * The total VAT amount for the order.
      * @return OrderDocumentBuilder
      */
-    public function setDocumentSummation(float $grandTotalAmount, ?float $lineTotalAmount = null, ?float $chargeTotalAmount = null, ?float $allowanceTotalAmount = null, ?float $taxBasisTotalAmount = null, ?float $taxTotalAmount = null): OrderDocumentBuilder
+    public function setDocumentSummation(float $lineTotalAmount, ?float $grandTotalAmount = null, ?float $chargeTotalAmount = null, ?float $allowanceTotalAmount = null, ?float $taxBasisTotalAmount = null, ?float $taxTotalAmount = null): OrderDocumentBuilder
     {
         $summation = $this->objectHelper->getTradeSettlementHeaderMonetarySummationType($grandTotalAmount, $lineTotalAmount, $chargeTotalAmount, $allowanceTotalAmount, $taxBasisTotalAmount, $taxTotalAmount);
         $this->objectHelper->tryCall($this->headerTradeSettlement, "setSpecifiedTradeSettlementHeaderMonetarySummation", $summation);

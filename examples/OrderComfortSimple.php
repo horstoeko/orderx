@@ -86,7 +86,7 @@ $document
     ->addDocumentPaymentTerm("PAYMENT_TERMS_DESC")
     ->addDocumentAllowanceCharge(31.00, false, "S", "VAT", 20, null, 10.00, 310.00, null, null, "64", "SPECIAL AGREEMENT")
     ->addDocumentAllowanceCharge(21.00, true, "S", "VAT", 20, null, 10.00, 210.00, null, null, "FC", "FREIGHT SERVICES")
-    ->setDocumentSummation(360, 310, 21, 31, 300, 60)
+    ->setDocumentSummation(310, 360, 21, 31, 300, 60)
     ->setDocumentReceivableSpecifiedTradeAccountingAccount("BUYER_ACCOUNT_REF")
 
     ->addNewPosition("1")
