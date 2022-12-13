@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is a part of horstoeko/orderx.
  *
@@ -1135,7 +1137,15 @@ class OrderDocumentBuilder extends OrderDocument
      * @param DateTime|null $additionalRefDate
      * Document date
      * @param string|null $binarydatafilename
-     * Contains a file name of an attachment document embedded as a binary object
+     * Contains a file name of an attachment document embedded as a binary object.
+     * Allowed mime codes:
+     * - application/pdf
+     * - image/png
+     * - image/jpeg
+     * - text/csv
+     * - application/vnd.openxmlformats
+     * - officedocument.spreadsheetml.sheet
+     * - application/vnd.oasis.opendocument. Spreadsheet
      * @return OrderDocumentBuilder
      */
     public function addDocumentAdditionalReferencedDocument(string $additionalRefTypeCode, ?string $additionalRefId, ?string $additionalRefURIID = null, $additionalRefName = null, ?string $additionalRefRefTypeCode = null, ?DateTime $additionalRefDate = null, ?string $binarydatafilename = null): OrderDocumentBuilder
@@ -1149,12 +1159,14 @@ class OrderDocumentBuilder extends OrderDocument
      * Set details of a blanket order referenced document
      *
      * @param string $blanketOrderRefId
-     * The unique identifier of a Blanket Order referenced document
+     * The identification of a Blanket Order, issued by the Buyer or the Buyer Requisitioner.
+     * @param DateTime|null $blanketOrderRefDate
+     * The date or date time for the issuance of this referenced Blanket Order.
      * @return OrderDocumentBuilder
      */
-    public function setDocumentBlanketOrderReferencedDocument(string $blanketOrderRefId): OrderDocumentBuilder
+    public function setDocumentBlanketOrderReferencedDocument(string $blanketOrderRefId, ?DateTime $blanketOrderRefDate = null): OrderDocumentBuilder
     {
-        $blanketOrderRefDoc = $this->objectHelper->getReferencedDocumentType($blanketOrderRefId, null, null, null, null, null, null, null);
+        $blanketOrderRefDoc = $this->objectHelper->getReferencedDocumentType($blanketOrderRefId, null, null, null, null, null, $blanketOrderRefDate, null);
         $this->objectHelper->tryCallIfMethodExists($this->headerTradeAgreement, "addToBlanketOrderReferencedDocument", "setBlanketOrderReferencedDocument", [$blanketOrderRefDoc], $blanketOrderRefDoc);
         return $this;
     }
@@ -1163,12 +1175,14 @@ class OrderDocumentBuilder extends OrderDocument
      * Add new details of a blanket order referenced document
      *
      * @param string $blanketOrderRefId
-     * The unique identifier of a line in the Blanketl Order referenced document
+     * The identification of a Blanket Order, issued by the Buyer or the Buyer Requisitioner.
+     * @param DateTime|null $blanketOrderRefDate
+     * The date or date time for the issuance of this referenced Blanket Order.
      * @return OrderDocumentBuilder
      */
-    public function addDocumentBlanketOrderReferencedDocument(string $blanketOrderRefId): OrderDocumentBuilder
+    public function addDocumentBlanketOrderReferencedDocument(string $blanketOrderRefId, ?DateTime $blanketOrderRefDate = null): OrderDocumentBuilder
     {
-        $blanketOrderRefDoc = $this->objectHelper->getReferencedDocumentType($blanketOrderRefId, null, null, null, null, null, null, null);
+        $blanketOrderRefDoc = $this->objectHelper->getReferencedDocumentType($blanketOrderRefId, null, null, null, null, null, $blanketOrderRefDate, null);
         $this->objectHelper->tryCall($this->headerTradeAgreement, "addToBlanketOrderReferencedDocument", $blanketOrderRefDoc);
         return $this;
     }
