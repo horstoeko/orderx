@@ -1539,6 +1539,36 @@ class OrderObjectHelper
     }
 
     /**
+     * Tries to call a method with two parameters
+     *
+     * @codeCoverageIgnore
+     * @param object $instance
+     * @param string $method
+     * @param mixed $value1
+     * @param mixed $value2
+     * @return OrderObjectHelper
+     */
+    public function tryCall2($instance, string $method, $value1, $value2): OrderObjectHelper
+    {
+        if (!$instance) {
+            return $this;
+        }
+        if (!$method) {
+            return $this;
+        }
+        if (self::isNullOrEmpty($value1) && !is_bool($value1)) {
+            return $this;
+        }
+        if (self::isNullOrEmpty($value2) && !is_bool($value2)) {
+            return $this;
+        }
+        if ($this->methodExists($instance, $method)) {
+            $instance->$method($value1, $value2);
+        }
+        return $this;
+    }
+
+    /**
      * Try call all methods
      *
      * @codeCoverageIgnore

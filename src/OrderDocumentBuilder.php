@@ -149,36 +149,153 @@ class OrderDocumentBuilder extends OrderDocument
      * The type of the document, See \horstoeko\codelists\OrderInvoiceType for details
      * @param DateTime $documentDate Date of order
      * The date when the document was issued by the seller
-     * @param string $orderCurrency Code for the order currency
+     * @param string $documentCurrency Code for the order currency
      * The code for the order currency
      * @param string|null $documentName Document Type
      * The document type (free text)
-     * @param string|null $documentLanguage Language indicator
+     * @param string|null $documentLanguageId Language indicator
      * The language code in which the document was written
-     * @param DateTime|null $effectiveSpecifiedPeriod
+     * @param DateTime|null $documentEffectiveSpecifiedPeriod
      * The contractual due date of the order
-     * @param string|null $purposeCode The purpose, expressed as text,
-     * of this exchanged document.
+     * @param string|null $documentPurposeCode
+     * The purpose, expressed as text, of this exchanged document.
      * -  7 : Duplicate
      * -  9 : Original
      * - 35 : Retransmission
-     * @param string|null $requestedResponseTypeCode A code specifying a type of
-     * response requested for this exchanged document. Value = AC to request an Order_Response
+     * @param string|null $documentRequestedResponseTypeCode A code specifying a type of
+     * Response requested for this exchanged document. Value = AC to request an Order_Response
      * @return OrderDocumentBuilder
      */
-    public function setDocumentInformation(string $documentNo, string $documentTypeCode, DateTime $documentDate, string $orderCurrency, ?string $documentName = null, ?string $documentLanguage = null, ?DateTime $effectiveSpecifiedPeriod = null, ?string $purposeCode = null, ?string $requestedResponseTypeCode = null): OrderDocumentBuilder
+    public function setDocumentInformation(string $documentNo, string $documentTypeCode, DateTime $documentDate, string $documentCurrency, ?string $documentName = null, ?string $documentLanguageId = null, ?DateTime $documentEffectiveSpecifiedPeriod = null, ?string $documentPurposeCode = null, ?string $documentRequestedResponseTypeCode = null): OrderDocumentBuilder
+    {
+        $this->objectHelper->tryCall($this, "setDocumentNo", $documentNo);
+        $this->objectHelper->tryCall($this, "setDocumentTypeCode", $documentTypeCode);
+        $this->objectHelper->tryCall($this, "setDocumentDate", $documentDate);
+        $this->objectHelper->tryCall($this, "setDocumentCurrency", $documentCurrency);
+        $this->objectHelper->tryCall($this, "setDocumentName", $documentName);
+        $this->objectHelper->tryCall($this, "setDocumentLanguageId", $documentLanguageId);
+        $this->objectHelper->tryCall($this, "setDocumentPurposeCode", $documentPurposeCode);
+        $this->objectHelper->tryCall($this, "setDocumentRequestedResponseTypeCode", $documentRequestedResponseTypeCode);
+        $this->objectHelper->tryCall2($this, "setDocumentEffectiveSpecifiedPeriod", $documentEffectiveSpecifiedPeriod, $documentEffectiveSpecifiedPeriod);
+
+        return $this;
+    }
+
+    /**
+     * Short-Hand function for setting the document no.
+     *
+     * @param string $documentNo
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentNo(string $documentNo): OrderDocumentBuilder
     {
         $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setID", $this->objectHelper->getIdType($documentNo));
+        return $this;
+    }
+
+    /**
+     * Short-Hand function for setting the document's name
+     *
+     * @param string $documentName
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentName(string $documentName): OrderDocumentBuilder
+    {
         $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setName", $this->objectHelper->getTextType($documentName));
+        return $this;
+    }
+
+    /**
+     * Short-Hand function for setting the document type
+     *
+     * @param string $documentTypeCode
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentTypeCode(string $documentTypeCode): OrderDocumentBuilder
+    {
         $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setTypeCode", $this->objectHelper->getCodeType($documentTypeCode));
+        return $this;
+    }
+
+    /**
+     * Short-Hand function for setting the document date
+     *
+     * @param DateTime $documentDate
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentDate(DateTime $documentDate): OrderDocumentBuilder
+    {
         $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setIssueDateTime", $this->objectHelper->getDateTimeType($documentDate));
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "addToLanguageID", $this->objectHelper->getIdType($documentLanguage));
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setEffectiveSpecifiedPeriod", $this->objectHelper->getSpecifiedPeriodType($effectiveSpecifiedPeriod, $effectiveSpecifiedPeriod));
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setPurposeCode", $this->objectHelper->getCodeType($purposeCode));
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setRequestedResponseTypeCode", $this->objectHelper->getCodeType($requestedResponseTypeCode));
+        return $this;
+    }
 
-        $this->objectHelper->tryCall($this->headerTradeSettlement, "setOrderCurrencyCode", $this->objectHelper->getIdType($orderCurrency));
+    /**
+     * Short-Hand function for setting the document's currency
+     *
+     * @param string $documentCurrency
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentCurrency(string $documentCurrency): OrderDocumentBuilder
+    {
+        $this->objectHelper->tryCall($this->headerTradeSettlement, "setOrderCurrencyCode", $this->objectHelper->getIdType($documentCurrency));
+        return $this;
+    }
 
+    /**
+     * Short-Hand function for setting the document's language
+     *
+     * @param string $documentLanguageId
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentLanguageId(string $documentLanguageId): OrderDocumentBuilder
+    {
+        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setLanguageID", [$this->objectHelper->getIdType($documentLanguageId)]);
+        return $this;
+    }
+
+    /**
+     * Short-Hand function for setting the specified period within which this
+     * exchanged document is effective
+     *
+     * @param DateTime $effectiveSpecifiedPeriodFrom
+     * Effective Document Period Start Date (Order)
+     * @param DateTime $effectiveSpecifiedPeriodTo
+     * Effective Document Period End Date (Order)
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentEffectiveSpecifiedPeriod(DateTime $effectiveSpecifiedPeriodFrom, DateTime $effectiveSpecifiedPeriodTo): OrderDocumentBuilder
+    {
+        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setEffectiveSpecifiedPeriod", $this->objectHelper->getSpecifiedPeriodType($effectiveSpecifiedPeriodFrom, $effectiveSpecifiedPeriodTo));
+        return $this;
+    }
+
+    /**
+     * Short-Hand function for setting the doocument's purpose code
+     *
+     * @param string $documentPurposeCode
+     * The purpose, expressed as text, of this exchanged document.
+     * -  7 : Duplicate
+     * -  9 : Original
+     * - 35 : Retransmission
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentPurposeCode(string $documentPurposeCode): OrderDocumentBuilder
+    {
+        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setPurposeCode", $this->objectHelper->getCodeType($documentPurposeCode));
+        return $this;
+    }
+
+    /**
+     * Short-Hand function for setting a code specifying a type of response
+     * requested for this exchanged document.
+     *
+     * @param string $documentRequestedResponseTypeCode
+     * Value = AC to request an Order_Response
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentRequestedResponseTypeCode(string $documentRequestedResponseTypeCode): OrderDocumentBuilder
+    {
+        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setRequestedResponseTypeCode", $this->objectHelper->getCodeType($documentRequestedResponseTypeCode));
         return $this;
     }
 
@@ -194,7 +311,6 @@ class OrderDocumentBuilder extends OrderDocument
     public function setDocumentBusinessProcessSpecifiedDocumentContextParameter(string $businessProcessSpecifiedDocumentContextParameter): OrderDocumentBuilder
     {
         $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocumentContext(), "setBusinessProcessSpecifiedDocumentContextParameter", $this->objectHelper->getDocumentContextParameterType($businessProcessSpecifiedDocumentContextParameter));
-
         return $this;
     }
 
