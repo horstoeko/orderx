@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="index, follow, all" />
-    <title>horstoeko\orderx\OrderDocument | horstoeko/Order-X API</title>
+    <title>horstoeko\orderx\OrderDocumentPdfBuilder | horstoeko/Order-X API</title>
 
             <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
@@ -19,7 +19,7 @@
     
     </head>
 
-    <body id="class" data-name="class:horstoeko_orderx_OrderDocument" data-root-path="../../">
+    <body id="class" data-name="class:horstoeko_orderx_OrderDocumentPdfBuilder" data-root-path="../../">
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
@@ -66,83 +66,31 @@
                         <div class="namespace-breadcrumbs">
             <ol class="breadcrumb">
                 <li><span class="label label-default">class</span></li>
-                        <li><a href="../../horstoeko.html">horstoeko</a></li><li class="backslash">\</li><li><a href="../../horstoeko/orderx.html">orderx</a></li><li class="backslash">\</li><li>OrderDocument</li>
+                        <li><a href="../../horstoeko.html">horstoeko</a></li><li class="backslash">\</li><li><a href="../../horstoeko/orderx.html">orderx</a></li><li class="backslash">\</li><li>OrderDocumentPdfBuilder</li>
             </ol>
         </div>
                 <div id="page-content">
                 
     <div class="page-header">
         <h1>
-            OrderDocument
+            OrderDocumentPdfBuilder
                 
         </h1>
     </div>
 
     <p>    class
-    <strong>OrderDocument</strong>
+    <strong>OrderDocumentPdfBuilder</strong>
 </p>
 
         
     
 
             <div class="description">
-            <p>Class representing the document basics</p>                                </div>
+            <p>Class representing the facillity adding XML data from OrderDocumentBuilder
+to an existing PDF with conversion to PDF/A</p>                                </div>
     
     
     
-            <h2>Properties</h2>
-
-            <table class="table table-condensed">
-                    <tr>
-                <td class="type" id="property_profileId">
-                                                                                integer
-                </td>
-                <td>$profileId</td>
-                <td class="last"></td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type" id="property_profileDefinition">
-                                                                                array
-                </td>
-                <td>$profileDefinition</td>
-                <td class="last"></td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type" id="property_serializerBuilder">
-                                        protected                                        <abbr title="JMS\Serializer\SerializerBuilder">SerializerBuilder</abbr>
-                </td>
-                <td>$serializerBuilder</td>
-                <td class="last"></td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type" id="property_serializer">
-                                        protected                                        <abbr title="JMS\Serializer\SerializerInterface">SerializerInterface</abbr>
-                </td>
-                <td>$serializer</td>
-                <td class="last"></td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type" id="property_invoiceObject">
-                                        protected                                        <abbr title="horstoeko\orderx\entities\en16931\rsm\CrossIndustryInvoiceType">CrossIndustryInvoiceType</abbr>
-                </td>
-                <td>$invoiceObject</td>
-                <td class="last"></td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type" id="property_objectHelper">
-                                        protected                                        <a href="../../horstoeko/orderx/OrderObjectHelper.html"><abbr title="horstoeko\orderx\OrderObjectHelper">OrderObjectHelper</abbr></a>
-                </td>
-                <td>$objectHelper</td>
-                <td class="last"></td>
-                <td></td>
-            </tr>
-            </table>
-
     
             <h2>Methods</h2>
 
@@ -152,30 +100,29 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>(int $profile)
+                    <a href="#method___construct">__construct</a>(<a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a> $documentBuiler, string $pdfData)
         
                                             <p>Constructor</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    object
+                    <a href="../../horstoeko/orderx/OrderDocumentPdfBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentPdfBuilder">OrderDocumentPdfBuilder</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_getInvoiceObject">getInvoiceObject</a>()
+                    <a href="#method_generateDocument">generateDocument</a>()
         
-                                            <p class="no-description">No description</p>
-                                    </div>
+                                            <p>Generates the final document</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    int
+                    <a href="../../horstoeko/orderx/OrderDocumentPdfBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentPdfBuilder">OrderDocumentPdfBuilder</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_getProfileId">getProfileId</a>()
+                    <a href="#method_saveDocument">saveDocument</a>(string $toFilename)
         
-                                            <p>Returns the selected profile id</p>                </div>
+                                            <p>Saves the document generated with generateDocument to a file</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -183,9 +130,9 @@
                     array
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_getProfileDefinition">getProfileDefinition</a>()
+                    <a href="#method_extractOrderInformations">extractOrderInformations</a>()
         
-                                            <p>Returns the profile definition</p>                </div>
+                                            <p>Extract major invoice information from Order-X XML.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -196,9 +143,9 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at         line 84</div>
+        <div class="location">at         line 67</div>
         <code>                    
-    <strong>__construct</strong>(int $profile)
+    <strong>__construct</strong>(<a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a> $documentBuiler, string $pdfData)
         </code>
     </h3>
     <div class="details">
@@ -212,9 +159,15 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td>int</td>
-                <td>$profile</td>
-                <td>The ID of the profile of the document</td>
+                <td><a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a></td>
+                <td>$documentBuiler</td>
+                <td>The instance of the document builder. Needed to get the XML data</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pdfData</td>
+                <td>The full filename or a string containing the binary pdf data. This
+is the original PDF (e.g. created by a ERP system)</td>
             </tr>
             </table>
 
@@ -226,23 +179,25 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_getInvoiceObject">
-        <div class="location">at         line 99</div>
-        <code>                    object
-    <strong>getInvoiceObject</strong>()
+                    <h3 id="method_generateDocument">
+        <div class="location">at         line 81</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentPdfBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentPdfBuilder">OrderDocumentPdfBuilder</abbr></a>
+    <strong>generateDocument</strong>()
         </code>
     </h3>
     <div class="details">
             
     
 
+                    <div class="method-description">
+                                    <p>Generates the final document</p>                                                </div>
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td>object</td>
+            <td><a href="../../horstoeko/orderx/OrderDocumentPdfBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentPdfBuilder">OrderDocumentPdfBuilder</abbr></a></td>
             <td></td>
         </tr>
     </table>
@@ -254,10 +209,10 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_getProfileId">
-        <div class="location">at         line 109</div>
-        <code>                    int
-    <strong>getProfileId</strong>()
+                    <h3 id="method_saveDocument">
+        <div class="location">at         line 96</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentPdfBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentPdfBuilder">OrderDocumentPdfBuilder</abbr></a>
+    <strong>saveDocument</strong>(string $toFilename)
         </code>
     </h3>
     <div class="details">
@@ -265,14 +220,25 @@
     
 
                     <div class="method-description">
-                                    <p>Returns the selected profile id</p>                                                </div>
+                                    <p>Saves the document generated with generateDocument to a file</p>                                                </div>
                 <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$toFilename</td>
+                <td>The full qualified filename to which the generated PDF (with attachment)
+is stored</td>
+            </tr>
+            </table>
+
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td>int</td>
+            <td><a href="../../horstoeko/orderx/OrderDocumentPdfBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentPdfBuilder">OrderDocumentPdfBuilder</abbr></a></td>
             <td></td>
         </tr>
     </table>
@@ -284,10 +250,10 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_getProfileDefinition">
-        <div class="location">at         line 119</div>
-        <code>                    array
-    <strong>getProfileDefinition</strong>()
+                    <h3 id="method_extractOrderInformations">
+        <div class="location">at         line 209</div>
+        <code>            protected        array
+    <strong>extractOrderInformations</strong>()
         </code>
     </h3>
     <div class="details">
@@ -295,7 +261,7 @@
     
 
                     <div class="method-description">
-                                    <p>Returns the profile definition</p>                                                </div>
+                                    <p>Extract major invoice information from Order-X XML.</p>                                                </div>
                 <div class="tags">
             
                             <h4>Return Value</h4>
