@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is a part of horstoeko/orderx.
  *
@@ -123,7 +125,7 @@ class OrderDocumentPdfBuilder
 
         // Start
 
-        $this->pdfWriter->attach($xmlDataRef, $this->documentBuiler->getProfileDefinition()['attachmentfilename'], 'Order-X', 'Data', 'text#2Fxml');
+        $this->pdfWriter->attach($xmlDataRef, $this->documentBuiler->getProfileDefinition()['attachmentfilename'], 'Order-X XML File', 'Data', 'text#2Fxml');
         $this->pdfWriter->openAttachmentPane();
 
         // Copy pages from the original PDF

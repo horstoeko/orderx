@@ -4,7 +4,7 @@ use horstoeko\orderx\OrderDocumentBuilder;
 use horstoeko\orderx\OrderDocumentPdfBuilder;
 use horstoeko\orderx\OrderProfiles;
 
-require getcwd() . "/../vendor/autoload.php";
+require dirname(__FILE__) . "/../vendor/autoload.php";
 
 $document = OrderDocumentBuilder::CreateNew(OrderProfiles::PROFILE_EXTENDED);
 $document
@@ -180,6 +180,6 @@ $document
 
     ->writeFile(getcwd() . "/order-x.xml");
 
-$pdfBuilder = new OrderDocumentPdfBuilder($document, dirname(__FILE__) . "/../src/assets/empty.pdf");
-$pdfBuilder->generateDocument();
-$pdfBuilder->saveDocument(getcwd() . "/order-x.pdf");
+(new OrderDocumentPdfBuilder($document, dirname(__FILE__) . "/../src/assets/empty.pdf"))
+    ->generateDocument()
+    ->saveDocument(getcwd() . "/order-x.pdf");
