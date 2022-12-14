@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="index, follow, all" />
-    <title>horstoeko\orderx\OrderDocument | horstoeko/Order-X API</title>
+    <title>horstoeko\orderx\OrderDocumentValidator | horstoeko/Order-X API</title>
 
             <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
@@ -19,7 +19,7 @@
     
     </head>
 
-    <body id="class" data-name="class:horstoeko_orderx_OrderDocument" data-root-path="../../">
+    <body id="class" data-name="class:horstoeko_orderx_OrderDocumentValidator" data-root-path="../../">
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
@@ -66,83 +66,30 @@
                         <div class="namespace-breadcrumbs">
             <ol class="breadcrumb">
                 <li><span class="label label-default">class</span></li>
-                        <li><a href="../../horstoeko.html">horstoeko</a></li><li class="backslash">\</li><li><a href="../../horstoeko/orderx.html">orderx</a></li><li class="backslash">\</li><li>OrderDocument</li>
+                        <li><a href="../../horstoeko.html">horstoeko</a></li><li class="backslash">\</li><li><a href="../../horstoeko/orderx.html">orderx</a></li><li class="backslash">\</li><li>OrderDocumentValidator</li>
             </ol>
         </div>
                 <div id="page-content">
                 
     <div class="page-header">
         <h1>
-            OrderDocument
+            OrderDocumentValidator
                 
         </h1>
     </div>
 
     <p>    class
-    <strong>OrderDocument</strong>
+    <strong>OrderDocumentValidator</strong>
 </p>
 
         
     
 
             <div class="description">
-            <p>Class representing the document basics</p>                                </div>
+            <p>Class representing the document validator for incoming documents</p>                                </div>
     
     
     
-            <h2>Properties</h2>
-
-            <table class="table table-condensed">
-                    <tr>
-                <td class="type" id="property_profile">
-                                                                                integer
-                </td>
-                <td>$profile</td>
-                <td class="last"></td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type" id="property_profiledef">
-                                                                                array
-                </td>
-                <td>$profiledef</td>
-                <td class="last"></td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type" id="property_serializerBuilder">
-                                        protected                                        <abbr title="JMS\Serializer\SerializerBuilder">SerializerBuilder</abbr>
-                </td>
-                <td>$serializerBuilder</td>
-                <td class="last"></td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type" id="property_serializer">
-                                        protected                                        <abbr title="JMS\Serializer\SerializerInterface">SerializerInterface</abbr>
-                </td>
-                <td>$serializer</td>
-                <td class="last"></td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type" id="property_invoiceObject">
-                                        protected                                        <abbr title="horstoeko\orderx\entities\en16931\rsm\CrossIndustryInvoiceType">CrossIndustryInvoiceType</abbr>
-                </td>
-                <td>$invoiceObject</td>
-                <td class="last"></td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type" id="property_objectHelper">
-                                        protected                                        <a href="../../horstoeko/orderx/OrderObjectHelper.html"><abbr title="horstoeko\orderx\OrderObjectHelper">OrderObjectHelper</abbr></a>
-                </td>
-                <td>$objectHelper</td>
-                <td class="last"></td>
-                <td></td>
-            </tr>
-            </table>
-
     
             <h2>Methods</h2>
 
@@ -152,20 +99,19 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>(int $profile)
+                    <a href="#method___construct">__construct</a>(<a href="../../horstoeko/orderx/OrderDocument.html"><abbr title="horstoeko\orderx\OrderDocument">OrderDocument</abbr></a> $document)
         
                                             <p>Constructor</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    object
+                    <abbr title="Symfony\Component\Validator\ConstraintViolationListInterface">ConstraintViolationListInterface</abbr>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_getInvoiceObject">getInvoiceObject</a>()
+                    <a href="#method_validateDocument">validateDocument</a>()
         
-                                            <p class="no-description">No description</p>
-                                    </div>
+                                            <p>Perform the validation of the document</p>                </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -176,9 +122,9 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at         line 84</div>
+        <div class="location">at         line 51</div>
         <code>                    
-    <strong>__construct</strong>(int $profile)
+    <strong>__construct</strong>(<a href="../../horstoeko/orderx/OrderDocument.html"><abbr title="horstoeko\orderx\OrderDocument">OrderDocument</abbr></a> $document)
         </code>
     </h3>
     <div class="details">
@@ -192,9 +138,9 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td>int</td>
-                <td>$profile</td>
-                <td>The ID of the profile of the document</td>
+                <td><a href="../../horstoeko/orderx/OrderDocument.html"><abbr title="horstoeko\orderx\OrderDocument">OrderDocument</abbr></a></td>
+                <td>$document</td>
+                <td></td>
             </tr>
             </table>
 
@@ -206,23 +152,25 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_getInvoiceObject">
-        <div class="location">at         line 99</div>
-        <code>                    object
-    <strong>getInvoiceObject</strong>()
+                    <h3 id="method_validateDocument">
+        <div class="location">at         line 62</div>
+        <code>                    <abbr title="Symfony\Component\Validator\ConstraintViolationListInterface">ConstraintViolationListInterface</abbr>
+    <strong>validateDocument</strong>()
         </code>
     </h3>
     <div class="details">
             
     
 
+                    <div class="method-description">
+                                    <p>Perform the validation of the document</p>                                                </div>
                 <div class="tags">
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td>object</td>
+            <td><abbr title="Symfony\Component\Validator\ConstraintViolationListInterface">ConstraintViolationListInterface</abbr></td>
             <td></td>
         </tr>
     </table>
