@@ -2158,7 +2158,7 @@ class OrderDocumentBuilder extends OrderDocument
      * Specify the supply chain packaging
      *
      * @param string|null $typeCode
-     * The code specifying the type of supply chain packaging.
+     * The code specifying the type of supply chain packaging. To be chosen from the entries in UNTDID 7065.
      * @param float|null $width
      * The measure of the width component of this spatial dimension.
      * @param string|null $widthUnitCode

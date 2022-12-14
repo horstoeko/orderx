@@ -19,11 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "horstoeko\\orderx\\": "src",
-            "horstoeko\\orderx\\rsm\\": "src/entities/rsm",
-            "horstoeko\\orderx\\qdt\\": "src/entities/qdt",
-            "horstoeko\\orderx\\ram\\": "src/entities/ram",
-            "horstoeko\\orderx\\udt\\": "src/entities/udt"
+            "horstoeko\\orderx\\": "src"
         }
     },
     "autoload-dev": {
