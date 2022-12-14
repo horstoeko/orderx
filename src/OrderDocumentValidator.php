@@ -73,7 +73,7 @@ class OrderDocumentValidator
     private function initValidator(): void
     {
         $validatorBuilder = Validation::createValidatorBuilder();
-        $dirname = PathUtils::combinePathWithFile(PathUtils::combineAllPaths(dirname(__FILE__) , 'validation', $this->document->profiledef['name']), '*.yml');
+        $dirname = PathUtils::combinePathWithFile(PathUtils::combineAllPaths(dirname(__FILE__) , 'validation', $this->document->profileDef['name']), '*.yml');
         $files = $this->globRecursive($dirname);
 
         foreach ($files as $file) {

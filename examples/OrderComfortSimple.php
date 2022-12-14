@@ -1,6 +1,7 @@
 <?php
 
 use horstoeko\orderx\OrderDocumentBuilder;
+use horstoeko\orderx\OrderDocumentPdfBuilder;
 use horstoeko\orderx\OrderProfiles;
 
 require getcwd() . "/../vendor/autoload.php";
@@ -178,3 +179,7 @@ $document
     ->setDocumentPositionReceivableTradeAccountingAccount("BUYER_ACCOUNTING_REF")
 
     ->writeFile(getcwd() . "/order-x.xml");
+
+$pdfBuilder = new OrderDocumentPdfBuilder($document, dirname(__FILE__) . "/../src/assets/empty.pdf");
+$pdfBuilder->generateDocument();
+$pdfBuilder->saveDocument(getcwd() . "/order-x.pdf");

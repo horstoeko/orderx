@@ -1845,7 +1845,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPaymentTerm(string $paymentTermsDescription): OrderDocumentBuilder
     {
-        if ($this->profile == OrderProfiles::PROFILE_EXTENDED) {
+        if ($this->profileId == OrderProfiles::PROFILE_EXTENDED) {
             $paymentTerms = $paymentTermsDescription;
         } else {
             $paymentTerms = $this->objectHelper->getTradePaymentTermsType($paymentTermsDescription);

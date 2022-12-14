@@ -36,14 +36,14 @@ class OrderDocument
      * Internal profile id (see OrderProfiles.php)
      * @var integer
      */
-    public $profile = -1;
+    public $profileId = -1;
 
     /**
      * @internal
      * Internal profile definition (see OrderProfiles.php)
      * @var array
      */
-    public $profiledef = [];
+    public $profileDef = [];
 
     /**
      * @internal
@@ -113,8 +113,8 @@ class OrderDocument
      */
     private function initProfile(int $profile): OrderDocument
     {
-        $this->profile = $profile;
-        $this->profiledef = OrderProfiles::PROFILEDEF[$profile];
+        $this->profileId = $profile;
+        $this->profileDef = OrderProfiles::PROFILEDEF[$profile];
 
         return $this;
     }
@@ -129,7 +129,7 @@ class OrderDocument
      */
     private function initObjectHelper(): OrderDocument
     {
-        $this->objectHelper = new OrderObjectHelper($this->profile);
+        $this->objectHelper = new OrderObjectHelper($this->profileId);
 
         return $this;
     }
@@ -147,10 +147,10 @@ class OrderDocument
         $serializerBuilder = SerializerBuilder::create();
 
         $this->serializerBuilder = $serializerBuilder;
-        $this->serializerBuilder->addMetadataDir(dirname(__FILE__) . '/yaml/' . $this->profiledef["name"] . '/qdt', 'horstoeko\orderx\entities\\' . $this->profiledef["name"] . '\qdt');
-        $this->serializerBuilder->addMetadataDir(dirname(__FILE__) . '/yaml/' . $this->profiledef["name"] . '/ram', 'horstoeko\orderx\entities\\' . $this->profiledef["name"] . '\ram');
-        $this->serializerBuilder->addMetadataDir(dirname(__FILE__) . '/yaml/' . $this->profiledef["name"] . '/rsm', 'horstoeko\orderx\entities\\' . $this->profiledef["name"] . '\rsm');
-        $this->serializerBuilder->addMetadataDir(dirname(__FILE__) . '/yaml/' . $this->profiledef["name"] . '/udt', 'horstoeko\orderx\entities\\' . $this->profiledef["name"] . '\udt');
+        $this->serializerBuilder->addMetadataDir(dirname(__FILE__) . '/yaml/' . $this->profileDef["name"] . '/qdt', 'horstoeko\orderx\entities\\' . $this->profileDef["name"] . '\qdt');
+        $this->serializerBuilder->addMetadataDir(dirname(__FILE__) . '/yaml/' . $this->profileDef["name"] . '/ram', 'horstoeko\orderx\entities\\' . $this->profileDef["name"] . '\ram');
+        $this->serializerBuilder->addMetadataDir(dirname(__FILE__) . '/yaml/' . $this->profileDef["name"] . '/rsm', 'horstoeko\orderx\entities\\' . $this->profileDef["name"] . '\rsm');
+        $this->serializerBuilder->addMetadataDir(dirname(__FILE__) . '/yaml/' . $this->profileDef["name"] . '/udt', 'horstoeko\orderx\entities\\' . $this->profileDef["name"] . '\udt');
         $this->serializerBuilder->addDefaultListeners();
         $this->serializerBuilder->configureHandlers(function (HandlerRegistryInterface $handler) use ($serializerBuilder) {
             $serializerBuilder->addDefaultHandlers();
