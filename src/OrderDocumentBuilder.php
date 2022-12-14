@@ -2301,11 +2301,13 @@ class OrderDocumentBuilder extends OrderDocument
      * The quotation document referenced in this line trade agreement
      * @param string|null $quotationRefLineId
      * The unique identifier of a line in this Quotation referenced document.
+     * @param DateTime|null $quotationRefDate
+     * The quotation reference date
      * @return OrderDocumentBuilder
      */
-    public function setDocumentPositionQuotationReferencedDocument(?string $quotationRefId = null, ?string $quotationRefLineId = null): OrderDocumentBuilder
+    public function setDocumentPositionQuotationReferencedDocument(?string $quotationRefId = null, ?string $quotationRefLineId = null, ?DateTime $quotationRefDate = null): OrderDocumentBuilder
     {
-        $quotationRefDoc = $this->objectHelper->getReferencedDocumentType($quotationRefId, null, $quotationRefLineId, null, null, null, null, null);
+        $quotationRefDoc = $this->objectHelper->getReferencedDocumentType($quotationRefId, null, $quotationRefLineId, null, null, null, $quotationRefDate, null);
         $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
         $this->objectHelper->tryCall($positionAgreement, "setQuotationReferencedDocument", $quotationRefDoc);
         return $this;
@@ -2344,7 +2346,7 @@ class OrderDocumentBuilder extends OrderDocument
      * The reason for the order line item trade price charge expressed as text.
      * @param string|null $reasonCode
      * The reason for the order line item trade price charge, expressed as a code.
-     * Use entries of the UNTDID 7161 code list . The order line level item trade price discount reason code
+     * Use entries of the UNTDID 5189 and UNTDID 7161 code list . The order line level item trade price discount reason code
      * and the order line level item trade price discount reason shall indicate the same item trade price
      * charge reason. Example AEW for WEEE.
      * @return OrderDocumentBuilder
@@ -2378,15 +2380,88 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
+     * Set tax included in this trade price (for instance in case of other Tax, or B2C Order with VAT)
+     *
+     * @param string $categoryCode
+     * Coded description of a sales tax category
+     *
+     * The following entries from UNTDID 5305 are used (details in brackets):
+     *  - Standard rate (sales tax is due according to the normal procedure)
+     *  - Goods to be taxed according to the zero rate (sales tax is charged with a percentage of zero)
+     *  - Tax exempt (USt./IGIC/IPSI)
+     *  - Reversal of the tax liability (the rules for reversing the tax liability at USt./IGIC/IPSI apply)
+     *  - VAT exempt for intra-community deliveries of goods (USt./IGIC/IPSI not levied due to rules on intra-community deliveries)
+     *  - Free export item, tax not levied (VAT / IGIC/IPSI not levied due to export outside the EU)
+     *  - Services outside the tax scope (sales are not subject to VAT / IGIC/IPSI)
+     *  - Canary Islands general indirect tax (IGIC tax applies)
+     *  - IPSI (tax for Ceuta / Melilla) applies.
+     *
+     * The codes for the VAT category are as follows:
+     *  - S = sales tax is due at the normal rate
+     *  - Z = goods to be taxed according to the zero rate
+     *  - E = tax exempt
+     *  - AE = reversal of tax liability
+     *  - K = VAT is not shown for intra-community deliveries
+     *  - G = tax not levied due to export outside the EU
+     *  - O = Outside the tax scope
+     *  - L = IGIC (Canary Islands)
+     *  - M = IPSI (Ceuta / Melilla)
+     * @param string $typeCode
+     * Coded description of a sales tax category. Note: Fixed value = "VAT"
+     * @param float|null $rateApplicablePercent
+     * The sales tax rate, expressed as the percentage applicable to the sales tax category in
+     * question. Note: The code of the sales tax category and the category-specific sales tax rate
+     * must correspond to one another. The value to be given is the percentage. For example, the
+     * value 20 is given for 20% (and not 0.2)
+     * @param float|null $calculatedAmount
+     * The total amount to be paid for the relevant VAT category. Note: Calculated by multiplying
+     * the amount to be taxed according to the sales tax category by the sales tax rate applicable
+     * for the sales tax category concerned
+     * @param string|null $exemptionReason
+     * Reason for tax exemption (free text)
+     * @param string|null $exemptionReasonCode
+     * Reason given in code form for the exemption of the amount from VAT. Note: Code list issued
+     * and maintained by the Connecting Europe Facility.
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentPositionNetPriceTax(string $categoryCode, string $typeCode, ?float $rateApplicablePercent = null, ?float $calculatedAmount = null, ?string $exemptionReason = null, ?string $exemptionReasonCode = null): OrderDocumentBuilder
+    {
+        $positionagreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $netPrice = $this->objectHelper->tryCallAndReturn($positionagreement, "getNetPriceProductTradePrice");
+        $tax = $this->objectHelper->getTradeTaxType($categoryCode, $typeCode, null, $calculatedAmount, $rateApplicablePercent, $exemptionReason, $exemptionReasonCode, null, null, null, null);
+        $this->objectHelper->tryCallIfMethodExists($netPrice, "addToIncludedTradeTax", "setIncludedTradeTax", [$tax], $tax);
+        return $this;
+    }
+
+    /**
+     * Add a additional tax included in this trade price (for instance in case of other Tax, or B2C Order with VAT)
+     * For detailed information see __setDocumentPositionNetPriceTax__
+     *
+     * @return OrderDocumentBuilder
+     */
+    public function addDocumentPositionNetPriceTax(string $categoryCode, string $typeCode, ?float $rateApplicablePercent = null, ?float $calculatedAmount = null, ?string $exemptionReason = null, ?string $exemptionReasonCode = null): OrderDocumentBuilder
+    {
+        $positionagreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $netPrice = $this->objectHelper->tryCallAndReturn($positionagreement, "getNetPriceProductTradePrice");
+        $tax = $this->objectHelper->getTradeTaxType($categoryCode, $typeCode, null, $calculatedAmount, $rateApplicablePercent, $exemptionReason, $exemptionReasonCode, null, null, null, null);
+        $this->objectHelper->tryCall($netPrice, "addToIncludedTradeTax", $tax);
+        return $this;
+    }
+
+    /**
      * Set the Referenced Catalog ID applied to this line
      *
      * @param string|null $catalogueRefId
+     * Referenced Catalog ID applied to this line
      * @param string|null $catalogueRefLineId
+     * Referenced Catalog LineID applied to this line
+     * @param DateTime|null $catalogueRefDate
+     * The formatted date or date time for the issuance of this referenced Catalog.
      * @return OrderDocumentBuilder
      */
-    public function setDocumentPositionCatalogueReferencedDocument(?string $catalogueRefId = null, ?string $catalogueRefLineId = null): OrderDocumentBuilder
+    public function setDocumentPositionCatalogueReferencedDocument(?string $catalogueRefId = null, ?string $catalogueRefLineId = null, ?DateTime $catalogueRefDate = null): OrderDocumentBuilder
     {
-        $quotationrefdoc = $this->objectHelper->getReferencedDocumentType($catalogueRefId, null, $catalogueRefLineId, null, null, null, null, null);
+        $quotationrefdoc = $this->objectHelper->getReferencedDocumentType($catalogueRefId, null, $catalogueRefLineId, null, null, null, $catalogueRefDate, null);
         $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
         $this->objectHelper->tryCallIfMethodExists($positionAgreement, "addToCatalogueReferencedDocument", "setCatalogueReferencedDocument", [$quotationrefdoc], $quotationrefdoc);
         return $this;
@@ -2396,12 +2471,16 @@ class OrderDocumentBuilder extends OrderDocument
      * Set the Referenced Catalog ID applied to this line
      *
      * @param string|null $catalogueRefId
+     * Referenced Catalog ID applied to this line
      * @param string|null $catalogueRefLineId
+     * Referenced Catalog LineID applied to this line
+     * @param DateTime|null $catalogueRefDate
+     * The formatted date or date time for the issuance of this referenced Catalog.
      * @return OrderDocumentBuilder
      */
-    public function addDocumentPositionCatalogueReferencedDocument(?string $catalogueRefId = null, ?string $catalogueRefLineId = null): OrderDocumentBuilder
+    public function addDocumentPositionCatalogueReferencedDocument(?string $catalogueRefId = null, ?string $catalogueRefLineId = null, ?DateTime $catalogueRefDate = null): OrderDocumentBuilder
     {
-        $quotationrefdoc = $this->objectHelper->getReferencedDocumentType($catalogueRefId, null, $catalogueRefLineId, null, null, null, null, null);
+        $quotationrefdoc = $this->objectHelper->getReferencedDocumentType($catalogueRefId, null, $catalogueRefLineId, null, null, null, $catalogueRefDate, null);
         $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
         $this->objectHelper->tryCall($positionAgreement, "addToCatalogueReferencedDocument", $quotationrefdoc);
         return $this;
