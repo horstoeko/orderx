@@ -9,10 +9,11 @@
 
 namespace horstoeko\orderx;
 
-use horstoeko\orderx\codelists\OrderDocumentTypes;
+use DOMDocument;
 use horstoeko\orderx\OrderPdfWriter;
 use horstoeko\orderx\OrderDocumentBuilder;
-use \setasign\Fpdi\PdfParser\StreamReader as PdfStreamReader;
+use horstoeko\orderx\codelists\OrderDocumentTypes;
+use setasign\Fpdi\PdfParser\StreamReader as PdfStreamReader;
 
 /**
  * Class representing the facillity adding XML data from OrderDocumentBuilder
@@ -68,7 +69,7 @@ class OrderDocumentPdfBuilder
         $this->documentBuiler = $documentBuiler;
         $this->pdfData = $pdfData;
         $this->pdfWriter = new OrderPdfWriter();
-        $this->xmlData = new \DOMDocument();
+        $this->xmlData = new DOMDocument();
         $this->xmlData->loadXML($this->documentBuiler->getContent());
     }
 
@@ -120,13 +121,9 @@ class OrderDocumentPdfBuilder
 
         $xmlDataRef = PdfStreamReader::createByString($this->xmlData->saveXML());
 
-        // Get profile definition for later use
-
-        $profileDef = $this->documentBuiler->profileDef;
-
         // Start
 
-        $this->pdfWriter->attach($xmlDataRef, $profileDef['attachmentfilename'], 'Order-X', 'Data', 'text#2Fxml');
+        $this->pdfWriter->attach($xmlDataRef, $this->documentBuiler->getProfileDefinition()['attachmentfilename'], 'Order-X', 'Data', 'text#2Fxml');
         $this->pdfWriter->openAttachmentPane();
 
         // Copy pages from the original PDF
@@ -161,7 +158,7 @@ class OrderDocumentPdfBuilder
         $xmp = simplexml_load_file(dirname(__FILE__) . "/assets/orderx_extension_schema.xmp");
         $descriptionNodes = $xmp->xpath('rdf:Description');
 
-        $descriptionNodes[0]->children('fx_1_', true)->ConformanceLevel = strtoupper($this->documentBuiler->profileDef["xmpname"]);
+        $descriptionNodes[0]->children('fx_1_', true)->ConformanceLevel = strtoupper($this->documentBuiler->getProfileDefinition()["xmpname"]);
 
         $destDcNodes = $descriptionNodes[0]->children('dc', true);
         $destDcNodes->title->children('rdf', true)->Alt->li = $pdfMetadataInfos['title'];
