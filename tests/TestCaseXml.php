@@ -7,7 +7,7 @@ use horstoeko\orderx\tests\TestCase;
 abstract class TestCaseXml extends TestCase
 {
     /**
-     * @var ZugferdDocumentBuilder
+     * @var \horstoeko\orderx\OrderDocumentBuilder
      */
     protected static $document;
 

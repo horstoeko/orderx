@@ -279,7 +279,13 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentLanguageId(string $documentLanguageId): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setLanguageID", [$this->objectHelper->getIdType($documentLanguageId)]);
+        $this->objectHelper->tryCallIfMethodExists(
+            $this->invoiceObject->getExchangedDocument(),
+            "addToLanguageID",
+            "setLanguageID",
+            [$this->objectHelper->getIdType($documentLanguageId)],
+            $this->objectHelper->getIdType($documentLanguageId)
+        );
         return $this;
     }
 
@@ -377,11 +383,13 @@ class OrderDocumentBuilder extends OrderDocument
      * A textual note that gives unstructured information that is relevant to the order as a whole.
      * @param string|null $subjectCode Code to qualify the free text for the order
      * The subject of the textual note in BT-22. To be chosen from the entries in UNTDID 4451
+     * @param string|null $contentCode Code to qualify the free text for the order
+     * To be chosen from the entries in UNTDID xxx
      * @return OrderDocumentBuilder
      */
-    public function addDocumentNote(string $content, ?string $subjectCode = null): OrderDocumentBuilder
+    public function addDocumentNote(string $content, ?string $subjectCode = null, ?string $contentCode = null): OrderDocumentBuilder
     {
-        $note = $this->objectHelper->getNoteType($content, null, $subjectCode);
+        $note = $this->objectHelper->getNoteType($content, $contentCode, $subjectCode);
         $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "addToIncludedNote", $note);
         return $this;
     }

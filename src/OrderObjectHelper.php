@@ -58,8 +58,6 @@ class OrderObjectHelper
     /**
      * Constructor
      *
-     * @codeCoverageIgnore
-     *
      * @param integer $profile
      */
     public function __construct(int $profile)
@@ -1518,7 +1516,6 @@ class OrderObjectHelper
     /**
      * Tries to call a method
      *
-     * @codeCoverageIgnore
      * @param object $instance
      * @param string $method
      * @param mixed $value
@@ -1544,7 +1541,6 @@ class OrderObjectHelper
     /**
      * Tries to call a method with two parameters
      *
-     * @codeCoverageIgnore
      * @param object $instance
      * @param string $method
      * @param mixed $value1
@@ -1574,7 +1570,6 @@ class OrderObjectHelper
     /**
      * Try call all methods
      *
-     * @codeCoverageIgnore
      * @param object $instance
      * @param string[] $methods
      * @param mixed $value
@@ -1601,7 +1596,6 @@ class OrderObjectHelper
      * Tries to call a method and return the returnvalue from call to $method
      * in object $instance
      *
-     * @codeCoverageIgnore
      * @param object $instance
      * @param string $method
      * @return mixed
@@ -1623,7 +1617,6 @@ class OrderObjectHelper
     /**
      * Try call methods in a form .object.method1.method2.method3
      *
-     * @codeCoverageIgnore
      * @param object $instance
      * @param string $methods
      * @param mixed $value
@@ -1645,7 +1638,6 @@ class OrderObjectHelper
     /**
      * Try call methods in a form .object.method1.method2.method3
      *
-     * @codeCoverageIgnore
      * @param object $instance
      * @param string $methods
      * @return mixed
@@ -1698,7 +1690,6 @@ class OrderObjectHelper
     /**
      * Ensure that $input is an array
      *
-     * @codeCoverageIgnore
      * @param mixed $input
      * @return array
      */
@@ -1713,7 +1704,6 @@ class OrderObjectHelper
     /**
      * Ensure array
      *
-     * @codeCoverageIgnore
      *
      * @param mixed $value
      * @return array
@@ -1732,7 +1722,6 @@ class OrderObjectHelper
     /**
      * Test if a value is null or empty
      *
-     * @codeCoverageIgnore
      * @param mixed $value
      * @return boolean
      */
@@ -1752,7 +1741,6 @@ class OrderObjectHelper
     /**
      * Checks if all function arguments are null or empty
      *
-     * @codeCoverageIgnore
      * @param array $args
      * @return boolean
      */
@@ -1773,7 +1761,6 @@ class OrderObjectHelper
     /**
      * Checks if all function arguments are null or empty
      *
-     * @codeCoverageIgnore
      * @param array $args
      * @return boolean
      */
