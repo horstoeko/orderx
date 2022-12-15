@@ -88,9 +88,24 @@ abstract class TestCase extends PhpUnitTestCase
      * @param string $propertyName
      * @return ReflectionProperty
      */
-    public function getPrivateProperty($className, $propertyName): ReflectionProperty
+    public function getPrivatePropertyFromClassname($className, $propertyName): ReflectionProperty
     {
         $reflector = new ReflectionClass($className);
+        $property = $reflector->getProperty($propertyName);
+        $property->setAccessible(true);
+        return $property;
+    }
+
+    /**
+     * Access to private properties
+     *
+     * @param object $object
+     * @param string $propertyName
+     * @return ReflectionProperty
+     */
+    public function getPrivatePropertyFromObject($object, $propertyName): ReflectionProperty
+    {
+        $reflector = new ReflectionClass($object);
         $property = $reflector->getProperty($propertyName);
         $property->setAccessible(true);
         return $property;

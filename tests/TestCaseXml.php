@@ -211,6 +211,20 @@ abstract class TestCaseXml extends TestCase
     }
 
     /**
+     * Test that an xml element does exist at index
+     *
+     * @param string $xpath
+     * @param integer $index
+     * @return void
+     */
+    protected function assertXPathExistsWithIndex(string $xpath, int $index)
+    {
+        $xml = $this->getXml();
+        $xmlvalue = $xml->xpath($xpath);
+        $this->assertArrayHasKey($index, $xmlvalue);
+    }
+
+    /**
      * Test that an xml element does not exist at index
      *
      * @param string $xpath

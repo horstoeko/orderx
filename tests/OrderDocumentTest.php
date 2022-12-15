@@ -56,13 +56,13 @@ class OrderDocumentTest extends TestCase
     public function testDocumentInternals(): void
     {
         $doc = new OrderDocument(OrderProfiles::PROFILE_EXTENDED);
-        $property = $this->getPrivateProperty('horstoeko\orderx\OrderDocument', 'serializerBuilder');
+        $property = $this->getPrivatePropertyFromClassname('horstoeko\orderx\OrderDocument', 'serializerBuilder');
         $this->assertNotNull($property->getValue($doc));
-        $property = $this->getPrivateProperty('horstoeko\orderx\OrderDocument', 'serializer');
+        $property = $this->getPrivatePropertyFromClassname('horstoeko\orderx\OrderDocument', 'serializer');
         $this->assertNotNull($property->getValue($doc));
-        $property = $this->getPrivateProperty('horstoeko\orderx\OrderDocument', 'invoiceObject');
+        $property = $this->getPrivatePropertyFromClassname('horstoeko\orderx\OrderDocument', 'invoiceObject');
         $this->assertNull($property->getValue($doc));
-        $property = $this->getPrivateProperty('horstoeko\orderx\OrderDocument', 'objectHelper');
+        $property = $this->getPrivatePropertyFromClassname('horstoeko\orderx\OrderDocument', 'objectHelper');
         $this->assertNotNull($property->getValue($doc));
         $this->assertNull($doc->getInvoiceObject());
     }

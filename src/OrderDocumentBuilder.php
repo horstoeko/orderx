@@ -498,6 +498,30 @@ class OrderDocumentBuilder extends OrderDocument
      * Tax number of the seller or sales tax identification number of the (FC = Tax number, VA = Sales tax number)
      * @return OrderDocumentBuilder
      */
+    public function setDocumentSellerTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
+    {
+        $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
+        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->objectHelper->tryCallIfMethodExists($sellerTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
+        return $this;
+    }
+
+    /**
+     * Add detailed information on the seller's tax information
+     *
+     * The local identification (defined by the seller's address) of the seller for tax purposes or a reference that enables the seller
+     * to indicate his reporting status for tax purposes The sales tax identification number of the seller
+     * Note: This information may affect how the buyer the order settled (such as in relation to social security contributions). So
+     * e.g. In some countries, if the seller is not reported for tax, the buyer will withhold the tax amount and pay it on behalf of the
+     * seller. Sales tax number with a prefixed country code. A supplier registered as subject to VAT must provide his sales tax
+     * identification number, unless he uses a tax agent.
+     *
+     * @param string $taxregtype
+     * Type of tax number of the seller
+     * @param string $taxregid
+     * Tax number of the seller or sales tax identification number of the (FC = Tax number, VA = Sales tax number)
+     * @return OrderDocumentBuilder
+     */
     public function addDocumentSellerTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
     {
         $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
