@@ -470,7 +470,7 @@ class OrderObjectHelper
      * @param string|null $uriid
      * @param string|null $lineid
      * @param string|null $typecode
-     * @param string|array|null $name
+     * @param string|null $name
      * @param string|null $reftypecode
      * @param DateTime|null $issueddate
      * @param string|null $binarydatafilename
@@ -555,9 +555,9 @@ class OrderObjectHelper
     /**
      * Undocumented function
      *
-     * @return \horstoeko\orderx\entities\basic\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\basicwl\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\en16931\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure
+     * @return \horstoeko\orderx\entities\basic\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure
      */
-    public function getCrossIndustryInvoice()
+    public function getOrderX()
     {
         $result = $this->createClassInstance('rsm\SCRDMCCBDACIOMessageStructure');
         $result->setExchangedDocumentContext($this->createClassInstance('ram\ExchangedDocumentContextType'));
@@ -753,10 +753,11 @@ class OrderObjectHelper
      * @param string|null $code
      * @param string|null $description
      * @param string|null $functionCode
-     * @param string|null $relevantTradeLocation
+     * @param string|null $relevantTradeLocationId
+     * @param string|null $relevantTradeLocationName
      * @return object|null
      */
-    public function getTradeDeliveryTermsType(?string $code = null, ?string $description, ?string $functionCode, ?string $relevantTradeLocationId, ?string $relevantTradeLocationName): ?object
+    public function getTradeDeliveryTermsType(?string $code = null, ?string $description = null, ?string $functionCode = null, ?string $relevantTradeLocationId = null, ?string $relevantTradeLocationName = null): ?object
     {
         if (self::isAllNullOrEmpty(func_get_args())) {
             return null;
@@ -1442,9 +1443,9 @@ class OrderObjectHelper
      * Set contect parameter
      *
      * @param string|null $id
-     * @return void
+     * @return object|null
      */
-    public function getDocumentContextParameterType(?string $id)
+    public function getDocumentContextParameterType(?string $id): ?object
     {
         $contextParameter = $this->createClassInstance('ram\DocumentContextParameterType');
 

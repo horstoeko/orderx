@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace horstoeko\orderx;
 
 use DOMDocument;
+use DOMXPath;
 use horstoeko\orderx\OrderPdfWriter;
 use horstoeko\orderx\OrderDocumentBuilder;
 use horstoeko\orderx\codelists\OrderDocumentTypes;
@@ -51,13 +52,6 @@ class OrderDocumentPdfBuilder
     private $pdfData = "";
 
     /**
-     * Contains the XML data DOMDocument instance
-     *
-     * @var \DOMDocument
-     */
-    private $xmlData = null;
-
-    /**
      * Constructor
      *
      * @param OrderDocumentBuilder $documentBuiler
@@ -70,9 +64,8 @@ class OrderDocumentPdfBuilder
     {
         $this->documentBuiler = $documentBuiler;
         $this->pdfData = $pdfData;
+
         $this->pdfWriter = new OrderPdfWriter();
-        $this->xmlData = new DOMDocument();
-        $this->xmlData->loadXML($this->documentBuiler->getContent());
     }
 
     /**
@@ -121,11 +114,18 @@ class OrderDocumentPdfBuilder
 
         // Get XML data from Builder
 
-        $xmlDataRef = PdfStreamReader::createByString($this->xmlData->saveXML());
+        $documentBuilderXmlDataRef = PdfStreamReader::createByString($this->documentBuiler->getContentAsDomDocument()->saveXML());
 
         // Start
 
-        $this->pdfWriter->attach($xmlDataRef, $this->documentBuiler->getProfileDefinition()['attachmentfilename'], 'Order-X XML File', 'Data', 'text#2Fxml');
+        $this->pdfWriter->attach(
+            $documentBuilderXmlDataRef,
+            $this->documentBuiler->getProfileDefinition()['attachmentfilename'],
+            'Order-X XML File',
+            'Data',
+            'text#2Fxml'
+        );
+
         $this->pdfWriter->openAttachmentPane();
 
         // Copy pages from the original PDF
@@ -144,7 +144,7 @@ class OrderDocumentPdfBuilder
 
         // Update meta data (e.g. such as author, producer, title)
 
-        $this->updatePdfMetaData();
+        $this->updatePdfMetadata();
     }
 
     /**
@@ -158,24 +158,26 @@ class OrderDocumentPdfBuilder
         $this->pdfWriter->setPdfMetadataInfos($pdfMetadataInfos);
 
         $xmp = simplexml_load_file(dirname(__FILE__) . "/assets/orderx_extension_schema.xmp");
-        $descriptionNodes = $xmp->xpath('rdf:Description');
 
-        $descriptionNodes[0]->children('fx_1_', true)->ConformanceLevel = strtoupper($this->documentBuiler->getProfileDefinition()["xmpname"]);
+        $descNodes = $xmp->xpath('rdf:Description');
+        $descNode = $descNodes[0];
 
-        $destDcNodes = $descriptionNodes[0]->children('dc', true);
-        $destDcNodes->title->children('rdf', true)->Alt->li = $pdfMetadataInfos['title'];
-        $destDcNodes->creator->children('rdf', true)->Seq->li = $pdfMetadataInfos['author'];
-        $destDcNodes->description->children('rdf', true)->Alt->li = $pdfMetadataInfos['subject'];
+        $descNode->children('fx_1_', true)->ConformanceLevel = strtoupper($this->documentBuiler->getProfileDefinition()["xmpname"]);
 
-        $destPdfNodes = $descriptionNodes[0]->children('pdf', true);
-        $destPdfNodes->Producer = 'FPDF';
+        $descDcNodes = $descNode->children('dc', true);
+        $descDcNodes->title->children('rdf', true)->Alt->li = $pdfMetadataInfos['title'];
+        $descDcNodes->creator->children('rdf', true)->Seq->li = $pdfMetadataInfos['author'];
+        $descDcNodes->description->children('rdf', true)->Alt->li = $pdfMetadataInfos['subject'];
 
-        $destXmpNodes = $descriptionNodes[0]->children('xmp', true);
-        $destXmpNodes->CreatorTool = sprintf('Order-X PHP library v%s by HorstOeko', "1.0");
-        $destXmpNodes->CreateDate = $pdfMetadataInfos['createdDate'];
-        $destXmpNodes->ModifyDate = $pdfMetadataInfos['modifiedDate'];
+        $descPdfNodes = $descNode->children('pdf', true);
+        $descPdfNodes->Producer = 'FPDF';
 
-        $this->pdfWriter->addMetadataDescriptionNode($descriptionNodes[0]->asXML());
+        $descXmpNodes = $descNode->children('xmp', true);
+        $descXmpNodes->CreatorTool = sprintf('Order-X PHP library v%s by HorstOeko', "1.0");
+        $descXmpNodes->CreateDate = $pdfMetadataInfos['createdDate'];
+        $descXmpNodes->ModifyDate = $pdfMetadataInfos['modifiedDate'];
+
+        $this->pdfWriter->addMetadataDescriptionNode($descNode->asXML());
     }
 
     /**
@@ -188,11 +190,11 @@ class OrderDocumentPdfBuilder
         $orderInformations = $this->extractOrderInformations();
 
         $dateString = date('Y-m-d', strtotime($orderInformations['date']));
-        $title = sprintf('%s : %s %s', $orderInformations['seller'], $orderInformations['docTypeName'], $orderInformations['invoiceId']);
-        $subject = sprintf('Order-X %s %s dated %s issued by %s', $orderInformations['docTypeName'], $orderInformations['invoiceId'], $dateString, $orderInformations['seller']);
+        $title = sprintf('%s : %s %s', $orderInformations['sellerName'], $orderInformations['docTypeName'], $orderInformations['orderId']);
+        $subject = sprintf('Order-X %s %s dated %s issued by %s', $orderInformations['docTypeName'], $orderInformations['orderId'], $dateString, $orderInformations['sellerName']);
 
         $pdfMetadata = array(
-            'author' => $orderInformations['seller'],
+            'author' => $orderInformations['sellerName'],
             'keywords' => sprintf('%s, Order-X', $orderInformations['docTypeName']),
             'title' => $title,
             'subject' => $subject,
@@ -210,7 +212,7 @@ class OrderDocumentPdfBuilder
      */
     protected function extractOrderInformations(): array
     {
-        $xpath = new \DOMXpath($this->xmlData);
+        $xpath = $this->documentBuiler->getContentAsDomXPath();
 
         $dateXpath = $xpath->query('//rsm:ExchangedDocument/ram:IssueDateTime/udt:DateTimeString');
         $date = $dateXpath->item(0)->nodeValue;
@@ -220,30 +222,30 @@ class OrderDocumentPdfBuilder
         $orderId = $orderIdXpath->item(0)->nodeValue;
 
         $sellerXpath = $xpath->query('//ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Name');
-        $seller = $sellerXpath->item(0)->nodeValue;
+        $sellerName = $sellerXpath->item(0)->nodeValue;
 
         $docTypeXpath = $xpath->query('//rsm:ExchangedDocument/ram:TypeCode');
         $docType = $docTypeXpath->item(0)->nodeValue;
 
         switch ($docType) {
-        case OrderDocumentTypes::ORDER:
-            $docTypeName = 'Order';
-            break;
-        case OrderDocumentTypes::ORDER_CHANGE:
-            $docTypeName = 'Order Change';
-            break;
-        case OrderDocumentTypes::ORDER_RESPONSE:
-            $docTypeName = 'Order Response';
-            break;
-        default:
-            $docTypeName = 'Order';
-            break;
+            case OrderDocumentTypes::ORDER:
+                $docTypeName = 'Order';
+                break;
+            case OrderDocumentTypes::ORDER_CHANGE:
+                $docTypeName = 'Order Change';
+                break;
+            case OrderDocumentTypes::ORDER_RESPONSE:
+                $docTypeName = 'Order Response';
+                break;
+            default:
+                $docTypeName = 'Order';
+                break;
         }
 
         $orderInformation = array(
-            'invoiceId' => $orderId,
+            'orderId' => $orderId,
             'docTypeName' => $docTypeName,
-            'seller' => $seller,
+            'sellerName' => $sellerName,
             'date' => $dateReformatted,
         );
 

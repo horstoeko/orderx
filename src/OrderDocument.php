@@ -14,7 +14,6 @@ namespace horstoeko\orderx;
 use \GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
 use \GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
 use \horstoeko\orderx\OrderObjectHelper;
-use \horstoeko\orderx\entities\en16931\rsm\CrossIndustryInvoiceType;
 use \horstoeko\orderx\jms\OrderTypesHandler;
 use \JMS\Serializer\Handler\HandlerRegistryInterface;
 use \JMS\Serializer\SerializerBuilder;
@@ -62,7 +61,7 @@ class OrderDocument
     /**
      * @internal
      * The internal invoice object
-     * @var CrossIndustryInvoiceType
+     * @var \horstoeko\orderx\entities\basic\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure
      */
     protected $invoiceObject = null;
 

@@ -12,6 +12,8 @@ declare(strict_types=1);
 namespace horstoeko\orderx;
 
 use DateTime;
+use DOMDocument;
+use DOMXPath;
 
 /**
  * Class representing the document builder for outgoing documents
@@ -99,7 +101,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function initNewDocument(): OrderDocumentBuilder
     {
-        $this->invoiceObject = $this->objectHelper->getCrossIndustryInvoice();
+        $this->invoiceObject = $this->objectHelper->getOrderX();
         $this->headerTradeAgreement = $this->invoiceObject->getSupplyChainTradeTransaction()->getApplicableHeaderTradeAgreement();
         $this->headerTradeDelivery = $this->invoiceObject->getSupplyChainTradeTransaction()->getApplicableHeaderTradeDelivery();
         $this->headerTradeSettlement = $this->invoiceObject->getSupplyChainTradeTransaction()->getApplicableHeaderTradeSettlement();
@@ -127,7 +129,33 @@ class OrderDocumentBuilder extends OrderDocument
     public function getContent(): string
     {
         $this->onBeforeGetContent();
+
         return $this->serializer->serialize($this->invoiceObject, 'xml');
+    }
+
+    /**
+     * Write the content of a Oder object to a DOMDocument instance
+     *
+     * @return DOMDocument
+     */
+    public function getContentAsDomDocument(): DOMDocument
+    {
+        $domDocument = new DOMDocument();
+        $domDocument->loadXML($this->getContent());
+
+        return $domDocument;
+    }
+
+    /**
+     * Write the content of a Oder object to a DOMXpath instance
+     *
+     * @return DOMXpath
+     */
+    public function getContentAsDomXPath(): DOMXpath
+    {
+        $domXPath = new DOMXPath($this->getContentAsDomDocument());
+
+        return $domXPath;
     }
 
     /**
