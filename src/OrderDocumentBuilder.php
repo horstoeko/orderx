@@ -692,6 +692,30 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
+     * Set detailed information on the buyers's tax information
+     *
+     * The local identification (defined by the buyers's address) of the buyers for tax purposes or a reference that enables the buyers
+     * to indicate his reporting status for tax purposes The sales tax identification number of the buyers
+     * Note: This information may affect how the buyer the invoice settled (such as in relation to social security contributions). So
+     * e.g. In some countries, if the buyers is not reported for tax, the buyer will withhold the tax amount and pay it on behalf of the
+     * buyers. Sales tax number with a prefixed country code. A supplier registered as subject to VAT must provide his sales tax
+     * identification number, unless he uses a tax agent.
+     *
+     * @param string $taxregtype
+     * Type of tax number of the buyers
+     * @param string $taxregid
+     * Tax number of the buyers or sales tax identification number of the (FC = Tax number, VA = Sales tax number)
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentBuyerTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
+    {
+        $buyerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
+        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->objectHelper->tryCallIfMethodExists($buyerTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
+        return $this;
+    }
+
+    /**
      * Add detailed information on the buyers's tax information
      *
      * The local identification (defined by the buyers's address) of the buyers for tax purposes or a reference that enables the buyers
@@ -871,6 +895,30 @@ class OrderDocumentBuilder extends OrderDocument
     {
         $buyerRequisitionerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
         $this->objectHelper->tryCall($buyerRequisitionerTradeParty, "addToGlobalID", $this->objectHelper->getIdType($globalID, $globalIDType));
+        return $this;
+    }
+
+    /**
+     * Set tax registration information of the party who raises the Order originally on behalf of the Buyer
+     *
+     * The local identification (defined by the buyers's address) of the buyers for tax purposes or a reference that enables the buyers
+     * to indicate his reporting status for tax purposes The sales tax identification number of the buyers
+     * Note: This information may affect how the buyer the invoice settled (such as in relation to social security contributions). So
+     * e.g. In some countries, if the buyers is not reported for tax, the buyer will withhold the tax amount and pay it on behalf of the
+     * buyers. Sales tax number with a prefixed country code. A supplier registered as subject to VAT must provide his sales tax
+     * identification number, unless he uses a tax agent.
+     *
+     * @param string $taxregtype
+     * Type of tax number of the buyers
+     * @param string $taxregid
+     * Tax number of the buyers or sales tax identification number of the (FC = Tax number, VA = Sales tax number)
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentBuyerRequisitionerTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
+    {
+        $buyerRequisitionerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
+        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->objectHelper->tryCallIfMethodExists($buyerRequisitionerTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
         return $this;
     }
 
