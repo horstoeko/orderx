@@ -54,6 +54,7 @@
     },
     "scripts": {
         "tests": "./vendor/bin/phpunit ./tests/",
+        "testsreal": "./vendor/bin/phpunit --configuration ./build/phpunit.xml tests",
         "phpcs": "./vendor/bin/phpcs --standard=./build/phpcsrules.xml --extensions=php --ignore=autoload.php ./src ./tests",
         "phpcs12": "./vendor/bin/phpcs --standard=./build/phpcsrules_psr12.xml --extensions=php --ignore=autoload.php ./src ./tests",
         "phpcbf": "./vendor/bin/phpcbf --ignore=/src/entities/* -q ./src ./tests",
