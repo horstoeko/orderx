@@ -2,7 +2,7 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" bootstrap="../vendor/autoload.php">
     <testsuites>
         <testsuite name="default">
-            <directory>../tests</directory>
+            <file>../tests/OrderDocumentTest.php</file>
         </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
