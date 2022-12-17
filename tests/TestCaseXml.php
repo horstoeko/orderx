@@ -30,7 +30,7 @@ abstract class TestCaseXml extends TestCase
      */
     protected function setUp(): void
     {
-        $this->EnableRenderXmlContent();
+        $this->enableRenderXmlContent();
     }
 
     /**
@@ -88,6 +88,7 @@ abstract class TestCaseXml extends TestCase
     {
         $xml = $this->getXml();
         $xmlvalue = $xml->xpath($xpath);
+        $this->assertIsArray($xmlvalue);
         $this->assertArrayHasKey(0, $xmlvalue);
         $this->assertEquals($expected, $xmlvalue[0]);
     }
@@ -104,6 +105,7 @@ abstract class TestCaseXml extends TestCase
     {
         $xml = $this->getXml();
         $xmlvalue = $xml->xpath($xpath);
+        $this->assertIsArray($xmlvalue);
         $this->assertArrayHasKey($index, $xmlvalue);
         $this->assertEquals($expected, $xmlvalue[$index]);
     }
@@ -120,6 +122,7 @@ abstract class TestCaseXml extends TestCase
     {
         $xml = $this->getXml();
         $xmlvalue = $xml->xpath($xpath);
+        $this->assertIsArray($xmlvalue);
         $this->assertArrayHasKey($index, $xmlvalue);
         $this->assertEquals($expected, substr($xmlvalue[$index], 0, strlen($expected)));
     }
@@ -137,6 +140,7 @@ abstract class TestCaseXml extends TestCase
     {
         $xml = $this->getXml();
         $xmlvalue = $xml->xpath($xpath);
+        $this->assertIsArray($xmlvalue);
         $this->assertArrayHasKey(0, $xmlvalue);
         $this->assertEquals($expected, $xmlvalue[0]);
         $this->assertNotNull($xmlvalue[0]->attributes()[$expectedAttribute]);
@@ -157,6 +161,7 @@ abstract class TestCaseXml extends TestCase
     {
         $xml = $this->getXml();
         $xmlvalue = $xml->xpath($xpath);
+        $this->assertIsArray($xmlvalue);
         $this->assertArrayHasKey($index, $xmlvalue);
         $this->assertEquals($expected, $xmlvalue[$index]);
         $this->assertNotNull($xmlvalue[$index]->attributes()[$expectedAttribute]);
@@ -177,6 +182,7 @@ abstract class TestCaseXml extends TestCase
     {
         $xml = $this->getXml();
         $xmlvalue = $xml->xpath($xpath);
+        $this->assertIsArray($xmlvalue);
         $this->assertArrayHasKey($index, $xmlvalue);
         $this->assertEquals($expected, substr($xmlvalue[$index], 0, strlen($expected)));
         $this->assertNotNull($xmlvalue[$index]->attributes()[$expectedAttribute]);
@@ -194,6 +200,7 @@ abstract class TestCaseXml extends TestCase
     {
         $xml = $this->getXml();
         $xmlvalue = $xml->xpath($xpath);
+        $this->assertIsArray($xmlvalue);
         $this->assertNotEmpty($xmlvalue);
     }
 
@@ -207,6 +214,7 @@ abstract class TestCaseXml extends TestCase
     {
         $xml = $this->getXml();
         $xmlvalue = $xml->xpath($xpath);
+        $this->assertIsArray($xmlvalue);
         $this->assertEmpty($xmlvalue);
     }
 
@@ -221,6 +229,7 @@ abstract class TestCaseXml extends TestCase
     {
         $xml = $this->getXml();
         $xmlvalue = $xml->xpath($xpath);
+        $this->assertIsArray($xmlvalue);
         $this->assertArrayHasKey($index, $xmlvalue);
     }
 
@@ -235,6 +244,7 @@ abstract class TestCaseXml extends TestCase
     {
         $xml = $this->getXml();
         $xmlvalue = $xml->xpath($xpath);
+        $this->assertIsArray($xmlvalue);
         $this->assertArrayNotHasKey($index, $xmlvalue);
     }
 

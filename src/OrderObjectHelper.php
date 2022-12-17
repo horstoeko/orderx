@@ -1248,7 +1248,7 @@ class OrderObjectHelper
      * @param string|null $value
      * @return object|null
      */
-    public function getProductCharacteristicType(?string $typeCode = null, ?string $description = null, ?string $value): ?object
+    public function getProductCharacteristicType(?string $typeCode = null, ?string $description = null, ?string $value, ?float $measureValue = null, ?string $measureUnitCode = null): ?object
     {
         if (self::isAllNullOrEmpty(func_get_args())) {
             return null;
@@ -1259,6 +1259,7 @@ class OrderObjectHelper
         $this->tryCall($productCharacteristic, "setTypeCode", $this->getCodeType($typeCode));
         $this->tryCallIfMethodExists($productCharacteristic, "unsetDescription", "setDescription", [$this->getTextType($description)], $this->getTextType($description));
         $this->tryCallIfMethodExists($productCharacteristic, "unsetValue", "setValue", [$this->getTextType($value)], $this->getTextType($value));
+        $this->tryCall($productCharacteristic, "setValueMeasure", $this->getMeasureType($measureValue, $measureUnitCode));
 
         return $productCharacteristic;
     }

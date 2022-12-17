@@ -1415,6 +1415,23 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
+     * Set Tax registration to Ship-To Trade party
+     *
+     * @param string $taxregtype
+     * Type of tax number of the party
+     * @param string $taxregid
+     * Tax number of the party or sales tax identification number of the (FC = Tax number, VA = Sales tax number)
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentShipToTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
+    {
+        $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
+        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->objectHelper->tryCallIfMethodExists($shipToTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
+        return $this;
+    }
+
+    /**
      * Add Tax registration to Ship-To Trade party
      *
      * @param string $taxregtype
@@ -1512,21 +1529,6 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set the universal communication info for the Buyer Requisitioner
-     *
-     * @param string|null $uriType
-     * @param string|null $uriId
-     * @return OrderDocumentBuilder
-     */
-    public function setDocumentShipToElectronicAddress(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
-    {
-        $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
-        $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
-        $this->objectHelper->tryCall($shipToTradeParty, "setURIUniversalCommunication", $universalCommunication);
-        return $this;
-    }
-
-    /**
      * Add a contact to the Ship-To party.
      *
      * @param string|null $contactpersonname
@@ -1546,6 +1548,21 @@ class OrderDocumentBuilder extends OrderDocument
         $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
         $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCpde);
         $this->objectHelper->tryCall($shipToTradeParty, "addToDefinedTradeContact", $contact);
+        return $this;
+    }
+
+    /**
+     * Set the universal communication info for the Buyer Requisitioner
+     *
+     * @param string|null $uriType
+     * @param string|null $uriId
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentShipToElectronicAddress(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
+    {
+        $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
+        $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
+        $this->objectHelper->tryCall($shipToTradeParty, "setURIUniversalCommunication", $universalCommunication);
         return $this;
     }
 
@@ -1587,7 +1604,24 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Add Tax registration to the deviating consignor party
+     * Set Tax registration to the deviating consignor party
+     *
+     * @param string $taxregtype
+     * Type of tax number of the party
+     * @param string $taxregid
+     * Tax number of the party or sales tax identification number of the (FC = Tax number, VA = Sales tax number)
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentShipFromTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
+    {
+        $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
+        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->objectHelper->tryCallIfMethodExists($shipFromTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
+        return $this;
+    }
+
+    /**
+     * Add an additional Tax registration to the deviating consignor party
      *
      * @param string $taxregtype
      * Type of tax number of the party
@@ -1775,7 +1809,24 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Add Tax registration to Invoicee Trade Party
+     * Set Tax registration to Invoicee Trade Party
+     *
+     * @param string $taxregtype
+     * Type of tax number of the party
+     * @param string $taxregid
+     * Tax number of the party or sales tax identification number of the (FC = Tax number, VA = Sales tax number)
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentInvoiceeTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
+    {
+        $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
+        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->objectHelper->tryCallIfMethodExists($invoiceeTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
+        return $this;
+    }
+
+    /**
+     * Add an additional Tax registration to Invoicee Trade Party
      *
      * @param string $taxregtype
      * Type of tax number of the party
@@ -1883,7 +1934,7 @@ class OrderDocumentBuilder extends OrderDocument
      * Detailed information on the party's email address
      * @return OrderDocumentBuilder
      */
-    public function addDocumentInvoiceeContact(?string $contactpersonname, ?string $contactdepartmentname, ?string $contactphoneno, ?string $contactfaxno, ?string $contactemailadd, ?string $contactTypeCode): OrderDocumentBuilder
+    public function addDocumentInvoiceeContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
     {
         $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
         $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
@@ -1938,12 +1989,69 @@ class OrderDocumentBuilder extends OrderDocument
     public function setDocumentPaymentMean(string $paymentMeansCode, ?string $paymentMeansInformation = null): OrderDocumentBuilder
     {
         $paymentMeans = $this->objectHelper->getTradeSettlementPaymentMeansType($paymentMeansCode, $paymentMeansInformation);
-        $this->objectHelper->tryCall($this->headerTradeSettlement, "setSpecifiedTradeSettlementPaymentMeans", $paymentMeans);
+        $this->objectHelper->tryCallIfMethodExists($this->headerTradeSettlement, "addToSpecifiedTradeSettlementPaymentMeans", "setSpecifiedTradeSettlementPaymentMeans", [$paymentMeans], $paymentMeans);
+        return $this;
+    }
+
+    /**
+     * Add additional information on the payment method
+     *
+     * __Notes__
+     *  - The SpecifiedTradeSettlementPaymentMeans element can only be repeated for each bank account if
+     *    several bank accounts are to be transferred for transfers. The code for the payment method in the Typecode
+     *    element must therefore not differ in the repetitions. The elements ApplicableTradeSettlementFinancialCard
+     *    and PayerPartyDebtorFinancialAccount must not be specified for bank transfers.
+     *
+     * @param string $paymentMeansCode
+     * The expected or used means of payment, expressed as a code. The entries from the UNTDID 4461 code list
+     * must be used. A distinction should be made between SEPA and non-SEPA payments as well as between credit
+     * payments, direct debits, card payments and other means of payment In particular, the following codes can
+     * be used:
+     *  - 10: cash
+     *  - 20: check
+     *  - 30: transfer
+     *  - 42: Payment to bank account
+     *  - 48: Card payment
+     *  - 49: direct debit
+     *  - 57: Standing order
+     *  - 58: SEPA Credit Transfer
+     *  - 59: SEPA Direct Debit
+     *  - 97: Report
+     * @param string|null $paymentMeansInformation
+     * The expected or used means of payment expressed in text form, e.g. cash, bank transfer, direct debit,
+     * credit card, etc.
+     * @return OrderDocumentBuilder
+     */
+    public function addDocumentPaymentMean(string $paymentMeansCode, ?string $paymentMeansInformation = null): OrderDocumentBuilder
+    {
+        $paymentMeans = $this->objectHelper->getTradeSettlementPaymentMeansType($paymentMeansCode, $paymentMeansInformation);
+        $this->objectHelper->tryCall($this->headerTradeSettlement, "addToSpecifiedTradeSettlementPaymentMeans", $paymentMeans);
         return $this;
     }
 
     /**
      * Add a payment term
+     *
+     * @param string $paymentTermsDescription
+     * A text description of the payment terms that apply to the payment amount due (including a
+     * description of possible penalties). Note: This element can contain multiple lines and
+     * multiple conditions.
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentPaymentTerm(string $paymentTermsDescription): OrderDocumentBuilder
+    {
+        if ($this->profileId == OrderProfiles::PROFILE_EXTENDED) {
+            $paymentTerms = $paymentTermsDescription;
+        } else {
+            $paymentTerms = $this->objectHelper->getTradePaymentTermsType($paymentTermsDescription);
+        }
+        $this->objectHelper->tryCallIfMethodExists($this->headerTradeSettlement, "addToSpecifiedTradePaymentTerms", "setSpecifiedTradePaymentTerms", [$paymentTerms], $paymentTerms);
+        $this->currentPaymentTerms = $paymentTerms;
+        return $this;
+    }
+
+    /**
+     * Add an additional payment term
      *
      * @param string $paymentTermsDescription
      * A text description of the payment terms that apply to the payment amount due (including a
@@ -1958,13 +2066,13 @@ class OrderDocumentBuilder extends OrderDocument
         } else {
             $paymentTerms = $this->objectHelper->getTradePaymentTermsType($paymentTermsDescription);
         }
-        $this->objectHelper->tryCallAll($this->headerTradeSettlement, ["addToSpecifiedTradePaymentTerms", "setSpecifiedTradePaymentTerms"], $paymentTerms);
+        $this->objectHelper->tryCall($this->headerTradeSettlement, "addToSpecifiedTradePaymentTerms", $paymentTerms);
         $this->currentPaymentTerms = $paymentTerms;
         return $this;
     }
 
     /**
-     * Add information about surcharges and charges applicable to the bill as a whole, Deductions,
+     * Set information about surcharges and charges applicable to the bill as a whole, Deductions,
      * such as for withheld taxes may also be specified in this group
      *
      * @param float $actualAmount
@@ -2047,6 +2155,31 @@ class OrderDocumentBuilder extends OrderDocument
      * The reason given in text form for the surcharge or discount at document level
      * @return OrderDocumentBuilder
      */
+    public function setDocumentAllowanceCharge(float $actualAmount, bool $isCharge, ?string $taxCategoryCode = null, ?string $taxTypeCode = null, ?float $rateApplicablePercent = null, ?float $sequence = null, ?float $calculationPercent = null, ?float $basisAmount = null, ?float $basisQuantity = null, ?string $basisQuantityUnitCode = null, ?string $reasonCode = null, ?string $reason = null): OrderDocumentBuilder
+    {
+        $allowanceCharge = $this->objectHelper->getTradeAllowanceChargeType($actualAmount, $isCharge, $taxTypeCode, $taxCategoryCode, $rateApplicablePercent, $sequence, $calculationPercent, $basisAmount, $basisQuantity, $basisQuantityUnitCode, $reasonCode, $reason);
+        $this->objectHelper->tryCallIfMethodExists($this->headerTradeSettlement, "addToSpecifiedTradeAllowanceCharge", "setSpecifiedTradeAllowanceCharge", [$allowanceCharge], $allowanceCharge);
+        return $this;
+    }
+
+    /**
+     * Add additional information about surcharges and charges applicable to the bill as a whole, Deductions,
+     * such as for withheld taxes may also be specified in this group
+     *
+     * @param float $actualAmount
+     * @param boolean $isCharge
+     * @param string|null $taxCategoryCode
+     * @param string|null $taxTypeCode
+     * @param float|null $rateApplicablePercent
+     * @param float|null $sequence
+     * @param float|null $calculationPercent
+     * @param float|null $basisAmount
+     * @param float|null $basisQuantity
+     * @param string|null $basisQuantityUnitCode
+     * @param string|null $reasonCode
+     * @param string|null $reason
+     * @return OrderDocumentBuilder
+     */
     public function addDocumentAllowanceCharge(float $actualAmount, bool $isCharge, ?string $taxCategoryCode = null, ?string $taxTypeCode = null, ?float $rateApplicablePercent = null, ?float $sequence = null, ?float $calculationPercent = null, ?float $basisAmount = null, ?float $basisQuantity = null, ?string $basisQuantityUnitCode = null, ?string $reasonCode = null, ?string $reason = null): OrderDocumentBuilder
     {
         $allowanceCharge = $this->objectHelper->getTradeAllowanceChargeType($actualAmount, $isCharge, $taxTypeCode, $taxCategoryCode, $rateApplicablePercent, $sequence, $calculationPercent, $basisAmount, $basisQuantity, $basisQuantityUnitCode, $reasonCode, $reason);
@@ -2085,6 +2218,34 @@ class OrderDocumentBuilder extends OrderDocument
         $position = $this->objectHelper->getSupplyChainTradeLineItemType($lineid, $lineStatusCode);
         $this->objectHelper->tryCall($this->headerSupplyChainTradeTransaction, "addToIncludedSupplyChainTradeLineItem", $position);
         $this->currentPosition = $position;
+        return $this;
+    }
+
+    /**
+     * Remove the latest position
+     *
+     * @return OrderDocumentBuilder
+     */
+    public function removeLatestPosition(): OrderDocumentBuilder
+    {
+        $positions = $this->objectHelper->tryCallAndReturn($this->headerSupplyChainTradeTransaction, "getIncludedSupplyChainTradeLineItem");
+        $noOfPositions = count($positions);
+
+        if ($noOfPositions == 0) {
+            return $this;
+        }
+
+        $this->objectHelper->tryCall($this->headerSupplyChainTradeTransaction, "unsetIncludedSupplyChainTradeLineItem", $noOfPositions - 1);
+
+        $positions = $this->objectHelper->tryCallAndReturn($this->headerSupplyChainTradeTransaction, "getIncludedSupplyChainTradeLineItem");
+        $noOfPositions = count($positions);
+
+        if ($noOfPositions > 0) {
+            $this->currentPosition = $positions[$noOfPositions - 1];
+        } else {
+            $this->currentPosition = null;
+        }
+
         return $this;
     }
 
@@ -2147,9 +2308,13 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string|null $typecode
      * Type of product property (code). The codes must be taken from the
      * UNTDID 6313 codelist. Available only in the Extended-Profile
+     * @param float|null $measureValue
+     * A measure of a value for this product characteristic.
+     * @param string|null $measureUnitCode
+     * A unit for the measure value for this product characteristic. To be chosen from the entries in UNTDID xxx
      * @return OrderDocumentBuilder
      */
-    public function setDocumentPositionProductCharacteristic(string $description, string $value, ?string $typecode = null): OrderDocumentBuilder
+    public function setDocumentPositionProductCharacteristic(string $description, string $value, ?string $typecode = null, ?float $measureValue = null, ?string $measureUnitCode = null): OrderDocumentBuilder
     {
         $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
         $productCharacteristic = $this->objectHelper->getProductCharacteristicType($typecode, $description, $value);
@@ -2168,9 +2333,13 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string|null $typecode
      * Type of product property (code). The codes must be taken from the
      * UNTDID 6313 codelist. Available only in the Extended-Profile
+     * @param float|null $measureValue
+     * A measure of a value for this product characteristic.
+     * @param string|null $measureUnitCode
+     * A unit for the measure value for this product characteristic. To be chosen from the entries in UNTDID xxx
      * @return OrderDocumentBuilder
      */
-    public function addDocumentPositionProductCharacteristic(string $description, string $value, ?string $typecode = null): OrderDocumentBuilder
+    public function addDocumentPositionProductCharacteristic(string $description, string $value, ?string $typecode = null, ?float $measureValue = null, ?string $measureUnitCode = null): OrderDocumentBuilder
     {
         $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
         $productCharacteristic = $this->objectHelper->getProductCharacteristicType($typecode, $description, $value);
@@ -2693,7 +2862,23 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Supply chain event on position level
+     * Set the supply chain event on position level
+     *
+     * @param DateTime|null $occurrenceDateTime
+     * @param DateTime|null $startDateTime
+     * @param DateTime|null $endDateTime
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentPositionRequestedDeliverySupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): OrderDocumentBuilder
+    {
+        $supplychainevent = $this->objectHelper->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->objectHelper->tryCallIfMethodExists($positionDelivery, "addToRequestedDeliverySupplyChainEvent", "setRequestedDeliverySupplyChainEvent", [$supplychainevent], $supplychainevent);
+        return $this;
+    }
+
+    /**
+     * Add an additional supply chain event on position level
      *
      * @param DateTime|null $occurrenceDateTime
      * @param DateTime|null $startDateTime
@@ -2753,11 +2938,139 @@ class OrderDocumentBuilder extends OrderDocument
      * and maintained by the Connecting Europe Facility.
      * @return OrderDocumentBuilder
      */
+    public function setDocumentPositionTax(string $categoryCode, string $typeCode, float $rateApplicablePercent, ?float $calculatedAmount = null, ?string $exemptionReason = null, ?string $exemptionReasonCode = null): OrderDocumentBuilder
+    {
+        $tax = $this->objectHelper->getTradeTaxType($categoryCode, $typeCode, null, $calculatedAmount, $rateApplicablePercent, $exemptionReason, $exemptionReasonCode, null, null, null, null);
+        $positionsettlement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
+        $this->objectHelper->tryCallIfMethodExists($positionsettlement, "addToApplicableTradeTax", "setApplicableTradeTax", [$tax], $tax);
+        return $this;
+    }
+
+    /**
+     * Add information about the sales tax that applies to the goods and services invoiced
+     * in the relevant invoice line
+     *
+     * @param string $categoryCode
+     * Coded description of a sales tax category
+     *
+     * The following entries from UNTDID 5305 are used (details in brackets):
+     *  - Standard rate (sales tax is due according to the normal procedure)
+     *  - Goods to be taxed according to the zero rate (sales tax is charged with a percentage of zero)
+     *  - Tax exempt (USt./IGIC/IPSI)
+     *  - Reversal of the tax liability (the rules for reversing the tax liability at USt./IGIC/IPSI apply)
+     *  - VAT exempt for intra-community deliveries of goods (USt./IGIC/IPSI not levied due to rules on intra-community deliveries)
+     *  - Free export item, tax not levied (VAT / IGIC/IPSI not levied due to export outside the EU)
+     *  - Services outside the tax scope (sales are not subject to VAT / IGIC/IPSI)
+     *  - Canary Islands general indirect tax (IGIC tax applies)
+     *  - IPSI (tax for Ceuta / Melilla) applies.
+     *
+     * The codes for the VAT category are as follows:
+     *  - S = sales tax is due at the normal rate
+     *  - Z = goods to be taxed according to the zero rate
+     *  - E = tax exempt
+     *  - AE = reversal of tax liability
+     *  - K = VAT is not shown for intra-community deliveries
+     *  - G = tax not levied due to export outside the EU
+     *  - O = Outside the tax scope
+     *  - L = IGIC (Canary Islands)
+     *  - M = IPSI (Ceuta / Melilla)
+     * @param string $typeCode
+     * In EN 16931 only the tax type “sales tax” with the code “VAT” is supported. Should other types of tax be
+     * specified, such as an insurance tax or a mineral oil tax the EXTENDED profile must be used. The code for
+     * the tax type must then be taken from the code list UNTDID 5153.
+     * @param float $rateApplicablePercent
+     * The VAT rate applicable to the item invoiced and expressed as a percentage. Note: The code of the sales
+     * tax category and the category-specific sales tax rate  must correspond to one another. The value to be
+     * given is the percentage. For example, the value 20 is given for 20% (and not 0.2)
+     * @param float|null $calculatedAmount
+     * Tax amount. Information only for taxes that are not VAT.
+     * @param string|null $exemptionReason
+     * Reason for tax exemption (free text)
+     * @param string|null $exemptionReasonCode
+     * Reason given in code form for the exemption of the amount from VAT. Note: Code list issued
+     * and maintained by the Connecting Europe Facility.
+     * @return OrderDocumentBuilder
+     */
     public function addDocumentPositionTax(string $categoryCode, string $typeCode, float $rateApplicablePercent, ?float $calculatedAmount = null, ?string $exemptionReason = null, ?string $exemptionReasonCode = null): OrderDocumentBuilder
     {
         $tax = $this->objectHelper->getTradeTaxType($categoryCode, $typeCode, null, $calculatedAmount, $rateApplicablePercent, $exemptionReason, $exemptionReasonCode, null, null, null, null);
         $positionsettlement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
-        $this->objectHelper->tryCallAll($positionsettlement, ["addToApplicableTradeTax", "setApplicableTradeTax"], $tax);
+        $this->objectHelper->tryCall($positionsettlement, "addToApplicableTradeTax", $tax);
+        return $this;
+    }
+
+    /**
+     * Add surcharges and discounts on position level
+     *
+     * @param float $actualAmount
+     * The surcharge/discount amount excluding sales tax
+     * @param boolean $isCharge
+     * Switch that indicates whether the following data refer to an allowance or a discount,
+     * true means that
+     * @param float|null $calculationPercent
+     * The percentage that may be used in conjunction with the base invoice line discount
+     * amount to calculate the invoice line discount amount
+     * @param float|null $basisAmount
+     * The base amount that may be used in conjunction with the invoice line discount percentage
+     * to calculate the invoice line discount amount
+     * @param string|null $reasonCode
+     * The reason given as a code for the invoice line discount
+     *
+     * __Notes__
+     *  - Use entries from the UNTDID 5189 code list (discounts) or the UNTDID 7161 code list
+     *    (surcharges). The invoice line discount reason code and the invoice line discount reason must
+     *    match.
+     *  - In the case of a discount, the code list UNTDID 5189 must be used.
+     *  - In the event of a surcharge, the code list UNTDID 7161 must be used.
+     *
+     * In particular, the following codes can be used:
+     *  - AA = Advertising
+     *  - ABL = Additional packaging
+     *  - ADR = Other services
+     *  - ADT = Pick-up
+     *  - FC = Freight service
+     *  - FI = Financing
+     *  - LA = Labelling
+     *
+     * Include PEPPOL subset:
+     *  - 41 - Bonus for works ahead of schedule
+     *  - 42 - Other bonus
+     *  - 60 - Manufacturer’s consumer discount
+     *  - 62 - Due to military status
+     *  - 63 - Due to work accident
+     *  - 64 - Special agreement
+     *  - 65 - Production error discount
+     *  - 66 - New outlet discount
+     *  - 67 - Sample discount
+     *  - 68 - End-of-range discount
+     *  - 70 - Incoterm discount
+     *  - 71 - Point of sales threshold allowance
+     *  - 88 - Material surcharge/deduction
+     *  - 95 - Discount
+     *  - 100 - Special rebate
+     *  - 102 - Fixed long term
+     *  - 103 - Temporary
+     *  - 104 - Standard
+     *  - 105 - Yearly turnover
+     *
+     * Codelists: UNTDID 7161 (Complete list), UNTDID 5189 (Restricted)
+     * @param string|null $reason
+     * The reason given in text form for the invoice item discount/surcharge
+     *
+     * __Notes__
+     *  - The invoice line discount reason code (BT-140) and the invoice line discount reason
+     *    (BT-139) must show the same allowance type.
+     *  - Each line item discount (BG-27) must include a corresponding line discount reason
+     *    (BT-139) or an appropriate line discount reason code (BT-140), or both.
+     *  - The code for the reason for the charge at the invoice line level (BT-145) and the
+     *    reason for the invoice line discount (BT-144) must show the same discount type
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentPositionAllowanceCharge(float $actualAmount, bool $isCharge, ?float $calculationPercent = null, ?float $basisAmount = null, ?string $reasonCode = null, ?string $reason = null): OrderDocumentBuilder
+    {
+        $positionsettlement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
+        $allowanceCharge = $this->objectHelper->getTradeAllowanceChargeType($actualAmount, $isCharge, null, null, null, null, $calculationPercent, $basisAmount, null, null, $reasonCode, $reason);
+        $this->objectHelper->tryCallIfMethodExists($positionsettlement, "addToSpecifiedTradeAllowanceCharge", "setSpecifiedTradeAllowanceCharge", [$allowanceCharge], $allowanceCharge);
         return $this;
     }
 
