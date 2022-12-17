@@ -417,7 +417,9 @@ class OrderDocumentBuilder extends OrderDocument
         $this->objectHelper->tryCall($this->headerTradeSettlement, "setSpecifiedTradeSettlementHeaderMonetarySummation", $summation);
         $taxTotalAmount = $this->objectHelper->tryCallAndReturn($summation, "getTaxTotalAmount");
         $orderCurrencyCode = $this->objectHelper->tryCallByPathAndReturn($this->headerTradeSettlement, "getOrderCurrencyCode.value");
-        $this->objectHelper->tryCall($this->objectHelper->ensureArray($taxTotalAmount)[0], 'setCurrencyID', $orderCurrencyCode);
+        if (isset($this->objectHelper->ensureArray($taxTotalAmount)[0])) {
+            $this->objectHelper->tryCall($this->objectHelper->ensureArray($taxTotalAmount)[0], 'setCurrencyID', $orderCurrencyCode);
+        }
         return $this;
     }
 
