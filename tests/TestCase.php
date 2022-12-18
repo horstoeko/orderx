@@ -67,6 +67,28 @@ abstract class TestCase extends PhpUnitTestCase
     }
 
     /**
+     * Register a file to delete in testcase teardown
+     *
+     * @param string $filename
+     * @return void
+     */
+    public function registerFileForTestCaseTeardown(string $filename): void
+    {
+        self::$registeredTestCaseFiles[] = $filename;
+    }
+
+    /**
+     * Register a file to delete in testmethod teardown
+     *
+     * @param string $filename
+     * @return void
+     */
+    public function registerFileForTestMethodTeardown(string $filename): void
+    {
+        $this->registeredTestFiles[] = $filename;
+    }
+
+    /**
      * Expect notice on php version smaller than 8
      * Expect warning on php version greater or equal than 8
      *

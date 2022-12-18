@@ -4,6 +4,7 @@
         <testsuite name="default">
             <file>../tests/OrderDocumentTest.php</file>
             <file>../tests/OrderDocumentBuilderBasicTest.php</file>
+            <file>../tests/OrderDocumentBuilderComfortTest.php</file>
         </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
