@@ -132,4 +132,14 @@ abstract class TestCase extends PhpUnitTestCase
         $property->setAccessible(true);
         return $property;
     }
+
+    /**
+     * Create a dummy DateTime instance
+     *
+     * @return \DateTime
+     */
+    public function getDummyDateTime(): \DateTime
+    {
+        return \DateTime::createFromFormat("Ymd", "20221231");
+    }
 }
