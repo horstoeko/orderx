@@ -1,14 +1,17 @@
 <?php
 
-namespace horstoeko\orderx\tests;
+namespace horstoeko\orderx\tests\testcases;
 
 use horstoeko\orderx\codelists\OrderDocumentTypes;
 use horstoeko\orderx\OrderDocumentBuilder;
 use horstoeko\orderx\OrderProfiles;
-use horstoeko\orderx\tests\TestCaseXml;
+use horstoeko\orderx\tests\TestCase;
+use horstoeko\orderx\tests\traits\HandlesXmlTests;
 
-class OrderDocumentBuilderBasicTest extends TestCaseXml
+class OrderDocumentBuilderBasicTest extends TestCase
 {
+    use HandlesXmlTests;
+
     /**
      * @inheritDoc
      */

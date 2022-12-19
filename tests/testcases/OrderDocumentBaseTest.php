@@ -1,12 +1,12 @@
 <?php
 
-namespace horstoeko\orderx\tests;
+namespace horstoeko\orderx\tests\testcases;
 
-use horstoeko\orderx\tests\TestCase;
 use horstoeko\orderx\OrderDocument;
 use horstoeko\orderx\OrderProfiles;
+use horstoeko\orderx\tests\TestCase;
 
-class OrderDocumentTest extends TestCase
+class OrderDocumentBaseTest extends TestCase
 {
     /**
      * @covers \horstoeko\orderx\OrderDocument

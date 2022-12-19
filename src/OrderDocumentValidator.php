@@ -29,21 +29,20 @@ class OrderDocumentValidator
     /**
      * The invoice document reference
      *
-     * @var OrderDocument
+     * @var \horstoeko\orderx\OrderDocument
      */
     private $document;
 
     /**
      * The validator instance
      *
-     * @var ValidatorInterface;
+     * @var \Symfony\Component\Validator\Validator\ValidatorInterface;
      */
     private $validator = null;
 
     /**
      * Constructor
      *
-     * @codeCoverageIgnore
      * @param OrderDocument $document
      */
     public function __construct(OrderDocument $document)
@@ -65,7 +64,6 @@ class OrderDocumentValidator
     /**
      * Initialize the internal validator object
      *
-     * @codeCoverageIgnore
      * @return void
      */
     private function initValidator(): void
@@ -92,7 +90,6 @@ class OrderDocumentValidator
     /**
      * Helper for find all files by pattern
      *
-     * @codeCoverageIgnore
      * @param string $pattern
      * @param integer $flags
      * @return array

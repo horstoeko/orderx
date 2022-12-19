@@ -1,10 +1,8 @@
 <?php
 
-namespace horstoeko\orderx\tests;
+namespace horstoeko\orderx\tests\traits;
 
-use horstoeko\orderx\tests\TestCase;
-
-abstract class TestCaseXml extends TestCase
+trait HandlesXmlTests
 {
     /**
      * @var \horstoeko\orderx\OrderDocumentBuilder
@@ -24,24 +22,6 @@ abstract class TestCaseXml extends TestCase
      * @var boolean
      */
     protected $renderingOfXmlDisabled = false;
-
-    /**
-     * @inheritDoc
-     */
-    protected function setUp(): void
-    {
-        $this->enableRenderXmlContent();
-    }
-
-    /**
-     * Dummy Test
-     *
-     * @return void
-     */
-    public function testDummy()
-    {
-        $this->assertTrue(true);
-    }
 
     /**
      * Get XML-Object from documents content
