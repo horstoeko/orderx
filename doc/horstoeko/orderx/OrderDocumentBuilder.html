@@ -365,7 +365,7 @@ requested for this exchanged document.</p>                </div>
                     <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addDocumentNote">addDocumentNote</a>(string $content, string|null $subjectCode = null)
+                    <a href="#method_addDocumentNote">addDocumentNote</a>(string $content, string|null $subjectCode = null, string|null $contentCode = null)
         
                                             <p>Add a note to the docuzment</p>                </div>
                 <div class="col-md-2"></div>
@@ -408,6 +408,16 @@ requested for this exchanged document.</p>                </div>
                     <a href="#method_addDocumentSellerGlobalId">addDocumentSellerGlobalId</a>(string $globalID, string $globalIDType)
         
                                             <p>Add a global id for the seller</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setDocumentSellerTaxRegistration">setDocumentSellerTaxRegistration</a>(string $taxregtype, string $taxregid)
+        
+                                            <p>Add detailed information on the seller's tax information</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -495,6 +505,16 @@ requested for this exchanged document.</p>                </div>
                     <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
                 </div>
                 <div class="col-md-8 type">
+                    <a href="#method_setDocumentBuyerTaxRegistration">setDocumentBuyerTaxRegistration</a>(string $taxregtype, string $taxregid)
+        
+                                            <p>Set detailed information on the buyers's tax information</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_addDocumentBuyerTaxRegistration">addDocumentBuyerTaxRegistration</a>(string $taxregtype, string $taxregid)
         
                                             <p>Add detailed information on the buyers's tax information</p>                </div>
@@ -568,6 +588,16 @@ requested for this exchanged document.</p>                </div>
                     <a href="#method_addDocumentBuyerRequisitionerGlobalId">addDocumentBuyerRequisitionerGlobalId</a>(string $globalID, string $globalIDType)
         
                                             <p>Add a global id for the party who raises the Order originally on behalf of the Buyer</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setDocumentBuyerRequisitionerTaxRegistration">setDocumentBuyerRequisitionerTaxRegistration</a>(string $taxregtype, string $taxregid)
+        
+                                            <p>Set tax registration information of the party who raises the Order originally on behalf of the Buyer</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -816,6 +846,16 @@ of the specific trading relationship and for a defined time period.</p>         
                     <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
                 </div>
                 <div class="col-md-8 type">
+                    <a href="#method_setDocumentShipToTaxRegistration">setDocumentShipToTaxRegistration</a>(string $taxregtype, string $taxregid)
+        
+                                            <p>Set Tax registration to Ship-To Trade party</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_addDocumentShipToTaxRegistration">addDocumentShipToTaxRegistration</a>(string $taxregtype, string $taxregid)
         
                                             <p>Add Tax registration to Ship-To Trade party</p>                </div>
@@ -857,9 +897,9 @@ overwritten</p>                </div>
                     <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setDocumentShipToElectronicAddress">setDocumentShipToElectronicAddress</a>(string|null $uriType = null, string|null $uriId = null)
+                    <a href="#method_addDocumentShipToContact">addDocumentShipToContact</a>(string|null $contactpersonname = null, string|null $contactdepartmentname = null, string|null $contactphoneno = null, string|null $contactfaxno = null, string|null $contactemailadd = null, string|null $contactTypeCpde = null)
         
-                                            <p>Set the universal communication info for the Buyer Requisitioner</p>                </div>
+                                            <p>Add a contact to the Ship-To party.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -867,9 +907,9 @@ overwritten</p>                </div>
                     <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addDocumentShipToContact">addDocumentShipToContact</a>(string|null $contactpersonname = null, string|null $contactdepartmentname = null, string|null $contactphoneno = null, string|null $contactfaxno = null, string|null $contactemailadd = null, string|null $contactTypeCpde = null)
+                    <a href="#method_setDocumentShipToElectronicAddress">setDocumentShipToElectronicAddress</a>(string|null $uriType = null, string|null $uriId = null)
         
-                                            <p>Add a contact to the Ship-To party.</p>                </div>
+                                            <p>Set the universal communication info for the Buyer Requisitioner</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -897,9 +937,19 @@ overwritten</p>                </div>
                     <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
                 </div>
                 <div class="col-md-8 type">
+                    <a href="#method_setDocumentShipFromTaxRegistration">setDocumentShipFromTaxRegistration</a>(string $taxregtype, string $taxregid)
+        
+                                            <p>Set Tax registration to the deviating consignor party</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_addDocumentShipFromTaxRegistration">addDocumentShipFromTaxRegistration</a>(string $taxregtype, string $taxregid)
         
-                                            <p>Add Tax registration to the deviating consignor party</p>                </div>
+                                            <p>Add an additional Tax registration to the deviating consignor party</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -987,9 +1037,19 @@ overwritten</p>                </div>
                     <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
                 </div>
                 <div class="col-md-8 type">
+                    <a href="#method_setDocumentInvoiceeTaxRegistration">setDocumentInvoiceeTaxRegistration</a>(string $taxregtype, string $taxregid)
+        
+                                            <p>Set Tax registration to Invoicee Trade Party</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_addDocumentInvoiceeTaxRegistration">addDocumentInvoiceeTaxRegistration</a>(string $taxregtype, string $taxregid)
         
-                                            <p>Add Tax registration to Invoicee Trade Party</p>                </div>
+                                            <p>Add an additional Tax registration to Invoicee Trade Party</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -1027,7 +1087,7 @@ overwritten</p>                </div>
                     <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addDocumentInvoiceeContact">addDocumentInvoiceeContact</a>(string|null $contactpersonname, string|null $contactdepartmentname, string|null $contactphoneno, string|null $contactfaxno, string|null $contactemailadd, string|null $contactTypeCode)
+                    <a href="#method_addDocumentInvoiceeContact">addDocumentInvoiceeContact</a>(string|null $contactpersonname = null, string|null $contactdepartmentname = null, string|null $contactphoneno = null, string|null $contactfaxno = null, string|null $contactemailadd = null, string|null $contactTypeCode = null)
         
                                             <p>Add an additional contact to the ultimate Ship-from party</p>                </div>
                 <div class="col-md-2"></div>
@@ -1057,7 +1117,17 @@ overwritten</p>                </div>
                     <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addDocumentPaymentTerm">addDocumentPaymentTerm</a>(string $paymentTermsDescription)
+                    <a href="#method_addDocumentPaymentMean">addDocumentPaymentMean</a>(string $paymentMeansCode, string|null $paymentMeansInformation = null)
+        
+                                            <p>Add additional information on the payment method</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setDocumentPaymentTerm">setDocumentPaymentTerm</a>(string $paymentTermsDescription)
         
                                             <p>Add a payment term</p>                </div>
                 <div class="col-md-2"></div>
@@ -1067,9 +1137,30 @@ overwritten</p>                </div>
                     <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
                 </div>
                 <div class="col-md-8 type">
+                    <a href="#method_addDocumentPaymentTerm">addDocumentPaymentTerm</a>(string $paymentTermsDescription)
+        
+                                            <p>Add an additional payment term</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setDocumentAllowanceCharge">setDocumentAllowanceCharge</a>(float $actualAmount, bool $isCharge, string|null $taxCategoryCode = null, string|null $taxTypeCode = null, float|null $rateApplicablePercent = null, float|null $sequence = null, float|null $calculationPercent = null, float|null $basisAmount = null, float|null $basisQuantity = null, string|null $basisQuantityUnitCode = null, string|null $reasonCode = null, string|null $reason = null)
+        
+                                            <p>Set information about surcharges and charges applicable to the bill as a whole, Deductions,
+such as for withheld taxes may also be specified in this group</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_addDocumentAllowanceCharge">addDocumentAllowanceCharge</a>(float $actualAmount, bool $isCharge, string|null $taxCategoryCode = null, string|null $taxTypeCode = null, float|null $rateApplicablePercent = null, float|null $sequence = null, float|null $calculationPercent = null, float|null $basisAmount = null, float|null $basisQuantity = null, string|null $basisQuantityUnitCode = null, string|null $reasonCode = null, string|null $reason = null)
         
-                                            <p>Add information about surcharges and charges applicable to the bill as a whole, Deductions,
+                                            <p>Add additional information about surcharges and charges applicable to the bill as a whole, Deductions,
 such as for withheld taxes may also be specified in this group</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -1099,6 +1190,16 @@ Detailinformationen zur Buchungsreferenz</p>                </div>
                     <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
                 </div>
                 <div class="col-md-8 type">
+                    <a href="#method_removeLatestPosition">removeLatestPosition</a>()
+        
+                                            <p>Remove the latest position</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_setDocumentPositionNote">setDocumentPositionNote</a>(string|null $content = null, string|null $contentCode = null, string|null $subjectCode = null)
         
                                             <p>Add detailed information on the free text on the position</p>                </div>
@@ -1119,7 +1220,7 @@ Detailinformationen zur Buchungsreferenz</p>                </div>
                     <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setDocumentPositionProductCharacteristic">setDocumentPositionProductCharacteristic</a>(string $description, string $value, string|null $typecode = null)
+                    <a href="#method_setDocumentPositionProductCharacteristic">setDocumentPositionProductCharacteristic</a>(string $description, string $value, string|null $typecode = null, float|null $measureValue = null, string|null $measureUnitCode = null)
         
                                             <p>Set (single) extra characteristics to the formerly added product.</p>                </div>
                 <div class="col-md-2"></div>
@@ -1129,7 +1230,7 @@ Detailinformationen zur Buchungsreferenz</p>                </div>
                     <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addDocumentPositionProductCharacteristic">addDocumentPositionProductCharacteristic</a>(string $description, string $value, string|null $typecode = null)
+                    <a href="#method_addDocumentPositionProductCharacteristic">addDocumentPositionProductCharacteristic</a>(string $description, string $value, string|null $typecode = null, float|null $measureValue = null, string|null $measureUnitCode = null)
         
                                             <p>Add extra characteristics to the formerly added product.</p>                </div>
                 <div class="col-md-2"></div>
@@ -1382,9 +1483,30 @@ For detailed information see <strong>setDocumentPositionNetPriceTax</strong></p>
                     <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
                 </div>
                 <div class="col-md-8 type">
+                    <a href="#method_setDocumentPositionRequestedDeliverySupplyChainEvent">setDocumentPositionRequestedDeliverySupplyChainEvent</a>(<a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $occurrenceDateTime = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $startDateTime = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $endDateTime = null)
+        
+                                            <p>Set the supply chain event on position level</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_addDocumentPositionRequestedDeliverySupplyChainEvent">addDocumentPositionRequestedDeliverySupplyChainEvent</a>(<a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $occurrenceDateTime = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $startDateTime = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $endDateTime = null)
         
-                                            <p>Supply chain event on position level</p>                </div>
+                                            <p>Add an additional supply chain event on position level</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setDocumentPositionTax">setDocumentPositionTax</a>(string $categoryCode, string $typeCode, float $rateApplicablePercent, float|null $calculatedAmount = null, string|null $exemptionReason = null, string|null $exemptionReasonCode = null)
+        
+                                            <p>Add information about the sales tax that applies to the goods and services invoiced
+in the relevant invoice line</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -1396,6 +1518,16 @@ For detailed information see <strong>setDocumentPositionNetPriceTax</strong></p>
         
                                             <p>Add information about the sales tax that applies to the goods and services invoiced
 in the relevant invoice line</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setDocumentPositionAllowanceCharge">setDocumentPositionAllowanceCharge</a>(float $actualAmount, bool $isCharge, float|null $calculationPercent = null, float|null $basisAmount = null, string|null $reasonCode = null, string|null $reason = null)
+        
+                                            <p>Add surcharges and discounts on position level</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -2027,7 +2159,7 @@ Response requested for this exchanged document. Value = AC to request an Order_R
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentEffectiveSpecifiedPeriod">
-        <div class="location">at         line 296</div>
+        <div class="location">at         line 302</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentEffectiveSpecifiedPeriod</strong>(<a target="_blank" href="http://php.net/DateTime">DateTime</a> $effectiveSpecifiedPeriodFrom, <a target="_blank" href="http://php.net/DateTime">DateTime</a> $effectiveSpecifiedPeriodTo)
         </code>
@@ -2073,7 +2205,7 @@ exchanged document is effective</p>                                             
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPurposeCode">
-        <div class="location">at         line 312</div>
+        <div class="location">at         line 318</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPurposeCode</strong>(string $documentPurposeCode)
         </code>
@@ -2116,7 +2248,7 @@ exchanged document is effective</p>                                             
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentRequestedResponseTypeCode">
-        <div class="location">at         line 326</div>
+        <div class="location">at         line 332</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentRequestedResponseTypeCode</strong>(string $documentRequestedResponseTypeCode)
         </code>
@@ -2157,7 +2289,7 @@ requested for this exchanged document.</p>                                      
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentBusinessProcessSpecifiedDocumentContextParameter">
-        <div class="location">at         line 341</div>
+        <div class="location">at         line 347</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentBusinessProcessSpecifiedDocumentContextParameter</strong>(string $businessProcessSpecifiedDocumentContextParameter)
         </code>
@@ -2198,7 +2330,7 @@ to enable the Buyer to process the Order in an appropriate way.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setIsDocumentCopy">
-        <div class="location">at         line 354</div>
+        <div class="location">at         line 360</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setIsDocumentCopy</strong>(bool|null $isDocumentCopy = null)
         </code>
@@ -2238,7 +2370,7 @@ to enable the Buyer to process the Order in an appropriate way.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setIsTestDocument">
-        <div class="location">at         line 367</div>
+        <div class="location">at         line 373</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setIsTestDocument</strong>(bool|null $isTestDocument = null)
         </code>
@@ -2278,9 +2410,9 @@ to enable the Buyer to process the Order in an appropriate way.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentNote">
-        <div class="location">at         line 382</div>
+        <div class="location">at         line 390</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
-    <strong>addDocumentNote</strong>(string $content, string|null $subjectCode = null)
+    <strong>addDocumentNote</strong>(string $content, string|null $subjectCode = null, string|null $contentCode = null)
         </code>
     </h3>
     <div class="details">
@@ -2305,6 +2437,12 @@ A textual note that gives unstructured information that is relevant to the order
                 <td>Code to qualify the free text for the order
 The subject of the textual note in BT-22. To be chosen from the entries in UNTDID 4451</td>
             </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$contentCode</td>
+                <td>Code to qualify the free text for the order
+To be chosen from the entries in UNTDID xxx</td>
+            </tr>
             </table>
 
             
@@ -2325,7 +2463,7 @@ The subject of the textual note in BT-22. To be chosen from the entries in UNTDI
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentSummation">
-        <div class="location">at         line 406</div>
+        <div class="location">at         line 414</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentSummation</strong>(float $lineTotalAmount, float|null $grandTotalAmount = null, float|null $chargeTotalAmount = null, float|null $allowanceTotalAmount = null, float|null $taxBasisTotalAmount = null, float|null $taxTotalAmount = null)
         </code>
@@ -2396,7 +2534,7 @@ The total VAT amount for the order.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentBuyerReference">
-        <div class="location">at         line 426</div>
+        <div class="location">at         line 436</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentBuyerReference</strong>(string $buyerreference)
         </code>
@@ -2437,7 +2575,7 @@ but stated by the seller on the order.</p>                            </div>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentSeller">
-        <div class="location">at         line 447</div>
+        <div class="location">at         line 457</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentSeller</strong>(string $name, string|null $id = null, string|null $description = null)
         </code>
@@ -2491,7 +2629,7 @@ and seller, e.g. a previously exchanged, buyer-assigned identifier of the seller
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentSellerGlobalId">
-        <div class="location">at         line 470</div>
+        <div class="location">at         line 480</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentSellerGlobalId</strong>(string $globalID, string $globalIDType)
         </code>
@@ -2543,8 +2681,58 @@ the list published by the ISO / IEC 6523 Maintenance Agency.</td>
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_setDocumentSellerTaxRegistration">
+        <div class="location">at         line 503</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+    <strong>setDocumentSellerTaxRegistration</strong>(string $taxregtype, string $taxregid)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add detailed information on the seller's tax information</p>                    <p>The local identification (defined by the seller's address) of the seller for tax purposes or a reference that enables the seller
+to indicate his reporting status for tax purposes The sales tax identification number of the seller
+Note: This information may affect how the buyer the order settled (such as in relation to social security contributions). So
+e.g. In some countries, if the seller is not reported for tax, the buyer will withhold the tax amount and pay it on behalf of the
+seller. Sales tax number with a prefixed country code. A supplier registered as subject to VAT must provide his sales tax
+identification number, unless he uses a tax agent.</p>                            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$taxregtype</td>
+                <td>Type of tax number of the seller</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$taxregid</td>
+                <td>Tax number of the seller or sales tax identification number of the (FC = Tax number, VA = Sales tax number)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_addDocumentSellerTaxRegistration">
-        <div class="location">at         line 493</div>
+        <div class="location">at         line 527</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentSellerTaxRegistration</strong>(string $taxregtype, string $taxregid)
         </code>
@@ -2594,7 +2782,7 @@ identification number, unless he uses a tax agent.</p>                          
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentSellerAddress">
-        <div class="location">at         line 525</div>
+        <div class="location">at         line 559</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentSellerAddress</strong>(string|null $lineone = null, string|null $linetwo = null, string|null $linethree = null, string|null $postcode = null, string|null $city = null, string|null $country = null, string|null $subdivision = null)
         </code>
@@ -2669,7 +2857,7 @@ representation of names of countries and their subdivisions”</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentSellerLegalOrganisation">
-        <div class="location">at         line 549</div>
+        <div class="location">at         line 583</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentSellerLegalOrganisation</strong>(string|null $legalorgid = null, string|null $legalorgtype = null, string|null $legalorgname = null)
         </code>
@@ -2724,7 +2912,7 @@ the company name). Note: This may be used if different from the seller's name.</
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentSellerContact">
-        <div class="location">at         line 575</div>
+        <div class="location">at         line 609</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentSellerContact</strong>(string|null $contactpersonname = null, string|null $contactdepartmentname = null, string|null $contactphoneno = null, string|null $contactfaxno = null, string|null $contactemailadd = null, string|null $contactTypeCode = null)
         </code>
@@ -2790,7 +2978,7 @@ such as a personal name of the contact person</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentSellerContact">
-        <div class="location">at         line 601</div>
+        <div class="location">at         line 635</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentSellerContact</strong>(string|null $contactpersonname = null, string|null $contactdepartmentname = null, string|null $contactphoneno = null, string|null $contactfaxno = null, string|null $contactemailadd = null, string|null $contactTypeCode = null)
         </code>
@@ -2856,7 +3044,7 @@ such as a personal name of the contact person</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentSellerElectronicAddress">
-        <div class="location">at         line 616</div>
+        <div class="location">at         line 650</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentSellerElectronicAddress</strong>(string|null $uriType = null, string|null $uriId = null)
         </code>
@@ -2901,7 +3089,7 @@ such as a personal name of the contact person</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentBuyer">
-        <div class="location">at         line 637</div>
+        <div class="location">at         line 671</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentBuyer</strong>(string $name, string|null $id = null, string|null $description = null)
         </code>
@@ -2953,7 +3141,7 @@ it should be known to the buyer and buyer, e.g. a previously exchanged, seller-a
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentBuyerGlobalId">
-        <div class="location">at         line 655</div>
+        <div class="location">at         line 689</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentBuyerGlobalId</strong>(string $globalID, string $globalIDType)
         </code>
@@ -2999,8 +3187,58 @@ the list published by the ISO / IEC 6523 Maintenance Agency.</td>
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_setDocumentBuyerTaxRegistration">
+        <div class="location">at         line 712</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+    <strong>setDocumentBuyerTaxRegistration</strong>(string $taxregtype, string $taxregid)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Set detailed information on the buyers's tax information</p>                    <p>The local identification (defined by the buyers's address) of the buyers for tax purposes or a reference that enables the buyers
+to indicate his reporting status for tax purposes The sales tax identification number of the buyers
+Note: This information may affect how the buyer the invoice settled (such as in relation to social security contributions). So
+e.g. In some countries, if the buyers is not reported for tax, the buyer will withhold the tax amount and pay it on behalf of the
+buyers. Sales tax number with a prefixed country code. A supplier registered as subject to VAT must provide his sales tax
+identification number, unless he uses a tax agent.</p>                            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$taxregtype</td>
+                <td>Type of tax number of the buyers</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$taxregid</td>
+                <td>Tax number of the buyers or sales tax identification number of the (FC = Tax number, VA = Sales tax number)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_addDocumentBuyerTaxRegistration">
-        <div class="location">at         line 678</div>
+        <div class="location">at         line 736</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentBuyerTaxRegistration</strong>(string $taxregtype, string $taxregid)
         </code>
@@ -3050,7 +3288,7 @@ identification number, unless he uses a tax agent.</p>                          
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentBuyerAddress">
-        <div class="location">at         line 710</div>
+        <div class="location">at         line 768</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentBuyerAddress</strong>(string|null $lineone = null, string|null $linetwo = null, string|null $linethree = null, string|null $postcode = null, string|null $city = null, string|null $country = null, string|null $subdivision = null)
         </code>
@@ -3125,7 +3363,7 @@ representation of names of countries and their subdivisions”</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentBuyerLegalOrganisation">
-        <div class="location">at         line 734</div>
+        <div class="location">at         line 792</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentBuyerLegalOrganisation</strong>(string|null $legalorgid = null, string|null $legalorgtype = null, string|null $legalorgname = null)
         </code>
@@ -3180,7 +3418,7 @@ ISO/IEC 6523 list</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentBuyerContact">
-        <div class="location">at         line 759</div>
+        <div class="location">at         line 817</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentBuyerContact</strong>(string|null $contactpersonname = null, string|null $contactdepartmentname = null, string|null $contactphoneno = null, string|null $contactfaxno = null, string|null $contactemailadd = null, string|null $contactTypeCode = null)
         </code>
@@ -3245,7 +3483,7 @@ ISO/IEC 6523 list</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentBuyerContact">
-        <div class="location">at         line 784</div>
+        <div class="location">at         line 842</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentBuyerContact</strong>(string|null $contactpersonname = null, string|null $contactdepartmentname = null, string|null $contactphoneno = null, string|null $contactfaxno = null, string|null $contactemailadd = null, string|null $contactTypeCode = null)
         </code>
@@ -3310,7 +3548,7 @@ ISO/IEC 6523 list</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentBuyerElectronicAddress">
-        <div class="location">at         line 799</div>
+        <div class="location">at         line 857</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentBuyerElectronicAddress</strong>(string|null $uriType = null, string|null $uriId = null)
         </code>
@@ -3355,7 +3593,7 @@ ISO/IEC 6523 list</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentBuyerRequisitioner">
-        <div class="location">at         line 820</div>
+        <div class="location">at         line 878</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentBuyerRequisitioner</strong>(string $name, string|null $id = null, string|null $description = null)
         </code>
@@ -3407,7 +3645,7 @@ it should be known to the buyer and buyer, e.g. a previously exchanged, seller-a
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentBuyerRequisitionerGlobalId">
-        <div class="location">at         line 838</div>
+        <div class="location">at         line 896</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentBuyerRequisitionerGlobalId</strong>(string $globalID, string $globalIDType)
         </code>
@@ -3453,8 +3691,58 @@ the list published by the ISO / IEC 6523 Maintenance Agency.</td>
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_setDocumentBuyerRequisitionerTaxRegistration">
+        <div class="location">at         line 919</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+    <strong>setDocumentBuyerRequisitionerTaxRegistration</strong>(string $taxregtype, string $taxregid)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Set tax registration information of the party who raises the Order originally on behalf of the Buyer</p>                    <p>The local identification (defined by the buyers's address) of the buyers for tax purposes or a reference that enables the buyers
+to indicate his reporting status for tax purposes The sales tax identification number of the buyers
+Note: This information may affect how the buyer the invoice settled (such as in relation to social security contributions). So
+e.g. In some countries, if the buyers is not reported for tax, the buyer will withhold the tax amount and pay it on behalf of the
+buyers. Sales tax number with a prefixed country code. A supplier registered as subject to VAT must provide his sales tax
+identification number, unless he uses a tax agent.</p>                            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$taxregtype</td>
+                <td>Type of tax number of the buyers</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$taxregid</td>
+                <td>Tax number of the buyers or sales tax identification number of the (FC = Tax number, VA = Sales tax number)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_addDocumentBuyerRequisitionerTaxRegistration">
-        <div class="location">at         line 861</div>
+        <div class="location">at         line 943</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentBuyerRequisitionerTaxRegistration</strong>(string $taxregtype, string $taxregid)
         </code>
@@ -3504,7 +3792,7 @@ identification number, unless he uses a tax agent.</p>                          
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentBuyerRequisitionerAddress">
-        <div class="location">at         line 893</div>
+        <div class="location">at         line 975</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentBuyerRequisitionerAddress</strong>(string|null $lineone = null, string|null $linetwo = null, string|null $linethree = null, string|null $postcode = null, string|null $city = null, string|null $country = null, string|null $subdivision = null)
         </code>
@@ -3579,7 +3867,7 @@ representation of names of countries and their subdivisions”</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentBuyerRequisitionerLegalOrganisation">
-        <div class="location">at         line 917</div>
+        <div class="location">at         line 999</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentBuyerRequisitionerLegalOrganisation</strong>(string|null $legalorgid = null, string|null $legalorgtype = null, string|null $legalorgname = null)
         </code>
@@ -3634,7 +3922,7 @@ ISO/IEC 6523 list</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentBuyerRequisitionerContact">
-        <div class="location">at         line 942</div>
+        <div class="location">at         line 1024</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentBuyerRequisitionerContact</strong>(string|null $contactpersonname = null, string|null $contactdepartmentname = null, string|null $contactphoneno = null, string|null $contactfaxno = null, string|null $contactemailadd = null, string|null $contactTypeCode = null)
         </code>
@@ -3699,7 +3987,7 @@ ISO/IEC 6523 list</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentBuyerRequisitionerContact">
-        <div class="location">at         line 965</div>
+        <div class="location">at         line 1047</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentBuyerRequisitionerContact</strong>(string|null $contactpersonname = null, string|null $contactdepartmentname = null, string|null $contactphoneno = null, string|null $contactfaxno = null, string|null $contactemailadd = null)
         </code>
@@ -3759,7 +4047,7 @@ ISO/IEC 6523 list</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentBuyerRequisitionerElectronicAddress">
-        <div class="location">at         line 980</div>
+        <div class="location">at         line 1062</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentBuyerRequisitionerElectronicAddress</strong>(string|null $uriType = null, string|null $uriId = null)
         </code>
@@ -3804,7 +4092,7 @@ ISO/IEC 6523 list</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentDeliveryTerms">
-        <div class="location">at         line 1014</div>
+        <div class="location">at         line 1096</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentDeliveryTerms</strong>(string|null $code = null, string|null $description = null, string|null $functionCode = null, string|null $relevantTradeLocationId = null, string|null $relevantTradeLocationName = null)
         </code>
@@ -3878,7 +4166,7 @@ in UNTDID 4053 + INCOTERMS List
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentSellerOrderReferencedDocument">
-        <div class="location">at         line 1030</div>
+        <div class="location">at         line 1112</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentSellerOrderReferencedDocument</strong>(string $sellerOrderRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $sellerOrderRefDate = null)
         </code>
@@ -3923,7 +4211,7 @@ in UNTDID 4053 + INCOTERMS List
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentBuyerOrderReferencedDocument">
-        <div class="location">at         line 1046</div>
+        <div class="location">at         line 1128</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentBuyerOrderReferencedDocument</strong>(string $buyerOrderRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $buyerOrderRefDate = null)
         </code>
@@ -3968,7 +4256,7 @@ in UNTDID 4053 + INCOTERMS List
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentQuotationReferencedDocument">
-        <div class="location">at         line 1062</div>
+        <div class="location">at         line 1144</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentQuotationReferencedDocument</strong>(string $quotationRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $quotationRefDate = null)
         </code>
@@ -4013,7 +4301,7 @@ in UNTDID 4053 + INCOTERMS List
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentContractReferencedDocument">
-        <div class="location">at         line 1080</div>
+        <div class="location">at         line 1162</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentContractReferencedDocument</strong>(string $contractRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $contractRefDate = null)
         </code>
@@ -4060,7 +4348,7 @@ defined period of time (contract number)</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentContractReferencedDocument">
-        <div class="location">at         line 1097</div>
+        <div class="location">at         line 1179</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentContractReferencedDocument</strong>(string $contractRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $contractRefDate = null)
         </code>
@@ -4106,7 +4394,7 @@ defined period of time (contract number)</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentRequisitionReferencedDocument">
-        <div class="location">at         line 1113</div>
+        <div class="location">at         line 1195</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentRequisitionReferencedDocument</strong>(string $requisitionRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $requisitionRefDate = null)
         </code>
@@ -4151,7 +4439,7 @@ defined period of time (contract number)</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentRequisitionReferencedDocument">
-        <div class="location">at         line 1129</div>
+        <div class="location">at         line 1211</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentRequisitionReferencedDocument</strong>(string $requisitionRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $requisitionRefDate = null)
         </code>
@@ -4196,7 +4484,7 @@ defined period of time (contract number)</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentAdditionalReferencedDocument">
-        <div class="location">at         line 1179</div>
+        <div class="location">at         line 1261</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentAdditionalReferencedDocument</strong>(string $additionalRefTypeCode, string|null $additionalRefId, string|null $additionalRefURIID = null, string|array|null $additionalRefName = null, string|null $additionalRefRefTypeCode = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $additionalRefDate = null, string|null $binarydatafilename = null)
         </code>
@@ -4288,7 +4576,7 @@ Allowed mime codes:
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentBlanketOrderReferencedDocument">
-        <div class="location">at         line 1195</div>
+        <div class="location">at         line 1277</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentBlanketOrderReferencedDocument</strong>(string $blanketOrderRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $blanketOrderRefDate = null)
         </code>
@@ -4333,7 +4621,7 @@ Allowed mime codes:
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentBlanketOrderReferencedDocument">
-        <div class="location">at         line 1211</div>
+        <div class="location">at         line 1293</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentBlanketOrderReferencedDocument</strong>(string $blanketOrderRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $blanketOrderRefDate = null)
         </code>
@@ -4378,7 +4666,7 @@ Allowed mime codes:
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPreviousOrderChangeReferencedDocument">
-        <div class="location">at         line 1227</div>
+        <div class="location">at         line 1309</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPreviousOrderChangeReferencedDocument</strong>(string $prevOrderChangeRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $prevOrderChangeRefDate = null)
         </code>
@@ -4423,7 +4711,7 @@ Allowed mime codes:
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentPreviousOrderChangeReferencedDocument">
-        <div class="location">at         line 1243</div>
+        <div class="location">at         line 1325</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentPreviousOrderChangeReferencedDocument</strong>(string $prevOrderChangeRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $prevOrderChangeRefDate = null)
         </code>
@@ -4468,7 +4756,7 @@ Allowed mime codes:
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPreviousOrderResponseReferencedDocument">
-        <div class="location">at         line 1259</div>
+        <div class="location">at         line 1341</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPreviousOrderResponseReferencedDocument</strong>(string $prevOrderResponseRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $prevOrderResponseRefDate = null)
         </code>
@@ -4513,7 +4801,7 @@ Allowed mime codes:
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentPreviousOrderResponseReferencedDocument">
-        <div class="location">at         line 1275</div>
+        <div class="location">at         line 1357</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentPreviousOrderResponseReferencedDocument</strong>(string $prevOrderResponseRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $prevOrderResponseRefDate = null)
         </code>
@@ -4558,7 +4846,7 @@ Allowed mime codes:
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentProcuringProject">
-        <div class="location">at         line 1291</div>
+        <div class="location">at         line 1373</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentProcuringProject</strong>(string $procuringProjectId, string $procuringProjectName)
         </code>
@@ -4603,7 +4891,7 @@ Allowed mime codes:
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentShipTo">
-        <div class="location">at         line 1313</div>
+        <div class="location">at         line 1395</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentShipTo</strong>(string $name, string|null $id = null, string|null $description = null)
         </code>
@@ -4657,7 +4945,7 @@ a previously exchanged identifier assigned by the buyer or seller.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentShipToGlobalId">
-        <div class="location">at         line 1330</div>
+        <div class="location">at         line 1412</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentShipToGlobalId</strong>(string $globalID, string $globalIDType)
         </code>
@@ -4702,8 +4990,53 @@ the list published by the ISO / IEC 6523 Maintenance Agency.</td>
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_setDocumentShipToTaxRegistration">
+        <div class="location">at         line 1428</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+    <strong>setDocumentShipToTaxRegistration</strong>(string $taxregtype, string $taxregid)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Set Tax registration to Ship-To Trade party</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$taxregtype</td>
+                <td>Type of tax number of the party</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$taxregid</td>
+                <td>Tax number of the party or sales tax identification number of the (FC = Tax number, VA = Sales tax number)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_addDocumentShipToTaxRegistration">
-        <div class="location">at         line 1346</div>
+        <div class="location">at         line 1445</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentShipToTaxRegistration</strong>(string $taxregtype, string $taxregid)
         </code>
@@ -4748,7 +5081,7 @@ the list published by the ISO / IEC 6523 Maintenance Agency.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentShipToAddress">
-        <div class="location">at         line 1378</div>
+        <div class="location">at         line 1477</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentShipToAddress</strong>(string|null $lineone = null, string|null $linetwo = null, string|null $linethree = null, string|null $postcode = null, string|null $city = null, string|null $country = null, string|null $subdivision = null)
         </code>
@@ -4823,7 +5156,7 @@ representation of names of countries and their subdivisions”</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentShipToLegalOrganisation">
-        <div class="location">at         line 1400</div>
+        <div class="location">at         line 1499</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentShipToLegalOrganisation</strong>(string|null $legalorgid = null, string|null $legalorgtype = null, string|null $legalorgname = null)
         </code>
@@ -4878,7 +5211,7 @@ registration of the party. In particular, the following scheme codes are used: 0
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentShipToContact">
-        <div class="location">at         line 1426</div>
+        <div class="location">at         line 1525</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentShipToContact</strong>(string|null $contactpersonname = null, string|null $contactdepartmentname = null, string|null $contactphoneno = null, string|null $contactfaxno = null, string|null $contactemailadd = null, string|null $contactTypeCode = null)
         </code>
@@ -4943,53 +5276,8 @@ overwritten</p>                                                </div>
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_setDocumentShipToElectronicAddress">
-        <div class="location">at         line 1441</div>
-        <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
-    <strong>setDocumentShipToElectronicAddress</strong>(string|null $uriType = null, string|null $uriId = null)
-        </code>
-    </h3>
-    <div class="details">
-            
-    
-
-                    <div class="method-description">
-                                    <p>Set the universal communication info for the Buyer Requisitioner</p>                                                </div>
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string|null</td>
-                <td>$uriType</td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td>string|null</td>
-                <td>$uriId</td>
-                <td></td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td><a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a></td>
-            <td></td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
                     <h3 id="method_addDocumentShipToContact">
-        <div class="location">at         line 1464</div>
+        <div class="location">at         line 1548</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentShipToContact</strong>(string|null $contactpersonname = null, string|null $contactdepartmentname = null, string|null $contactphoneno = null, string|null $contactfaxno = null, string|null $contactemailadd = null, string|null $contactTypeCpde = null)
         </code>
@@ -5053,8 +5341,53 @@ overwritten</p>                                                </div>
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_setDocumentShipToElectronicAddress">
+        <div class="location">at         line 1563</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+    <strong>setDocumentShipToElectronicAddress</strong>(string|null $uriType = null, string|null $uriId = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Set the universal communication info for the Buyer Requisitioner</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$uriType</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$uriId</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_setDocumentShipFrom">
-        <div class="location">at         line 1485</div>
+        <div class="location">at         line 1584</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentShipFrom</strong>(string $name, string|null $id = null, string|null $description = null)
         </code>
@@ -5106,7 +5439,7 @@ a previously exchanged identifier assigned by the buyer or seller.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentShipFromGlobalId">
-        <div class="location">at         line 1502</div>
+        <div class="location">at         line 1601</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentShipFromGlobalId</strong>(string $globalID, string $globalIDType)
         </code>
@@ -5151,8 +5484,53 @@ the list published by the ISO / IEC 6523 Maintenance Agency.</td>
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_setDocumentShipFromTaxRegistration">
+        <div class="location">at         line 1617</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+    <strong>setDocumentShipFromTaxRegistration</strong>(string $taxregtype, string $taxregid)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Set Tax registration to the deviating consignor party</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$taxregtype</td>
+                <td>Type of tax number of the party</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$taxregid</td>
+                <td>Tax number of the party or sales tax identification number of the (FC = Tax number, VA = Sales tax number)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_addDocumentShipFromTaxRegistration">
-        <div class="location">at         line 1518</div>
+        <div class="location">at         line 1634</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentShipFromTaxRegistration</strong>(string $taxregtype, string $taxregid)
         </code>
@@ -5162,7 +5540,7 @@ the list published by the ISO / IEC 6523 Maintenance Agency.</td>
     
 
                     <div class="method-description">
-                                    <p>Add Tax registration to the deviating consignor party</p>                                                </div>
+                                    <p>Add an additional Tax registration to the deviating consignor party</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -5197,7 +5575,7 @@ the list published by the ISO / IEC 6523 Maintenance Agency.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentShipFromAddress">
-        <div class="location">at         line 1550</div>
+        <div class="location">at         line 1666</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentShipFromAddress</strong>(string|null $lineone = null, string|null $linetwo = null, string|null $linethree = null, string|null $postcode = null, string|null $city = null, string|null $country = null, string|null $subdivision = null)
         </code>
@@ -5272,7 +5650,7 @@ representation of names of countries and their subdivisions”</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentShipFromLegalOrganisation">
-        <div class="location">at         line 1572</div>
+        <div class="location">at         line 1688</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentShipFromLegalOrganisation</strong>(string|null $legalorgid = null, string|null $legalorgtype = null, string|null $legalorgname = null)
         </code>
@@ -5325,7 +5703,7 @@ the following scheme codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentShipFromContact">
-        <div class="location">at         line 1597</div>
+        <div class="location">at         line 1713</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentShipFromContact</strong>(string|null $contactpersonname = null, string|null $contactdepartmentname = null, string|null $contactphoneno = null, string|null $contactfaxno = null, string|null $contactemailadd = null, string|null $contactTypeCode = null)
         </code>
@@ -5390,7 +5768,7 @@ the following scheme codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentShipFromContact">
-        <div class="location">at         line 1622</div>
+        <div class="location">at         line 1738</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentShipFromContact</strong>(string|null $contactpersonname = null, string|null $contactdepartmentname = null, string|null $contactphoneno = null, string|null $contactfaxno = null, string|null $contactemailadd = null, string|null $contactTypeCode = null)
         </code>
@@ -5455,7 +5833,7 @@ the following scheme codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentShipFromElectronicAddress">
-        <div class="location">at         line 1637</div>
+        <div class="location">at         line 1753</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentShipFromElectronicAddress</strong>(string|null $uriType = null, string|null $uriId = null)
         </code>
@@ -5500,7 +5878,7 @@ the following scheme codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentRequestedDeliverySupplyChainEvent">
-        <div class="location">at         line 1653</div>
+        <div class="location">at         line 1769</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentRequestedDeliverySupplyChainEvent</strong>(<a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $occurrenceDateTime = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $startDateTime = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $endDateTime = null)
         </code>
@@ -5550,7 +5928,7 @@ the following scheme codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentInvoicee">
-        <div class="location">at         line 1673</div>
+        <div class="location">at         line 1789</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentInvoicee</strong>(string $name, string|null $id = null, string|null $description = null)
         </code>
@@ -5602,7 +5980,7 @@ a previously exchanged identifier assigned by the buyer or seller.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentInvoiceeGlobalId">
-        <div class="location">at         line 1690</div>
+        <div class="location">at         line 1806</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentInvoiceeGlobalId</strong>(string $globalID, string $globalIDType)
         </code>
@@ -5647,8 +6025,53 @@ the list published by the ISO / IEC 6523 Maintenance Agency.</td>
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_setDocumentInvoiceeTaxRegistration">
+        <div class="location">at         line 1822</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+    <strong>setDocumentInvoiceeTaxRegistration</strong>(string $taxregtype, string $taxregid)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Set Tax registration to Invoicee Trade Party</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$taxregtype</td>
+                <td>Type of tax number of the party</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$taxregid</td>
+                <td>Tax number of the party or sales tax identification number of the (FC = Tax number, VA = Sales tax number)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_addDocumentInvoiceeTaxRegistration">
-        <div class="location">at         line 1706</div>
+        <div class="location">at         line 1839</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentInvoiceeTaxRegistration</strong>(string $taxregtype, string $taxregid)
         </code>
@@ -5658,7 +6081,7 @@ the list published by the ISO / IEC 6523 Maintenance Agency.</td>
     
 
                     <div class="method-description">
-                                    <p>Add Tax registration to Invoicee Trade Party</p>                                                </div>
+                                    <p>Add an additional Tax registration to Invoicee Trade Party</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -5693,7 +6116,7 @@ the list published by the ISO / IEC 6523 Maintenance Agency.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentInvoiceeAddress">
-        <div class="location">at         line 1738</div>
+        <div class="location">at         line 1871</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentInvoiceeAddress</strong>(string|null $lineone = null, string|null $linetwo = null, string|null $linethree = null, string|null $postcode = null, string|null $city = null, string|null $country = null, string|null $subdivision = null)
         </code>
@@ -5768,7 +6191,7 @@ representation of names of countries and their subdivisions”</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentInvoiceeLegalOrganisation">
-        <div class="location">at         line 1760</div>
+        <div class="location">at         line 1893</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentInvoiceeLegalOrganisation</strong>(string|null $legalorgid = null, string|null $legalorgtype = null, string|null $legalorgname = null)
         </code>
@@ -5821,7 +6244,7 @@ the following scheme codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentInvoiceeContact">
-        <div class="location">at         line 1783</div>
+        <div class="location">at         line 1916</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentInvoiceeContact</strong>(string|null $contactpersonname = null, string|null $contactdepartmentname = null, string|null $contactphoneno = null, string|null $contactfaxno = null, string|null $contactemailadd = null, string|null $contactTypeCode = null)
         </code>
@@ -5886,9 +6309,9 @@ the following scheme codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentInvoiceeContact">
-        <div class="location">at         line 1806</div>
+        <div class="location">at         line 1939</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
-    <strong>addDocumentInvoiceeContact</strong>(string|null $contactpersonname, string|null $contactdepartmentname, string|null $contactphoneno, string|null $contactfaxno, string|null $contactemailadd, string|null $contactTypeCode)
+    <strong>addDocumentInvoiceeContact</strong>(string|null $contactpersonname = null, string|null $contactdepartmentname = null, string|null $contactphoneno = null, string|null $contactfaxno = null, string|null $contactemailadd = null, string|null $contactTypeCode = null)
         </code>
     </h3>
     <div class="details">
@@ -5951,7 +6374,7 @@ the following scheme codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentInvoiceeElectronicAddress">
-        <div class="location">at         line 1821</div>
+        <div class="location">at         line 1954</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentInvoiceeElectronicAddress</strong>(string|null $uriType = null, string|null $uriId = null)
         </code>
@@ -5996,7 +6419,7 @@ the following scheme codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPaymentMean">
-        <div class="location">at         line 1858</div>
+        <div class="location">at         line 1991</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPaymentMean</strong>(string $paymentMeansCode, string|null $paymentMeansInformation = null)
         </code>
@@ -6058,10 +6481,73 @@ credit card, etc.</td>
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_addDocumentPaymentTerm">
-        <div class="location">at         line 1874</div>
+                    <h3 id="method_addDocumentPaymentMean">
+        <div class="location">at         line 2027</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
-    <strong>addDocumentPaymentTerm</strong>(string $paymentTermsDescription)
+    <strong>addDocumentPaymentMean</strong>(string $paymentMeansCode, string|null $paymentMeansInformation = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add additional information on the payment method</p>                    <p><strong>Notes</strong>
+ - The SpecifiedTradeSettlementPaymentMeans element can only be repeated for each bank account if
+   several bank accounts are to be transferred for transfers. The code for the payment method in the Typecode
+   element must therefore not differ in the repetitions. The elements ApplicableTradeSettlementFinancialCard
+   and PayerPartyDebtorFinancialAccount must not be specified for bank transfers.</p>                            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$paymentMeansCode</td>
+                <td>The expected or used means of payment, expressed as a code. The entries from the UNTDID 4461 code list
+must be used. A distinction should be made between SEPA and non-SEPA payments as well as between credit
+payments, direct debits, card payments and other means of payment In particular, the following codes can
+be used:
+ - 10: cash
+ - 20: check
+ - 30: transfer
+ - 42: Payment to bank account
+ - 48: Card payment
+ - 49: direct debit
+ - 57: Standing order
+ - 58: SEPA Credit Transfer
+ - 59: SEPA Direct Debit
+ - 97: Report</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$paymentMeansInformation</td>
+                <td>The expected or used means of payment expressed in text form, e.g. cash, bank transfer, direct debit,
+credit card, etc.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setDocumentPaymentTerm">
+        <div class="location">at         line 2043</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+    <strong>setDocumentPaymentTerm</strong>(string $paymentTermsDescription)
         </code>
     </h3>
     <div class="details">
@@ -6100,10 +6586,10 @@ multiple conditions.</td>
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_addDocumentAllowanceCharge">
-        <div class="location">at         line 1970</div>
+                    <h3 id="method_addDocumentPaymentTerm">
+        <div class="location">at         line 2064</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
-    <strong>addDocumentAllowanceCharge</strong>(float $actualAmount, bool $isCharge, string|null $taxCategoryCode = null, string|null $taxTypeCode = null, float|null $rateApplicablePercent = null, float|null $sequence = null, float|null $calculationPercent = null, float|null $basisAmount = null, float|null $basisQuantity = null, string|null $basisQuantityUnitCode = null, string|null $reasonCode = null, string|null $reason = null)
+    <strong>addDocumentPaymentTerm</strong>(string $paymentTermsDescription)
         </code>
     </h3>
     <div class="details">
@@ -6111,7 +6597,49 @@ multiple conditions.</td>
     
 
                     <div class="method-description">
-                                    <p>Add information about surcharges and charges applicable to the bill as a whole, Deductions,
+                                    <p>Add an additional payment term</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$paymentTermsDescription</td>
+                <td>A text description of the payment terms that apply to the payment amount due (including a
+description of possible penalties). Note: This element can contain multiple lines and
+multiple conditions.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setDocumentAllowanceCharge">
+        <div class="location">at         line 2160</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+    <strong>setDocumentAllowanceCharge</strong>(float $actualAmount, bool $isCharge, string|null $taxCategoryCode = null, string|null $taxTypeCode = null, float|null $rateApplicablePercent = null, float|null $sequence = null, float|null $calculationPercent = null, float|null $basisAmount = null, float|null $basisQuantity = null, string|null $basisQuantityUnitCode = null, string|null $reasonCode = null, string|null $reason = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Set information about surcharges and charges applicable to the bill as a whole, Deductions,
 such as for withheld taxes may also be specified in this group</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
@@ -6250,8 +6778,104 @@ Include PEPPOL subset:
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_addDocumentAllowanceCharge">
+        <div class="location">at         line 2185</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+    <strong>addDocumentAllowanceCharge</strong>(float $actualAmount, bool $isCharge, string|null $taxCategoryCode = null, string|null $taxTypeCode = null, float|null $rateApplicablePercent = null, float|null $sequence = null, float|null $calculationPercent = null, float|null $basisAmount = null, float|null $basisQuantity = null, string|null $basisQuantityUnitCode = null, string|null $reasonCode = null, string|null $reason = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add additional information about surcharges and charges applicable to the bill as a whole, Deductions,
+such as for withheld taxes may also be specified in this group</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>float</td>
+                <td>$actualAmount</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$isCharge</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$taxCategoryCode</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$taxTypeCode</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>float|null</td>
+                <td>$rateApplicablePercent</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>float|null</td>
+                <td>$sequence</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>float|null</td>
+                <td>$calculationPercent</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>float|null</td>
+                <td>$basisAmount</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>float|null</td>
+                <td>$basisQuantity</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$basisQuantityUnitCode</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$reasonCode</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$reason</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_setDocumentReceivableSpecifiedTradeAccountingAccount">
-        <div class="location">at         line 1985</div>
+        <div class="location">at         line 2200</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentReceivableSpecifiedTradeAccountingAccount</strong>(string $id, string|null $typeCode = null)
         </code>
@@ -6297,7 +6921,7 @@ Detailinformationen zur Buchungsreferenz</p>                                    
             </div>
                     <div class="method-item">
                     <h3 id="method_addNewPosition">
-        <div class="location">at         line 2003</div>
+        <div class="location">at         line 2218</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addNewPosition</strong>(string $lineid, string|null $lineStatusCode = null)
         </code>
@@ -6343,8 +6967,38 @@ The following code should be used: TYPE_LINE</td>
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_removeLatestPosition">
+        <div class="location">at         line 2231</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+    <strong>removeLatestPosition</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Remove the latest position</p>                                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_setDocumentPositionNote">
-        <div class="location">at         line 2023</div>
+        <div class="location">at         line 2266</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionNote</strong>(string|null $content = null, string|null $contentCode = null, string|null $subjectCode = null)
         </code>
@@ -6395,7 +7049,7 @@ The following code should be used: TYPE_LINE</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionProductDetails">
-        <div class="location">at         line 2052</div>
+        <div class="location">at         line 2295</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionProductDetails</strong>(string|null $name = null, string|null $description = null, string|null $sellerAssignedID = null, string|null $buyerAssignedID = null, string|null $globalIDType = null, string|null $globalID = null, string|null $batchId = null, string|null $brandName = null)
         </code>
@@ -6470,9 +7124,9 @@ The following code should be used: TYPE_LINE</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionProductCharacteristic">
-        <div class="location">at         line 2072</div>
+        <div class="location">at         line 2319</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
-    <strong>setDocumentPositionProductCharacteristic</strong>(string $description, string $value, string|null $typecode = null)
+    <strong>setDocumentPositionProductCharacteristic</strong>(string $description, string $value, string|null $typecode = null, float|null $measureValue = null, string|null $measureUnitCode = null)
         </code>
     </h3>
     <div class="details">
@@ -6501,6 +7155,16 @@ The following code should be used: TYPE_LINE</td>
                 <td>Type of product property (code). The codes must be taken from the
 UNTDID 6313 codelist. Available only in the Extended-Profile</td>
             </tr>
+                    <tr>
+                <td>float|null</td>
+                <td>$measureValue</td>
+                <td>A measure of a value for this product characteristic.</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$measureUnitCode</td>
+                <td>A unit for the measure value for this product characteristic. To be chosen from the entries in UNTDID xxx</td>
+            </tr>
             </table>
 
             
@@ -6521,9 +7185,9 @@ UNTDID 6313 codelist. Available only in the Extended-Profile</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentPositionProductCharacteristic">
-        <div class="location">at         line 2093</div>
+        <div class="location">at         line 2344</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
-    <strong>addDocumentPositionProductCharacteristic</strong>(string $description, string $value, string|null $typecode = null)
+    <strong>addDocumentPositionProductCharacteristic</strong>(string $description, string $value, string|null $typecode = null, float|null $measureValue = null, string|null $measureUnitCode = null)
         </code>
     </h3>
     <div class="details">
@@ -6552,6 +7216,16 @@ UNTDID 6313 codelist. Available only in the Extended-Profile</td>
                 <td>Type of product property (code). The codes must be taken from the
 UNTDID 6313 codelist. Available only in the Extended-Profile</td>
             </tr>
+                    <tr>
+                <td>float|null</td>
+                <td>$measureValue</td>
+                <td>A measure of a value for this product characteristic.</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$measureUnitCode</td>
+                <td>A unit for the measure value for this product characteristic. To be chosen from the entries in UNTDID xxx</td>
+            </tr>
             </table>
 
             
@@ -6572,7 +7246,7 @@ UNTDID 6313 codelist. Available only in the Extended-Profile</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionProductClassification">
-        <div class="location">at         line 2117</div>
+        <div class="location">at         line 2368</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionProductClassification</strong>(string $classCode, string|null $className = null, string|null $listID = null, string|null $listVersionID = null)
         </code>
@@ -6630,7 +7304,7 @@ procurement (using the Common Procurement Vocabulary [CPV]), e-commerce (UNSPSC)
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentPositionProductClassification">
-        <div class="location">at         line 2141</div>
+        <div class="location">at         line 2392</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentPositionProductClassification</strong>(string $classCode, string|null $className = null, string|null $listID = null, string|null $listVersionID = null)
         </code>
@@ -6688,7 +7362,7 @@ procurement (using the Common Procurement Vocabulary [CPV]), e-commerce (UNSPSC)
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionProductInstance">
-        <div class="location">at         line 2159</div>
+        <div class="location">at         line 2410</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionProductInstance</strong>(string|null $batchID = null, string|null $serialId = null)
         </code>
@@ -6734,7 +7408,7 @@ the unique supplier assigned serial identifier for this trade product instance.<
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentPositionProductInstance">
-        <div class="location">at         line 2177</div>
+        <div class="location">at         line 2428</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentPositionProductInstance</strong>(string|null $batchID = null, string|null $serialId = null)
         </code>
@@ -6780,7 +7454,7 @@ the unique supplier assigned serial identifier for this trade product instance.<
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionApplicableSupplyChainPackaging">
-        <div class="location">at         line 2204</div>
+        <div class="location">at         line 2455</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionApplicableSupplyChainPackaging</strong>(string|null $typeCode = null, float|null $width = null, string|null $widthUnitCode = null, float|null $length = null, string|null $lengthUnitCode = null, float|null $height = null, string|null $heightUnitCode = null)
         </code>
@@ -6850,7 +7524,7 @@ the unique supplier assigned serial identifier for this trade product instance.<
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionProductOriginTradeCountry">
-        <div class="location">at         line 2221</div>
+        <div class="location">at         line 2472</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionProductOriginTradeCountry</strong>(string $country)
         </code>
@@ -6892,7 +7566,7 @@ Agency “Codes for the representation of names of countries and their subdivisi
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionProductReferencedDocument">
-        <div class="location">at         line 2242</div>
+        <div class="location">at         line 2493</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionProductReferencedDocument</strong>(string|null $issuerassignedid = null, string|null $typecode = null, string|null $uriid = null, string|null $lineid = null, string|null $name = null, string|null $reftypecode = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $issueddate = null, string|null $binarydatafilename = null)
         </code>
@@ -6967,7 +7641,7 @@ Agency “Codes for the representation of names of countries and their subdivisi
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentPositionProductReferencedDocument">
-        <div class="location">at         line 2263</div>
+        <div class="location">at         line 2514</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentPositionProductReferencedDocument</strong>(string|null $issuerassignedid = null, string|null $typecode = null, string|null $uriid = null, string|null $lineid = null, string|null $name = null, string|null $reftypecode = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $issueddate = null, string|null $binarydatafilename = null)
         </code>
@@ -7042,7 +7716,7 @@ Agency “Codes for the representation of names of countries and their subdivisi
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentPositionAdditionalReferencedDocument">
-        <div class="location">at         line 2301</div>
+        <div class="location">at         line 2552</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentPositionAdditionalReferencedDocument</strong>(string|null $issuerassignedid = null, string|null $typecode = null, string|null $uriid = null, string|null $lineid = null, string|null $name = null, string|null $reftypecode = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $issueddate = null, string|null $binarydatafilename = null)
         </code>
@@ -7126,7 +7800,7 @@ from UNTDID 1153 in accordance with the code list entries.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionBuyerOrderReferencedDocument">
-        <div class="location">at         line 2317</div>
+        <div class="location">at         line 2568</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionBuyerOrderReferencedDocument</strong>(string $buyerOrderRefLineId)
         </code>
@@ -7167,7 +7841,7 @@ reference at the document level.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionQuotationReferencedDocument">
-        <div class="location">at         line 2336</div>
+        <div class="location">at         line 2587</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionQuotationReferencedDocument</strong>(string|null $quotationRefId = null, string|null $quotationRefLineId = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $quotationRefDate = null)
         </code>
@@ -7217,7 +7891,7 @@ reference at the document level.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionGrossPrice">
-        <div class="location">at         line 2357</div>
+        <div class="location">at         line 2608</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionGrossPrice</strong>(float $chargeAmount, float|null $basisQuantity = null, string|null $basisQuantityUnitCode = null)
         </code>
@@ -7269,7 +7943,7 @@ according to the gross calculation.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentPositionGrossPriceAllowanceCharge">
-        <div class="location">at         line 2382</div>
+        <div class="location">at         line 2633</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentPositionGrossPriceAllowanceCharge</strong>(float $actualAmount, bool $isCharge, string|null $reason = null, string|null $reasonCode = null)
         </code>
@@ -7328,7 +8002,7 @@ charge reason. Example AEW for WEEE.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionNetPrice">
-        <div class="location">at         line 2402</div>
+        <div class="location">at         line 2653</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionNetPrice</strong>(float $chargeAmount, float|null $basisQuantity = null, string|null $basisQuantityUnitCode = null)
         </code>
@@ -7378,7 +8052,7 @@ charge reason. Example AEW for WEEE.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionNetPriceTax">
-        <div class="location">at         line 2455</div>
+        <div class="location">at         line 2706</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionNetPriceTax</strong>(string $categoryCode, string $typeCode, float|null $rateApplicablePercent = null, float|null $calculatedAmount = null, string|null $exemptionReason = null, string|null $exemptionReasonCode = null)
         </code>
@@ -7471,7 +8145,7 @@ and maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentPositionNetPriceTax">
-        <div class="location">at         line 2470</div>
+        <div class="location">at         line 2721</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentPositionNetPriceTax</strong>(string $categoryCode, string $typeCode, float|null $rateApplicablePercent = null, float|null $calculatedAmount = null, string|null $exemptionReason = null, string|null $exemptionReasonCode = null)
         </code>
@@ -7537,7 +8211,7 @@ For detailed information see <strong>setDocumentPositionNetPriceTax</strong></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionCatalogueReferencedDocument">
-        <div class="location">at         line 2490</div>
+        <div class="location">at         line 2741</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionCatalogueReferencedDocument</strong>(string|null $catalogueRefId = null, string|null $catalogueRefLineId = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $catalogueRefDate = null)
         </code>
@@ -7587,7 +8261,7 @@ For detailed information see <strong>setDocumentPositionNetPriceTax</strong></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_addDocumentPositionCatalogueReferencedDocument">
-        <div class="location">at         line 2509</div>
+        <div class="location">at         line 2760</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentPositionCatalogueReferencedDocument</strong>(string|null $catalogueRefId = null, string|null $catalogueRefLineId = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $catalogueRefDate = null)
         </code>
@@ -7637,7 +8311,7 @@ For detailed information see <strong>setDocumentPositionNetPriceTax</strong></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionBlanketOrderReferencedDocument">
-        <div class="location">at         line 2524</div>
+        <div class="location">at         line 2775</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionBlanketOrderReferencedDocument</strong>(string $blanketOrderRefLineId)
         </code>
@@ -7677,7 +8351,7 @@ For detailed information see <strong>setDocumentPositionNetPriceTax</strong></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionPartialDelivery">
-        <div class="location">at         line 2539</div>
+        <div class="location">at         line 2790</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionPartialDelivery</strong>(bool $partialDelivery = false)
         </code>
@@ -7717,7 +8391,7 @@ For detailed information see <strong>setDocumentPositionNetPriceTax</strong></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionDeliverReqQuantity">
-        <div class="location">at         line 2556</div>
+        <div class="location">at         line 2807</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionDeliverReqQuantity</strong>(float $requestedQuantity, string $requestedQuantityUnitCode)
         </code>
@@ -7762,7 +8436,7 @@ For detailed information see <strong>setDocumentPositionNetPriceTax</strong></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionDeliverPackageQuantity">
-        <div class="location">at         line 2573</div>
+        <div class="location">at         line 2824</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionDeliverPackageQuantity</strong>(float $packageQuantity, string $packageQuantityUnitCode)
         </code>
@@ -7807,7 +8481,7 @@ For detailed information see <strong>setDocumentPositionNetPriceTax</strong></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionDeliverPerPackageQuantity">
-        <div class="location">at         line 2590</div>
+        <div class="location">at         line 2841</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionDeliverPerPackageQuantity</strong>(float $perPackageQuantity, string $perPackageQuantityUnitCode)
         </code>
@@ -7852,7 +8526,7 @@ For detailed information see <strong>setDocumentPositionNetPriceTax</strong></p>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionDeliverAgreedQuantity">
-        <div class="location">at         line 2607</div>
+        <div class="location">at         line 2858</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionDeliverAgreedQuantity</strong>(float $agreedQuantity, string $agreedQuantityUnitCode)
         </code>
@@ -7896,10 +8570,10 @@ For detailed information see <strong>setDocumentPositionNetPriceTax</strong></p>
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_addDocumentPositionRequestedDeliverySupplyChainEvent">
-        <div class="location">at         line 2623</div>
+                    <h3 id="method_setDocumentPositionRequestedDeliverySupplyChainEvent">
+        <div class="location">at         line 2874</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
-    <strong>addDocumentPositionRequestedDeliverySupplyChainEvent</strong>(<a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $occurrenceDateTime = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $startDateTime = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $endDateTime = null)
+    <strong>setDocumentPositionRequestedDeliverySupplyChainEvent</strong>(<a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $occurrenceDateTime = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $startDateTime = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $endDateTime = null)
         </code>
     </h3>
     <div class="details">
@@ -7907,7 +8581,7 @@ For detailed information see <strong>setDocumentPositionNetPriceTax</strong></p>
     
 
                     <div class="method-description">
-                                    <p>Supply chain event on position level</p>                                                </div>
+                                    <p>Set the supply chain event on position level</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -7946,8 +8620,151 @@ For detailed information see <strong>setDocumentPositionNetPriceTax</strong></p>
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_addDocumentPositionRequestedDeliverySupplyChainEvent">
+        <div class="location">at         line 2890</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+    <strong>addDocumentPositionRequestedDeliverySupplyChainEvent</strong>(<a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $occurrenceDateTime = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $startDateTime = null, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $endDateTime = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add an additional supply chain event on position level</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
+                <td>$occurrenceDateTime</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
+                <td>$startDateTime</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
+                <td>$endDateTime</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setDocumentPositionTax">
+        <div class="location">at         line 2943</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+    <strong>setDocumentPositionTax</strong>(string $categoryCode, string $typeCode, float $rateApplicablePercent, float|null $calculatedAmount = null, string|null $exemptionReason = null, string|null $exemptionReasonCode = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add information about the sales tax that applies to the goods and services invoiced
+in the relevant invoice line</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$categoryCode</td>
+                <td>Coded description of a sales tax category</p>
+
+<p>The following entries from UNTDID 5305 are used (details in brackets):
+ - Standard rate (sales tax is due according to the normal procedure)
+ - Goods to be taxed according to the zero rate (sales tax is charged with a percentage of zero)
+ - Tax exempt (USt./IGIC/IPSI)
+ - Reversal of the tax liability (the rules for reversing the tax liability at USt./IGIC/IPSI apply)
+ - VAT exempt for intra-community deliveries of goods (USt./IGIC/IPSI not levied due to rules on intra-community deliveries)
+ - Free export item, tax not levied (VAT / IGIC/IPSI not levied due to export outside the EU)
+ - Services outside the tax scope (sales are not subject to VAT / IGIC/IPSI)
+ - Canary Islands general indirect tax (IGIC tax applies)
+ - IPSI (tax for Ceuta / Melilla) applies.</p>
+
+<p>The codes for the VAT category are as follows:
+ - S = sales tax is due at the normal rate
+ - Z = goods to be taxed according to the zero rate
+ - E = tax exempt
+ - AE = reversal of tax liability
+ - K = VAT is not shown for intra-community deliveries
+ - G = tax not levied due to export outside the EU
+ - O = Outside the tax scope
+ - L = IGIC (Canary Islands)
+ - M = IPSI (Ceuta / Melilla)</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$typeCode</td>
+                <td>In EN 16931 only the tax type “sales tax” with the code “VAT” is supported. Should other types of tax be
+specified, such as an insurance tax or a mineral oil tax the EXTENDED profile must be used. The code for
+the tax type must then be taken from the code list UNTDID 5153.</td>
+            </tr>
+                    <tr>
+                <td>float</td>
+                <td>$rateApplicablePercent</td>
+                <td>The VAT rate applicable to the item invoiced and expressed as a percentage. Note: The code of the sales
+tax category and the category-specific sales tax rate  must correspond to one another. The value to be
+given is the percentage. For example, the value 20 is given for 20% (and not 0.2)</td>
+            </tr>
+                    <tr>
+                <td>float|null</td>
+                <td>$calculatedAmount</td>
+                <td>Tax amount. Information only for taxes that are not VAT.</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$exemptionReason</td>
+                <td>Reason for tax exemption (free text)</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$exemptionReasonCode</td>
+                <td>Reason given in code form for the exemption of the amount from VAT. Note: Code list issued
+and maintained by the Connecting Europe Facility.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_addDocumentPositionTax">
-        <div class="location">at         line 2676</div>
+        <div class="location">at         line 2996</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentPositionTax</strong>(string $categoryCode, string $typeCode, float $rateApplicablePercent, float|null $calculatedAmount = null, string|null $exemptionReason = null, string|null $exemptionReasonCode = null)
         </code>
@@ -8039,8 +8856,123 @@ and maintained by the Connecting Europe Facility.</td>
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_setDocumentPositionAllowanceCharge">
+        <div class="location">at         line 3071</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
+    <strong>setDocumentPositionAllowanceCharge</strong>(float $actualAmount, bool $isCharge, float|null $calculationPercent = null, float|null $basisAmount = null, string|null $reasonCode = null, string|null $reason = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Add surcharges and discounts on position level</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>float</td>
+                <td>$actualAmount</td>
+                <td>The surcharge/discount amount excluding sales tax</td>
+            </tr>
+                    <tr>
+                <td>bool</td>
+                <td>$isCharge</td>
+                <td>Switch that indicates whether the following data refer to an allowance or a discount,
+true means that</td>
+            </tr>
+                    <tr>
+                <td>float|null</td>
+                <td>$calculationPercent</td>
+                <td>The percentage that may be used in conjunction with the base invoice line discount
+amount to calculate the invoice line discount amount</td>
+            </tr>
+                    <tr>
+                <td>float|null</td>
+                <td>$basisAmount</td>
+                <td>The base amount that may be used in conjunction with the invoice line discount percentage
+to calculate the invoice line discount amount</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$reasonCode</td>
+                <td>The reason given as a code for the invoice line discount</p>
+
+<p><strong>Notes</strong>
+ - Use entries from the UNTDID 5189 code list (discounts) or the UNTDID 7161 code list
+   (surcharges). The invoice line discount reason code and the invoice line discount reason must
+   match.
+ - In the case of a discount, the code list UNTDID 5189 must be used.
+ - In the event of a surcharge, the code list UNTDID 7161 must be used.</p>
+
+<p>In particular, the following codes can be used:
+ - AA = Advertising
+ - ABL = Additional packaging
+ - ADR = Other services
+ - ADT = Pick-up
+ - FC = Freight service
+ - FI = Financing
+ - LA = Labelling</p>
+
+<p>Include PEPPOL subset:
+ - 41 - Bonus for works ahead of schedule
+ - 42 - Other bonus
+ - 60 - Manufacturer’s consumer discount
+ - 62 - Due to military status
+ - 63 - Due to work accident
+ - 64 - Special agreement
+ - 65 - Production error discount
+ - 66 - New outlet discount
+ - 67 - Sample discount
+ - 68 - End-of-range discount
+ - 70 - Incoterm discount
+ - 71 - Point of sales threshold allowance
+ - 88 - Material surcharge/deduction
+ - 95 - Discount
+ - 100 - Special rebate
+ - 102 - Fixed long term
+ - 103 - Temporary
+ - 104 - Standard
+ - 105 - Yearly turnover</p>
+
+<p>Codelists: UNTDID 7161 (Complete list), UNTDID 5189 (Restricted)</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$reason</td>
+                <td>The reason given in text form for the invoice item discount/surcharge</p>
+
+<p><strong>Notes</strong>
+ - The invoice line discount reason code (BT-140) and the invoice line discount reason
+   (BT-139) must show the same allowance type.
+ - Each line item discount (BG-27) must include a corresponding line discount reason
+   (BT-139) or an appropriate line discount reason code (BT-140), or both.
+ - The code for the reason for the charge at the invoice line level (BT-145) and the
+   reason for the invoice line discount (BT-144) must show the same discount type</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_addDocumentPositionAllowanceCharge">
-        <div class="location">at         line 2751</div>
+        <div class="location">at         line 3146</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>addDocumentPositionAllowanceCharge</strong>(float $actualAmount, bool $isCharge, float|null $calculationPercent = null, float|null $basisAmount = null, string|null $reasonCode = null, string|null $reason = null)
         </code>
@@ -8155,7 +9087,7 @@ to calculate the invoice line discount amount</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionLineSummation">
-        <div class="location">at         line 2770</div>
+        <div class="location">at         line 3165</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionLineSummation</strong>(float $lineTotalAmount, float|null $totalAllowanceChargeAmount = null)
         </code>
@@ -8202,7 +9134,7 @@ and discounts applicable to the item level, as well as other taxes.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setDocumentPositionReceivableTradeAccountingAccount">
-        <div class="location">at         line 2789</div>
+        <div class="location">at         line 3184</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentBuilder.html"><abbr title="horstoeko\orderx\OrderDocumentBuilder">OrderDocumentBuilder</abbr></a>
     <strong>setDocumentPositionReceivableTradeAccountingAccount</strong>(string $id, string|null $typeCode = null)
         </code>
