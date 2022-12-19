@@ -11,11 +11,9 @@ declare(strict_types=1);
 
 namespace horstoeko\orderx;
 
-use horstoeko\stringmanagement\FileUtils;
 use horstoeko\stringmanagement\PathUtils;
-use \Symfony\Component\Validator\Validation;
-use \Symfony\Component\Validator\ConstraintViolationListInterface;
-use \Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
  * Class representing the document validator for incoming documents
@@ -73,11 +71,19 @@ class OrderDocumentValidator
     private function initValidator(): void
     {
         $validatorBuilder = Validation::createValidatorBuilder();
-        $dirname = PathUtils::combinePathWithFile(PathUtils::combineAllPaths(dirname(__FILE__) , 'validation', $this->document->$this->documentBuiler->getProfileDefinition()['name']), '*.yml');
-        $files = $this->globRecursive($dirname);
 
-        foreach ($files as $file) {
-            $validatorBuilder->addYamlMapping($file);
+        $validatorYamlFiles = PathUtils::combinePathWithFile(
+            PathUtils::combineAllPaths(
+                OrderSettings::getValidationDirectory(),
+                $this->document->getProfileDefinition()['name']
+            ),
+            '*.yml'
+        );
+
+        $validatorYamlFiles = $this->globRecursive($validatorYamlFiles);
+
+        foreach ($validatorYamlFiles as $validatorYamlFile) {
+            $validatorBuilder->addYamlMapping($validatorYamlFile);
         }
 
         $this->validator = $validatorBuilder->getValidator();

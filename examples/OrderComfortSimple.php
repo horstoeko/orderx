@@ -1,8 +1,9 @@
 <?php
 
-use horstoeko\orderx\OrderDocumentBuilder;
-use horstoeko\orderx\OrderDocumentPdfBuilder;
 use horstoeko\orderx\OrderProfiles;
+use horstoeko\orderx\OrderDocumentBuilder;
+use horstoeko\orderx\OrderDocumentValidator;
+use horstoeko\orderx\OrderDocumentPdfBuilder;
 
 require dirname(__FILE__) . "/../vendor/autoload.php";
 
@@ -183,3 +184,6 @@ $document
 (new OrderDocumentPdfBuilder($document, dirname(__FILE__) . "/../src/assets/empty.pdf"))
     ->generateDocument()
     ->saveDocument(getcwd() . "/order-x.pdf");
+
+(new OrderDocumentValidator($document))
+    ->validateDocument();

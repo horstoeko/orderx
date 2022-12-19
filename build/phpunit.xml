@@ -6,6 +6,7 @@
             <file>../tests/OrderDocumentBuilderBasicTest.php</file>
             <file>../tests/OrderDocumentBuilderComfortTest.php</file>
             <file>../tests/OrderDocumentBuilderExtendedTest.php</file>
+            <file>../tests/OrderDocumentPdfBuilderTest.php</file>
         </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">

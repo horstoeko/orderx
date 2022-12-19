@@ -15,6 +15,7 @@ use \GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
 use \GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
 use \horstoeko\orderx\OrderObjectHelper;
 use \horstoeko\orderx\jms\OrderTypesHandler;
+use horstoeko\stringmanagement\PathUtils;
 use \JMS\Serializer\Handler\HandlerRegistryInterface;
 use \JMS\Serializer\SerializerBuilder;
 use \JMS\Serializer\SerializerInterface;
@@ -163,16 +164,60 @@ class OrderDocument
      */
     private function initSerialzer(): OrderDocument
     {
-        $serializerBuilder = SerializerBuilder::create();
+        $this->serializerBuilder = SerializerBuilder::create();
 
-        $this->serializerBuilder = $serializerBuilder;
-        $this->serializerBuilder->addMetadataDir(dirname(__FILE__) . '/yaml/' . $this->getProfileDefinition()["name"] . '/qdt', 'horstoeko\orderx\entities\\' . $this->getProfileDefinition()["name"] . '\qdt');
-        $this->serializerBuilder->addMetadataDir(dirname(__FILE__) . '/yaml/' . $this->getProfileDefinition()["name"] . '/ram', 'horstoeko\orderx\entities\\' . $this->getProfileDefinition()["name"] . '\ram');
-        $this->serializerBuilder->addMetadataDir(dirname(__FILE__) . '/yaml/' . $this->getProfileDefinition()["name"] . '/rsm', 'horstoeko\orderx\entities\\' . $this->getProfileDefinition()["name"] . '\rsm');
-        $this->serializerBuilder->addMetadataDir(dirname(__FILE__) . '/yaml/' . $this->getProfileDefinition()["name"] . '/udt', 'horstoeko\orderx\entities\\' . $this->getProfileDefinition()["name"] . '\udt');
+        $this->serializerBuilder->addMetadataDir(
+            PathUtils::combineAllPaths(
+                OrderSettings::getYamlDirectory(),
+                $this->getProfileDefinition()["name"],
+                'qdt'
+            ),
+            sprintf(
+                'horstoeko\orderx\entities\%s\qdt',
+                $this->getProfileDefinition()["name"]
+            )
+        );
+
+        $this->serializerBuilder->addMetadataDir(
+            PathUtils::combineAllPaths(
+                OrderSettings::getYamlDirectory(),
+                $this->getProfileDefinition()["name"],
+                'ram'
+            ),
+            sprintf(
+                'horstoeko\orderx\entities\%s\ram',
+                $this->getProfileDefinition()["name"]
+            )
+        );
+
+        $this->serializerBuilder->addMetadataDir(
+            PathUtils::combineAllPaths(
+                OrderSettings::getYamlDirectory(),
+                $this->getProfileDefinition()["name"],
+                'rsm'
+            ),
+            sprintf(
+                'horstoeko\orderx\entities\%s\rsm',
+                $this->getProfileDefinition()["name"]
+            )
+        );
+
+        $this->serializerBuilder->addMetadataDir(
+            PathUtils::combineAllPaths(
+                OrderSettings::getYamlDirectory(),
+                $this->getProfileDefinition()["name"],
+                'udt'
+            ),
+            sprintf(
+                'horstoeko\orderx\entities\%s\udt',
+                $this->getProfileDefinition()["name"]
+            )
+        );
+
         $this->serializerBuilder->addDefaultListeners();
-        $this->serializerBuilder->configureHandlers(function (HandlerRegistryInterface $handler) use ($serializerBuilder) {
-            $serializerBuilder->addDefaultHandlers();
+        $this->serializerBuilder->addDefaultHandlers();
+
+        $this->serializerBuilder->configureHandlers(function (HandlerRegistryInterface $handler) {
             $handler->registerSubscribingHandler(new BaseTypesHandler());
             $handler->registerSubscribingHandler(new XmlSchemaDateHandler());
             $handler->registerSubscribingHandler(new OrderTypesHandler());

@@ -11,11 +11,10 @@ declare(strict_types=1);
 
 namespace horstoeko\orderx;
 
-use DOMDocument;
-use DOMXPath;
-use horstoeko\orderx\OrderPdfWriter;
-use horstoeko\orderx\OrderDocumentBuilder;
 use horstoeko\orderx\codelists\OrderDocumentTypes;
+use horstoeko\orderx\OrderDocumentBuilder;
+use horstoeko\orderx\OrderPdfWriter;
+use horstoeko\stringmanagement\PathUtils;
 use setasign\Fpdi\PdfParser\StreamReader as PdfStreamReader;
 
 /**
@@ -106,7 +105,7 @@ class OrderDocumentPdfBuilder
 
         $pdfDataRef = null;
 
-        if (@is_file($this->pdfData)) {
+        if ($this->pdfDataIsFile($this->pdfData)) {
             $pdfDataRef = $this->pdfData;
         } elseif (is_string($this->pdfData)) {
             $pdfDataRef = PdfStreamReader::createByString($this->pdfData);
@@ -157,7 +156,7 @@ class OrderDocumentPdfBuilder
         $pdfMetadataInfos = $this->preparePdfMetadata();
         $this->pdfWriter->setPdfMetadataInfos($pdfMetadataInfos);
 
-        $xmp = simplexml_load_file(dirname(__FILE__) . "/assets/orderx_extension_schema.xmp");
+        $xmp = simplexml_load_file(PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), 'orderx_extension_schema.xmp'));
 
         $descNodes = $xmp->xpath('rdf:Description');
         $descNode = $descNodes[0];
@@ -190,7 +189,7 @@ class OrderDocumentPdfBuilder
         $orderInformations = $this->extractOrderInformations();
 
         $dateString = date('Y-m-d', strtotime($orderInformations['date']));
-        $title = sprintf('%s : %s %s', $orderInformations['sellerName'], $orderInformations['docTypeName'], $orderInformations['orderId']);
+        $title = sprintf('%s, %s %s', $orderInformations['sellerName'], $orderInformations['docTypeName'], $orderInformations['orderId']);
         $subject = sprintf('Order-X %s %s dated %s issued by %s', $orderInformations['docTypeName'], $orderInformations['orderId'], $dateString, $orderInformations['sellerName']);
 
         $pdfMetadata = array(
@@ -210,7 +209,7 @@ class OrderDocumentPdfBuilder
      *
      * @return array
      */
-    protected function extractOrderInformations(): array
+    private function extractOrderInformations(): array
     {
         $xpath = $this->documentBuiler->getContentAsDomXPath();
 
@@ -225,9 +224,9 @@ class OrderDocumentPdfBuilder
         $sellerName = $sellerXpath->item(0)->nodeValue;
 
         $docTypeXpath = $xpath->query('//rsm:ExchangedDocument/ram:TypeCode');
-        $docType = $docTypeXpath->item(0)->nodeValue;
+        $docTypeCode = $docTypeXpath->item(0)->nodeValue;
 
-        switch ($docType) {
+        switch ($docTypeCode) {
             case OrderDocumentTypes::ORDER:
                 $docTypeName = 'Order';
                 break;
@@ -250,5 +249,21 @@ class OrderDocumentPdfBuilder
         );
 
         return $orderInformation;
+    }
+
+    /**
+     * Returns true if the submittet parameter $pdfData is a valid file.
+     * Otherwise it will return false
+     *
+     * @param string $pdfData
+     * @return boolean
+     */
+    private function pdfDataIsFile($pdfData): bool
+    {
+        try {
+            return @is_file($pdfData);
+        } catch (\TypeError $ex) {
+            return false;
+        }
     }
 }

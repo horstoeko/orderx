@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace horstoeko\orderx;
 
+use horstoeko\stringmanagement\PathUtils;
+
 /**
  * Class representing the general settings
  *
@@ -160,5 +162,45 @@ class OrderSettings
     public static function setThousandsSeparator(string $thousandsSeparator): void
     {
         self::$thousandsSeparator = $thousandsSeparator;
+    }
+
+    /**
+     * Get root directory
+     *
+     * @return string
+     */
+    public static function getRootDirectory(): string
+    {
+        return PathUtils::combineAllPaths(dirname(__FILE__), "..");
+    }
+
+    /**
+     * Get the directory where all the assets are stored
+     *
+     * @return string
+     */
+    public static function getAssetDirectory(): string
+    {
+        return PathUtils::combineAllPaths(self::getRootDirectory(), "src", "assets");
+    }
+
+    /**
+     * Get the directory where all the assets are stored
+     *
+     * @return string
+     */
+    public static function getYamlDirectory(): string
+    {
+        return PathUtils::combineAllPaths(self::getRootDirectory(), "src", "yaml");
+    }
+
+    /**
+     * Get the directory where all the validation files are located
+     *
+     * @return string
+     */
+    public static function getValidationDirectory(): string
+    {
+        return PathUtils::combineAllPaths(self::getRootDirectory(), "src", "validation");
     }
 }
