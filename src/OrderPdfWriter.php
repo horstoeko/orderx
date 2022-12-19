@@ -11,7 +11,8 @@ declare(strict_types=1);
 
 namespace horstoeko\orderx;
 
-use \setasign\Fpdi\Fpdi as PdfFpdi;
+use horstoeko\stringmanagement\PathUtils;
+use setasign\Fpdi\Fpdi as PdfFpdi;
 
 /**
  * Class representing some tools for pdf generation
@@ -27,9 +28,9 @@ use \setasign\Fpdi\Fpdi as PdfFpdi;
 class OrderPdfWriter extends PdfFpdi
 {
     /**
-     * Full path to the ICC-Profile
+     * The filename of the ICC-Profile
      */
-    const ICC_PROFILE_PATH = __DIR__ . '/assets/sRGB_v4_ICC.icc';
+    const ICC_PROFILE_FILENAME = 'sRGB_v4_ICC.icc';
 
     /**
      * Option Name for "Created at"
@@ -377,7 +378,7 @@ class OrderPdfWriter extends PdfFpdi
         $this->_put('endobj');
         $this->outputIntentIndex = $this->n;
 
-        $icc = file_get_contents($this::ICC_PROFILE_PATH);
+        $icc = file_get_contents(PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), $this::ICC_PROFILE_FILENAME));
         $icc = gzcompress($icc);
 
         $this->_newobj();
