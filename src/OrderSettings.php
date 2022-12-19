@@ -177,13 +177,23 @@ class OrderSettings
     }
 
     /**
+     * Get the directory where all the sources are stored
+     *
+     * @return string
+     */
+    public static function getSourceDirectory(): string
+    {
+        return PathUtils::combineAllPaths(self::getRootDirectory(), "src");
+    }
+
+    /**
      * Get the directory where all the assets are stored
      *
      * @return string
      */
     public static function getAssetDirectory(): string
     {
-        return PathUtils::combineAllPaths(self::getRootDirectory(), "src", "assets");
+        return PathUtils::combineAllPaths(self::getSourceDirectory(), "assets");
     }
 
     /**
@@ -193,7 +203,7 @@ class OrderSettings
      */
     public static function getYamlDirectory(): string
     {
-        return PathUtils::combineAllPaths(self::getRootDirectory(), "src", "yaml");
+        return PathUtils::combineAllPaths(self::getSourceDirectory(), "yaml");
     }
 
     /**
@@ -203,6 +213,6 @@ class OrderSettings
      */
     public static function getValidationDirectory(): string
     {
-        return PathUtils::combineAllPaths(self::getRootDirectory(), "src", "validation");
+        return PathUtils::combineAllPaths(self::getSourceDirectory(), "validation");
     }
 }
