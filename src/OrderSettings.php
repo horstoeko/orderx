@@ -21,6 +21,8 @@ use horstoeko\stringmanagement\PathUtils;
  * @author   D. Erling <horstoeko@erling.com.de>
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/orderx
+ *
+ * @codeCoverageIgnore
  */
 class OrderSettings
 {
