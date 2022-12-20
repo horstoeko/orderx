@@ -11,14 +11,14 @@ declare(strict_types=1);
 
 namespace horstoeko\orderx;
 
-use \GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
-use \GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
-use \horstoeko\orderx\OrderObjectHelper;
-use \horstoeko\orderx\jms\OrderTypesHandler;
+use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
+use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
+use horstoeko\orderx\jms\OrderTypesHandler;
+use horstoeko\orderx\OrderObjectHelper;
 use horstoeko\stringmanagement\PathUtils;
-use \JMS\Serializer\Handler\HandlerRegistryInterface;
-use \JMS\Serializer\SerializerBuilder;
-use \JMS\Serializer\SerializerInterface;
+use JMS\Serializer\Handler\HandlerRegistryInterface;
+use JMS\Serializer\SerializerBuilder;
+use JMS\Serializer\SerializerInterface;
 
 /**
  * Class representing the document basics
