@@ -14,8 +14,7 @@ namespace horstoeko\orderx\exception;
 use Throwable;
 
 /**
- * Class representing the exception if an invalid date format
- * is presented to the system
+ * Class representing the exception if a profile can't be determained
  *
  * @category Order-X
  * @package  Order-X
@@ -23,15 +22,16 @@ use Throwable;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/orderx
  */
-class OrderUnknownDateFormat extends OrderBaseException
+class OrderMimeTypeNotSupportedException extends OrderBaseException
 {
     /**
      * Constructor
      *
+     * @param string $mimetype
      * @param Throwable|null $previous
      */
-    public function __construct(string $dateFormatCode, ?Throwable $previous = null)
+    public function __construct(string $mimetype, ?Throwable $previous = null)
     {
-        parent::__construct(sprintf("Invalid date format %s", $dateFormatCode), -1104, $previous);
+        parent::__construct(sprintf("The Mime Type %s is not supported", $mimetype), -1103, $previous);
     }
 }

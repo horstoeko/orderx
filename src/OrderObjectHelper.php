@@ -12,10 +12,11 @@ declare(strict_types=1);
 namespace horstoeko\orderx;
 
 use DateTime;
-use \MimeTyper\Repository\MimeDbRepository;
-use \horstoeko\orderx\exception\OrderUnknownDateFormat;
-use \horstoeko\stringmanagement\FileUtils;
-use \horstoeko\stringmanagement\StringUtils;
+use horstoeko\orderx\exception\OrderMimeTypeNotSupportedException;
+use horstoeko\orderx\exception\OrderUnknownDateFormat;
+use horstoeko\stringmanagement\FileUtils;
+use horstoeko\stringmanagement\StringUtils;
+use MimeTyper\Repository\MimeDbRepository;
 
 /**
  * Class representing a collection of common helpers and class factories
@@ -506,7 +507,7 @@ class OrderObjectHelper
                         $this->getBinaryObjectType($content, $mimeType, FileUtils::getFilenameWithExtension($binarydatafilename))
                     );
                 } else {
-                    throw new \Exception(sprintf("Invalid attachment. Mimetype %s not supported", $mimeType));
+                    throw new OrderMimeTypeNotSupportedException($mimeType);
                 }
             }
         }
@@ -1479,7 +1480,7 @@ class OrderObjectHelper
         } elseif ($format == "204") {
             return DateTime::createFromFormat("YmdHis", $dateTimeString);
         } else {
-            throw new OrderUnknownDateFormat();
+            throw new OrderUnknownDateFormat($format);
         }
     }
 

@@ -14,8 +14,7 @@ namespace horstoeko\orderx\exception;
 use Throwable;
 
 /**
- * Class representing the exception if an invalid date format
- * is presented to the system
+ * Class representing the exception if a profile can't be determained
  *
  * @category Order-X
  * @package  Order-X
@@ -23,15 +22,16 @@ use Throwable;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/orderx
  */
-class OrderUnknownDateFormat extends OrderBaseException
+class OrderUnknownProfileException extends OrderBaseException
 {
     /**
      * Constructor
      *
+     * @param string $profileString
      * @param Throwable|null $previous
      */
-    public function __construct(string $dateFormatCode, ?Throwable $previous = null)
+    public function __construct(string $profileString, ?Throwable $previous = null)
     {
-        parent::__construct(sprintf("Invalid date format %s", $dateFormatCode), -1104, $previous);
+        parent::__construct(sprintf("Cannot determain the profile by %s", $profileString), -1102, $previous);
     }
 }
