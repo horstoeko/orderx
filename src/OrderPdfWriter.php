@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace horstoeko\orderx;
 
-use horstoeko\stringmanagement\PathUtils;
 use setasign\Fpdi\Fpdi as PdfFpdi;
 
 /**
@@ -27,21 +26,6 @@ use setasign\Fpdi\Fpdi as PdfFpdi;
  */
 class OrderPdfWriter extends PdfFpdi
 {
-    /**
-     * The filename of the ICC-Profile
-     */
-    const ICC_PROFILE_FILENAME = 'sRGB_v4_ICC.icc';
-
-    /**
-     * Option Name for "Created at"
-     */
-    const DATE_CREATED_NAME = "created";
-
-    /**
-     * Option Name for "Modified at"
-     */
-    const DATE_MODIFIED_NAME = "modified";
-
     /**
      * Contains all attached files
      *
@@ -89,7 +73,7 @@ class OrderPdfWriter extends PdfFpdi
      *
      * @var integer
      */
-    protected $n_files;
+    protected $filesIndex;
 
     /**
      * Internal flag that indicates that the attachment
@@ -294,7 +278,7 @@ class OrderPdfWriter extends PdfFpdi
     protected function putFileDictionary(): void
     {
         $this->_newobj();
-        $this->n_files = $this->n;
+        $this->filesIndex = $this->n;
         $this->_put('<<');
         $s = '';
         $files = $this->files;
@@ -378,7 +362,7 @@ class OrderPdfWriter extends PdfFpdi
         $this->_put('endobj');
         $this->outputIntentIndex = $this->n;
 
-        $icc = file_get_contents(PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), $this::ICC_PROFILE_FILENAME));
+        $icc = file_get_contents(OrderSettings::getFullIccProfileFilename());
         $icc = gzcompress($icc);
 
         $this->_newobj();
@@ -412,7 +396,7 @@ class OrderPdfWriter extends PdfFpdi
                 }
                 $this->_put(sprintf('/AF [%s]', $files_ref_str));
             } else {
-                $this->_put(sprintf('/AF %s 0 R', $this->n_files));
+                $this->_put(sprintf('/AF %s 0 R', $this->filesIndex));
             }
 
             if (0 != $this->descriptionIndex) {
@@ -421,7 +405,7 @@ class OrderPdfWriter extends PdfFpdi
 
             $this->_put('/Names <<');
             $this->_put('/EmbeddedFiles ');
-            $this->_put(sprintf('%s 0 R', $this->n_files));
+            $this->_put(sprintf('%s 0 R', $this->filesIndex));
             $this->_put('>>');
         }
 
@@ -444,8 +428,8 @@ class OrderPdfWriter extends PdfFpdi
     {
         parent::_puttrailer();
 
-        $created_id = md5($this->generateMetadataString(self::DATE_CREATED_NAME));
-        $modified_id = md5($this->generateMetadataString(self::DATE_MODIFIED_NAME));
+        $created_id = md5($this->generateMetadataString("created"));
+        $modified_id = md5($this->generateMetadataString("modified"));
 
         $this->_put(sprintf('/ID [<%s><%s>]', $created_id, $modified_id));
     }
@@ -460,7 +444,7 @@ class OrderPdfWriter extends PdfFpdi
      */
     protected function generateMetadataString(?string $dateType = null)
     {
-        $dateType = $dateType ?? self::DATE_CREATED_NAME;
+        $dateType = $dateType ?? "created";
         $metaDataString = '';
 
         if (isset($this->metaDataInfos['title'])) {
@@ -471,11 +455,11 @@ class OrderPdfWriter extends PdfFpdi
             $metaDataString .= $this->metaDataInfos['subject'];
         }
 
-        if ($dateType == self::DATE_MODIFIED_NAME && isset($this->metaDataInfos['modifiedDate'])) {
+        if ($dateType == "modified" && isset($this->metaDataInfos['modifiedDate'])) {
             $metaDataString .= $this->metaDataInfos['modifiedDate'];
         }
 
-        if ($dateType == self::DATE_CREATED_NAME && isset($this->metaDataInfos['createdDate'])) {
+        if ($dateType == "created" && isset($this->metaDataInfos['createdDate'])) {
             $metaDataString .= $this->metaDataInfos['createdDate'];
         }
 

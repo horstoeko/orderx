@@ -89,32 +89,6 @@
             <p>Class representing some tools for pdf generation</p>                                </div>
     
     
-            <h2>Constants</h2>
-
-            <table class="table table-condensed">
-                    <tr>
-                <td>ICC_PROFILE_FILENAME</td>
-                <td class="last">
-                    <p><em>The filename of the ICC-Profile</em></p>
-                    <p></p>
-                </td>
-            </tr>
-                    <tr>
-                <td>DATE_CREATED_NAME</td>
-                <td class="last">
-                    <p><em>Option Name for "Created at"</em></p>
-                    <p></p>
-                </td>
-            </tr>
-                    <tr>
-                <td>DATE_MODIFIED_NAME</td>
-                <td class="last">
-                    <p><em>Option Name for "Modified at"</em></p>
-                    <p></p>
-                </td>
-            </tr>
-            </table>
-
     
             <h2>Properties</h2>
 
@@ -168,10 +142,10 @@
                 <td></td>
             </tr>
                     <tr>
-                <td class="type" id="property_n_files">
+                <td class="type" id="property_filesIndex">
                                         protected                                        integer
                 </td>
-                <td>$n_files</td>
+                <td>$filesIndex</td>
                 <td class="last">Internal index</td>
                 <td></td>
             </tr>
@@ -348,7 +322,7 @@ pane should be shown by default</td>
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_setPdfVersion">
-        <div class="location">at         line 110</div>
+        <div class="location">at         line 94</div>
         <code>                    void
     <strong>setPdfVersion</strong>(string $version = &#039;1.3&#039;, bool $binary_data = false)
         </code>
@@ -393,7 +367,7 @@ pane should be shown by default</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_attach">
-        <div class="location">at         line 141</div>
+        <div class="location">at         line 125</div>
         <code>                    void
     <strong>attach</strong>(mixed $file, string $name = &#039;&#039;, string $desc = &#039;&#039;, string $relationship = &#039;Unspecified&#039;, string $mimetype = &#039;&#039;, bool $isUTF8 = false)
         </code>
@@ -458,7 +432,7 @@ pane should be shown by default</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_openAttachmentPane">
-        <div class="location">at         line 175</div>
+        <div class="location">at         line 159</div>
         <code>                    void
     <strong>openAttachmentPane</strong>()
         </code>
@@ -488,7 +462,7 @@ pane should be shown by default</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_addMetadataDescriptionNode">
-        <div class="location">at         line 187</div>
+        <div class="location">at         line 171</div>
         <code>                    void
     <strong>addMetadataDescriptionNode</strong>(string $description)
         </code>
@@ -528,7 +502,7 @@ pane should be shown by default</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_setPdfMetadataInfos">
-        <div class="location">at         line 199</div>
+        <div class="location">at         line 183</div>
         <code>                    void
     <strong>setPdfMetadataInfos</strong>(array $metaDataInfos)
         </code>
@@ -568,7 +542,7 @@ pane should be shown by default</td>
             </div>
                     <div class="method-item">
                     <h3 id="method__putfiles">
-        <div class="location">at         line 212</div>
+        <div class="location">at         line 196</div>
         <code>            protected        void
     <strong>_putfiles</strong>()
         </code>
@@ -607,7 +581,7 @@ pane should be shown by default</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_putFileSpecification">
-        <div class="location">at         line 229</div>
+        <div class="location">at         line 213</div>
         <code>            protected        void
     <strong>putFileSpecification</strong>(array $file_info)
         </code>
@@ -647,7 +621,7 @@ pane should be shown by default</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_putFileStream">
-        <div class="location">at         line 257</div>
+        <div class="location">at         line 241</div>
         <code>            protected        void
     <strong>putFileStream</strong>(array $file_info)
         </code>
@@ -696,7 +670,7 @@ pane should be shown by default</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_putFileDictionary">
-        <div class="location">at         line 294</div>
+        <div class="location">at         line 278</div>
         <code>            protected        void
     <strong>putFileDictionary</strong>()
         </code>
@@ -726,7 +700,7 @@ pane should be shown by default</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_putMetadataDescriptions">
-        <div class="location">at         line 317</div>
+        <div class="location">at         line 301</div>
         <code>            protected        void
     <strong>putMetadataDescriptions</strong>()
         </code>
@@ -756,7 +730,7 @@ pane should be shown by default</td>
             </div>
                     <div class="method-item">
                     <h3 id="method__putresources">
-        <div class="location">at         line 346</div>
+        <div class="location">at         line 330</div>
         <code>            protected        void
     <strong>_putresources</strong>()
         </code>
@@ -795,7 +769,7 @@ pane should be shown by default</td>
             </div>
                     <div class="method-item">
                     <h3 id="method__putoutputintent">
-        <div class="location">at         line 367</div>
+        <div class="location">at         line 351</div>
         <code>            protected        void
     <strong>_putoutputintent</strong>()
         </code>
@@ -825,7 +799,7 @@ pane should be shown by default</td>
             </div>
                     <div class="method-item">
                     <h3 id="method__putcatalog">
-        <div class="location">at         line 400</div>
+        <div class="location">at         line 384</div>
         <code>            protected        void
     <strong>_putcatalog</strong>()
         </code>
@@ -855,7 +829,7 @@ pane should be shown by default</td>
             </div>
                     <div class="method-item">
                     <h3 id="method__puttrailer">
-        <div class="location">at         line 443</div>
+        <div class="location">at         line 427</div>
         <code>            protected        void
     <strong>_puttrailer</strong>()
         </code>
@@ -885,7 +859,7 @@ pane should be shown by default</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_generateMetadataString">
-        <div class="location">at         line 461</div>
+        <div class="location">at         line 445</div>
         <code>            protected        string
     <strong>generateMetadataString</strong>(string|null $dateType = null)
         </code>

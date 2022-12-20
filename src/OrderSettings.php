@@ -62,6 +62,13 @@ class OrderSettings
     protected static $thousandsSeparator = "";
 
     /**
+     * The filename of a ICC profile
+     *
+     * @var string
+     */
+    protected static $iccProfileFilename = "sRGB_v4_ICC.icc";
+
+    /**
      * Get the number of decimals to use for amount values
      *
      * @return integer
@@ -167,6 +174,27 @@ class OrderSettings
     }
 
     /**
+     * Get the filename of the ICC Profile
+     *
+     * @return string
+     */
+    public static function getIccProfileFilename(): string
+    {
+        return self::$iccProfileFilename;
+    }
+
+    /**
+     * Set the filename of the ICC Profile
+     *
+     * @param string $iccProfileFilename
+     * @return void
+     */
+    public static function setIccProfileFilename(string $iccProfileFilename): void
+    {
+        self::$iccProfileFilename = $iccProfileFilename;
+    }
+
+    /**
      * Get root directory
      *
      * @return string
@@ -214,5 +242,15 @@ class OrderSettings
     public static function getValidationDirectory(): string
     {
         return PathUtils::combineAllPaths(self::getSourceDirectory(), "validation");
+    }
+
+    /**
+     * Get the full filename of the ICC profile to use
+     *
+     * @return string
+     */
+    public static function getFullIccProfileFilename(): string
+    {
+        return PathUtils::combinePathWithFile(self::getAssetDirectory(), self::$iccProfileFilename);
     }
 }
