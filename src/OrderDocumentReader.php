@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is a part of horstoeko/orderx.
  *
@@ -11,6 +9,8 @@ declare(strict_types=1);
 
 namespace horstoeko\orderx;
 
+use Closure;
+use DateTime;
 use SimpleXMLElement;
 use horstoeko\orderx\exception\OrderFileNotFoundException;
 use horstoeko\orderx\exception\OrderCannotFindProfileString;
@@ -110,5 +110,144 @@ class OrderDocumentReader extends OrderDocument
     {
         $this->invoiceObject = $this->serializer->deserialize($xmlcontent, 'horstoeko\orderx\entities\\' . $this->getProfileDefinition()["name"] . '\rsm\SCRDMCCBDACIOMessageStructure', 'xml');
         return $this;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param string|null $documentNo
+     * @param string|null $documentTypeCode
+     * @param DateTime|null $documentDate
+     * @param string|null $documentCurrency
+     * @param string|null $documentName
+     * @param string|null $documentLanguageId
+     * @param DateTime|null $documentEffectiveSpecifiedPeriod
+     * @param string|null $documentPurposeCode
+     * @param string|null $documentRequestedResponseTypeCode
+     * @return OrderDocumentBuilder
+     */
+    public function getDocumentInformation(?string &$documentNo, ?string &$documentTypeCode, ?DateTime &$documentDate, ?string &$documentCurrency, ?string &$documentName, ?string &$documentLanguageId, ?DateTime &$documentEffectiveSpecifiedPeriod, ?string &$documentPurposeCode, ?string &$documentRequestedResponseTypeCode): OrderDocumentReader
+    {
+        $documentNo = $this->getInvoiceValueByPath("getExchangedDocument.getID", "");
+        $documentTypeCode = $this->getInvoiceValueByPath("getExchangedDocument.getTypeCode", "");
+        $documentDate = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPath("getExchangedDocument.getIssueDateTime.getDateTimeString", ""),
+            $this->getInvoiceValueByPath("getExchangedDocument.getIssueDateTime.getDateTimeString.getFormat", "")
+        );
+        $documentCurrency = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getOrderCurrencyCode", "");
+        $documentName = $this->getInvoiceValueByPath("getExchangedDocument.getName", "");
+        $documentLanguageIds = $this->getInvoiceValueByPath("getExchangedDocument.getLanguageID", []);
+        $documentLanguageId = (isset($documentLanguageIds[0]) ? $this->objectHelper->tryCallByPathAndReturn($documentLanguageIds[0], "value") : "");
+        $documentEffectiveSpecifiedPeriod = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPath("getExchangedDocument.getEffectiveSpecifiedPeriod.getDateTimeString", ""),
+            $this->getInvoiceValueByPath("getExchangedDocument.getEffectiveSpecifiedPeriod.getDateTimeString.getFormat", "")
+        );
+        $documentPurposeCode = $this->getInvoiceValueByPath("getExchangedDocument.getPurposeCode", "");
+        $documentRequestedResponseTypeCode = $this->getInvoiceValueByPath("getExchangedDocument.getRequestedResponseTypeCode", "");
+
+        return $this;
+    }
+
+    /**
+     * Function to return a value from $invoiceObject by path
+     *
+     * @codeCoverageIgnore
+     *
+     * @param string $methods
+     * @param mixed $defaultValue
+     * @return mixed
+     */
+    private function getInvoiceValueByPath(string $methods, $defaultValue)
+    {
+        return $this->getInvoiceValueByPathFrom($this->invoiceObject, $methods, $defaultValue);
+    }
+
+    /**
+     * Function to return a value from $from by path
+     *
+     * @codeCoverageIgnore
+     *
+     * @param object|null $from
+     * @param string $methods
+     * @param mixed $defaultValue
+     * @return mixed
+     */
+    private function getInvoiceValueByPathFrom(?object $from, string $methods, $defaultValue)
+    {
+        return $this->objectHelper->tryCallByPathAndReturn($from, $methods) ?? $defaultValue;
+    }
+
+    /**
+     * Convert to array
+     *
+     * @codeCoverageIgnore
+     *
+     * @param mixed $value
+     * @param array $methods
+     * @return array
+     */
+    private function convertToArray($value, array $methods)
+    {
+        $result = [];
+        $isFlat = count($methods) == 1;
+        $value = $this->objectHelper->ensureArray($value);
+
+        foreach ($value as $valueItem) {
+            $resultItem = [];
+
+            foreach ($methods as $methodKey => $method) {
+                if (is_array($method)) {
+                    $defaultValue = $method[1];
+                    $method = $method[0];
+                } else {
+                    $defaultValue = null;
+                }
+
+                if ($method instanceof Closure) {
+                    $itemValue = $method($valueItem);
+                } else {
+                    $itemValue = $this->objectHelper->tryCallByPathAndReturn($valueItem, $method) ?? $defaultValue;
+                }
+
+                if ($isFlat === true) {
+                    $result[] = $itemValue;
+                } else {
+                    $resultItem[$methodKey] = $itemValue;
+                }
+            }
+
+            if ($isFlat !== true) {
+                $result[] = $resultItem;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Convert to associative array
+     *
+     * @codeCoverageIgnore
+     *
+     * @param mixed $value
+     * @param string $methodKey
+     * @param string $methodValue
+     * @return array
+     */
+    private function convertToAssociativeArray($value, string $methodKey, string $methodValue)
+    {
+        $result = [];
+        $value = $this->objectHelper->ensureArray($value);
+
+        foreach ($value as $valueItem) {
+            $theValueForKey = $this->objectHelper->tryCallByPathAndReturn($valueItem, $methodKey);
+            $theValueForValue = $this->objectHelper->tryCallByPathAndReturn($valueItem, $methodValue);
+
+            if (!OrderObjectHelper::isNullOrEmpty($theValueForKey) && !OrderObjectHelper::isNullOrEmpty($theValueForValue)) {
+                $result[$theValueForKey] = $theValueForValue;
+            }
+        }
+
+        return $result;
     }
 }
