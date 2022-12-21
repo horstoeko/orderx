@@ -30,7 +30,7 @@ class OrderDocumentBuilderComfortTest extends TestCase
     {
         (self::$document)->initNewDocument();
 
-        $property = $this->getPrivatePropertyFromObject(self::$document, 'invoiceObject');
+        $property = $this->getPrivatePropertyFromObject(self::$document, 'orderObject');
         $this->assertNotNull($property->getValue(self::$document));
         $property = $this->getPrivatePropertyFromObject(self::$document, 'headerTradeAgreement');
         $this->assertNotNull($property->getValue(self::$document));
