@@ -15,6 +15,7 @@ use SimpleXMLElement;
 use horstoeko\orderx\exception\OrderFileNotFoundException;
 use horstoeko\orderx\exception\OrderCannotFindProfileString;
 use horstoeko\orderx\exception\OrderUnknownProfileException;
+use OutOfRangeException;
 
 /**
  * Class representing the document reader for incoming XML-Documents with
@@ -32,6 +33,16 @@ class OrderDocumentReader extends OrderDocument
      * @var string
      */
     private $binarydatadirectory = "";
+
+    /**
+     * @var integer
+     */
+    private $documentNotePointer = 0;
+
+    /**
+     * @var integer
+     */
+    private $documentSellerContactPointer = 0;
 
     /**
      * Set the directory where the attached binary data from
@@ -56,8 +67,6 @@ class OrderDocumentReader extends OrderDocument
     /**
      * Guess the profile type of a xml file
      *
-     * @codeCoverageIgnore
-     *
      * @param string $xmlfilename The filename to read invoice data from
      * @return OrderDocumentReader
      * @throws Exception
@@ -73,8 +82,6 @@ class OrderDocumentReader extends OrderDocument
 
     /**
      * Guess the profile type of the readden xml document
-     *
-     * @codeCoverageIgnore
      *
      * @param string $xmlcontent The XML content as a string to read the invoice data from
      * @return OrderDocumentReader
@@ -101,14 +108,12 @@ class OrderDocumentReader extends OrderDocument
     /**
      * Read content of a zuferd/xrechnung xml from a string
      *
-     * @codeCoverageIgnore
-     *
      * @param string $xmlcontent The XML content as a string to read the invoice data from
      * @return OrderDocumentReader
      */
     private function readContent(string $xmlcontent): OrderDocumentReader
     {
-        $this->invoiceObject = $this->serializer->deserialize($xmlcontent, 'horstoeko\orderx\entities\\' . $this->getProfileDefinition()["name"] . '\rsm\SCRDMCCBDACIOMessageStructure', 'xml');
+        $this->orderObject = $this->serializer->deserialize($xmlcontent, 'horstoeko\orderx\entities\\' . $this->getProfileDefinition()["name"] . '\rsm\SCRDMCCBDACIOMessageStructure', 'xml');
         return $this;
     }
 
@@ -124,7 +129,7 @@ class OrderDocumentReader extends OrderDocument
      * @param DateTime|null $documentEffectiveSpecifiedPeriod
      * @param string|null $documentPurposeCode
      * @param string|null $documentRequestedResponseTypeCode
-     * @return OrderDocumentBuilder
+     * @return OrderDocumentReader
      */
     public function getDocumentInformation(?string &$documentNo, ?string &$documentTypeCode, ?DateTime &$documentDate, ?string &$documentCurrency, ?string &$documentName, ?string &$documentLanguageId, ?DateTime &$documentEffectiveSpecifiedPeriod, ?string &$documentPurposeCode, ?string &$documentRequestedResponseTypeCode): OrderDocumentReader
     {
@@ -149,7 +154,371 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Function to return a value from $invoiceObject by path
+     * Read copy indicator
+     *
+     * @param boolean|null $copyindicator
+     * Returns true if this document is a copy from the original document
+     * @return OrderDocumentReader
+     */
+    public function getIsDocumentCopy(?bool &$copyindicator): OrderDocumentReader
+    {
+        $copyindicator = $this->getInvoiceValueByPath("getExchangedDocument.getCopyIndicator.getIndicator", false);
+        return $this;
+    }
+
+    /**
+     * Read a test document indicator
+     *
+     * @param boolean|null $testdocumentindicator
+     * Returns true if this document is only for test purposes
+     * @return OrderDocumentReader
+     */
+    public function getIsTestDocument(?bool &$testdocumentindicator): OrderDocumentReader
+    {
+        $testdocumentindicator = $this->getInvoiceValueByPath("getExchangedDocumentContext.getTestIndicator.getIndicator", false);
+        return $this;
+    }
+
+    /**
+     * Set the intérnal note pointer to the first position
+     * It will return false if there is no note on the first position
+     *
+     * @return boolean
+     */
+    public function firstDocumentNote(): bool
+    {
+        $this->documentNotePointer = 0;
+        $notes = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getExchangedDocument.getIncludedNote", []));
+        return isset($notes[$this->documentNotePointer]);
+    }
+
+    /**
+     * Set the intérnal note pointer to the next position.
+     * It will return false if there is no next note
+     *
+     * @return boolean
+     */
+    public function nextDocumentNote(): bool
+    {
+        $this->documentNotePointer++;
+        $notes = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getExchangedDocument.getIncludedNote", []));
+        return isset($notes[$this->documentNotePointer]);
+    }
+
+    /**
+     * Retrieve the document note. You have to check first if there is a note using
+     * the firstDocumentNote/nextDocumentNote methods
+     *
+     * @param array|null $content
+     * Note content
+     * @param string|null $subjectCode
+     * Subject code. To be chosen from the entries in UNTDID 4451
+     * @param string|null $contentCode
+     * Content code. To be chosen from the entries in UNTDID xxx
+     * @return OrderDocumentReader
+     * @throws OutOfRangeException
+     */
+    public function getDocumentNote(?array &$content, ?string &$subjectCode, ?string &$contentCode): OrderDocumentReader
+    {
+        $notes = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getExchangedDocument.getIncludedNote", []));
+        $note = $this->objectHelper->getArrayIndex($notes, $this->documentNotePointer);
+        $content = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($note, "getContent", ""));
+        $subjectCode = $this->getInvoiceValueByPathFrom($note, "getSubjectCode", "");
+        $contentCode = $this->getInvoiceValueByPathFrom($note, "getContentCode", "");
+        return $this;
+    }
+
+    /**
+     * Get the document's money summation
+     *
+     * @param float $lineTotalAmount Sum of the net amounts of all prder items
+     * Sum of all order line net amounts in the order.
+     * @param float|null $grandTotalAmount Total order amount including sales tax
+     * The total amount of the order with VAT.
+     * @param float|null $chargeTotalAmount Sum of the surcharges at document level
+     * Sum of all charges on document level in the order.
+     * @param float|null $allowanceTotalAmount Sum of the discounts at document level
+     * Sum of all allowances on document level in the order.
+     * @param float|null $taxBasisTotalAmount Total order amount excluding sales tax
+     * The total amount of the order without VAT.
+     * @param float|null $taxTotalAmount Total amount of the order tax, Total tax amount in the booking currency
+     * The total VAT amount for the order.
+     * @return OrderDocumentReader
+     */
+    public function getDocumentSummation(?float &$lineTotalAmount, ?float &$grandTotalAmount, ?float &$chargeTotalAmount, ?float &$allowanceTotalAmount, ?float &$taxBasisTotalAmount, ?float &$taxTotalAmount): OrderDocumentReader
+    {
+        $orderCurrencyCode = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getOrderCurrencyCode", "");
+
+        $grandTotalAmountElement = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getSpecifiedTradeSettlementHeaderMonetarySummation.getGrandTotalAmount", 0);
+        if (is_array($grandTotalAmountElement)) {
+            foreach ($grandTotalAmountElement as $grandTotalAmountElementItem) {
+                $grandTotalAmountCurrencyCode = $this->objectHelper->tryCallAndReturn($grandTotalAmountElementItem, "getCurrencyID") ?? "";
+                if ($grandTotalAmountCurrencyCode == $orderCurrencyCode || $grandTotalAmountCurrencyCode == "") {
+                    $grandTotalAmount = $this->objectHelper->tryCallAndReturn($grandTotalAmountElementItem, "value") ?? 0;
+                    break;
+                }
+            }
+        } else {
+            $grandTotalAmount = $this->objectHelper->tryCallAndReturn($grandTotalAmountElement, "value") ?? 0;
+        }
+
+        $taxBasisTotalAmountElement = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getSpecifiedTradeSettlementHeaderMonetarySummation.getTaxBasisTotalAmount", 0);
+        if (is_array($taxBasisTotalAmountElement)) {
+            foreach ($taxBasisTotalAmountElement as $taxBasisTotalAmountElementItem) {
+                $taxBasisTotalAmountCurrencyCode = $this->objectHelper->tryCallAndReturn($taxBasisTotalAmountElementItem, "getCurrencyID") ?? "";
+                if ($taxBasisTotalAmountCurrencyCode == $orderCurrencyCode || $taxBasisTotalAmountCurrencyCode == "") {
+                    $taxBasisTotalAmount = $this->objectHelper->tryCallAndReturn($taxBasisTotalAmountElementItem, "value") ?? 0;
+                    break;
+                }
+            }
+        } else {
+            $taxBasisTotalAmount = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getSpecifiedTradeSettlementHeaderMonetarySummation.getTaxBasisTotalAmount.value", 0);
+        }
+
+        $taxTotalAmountElement = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getSpecifiedTradeSettlementHeaderMonetarySummation.getTaxTotalAmount", 0);
+        if (is_array($taxTotalAmountElement)) {
+            foreach ($taxTotalAmountElement as $taxTotalAmountElementItem) {
+                $taxTotalAmountCurrencyCode = $this->objectHelper->tryCallAndReturn($taxTotalAmountElementItem, "getCurrencyID") ?? "";
+                if ($taxTotalAmountCurrencyCode == $orderCurrencyCode || $taxTotalAmountCurrencyCode == "") {
+                    $taxTotalAmount = $this->objectHelper->tryCallAndReturn($taxTotalAmountElementItem, "value") ?? 0;
+                    break;
+                }
+            }
+        } else {
+            $taxTotalAmount = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getSpecifiedTradeSettlementHeaderMonetarySummation.getTaxBasisTotalAmount.value", 0);
+        }
+
+        $lineTotalAmount = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getSpecifiedTradeSettlementHeaderMonetarySummation.getLineTotalAmount.value", 0);
+        $chargeTotalAmount = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getSpecifiedTradeSettlementHeaderMonetarySummation.getChargeTotalAmount.value", 0);
+        $allowanceTotalAmount = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getSpecifiedTradeSettlementHeaderMonetarySummation.getAllowanceTotalAmount.value", 0);
+
+        return $this;
+    }
+
+    /**
+     * Get the identifier assigned by the buyer and used for internal routing.
+     *
+     * __Note__: The reference is specified by the buyer (e.g. contact details, department, office ID, project code),
+     * but stated by the seller on the invoice.
+     *
+     * @param string|null $buyerreference
+     * An identifier assigned by the buyer and used for internal routing
+     * @return OrderDocumentReader
+     */
+    public function getDocumentBuyerReference(?string &$buyerreference): OrderDocumentReader
+    {
+        $buyerreference = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getBuyerReference", "");
+        return $this;
+    }
+
+    /**
+     * Get detailed information about the seller (=service provider)
+     *
+     * @param string|null $name
+     * The full formal name under which the seller is registered in the
+     * National Register of Legal Entities, Taxable Person or otherwise acting as person(s)
+     * @param array|null $id
+     * An identifier of the seller. In many systems, seller identification
+     * is key information. Multiple seller IDs can be assigned or specified. They can be differentiated
+     * by using different identification schemes. If no scheme is given, it should be known to the buyer
+     * and seller, e.g. a previously exchanged, buyer-assigned identifier of the seller
+     * @param string|null $description
+     * Further legal information that is relevant for the seller
+     * @return OrderDocumentReader
+     */
+    public function getDocumentSeller(?string &$name, ?array &$id, ?string &$description): OrderDocumentReader
+    {
+        $name = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getName", "");
+        $id = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getID", []);
+        $description = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getDescription", "");
+
+        $id = $this->convertToArray($id, ["id" => "value"]);
+
+        return $this;
+    }
+
+    /**
+     * Get global identifier of the seller.
+     *
+     * __Notes__
+     *
+     * - The Seller's ID identification scheme is a unique identifier
+     *   assigned to a seller by a global registration organization
+     *
+     * @param array|null $globalID
+     * Array of the sellers global ids indexed by the identification scheme. The identification scheme results
+     * from the list published by the ISO/IEC 6523 Maintenance Agency. In particular, the following scheme
+     * codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177 : ODETTE
+     * @return OrderDocumentReader
+     */
+    public function getDocumentSellerGlobalId(?array &$globalID): OrderDocumentReader
+    {
+        $globalID = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getGlobalID", []);
+        $globalID = $this->convertToAssociativeArray($globalID, "getSchemeID", "value");
+
+        return $this;
+    }
+
+    /**
+     * Get detailed information on the seller's tax information.
+     *
+     * __Notes__
+     *  - The local identification (defined by the seller's address) of the seller for tax purposes or a reference that
+     *    enables the seller to indicate his reporting status for tax purposes. This information may have an impact on how the buyer
+     *    pays the bill (such as regarding social security contributions). So e.g. in some countries, if the seller is not reported
+     *    for tax, the buyer will withhold the tax amount and pay it on behalf of the seller
+     *
+     * @param array|null $taxreg
+     * Array of sales tax identification numbers of the seller indexed by __FC__ for _Tax number of the seller_ and __VA__
+     * for _Sales tax identification number of the seller_
+     * @return OrderDocumentReader
+     */
+    public function getDocumentSellerTaxRegistration(?array &$taxreg): OrderDocumentReader
+    {
+        $taxreg = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getSpecifiedTaxRegistration", []);
+        $taxreg = $this->convertToAssociativeArray($taxreg, "getID.getSchemeID", "getID.value");
+
+        return $this;
+    }
+
+    /**
+     * Get the address of seller trade party
+     *
+     * @param string|null $lineone
+     * The main line in the sellers address. This is usually the street name and house number or
+     * the post office box
+     * @param string|null $linetwo
+     * Line 2 of the seller's address. This is an additional address line in an address that can be
+     * used to provide additional details in addition to the main line
+     * @param string|null $linethree
+     * Line 3 of the seller's address. This is an additional address line in an address that can be
+     * used to provide additional details in addition to the main line
+     * @param string|null $postcode
+     * Identifier for a group of properties, such as a zip code
+     * @param string|null $city
+     * Usual name of the city or municipality in which the seller's address is located
+     * @param string|null $country
+     * Code used to identify the country. If no tax agent is specified, this is the country in which the sales tax
+     * is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
+     * representation of names of countries and their subdivisions”
+     * @param array|null $subdivision
+     * The sellers state
+     * @return OrderDocumentReader
+     */
+    public function getDocumentSellerAddress(?string &$lineone, ?string &$linetwo, ?string &$linethree, ?string &$postcode, ?string &$city, ?string &$country, ?string &$subdivision): OrderDocumentReader
+    {
+        $lineone = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getPostalTradeAddress.getLineOne", "");
+        $linetwo = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getPostalTradeAddress.getLineTwo", "");
+        $linethree = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getPostalTradeAddress.getLineThree", "");
+        $postcode = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getPostalTradeAddress.getPostcodeCode.value", "");
+        $city = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getPostalTradeAddress.getCityName", "");
+        $country = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getPostalTradeAddress.getCountryID", "");
+        $subdivision = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getPostalTradeAddress.getCountrySubDivisionName", "");
+
+        return $this;
+    }
+
+    /**
+     * Get the legal organisation of seller trade party
+     *
+     * @param string|null $legalorgid
+     * An identifier issued by an official registrar that identifies the
+     * seller as a legal entity or legal person. If no identification scheme ($legalorgtype) is provided,
+     * it should be known to the buyer and seller
+     * @param string|null $legalorgtype
+     * The identifier for the identification scheme of the legal
+     * registration of the seller. If the identification scheme is used, it must be selected from
+     * ISO/IEC 6523 list
+     * @param string|null $legalorgname
+     * A name by which the seller is known, if different from the seller's name
+     * (also known as the company name)
+     * @return OrderDocumentReader
+     */
+    public function getDocumentSellerLegalOrganisation(?string &$legalorgid, ?string &$legalorgtype, ?string &$legalorgname): OrderDocumentReader
+    {
+        $legalorgid = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getSpecifiedLegalOrganization.getID.value", "");
+        $legalorgtype = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getSpecifiedLegalOrganization.getID.getSchemeID", "");
+        $legalorgname = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getSpecifiedLegalOrganization.getTradingBusinessName", "");
+
+        return $this;
+    }
+
+    /**
+     * Seek to the first seller contact of the document.
+     * Returns true if a first seller contact is available, otherwise false
+     * You may use this together with ZugferdDocumentReader::getDocumentSellerContact
+     *
+     * @return boolean
+     */
+    public function firstDocumentSellerContact(): bool
+    {
+        $this->documentSellerContactPointer = 0;
+        $contacts = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getDefinedTradeContact", []));
+        return isset($contacts[$this->documentSellerContactPointer]);
+    }
+
+    /**
+     * Seek to the next available first seller contact of the document.
+     * Returns true if another seller contact is available, otherwise false
+     * You may use this together with ZugferdDocumentReader::getDocumentSellerContact
+     *
+     * @return boolean
+     */
+    public function nextDocumentSellerContact(): bool
+    {
+        $this->documentSellerContactPointer++;
+        $contacts = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getDefinedTradeContact", []));
+        return isset($contacts[$this->documentSellerContactPointer]);
+    }
+
+    /**
+     * Get detailed information on the seller's contact person
+     *
+     * @param string|null $contactpersonname
+     * Contact point for a legal entity,
+     * such as a personal name of the contact person
+     * @param string|null $contactdepartmentname
+     * Contact point for a legal entity, such as a name of the department or office
+     * @param string|null $contactphoneno
+     * Detailed information on the seller's phone number
+     * @param string|null $contactfaxno
+     * Detailed information on the seller's fax number
+     * @param string|null $contactemailadd
+     * Detailed information on the seller's email address
+     * @param string|null $contacttypecode
+     * @return OrderDocumentReader
+     */
+    public function getDocumentSellerContact(?string &$contactpersonname, ?string &$contactdepartmentname, ?string &$contactphoneno, ?string &$contactfaxno, ?string &$contactemailadd, ?string &$contacttypecode): OrderDocumentReader
+    {
+        $contacts = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getDefinedTradeContact", []));
+        $contact = $this->objectHelper->getArrayIndex($contacts, $this->documentSellerContactPointer);
+        $contactpersonname = $this->getInvoiceValueByPathFrom($contact, "getPersonName", "");
+        $contactdepartmentname = $this->getInvoiceValueByPathFrom($contact, "getDepartmentName", "");
+        $contactphoneno = $this->getInvoiceValueByPathFrom($contact, "getTelephoneUniversalCommunication.getCompleteNumber", "");
+        $contactfaxno = $this->getInvoiceValueByPathFrom($contact, "getFaxUniversalCommunication.getCompleteNumber", "");
+        $contactemailadd = $this->getInvoiceValueByPathFrom($contact, "getEmailURIUniversalCommunication.getURIID", "");
+        $contacttypecode = $this->getInvoiceValueByPathFrom($contact, "getTypeCode", "");
+
+        return $this;
+    }
+
+    /**
+     * Set the universal communication info for the seller
+     *
+     * @param string|null $uriType
+     * @param string|null $uriId
+     * @return OrderDocumentReader
+     */
+    public function getDocumentSellerElectronicAddress(?string &$uriType = null, ?string &$uriId = null): OrderDocumentReader
+    {
+        $uriType = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getURIUniversalCommunication.getURIID.getschemeID", "");
+        $uriId = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getURIUniversalCommunication.getURIID", "");
+
+        return $this;
+    }
+
+    /**
+     * Function to return a value from $orderobject by path
      *
      * @codeCoverageIgnore
      *
@@ -159,7 +528,7 @@ class OrderDocumentReader extends OrderDocument
      */
     private function getInvoiceValueByPath(string $methods, $defaultValue)
     {
-        return $this->getInvoiceValueByPathFrom($this->invoiceObject, $methods, $defaultValue);
+        return $this->getInvoiceValueByPathFrom($this->orderObject, $methods, $defaultValue);
     }
 
     /**
