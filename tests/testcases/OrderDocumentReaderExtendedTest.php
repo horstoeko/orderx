@@ -7,7 +7,7 @@ use horstoeko\orderx\OrderDocumentReader;
 use horstoeko\orderx\OrderProfiles;
 use horstoeko\orderx\tests\TestCase;
 
-class OrderDocumentBaseTest extends TestCase
+class OrderDocumentReaderExtendedTest extends TestCase
 {
     /**
      * @var \horstoeko\orderx\OrderDocumentReader
