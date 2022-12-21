@@ -8,6 +8,7 @@
             <file>../tests/testcases/OrderDocumentBuilderExtendedTest.php</file>
             <file>../tests/testcases/OrderDocumentPdfBuilderTest.php</file>
             <file>../tests/testcases/OrderDocumentValidatorTest.php</file>
+            <file>../tests/testcases/OrderDocumentReaderExtendedTest.php</file>
         </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
