@@ -62,7 +62,7 @@ class OrderDocument
      * The internal invoice object
      * @var \horstoeko\orderx\entities\basic\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure
      */
-    protected $invoiceObject = null;
+    protected $orderObject = null;
 
     /**
      * @internal
@@ -89,14 +89,14 @@ class OrderDocument
     /**
      * @internal
      *
-     * Returns the internal invoice object (created by the
+     * Returns the internal order object (created by the
      * serializer). This is used e.g. in the validator
      *
      * @return object
      */
-    public function getInvoiceObject()
+    public function getOrderObject()
     {
-        return $this->invoiceObject;
+        return $this->orderObject;
     }
 
     /**

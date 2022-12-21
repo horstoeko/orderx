@@ -64,6 +64,6 @@ class OrderDocumentBaseTest extends TestCase
         $this->assertNull($property->getValue($doc));
         $property = $this->getPrivatePropertyFromClassname('horstoeko\orderx\OrderDocument', 'objectHelper');
         $this->assertNotNull($property->getValue($doc));
-        $this->assertNull($doc->getInvoiceObject());
+        $this->assertNull($doc->getOrderObject());
     }
 }

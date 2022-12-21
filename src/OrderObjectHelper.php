@@ -15,6 +15,7 @@ use horstoeko\orderx\exception\OrderUnknownDateFormat;
 use horstoeko\stringmanagement\FileUtils;
 use horstoeko\stringmanagement\StringUtils;
 use MimeTyper\Repository\MimeDbRepository;
+use OutOfRangeException;
 
 /**
  * Class representing a collection of common helpers and class factories
@@ -1496,7 +1497,7 @@ class OrderObjectHelper
     }
 
     /**
-     * Creates an instance of a class needed by $invoiceObject
+     * Creates an instance of a class needed by $orderobject
      *
      * @param string $classname
      * @param mixed $constructorvalue
@@ -1816,5 +1817,34 @@ class OrderObjectHelper
             return false;
         }
         return method_exists($instance, $method);
+    }
+
+    /**
+     * If $index is not found in $array an exception is raised.
+     *
+     * @param array $arr
+     * @param integer $index
+     * @return void
+     * @throws OutOfRangeException
+     */
+    public function checkArrayIndex(array $arr, int $index): void
+    {
+        if (!isset($arr[$index])) {
+            throw new OutOfRangeException();
+        }
+    }
+
+    /**
+     * Get the array from $arr element at position $index. If $index is not found in $array an exception is raised.
+     *
+     * @param array $arr
+     * @param integer $index
+     * @return mixed
+     * @throws OutOfRangeException
+     */
+    public function getArrayIndex(array $arr, int $index)
+    {
+        $this->checkArrayIndex($arr, $index);
+        return $arr[$index];
     }
 }

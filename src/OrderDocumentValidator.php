@@ -56,7 +56,7 @@ class OrderDocumentValidator
      */
     public function validateDocument(): ConstraintViolationListInterface
     {
-        return $this->validator->validate($this->document->getInvoiceObject(), null, ['xsd_rules']);
+        return $this->validator->validate($this->document->getOrderObject(), null, ['xsd_rules']);
     }
 
     /**

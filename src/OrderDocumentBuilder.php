@@ -99,11 +99,11 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function initNewDocument(): OrderDocumentBuilder
     {
-        $this->invoiceObject = $this->objectHelper->getOrderX();
-        $this->headerTradeAgreement = $this->invoiceObject->getSupplyChainTradeTransaction()->getApplicableHeaderTradeAgreement();
-        $this->headerTradeDelivery = $this->invoiceObject->getSupplyChainTradeTransaction()->getApplicableHeaderTradeDelivery();
-        $this->headerTradeSettlement = $this->invoiceObject->getSupplyChainTradeTransaction()->getApplicableHeaderTradeSettlement();
-        $this->headerSupplyChainTradeTransaction = $this->invoiceObject->getSupplyChainTradeTransaction();
+        $this->orderObject = $this->objectHelper->getOrderX();
+        $this->headerTradeAgreement = $this->orderObject->getSupplyChainTradeTransaction()->getApplicableHeaderTradeAgreement();
+        $this->headerTradeDelivery = $this->orderObject->getSupplyChainTradeTransaction()->getApplicableHeaderTradeDelivery();
+        $this->headerTradeSettlement = $this->orderObject->getSupplyChainTradeTransaction()->getApplicableHeaderTradeSettlement();
+        $this->headerSupplyChainTradeTransaction = $this->orderObject->getSupplyChainTradeTransaction();
 
         return $this;
     }
@@ -128,7 +128,7 @@ class OrderDocumentBuilder extends OrderDocument
     {
         $this->onBeforeGetContent();
 
-        return $this->serializer->serialize($this->invoiceObject, 'xml');
+        return $this->serializer->serialize($this->orderObject, 'xml');
     }
 
     /**
@@ -217,7 +217,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentNo(string $documentNo): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setID", $this->objectHelper->getIdType($documentNo));
+        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setID", $this->objectHelper->getIdType($documentNo));
         return $this;
     }
 
@@ -229,7 +229,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentName(string $documentName): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setName", $this->objectHelper->getTextType($documentName));
+        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setName", $this->objectHelper->getTextType($documentName));
         return $this;
     }
 
@@ -241,7 +241,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentTypeCode(string $documentTypeCode): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setTypeCode", $this->objectHelper->getCodeType($documentTypeCode));
+        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setTypeCode", $this->objectHelper->getCodeType($documentTypeCode));
         return $this;
     }
 
@@ -253,7 +253,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentDate(DateTime $documentDate): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setIssueDateTime", $this->objectHelper->getDateTimeType($documentDate));
+        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setIssueDateTime", $this->objectHelper->getDateTimeType($documentDate));
         return $this;
     }
 
@@ -278,7 +278,7 @@ class OrderDocumentBuilder extends OrderDocument
     public function setDocumentLanguageId(string $documentLanguageId): OrderDocumentBuilder
     {
         $this->objectHelper->tryCallIfMethodExists(
-            $this->invoiceObject->getExchangedDocument(),
+            $this->orderObject->getExchangedDocument(),
             "addToLanguageID",
             "setLanguageID",
             [$this->objectHelper->getIdType($documentLanguageId)],
@@ -299,7 +299,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentEffectiveSpecifiedPeriod(DateTime $effectiveSpecifiedPeriodFrom, DateTime $effectiveSpecifiedPeriodTo): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setEffectiveSpecifiedPeriod", $this->objectHelper->getSpecifiedPeriodType($effectiveSpecifiedPeriodFrom, $effectiveSpecifiedPeriodTo));
+        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setEffectiveSpecifiedPeriod", $this->objectHelper->getSpecifiedPeriodType($effectiveSpecifiedPeriodFrom, $effectiveSpecifiedPeriodTo));
         return $this;
     }
 
@@ -315,7 +315,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPurposeCode(string $documentPurposeCode): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setPurposeCode", $this->objectHelper->getCodeType($documentPurposeCode));
+        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setPurposeCode", $this->objectHelper->getCodeType($documentPurposeCode));
         return $this;
     }
 
@@ -329,7 +329,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentRequestedResponseTypeCode(string $documentRequestedResponseTypeCode): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setRequestedResponseTypeCode", $this->objectHelper->getCodeType($documentRequestedResponseTypeCode));
+        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setRequestedResponseTypeCode", $this->objectHelper->getCodeType($documentRequestedResponseTypeCode));
         return $this;
     }
 
@@ -344,7 +344,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentBusinessProcessSpecifiedDocumentContextParameter(string $businessProcessSpecifiedDocumentContextParameter): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocumentContext(), "setBusinessProcessSpecifiedDocumentContextParameter", $this->objectHelper->getDocumentContextParameterType($businessProcessSpecifiedDocumentContextParameter));
+        $this->objectHelper->tryCall($this->orderObject->getExchangedDocumentContext(), "setBusinessProcessSpecifiedDocumentContextParameter", $this->objectHelper->getDocumentContextParameterType($businessProcessSpecifiedDocumentContextParameter));
         return $this;
     }
 
@@ -357,7 +357,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setIsDocumentCopy(?bool $isDocumentCopy = null): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "setCopyIndicator", $this->objectHelper->getIndicatorType($isDocumentCopy ?? true));
+        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setCopyIndicator", $this->objectHelper->getIndicatorType($isDocumentCopy ?? true));
         return $this;
     }
 
@@ -370,7 +370,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setIsTestDocument(?bool $isTestDocument = null): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocumentContext(), "setTestIndicator", $this->objectHelper->getIndicatorType($isTestDocument ?? true));
+        $this->objectHelper->tryCall($this->orderObject->getExchangedDocumentContext(), "setTestIndicator", $this->objectHelper->getIndicatorType($isTestDocument ?? true));
         return $this;
     }
 
@@ -388,7 +388,7 @@ class OrderDocumentBuilder extends OrderDocument
     public function addDocumentNote(string $content, ?string $subjectCode = null, ?string $contentCode = null): OrderDocumentBuilder
     {
         $note = $this->objectHelper->getNoteType($content, $contentCode, $subjectCode);
-        $this->objectHelper->tryCall($this->invoiceObject->getExchangedDocument(), "addToIncludedNote", $note);
+        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "addToIncludedNote", $note);
         return $this;
     }
 
