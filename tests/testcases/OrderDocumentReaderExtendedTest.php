@@ -136,6 +136,18 @@ class OrderDocumentReaderExtendedTest extends TestCase
      * @covers \horstoeko\orderx\OrderDocumentReader
      * @covers \horstoeko\orderx\OrderObjectHelper
      */
+    public function testGetDocumentNoteNoNext(): void
+    {
+        $this->expectException(\OutOfRangeException::class);
+
+        self::$document->nextDocumentNote();
+        self::$document->getDocumentNote($content, $subjectCode, $contentCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
     public function testGetDocumentSummation(): void
     {
         self::$document->getDocumentSummation(
@@ -279,6 +291,25 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $contactfaxno);
         $this->assertEquals("contact@seller.com", $contactemailadd);
         $this->assertEquals("SR", $contacttypecode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentSellerContactNoNext(): void
+    {
+        $this->expectException(\OutOfRangeException::class);
+
+        self::$document->nextDocumentSellerContact();
+        self::$document->getDocumentSellerContact(
+            $contactpersonname,
+            $contactdepartmentname,
+            $contactphoneno,
+            $contactfaxno,
+            $contactemailadd,
+            $contacttypecode
+        );
     }
 
     /**
