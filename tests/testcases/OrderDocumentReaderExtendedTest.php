@@ -1339,4 +1339,163 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("30", $paymentMeansCode);
         $this->assertEquals("Credit Transfer", $paymentMeansInformation);
     }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentAllowanceCharge(): void
+    {
+        $this->assertTrue(self::$document->firstDocumentAllowanceCharge());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentAllowanceCharge(): void
+    {
+        $this->assertTrue(self::$document->nextDocumentAllowanceCharge());
+        $this->assertFalse(self::$document->nextDocumentAllowanceCharge());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentAllowanceCharge(): void
+    {
+        self::$document->firstDocumentAllowanceCharge();
+        self::$document->getDocumentAllowanceCharge(
+            $actualAmount,
+            $isCharge,
+            $taxCategoryCode,
+            $taxTypeCode,
+            $rateApplicablePercent,
+            $sequence,
+            $calculationPercent,
+            $basisAmount,
+            $basisQuantity,
+            $basisQuantityUnitCode,
+            $reasonCode,
+            $reason
+        );
+
+        $this->assertEquals(31.00, $actualAmount);
+        $this->assertEquals(false, $isCharge);
+        $this->assertEquals("S", $taxCategoryCode);
+        $this->assertEquals("VAT", $taxTypeCode);
+        $this->assertEquals(20.00, $rateApplicablePercent);
+        $this->assertEquals(0.0, $sequence);
+        $this->assertEquals(10.00, $calculationPercent);
+        $this->assertEquals(310.00, $basisAmount);
+        $this->assertEquals(0.0, $basisQuantity);
+        $this->assertEquals("", $basisQuantityUnitCode);
+        $this->assertEquals("64", $reasonCode);
+        $this->assertEquals("SPECIAL AGREEMENT", $reason);
+
+        self::$document->nextDocumentAllowanceCharge();
+        self::$document->getDocumentAllowanceCharge(
+            $actualAmount,
+            $isCharge,
+            $taxCategoryCode,
+            $taxTypeCode,
+            $rateApplicablePercent,
+            $sequence,
+            $calculationPercent,
+            $basisAmount,
+            $basisQuantity,
+            $basisQuantityUnitCode,
+            $reasonCode,
+            $reason
+        );
+
+        $this->assertEquals(21.00, $actualAmount);
+        $this->assertEquals(true, $isCharge);
+        $this->assertEquals("S", $taxCategoryCode);
+        $this->assertEquals("VAT", $taxTypeCode);
+        $this->assertEquals(20.00, $rateApplicablePercent);
+        $this->assertEquals(0.0, $sequence);
+        $this->assertEquals(10.00, $calculationPercent);
+        $this->assertEquals(210.00, $basisAmount);
+        $this->assertEquals(0.0, $basisQuantity);
+        $this->assertEquals("", $basisQuantityUnitCode);
+        $this->assertEquals("FC", $reasonCode);
+        $this->assertEquals("FREIGHT SERVICES", $reason);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentAllowanceChargeNoNext(): void
+    {
+        $this->expectException(\OutOfRangeException::class);
+
+        self::$document->nextDocumentAllowanceCharge();
+        self::$document->getDocumentAllowanceCharge(
+            $actualAmount,
+            $isCharge,
+            $taxCategoryCode,
+            $taxTypeCode,
+            $rateApplicablePercent,
+            $sequence,
+            $calculationPercent,
+            $basisAmount,
+            $basisQuantity,
+            $basisQuantityUnitCode,
+            $reasonCode,
+            $reason
+        );
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPaymentTerms(): void
+    {
+        $this->assertTrue(self::$document->firstDocumentPaymentTerms());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPaymentTerms(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPaymentTerms());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPaymentTerm(): void
+    {
+        self::$document->firstDocumentPaymentTerms();
+        self::$document->getDocumentPaymentTerm($paymentTermsDescription);
+
+        $this->assertEquals("PAYMENT_TERMS_DESC", $paymentTermsDescription);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPosition(): void
+    {
+        $this->assertTrue(self::$document->firstDocumentPosition());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPosition(): void
+    {
+        $this->assertTrue(self::$document->nextDocumentPosition());
+        $this->assertTrue(self::$document->nextDocumentPosition());
+        $this->assertFalse(self::$document->nextDocumentPosition());
+    }
 }

@@ -88,6 +88,58 @@ class OrderDocumentReader extends OrderDocument
     private $documentPaymentMeansPointer = 0;
 
     /**
+     * @var integer
+     */
+    private $documentAllowanceChargePointer = 0;
+
+    /**
+     * @var integer
+     */
+    private $documentPaymentTermsPointer = 0;
+
+    /**
+     * Internal pointer for the position
+     *
+     * @var integer
+     */
+    private $positionPointer = 0;
+
+    /**
+     * Internal pointer for the position note
+     *
+     * @var integer
+     */
+    private $positionNotePointer = 0;
+
+    /**
+     * Internal pointer for the position's gross price allowances/charges
+     *
+     * @var integer
+     */
+    private $positionGrossPriceAllowanceChargePointer = 0;
+
+    /**
+     * Internal pointer for the position taxes
+     *
+     * @var integer
+     */
+    private $positionTaxPointer = 0;
+
+    /**
+     * Internal pointer for the position's allowances/charges
+     *
+     * @var integer
+     */
+    private $positionAllowanceChargePointer = 0;
+
+    /**
+     * Internal pointer for the position's additional referenced document
+     *
+     * @var integer
+     */
+    private $positionAddRefDocPointer = 0;
+
+    /**
      * Set the directory where the attached binary data from
      * additional referenced documents are temporary stored
      *
@@ -1905,7 +1957,7 @@ class OrderDocumentReader extends OrderDocument
     /**
      * Seek to the first payment means of the document.
      * Returns true if a first payment mean is available, otherwise false
-     * You may use this together with ZugferdDocumentReader::getDocumentPaymentMeans
+     * You may use this together with OrderDocumentReader::getDocumentPaymentMeans
      *
      * @return boolean
      */
@@ -1919,7 +1971,7 @@ class OrderDocumentReader extends OrderDocument
     /**
      * Seek to the next payment means of the document
      * Returns true if another payment mean is available, otherwise false
-     * You may use this together with ZugferdDocumentReader::getDocumentPaymentMeans
+     * You may use this together with OrderDocumentReader::getDocumentPaymentMeans
      *
      * @return boolean
      */
@@ -1962,6 +2014,228 @@ class OrderDocumentReader extends OrderDocument
         $paymentMeansInformation = implode("\r\n", $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($paymentMean, "getInformation", "")));
 
         return $this;
+    }
+
+    /**
+     * Seek to the first documents payment terms position
+     * Returns true if the first position is available, otherwise false
+     * You may use this together with OrderDocumentReader::getDocumentPaymentTerm
+     *
+     * @return boolean
+     */
+    public function firstDocumentPaymentTerms(): bool
+    {
+        $this->documentPaymentTermsPointer = 0;
+        $paymentTerms = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getSpecifiedTradePaymentTerms", []));
+        return isset($paymentTerms[$this->documentPaymentTermsPointer]);
+    }
+
+    /**
+     * Seek to the next documents payment terms position
+     * Returns true if a other position is available, otherwise false
+     * You may use this together with OrderDocumentReader::getDocumentPaymentTerm
+     *
+     * @return boolean
+     */
+    public function nextDocumentPaymentTerms(): bool
+    {
+        $this->documentPaymentTermsPointer++;
+        $paymentTerms = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getSpecifiedTradePaymentTerms", []));
+        return isset($paymentTerms[$this->documentPaymentTermsPointer]);
+    }
+
+    /**
+     * Get currently seeked payment term
+     * This controlled by firstDocumentPaymentTerms and nextDocumentPaymentTerms methods
+     *
+     * @param string|null $paymentTermsDescription
+     * A text description of the payment terms that apply to the payment amount due (including a
+     * description of possible penalties). Note: This element can contain multiple lines and
+     * multiple conditions.
+     * @return OrderDocumentReader
+     * @throws Exception
+     */
+    public function getDocumentPaymentTerm(?string &$paymentTermsDescription): OrderDocumentReader
+    {
+        $paymentTerms = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getSpecifiedTradePaymentTerms", []));
+        $paymentTerm = $this->objectHelper->getArrayIndex($paymentTerms, $this->documentPaymentTermsPointer);
+
+        $paymentTermsDescription = $paymentTerm;
+
+        return $this;
+    }
+
+    /**
+     * Seek to the first documents allowance charge. Returns true if the first position is available, otherwise false
+     * You may use this together with OrderDocumentReader::getDocumentAllowanceCharge
+     *
+     * @return boolean
+     */
+    public function firstDocumentAllowanceCharge(): bool
+    {
+        $this->documentAllowanceChargePointer = 0;
+        $allowanceCharge = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getSpecifiedTradeAllowanceCharge", []);
+        return isset($allowanceCharge[$this->documentAllowanceChargePointer]);
+    }
+
+    /**
+     * Seek to the next documents allowance charge. Returns true if a other position is available, otherwise false
+     * You may use this together with OrderDocumentReader::getDocumentAllowanceCharge
+     *
+     * @return boolean
+     */
+    public function nextDocumentAllowanceCharge(): bool
+    {
+        $this->documentAllowanceChargePointer++;
+        $allowanceCharge = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getSpecifiedTradeAllowanceCharge", []);
+        return isset($allowanceCharge[$this->documentAllowanceChargePointer]);
+    }
+
+    /**
+     * Get information about the currently seeked surcharges and charges applicable to the
+     * bill as a whole, Deductions, such as for withheld taxes may also be specified in this group
+     *
+     * @param float|null $actualAmount
+     * Amount of the surcharge or discount at document level
+     * @param boolean|null $isCharge
+     * Switch that indicates whether the following data refer to an allowance or a discount, true means that
+     * this an charge
+     * @param string|null $taxCategoryCode
+     * A coded indication of which sales tax category applies to the surcharge or deduction at document level
+     *
+     * The following entries from UNTDID 5305 are used (details in brackets):
+     *  - Standard rate (sales tax is due according to the normal procedure)
+     *  - Goods to be taxed according to the zero rate (sales tax is charged with a percentage of zero)
+     *  - Tax exempt (USt./IGIC/IPSI)
+     *  - Reversal of the tax liability (the rules for reversing the tax liability at USt./IGIC/IPSI apply)
+     *  - VAT exempt for intra-community deliveries of goods (USt./IGIC/IPSI not levied due to rules on intra-community deliveries)
+     *  - Free export item, tax not levied (VAT / IGIC/IPSI not levied due to export outside the EU)
+     *  - Services outside the tax scope (sales are not subject to VAT / IGIC/IPSI)
+     *  - Canary Islands general indirect tax (IGIC tax applies)
+     *  - IPSI (tax for Ceuta / Melilla) applies.
+     *
+     * The codes for the VAT category are as follows:
+     *  - S = sales tax is due at the normal rate
+     *  - Z = goods to be taxed according to the zero rate
+     *  - E = tax exempt
+     *  - AE = reversal of tax liability
+     *  - K = VAT is not shown for intra-community deliveries
+     *  - G = tax not levied due to export outside the EU
+     *  - O = Outside the tax scope
+     *  - L = IGIC (Canary Islands)
+     *  - M = IPSI (Ceuta/Melilla)
+     * @param string|null $taxTypeCode
+     * Code for the VAT category of the surcharge or charge at document level. Note: Fixed value = "VAT"
+     * @param float|null $rateApplicablePercent
+     * VAT rate for the surcharge or discount on document level. Note: The code of the sales tax category
+     * and the category-specific sales tax rate must correspond to one another. The value to be given is
+     * the percentage. For example, the value 20 is given for 20% (and not 0.2)
+     * @param float|null $sequence
+     * Calculation order
+     * @param float|null $calculationPercent
+     * Percentage surcharge or discount at document level
+     * @param float|null $basisAmount
+     * The base amount that may be used in conjunction with the percentage of the surcharge or discount
+     * at document level to calculate the amount of the discount at document level
+     * @param float|null $basisQuantity
+     * Basismenge des Rabatts
+     * @param string|null $basisQuantityUnitCode
+     * Einheit der Preisbasismenge
+     *  - Codeliste: Rec. N°20 Vollständige Liste, In Recommendation N°20 Intro 2.a ist beschrieben, dass
+     *    beide Listen kombiniert anzuwenden sind.
+     *  - Codeliste: Rec. N°21 Vollständige Liste, In Recommendation N°20 Intro 2.a ist beschrieben, dass
+     *    beide Listen kombiniert anzuwenden sind.
+     * @param string|null $reasonCode
+     * The reason given as a code for the surcharge or discount at document level. Note: Use entries from
+     * the UNTDID 5189 code list. The code of the reason for the surcharge or discount at document level
+     * and the reason for the surcharge or discount at document level must correspond to each other
+     *
+     * Code list: UNTDID 7161 Complete list, code list: UNTDID 5189 Restricted
+     * Include PEPPOL subset:
+     *  - 41 - Bonus for works ahead of schedule
+     *  - 42 - Other bonus
+     *  - 60 - Manufacturer’s consumer discount
+     *  - 62 - Due to military status
+     *  - 63 - Due to work accident
+     *  - 64 - Special agreement
+     *  - 65 - Production error discount
+     *  - 66 - New outlet discount
+     *  - 67 - Sample discount
+     *  - 68 - End-of-range discount
+     *  - 70 - Incoterm discount
+     *  - 71 - Point of sales threshold allowance
+     *  - 88 - Material surcharge/deduction
+     *  - 95 - Discount
+     *  - 100 - Special rebate
+     *  - 102 - Fixed long term
+     *  - 103 - Temporary
+     *  - 104 - Standard
+     *  - 105 - Yearly turnover
+     * @param string|null $reason
+     * The reason given in text form for the surcharge or discount at document level
+     * @return OrderDocumentReader
+     */
+    public function getDocumentAllowanceCharge(?float &$actualAmount, ?bool &$isCharge, ?string &$taxCategoryCode, ?string &$taxTypeCode, ?float &$rateApplicablePercent, ?float &$sequence, ?float &$calculationPercent, ?float &$basisAmount, ?float &$basisQuantity, ?string &$basisQuantityUnitCode, ?string &$reasonCode, ?string &$reason): OrderDocumentReader
+    {
+        $allowanceCharges = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getSpecifiedTradeAllowanceCharge", []);
+        $allowanceCharge = $this->objectHelper->getArrayIndex($allowanceCharges, $this->documentAllowanceChargePointer);
+
+        $actualAmount = $this->getInvoiceValueByPathFrom($allowanceCharge, "getActualAmount.value", 0.0);
+        $isCharge = $this->getInvoiceValueByPathFrom($allowanceCharge, "getChargeIndicator.getIndicator", false);
+        $taxCategoryCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getCategoryTradeTax.getCategoryCode", "");
+        $taxTypeCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getCategoryTradeTax.getTypeCode", "");
+        $rateApplicablePercent = $this->getInvoiceValueByPathFrom($allowanceCharge, "getCategoryTradeTax.getRateApplicablePercent.value", 0.0);
+        $sequence = $this->getInvoiceValueByPathFrom($allowanceCharge, "getSequenceNumeric.value", 0);
+        $calculationPercent = $this->getInvoiceValueByPathFrom($allowanceCharge, "getCalculationPercent.value", 0.0);
+        $basisAmount = $this->getInvoiceValueByPathFrom($allowanceCharge, "getBasisAmount.value", 0.0);
+        $basisQuantity = $this->getInvoiceValueByPathFrom($allowanceCharge, "getBasisQuantity.value", 0.0);
+        $basisQuantityUnitCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getBasisQuantity.getUnitCode", "");
+        $reasonCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getReasonCode", "");
+        $reason = $this->getInvoiceValueByPathFrom($allowanceCharge, "getReason", "");
+
+        return $this;
+    }
+
+    /**
+     * Seek to the first document position
+     * Returns true if the first position is available, otherwise false
+     * You may use it together with getDocumentPositionGenerals
+     *
+     * @return boolean
+     */
+    public function firstDocumentPosition(): bool
+    {
+        $this->positionPointer = 0;
+
+        $this->positionNotePointer = 0;
+        $this->positionGrossPriceAllowanceChargePointer = 0;
+        $this->positionTaxPointer = 0;
+        $this->positionAllowanceChargePointer = 0;
+        $this->positionAddRefDocPointer = 0;
+
+        $tradeLineItem = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        return isset($tradeLineItem[$this->positionPointer]);
+    }
+
+    /**
+     * Seek to the next document position
+     * Returns true if another position is available, otherwise false
+     * You may use it together with getDocumentPositionGenerals
+     *
+     * @return boolean
+     */
+    public function nextDocumentPosition(): bool
+    {
+        $this->positionPointer++;
+
+        $this->positionNotePointer = 0;
+        $this->positionGrossPriceAllowanceChargePointer = 0;
+        $this->positionTaxPointer = 0;
+        $this->positionAllowanceChargePointer = 0;
+        $this->positionAddRefDocPointer = 0;
+
+        $tradeLineItem = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        return isset($tradeLineItem[$this->positionPointer]);
     }
 
     /**
