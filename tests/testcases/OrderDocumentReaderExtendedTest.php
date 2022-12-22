@@ -323,4 +323,455 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("EM", $uriType);
         $this->assertEquals("sales@seller.com", $uriId);
     }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBuyer(): void
+    {
+        self::$document->getDocumentBuyer($name, $id, $description);
+
+        $this->assertEquals("BUYER_NAME", $name);
+        $this->assertIsArray($id);
+        $this->assertArrayHasKey(0, $id);
+        $this->assertEquals("BY_ID_9587456", $id[0]);
+        $this->assertEquals("", $description);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBuyerGlobalId(): void
+    {
+        self::$document->getDocumentBuyerGlobalId($globalids);
+
+        $this->assertIsArray($globalids);
+        $this->assertArrayHasKey("0088", $globalids);
+        $this->assertEquals("98765432179", $globalids["0088"]);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBuyerTaxRegistration(): void
+    {
+        self::$document->getDocumentBuyerTaxRegistration($taxreg);
+
+        $this->assertIsArray($taxreg);
+        $this->assertArrayHasKey("VA", $taxreg);
+        $this->assertArrayNotHasKey("FC", $taxreg);
+        $this->assertEquals("FR 05 987 654 321", $taxreg["VA"]);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBuyerAddress(): void
+    {
+        self::$document->getDocumentBuyerAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
+
+        $this->assertEquals("BUYER_ADDR_1", $lineone);
+        $this->assertEquals("BUYER_ADDR_2", $linetwo);
+        $this->assertEquals("BUYER_ADDR_3", $linethree);
+        $this->assertEquals("69001", $postcode);
+        $this->assertEquals("BUYER_CITY", $city);
+        $this->assertEquals("FR", $country);
+        $this->assertEquals("", $subdivision);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBuyerLegalOrganisation(): void
+    {
+        self::$document->getDocumentBuyerLegalOrganisation($legalorgid, $legalorgtype, $legalorgname);
+
+        $this->assertEquals("987654321", $legalorgid);
+        $this->assertEquals("0002", $legalorgtype);
+        $this->assertEquals("BUYER_TRADING_NAME", $legalorgname);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentBuyerContact(): void
+    {
+        $this->assertTrue(self::$document->firstDocumentBuyerContact());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentBuyerContact(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentBuyerContact());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBuyerContact(): void
+    {
+        self::$document->firstDocumentBuyerContact();
+        self::$document->getDocumentBuyerContact(
+            $contactpersonname,
+            $contactdepartmentname,
+            $contactphoneno,
+            $contactfaxno,
+            $contactemailadd,
+            $contacttypecode
+        );
+
+        $this->assertEquals("BUYER_CONTACT_NAME", $contactpersonname);
+        $this->assertEquals("BUYER_CONTACT_DEP", $contactdepartmentname);
+        $this->assertEquals("+33 6 65 98 75 32", $contactphoneno);
+        $this->assertEquals("", $contactfaxno);
+        $this->assertEquals("contact@buyer.com", $contactemailadd);
+        $this->assertEquals("LB", $contacttypecode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBuyerContactNoNext(): void
+    {
+        $this->expectException(\OutOfRangeException::class);
+
+        self::$document->nextDocumentBuyerContact();
+        self::$document->getDocumentBuyerContact(
+            $contactpersonname,
+            $contactdepartmentname,
+            $contactphoneno,
+            $contactfaxno,
+            $contactemailadd,
+            $contacttypecode
+        );
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBuyerElectronicAddress(): void
+    {
+        self::$document->getDocumentBuyerElectronicAddress($uriType, $uriId);
+
+        $this->assertEquals("EM", $uriType);
+        $this->assertEquals("operation@buyer.com", $uriId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBuyerRequisitioner(): void
+    {
+        self::$document->getDocumentBuyerRequisitioner($name, $id, $description);
+
+        $this->assertEquals("BUYER_REQ_NAME", $name);
+        $this->assertIsArray($id);
+        $this->assertArrayHasKey(0, $id);
+        $this->assertEquals("BUYER_REQ_ID_25987", $id[0]);
+        $this->assertEquals("", $description);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBuyerRequisitionerGlobalId(): void
+    {
+        self::$document->getDocumentBuyerRequisitionerGlobalId($globalids);
+
+        $this->assertIsArray($globalids);
+        $this->assertArrayHasKey("0088", $globalids);
+        $this->assertEquals("654987321", $globalids["0088"]);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBuyerRequisitionerTaxRegistration(): void
+    {
+        self::$document->getDocumentBuyerRequisitionerTaxRegistration($taxreg);
+
+        $this->assertIsArray($taxreg);
+        $this->assertArrayHasKey("VA", $taxreg);
+        $this->assertArrayNotHasKey("FC", $taxreg);
+        $this->assertEquals("FR 92 654 987 321", $taxreg["VA"]);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBuyerRequisitionerAddress(): void
+    {
+        self::$document->getDocumentBuyerRequisitionerAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
+
+        $this->assertEquals("BUYER_REQ_ADDR_1", $lineone);
+        $this->assertEquals("BUYER_REQ_ADDR_2", $linetwo);
+        $this->assertEquals("BUYER_REQ_ADDR_3", $linethree);
+        $this->assertEquals("69001", $postcode);
+        $this->assertEquals("BUYER_REQ_CITY", $city);
+        $this->assertEquals("FR", $country);
+        $this->assertEquals("", $subdivision);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBuyerRequisitionerLegalOrganisation(): void
+    {
+        self::$document->getDocumentBuyerRequisitionerLegalOrganisation($legalorgid, $legalorgtype, $legalorgname);
+
+        $this->assertEquals("654987321", $legalorgid);
+        $this->assertEquals("0022", $legalorgtype);
+        $this->assertEquals("BUYER_REQ_TRADING_NAME", $legalorgname);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentBuyerRequisitionerContact(): void
+    {
+        $this->assertTrue(self::$document->firstDocumentBuyerRequisitionerContact());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentBuyerRequisitionerContact(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentBuyerRequisitionerContact());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBuyerRequisitionerContact(): void
+    {
+        self::$document->firstDocumentBuyerRequisitionerContact();
+        self::$document->getDocumentBuyerRequisitionerContact(
+            $contactpersonname,
+            $contactdepartmentname,
+            $contactphoneno,
+            $contactfaxno,
+            $contactemailadd,
+            $contacttypecode
+        );
+
+        $this->assertEquals("BUYER_REQ_CONTACT_NAME", $contactpersonname);
+        $this->assertEquals("BUYER_REQ_CONTACT_DEP", $contactdepartmentname);
+        $this->assertEquals("+33 6 54 98 65 32", $contactphoneno);
+        $this->assertEquals("", $contactfaxno);
+        $this->assertEquals("requisitioner@buyer.com", $contactemailadd);
+        $this->assertEquals("PD", $contacttypecode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBuyerRequisitionerContactNoNext(): void
+    {
+        $this->expectException(\OutOfRangeException::class);
+
+        self::$document->nextDocumentBuyerRequisitionerContact();
+        self::$document->getDocumentBuyerRequisitionerContact(
+            $contactpersonname,
+            $contactdepartmentname,
+            $contactphoneno,
+            $contactfaxno,
+            $contactemailadd,
+            $contacttypecode
+        );
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBuyerRequisitionerElectronicAddress(): void
+    {
+        self::$document->getDocumentBuyerRequisitionerElectronicAddress($uriType, $uriId);
+
+        $this->assertEquals("EM", $uriType);
+        $this->assertEquals("purchase@buyer.com", $uriId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentDeliveryTerms(): void
+    {
+        self::$document->getDocumentDeliveryTerms($code, $description, $functionCode, $locationId, $locationName);
+
+        $this->assertEquals("FCA", $code);
+        $this->assertEquals("Free Carrier", $description);
+        $this->assertEquals("7", $functionCode);
+        $this->assertEquals("DEL_TERMS_LOC_ID", $locationId);
+        $this->assertEquals("DEL_TERMS_LOC_Name", $locationName);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentSellerOrderReferencedDocument(): void
+    {
+        self::$document->getDocumentSellerOrderReferencedDocument($sellerOrderRefId, $sellerOrderRefDate);
+
+        $this->assertEquals("SALES_REF_ID_459875", $sellerOrderRefId);
+        $this->assertNull($sellerOrderRefDate);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBuyerOrderReferencedDocument(): void
+    {
+        self::$document->getDocumentBuyerOrderReferencedDocument($buyerOrderRefId, $buyerOrderRefDate);
+
+        $this->assertEquals("PO123456789", $buyerOrderRefId);
+        $this->assertNull($buyerOrderRefDate);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentQuotationReferencedDocument(): void
+    {
+        self::$document->getDocumentQuotationReferencedDocument($quotationRefId, $quotationRefDate);
+
+        $this->assertEquals("QUOT_125487", $quotationRefId);
+        $this->assertNull($quotationRefDate);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentContractReferencedDocument(): void
+    {
+        self::$document->getDocumentContractReferencedDocument($contractRefId, $contractRefDate);
+
+        $this->assertEquals("CONTRACT_2020-25987", $contractRefId);
+        $this->assertNull($contractRefDate);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetGetDocumentRequisitionReferencedDocument(): void
+    {
+        self::$document->getDocumentRequisitionReferencedDocument($requisitionRefId, $requisitionRefDate);
+
+        $this->assertEquals("REQ_875498", $requisitionRefId);
+        $this->assertNull($requisitionRefDate);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentAdditionalReferencedDocument(): void
+    {
+        $this->assertTrue(self::$document->firstDocumentAdditionalReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentAdditionalReferencedDocument(): void
+    {
+        $this->assertTrue(self::$document->nextDocumentAdditionalReferencedDocument());
+        $this->assertTrue(self::$document->nextDocumentAdditionalReferencedDocument());
+        $this->assertFalse(self::$document->nextDocumentAdditionalReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentAdditionalReferencedDocument(): void
+    {
+        $this->assertTrue(self::$document->firstDocumentAdditionalReferencedDocument());
+
+        self::$document->getDocumentAdditionalReferencedDocument($additionalRefTypeCode, $additionalRefId, $additionalRefURIID, $additionalRefName, $additionalRefRefTypeCode, $additionalRefDate);
+
+        $this->assertEquals("916", $additionalRefTypeCode);
+        $this->assertEquals("ADD_REF_DOC_ID", $additionalRefId);
+        $this->assertEquals("ADD_REF_DOC_URIID", $additionalRefURIID);
+        $this->assertEquals("ADD_REF_DOC_Desc", $additionalRefName);
+        $this->assertEquals("", $additionalRefRefTypeCode);
+        $this->assertNull($additionalRefDate);
+
+        $this->assertTrue(self::$document->nextDocumentAdditionalReferencedDocument());
+
+        self::$document->getDocumentAdditionalReferencedDocument($additionalRefTypeCode, $additionalRefId, $additionalRefURIID, $additionalRefName, $additionalRefRefTypeCode, $additionalRefDate);
+
+        $this->assertEquals("50", $additionalRefTypeCode);
+        $this->assertEquals("TENDER_ID", $additionalRefId);
+        $this->assertEquals("", $additionalRefURIID);
+        $this->assertEquals("", $additionalRefName);
+        $this->assertEquals("", $additionalRefRefTypeCode);
+        $this->assertNull($additionalRefDate);
+
+        $this->assertTrue(self::$document->nextDocumentAdditionalReferencedDocument());
+
+        self::$document->getDocumentAdditionalReferencedDocument($additionalRefTypeCode, $additionalRefId, $additionalRefURIID, $additionalRefName, $additionalRefRefTypeCode, $additionalRefDate);
+
+        $this->assertEquals("130", $additionalRefTypeCode);
+        $this->assertEquals("OBJECT_ID", $additionalRefId);
+        $this->assertEquals("", $additionalRefURIID);
+        $this->assertEquals("", $additionalRefName);
+        $this->assertEquals("AWV", $additionalRefRefTypeCode);
+        $this->assertNull($additionalRefDate);
+
+        $this->assertFalse(self::$document->nextDocumentAdditionalReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentAdditionalReferencedDocumentBinaryData(): void
+    {
+        self::$document->setBinaryDataDirectory(dirname(__FILE__));
+
+        self::$document->firstDocumentAdditionalReferencedDocument();
+        self::$document->getDocumentAdditionalReferencedDocumentBinaryData($additionalBinaryFilename);
+
+        $this->assertEmpty($additionalBinaryFilename);
+
+        self::$document->nextDocumentAdditionalReferencedDocument();
+        self::$document->getDocumentAdditionalReferencedDocumentBinaryData($additionalBinaryFilename);
+
+        $this->assertEmpty($additionalBinaryFilename);
+
+        self::$document->nextDocumentAdditionalReferencedDocument();
+        self::$document->getDocumentAdditionalReferencedDocumentBinaryData($additionalBinaryFilename);
+
+        $this->assertEmpty($additionalBinaryFilename);
+    }
 }

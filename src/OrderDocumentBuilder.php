@@ -864,13 +864,11 @@ class OrderDocumentBuilder extends OrderDocument
      * Detailed information about the party who raises the Order originally on behalf of the Buyer
      *
      * @param string $name
-     * The full name of the buyer
+     * The full name of the buyer requisitioner
      * @param string|null $id
-     * An identifier of the buyer. In many systems, buyer identification is key information. Multiple buyer IDs can be
-     * assigned or specified. They can be differentiated by using different identification schemes. If no scheme is given,
-     * it should be known to the buyer and buyer, e.g. a previously exchanged, seller-assigned identifier of the buyer
+     * An identifier of the buyer requisitioner
      * @param string|null $description
-     * Further legal information about the buyer
+     * Further legal information about the buyer requisitioner
      * @return OrderDocumentBuilder
      */
     public function setDocumentBuyerRequisitioner(string $name, ?string $id = null, ?string $description = null): OrderDocumentBuilder
@@ -881,10 +879,10 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Add a global id for the party who raises the Order originally on behalf of the Buyer
+     * Add a global id for the party who raises the Order originally on behalf of the buyer requisitioner
      *
      * @param string $globalID
-     * The buyers's identifier identification scheme is an identifier uniquely assigned to a buyer by a
+     * The buyer requisitioner's identifier identification scheme is an identifier uniquely assigned to a buyer requisitioner by a
      * global registration organization.
      * @param string $globalIDType
      * If the identifier is used for the identification scheme, it must be selected from the entries in
@@ -901,17 +899,10 @@ class OrderDocumentBuilder extends OrderDocument
     /**
      * Set tax registration information of the party who raises the Order originally on behalf of the Buyer
      *
-     * The local identification (defined by the buyers's address) of the buyers for tax purposes or a reference that enables the buyers
-     * to indicate his reporting status for tax purposes The sales tax identification number of the buyers
-     * Note: This information may affect how the buyer the invoice settled (such as in relation to social security contributions). So
-     * e.g. In some countries, if the buyers is not reported for tax, the buyer will withhold the tax amount and pay it on behalf of the
-     * buyers. Sales tax number with a prefixed country code. A supplier registered as subject to VAT must provide his sales tax
-     * identification number, unless he uses a tax agent.
-     *
      * @param string $taxregtype
-     * Type of tax number of the buyers
+     * Type of tax number of the buyer requisitioner
      * @param string $taxregid
-     * Tax number of the buyers or sales tax identification number of the (FC = Tax number, VA = Sales tax number)
+     * Tax number of the buyer requisitioner or sales tax identification number of the (FC = Tax number, VA = Sales tax number)
      * @return OrderDocumentBuilder
      */
     public function setDocumentBuyerRequisitionerTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
@@ -925,17 +916,10 @@ class OrderDocumentBuilder extends OrderDocument
     /**
      * Add tax registration information of the party who raises the Order originally on behalf of the Buyer
      *
-     * The local identification (defined by the buyers's address) of the buyers for tax purposes or a reference that enables the buyers
-     * to indicate his reporting status for tax purposes The sales tax identification number of the buyers
-     * Note: This information may affect how the buyer the invoice settled (such as in relation to social security contributions). So
-     * e.g. In some countries, if the buyers is not reported for tax, the buyer will withhold the tax amount and pay it on behalf of the
-     * buyers. Sales tax number with a prefixed country code. A supplier registered as subject to VAT must provide his sales tax
-     * identification number, unless he uses a tax agent.
-     *
      * @param string $taxregtype
-     * Type of tax number of the buyers
+     * Type of tax number of the buyer requisitioner
      * @param string $taxregid
-     * Tax number of the buyers or sales tax identification number of the (FC = Tax number, VA = Sales tax number)
+     * Tax number of the buyer requisitioner or sales tax identification number of the (FC = Tax number, VA = Sales tax number)
      * @return OrderDocumentBuilder
      */
     public function addDocumentBuyerRequisitionerTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
@@ -950,24 +934,24 @@ class OrderDocumentBuilder extends OrderDocument
      * Sets detailed information of the party who raises the Order originally on behalf of the Buyer
      *
      * @param string|null $lineone
-     * The main line in the buyers address. This is usually the street name and house number or
+     * The main line in the buyer requisitioners address. This is usually the street name and house number or
      * the post office box
      * @param string|null $linetwo
-     * Line 2 of the buyers address. This is an additional address line in an address that can be
+     * Line 2 of the buyer requisitioners address. This is an additional address line in an address that can be
      * used to provide additional details in addition to the main line
      * @param string|null $linethree
-     * Line 3 of the buyers address. This is an additional address line in an address that can be
+     * Line 3 of the buyer requisitioners address. This is an additional address line in an address that can be
      * used to provide additional details in addition to the main line
      * @param string|null $postcode
      * Identifier for a group of properties, such as a zip code
      * @param string|null $city
-     * Usual name of the city or municipality in which the buyers address is located
+     * Usual name of the city or municipality in which the buyer requisitioners address is located
      * @param string|null $country
      * Code used to identify the country. If no tax agent is specified, this is the country in which the sales tax
      * is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
      * representation of names of countries and their subdivisions”
      * @param string|null $subdivision
-     * The buyers state
+     * The buyer requisitioners state
      * @return OrderDocumentBuilder
      */
     public function setDocumentBuyerRequisitionerAddress(?string $lineone = null, ?string $linetwo = null, ?string $linethree = null, ?string $postcode = null, ?string $city = null, ?string $country = null, ?string $subdivision = null): OrderDocumentBuilder
@@ -983,14 +967,13 @@ class OrderDocumentBuilder extends OrderDocument
      *
      * @param string|null $legalorgid
      * An identifier issued by an official registrar that identifies the
-     * buyer as a legal entity or legal person. If no identification scheme ($legalorgtype) is provided,
-     * it should be known to the buyer and buyer
+     * buyer requisitioner as a legal entity or legal person.
      * @param string|null $legalorgtype
      * The identifier for the identification scheme of the legal
-     * registration of the buyer. If the identification scheme is used, it must be selected from
+     * registration of the buyer requisitioner. If the identification scheme is used, it must be selected from
      * ISO/IEC 6523 list
      * @param string|null $legalorgname
-     * A name by which the buyer is known, if different from the buyers name
+     * A name by which the buyer requisitioner is known, if different from the buyer requisitioners name
      * (also known as the company name)
      * @return OrderDocumentBuilder
      */
@@ -1010,11 +993,11 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string|null $contactdepartmentname
      * Contact point for a legal entity, such as a name of the department or office
      * @param string|null $contactphoneno
-     * Detailed information on the buyer's phone number
+     * Detailed information on the buyer requisitioner's phone number
      * @param string|null $contactfaxno
-     * Detailed information on the buyer's fax number
+     * Detailed information on the buyer requisitioner's fax number
      * @param string|null $contactemailadd
-     * Detailed information on the buyer's email address
+     * Detailed information on the buyer requisitioner's email address
      * @param string|null $contactTypeCode
      * Type Code of the contact
      * @return OrderDocumentBuilder
@@ -1035,11 +1018,11 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string|null $contactdepartmentname
      * Contact point for a legal entity, such as a name of the department or office
      * @param string|null $contactphoneno
-     * Detailed information on the buyer's phone number
+     * Detailed information on the buyer requisitioner's phone number
      * @param string|null $contactfaxno
-     * Detailed information on the buyer's fax number
+     * Detailed information on the buyer requisitioner's fax number
      * @param string|null $contactemailadd
-     * Detailed information on the buyer's email address
+     * Detailed information on the buyer requisitioner's email address
      * @return OrderDocumentBuilder
      */
     public function addDocumentBuyerRequisitionerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null): OrderDocumentBuilder
@@ -1051,7 +1034,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set the universal communication info for the Buyer Requisitioner
+     * Set the universal communication info for the buyer requisitioner
      *
      * @param string|null $uriType
      * @param string|null $uriId
@@ -1087,8 +1070,12 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string|null $description
      * Simple description
      * @param string|null $functionCode
+     * A code specifying a function of these trade delivery terms (Pick up,or delivered) To be chosen from the entries
+     * in UNTDID 4055
      * @param string|null $relevantTradeLocationId
+     * The unique identifier of a country location used or referenced in trade.
      * @param string|null $relevantTradeLocationName
+     * The name, expressed as text, of this location used or referenced in trade.
      * @return OrderDocumentBuilder
      */
     public function setDocumentDeliveryTerms(?string $code = null, ?string $description = null, ?string $functionCode = null, ?string $relevantTradeLocationId = null, ?string $relevantTradeLocationName = null): OrderDocumentBuilder
