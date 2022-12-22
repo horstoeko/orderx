@@ -63,15 +63,15 @@ class OrderDocumentReaderExtendedTest extends TestCase
             $documentRequestedResponseTypeCode
         );
 
-        $this->assertEquals($documentNo, "PO123456789");
-        $this->assertEquals($documentTypeCode, OrderDocumentTypes::ORDER);
-        $this->assertEquals($documentDate->format('d.m.Y'), "21.12.2022");
-        $this->assertEquals($documentCurrency, "EUR");
-        $this->assertEquals($documentName, "Doc Name");
+        $this->assertEquals("PO123456789", $documentNo);
+        $this->assertEquals(OrderDocumentTypes::ORDER, $documentTypeCode);
+        $this->assertEquals("21.12.2022", $documentDate->format('d.m.Y'));
+        $this->assertEquals("EUR", $documentCurrency);
+        $this->assertEquals("Doc Name", $documentName);
         $this->assertEmpty($documentLanguageId);
         $this->assertNull($documentEffectiveSpecifiedPeriod);
-        $this->assertEquals($documentPurposeCode, "9");
-        $this->assertEquals($documentRequestedResponseTypeCode, "AC");
+        $this->assertEquals("9", $documentPurposeCode);
+        $this->assertEquals("AC", $documentRequestedResponseTypeCode);
     }
 
     /**
@@ -773,5 +773,570 @@ class OrderDocumentReaderExtendedTest extends TestCase
         self::$document->getDocumentAdditionalReferencedDocumentBinaryData($additionalBinaryFilename);
 
         $this->assertEmpty($additionalBinaryFilename);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentBlanketOrderReferencedDocument(): void
+    {
+        self::$document->getDocumentBlanketOrderReferencedDocument($blanketOrderRefId, $blanketOrderRefDate);
+
+        $this->assertEquals("BLANKET_ORDER_OD", $blanketOrderRefId);
+        $this->assertNotNull($blanketOrderRefDate);
+        $this->assertEquals($blanketOrderRefDate->format("d.m.Y"), "21.12.2022");
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPreviousOrderChangeReferencedDocument(): void
+    {
+        self::$document->getDocumentPreviousOrderChangeReferencedDocument($prevOrderChangeRefId, $prevOrderChangeRefDate);
+
+        $this->assertEquals("PREV_ORDER_C_ID", $prevOrderChangeRefId);
+        $this->assertNotNull($prevOrderChangeRefDate);
+        $this->assertEquals($prevOrderChangeRefDate->format("d.m.Y"), "21.12.2022");
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPreviousOrderResponseReferencedDocument(): void
+    {
+        self::$document->getDocumentPreviousOrderResponseReferencedDocument($prevOrderResponseRefId, $prevOrderResponseRefDate);
+
+        $this->assertEquals("PREV_ORDER_R_ID", $prevOrderResponseRefId);
+        $this->assertNotNull($prevOrderResponseRefDate);
+        $this->assertEquals($prevOrderResponseRefDate->format("d.m.Y"), "21.12.2022");
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentProcuringProject(): void
+    {
+        self::$document->getDocumentProcuringProject($procuringProjectId, $procuringProjectName);
+
+        $this->assertEquals("PROJECT_ID", $procuringProjectId);
+        $this->assertEquals("Project Reference", $procuringProjectName);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentShipTo(): void
+    {
+        self::$document->getDocumentShipTo($name, $id, $description);
+
+        $this->assertEquals("SHIP_TO_NAME", $name);
+        $this->assertIsArray($id);
+        $this->assertArrayHasKey(0, $id);
+        $this->assertEquals("SHIP_TO_ID", $id[0]);
+        $this->assertEquals("", $description);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentShipToGlobalId(): void
+    {
+        self::$document->getDocumentShipToGlobalId($globalids);
+
+        $this->assertIsArray($globalids);
+        $this->assertArrayHasKey("0088", $globalids);
+        $this->assertEquals("5897546912", $globalids["0088"]);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentShipToTaxRegistration(): void
+    {
+        self::$document->getDocumentShipToTaxRegistration($taxreg);
+
+        $this->assertIsArray($taxreg);
+        $this->assertArrayHasKey("VA", $taxreg);
+        $this->assertArrayNotHasKey("FC", $taxreg);
+        $this->assertEquals("FR 66 951 632 874", $taxreg["VA"]);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentShipToAddress(): void
+    {
+        self::$document->getDocumentShipToAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
+
+        $this->assertEquals("SHIP_TO_ADDR_1", $lineone);
+        $this->assertEquals("SHIP_TO_ADDR_2", $linetwo);
+        $this->assertEquals("SHIP_TO_ADDR_3", $linethree);
+        $this->assertEquals("69003", $postcode);
+        $this->assertEquals("SHIP_TO_CITY", $city);
+        $this->assertEquals("FR", $country);
+        $this->assertEquals("", $subdivision);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentShipToLegalOrganisation(): void
+    {
+        self::$document->getDocumentShipToLegalOrganisation($legalorgid, $legalorgtype, $legalorgname);
+
+        $this->assertEquals("951632874", $legalorgid);
+        $this->assertEquals("0002", $legalorgtype);
+        $this->assertEquals("SHIP_TO_TRADING_NAME", $legalorgname);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentShipToContact(): void
+    {
+        $this->assertTrue(self::$document->firstDocumentShipToContact());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentShipToContact(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentShipToContact());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentShipToContact(): void
+    {
+        self::$document->firstDocumentShipToContact();
+        self::$document->getDocumentShipToContact(
+            $contactpersonname,
+            $contactdepartmentname,
+            $contactphoneno,
+            $contactfaxno,
+            $contactemailadd,
+            $contacttypecode
+        );
+
+        $this->assertEquals("SHIP_TO_CONTACT_NAME", $contactpersonname);
+        $this->assertEquals("SHIP_TO_CONTACT_DEP", $contactdepartmentname);
+        $this->assertEquals("+33 6 85 96 32 41", $contactphoneno);
+        $this->assertEquals("", $contactfaxno);
+        $this->assertEquals("shipto@customer.com", $contactemailadd);
+        $this->assertEquals("SD", $contacttypecode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentShipToContactNoNext(): void
+    {
+        $this->expectException(\OutOfRangeException::class);
+
+        self::$document->nextDocumentShipToContact();
+        self::$document->getDocumentShipToContact(
+            $contactpersonname,
+            $contactdepartmentname,
+            $contactphoneno,
+            $contactfaxno,
+            $contactemailadd,
+            $contacttypecode
+        );
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentShipToElectronicAddress(): void
+    {
+        self::$document->getDocumentShipToElectronicAddress($uriType, $uriId);
+
+        $this->assertEquals("EM", $uriType);
+        $this->assertEquals("delivery@buyer.com", $uriId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentShipFrom(): void
+    {
+        self::$document->getDocumentShipFrom($name, $id, $description);
+
+        $this->assertEquals("SHIP_FROM_NAME", $name);
+        $this->assertIsArray($id);
+        $this->assertArrayHasKey(0, $id);
+        $this->assertEquals("SHIP_FROM_ID", $id[0]);
+        $this->assertEquals("", $description);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentShipFromGlobalId(): void
+    {
+        self::$document->getDocumentShipFromGlobalId($globalids);
+
+        $this->assertIsArray($globalids);
+        $this->assertArrayHasKey("0088", $globalids);
+        $this->assertEquals("875496123", $globalids["0088"]);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentShipFromTaxRegistration(): void
+    {
+        self::$document->getDocumentShipFromTaxRegistration($taxreg);
+
+        $this->assertIsArray($taxreg);
+        $this->assertArrayHasKey("VA", $taxreg);
+        $this->assertArrayNotHasKey("FC", $taxreg);
+        $this->assertEquals("FR 16 548 963 127", $taxreg["VA"]);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentShipFromAddress(): void
+    {
+        self::$document->getDocumentShipFromAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
+
+        $this->assertEquals("SHIP_FROM_ADDR_1", $lineone);
+        $this->assertEquals("SHIP_FROM_ADDR_2", $linetwo);
+        $this->assertEquals("SHIP_FROM_ADDR_3", $linethree);
+        $this->assertEquals("75003", $postcode);
+        $this->assertEquals("SHIP_FROM_CITY", $city);
+        $this->assertEquals("FR", $country);
+        $this->assertEquals("", $subdivision);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentShipFromLegalOrganisation(): void
+    {
+        self::$document->getDocumentShipFromLegalOrganisation($legalorgid, $legalorgtype, $legalorgname);
+
+        $this->assertEquals("548963127", $legalorgid);
+        $this->assertEquals("0002", $legalorgtype);
+        $this->assertEquals("SHIP_FROM_TRADING_NAME", $legalorgname);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentShipFromContact(): void
+    {
+        $this->assertTrue(self::$document->firstDocumentShipFromContact());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentShipFromContact(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentShipFromContact());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentShipFromContact(): void
+    {
+        self::$document->firstDocumentShipFromContact();
+        self::$document->getDocumentShipFromContact(
+            $contactpersonname,
+            $contactdepartmentname,
+            $contactphoneno,
+            $contactfaxno,
+            $contactemailadd,
+            $contacttypecode
+        );
+
+        $this->assertEquals("SHIP_FROM_CONTACT_NAME", $contactpersonname);
+        $this->assertEquals("SHIP_FROM_CONTACT_DEP", $contactdepartmentname);
+        $this->assertEquals("+33 6 85 96 32 41", $contactphoneno);
+        $this->assertEquals("", $contactfaxno);
+        $this->assertEquals("shipfrom@seller.com", $contactemailadd);
+        $this->assertEquals("SD", $contacttypecode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentShipFromContactNoNext(): void
+    {
+        $this->expectException(\OutOfRangeException::class);
+
+        self::$document->nextDocumentShipFromContact();
+        self::$document->getDocumentShipFromContact(
+            $contactpersonname,
+            $contactdepartmentname,
+            $contactphoneno,
+            $contactfaxno,
+            $contactemailadd,
+            $contacttypecode
+        );
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentShipFromElectronicAddress(): void
+    {
+        self::$document->getDocumentShipFromElectronicAddress($uriType, $uriId);
+
+        $this->assertEquals("EM", $uriType);
+        $this->assertEquals("warehouse@seller.com", $uriId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentRequestedDeliverySupplyChainEvent(): void
+    {
+        $this->assertTrue(self::$document->firstDocumentRequestedDeliverySupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentRequestedDeliverySupplyChainEvent(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentRequestedDeliverySupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentRequestedDeliverySupplyChainEvent(): void
+    {
+        self::$document->firstDocumentRequestedDeliverySupplyChainEvent();
+        self::$document->getDocumentRequestedDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+
+        $this->assertNotNull($occurrenceDateTime);
+        $this->assertNotNull($startDateTime);
+        $this->assertNotNull($endDateTime);
+        $this->assertEquals("21.12.2022", $occurrenceDateTime->format('d.m.Y'));
+        $this->assertEquals("21.12.2022", $startDateTime->format('d.m.Y'));
+        $this->assertEquals("21.12.2022", $endDateTime->format('d.m.Y'));
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentRequestedDeliverySupplyChainEventNoNext(): void
+    {
+        $this->expectException(\OutOfRangeException::class);
+
+        self::$document->nextDocumentRequestedDeliverySupplyChainEvent();
+        self::$document->getDocumentRequestedDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentInvoicee(): void
+    {
+        self::$document->getDocumentInvoicee($name, $id, $description);
+
+        $this->assertEquals("INVOICEE_NAME", $name);
+        $this->assertIsArray($id);
+        $this->assertArrayHasKey(0, $id);
+        $this->assertEquals("INVOICEE_ID_9587456", $id[0]);
+        $this->assertEquals("", $description);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentInvoiceeGlobalId(): void
+    {
+        self::$document->getDocumentInvoiceeGlobalId($globalids);
+
+        $this->assertIsArray($globalids);
+        $this->assertArrayHasKey("0088", $globalids);
+        $this->assertEquals("98765432179", $globalids["0088"]);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentInvoiceeTaxRegistration(): void
+    {
+        self::$document->getDocumentInvoiceeTaxRegistration($taxreg);
+
+        $this->assertIsArray($taxreg);
+        $this->assertArrayHasKey("VA", $taxreg);
+        $this->assertArrayHasKey("FC", $taxreg);
+        $this->assertEquals("FR 05 987 654 321", $taxreg["VA"]);
+        $this->assertEquals("INVOICEE_TAX_ID", $taxreg["FC"]);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentInvoiceeAddress(): void
+    {
+        self::$document->getDocumentInvoiceeAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
+
+        $this->assertEquals("INVOICEE_ADDR_1", $lineone);
+        $this->assertEquals("INVOICEE_ADDR_2", $linetwo);
+        $this->assertEquals("INVOICEE_ADDR_3", $linethree);
+        $this->assertEquals("69001", $postcode);
+        $this->assertEquals("INVOICEE_CITY", $city);
+        $this->assertEquals("FR", $country);
+        $this->assertEquals("", $subdivision);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentInvoiceeLegalOrganisation(): void
+    {
+        self::$document->getDocumentInvoiceeLegalOrganisation($legalorgid, $legalorgtype, $legalorgname);
+
+        $this->assertEquals("987654321", $legalorgid);
+        $this->assertEquals("0002", $legalorgtype);
+        $this->assertEquals("INVOICEE_TRADING_NAME", $legalorgname);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentInvoiceeContact(): void
+    {
+        $this->assertTrue(self::$document->firstDocumentInvoiceeContact());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentInvoiceeContact(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentInvoiceeContact());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentInvoiceeContact(): void
+    {
+        self::$document->firstDocumentInvoiceeContact();
+        self::$document->getDocumentInvoiceeContact(
+            $contactpersonname,
+            $contactdepartmentname,
+            $contactphoneno,
+            $contactfaxno,
+            $contactemailadd,
+            $contacttypecode
+        );
+
+        $this->assertEquals("INVOICEE_CONTACT_NAME", $contactpersonname);
+        $this->assertEquals("INVOICEE_CONTACT_DEP", $contactdepartmentname);
+        $this->assertEquals("+33 6 65 98 75 32", $contactphoneno);
+        $this->assertEquals("", $contactfaxno);
+        $this->assertEquals("invoicee@buyer.com", $contactemailadd);
+        $this->assertEquals("LB", $contacttypecode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentInvoiceeContactNoNext(): void
+    {
+        $this->expectException(\OutOfRangeException::class);
+
+        self::$document->nextDocumentInvoiceeContact();
+        self::$document->getDocumentInvoiceeContact(
+            $contactpersonname,
+            $contactdepartmentname,
+            $contactphoneno,
+            $contactfaxno,
+            $contactemailadd,
+            $contacttypecode
+        );
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentInvoiceeElectronicAddress(): void
+    {
+        self::$document->getDocumentInvoiceeElectronicAddress($uriType, $uriId);
+
+        $this->assertEquals("EM", $uriType);
+        $this->assertEquals("invoicee@buyer.com", $uriId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstGetDocumentPaymentMeans(): void
+    {
+        $this->assertTrue(self::$document->firstDocumentPaymentMeans());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextGetDocumentPaymentMeans(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPaymentMeans());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPaymentMeans(): void
+    {
+        self::$document->firstDocumentPaymentMeans();
+        self::$document->getDocumentPaymentMeans($paymentMeansCode, $paymentMeansInformation);
+
+        $this->assertEquals("30", $paymentMeansCode);
+        $this->assertEquals("Credit Transfer", $paymentMeansInformation);
     }
 }

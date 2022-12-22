@@ -1747,8 +1747,11 @@ class OrderDocumentBuilder extends OrderDocument
      * Set the requested date or period on which delivery is requested
      *
      * @param DateTime $occurrenceDateTime
+     * A Requested Date on which Delivery is requested
      * @param DateTime|null $startDateTime
+     * The Start Date of he Requested Period on which Delivery is requested
      * @param DateTime|null $endDateTime
+     * The End Date of he Requested Period on which Delivery is requested
      * @return OrderDocumentBuilder
      */
     public function setDocumentRequestedDeliverySupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): OrderDocumentBuilder
@@ -1946,12 +1949,6 @@ class OrderDocumentBuilder extends OrderDocument
 
     /**
      * Set detailed information on the payment method
-     *
-     * __Notes__
-     *  - The SpecifiedTradeSettlementPaymentMeans element can only be repeated for each bank account if
-     *    several bank accounts are to be transferred for transfers. The code for the payment method in the Typecode
-     *    element must therefore not differ in the repetitions. The elements ApplicableTradeSettlementFinancialCard
-     *    and PayerPartyDebtorFinancialAccount must not be specified for bank transfers.
      *
      * @param string $paymentMeansCode
      * The expected or used means of payment, expressed as a code. The entries from the UNTDID 4461 code list

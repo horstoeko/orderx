@@ -60,7 +60,32 @@ class OrderDocumentReader extends OrderDocument
     /**
      * @var integer
      */
+    private $documentShipToContactPointer = 0;
+
+    /**
+     * @var integer
+     */
+    private $documentShipFromContactPointer = 0;
+
+    /**
+     * @var integer
+     */
     private $documentAddRefDocPointer = 0;
+
+    /**
+     * @var integer
+     */
+    private $documentRequestedDeliverySupplyChainEventPointer = 0;
+
+    /**
+     * @var integer
+     */
+    private $documentInvoiceeContactPointer = 0;
+
+    /**
+     * @var integer
+     */
+    private $documentPaymentMeansPointer = 0;
 
     /**
      * Set the directory where the attached binary data from
@@ -527,7 +552,7 @@ class OrderDocumentReader extends OrderDocument
      * @param string|null $uriId
      * @return OrderDocumentReader
      */
-    public function getDocumentSellerElectronicAddress(?string &$uriType = null, ?string &$uriId = null): OrderDocumentReader
+    public function getDocumentSellerElectronicAddress(?string &$uriType, ?string &$uriId): OrderDocumentReader
     {
         $uriType = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getURIUniversalCommunication.getURIID.getschemeID", "");
         $uriId = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSellerTradeParty.getURIUniversalCommunication.getURIID", "");
@@ -728,7 +753,7 @@ class OrderDocumentReader extends OrderDocument
      * @param string|null $uriId
      * @return OrderDocumentReader
      */
-    public function getDocumentBuyerElectronicAddress(?string &$uriType = null, ?string &$uriId = null): OrderDocumentReader
+    public function getDocumentBuyerElectronicAddress(?string &$uriType, ?string &$uriId): OrderDocumentReader
     {
         $uriType = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getBuyerTradeParty.getURIUniversalCommunication.getURIID.getschemeID", "");
         $uriId = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getBuyerTradeParty.getURIUniversalCommunication.getURIID", "");
@@ -918,7 +943,7 @@ class OrderDocumentReader extends OrderDocument
      * @param string|null $uriId
      * @return OrderDocumentReader
      */
-    public function getDocumentBuyerRequisitionerElectronicAddress(?string &$uriType = null, ?string &$uriId = null): OrderDocumentReader
+    public function getDocumentBuyerRequisitionerElectronicAddress(?string &$uriType, ?string &$uriId): OrderDocumentReader
     {
         $uriType = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getBuyerRequisitionerTradeParty.getURIUniversalCommunication.getURIID.getschemeID", "");
         $uriId = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getBuyerRequisitionerTradeParty.getURIUniversalCommunication.getURIID", "");
@@ -1153,6 +1178,788 @@ class OrderDocumentReader extends OrderDocument
         } else {
             $binarydatafilename = "";
         }
+
+        return $this;
+    }
+
+    /**
+     * Get details of a blanket order referenced document
+     *
+     * @param string $blanketOrderRefId
+     * The identification of a Blanket Order, issued by the Buyer or the Buyer Requisitioner.
+     * @param DateTime|null $blanketOrderRefDate
+     * The date or date time for the issuance of this referenced Blanket Order.
+     * @return OrderDocumentReader
+     */
+    public function getDocumentBlanketOrderReferencedDocument(?string &$blanketOrderRefId, ?DateTime &$blanketOrderRefDate): OrderDocumentReader
+    {
+        $blanketOrderRefId = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getBlanketOrderReferencedDocument.getIssuerAssignedID.value", "");
+        $blanketOrderRefDate = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getBlanketOrderReferencedDocument.getFormattedIssueDateTime.getDateTimeString.value", ""),
+            $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getBlanketOrderReferencedDocument.getFormattedIssueDateTime.getDateTimeString.getFormat", "")
+        );
+
+        return $this;
+    }
+
+    /**
+     * Get details of a the Previous Order Change Document, issued by the Buyer or the Buyer Requisitioner.
+     *
+     * @param string $prevOrderChangeRefId
+     * The identification of a the Previous Order Change Document, issued by the Buyer or the Buyer Requisitioner.
+     * @param DateTime|null $prevOrderChangeRefDate
+     * Issued date
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPreviousOrderChangeReferencedDocument(?string &$prevOrderChangeRefId, ?DateTime &$prevOrderChangeRefDate): OrderDocumentReader
+    {
+        $prevOrderChangeRefId = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getPreviousOrderChangeReferencedDocument.getIssuerAssignedID.value", "");
+        $prevOrderChangeRefDate = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getPreviousOrderChangeReferencedDocument.getFormattedIssueDateTime.getDateTimeString.value", ""),
+            $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getPreviousOrderChangeReferencedDocument.getFormattedIssueDateTime.getDateTimeString.getFormat", "")
+        );
+
+        return $this;
+    }
+
+    /**
+     * Set details of a the Previous Order Response Document, issued by the Seller.
+     *
+     * @param string $prevOrderResponseRefId
+     * The identification of a the Previous Order Response Document, issued by the Seller.
+     * @param DateTime|null $prevOrderResponseRefDate
+     * Issued date
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPreviousOrderResponseReferencedDocument(?string &$prevOrderResponseRefId, ?DateTime &$prevOrderResponseRefDate): OrderDocumentReader
+    {
+        $prevOrderResponseRefId = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getPreviousOrderResponseReferencedDocument.getIssuerAssignedID.value", "");
+        $prevOrderResponseRefDate = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getPreviousOrderResponseReferencedDocument.getFormattedIssueDateTime.getDateTimeString.value", ""),
+            $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getPreviousOrderResponseReferencedDocument.getFormattedIssueDateTime.getDateTimeString.getFormat", "")
+        );
+
+        return $this;
+    }
+
+    /**
+     * Get Details of a project reference
+     *
+     * @param string $procuringProjectId
+     * Project Data
+     * @param string $procuringProjectName
+     * Project Name
+     * @return OrderDocumentReader
+     */
+    public function getDocumentProcuringProject(?string &$procuringProjectId, ?string &$procuringProjectName): OrderDocumentReader
+    {
+        $procuringProjectId = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSpecifiedProcuringProject.getID", "");
+        $procuringProjectName = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSpecifiedProcuringProject.getName", "");
+
+        return $this;
+    }
+
+    /**
+     * Ship-To
+     *
+     * @param string $name
+     * The name of the party to whom the goods are being delivered or for whom the services are being
+     * performed. Must be used if the recipient of the goods or services is not the same as the buyer.
+     * @param string|null $id
+     * An identifier for the place where the goods are delivered or where the services are provided.
+     * Multiple IDs can be assigned or specified. They can be differentiated by using different
+     * identification schemes. If no scheme is given, it should be known to the buyer and seller, e.g.
+     * a previously exchanged identifier assigned by the buyer or seller.
+     * @param string|null $description
+     * Further legal information that is relevant for the party
+     * @return OrderDocumentReader
+     */
+    public function getDocumentShipTo(?string &$name, ?array &$id, ?string &$description): OrderDocumentReader
+    {
+        $name = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getName", "");
+        $id = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getID", []);
+        $description = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getDescription", "");
+
+        $id = $this->convertToArray($id, ["id" => "value"]);
+
+        return $this;
+    }
+
+    /**
+     * Get global identifier of the seller.
+     *
+     * @param array|null $globalID
+     * Array of the sellers global ids indexed by the identification scheme. The identification scheme results
+     * from the list published by the ISO/IEC 6523 Maintenance Agency. In particular, the following scheme
+     * codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177 : ODETTE
+     * @return OrderDocumentReader
+     */
+    public function getDocumentShipToGlobalId(?array &$globalID): OrderDocumentReader
+    {
+        $globalID = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getGlobalID", []);
+        $globalID = $this->convertToAssociativeArray($globalID, "getSchemeID", "value");
+
+        return $this;
+    }
+
+    /**
+     * Get Tax registration to Ship-To Trade party
+     *
+     * @param array|null $taxreg
+     * Array of sales tax identification numbers of the seller indexed by __FC__ for _Tax number of the seller_ and __VA__
+     * for _Sales tax identification number of the seller_
+     * @return OrderDocumentReader
+     */
+    public function getDocumentShipToTaxRegistration(?array &$taxreg): OrderDocumentReader
+    {
+        $taxreg = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getSpecifiedTaxRegistration", []);
+        $taxreg = $this->convertToAssociativeArray($taxreg, "getID.getSchemeID", "getID.value");
+
+        return $this;
+    }
+
+    /**
+     * Get the postal address of the Ship-To party
+     *
+     * @param string|null $lineone
+     * The main line in the party's address. This is usually the street name and house number or
+     * the post office box
+     * @param string|null $linetwo
+     * Line 2 of the party's address. This is an additional address line in an address that can be
+     * used to provide additional details in addition to the main line
+     * @param string|null $linethree
+     * Line 3 of the party's address. This is an additional address line in an address that can be
+     * used to provide additional details in addition to the main line
+     * @param string|null $postcode
+     * Identifier for a group of properties, such as a zip code
+     * @param string|null $city
+     * Usual name of the city or municipality in which the party's address is located
+     * @param string|null $country
+     * Code used to identify the country. If no tax agent is specified, this is the country in which the sales tax
+     * is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
+     * representation of names of countries and their subdivisions”
+     * @param string|null $subdivision
+     * The party's state
+     * @return OrderDocumentReader
+     */
+    public function getDocumentShipToAddress(?string &$lineone, ?string &$linetwo, ?string &$linethree, ?string &$postcode, ?string &$city, ?string &$country, ?string &$subdivision): OrderDocumentReader
+    {
+        $lineone = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getPostalTradeAddress.getLineOne", "");
+        $linetwo = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getPostalTradeAddress.getLineTwo", "");
+        $linethree = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getPostalTradeAddress.getLineThree", "");
+        $postcode = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getPostalTradeAddress.getPostcodeCode.value", "");
+        $city = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getPostalTradeAddress.getCityName", "");
+        $country = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getPostalTradeAddress.getCountryID", "");
+        $subdivision = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getPostalTradeAddress.getCountrySubDivisionName", "");
+
+        return $this;
+    }
+
+    /**
+     * Set legal organisation of the Ship-To party
+     *
+     * @param string|null $legalorgid
+     * An identifier issued by an official registrar that identifies the
+     * party as a legal entity or legal person. If no identification scheme ($legalorgtype) is provided,
+     * it should be known to the buyer or seller party
+     * @param string|null $legalorgtype The identifier for the identification scheme of the legal
+     * registration of the party. In particular, the following scheme codes are used: 0021 : SWIFT, 0088 : EAN,
+     * 0060 : DUNS, 0177 : ODETTE
+     * @param string|null $legalorgname A name by which the party is known, if different from the party's name
+     * (also known as the company name)
+     * @return OrderDocumentReader
+     */
+    public function getDocumentShipToLegalOrganisation(?string &$legalorgid, ?string &$legalorgtype, ?string &$legalorgname): OrderDocumentReader
+    {
+        $legalorgid = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getSpecifiedLegalOrganization.getID.value", "");
+        $legalorgtype = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getSpecifiedLegalOrganization.getID.getSchemeID", "");
+        $legalorgname = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getSpecifiedLegalOrganization.getTradingBusinessName", "");
+
+        return $this;
+    }
+
+    /**
+     * Seek to the first ship-to contact of the document.
+     * Returns true if a first ship-to contact is available, otherwise false
+     * You may use this together with OrderDocumentReader::getDocumentShipToContact
+     *
+     * @return boolean
+     */
+    public function firstDocumentShipToContact(): bool
+    {
+        $this->documentShipToContactPointer = 0;
+        $contacts = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getDefinedTradeContact", []));
+        return isset($contacts[$this->documentShipToContactPointer]);
+    }
+
+    /**
+     * Seek to the next available first ship-to contact of the document.
+     * Returns true if another ship-to contact is available, otherwise false
+     * You may use this together with OrderDocumentReader::getDocumentShipToContact
+     *
+     * @return boolean
+     */
+    public function nextDocumentShipToContact(): bool
+    {
+        $this->documentShipToContactPointer++;
+        $contacts = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getDefinedTradeContact", []));
+        return isset($contacts[$this->documentShipToContactPointer]);
+    }
+
+    /**
+     * Get contact of the Ship-To party
+     *
+     * @param string|null $contactpersonname
+     * Contact point for a legal entity, such as a personal name of the contact person
+     * @param string|null $contactdepartmentname
+     * Contact point for a legal entity, such as a name of the department or office
+     * @param string|null $contactphoneno
+     * Detailed information on the party's phone number
+     * @param string|null $contactfaxno
+     * Detailed information on the party's fax number
+     * @param string|null $contactemailadd
+     * Detailed information on the party's email address
+     * @param string|null $contactTypeCode
+     * Type (Code) of the contach
+     * @return OrderDocumentReader
+     */
+    public function getDocumentShipToContact(?string &$contactpersonname, ?string &$contactdepartmentname, ?string &$contactphoneno, ?string &$contactfaxno, ?string &$contactemailadd, ?string &$contacttypecode): OrderDocumentReader
+    {
+        $contacts = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getDefinedTradeContact", []));
+        $contact = $this->objectHelper->getArrayIndex($contacts, $this->documentShipToContactPointer);
+        $contactpersonname = $this->getInvoiceValueByPathFrom($contact, "getPersonName", "");
+        $contactdepartmentname = $this->getInvoiceValueByPathFrom($contact, "getDepartmentName", "");
+        $contactphoneno = $this->getInvoiceValueByPathFrom($contact, "getTelephoneUniversalCommunication.getCompleteNumber", "");
+        $contactfaxno = $this->getInvoiceValueByPathFrom($contact, "getFaxUniversalCommunication.getCompleteNumber", "");
+        $contactemailadd = $this->getInvoiceValueByPathFrom($contact, "getEmailURIUniversalCommunication.getURIID", "");
+        $contacttypecode = $this->getInvoiceValueByPathFrom($contact, "getTypeCode", "");
+
+        return $this;
+    }
+
+    /**
+     * Set the universal communication info for the Ship-To Trade Party
+     *
+     * @param string|null $uriType
+     * @param string|null $uriId
+     * @return OrderDocumentReader
+     */
+    public function getDocumentShipToElectronicAddress(?string &$uriType, ?string &$uriId): OrderDocumentReader
+    {
+        $uriType = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getURIUniversalCommunication.getURIID.getschemeID", "");
+        $uriId = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipToTradeParty.getURIUniversalCommunication.getURIID", "");
+
+        return $this;
+    }
+
+    /**
+     * Ship-From
+     *
+     * @param string $name
+     * The name of the party to whom the goods are being delivered or for whom the services are being
+     * performed. Must be used if the recipient of the goods or services is not the same as the buyer.
+     * @param string|null $id
+     * An identifier for the place where the goods are delivered or where the services are provided.
+     * Multiple IDs can be assigned or specified. They can be differentiated by using different
+     * identification schemes. If no scheme is given, it should be known to the buyer and seller, e.g.
+     * a previously exchanged identifier assigned by the buyer or seller.
+     * @param string|null $description
+     * Further legal information that is relevant for the party
+     * @return OrderDocumentReader
+     */
+    public function getDocumentShipFrom(?string &$name, ?array &$id, ?string &$description): OrderDocumentReader
+    {
+        $name = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getName", "");
+        $id = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getID", []);
+        $description = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getDescription", "");
+
+        $id = $this->convertToArray($id, ["id" => "value"]);
+
+        return $this;
+    }
+
+    /**
+     * Get global identifier of the Ship-From Trade party.
+     *
+     * @param array|null $globalID
+     * Array of the sellers global ids indexed by the identification scheme. The identification scheme results
+     * from the list published by the ISO/IEC 6523 Maintenance Agency. In particular, the following scheme
+     * codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177 : ODETTE
+     * @return OrderDocumentReader
+     */
+    public function getDocumentShipFromGlobalId(?array &$globalID): OrderDocumentReader
+    {
+        $globalID = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getGlobalID", []);
+        $globalID = $this->convertToAssociativeArray($globalID, "getSchemeID", "value");
+
+        return $this;
+    }
+
+    /**
+     * Get Tax registration to Ship-From Trade party
+     *
+     * @param array|null $taxreg
+     * Array of sales tax identification numbers of the seller indexed by __FC__ for _Tax number of the seller_ and __VA__
+     * for _Sales tax identification number of the seller_
+     * @return OrderDocumentReader
+     */
+    public function getDocumentShipFromTaxRegistration(?array &$taxreg): OrderDocumentReader
+    {
+        $taxreg = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getSpecifiedTaxRegistration", []);
+        $taxreg = $this->convertToAssociativeArray($taxreg, "getID.getSchemeID", "getID.value");
+
+        return $this;
+    }
+
+    /**
+     * Get the postal address of the Ship-From party
+     *
+     * @param string|null $lineone
+     * The main line in the party's address. This is usually the street name and house number or
+     * the post office box
+     * @param string|null $linetwo
+     * Line 2 of the party's address. This is an additional address line in an address that can be
+     * used to provide additional details in addition to the main line
+     * @param string|null $linethree
+     * Line 3 of the party's address. This is an additional address line in an address that can be
+     * used to provide additional details in addition to the main line
+     * @param string|null $postcode
+     * Identifier for a group of properties, such as a zip code
+     * @param string|null $city
+     * Usual name of the city or municipality in which the party's address is located
+     * @param string|null $country
+     * Code used to identify the country. If no tax agent is specified, this is the country in which the sales tax
+     * is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
+     * representation of names of countries and their subdivisions”
+     * @param string|null $subdivision
+     * The party's state
+     * @return OrderDocumentReader
+     */
+    public function getDocumentShipFromAddress(?string &$lineone, ?string &$linetwo, ?string &$linethree, ?string &$postcode, ?string &$city, ?string &$country, ?string &$subdivision): OrderDocumentReader
+    {
+        $lineone = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getPostalTradeAddress.getLineOne", "");
+        $linetwo = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getPostalTradeAddress.getLineTwo", "");
+        $linethree = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getPostalTradeAddress.getLineThree", "");
+        $postcode = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getPostalTradeAddress.getPostcodeCode.value", "");
+        $city = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getPostalTradeAddress.getCityName", "");
+        $country = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getPostalTradeAddress.getCountryID", "");
+        $subdivision = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getPostalTradeAddress.getCountrySubDivisionName", "");
+
+        return $this;
+    }
+
+    /**
+     * Set legal organisation of the Ship-From party
+     *
+     * @param string|null $legalorgid
+     * An identifier issued by an official registrar that identifies the
+     * party as a legal entity or legal person. If no identification scheme ($legalorgtype) is provided,
+     * it should be known to the buyer or seller party
+     * @param string|null $legalorgtype The identifier for the identification scheme of the legal
+     * registration of the party. In particular, the following scheme codes are used: 0021 : SWIFT, 0088 : EAN,
+     * 0060 : DUNS, 0177 : ODETTE
+     * @param string|null $legalorgname A name by which the party is known, if different from the party's name
+     * (also known as the company name)
+     * @return OrderDocumentReader
+     */
+    public function getDocumentShipFromLegalOrganisation(?string &$legalorgid, ?string &$legalorgtype, ?string &$legalorgname): OrderDocumentReader
+    {
+        $legalorgid = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getSpecifiedLegalOrganization.getID.value", "");
+        $legalorgtype = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getSpecifiedLegalOrganization.getID.getSchemeID", "");
+        $legalorgname = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getSpecifiedLegalOrganization.getTradingBusinessName", "");
+
+        return $this;
+    }
+
+    /**
+     * Seek to the first ship-from contact of the document.
+     * Returns true if a first ship-to contact is available, otherwise false
+     * You may use this together with OrderDocumentReader::getDocumentShipFromContact
+     *
+     * @return boolean
+     */
+    public function firstDocumentShipFromContact(): bool
+    {
+        $this->documentShipFromContactPointer = 0;
+        $contacts = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getDefinedTradeContact", []));
+        return isset($contacts[$this->documentShipFromContactPointer]);
+    }
+
+    /**
+     * Seek to the next available first ship-to contact of the document.
+     * Returns true if another ship-to contact is available, otherwise false
+     * You may use this together with OrderDocumentReader::getDocumentShipFromContact
+     *
+     * @return boolean
+     */
+    public function nextDocumentShipFromContact(): bool
+    {
+        $this->documentShipFromContactPointer++;
+        $contacts = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getDefinedTradeContact", []));
+        return isset($contacts[$this->documentShipFromContactPointer]);
+    }
+
+    /**
+     * Get contact of the Ship-From Trade party
+     *
+     * @param string|null $contactpersonname
+     * Contact point for a legal entity, such as a personal name of the contact person
+     * @param string|null $contactdepartmentname
+     * Contact point for a legal entity, such as a name of the department or office
+     * @param string|null $contactphoneno
+     * Detailed information on the party's phone number
+     * @param string|null $contactfaxno
+     * Detailed information on the party's fax number
+     * @param string|null $contactemailadd
+     * Detailed information on the party's email address
+     * @param string|null $contactTypeCode
+     * Type (Code) of the contach
+     * @return OrderDocumentReader
+     */
+    public function getDocumentShipFromContact(?string &$contactpersonname, ?string &$contactdepartmentname, ?string &$contactphoneno, ?string &$contactfaxno, ?string &$contactemailadd, ?string &$contacttypecode): OrderDocumentReader
+    {
+        $contacts = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getDefinedTradeContact", []));
+        $contact = $this->objectHelper->getArrayIndex($contacts, $this->documentShipFromContactPointer);
+        $contactpersonname = $this->getInvoiceValueByPathFrom($contact, "getPersonName", "");
+        $contactdepartmentname = $this->getInvoiceValueByPathFrom($contact, "getDepartmentName", "");
+        $contactphoneno = $this->getInvoiceValueByPathFrom($contact, "getTelephoneUniversalCommunication.getCompleteNumber", "");
+        $contactfaxno = $this->getInvoiceValueByPathFrom($contact, "getFaxUniversalCommunication.getCompleteNumber", "");
+        $contactemailadd = $this->getInvoiceValueByPathFrom($contact, "getEmailURIUniversalCommunication.getURIID", "");
+        $contacttypecode = $this->getInvoiceValueByPathFrom($contact, "getTypeCode", "");
+
+        return $this;
+    }
+
+    /**
+     * Set the universal communication info for the Ship-From Trade Party
+     *
+     * @param string|null $uriType
+     * @param string|null $uriId
+     * @return OrderDocumentReader
+     */
+    public function getDocumentShipFromElectronicAddress(?string &$uriType, ?string &$uriId): OrderDocumentReader
+    {
+        $uriType = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getURIUniversalCommunication.getURIID.getschemeID", "");
+        $uriId = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getShipFromTradeParty.getURIUniversalCommunication.getURIID", "");
+
+        return $this;
+    }
+
+    /**
+     * Seek to the first document requested delivery supply chain event of the document.
+     * Returns true if a first event is available, otherwise false
+     * You may use this together with OrderDocumentReader::getDocumentRequestedDeliverySupplyChainEvent
+     *
+     * @return boolean
+     */
+    public function firstDocumentRequestedDeliverySupplyChainEvent(): bool
+    {
+        $this->documentRequestedDeliverySupplyChainEventPointer = 0;
+        $events = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getRequestedDeliverySupplyChainEvent", []));
+        return isset($events[$this->documentRequestedDeliverySupplyChainEventPointer]);
+    }
+
+    /**
+     * Seek to the next document requested delivery supply chain event of the document.
+     * Returns true if a event is available, otherwise false
+     * You may use this together with OrderDocumentReader::getDocumentRequestedDeliverySupplyChainEvent
+     *
+     * @return boolean
+     */
+    public function nextDocumentRequestedDeliverySupplyChainEvent(): bool
+    {
+        $this->documentRequestedDeliverySupplyChainEventPointer++;
+        $events = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getRequestedDeliverySupplyChainEvent", []));
+        return isset($events[$this->documentRequestedDeliverySupplyChainEventPointer]);
+    }
+
+    /**
+     * Get the requested date or period on which delivery is requested at current
+     * pointer position. See
+     *  - __$documentRequestedDeliverySupplyChainEventPointer)__
+     *  - __OrderDocumentReader::firstDocumentRequestedDeliverySupplyChainEvent__
+     *  - __OrderDocumentReader::nextDocumentRequestedDeliverySupplyChainEvent__
+     *
+     * @param DateTime $occurrenceDateTime
+     * A Requested Date on which Delivery is requested
+     * @param DateTime|null $startDateTime
+     * The Start Date of he Requested Period on which Delivery is requested
+     * @param DateTime|null $endDateTime
+     * The End Date of he Requested Period on which Delivery is requested
+     * @return OrderDocumentReader
+     */
+    public function getDocumentRequestedDeliverySupplyChainEvent(?DateTime &$occurrenceDateTime, ?DateTime &$startDateTime, ?DateTime &$endDateTime): OrderDocumentReader
+    {
+        $events = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getRequestedDeliverySupplyChainEvent", []));
+        $event = $this->objectHelper->getArrayIndex($events, $this->documentRequestedDeliverySupplyChainEventPointer);
+
+        $occurrenceDateTime = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPathFrom($event, "getOccurrenceDateTime.getDateTimeString", ""),
+            $this->getInvoiceValueByPathFrom($event, "getOccurrenceDateTime.getDateTimeString.getFormat", "")
+        );
+        $startDateTime = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPathFrom($event, "getOccurrenceSpecifiedPeriod.getStartDateTime.getDateTimeString", ""),
+            $this->getInvoiceValueByPathFrom($event, "getOccurrenceSpecifiedPeriod.getStartDateTime.getDateTimeString.getFormat", "")
+        );
+        $endDateTime = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPathFrom($event, "getOccurrenceSpecifiedPeriod.getEndDateTime.getDateTimeString", ""),
+            $this->getInvoiceValueByPathFrom($event, "getOccurrenceSpecifiedPeriod.getEndDateTime.getDateTimeString.getFormat", "")
+        );
+
+        return $this;
+    }
+
+    /**
+     * Set detailed information on the Invoicee Trade Party
+     *
+     * @param string $name
+     * The name of the party
+     * @param string|null $id
+     * An identifier for the party. Multiple IDs can be assigned or specified. They can be differentiated by using
+     * different identification schemes. If no scheme is given, it should  be known to the buyer and seller, e.g.
+     * a previously exchanged identifier assigned by the buyer or seller.
+     * @param string|null $description
+     * Further legal information that is relevant for the party
+     * @return OrderDocumentReader
+     */
+    public function getDocumentInvoicee(?string &$name, ?array &$id, ?string &$description): OrderDocumentReader
+    {
+        $name = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getName", "");
+        $id = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getID", []);
+        $description = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getDescription", "");
+
+        $id = $this->convertToArray($id, ["id" => "value"]);
+
+        return $this;
+    }
+
+    /**
+     * Get global identifier of the Invoicee.
+     *
+     * @param array|null $globalID
+     * Array of the invoicees global ids indexed by the identification scheme. The identification scheme results
+     * from the list published by the ISO/IEC 6523 Maintenance Agency. In particular, the following scheme
+     * codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177 : ODETTE
+     * @return OrderDocumentReader
+     */
+    public function getDocumentInvoiceeGlobalId(?array &$globalID): OrderDocumentReader
+    {
+        $globalID = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getGlobalID", []);
+        $globalID = $this->convertToAssociativeArray($globalID, "getSchemeID", "value");
+
+        return $this;
+    }
+
+    /**
+     * Get Tax registration to Invoicee Trade Party
+     *
+     * @param array|null $taxreg
+     * Array of sales tax identification numbers of the invoicee indexed by __FC__ for _Tax number of the invoicee_ and __VA__
+     * for _Sales tax identification number of the invoicee_
+     * @return OrderDocumentReader
+     */
+    public function getDocumentInvoiceeTaxRegistration(?array &$taxreg): OrderDocumentReader
+    {
+        $taxreg = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getSpecifiedTaxRegistration", []);
+        $taxreg = $this->convertToAssociativeArray($taxreg, "getID.getSchemeID", "getID.value");
+
+        return $this;
+    }
+
+    /**
+     * Get the address of Invoicee trade party
+     *
+     * @param string|null $lineone
+     * The main line in the invoicee's address. This is usually the street name and house number or
+     * the post office box
+     * @param string|null $linetwo
+     * Line 2 of the invoicee's address. This is an additional address line in an address that can be
+     * used to provide additional details in addition to the main line
+     * @param string|null $linethree
+     * Line 3 of the invoicee' address. This is an additional address line in an address that can be
+     * used to provide additional details in addition to the main line
+     * @param string|null $postcode
+     * Identifier for a group of properties, such as a zip code
+     * @param string|null $city
+     * Usual name of the city or municipality in which the invoicee' address is located
+     * @param string|null $country
+     * Code used to identify the country. If no tax agent is specified, this is the country in which the sales tax
+     * is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
+     * representation of names of countries and their subdivisions”
+     * @param array|null $subdivision
+     * The invoicee' state
+     * @return OrderDocumentReader
+     */
+    public function getDocumentInvoiceeAddress(?string &$lineone, ?string &$linetwo, ?string &$linethree, ?string &$postcode, ?string &$city, ?string &$country, ?string &$subdivision): OrderDocumentReader
+    {
+        $lineone = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getPostalTradeAddress.getLineOne", "");
+        $linetwo = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getPostalTradeAddress.getLineTwo", "");
+        $linethree = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getPostalTradeAddress.getLineThree", "");
+        $postcode = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getPostalTradeAddress.getPostcodeCode.value", "");
+        $city = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getPostalTradeAddress.getCityName", "");
+        $country = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getPostalTradeAddress.getCountryID", "");
+        $subdivision = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getPostalTradeAddress.getCountrySubDivisionName", "");
+
+        return $this;
+    }
+
+    /**
+     * Get the legal organisation of invoice trade party
+     *
+     * @param string|null $legalorgid
+     * An identifier issued by an official registrar that identifies the
+     * invoice as a legal entity or legal person. If no identification scheme ($legalorgtype) is provided,
+     * it should be known to the buyer and invoice
+     * @param string|null $legalorgtype
+     * The identifier for the identification scheme of the legal
+     * registration of the invoice. If the identification scheme is used, it must be selected from
+     * ISO/IEC 6523 list
+     * @param string|null $legalorgname
+     * A name by which the invoice is known, if different from the invoice's name
+     * (also known as the company name)
+     * @return OrderDocumentReader
+     */
+    public function getDocumentInvoiceeLegalOrganisation(?string &$legalorgid, ?string &$legalorgtype, ?string &$legalorgname): OrderDocumentReader
+    {
+        $legalorgid = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getSpecifiedLegalOrganization.getID.value", "");
+        $legalorgtype = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getSpecifiedLegalOrganization.getID.getSchemeID", "");
+        $legalorgname = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getSpecifiedLegalOrganization.getTradingBusinessName", "");
+
+        return $this;
+    }
+
+    /**
+     * Seek to the first invoice contact of the document.
+     * Returns true if a first invoice contact is available, otherwise false
+     * You may use this together with OrderDocumentReader::getDocumentinvoiceeContact
+     *
+     * @return boolean
+     */
+    public function firstDocumentInvoiceeContact(): bool
+    {
+        $this->documentInvoiceeContactPointer = 0;
+        $contacts = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getDefinedTradeContact", []));
+        return isset($contacts[$this->documentInvoiceeContactPointer]);
+    }
+
+    /**
+     * Seek to the next available first invoicee contact of the document.
+     * Returns true if another invoicee contact is available, otherwise false
+     * You may use this together with OrderDocumentReader::getDocumentInvoiceeContact
+     *
+     * @return boolean
+     */
+    public function nextDocumentInvoiceeContact(): bool
+    {
+        $this->documentInvoiceeContactPointer++;
+        $contacts = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getDefinedTradeContact", []));
+        return isset($contacts[$this->documentInvoiceeContactPointer]);
+    }
+
+    /**
+     * Get detailed information on the invoicee's contact person
+     *
+     * @param string|null $contactpersonname
+     * Contact point for a legal entity,
+     * such as a personal name of the contact person
+     * @param string|null $contactdepartmentname
+     * Contact point for a legal entity, such as a name of the department or office
+     * @param string|null $contactphoneno
+     * Detailed information on the invoicee's phone number
+     * @param string|null $contactfaxno
+     * Detailed information on the invoicee's fax number
+     * @param string|null $contactemailadd
+     * Detailed information on the invoicee's email address
+     * @param string|null $contacttypecode
+     * @return OrderDocumentReader
+     */
+    public function getDocumentInvoiceeContact(?string &$contactpersonname, ?string &$contactdepartmentname, ?string &$contactphoneno, ?string &$contactfaxno, ?string &$contactemailadd, ?string &$contacttypecode): OrderDocumentReader
+    {
+        $contacts = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getDefinedTradeContact", []));
+        $contact = $this->objectHelper->getArrayIndex($contacts, $this->documentInvoiceeContactPointer);
+        $contactpersonname = $this->getInvoiceValueByPathFrom($contact, "getPersonName", "");
+        $contactdepartmentname = $this->getInvoiceValueByPathFrom($contact, "getDepartmentName", "");
+        $contactphoneno = $this->getInvoiceValueByPathFrom($contact, "getTelephoneUniversalCommunication.getCompleteNumber", "");
+        $contactfaxno = $this->getInvoiceValueByPathFrom($contact, "getFaxUniversalCommunication.getCompleteNumber", "");
+        $contactemailadd = $this->getInvoiceValueByPathFrom($contact, "getEmailURIUniversalCommunication.getURIID", "");
+        $contacttypecode = $this->getInvoiceValueByPathFrom($contact, "getTypeCode", "");
+
+        return $this;
+    }
+
+    /**
+     * Set the universal communication info for the invoicee
+     *
+     * @param string|null $uriType
+     * @param string|null $uriId
+     * @return OrderDocumentReader
+     */
+    public function getDocumentInvoiceeElectronicAddress(?string &$uriType, ?string &$uriId): OrderDocumentReader
+    {
+        $uriType = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getURIUniversalCommunication.getURIID.getschemeID", "");
+        $uriId = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getInvoiceeTradeParty.getURIUniversalCommunication.getURIID", "");
+
+        return $this;
+    }
+
+    /**
+     * Seek to the first payment means of the document.
+     * Returns true if a first payment mean is available, otherwise false
+     * You may use this together with ZugferdDocumentReader::getDocumentPaymentMeans
+     *
+     * @return boolean
+     */
+    public function firstDocumentPaymentMeans(): bool
+    {
+        $this->documentPaymentMeansPointer = 0;
+        $paymentMeans = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getSpecifiedTradeSettlementPaymentMeans", []));
+        return isset($paymentMeans[$this->documentPaymentMeansPointer]);
+    }
+
+    /**
+     * Seek to the next payment means of the document
+     * Returns true if another payment mean is available, otherwise false
+     * You may use this together with ZugferdDocumentReader::getDocumentPaymentMeans
+     *
+     * @return boolean
+     */
+    public function nextDocumentPaymentMeans(): bool
+    {
+        $this->documentPaymentMeansPointer++;
+        $paymentMeans = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getSpecifiedTradeSettlementPaymentMeans", []));
+        return isset($paymentMeans[$this->documentPaymentMeansPointer]);
+    }
+
+    /**
+     * Get detailed information on the payment method
+     *
+     * @param string|null $paymentMeansCode
+     * The expected or used means of payment, expressed as a code. The entries from the UNTDID 4461 code list
+     * must be used. A distinction should be made between SEPA and non-SEPA payments as well as between credit
+     * payments, direct debits, card payments and other means of payment In particular, the following codes can
+     * be used:
+     *  - 10: cash
+     *  - 20: check
+     *  - 30: transfer
+     *  - 42: Payment to bank account
+     *  - 48: Card payment
+     *  - 49: direct debit
+     *  - 57: Standing order
+     *  - 58: SEPA Credit Transfer
+     *  - 59: SEPA Direct Debit
+     *  - 97: Report
+     * @param string|null $paymentMeansInformation
+     * The expected or used means of payment expressed in text form, e.g. cash, bank transfer, direct debit,
+     * credit card, etc.
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPaymentMeans(?string &$paymentMeansCode, ?string &$paymentMeansInformation): OrderDocumentReader
+    {
+        $paymentMeans = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getSpecifiedTradeSettlementPaymentMeans", []));
+        $paymentMean = $this->objectHelper->getArrayIndex($paymentMeans, $this->documentPaymentMeansPointer);
+
+        $paymentMeansCode = $this->getInvoiceValueByPathFrom($paymentMean, "getTypeCode", "");
+        $paymentMeansInformation = implode("\r\n", $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($paymentMean, "getInformation", "")));
 
         return $this;
     }
