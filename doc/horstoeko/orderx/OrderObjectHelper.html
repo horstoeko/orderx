@@ -757,7 +757,7 @@ Zu- und Abschläge</p>                </div>
                 <div class="col-md-8 type">
                     <a href="#method_createClassInstance">createClassInstance</a>(string $classname, mixed $constructorvalue = null)
         
-                                            <p>Creates an instance of a class needed by $invoiceObject</p>                </div>
+                                            <p>Creates an instance of a class needed by $orderobject</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -901,6 +901,26 @@ array $value is returned</p>                </div>
                     <a href="#method_methodExists">methodExists</a>(string|object $instance, string $method)
         
                                             <p>Wrapper for method_exists for use in PHP8</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    void
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_checkArrayIndex">checkArrayIndex</a>(array $arr, int $index)
+        
+                                            <p>If $index is not found in $array an exception is raised.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getArrayIndex">getArrayIndex</a>(array $arr, int $index)
+        
+                                            <p>Get the array from $arr element at position $index. If $index is not found in $array an exception is raised.</p>                </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -3994,7 +4014,7 @@ Zu- und Abschläge</p>                                                </div>
     
 
                     <div class="method-description">
-                                    <p>Creates an instance of a class needed by $invoiceObject</p>                                                </div>
+                                    <p>Creates an instance of a class needed by $orderobject</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -4665,6 +4685,114 @@ array $value is returned</p>                                                </di
     </table>
 
             
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_checkArrayIndex">
+        <div class="location">at         line 1830</div>
+        <code>                    void
+    <strong>checkArrayIndex</strong>(array $arr, int $index)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>If $index is not found in $array an exception is raised.</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$arr</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>int</td>
+                <td>$index</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>void</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/OutOfRangeException">OutOfRangeException</a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getArrayIndex">
+        <div class="location">at         line 1845</div>
+        <code>                    mixed
+    <strong>getArrayIndex</strong>(array $arr, int $index)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get the array from $arr element at position $index. If $index is not found in $array an exception is raised.</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$arr</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>int</td>
+                <td>$index</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/OutOfRangeException">OutOfRangeException</a></td>
+                <td></td>
+            </tr>
+            </table>
+
             
                     </div>
     </div>

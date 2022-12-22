@@ -1,0 +1,2929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>horstoeko\orderx\OrderDocumentReader | horstoeko/Order-X API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/sami.css">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/typeahead.min.js"></script>
+        <script src="../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    
+    
+    </head>
+
+    <body id="class" data-name="class:horstoeko_orderx_OrderDocumentReader" data-root-path="../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../index.html">horstoeko/Order-X API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../classes.html">Classes</a></li>
+                                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../traits.html">Traits</a></li>
+                    <li><a href="../../doc-index.html">Index</a></li>
+                    <li><a href="../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                        <li><a href="../../horstoeko.html">horstoeko</a></li><li class="backslash">\</li><li><a href="../../horstoeko/orderx.html">orderx</a></li><li class="backslash">\</li><li>OrderDocumentReader</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>
+            OrderDocumentReader
+                
+        </h1>
+    </div>
+
+    <p>    class
+    <strong>OrderDocumentReader</strong>        extends <a href="../../horstoeko/orderx/OrderDocument.html"><abbr title="horstoeko\orderx\OrderDocument">OrderDocument</abbr></a>
+</p>
+
+        
+    
+
+            <div class="description">
+            <p>Class representing the document reader for incoming XML-Documents with
+XML data in BASIC-, COMFORT- and EXTENDED profile</p>                                </div>
+    
+    
+    
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setBinaryDataDirectory">setBinaryDataDirectory</a>(string $binarydatadirectory)
+        
+                                            <p>Set the directory where the attached binary data from
+additional referenced documents are temporary stored</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;<a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_readAndGuessFromFile">readAndGuessFromFile</a>(string $xmlfilename)
+        
+                                            <p>Guess the profile type of a xml file</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;<a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_readAndGuessFromContent">readAndGuessFromContent</a>(string $xmlcontent)
+        
+                                            <p>Guess the profile type of the readden xml document</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentInformation">getDocumentInformation</a>(string|null $documentNo, string|null $documentTypeCode, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $documentDate, string|null $documentCurrency, string|null $documentName, string|null $documentLanguageId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $documentEffectiveSpecifiedPeriod, string|null $documentPurposeCode, string|null $documentRequestedResponseTypeCode)
+        
+                                            <p>Undocumented function</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getIsDocumentCopy">getIsDocumentCopy</a>(bool|null $copyindicator)
+        
+                                            <p>Read copy indicator</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getIsTestDocument">getIsTestDocument</a>(bool|null $testdocumentindicator)
+        
+                                            <p>Read a test document indicator</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_firstDocumentNote">firstDocumentNote</a>()
+        
+                                            <p>Set the intérnal note pointer to the first position
+It will return false if there is no note on the first position</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_nextDocumentNote">nextDocumentNote</a>()
+        
+                                            <p>Set the intérnal note pointer to the next position.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentNote">getDocumentNote</a>(array|null $content, string|null $subjectCode, string|null $contentCode)
+        
+                                            <p>Retrieve the document note. You have to check first if there is a note using
+the firstDocumentNote/nextDocumentNote methods</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentSummation">getDocumentSummation</a>(float|null $lineTotalAmount, float|null $grandTotalAmount, float|null $chargeTotalAmount, float|null $allowanceTotalAmount, float|null $taxBasisTotalAmount, float|null $taxTotalAmount)
+        
+                                            <p>Get the document's money summation</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentBuyerReference">getDocumentBuyerReference</a>(string|null $buyerreference)
+        
+                                            <p>Get the identifier assigned by the buyer and used for internal routing.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentSeller">getDocumentSeller</a>(string|null $name, array|null $id, string|null $description)
+        
+                                            <p>Get detailed information about the seller (=service provider)</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentSellerGlobalId">getDocumentSellerGlobalId</a>(array|null $globalID)
+        
+                                            <p>Get global identifier of the seller.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentSellerTaxRegistration">getDocumentSellerTaxRegistration</a>(array|null $taxreg)
+        
+                                            <p>Get detailed information on the seller's tax information.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentSellerAddress">getDocumentSellerAddress</a>(string|null $lineone, string|null $linetwo, string|null $linethree, string|null $postcode, string|null $city, string|null $country, string|null $subdivision)
+        
+                                            <p>Get the address of seller trade party</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentSellerLegalOrganisation">getDocumentSellerLegalOrganisation</a>(string|null $legalorgid, string|null $legalorgtype, string|null $legalorgname)
+        
+                                            <p>Get the legal organisation of seller trade party</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_firstDocumentSellerContact">firstDocumentSellerContact</a>()
+        
+                                            <p>Seek to the first seller contact of the document.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_nextDocumentSellerContact">nextDocumentSellerContact</a>()
+        
+                                            <p>Seek to the next available first seller contact of the document.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentSellerContact">getDocumentSellerContact</a>(string|null $contactpersonname, string|null $contactdepartmentname, string|null $contactphoneno, string|null $contactfaxno, string|null $contactemailadd, string|null $contacttypecode)
+        
+                                            <p>Get detailed information on the seller's contact person</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentSellerElectronicAddress">getDocumentSellerElectronicAddress</a>(string|null $uriType = null, string|null $uriId = null)
+        
+                                            <p>Set the universal communication info for the seller</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentBuyer">getDocumentBuyer</a>(string|null $name, array|null $id, string|null $description)
+        
+                                            <p>Get detailed information about the buyer (service recipient)</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentBuyerGlobalId">getDocumentBuyerGlobalId</a>(array|null $globalID)
+        
+                                            <p>Get global identifier of the buyer.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentBuyerTaxRegistration">getDocumentBuyerTaxRegistration</a>(array|null $taxreg)
+        
+                                            <p>Get detailed information on the buyer's tax information.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentBuyerAddress">getDocumentBuyerAddress</a>(string|null $lineone, string|null $linetwo, string|null $linethree, string|null $postcode, string|null $city, string|null $country, string|null $subdivision)
+        
+                                            <p>Get the address of buyer trade party</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentBuyerLegalOrganisation">getDocumentBuyerLegalOrganisation</a>(string|null $legalorgid, string|null $legalorgtype, string|null $legalorgname)
+        
+                                            <p>Get the legal organisation of buyer trade party</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_firstDocumentBuyerContact">firstDocumentBuyerContact</a>()
+        
+                                            <p>Seek to the first buyer contact of the document.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_nextDocumentBuyerContact">nextDocumentBuyerContact</a>()
+        
+                                            <p>Seek to the next available first Buyer contact of the document.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentBuyerContact">getDocumentBuyerContact</a>(string|null $contactpersonname, string|null $contactdepartmentname, string|null $contactphoneno, string|null $contactfaxno, string|null $contactemailadd, string|null $contacttypecode)
+        
+                                            <p>Get detailed information on the buyer's contact person</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentBuyerElectronicAddress">getDocumentBuyerElectronicAddress</a>(string|null $uriType = null, string|null $uriId = null)
+        
+                                            <p>Set the universal communication info for the buyer</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentBuyerRequisitioner">getDocumentBuyerRequisitioner</a>(string|null $name, array|null $id, string|null $description)
+        
+                                            <p>Detailed information about the party who raises the Order originally on behalf of the Buyer</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentBuyerRequisitionerGlobalId">getDocumentBuyerRequisitionerGlobalId</a>(array|null $globalID)
+        
+                                            <p>Get global id's for the party who raises the Order originally on behalf of the buyer requisitioner</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentBuyerRequisitionerTaxRegistration">getDocumentBuyerRequisitionerTaxRegistration</a>(array|null $taxreg)
+        
+                                            <p>Get detailed information on the buyer requisitioner's tax information.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentBuyerRequisitionerAddress">getDocumentBuyerRequisitionerAddress</a>(string|null $lineone, string|null $linetwo, string|null $linethree, string|null $postcode, string|null $city, string|null $country, string|null $subdivision)
+        
+                                            <p>Get the address of buyer requisitioner's trade party</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentBuyerRequisitionerLegalOrganisation">getDocumentBuyerRequisitionerLegalOrganisation</a>(string|null $legalorgid, string|null $legalorgtype, string|null $legalorgname)
+        
+                                            <p>Get the legal organisation of buyer requisitioner trade party</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_firstDocumentBuyerRequisitionerContact">firstDocumentBuyerRequisitionerContact</a>()
+        
+                                            <p>Seek to the first buyer requisitioner's contact of the document.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_nextDocumentBuyerRequisitionerContact">nextDocumentBuyerRequisitionerContact</a>()
+        
+                                            <p>Seek to the next available first Buyer requisitioner's contact of the document.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentBuyerRequisitionerContact">getDocumentBuyerRequisitionerContact</a>(string|null $contactpersonname, string|null $contactdepartmentname, string|null $contactphoneno, string|null $contactfaxno, string|null $contactemailadd, string|null $contacttypecode)
+        
+                                            <p>Get detailed information on the buyer requisitioner's contact person</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentBuyerRequisitionerElectronicAddress">getDocumentBuyerRequisitionerElectronicAddress</a>(string|null $uriType = null, string|null $uriId = null)
+        
+                                            <p>Get the universal communication info for the buyer requisitioner</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentDeliveryTerms">getDocumentDeliveryTerms</a>(string|null $code, string|null $description, string|null $functionCode, string|null $relevantTradeLocationId, string|null $relevantTradeLocationName)
+        
+                                            <p>Get information on the delivery conditions</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentSellerOrderReferencedDocument">getDocumentSellerOrderReferencedDocument</a>(string|null $sellerOrderRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $sellerOrderRefDate)
+        
+                                            <p>Get details of the associated order confirmation</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentBuyerOrderReferencedDocument">getDocumentBuyerOrderReferencedDocument</a>(string|null $buyerOrderRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $buyerOrderRefDate)
+        
+                                            <p>Get details of the related buyer order</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentQuotationReferencedDocument">getDocumentQuotationReferencedDocument</a>(string|null $quotationRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $quotationRefDate)
+        
+                                            <p>Get details of the related quotation</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentContractReferencedDocument">getDocumentContractReferencedDocument</a>(string|null $contractRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $contractRefDate)
+        
+                                            <p>Get details of the associated contract. The contract identifier should be unique in the context
+of the specific trading relationship and for a defined time period.</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentRequisitionReferencedDocument">getDocumentRequisitionReferencedDocument</a>(string|null $requisitionRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $requisitionRefDate)
+        
+                                            <p>Get details of the associated contract</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_firstDocumentAdditionalReferencedDocument">firstDocumentAdditionalReferencedDocument</a>()
+        
+                                            <p>Set the intérnal additional ref. documents pointer to the first position
+It will return false if there is no additional ref. document</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_nextDocumentAdditionalReferencedDocument">nextDocumentAdditionalReferencedDocument</a>()
+        
+                                            <p>Set the intérnal additional ref. documents pointer to the next position
+It will return false if there is no next additional ref. document</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentAdditionalReferencedDocument">getDocumentAdditionalReferencedDocument</a>(string|null $additionalRefTypeCode, string|null $additionalRefId, string|null $additionalRefURIID, string|null $additionalRefName, string|null $additionalRefRefTypeCode, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $additionalRefDate)
+        
+                                            <p>Get information about billing documents that provide evidence of claims made in the bill</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentAdditionalReferencedDocumentBinaryData">getDocumentAdditionalReferencedDocumentBinaryData</a>(string|null $binarydatafilename)
+        
+                                            <p>Get the binary data from the current additional document. You have to
+specify $binarydatadirectory-Property using the <strong>setBinaryDataDirectory</strong> method</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method_setBinaryDataDirectory">
+        <div class="location">at         line 72</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>setBinaryDataDirectory</strong>(string $binarydatadirectory)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Set the directory where the attached binary data from
+additional referenced documents are temporary stored</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$binarydatadirectory</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_readAndGuessFromFile">
+        <div class="location">at         line 92</div>
+        <code>        static            <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>readAndGuessFromFile</strong>(string $xmlfilename)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Guess the profile type of a xml file</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$xmlfilename</td>
+                <td>The filename to read invoice data from</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="horstoeko\orderx\Exception">Exception</abbr></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_readAndGuessFromContent">
+        <div class="location">at         line 108</div>
+        <code>        static            <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>readAndGuessFromContent</strong>(string $xmlcontent)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Guess the profile type of the readden xml document</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$xmlcontent</td>
+                <td>The XML content as a string to read the invoice data from</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="horstoeko\orderx\Exception">Exception</abbr></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentInformation">
+        <div class="location">at         line 152</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentInformation</strong>(string|null $documentNo, string|null $documentTypeCode, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $documentDate, string|null $documentCurrency, string|null $documentName, string|null $documentLanguageId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $documentEffectiveSpecifiedPeriod, string|null $documentPurposeCode, string|null $documentRequestedResponseTypeCode)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Undocumented function</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$documentNo</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$documentTypeCode</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
+                <td>$documentDate</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$documentCurrency</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$documentName</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$documentLanguageId</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
+                <td>$documentEffectiveSpecifiedPeriod</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$documentPurposeCode</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$documentRequestedResponseTypeCode</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getIsDocumentCopy">
+        <div class="location">at         line 181</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getIsDocumentCopy</strong>(bool|null $copyindicator)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Read copy indicator</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>bool|null</td>
+                <td>$copyindicator</td>
+                <td>Returns true if this document is a copy from the original document</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getIsTestDocument">
+        <div class="location">at         line 194</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getIsTestDocument</strong>(bool|null $testdocumentindicator)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Read a test document indicator</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>bool|null</td>
+                <td>$testdocumentindicator</td>
+                <td>Returns true if this document is only for test purposes</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_firstDocumentNote">
+        <div class="location">at         line 206</div>
+        <code>                    bool
+    <strong>firstDocumentNote</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Set the intérnal note pointer to the first position
+It will return false if there is no note on the first position</p>                                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_nextDocumentNote">
+        <div class="location">at         line 219</div>
+        <code>                    bool
+    <strong>nextDocumentNote</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Set the intérnal note pointer to the next position.</p>                    <p>It will return false if there is no next note</p>                            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentNote">
+        <div class="location">at         line 239</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentNote</strong>(array|null $content, string|null $subjectCode, string|null $contentCode)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Retrieve the document note. You have to check first if there is a note using
+the firstDocumentNote/nextDocumentNote methods</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array|null</td>
+                <td>$content</td>
+                <td>Note content</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$subjectCode</td>
+                <td>Subject code. To be chosen from the entries in UNTDID 4451</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$contentCode</td>
+                <td>Content code. To be chosen from the entries in UNTDID xxx</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/OutOfRangeException">OutOfRangeException</a></td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentSummation">
+        <div class="location">at         line 266</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentSummation</strong>(float|null $lineTotalAmount, float|null $grandTotalAmount, float|null $chargeTotalAmount, float|null $allowanceTotalAmount, float|null $taxBasisTotalAmount, float|null $taxTotalAmount)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get the document's money summation</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>float|null</td>
+                <td>$lineTotalAmount</td>
+                <td>Sum of the net amounts of all prder items
+Sum of all order line net amounts in the order.</td>
+            </tr>
+                    <tr>
+                <td>float|null</td>
+                <td>$grandTotalAmount</td>
+                <td>Total order amount including sales tax
+The total amount of the order with VAT.</td>
+            </tr>
+                    <tr>
+                <td>float|null</td>
+                <td>$chargeTotalAmount</td>
+                <td>Sum of the surcharges at document level
+Sum of all charges on document level in the order.</td>
+            </tr>
+                    <tr>
+                <td>float|null</td>
+                <td>$allowanceTotalAmount</td>
+                <td>Sum of the discounts at document level
+Sum of all allowances on document level in the order.</td>
+            </tr>
+                    <tr>
+                <td>float|null</td>
+                <td>$taxBasisTotalAmount</td>
+                <td>Total order amount excluding sales tax
+The total amount of the order without VAT.</td>
+            </tr>
+                    <tr>
+                <td>float|null</td>
+                <td>$taxTotalAmount</td>
+                <td>Total amount of the order tax, Total tax amount in the booking currency
+The total VAT amount for the order.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentBuyerReference">
+        <div class="location">at         line 326</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentBuyerReference</strong>(string|null $buyerreference)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get the identifier assigned by the buyer and used for internal routing.</p>                    <p><strong>Note</strong>: The reference is specified by the buyer (e.g. contact details, department, office ID, project code),
+but stated by the seller on the invoice.</p>                            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$buyerreference</td>
+                <td>An identifier assigned by the buyer and used for internal routing</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentSeller">
+        <div class="location">at         line 347</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentSeller</strong>(string|null $name, array|null $id, string|null $description)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get detailed information about the seller (=service provider)</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$name</td>
+                <td>The full formal name under which the seller is registered in the
+National Register of Legal Entities, Taxable Person or otherwise acting as person(s)</td>
+            </tr>
+                    <tr>
+                <td>array|null</td>
+                <td>$id</td>
+                <td>An identifier of the seller. In many systems, seller identification
+is key information. Multiple seller IDs can be assigned or specified. They can be differentiated
+by using different identification schemes. If no scheme is given, it should be known to the buyer
+and seller, e.g. a previously exchanged, buyer-assigned identifier of the seller</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$description</td>
+                <td>Further legal information that is relevant for the seller</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentSellerGlobalId">
+        <div class="location">at         line 372</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentSellerGlobalId</strong>(array|null $globalID)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get global identifier of the seller.</p>                    <p><strong>Notes</strong></p>
+
+<ul>
+<li>The Seller's ID identification scheme is a unique identifier
+assigned to a seller by a global registration organization</li>
+</ul>
+</p>                            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array|null</td>
+                <td>$globalID</td>
+                <td>Array of the sellers global ids indexed by the identification scheme. The identification scheme results
+from the list published by the ISO/IEC 6523 Maintenance Agency. In particular, the following scheme
+codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177 : ODETTE</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentSellerTaxRegistration">
+        <div class="location">at         line 394</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentSellerTaxRegistration</strong>(array|null $taxreg)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get detailed information on the seller's tax information.</p>                    <p><strong>Notes</strong>
+ - The local identification (defined by the seller's address) of the seller for tax purposes or a reference that
+   enables the seller to indicate his reporting status for tax purposes. This information may have an impact on how the buyer
+   pays the bill (such as regarding social security contributions). So e.g. in some countries, if the seller is not reported
+   for tax, the buyer will withhold the tax amount and pay it on behalf of the seller</p>                            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array|null</td>
+                <td>$taxreg</td>
+                <td>Array of sales tax identification numbers of the seller indexed by <strong>FC</strong> for <em>Tax number of the seller</em> and <strong>VA</strong>
+for <em>Sales tax identification number of the seller</em></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentSellerAddress">
+        <div class="location">at         line 426</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentSellerAddress</strong>(string|null $lineone, string|null $linetwo, string|null $linethree, string|null $postcode, string|null $city, string|null $country, string|null $subdivision)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get the address of seller trade party</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$lineone</td>
+                <td>The main line in the sellers address. This is usually the street name and house number or
+the post office box</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$linetwo</td>
+                <td>Line 2 of the seller's address. This is an additional address line in an address that can be
+used to provide additional details in addition to the main line</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$linethree</td>
+                <td>Line 3 of the seller's address. This is an additional address line in an address that can be
+used to provide additional details in addition to the main line</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$postcode</td>
+                <td>Identifier for a group of properties, such as a zip code</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$city</td>
+                <td>Usual name of the city or municipality in which the seller's address is located</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$country</td>
+                <td>Code used to identify the country. If no tax agent is specified, this is the country in which the sales tax
+is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
+representation of names of countries and their subdivisions”</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$subdivision</td>
+                <td>The sellers state</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentSellerLegalOrganisation">
+        <div class="location">at         line 455</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentSellerLegalOrganisation</strong>(string|null $legalorgid, string|null $legalorgtype, string|null $legalorgname)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get the legal organisation of seller trade party</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$legalorgid</td>
+                <td>An identifier issued by an official registrar that identifies the
+seller as a legal entity or legal person. If no identification scheme ($legalorgtype) is provided,
+it should be known to the buyer and seller</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$legalorgtype</td>
+                <td>The identifier for the identification scheme of the legal
+registration of the seller. If the identification scheme is used, it must be selected from
+ISO/IEC 6523 list</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$legalorgname</td>
+                <td>A name by which the seller is known, if different from the seller's name
+(also known as the company name)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_firstDocumentSellerContact">
+        <div class="location">at         line 471</div>
+        <code>                    bool
+    <strong>firstDocumentSellerContact</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Seek to the first seller contact of the document.</p>                    <p>Returns true if a first seller contact is available, otherwise false
+You may use this together with OrderDocumentReader::getDocumentSellerContact</p>                            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_nextDocumentSellerContact">
+        <div class="location">at         line 485</div>
+        <code>                    bool
+    <strong>nextDocumentSellerContact</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Seek to the next available first seller contact of the document.</p>                    <p>Returns true if another seller contact is available, otherwise false
+You may use this together with OrderDocumentReader::getDocumentSellerContact</p>                            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentSellerContact">
+        <div class="location">at         line 509</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentSellerContact</strong>(string|null $contactpersonname, string|null $contactdepartmentname, string|null $contactphoneno, string|null $contactfaxno, string|null $contactemailadd, string|null $contacttypecode)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get detailed information on the seller's contact person</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$contactpersonname</td>
+                <td>Contact point for a legal entity,
+such as a personal name of the contact person</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$contactdepartmentname</td>
+                <td>Contact point for a legal entity, such as a name of the department or office</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$contactphoneno</td>
+                <td>Detailed information on the seller's phone number</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$contactfaxno</td>
+                <td>Detailed information on the seller's fax number</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$contactemailadd</td>
+                <td>Detailed information on the seller's email address</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$contacttypecode</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentSellerElectronicAddress">
+        <div class="location">at         line 530</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentSellerElectronicAddress</strong>(string|null $uriType = null, string|null $uriId = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Set the universal communication info for the seller</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$uriType</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$uriId</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentBuyer">
+        <div class="location">at         line 551</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentBuyer</strong>(string|null $name, array|null $id, string|null $description)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get detailed information about the buyer (service recipient)</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$name</td>
+                <td>The full name of the buyer</td>
+            </tr>
+                    <tr>
+                <td>array|null</td>
+                <td>$id</td>
+                <td>An identifier of the buyer. In many systems, buyer identification is key information. Multiple buyer IDs can be
+assigned or specified. They can be differentiated by using different identification schemes. If no scheme is given,
+it should be known to the buyer and buyer, e.g. a previously exchanged, seller-assigned identifier of the buyer</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$description</td>
+                <td>Further legal information about the buyer</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentBuyerGlobalId">
+        <div class="location">at         line 575</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentBuyerGlobalId</strong>(array|null $globalID)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get global identifier of the buyer.</p>                    <p><strong>Notes</strong>
+ - The buyers's ID identification scheme is a unique identifier
+   assigned to a buyer by a global registration organization</p>                            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array|null</td>
+                <td>$globalID</td>
+                <td>Array of the buyers global ids indexed by the identification scheme. The identification scheme results
+from the list published by the ISO/IEC 6523 Maintenance Agency. In particular, the following scheme
+codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177 : ODETTE</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentBuyerTaxRegistration">
+        <div class="location">at         line 595</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentBuyerTaxRegistration</strong>(array|null $taxreg)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get detailed information on the buyer's tax information.</p>                    <p><strong>Notes</strong>
+ - The local identification (defined by the buyer's address) of the buyer for tax purposes or a reference that
+   enables the buyer to indicate his reporting status for tax purposes.</p>                            </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array|null</td>
+                <td>$taxreg</td>
+                <td>Array of sales tax identification numbers of the buyer indexed by <strong>VA</strong> for <em>Sales tax identification number of the buyer</em>
+Only the code <strong>VA</strong> is permitted as an identification scheme</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentBuyerAddress">
+        <div class="location">at         line 627</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentBuyerAddress</strong>(string|null $lineone, string|null $linetwo, string|null $linethree, string|null $postcode, string|null $city, string|null $country, string|null $subdivision)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get the address of buyer trade party</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$lineone</td>
+                <td>The main line in the buyers address. This is usually the street name and house number or
+the post office box</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$linetwo</td>
+                <td>Line 2 of the buyers address. This is an additional address line in an address that can be
+used to provide additional details in addition to the main line</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$linethree</td>
+                <td>Line 3 of the buyers address. This is an additional address line in an address that can be
+used to provide additional details in addition to the main line</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$postcode</td>
+                <td>Identifier for a group of properties, such as a zip code</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$city</td>
+                <td>Usual name of the city or municipality in which the buyers address is located</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$country</td>
+                <td>Code used to identify the country. If no tax agent is specified, this is the country in which the sales tax
+is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
+representation of names of countries and their subdivisions”</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$subdivision</td>
+                <td>The buyers state</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentBuyerLegalOrganisation">
+        <div class="location">at         line 656</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentBuyerLegalOrganisation</strong>(string|null $legalorgid, string|null $legalorgtype, string|null $legalorgname)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get the legal organisation of buyer trade party</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$legalorgid</td>
+                <td>An identifier issued by an official registrar that identifies the
+buyer as a legal entity or legal person. If no identification scheme ($legalorgtype) is provided,
+it should be known to the buyer and buyer</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$legalorgtype</td>
+                <td>The identifier for the identification scheme of the legal
+registration of the buyer. If the identification scheme is used, it must be selected from
+ISO/IEC 6523 list</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$legalorgname</td>
+                <td>A name by which the buyer is known, if different from the buyers name
+(also known as the company name)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_firstDocumentBuyerContact">
+        <div class="location">at         line 672</div>
+        <code>                    bool
+    <strong>firstDocumentBuyerContact</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Seek to the first buyer contact of the document.</p>                    <p>Returns true if a first buyer contact is available, otherwise false
+You may use this together with OrderDocumentReader::getDocumentBuyerContact</p>                            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_nextDocumentBuyerContact">
+        <div class="location">at         line 686</div>
+        <code>                    bool
+    <strong>nextDocumentBuyerContact</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Seek to the next available first Buyer contact of the document.</p>                    <p>Returns true if another Buyer contact is available, otherwise false
+You may use this together with OrderDocumentReader::getDocumentBuyerContact</p>                            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentBuyerContact">
+        <div class="location">at         line 710</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentBuyerContact</strong>(string|null $contactpersonname, string|null $contactdepartmentname, string|null $contactphoneno, string|null $contactfaxno, string|null $contactemailadd, string|null $contacttypecode)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get detailed information on the buyer's contact person</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$contactpersonname</td>
+                <td>Contact point for a legal entity,
+such as a personal name of the contact person</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$contactdepartmentname</td>
+                <td>Contact point for a legal entity, such as a name of the department or office</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$contactphoneno</td>
+                <td>Detailed information on the buyer's phone number</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$contactfaxno</td>
+                <td>Detailed information on the buyer's fax number</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$contactemailadd</td>
+                <td>Detailed information on the buyer's email address</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$contacttypecode</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentBuyerElectronicAddress">
+        <div class="location">at         line 731</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentBuyerElectronicAddress</strong>(string|null $uriType = null, string|null $uriId = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Set the universal communication info for the buyer</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$uriType</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$uriId</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentBuyerRequisitioner">
+        <div class="location">at         line 750</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentBuyerRequisitioner</strong>(string|null $name, array|null $id, string|null $description)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Detailed information about the party who raises the Order originally on behalf of the Buyer</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$name</td>
+                <td>The full name of the buyer requisitioner</td>
+            </tr>
+                    <tr>
+                <td>array|null</td>
+                <td>$id</td>
+                <td>An identifier of the buyer requisitioner</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$description</td>
+                <td>Further legal information about the buyer requisitioner</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentBuyerRequisitionerGlobalId">
+        <div class="location">at         line 770</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentBuyerRequisitionerGlobalId</strong>(array|null $globalID)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get global id's for the party who raises the Order originally on behalf of the buyer requisitioner</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array|null</td>
+                <td>$globalID</td>
+                <td>Array of the buyer requisitioner's global ids indexed by the identification scheme. The identification scheme results
+from the list published by the ISO/IEC 6523 Maintenance Agency. In particular, the following scheme
+codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177 : ODETTE</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentBuyerRequisitionerTaxRegistration">
+        <div class="location">at         line 786</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentBuyerRequisitionerTaxRegistration</strong>(array|null $taxreg)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get detailed information on the buyer requisitioner's tax information.</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array|null</td>
+                <td>$taxreg</td>
+                <td>Array of sales tax identification numbers of the buyer indexed by <strong>VA</strong> for <em>Sales tax identification number of the buyer</em>
+Only the code <strong>VA</strong> is permitted as an identification scheme</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentBuyerRequisitionerAddress">
+        <div class="location">at         line 818</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentBuyerRequisitionerAddress</strong>(string|null $lineone, string|null $linetwo, string|null $linethree, string|null $postcode, string|null $city, string|null $country, string|null $subdivision)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get the address of buyer requisitioner's trade party</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$lineone</td>
+                <td>The main line in the buyer requisitioners address. This is usually the street name and house number or
+the post office box</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$linetwo</td>
+                <td>Line 2 of the buyer requisitioners address. This is an additional address line in an address that can be
+used to provide additional details in addition to the main line</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$linethree</td>
+                <td>Line 3 of the buyer requisitioners address. This is an additional address line in an address that can be
+used to provide additional details in addition to the main line</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$postcode</td>
+                <td>Identifier for a group of properties, such as a zip code</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$city</td>
+                <td>Usual name of the city or municipality in which the buyer requisitioners address is located</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$country</td>
+                <td>Code used to identify the country. If no tax agent is specified, this is the country in which the sales tax
+is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
+representation of names of countries and their subdivisions”</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$subdivision</td>
+                <td>The buyer requisitioners state</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentBuyerRequisitionerLegalOrganisation">
+        <div class="location">at         line 846</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentBuyerRequisitionerLegalOrganisation</strong>(string|null $legalorgid, string|null $legalorgtype, string|null $legalorgname)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get the legal organisation of buyer requisitioner trade party</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$legalorgid</td>
+                <td>An identifier issued by an official registrar that identifies the
+buyer requisitioner as a legal entity or legal person.</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$legalorgtype</td>
+                <td>The identifier for the identification scheme of the legal
+registration of the buyer requisitioner. If the identification scheme is used, it must be selected from
+ISO/IEC 6523 list</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$legalorgname</td>
+                <td>A name by which the buyer requisitioner is known, if different from the buyer requisitioners name
+(also known as the company name)</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_firstDocumentBuyerRequisitionerContact">
+        <div class="location">at         line 862</div>
+        <code>                    bool
+    <strong>firstDocumentBuyerRequisitionerContact</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Seek to the first buyer requisitioner's contact of the document.</p>                    <p>Returns true if a first buyer contact is available, otherwise false
+You may use this together with OrderDocumentReader::getDocumentBuyerContact</p>                            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_nextDocumentBuyerRequisitionerContact">
+        <div class="location">at         line 876</div>
+        <code>                    bool
+    <strong>nextDocumentBuyerRequisitionerContact</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Seek to the next available first Buyer requisitioner's contact of the document.</p>                    <p>Returns true if another Buyer contact is available, otherwise false
+You may use this together with OrderDocumentReader::getDocumentBuyerContact</p>                            </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentBuyerRequisitionerContact">
+        <div class="location">at         line 900</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentBuyerRequisitionerContact</strong>(string|null $contactpersonname, string|null $contactdepartmentname, string|null $contactphoneno, string|null $contactfaxno, string|null $contactemailadd, string|null $contacttypecode)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get detailed information on the buyer requisitioner's contact person</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$contactpersonname</td>
+                <td>Contact point for a legal entity,
+such as a personal name of the contact person</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$contactdepartmentname</td>
+                <td>Contact point for a legal entity, such as a name of the department or office</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$contactphoneno</td>
+                <td>Detailed information on the buyer's phone number</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$contactfaxno</td>
+                <td>Detailed information on the buyer's fax number</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$contactemailadd</td>
+                <td>Detailed information on the buyer's email address</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$contacttypecode</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentBuyerRequisitionerElectronicAddress">
+        <div class="location">at         line 921</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentBuyerRequisitionerElectronicAddress</strong>(string|null $uriType = null, string|null $uriId = null)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get the universal communication info for the buyer requisitioner</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$uriType</td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$uriId</td>
+                <td></td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentDeliveryTerms">
+        <div class="location">at         line 946</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentDeliveryTerms</strong>(string|null $code, string|null $description, string|null $functionCode, string|null $relevantTradeLocationId, string|null $relevantTradeLocationName)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get information on the delivery conditions</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$code</td>
+                <td>The code specifying the type of delivery for these trade delivery terms. To be chosen from the entries
+in UNTDID 4053 + INCOTERMS List</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$description</td>
+                <td>Simple description</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$functionCode</td>
+                <td>A code specifying a function of these trade delivery terms (Pick up,or delivered) To be chosen from the entries
+in UNTDID 4055</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$relevantTradeLocationId</td>
+                <td>The unique identifier of a country location used or referenced in trade.</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$relevantTradeLocationName</td>
+                <td>The name, expressed as text, of this location used or referenced in trade.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentSellerOrderReferencedDocument">
+        <div class="location">at         line 966</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentSellerOrderReferencedDocument</strong>(string|null $sellerOrderRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $sellerOrderRefDate)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get details of the associated order confirmation</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$sellerOrderRefId</td>
+                <td>An identifier issued by the seller for a referenced sales order (Order confirmation number)</td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
+                <td>$sellerOrderRefDate</td>
+                <td>Order confirmation date</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentBuyerOrderReferencedDocument">
+        <div class="location">at         line 986</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentBuyerOrderReferencedDocument</strong>(string|null $buyerOrderRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $buyerOrderRefDate)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get details of the related buyer order</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$buyerOrderRefId</td>
+                <td>An identifier issued by the buyer for a referenced order (order number)</td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
+                <td>$buyerOrderRefDate</td>
+                <td>Date of order</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentQuotationReferencedDocument">
+        <div class="location">at         line 1006</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentQuotationReferencedDocument</strong>(string|null $quotationRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $quotationRefDate)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get details of the related quotation</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$quotationRefId</td>
+                <td>An Identifier of a Quotation, issued by the Seller.</td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
+                <td>$quotationRefDate</td>
+                <td>Date of order</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentContractReferencedDocument">
+        <div class="location">at         line 1028</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentContractReferencedDocument</strong>(string|null $contractRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $contractRefDate)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get details of the associated contract. The contract identifier should be unique in the context
+of the specific trading relationship and for a defined time period.</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$contractRefId</td>
+                <td>The contract reference should be assigned once in the context of the specific trade relationship and for a
+defined period of time (contract number)</td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
+                <td>$contractRefDate</td>
+                <td>The formatted date or date time for the issuance of this referenced Contract.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentRequisitionReferencedDocument">
+        <div class="location">at         line 1048</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentRequisitionReferencedDocument</strong>(string|null $requisitionRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $requisitionRefDate)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get details of the associated contract</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$requisitionRefId</td>
+                <td>The identification of a Requisition Document, issued by the Buyer or the Buyer Requisitioner.</td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
+                <td>$requisitionRefDate</td>
+                <td>The formatted date or date time for the issuance of this referenced Requisition.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_firstDocumentAdditionalReferencedDocument">
+        <div class="location">at         line 1065</div>
+        <code>                    bool
+    <strong>firstDocumentAdditionalReferencedDocument</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Set the intérnal additional ref. documents pointer to the first position
+It will return false if there is no additional ref. document</p>                                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_nextDocumentAdditionalReferencedDocument">
+        <div class="location">at         line 1078</div>
+        <code>                    bool
+    <strong>nextDocumentAdditionalReferencedDocument</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Set the intérnal additional ref. documents pointer to the next position
+It will return false if there is no next additional ref. document</p>                                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentAdditionalReferencedDocument">
+        <div class="location">at         line 1111</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentAdditionalReferencedDocument</strong>(string|null $additionalRefTypeCode, string|null $additionalRefId, string|null $additionalRefURIID, string|null $additionalRefName, string|null $additionalRefRefTypeCode, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $additionalRefDate)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get information about billing documents that provide evidence of claims made in the bill</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$additionalRefTypeCode</td>
+                <td>Type of referenced document (See codelist UNTDID 1001)
+ - Code 916 "reference paper" is used to reference the identification of the document on which the invoice is based
+ - Code 50 "Price / sales catalog response" is used to reference the tender or the lot
+ - Code 130 "invoice data sheet" is used to reference an identifier for an object specified by the seller.</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$additionalRefId</td>
+                <td>The identifier of the tender or lot to which the invoice relates, or an identifier specified by the seller for
+an object on which the invoice is based, or an identifier of the document on which the invoice is based.</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$additionalRefURIID</td>
+                <td>The Uniform Resource Locator (URL) at which the external document is available. A means of finding the resource
+including the primary access method intended for it, e.g. http: // or ftp: //. The location of the external document
+must be used if the buyer needs additional information to support the amounts billed. External documents are not part
+of the invoice. Access to external documents can involve certain risks.</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$additionalRefName</td>
+                <td>A description of the document, e.g. Hourly billing, usage or consumption report, etc.</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$additionalRefRefTypeCode</td>
+                <td>The identifier for the identification scheme of the identifier of the item invoiced. If it is not clear to the
+recipient which scheme is used for the identifier, an identifier of the scheme should be used, which must be selected
+from UNTDID 1153 in accordance with the code list entries.</td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
+                <td>$additionalRefDate</td>
+                <td>Document date</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentAdditionalReferencedDocumentBinaryData">
+        <div class="location">at         line 1138</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentAdditionalReferencedDocumentBinaryData</strong>(string|null $binarydatafilename)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get the binary data from the current additional document. You have to
+specify $binarydatadirectory-Property using the <strong>setBinaryDataDirectory</strong> method</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$binarydatafilename</td>
+                <td>The fuill-qualified filename where the data where stored. If no binary data are
+available, this value will be empty</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>

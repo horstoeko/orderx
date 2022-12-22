@@ -795,24 +795,24 @@ class OrderDocumentReader extends OrderDocument
      * Get the address of buyer requisitioner's trade party
      *
      * @param string|null $lineone
-     * The main line in the buyers address. This is usually the street name and house number or
+     * The main line in the buyer requisitioners address. This is usually the street name and house number or
      * the post office box
      * @param string|null $linetwo
-     * Line 2 of the buyers address. This is an additional address line in an address that can be
+     * Line 2 of the buyer requisitioners address. This is an additional address line in an address that can be
      * used to provide additional details in addition to the main line
      * @param string|null $linethree
-     * Line 3 of the buyers address. This is an additional address line in an address that can be
+     * Line 3 of the buyer requisitioners address. This is an additional address line in an address that can be
      * used to provide additional details in addition to the main line
      * @param string|null $postcode
      * Identifier for a group of properties, such as a zip code
      * @param string|null $city
-     * Usual name of the city or municipality in which the buyers address is located
+     * Usual name of the city or municipality in which the buyer requisitioners address is located
      * @param string|null $country
      * Code used to identify the country. If no tax agent is specified, this is the country in which the sales tax
      * is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
      * representation of names of countries and their subdivisions”
-     * @param array|null $subdivision
-     * The buyers state
+     * @param string|null $subdivision
+     * The buyer requisitioners state
      * @return OrderDocumentReader
      */
     public function getDocumentBuyerRequisitionerAddress(?string &$lineone, ?string &$linetwo, ?string &$linethree, ?string &$postcode, ?string &$city, ?string &$country, ?string &$subdivision): OrderDocumentReader
@@ -833,14 +833,13 @@ class OrderDocumentReader extends OrderDocument
      *
      * @param string|null $legalorgid
      * An identifier issued by an official registrar that identifies the
-     * buyer as a legal entity or legal person. If no identification scheme ($legalorgtype) is provided,
-     * it should be known to the buyer and buyer
+     * buyer requisitioner as a legal entity or legal person.
      * @param string|null $legalorgtype
      * The identifier for the identification scheme of the legal
-     * registration of the buyer. If the identification scheme is used, it must be selected from
+     * registration of the buyer requisitioner. If the identification scheme is used, it must be selected from
      * ISO/IEC 6523 list
      * @param string|null $legalorgname
-     * A name by which the buyer is known, if different from the buyers name
+     * A name by which the buyer requisitioner is known, if different from the buyer requisitioners name
      * (also known as the company name)
      * @return OrderDocumentReader
      */
