@@ -1498,4 +1498,1081 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->nextDocumentPosition());
         $this->assertFalse(self::$document->nextDocumentPosition());
     }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionGenerals(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionGenerals($lineid, $lineStatusCode);
+
+        $this->assertEquals("1", $lineid);
+        $this->assertEquals("", $lineStatusCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionNotePos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        $this->assertTrue(self::$document->firstDocumentPositionNote());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionNotePos1(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionNote());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionNotePos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        $this->assertTrue(self::$document->firstDocumentPositionNote());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionNotePos2(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionNote());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionNotePos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        $this->assertTrue(self::$document->firstDocumentPositionNote());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionNotePos3(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionNote());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionNotePos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionNote($content, $contentCode, $subjectCode);
+
+        $this->assertEquals("WEEE Tax of 0,50 euros per item included", $content);
+        $this->assertEquals("", $contentCode);
+        $this->assertEquals("TXD", $subjectCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionNotePos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionNote($content, $contentCode, $subjectCode);
+
+        $this->assertEquals("WEEE Tax of 0,50 euros per item included", $content);
+        $this->assertEquals("", $contentCode);
+        $this->assertEquals("TXD", $subjectCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionNotePos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionNote($content, $contentCode, $subjectCode);
+
+        $this->assertEquals("Content of Note", $content);
+        $this->assertEquals("", $contentCode);
+        $this->assertEquals("AAI", $subjectCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductDetailsPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionProductDetails(
+            $name,
+            $description,
+            $sellerAssignedID,
+            $buyerAssignedID,
+            $globalID,
+            $batchId,
+            $brandName
+        );
+
+        $this->assertEquals("Product Name", $name);
+        $this->assertEquals("Product Description", $description);
+        $this->assertEquals("987654321", $sellerAssignedID);
+        $this->assertEquals("654987321", $buyerAssignedID);
+        $this->assertIsArray($globalID);
+        $this->assertNotEmpty($globalID);
+        $this->assertArrayHasKey("0160", $globalID);
+        $this->assertEquals("1234567890123", $globalID["0160"]);
+        $this->assertEquals("Product Batch ID (lot ID)", $batchId);
+        $this->assertEquals("Product Brand Name", $brandName);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductDetailsPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionProductDetails(
+            $name,
+            $description,
+            $sellerAssignedID,
+            $buyerAssignedID,
+            $globalID,
+            $batchId,
+            $brandName
+        );
+
+        $this->assertEquals("Product Name", $name);
+        $this->assertEquals("Product Description", $description);
+        $this->assertEquals("598632147", $sellerAssignedID);
+        $this->assertEquals("698569856", $buyerAssignedID);
+        $this->assertIsArray($globalID);
+        $this->assertNotEmpty($globalID);
+        $this->assertArrayHasKey("0160", $globalID);
+        $this->assertEquals("548796523", $globalID["0160"]);
+        $this->assertEquals("Product Batch ID (lot ID)", $batchId);
+        $this->assertEquals("Product Brand Name", $brandName);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductDetailsPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionProductDetails(
+            $name,
+            $description,
+            $sellerAssignedID,
+            $buyerAssignedID,
+            $globalID,
+            $batchId,
+            $brandName
+        );
+
+        $this->assertEquals("Product Name", $name);
+        $this->assertEquals("Product Description", $description);
+        $this->assertEquals("698325417", $sellerAssignedID);
+        $this->assertEquals("598674321", $buyerAssignedID);
+        $this->assertIsArray($globalID);
+        $this->assertNotEmpty($globalID);
+        $this->assertArrayHasKey("0160", $globalID);
+        $this->assertEquals("854721548", $globalID["0160"]);
+        $this->assertEquals("Product Batch ID (lot ID)", $batchId);
+        $this->assertEquals("Product Brand Name", $brandName);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionProductCharacteristicPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionProductCharacteristic());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionProductCharacteristicPos1(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionProductCharacteristic());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionProductCharacteristicPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionProductCharacteristic());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionProductCharacteristicPos2(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionProductCharacteristic());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionProductCharacteristicPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionProductCharacteristic());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionProductCharacteristicPos3(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionProductCharacteristic());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductCharacteristicPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->firstDocumentPositionProductCharacteristic();
+        self::$document->getDocumentPositionProductCharacteristic($description, $values, $typecode, $measureValue, $measureUnitCode);
+
+        $this->assertEquals("Characteristic Description", $description);
+        $this->assertIsArray($values);
+        $this->assertNotEmpty($values);
+        $this->assertArrayHasKey(0, $values);
+        $this->assertArrayNotHasKey(1, $values);
+        $this->assertEquals("5 meters", $values[0]);
+        $this->assertEquals("Characteristic_Code", $typecode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductCharacteristicPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->firstDocumentPositionProductCharacteristic();
+        self::$document->getDocumentPositionProductCharacteristic($description, $values, $typecode, $measureValue, $measureUnitCode);
+
+        $this->assertEquals("Characteristic Description", $description);
+        $this->assertIsArray($values);
+        $this->assertNotEmpty($values);
+        $this->assertArrayHasKey(0, $values);
+        $this->assertArrayNotHasKey(1, $values);
+        $this->assertEquals("3 meters", $values[0]);
+        $this->assertEquals("Characteristic_Code", $typecode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductCharacteristicPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->firstDocumentPositionProductCharacteristic();
+        self::$document->getDocumentPositionProductCharacteristic($description, $values, $typecode, $measureValue, $measureUnitCode);
+
+        $this->assertEquals("Characteristic Description", $description);
+        $this->assertIsArray($values);
+        $this->assertNotEmpty($values);
+        $this->assertArrayHasKey(0, $values);
+        $this->assertArrayNotHasKey(1, $values);
+        $this->assertEquals("3 meters", $values[0]);
+        $this->assertEquals("Characteristic_Code", $typecode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionProductClassificationPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionProductClassification());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionProductClassificationPos1(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionProductClassification());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionProductClassificationPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionProductClassification());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionProductClassificationPos2(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionProductClassification());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionProductClassificationPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionProductClassification());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionProductClassificationPos3(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionProductClassification());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductClassificationPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->firstDocumentPositionProductClassification();
+        self::$document->getDocumentPositionProductClassification($classCode, $className, $listID, $listVersionID);
+
+        $this->assertEquals("Class_code", $classCode);
+        $this->assertEquals("Name Class Codification", $className);
+        $this->assertEquals("TST", $listID);
+        $this->assertEquals("", $listVersionID);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductClassificationPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->firstDocumentPositionProductClassification();
+        self::$document->getDocumentPositionProductClassification($classCode, $className, $listID, $listVersionID);
+
+        $this->assertEquals("Class_code", $classCode);
+        $this->assertEquals("Name Class Codification", $className);
+        $this->assertEquals("TST", $listID);
+        $this->assertEquals("", $listVersionID);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductClassificationPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->firstDocumentPositionProductClassification();
+        self::$document->getDocumentPositionProductClassification($classCode, $className, $listID, $listVersionID);
+
+        $this->assertEquals("Class_code", $classCode);
+        $this->assertEquals("Name Class Codification", $className);
+        $this->assertEquals("TST", $listID);
+        $this->assertEquals("", $listVersionID);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionProductInstancePos1(): void
+    {
+        self::$document->firstDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionProductInstance());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionProductInstancePos1(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionProductInstance());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionProductInstancePos2(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionProductInstance());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionProductInstancePos2(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionProductInstance());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionProductInstancePos3(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionProductInstance());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionProductInstancePos3(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionProductInstance());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductInstancePos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->firstDocumentPositionProductInstance();
+        self::$document->getDocumentPositionProductInstance($batchID, $serialId);
+
+        $this->assertEquals("Product Instances Batch ID", $batchID);
+        $this->assertEquals("Product Instances Supplier Serial ID", $serialId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductInstancePos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->firstDocumentPositionProductInstance();
+        self::$document->getDocumentPositionProductInstance($batchID, $serialId);
+
+        $this->assertEquals("Product Instances Batch ID", $batchID);
+        $this->assertEquals("Product Instances Supplier Serial ID", $serialId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductInstancePos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->firstDocumentPositionProductInstance();
+        self::$document->getDocumentPositionProductInstance($batchID, $serialId);
+
+        $this->assertEquals("Product Instances Batch ID", $batchID);
+        $this->assertEquals("Product Instances Supplier Serial ID", $serialId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionApplicableSupplyChainPackagingPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionApplicableSupplyChainPackaging(
+            $typeCode,
+            $width,
+            $widthUnitCode,
+            $length,
+            $lengthUnitCode,
+            $height,
+            $heightUnitCode
+        );
+
+        $this->assertEquals("7B", $typeCode);
+        $this->assertEquals(5.0, $width);
+        $this->assertEquals("MTR", $widthUnitCode);
+        $this->assertEquals(3.0, $length);
+        $this->assertEquals("MTR", $lengthUnitCode);
+        $this->assertEquals(1.0, $height);
+        $this->assertEquals("MTR", $heightUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionApplicableSupplyChainPackagingPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionApplicableSupplyChainPackaging(
+            $typeCode,
+            $width,
+            $widthUnitCode,
+            $length,
+            $lengthUnitCode,
+            $height,
+            $heightUnitCode
+        );
+
+        $this->assertEquals("7B", $typeCode);
+        $this->assertEquals(2.0, $width);
+        $this->assertEquals("MTR", $widthUnitCode);
+        $this->assertEquals(1.0, $length);
+        $this->assertEquals("MTR", $lengthUnitCode);
+        $this->assertEquals(3.0, $height);
+        $this->assertEquals("MTR", $heightUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionApplicableSupplyChainPackagingPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionApplicableSupplyChainPackaging(
+            $typeCode,
+            $width,
+            $widthUnitCode,
+            $length,
+            $lengthUnitCode,
+            $height,
+            $heightUnitCode
+        );
+
+        $this->assertEquals("7B", $typeCode);
+        $this->assertEquals(2.0, $width);
+        $this->assertEquals("MTR", $widthUnitCode);
+        $this->assertEquals(1.0, $length);
+        $this->assertEquals("MTR", $lengthUnitCode);
+        $this->assertEquals(3.0, $height);
+        $this->assertEquals("MTR", $heightUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductOriginTradeCountryPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionProductOriginTradeCountry($country);
+
+        $this->assertEquals("FR", $country);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductOriginTradeCountryPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionProductOriginTradeCountry($country);
+
+        $this->assertEquals("FR", $country);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductOriginTradeCountryPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionProductOriginTradeCountry($country);
+
+        $this->assertEquals("FR", $country);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionProductReferencedDocumentPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionProductReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionProductReferencedDocumentPos1(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionProductReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionProductReferencedDocumentPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionProductReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionProductReferencedDocumentPos2(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionProductReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionProductReferencedDocumentPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionProductReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionProductReferencedDocumentPos3(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionProductReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductReferencedDocumentPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->firstDocumentPositionProductReferencedDocument();
+        self::$document->getDocumentPositionProductReferencedDocument(
+            $issuerassignedid,
+            $typecode,
+            $uriid,
+            $lineid,
+            $name,
+            $reftypecode,
+            $issueddate
+        );
+
+        $this->assertEquals("ADD_REF_PROD_ID", $issuerassignedid);
+        $this->assertEquals("6", $typecode);
+        $this->assertEquals("ADD_REF_PROD_URIID", $uriid);
+        $this->assertEquals("", $lineid);
+        $this->assertEquals("ADD_REF_PROD_Desc", $name);
+        $this->assertEquals("", $reftypecode);
+        $this->assertNull($issueddate);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductReferencedDocumentPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->firstDocumentPositionProductReferencedDocument();
+        self::$document->getDocumentPositionProductReferencedDocument(
+            $issuerassignedid,
+            $typecode,
+            $uriid,
+            $lineid,
+            $name,
+            $reftypecode,
+            $issueddate
+        );
+
+        $this->assertEquals("ADD_REF_PROD_ID", $issuerassignedid);
+        $this->assertEquals("6", $typecode);
+        $this->assertEquals("ADD_REF_PROD_URIID", $uriid);
+        $this->assertEquals("", $lineid);
+        $this->assertEquals("ADD_REF_PROD_Desc", $name);
+        $this->assertEquals("", $reftypecode);
+        $this->assertNull($issueddate);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionProductReferencedDocumentPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->firstDocumentPositionProductReferencedDocument();
+        self::$document->getDocumentPositionProductReferencedDocument(
+            $issuerassignedid,
+            $typecode,
+            $uriid,
+            $lineid,
+            $name,
+            $reftypecode,
+            $issueddate
+        );
+
+        $this->assertEquals("ADD_REF_PROD_ID", $issuerassignedid);
+        $this->assertEquals("6", $typecode);
+        $this->assertEquals("ADD_REF_PROD_URIID", $uriid);
+        $this->assertEquals("", $lineid);
+        $this->assertEquals("ADD_REF_PROD_Desc", $name);
+        $this->assertEquals("", $reftypecode);
+        $this->assertNull($issueddate);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionBuyerOrderReferencedDocumentPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionBuyerOrderReferencedDocument($buyerOrderRefLineId);
+
+        $this->assertEquals("1", $buyerOrderRefLineId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionBuyerOrderReferencedDocumentPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionBuyerOrderReferencedDocument($buyerOrderRefLineId);
+
+        $this->assertEquals("3", $buyerOrderRefLineId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionBuyerOrderReferencedDocumentPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionBuyerOrderReferencedDocument($buyerOrderRefLineId);
+
+        $this->assertEquals("4", $buyerOrderRefLineId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionQuotationReferencedDocumentPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionQuotationReferencedDocument($quotationRefId, $quotationRefLineId, $quotationRefDate);
+
+        $this->assertEquals("QUOT_125487", $quotationRefId);
+        $this->assertEquals("3", $quotationRefLineId);
+        $this->assertNull($quotationRefDate);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionQuotationReferencedDocumentPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionQuotationReferencedDocument($quotationRefId, $quotationRefLineId, $quotationRefDate);
+
+        $this->assertEquals("QUOT_125487", $quotationRefId);
+        $this->assertEquals("2", $quotationRefLineId);
+        $this->assertNull($quotationRefDate);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionQuotationReferencedDocumentPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionQuotationReferencedDocument($quotationRefId, $quotationRefLineId, $quotationRefDate);
+
+        $this->assertEquals("QUOT_125487", $quotationRefId);
+        $this->assertEquals("1", $quotationRefLineId);
+        $this->assertNull($quotationRefDate);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionAdditionalReferencedDocumentPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionAdditionalReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionAdditionalReferencedDocumentPos1(): void
+    {
+        $this->assertTrue(self::$document->nextDocumentPositionAdditionalReferencedDocument());
+        $this->assertFalse(self::$document->nextDocumentPositionAdditionalReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionAdditionalReferencedDocumentPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionAdditionalReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionAdditionalReferencedDocumentPos2(): void
+    {
+        $this->assertTrue(self::$document->nextDocumentPositionAdditionalReferencedDocument());
+        $this->assertFalse(self::$document->nextDocumentPositionAdditionalReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionAdditionalReferencedDocumentPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionAdditionalReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionAdditionalReferencedDocumentPos3(): void
+    {
+        $this->assertTrue(self::$document->nextDocumentPositionAdditionalReferencedDocument());
+        $this->assertFalse(self::$document->nextDocumentPositionAdditionalReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionAdditionalReferencedDocumentPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+
+        self::$document->firstDocumentPositionAdditionalReferencedDocument();
+        self::$document->getDocumentPositionAdditionalReferencedDocument(
+            $issuerassignedid,
+            $typecode,
+            $uriid,
+            $lineid,
+            $name,
+            $reftypecode,
+            $issueddate
+        );
+
+        $this->assertEquals("ADD_REF_DOC_ID", $issuerassignedid);
+        $this->assertEquals("916", $typecode);
+        $this->assertEquals("ADD_REF_DOC_URIID", $uriid);
+        $this->assertEquals("5", $lineid);
+        $this->assertEquals("ADD_REF_DOC_Desc", $name);
+        $this->assertEquals("", $reftypecode);
+        $this->assertNull($issueddate);
+
+        self::$document->nextDocumentPositionAdditionalReferencedDocument();
+        self::$document->getDocumentPositionAdditionalReferencedDocument(
+            $issuerassignedid,
+            $typecode,
+            $uriid,
+            $lineid,
+            $name,
+            $reftypecode,
+            $issueddate
+        );
+
+        $this->assertEquals("OBJECT_125487", $issuerassignedid);
+        $this->assertEquals("130", $typecode);
+        $this->assertEquals("", $uriid);
+        $this->assertEquals("", $lineid);
+        $this->assertEquals("", $name);
+        $this->assertEquals("AWV", $reftypecode);
+        $this->assertNull($issueddate);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionAdditionalReferencedDocumentPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        self::$document->firstDocumentPositionAdditionalReferencedDocument();
+        self::$document->getDocumentPositionAdditionalReferencedDocument(
+            $issuerassignedid,
+            $typecode,
+            $uriid,
+            $lineid,
+            $name,
+            $reftypecode,
+            $issueddate
+        );
+
+        $this->assertEquals("ADD_REF_DOC_ID", $issuerassignedid);
+        $this->assertEquals("916", $typecode);
+        $this->assertEquals("ADD_REF_DOC_URIID", $uriid);
+        $this->assertEquals("5", $lineid);
+        $this->assertEquals("ADD_REF_DOC_Desc", $name);
+        $this->assertEquals("", $reftypecode);
+        $this->assertNull($issueddate);
+
+        self::$document->nextDocumentPositionAdditionalReferencedDocument();
+        self::$document->getDocumentPositionAdditionalReferencedDocument(
+            $issuerassignedid,
+            $typecode,
+            $uriid,
+            $lineid,
+            $name,
+            $reftypecode,
+            $issueddate
+        );
+
+        $this->assertEquals("OBJECT_125487", $issuerassignedid);
+        $this->assertEquals("130", $typecode);
+        $this->assertEquals("", $uriid);
+        $this->assertEquals("", $lineid);
+        $this->assertEquals("", $name);
+        $this->assertEquals("AWV", $reftypecode);
+        $this->assertNull($issueddate);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionAdditionalReferencedDocumentPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        self::$document->firstDocumentPositionAdditionalReferencedDocument();
+        self::$document->getDocumentPositionAdditionalReferencedDocument(
+            $issuerassignedid,
+            $typecode,
+            $uriid,
+            $lineid,
+            $name,
+            $reftypecode,
+            $issueddate
+        );
+
+        $this->assertEquals("ADD_REF_DOC_ID", $issuerassignedid);
+        $this->assertEquals("916", $typecode);
+        $this->assertEquals("ADD_REF_DOC_URIID", $uriid);
+        $this->assertEquals("5", $lineid);
+        $this->assertEquals("ADD_REF_DOC_Desc", $name);
+        $this->assertEquals("", $reftypecode);
+        $this->assertNull($issueddate);
+
+        self::$document->nextDocumentPositionAdditionalReferencedDocument();
+        self::$document->getDocumentPositionAdditionalReferencedDocument(
+            $issuerassignedid,
+            $typecode,
+            $uriid,
+            $lineid,
+            $name,
+            $reftypecode,
+            $issueddate
+        );
+
+        $this->assertEquals("OBJECT_125487", $issuerassignedid);
+        $this->assertEquals("130", $typecode);
+        $this->assertEquals("", $uriid);
+        $this->assertEquals("", $lineid);
+        $this->assertEquals("", $name);
+        $this->assertEquals("AWV", $reftypecode);
+        $this->assertNull($issueddate);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionGrossPricePos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionGrossPrice($chargeAmount, $basisQuantity, $basisQuantityUnitCode);
+
+        $this->assertEquals(10.50, $chargeAmount);
+        $this->assertEquals(1.00, $basisQuantity);
+        $this->assertEquals("C62", $basisQuantityUnitCode);
+    }
 }

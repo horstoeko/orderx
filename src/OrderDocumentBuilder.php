@@ -2272,6 +2272,10 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string|null $globalID
      * Identification of an article according to the registered scheme (Global identifier of the product,
      * GTIN, ...)
+     * @param string|null $batchId
+     * A batch identifier for this item.
+     * @param string|null $brandName
+     * The brand name, expressed as text, for this item.
      * @return OrderDocumentBuilder
      */
     public function setDocumentPositionProductDetails(?string $name = null, ?string $description = null, ?string $sellerAssignedID = null, ?string $buyerAssignedID = null, ?string $globalIDType = null, ?string $globalID = null, ?string $batchId = null, ?string $brandName = null): OrderDocumentBuilder
@@ -2460,13 +2464,17 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Undocumented function
+     * Set an additional product reference document at position level
      *
      * @param string|null $issuerassignedid
+     * The unique issuer assigned identifier for this referenced document.
      * @param string|null $typecode
+     * The code specifying the type of referenced document.
      * @param string|null $uriid
+     * The unique Uniform Resource Identifier (URI) for this referenced document.
      * @param string|null $lineid
      * @param string|null $name
+     * A name, expressed as text, for this referenced document.
      * @param string|null $reftypecode
      * @param DateTime|null $issueddate
      * @param string|null $binarydatafilename
@@ -2481,13 +2489,17 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Undocumented function
+     * Add an additional product reference document at position level
      *
      * @param string|null $issuerassignedid
+     * The unique issuer assigned identifier for this referenced document.
      * @param string|null $typecode
+     * The code specifying the type of referenced document.
      * @param string|null $uriid
+     * The unique Uniform Resource Identifier (URI) for this referenced document.
      * @param string|null $lineid
      * @param string|null $name
+     * A name, expressed as text, for this referenced document.
      * @param string|null $reftypecode
      * @param DateTime|null $issueddate
      * @param string|null $binarydatafilename
