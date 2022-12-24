@@ -241,17 +241,35 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Undocumented function
+     * Get main information about this document
      *
      * @param string|null $documentNo
+     * An identifier of a referenced purchase order, issued by the Buyer.
      * @param string|null $documentTypeCode
+     * A code specifying the functional type of the Order
+     * Commercial orders and credit notes are defined according the entries in UNTDID 1001
+     * Other entries of UNTDID 1001  with specific orders may be used if applicable.
+     *  - 220 for Order
+     *  - 230 for Order Change
+     *  - 231 for Order Response
      * @param DateTime|null $documentDate
+     * The date when the document was issued by the buyer
      * @param string|null $documentCurrency
+     * The code for the order currency
      * @param string|null $documentName
+     * The document type (free text)
      * @param string|null $documentLanguageId
+     * A unique identifier for a language used in this exchanged document
      * @param DateTime|null $documentEffectiveSpecifiedPeriod
+     * The specified period within which this exchanged document is effective
      * @param string|null $documentPurposeCode
+     * The purpose, expressed as text, of this exchanged document
+     * -  7 : Duplicate
+     * -  9 : Original
+     * - 35 : Retransmission
      * @param string|null $documentRequestedResponseTypeCode
+     * Response requested for this exchanged document. Value = AC to request an Order_Response
+     * Value = AC to request an Order_Response
      * @return OrderDocumentReader
      */
     public function getDocumentInformation(?string &$documentNo, ?string &$documentTypeCode, ?DateTime &$documentDate, ?string &$documentCurrency, ?string &$documentName, ?string &$documentLanguageId, ?DateTime &$documentEffectiveSpecifiedPeriod, ?string &$documentPurposeCode, ?string &$documentRequestedResponseTypeCode): OrderDocumentReader
@@ -303,7 +321,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Set the intérnal note pointer to the first position
+     * Set the intérnal note pointer to the first document note
      * It will return false if there is no note on the first position
      *
      * @return boolean
@@ -316,8 +334,8 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Set the intérnal note pointer to the next position.
-     * It will return false if there is no next note
+     * Set the intérnal note pointer to the next document note.
+     * It will return false if there isn't one more document note
      *
      * @return boolean
      */
@@ -352,7 +370,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get the document's money summation
+     * Get the document money summation
      *
      * @param float $lineTotalAmount Sum of the net amounts of all prder items
      * Sum of all order line net amounts in the order.
@@ -419,13 +437,10 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get the identifier assigned by the buyer and used for internal routing.
-     *
-     * __Note__: The reference is specified by the buyer (e.g. contact details, department, office ID, project code),
-     * but stated by the seller on the invoice.
+     * Get the identifier defined by the Buyer (e.g. contact ID, department, office id, project code).
      *
      * @param string|null $buyerreference
-     * An identifier assigned by the buyer and used for internal routing
+     * An identifier assigned by the Buyer used for internal routing purposes
      * @return OrderDocumentReader
      */
     public function getDocumentBuyerReference(?string &$buyerreference): OrderDocumentReader
@@ -437,16 +452,13 @@ class OrderDocumentReader extends OrderDocument
     /**
      * Get detailed information about the seller (=service provider)
      *
-     * @param string|null $name
-     * The full formal name under which the seller is registered in the
-     * National Register of Legal Entities, Taxable Person or otherwise acting as person(s)
-     * @param array|null $id
-     * An identifier of the seller. In many systems, seller identification
-     * is key information. Multiple seller IDs can be assigned or specified. They can be differentiated
-     * by using different identification schemes. If no scheme is given, it should be known to the buyer
-     * and seller, e.g. a previously exchanged, buyer-assigned identifier of the seller
+     * @param string $name
+     * The full formal name by which the party is registered in the national registry of
+     * legal entities or as a Taxable person or otherwise trades as a person or persons.
+     * @param string|null $id
+     * An identification of the Party. The identification scheme identifier of the Party identifier.
      * @param string|null $description
-     * Further legal information that is relevant for the seller
+     * Additional legal information relevant for the Paety.
      * @return OrderDocumentReader
      */
     public function getDocumentSeller(?string &$name, ?array &$id, ?string &$description): OrderDocumentReader
@@ -461,17 +473,11 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get global identifier of the seller.
-     *
-     * __Notes__
-     *
-     * - The Seller's ID identification scheme is a unique identifier
-     *   assigned to a seller by a global registration organization
+     * Get global identifiers of the seller.
      *
      * @param array|null $globalID
      * Array of the sellers global ids indexed by the identification scheme. The identification scheme results
-     * from the list published by the ISO/IEC 6523 Maintenance Agency. In particular, the following scheme
-     * codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177 : ODETTE
+     * from the list published by the ISO/IEC 6523 Maintenance Agency.
      * @return OrderDocumentReader
      */
     public function getDocumentSellerGlobalId(?array &$globalID): OrderDocumentReader
@@ -485,15 +491,9 @@ class OrderDocumentReader extends OrderDocument
     /**
      * Get detailed information on the seller's tax information.
      *
-     * __Notes__
-     *  - The local identification (defined by the seller's address) of the seller for tax purposes or a reference that
-     *    enables the seller to indicate his reporting status for tax purposes. This information may have an impact on how the buyer
-     *    pays the bill (such as regarding social security contributions). So e.g. in some countries, if the seller is not reported
-     *    for tax, the buyer will withhold the tax amount and pay it on behalf of the seller
-     *
      * @param array|null $taxreg
-     * Array of sales tax identification numbers of the seller indexed by __FC__ for _Tax number of the seller_ and __VA__
-     * for _Sales tax identification number of the seller_
+     * Array of sales tax identification numbers of the seller indexed by Scheme identifier (e.g.: __FC__ for _Tax number of the seller_ and __VA__
+     * for _Sales tax identification number of the seller_)
      * @return OrderDocumentReader
      */
     public function getDocumentSellerTaxRegistration(?array &$taxreg): OrderDocumentReader
@@ -517,15 +517,18 @@ class OrderDocumentReader extends OrderDocument
      * Line 3 of the seller's address. This is an additional address line in an address that can be
      * used to provide additional details in addition to the main line
      * @param string|null $postcode
-     * Identifier for a group of properties, such as a zip code
+     * The identifier for an addressable group of properties according to the relevant postal service.
      * @param string|null $city
      * Usual name of the city or municipality in which the seller's address is located
      * @param string|null $country
      * Code used to identify the country. If no tax agent is specified, this is the country in which the sales tax
      * is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
      * representation of names of countries and their subdivisions”
+     * If no tax representative is specified, this is the country where VAT is liable. The lists of valid countries
+     * are registered with the EN ISO 3166-1 Maintenance agency, “Codes for the representation of names of countries
+     * and their subdivisions”.
      * @param string|null $subdivision
-     * The sellers state
+     * The subdivision of a country.
      * @return OrderDocumentReader
      */
     public function getDocumentSellerAddress(?string &$lineone, ?string &$linetwo, ?string &$linethree, ?string &$postcode, ?string &$city, ?string &$country, ?string &$subdivision): OrderDocumentReader
@@ -549,12 +552,12 @@ class OrderDocumentReader extends OrderDocument
      * seller as a legal entity or legal person. If no identification scheme ($legalorgtype) is provided,
      * it should be known to the buyer and seller
      * @param string|null $legalorgtype
-     * The identifier for the identification scheme of the legal
-     * registration of the seller. If the identification scheme is used, it must be selected from
-     * ISO/IEC 6523 list
+     * The identification scheme identifier of the Seller legal registration identifier.
+     * If used, the identification scheme identifier shall be chosen from the entries of the list published
+     * by the ISO/IEC 6523 maintenance agency.
      * @param string|null $legalorgname
-     * A name by which the seller is known, if different from the seller's name
-     * (also known as the company name)
+     * A name by which the seller is known, if different from the seller's name (also known as
+     * the company name). Note: This may be used if different from the seller's name.
      * @return OrderDocumentReader
      */
     public function getDocumentSellerLegalOrganisation(?string &$legalorgid, ?string &$legalorgtype, ?string &$legalorgname): OrderDocumentReader
@@ -598,17 +601,17 @@ class OrderDocumentReader extends OrderDocument
      * Get detailed information on the seller's contact person
      *
      * @param string|null $contactpersonname
-     * Contact point for a legal entity,
-     * such as a personal name of the contact person
+     * Contact point for a legal entity, such as a personal name of the contact person
      * @param string|null $contactdepartmentname
      * Contact point for a legal entity, such as a name of the department or office
      * @param string|null $contactphoneno
-     * Detailed information on the seller's phone number
+     * A phone number for the contact point.
      * @param string|null $contactfaxno
-     * Detailed information on the seller's fax number
+     * A fax number for the contact point.
      * @param string|null $contactemailadd
-     * Detailed information on the seller's email address
-     * @param string|null $contacttypecode
+     * An e-mail address for the contact point.
+     * @param string|null $contactTypeCode
+     * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentReader
      */
     public function getDocumentSellerContact(?string &$contactpersonname, ?string &$contactdepartmentname, ?string &$contactphoneno, ?string &$contactfaxno, ?string &$contactemailadd, ?string &$contacttypecode): OrderDocumentReader
@@ -629,7 +632,10 @@ class OrderDocumentReader extends OrderDocument
      * Set the universal communication info for the seller
      *
      * @param string|null $uriType
+     * Identifies the electronic address to which the application level response to the order may be delivered.
      * @param string|null $uriId
+     * The identification scheme identifier of the electronic address. The scheme identifier shall be chosen
+     * from a list to be maintained by the Connecting Europe Facility.
      * @return OrderDocumentReader
      */
     public function getDocumentSellerElectronicAddress(?string &$uriType, ?string &$uriId): OrderDocumentReader
@@ -641,16 +647,15 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get detailed information about the buyer (service recipient)
+     * Get information about the Buyer.
      *
-     * @param string|null $name
-     * The full name of the buyer
-     * @param array|null $id
-     * An identifier of the buyer. In many systems, buyer identification is key information. Multiple buyer IDs can be
-     * assigned or specified. They can be differentiated by using different identification schemes. If no scheme is given,
-     * it should be known to the buyer and buyer, e.g. a previously exchanged, seller-assigned identifier of the buyer
+     * @param string $name
+     * The full formal name by which the party is registered in the national registry of
+     * legal entities or as a Taxable person or otherwise trades as a person or persons.
+     * @param string|null $id
+     * An identification of the Party. The identification scheme identifier of the Party identifier.
      * @param string|null $description
-     * Further legal information about the buyer
+     * Additional legal information relevant for the Paety.
      * @return OrderDocumentReader
      */
     public function getDocumentBuyer(?string &$name, ?array &$id, ?string &$description): OrderDocumentReader
@@ -666,10 +671,6 @@ class OrderDocumentReader extends OrderDocument
 
     /**
      * Get global identifier of the buyer.
-     *
-     * __Notes__
-     *  - The buyers's ID identification scheme is a unique identifier
-     *    assigned to a buyer by a global registration organization
      *
      * @param array|null $globalID
      * Array of the buyers global ids indexed by the identification scheme. The identification scheme results
@@ -688,13 +689,9 @@ class OrderDocumentReader extends OrderDocument
     /**
      * Get detailed information on the buyer's tax information.
      *
-     * __Notes__
-     *  - The local identification (defined by the buyer's address) of the buyer for tax purposes or a reference that
-     *    enables the buyer to indicate his reporting status for tax purposes.
-     *
      * @param array|null $taxreg
-     * Array of sales tax identification numbers of the buyer indexed by __VA__ for _Sales tax identification number of the buyer_
-     * Only the code __VA__ is permitted as an identification scheme
+     * Array of sales tax identification numbers of the seller indexed by Scheme identifier (e.g.: __FC__ for _Tax number of the seller_ and __VA__
+     * for _Sales tax identification number of the seller_)
      * @return OrderDocumentReader
      */
     public function getDocumentBuyerTaxRegistration(?array &$taxreg): OrderDocumentReader
@@ -718,7 +715,7 @@ class OrderDocumentReader extends OrderDocument
      * Line 3 of the buyers address. This is an additional address line in an address that can be
      * used to provide additional details in addition to the main line
      * @param string|null $postcode
-     * Identifier for a group of properties, such as a zip code
+     * The identifier for an addressable group of properties according to the relevant postal service.
      * @param string|null $city
      * Usual name of the city or municipality in which the buyers address is located
      * @param string|null $country
@@ -726,7 +723,7 @@ class OrderDocumentReader extends OrderDocument
      * is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
      * representation of names of countries and their subdivisions”
      * @param string|null $subdivision
-     * The buyers state
+     * The subdivision of a country.
      * @return OrderDocumentReader
      */
     public function getDocumentBuyerAddress(?string &$lineone, ?string &$linetwo, ?string &$linethree, ?string &$postcode, ?string &$city, ?string &$country, ?string &$subdivision): OrderDocumentReader
@@ -799,17 +796,17 @@ class OrderDocumentReader extends OrderDocument
      * Get detailed information on the buyer's contact person
      *
      * @param string|null $contactpersonname
-     * Contact point for a legal entity,
-     * such as a personal name of the contact person
+     * Contact point for a legal entity, such as a personal name of the contact person
      * @param string|null $contactdepartmentname
      * Contact point for a legal entity, such as a name of the department or office
      * @param string|null $contactphoneno
-     * Detailed information on the buyer's phone number
+     * A phone number for the contact point.
      * @param string|null $contactfaxno
-     * Detailed information on the buyer's fax number
+     * A fax number for the contact point.
      * @param string|null $contactemailadd
-     * Detailed information on the buyer's email address
-     * @param string|null $contacttypecode
+     * An e-mail address for the contact point.
+     * @param string|null $contactTypeCode
+     * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentReader
      */
     public function getDocumentBuyerContact(?string &$contactpersonname, ?string &$contactdepartmentname, ?string &$contactphoneno, ?string &$contactfaxno, ?string &$contactemailadd, ?string &$contacttypecode): OrderDocumentReader
@@ -830,7 +827,10 @@ class OrderDocumentReader extends OrderDocument
      * Set the universal communication info for the buyer
      *
      * @param string|null $uriType
+     * Identifies the electronic address to which the application level response to the order may be delivered.
      * @param string|null $uriId
+     * The identification scheme identifier of the electronic address. The scheme identifier shall be chosen
+     * from a list to be maintained by the Connecting Europe Facility.
      * @return OrderDocumentReader
      */
     public function getDocumentBuyerElectronicAddress(?string &$uriType, ?string &$uriId): OrderDocumentReader
@@ -845,11 +845,12 @@ class OrderDocumentReader extends OrderDocument
      * Detailed information about the party who raises the Order originally on behalf of the Buyer
      *
      * @param string $name
-     * The full name of the buyer requisitioner
-     * @param array|null $id
-     * An identifier of the buyer requisitioner
+     * The full formal name by which the party is registered in the national registry of
+     * legal entities or as a Taxable person or otherwise trades as a person or persons.
+     * @param string|null $id
+     * An identification of the Party. The identification scheme identifier of the Party identifier.
      * @param string|null $description
-     * Further legal information about the buyer requisitioner
+     * Additional legal information relevant for the Paety.
      * @return OrderDocumentReader
      */
     public function getDocumentBuyerRequisitioner(?string &$name, ?array &$id, ?string &$description): OrderDocumentReader
@@ -884,8 +885,8 @@ class OrderDocumentReader extends OrderDocument
      * Get detailed information on the buyer requisitioner's tax information.
      *
      * @param array|null $taxreg
-     * Array of sales tax identification numbers of the buyer indexed by __VA__ for _Sales tax identification number of the buyer_
-     * Only the code __VA__ is permitted as an identification scheme
+     * Array of sales tax identification numbers of the seller indexed by Scheme identifier (e.g.: __FC__ for _Tax number of the seller_ and __VA__
+     * for _Sales tax identification number of the seller_)
      * @return OrderDocumentReader
      */
     public function getDocumentBuyerRequisitionerTaxRegistration(?array &$taxreg): OrderDocumentReader
@@ -909,7 +910,7 @@ class OrderDocumentReader extends OrderDocument
      * Line 3 of the buyer requisitioners address. This is an additional address line in an address that can be
      * used to provide additional details in addition to the main line
      * @param string|null $postcode
-     * Identifier for a group of properties, such as a zip code
+     * The identifier for an addressable group of properties according to the relevant postal service.
      * @param string|null $city
      * Usual name of the city or municipality in which the buyer requisitioners address is located
      * @param string|null $country
@@ -917,7 +918,7 @@ class OrderDocumentReader extends OrderDocument
      * is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
      * representation of names of countries and their subdivisions”
      * @param string|null $subdivision
-     * The buyer requisitioners state
+     * The subdivision of a country.
      * @return OrderDocumentReader
      */
     public function getDocumentBuyerRequisitionerAddress(?string &$lineone, ?string &$linetwo, ?string &$linethree, ?string &$postcode, ?string &$city, ?string &$country, ?string &$subdivision): OrderDocumentReader
@@ -989,17 +990,17 @@ class OrderDocumentReader extends OrderDocument
      * Get detailed information on the buyer requisitioner's contact person
      *
      * @param string|null $contactpersonname
-     * Contact point for a legal entity,
-     * such as a personal name of the contact person
+     * Contact point for a legal entity, such as a personal name of the contact person
      * @param string|null $contactdepartmentname
      * Contact point for a legal entity, such as a name of the department or office
      * @param string|null $contactphoneno
-     * Detailed information on the buyer's phone number
+     * A phone number for the contact point.
      * @param string|null $contactfaxno
-     * Detailed information on the buyer's fax number
+     * A fax number for the contact point.
      * @param string|null $contactemailadd
-     * Detailed information on the buyer's email address
-     * @param string|null $contacttypecode
+     * An e-mail address for the contact point.
+     * @param string|null $contactTypeCode
+     * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentReader
      */
     public function getDocumentBuyerRequisitionerContact(?string &$contactpersonname, ?string &$contactdepartmentname, ?string &$contactphoneno, ?string &$contactfaxno, ?string &$contactemailadd, ?string &$contacttypecode): OrderDocumentReader
@@ -1020,7 +1021,10 @@ class OrderDocumentReader extends OrderDocument
      * Get the universal communication info for the buyer requisitioner
      *
      * @param string|null $uriType
+     * Identifies the electronic address to which the application level response to the order may be delivered.
      * @param string|null $uriId
+     * The identification scheme identifier of the electronic address. The scheme identifier shall be chosen
+     * from a list to be maintained by the Connecting Europe Facility.
      * @return OrderDocumentReader
      */
     public function getDocumentBuyerRequisitionerElectronicAddress(?string &$uriType, ?string &$uriId): OrderDocumentReader
@@ -1343,15 +1347,12 @@ class OrderDocumentReader extends OrderDocument
      * Ship-To
      *
      * @param string $name
-     * The name of the party to whom the goods are being delivered or for whom the services are being
-     * performed. Must be used if the recipient of the goods or services is not the same as the buyer.
-     * @param array|null $id
-     * An identifier for the place where the goods are delivered or where the services are provided.
-     * Multiple IDs can be assigned or specified. They can be differentiated by using different
-     * identification schemes. If no scheme is given, it should be known to the buyer and seller, e.g.
-     * a previously exchanged identifier assigned by the buyer or seller.
+     * The full formal name by which the party is registered in the national registry of
+     * legal entities or as a Taxable person or otherwise trades as a person or persons.
+     * @param string|null $id
+     * An identification of the Party. The identification scheme identifier of the Party identifier.
      * @param string|null $description
-     * Further legal information that is relevant for the party
+     * Additional legal information relevant for the Paety.
      * @return OrderDocumentReader
      */
     public function getDocumentShipTo(?string &$name, ?array &$id, ?string &$description): OrderDocumentReader
@@ -1386,8 +1387,8 @@ class OrderDocumentReader extends OrderDocument
      * Get Tax registration to Ship-To Trade party
      *
      * @param array|null $taxreg
-     * Array of sales tax identification numbers of the seller indexed by __FC__ for _Tax number of the seller_ and __VA__
-     * for _Sales tax identification number of the seller_
+     * Array of sales tax identification numbers of the seller indexed by Scheme identifier (e.g.: __FC__ for _Tax number of the seller_ and __VA__
+     * for _Sales tax identification number of the seller_)
      * @return OrderDocumentReader
      */
     public function getDocumentShipToTaxRegistration(?array &$taxreg): OrderDocumentReader
@@ -1411,7 +1412,7 @@ class OrderDocumentReader extends OrderDocument
      * Line 3 of the party's address. This is an additional address line in an address that can be
      * used to provide additional details in addition to the main line
      * @param string|null $postcode
-     * Identifier for a group of properties, such as a zip code
+     * The identifier for an addressable group of properties according to the relevant postal service.
      * @param string|null $city
      * Usual name of the city or municipality in which the party's address is located
      * @param string|null $country
@@ -1419,7 +1420,7 @@ class OrderDocumentReader extends OrderDocument
      * is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
      * representation of names of countries and their subdivisions”
      * @param string|null $subdivision
-     * The party's state
+     * The subdivision of a country.
      * @return OrderDocumentReader
      */
     public function getDocumentShipToAddress(?string &$lineone, ?string &$linetwo, ?string &$linethree, ?string &$postcode, ?string &$city, ?string &$country, ?string &$subdivision): OrderDocumentReader
@@ -1494,13 +1495,13 @@ class OrderDocumentReader extends OrderDocument
      * @param string|null $contactdepartmentname
      * Contact point for a legal entity, such as a name of the department or office
      * @param string|null $contactphoneno
-     * Detailed information on the party's phone number
+     * A phone number for the contact point.
      * @param string|null $contactfaxno
-     * Detailed information on the party's fax number
+     * A fax number for the contact point.
      * @param string|null $contactemailadd
-     * Detailed information on the party's email address
-     * @param string|null $contacttypecode
-     * Type (Code) of the contach
+     * An e-mail address for the contact point.
+     * @param string|null $contactTypeCode
+     * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentReader
      */
     public function getDocumentShipToContact(?string &$contactpersonname, ?string &$contactdepartmentname, ?string &$contactphoneno, ?string &$contactfaxno, ?string &$contactemailadd, ?string &$contacttypecode): OrderDocumentReader
@@ -1521,7 +1522,10 @@ class OrderDocumentReader extends OrderDocument
      * Set the universal communication info for the Ship-To Trade Party
      *
      * @param string|null $uriType
+     * Identifies the electronic address to which the application level response to the order may be delivered.
      * @param string|null $uriId
+     * The identification scheme identifier of the electronic address. The scheme identifier shall be chosen
+     * from a list to be maintained by the Connecting Europe Facility.
      * @return OrderDocumentReader
      */
     public function getDocumentShipToElectronicAddress(?string &$uriType, ?string &$uriId): OrderDocumentReader
@@ -1536,15 +1540,12 @@ class OrderDocumentReader extends OrderDocument
      * Ship-From
      *
      * @param string $name
-     * The name of the party to whom the goods are being delivered or for whom the services are being
-     * performed. Must be used if the recipient of the goods or services is not the same as the buyer.
-     * @param array|null $id
-     * An identifier for the place where the goods are delivered or where the services are provided.
-     * Multiple IDs can be assigned or specified. They can be differentiated by using different
-     * identification schemes. If no scheme is given, it should be known to the buyer and seller, e.g.
-     * a previously exchanged identifier assigned by the buyer or seller.
+     * The full formal name by which the party is registered in the national registry of
+     * legal entities or as a Taxable person or otherwise trades as a person or persons.
+     * @param string|null $id
+     * An identification of the Party. The identification scheme identifier of the Party identifier.
      * @param string|null $description
-     * Further legal information that is relevant for the party
+     * Additional legal information relevant for the Paety.
      * @return OrderDocumentReader
      */
     public function getDocumentShipFrom(?string &$name, ?array &$id, ?string &$description): OrderDocumentReader
@@ -1579,8 +1580,8 @@ class OrderDocumentReader extends OrderDocument
      * Get Tax registration to Ship-From Trade party
      *
      * @param array|null $taxreg
-     * Array of sales tax identification numbers of the seller indexed by __FC__ for _Tax number of the seller_ and __VA__
-     * for _Sales tax identification number of the seller_
+     * Array of sales tax identification numbers of the seller indexed by Scheme identifier (e.g.: __FC__ for _Tax number of the seller_ and __VA__
+     * for _Sales tax identification number of the seller_)
      * @return OrderDocumentReader
      */
     public function getDocumentShipFromTaxRegistration(?array &$taxreg): OrderDocumentReader
@@ -1604,7 +1605,7 @@ class OrderDocumentReader extends OrderDocument
      * Line 3 of the party's address. This is an additional address line in an address that can be
      * used to provide additional details in addition to the main line
      * @param string|null $postcode
-     * Identifier for a group of properties, such as a zip code
+     * The identifier for an addressable group of properties according to the relevant postal service.
      * @param string|null $city
      * Usual name of the city or municipality in which the party's address is located
      * @param string|null $country
@@ -1612,7 +1613,7 @@ class OrderDocumentReader extends OrderDocument
      * is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
      * representation of names of countries and their subdivisions”
      * @param string|null $subdivision
-     * The party's state
+     * The subdivision of a country.
      * @return OrderDocumentReader
      */
     public function getDocumentShipFromAddress(?string &$lineone, ?string &$linetwo, ?string &$linethree, ?string &$postcode, ?string &$city, ?string &$country, ?string &$subdivision): OrderDocumentReader
@@ -1687,13 +1688,13 @@ class OrderDocumentReader extends OrderDocument
      * @param string|null $contactdepartmentname
      * Contact point for a legal entity, such as a name of the department or office
      * @param string|null $contactphoneno
-     * Detailed information on the party's phone number
+     * A phone number for the contact point.
      * @param string|null $contactfaxno
-     * Detailed information on the party's fax number
+     * A fax number for the contact point.
      * @param string|null $contactemailadd
-     * Detailed information on the party's email address
-     * @param string|null $contacttypecode
-     * Type (Code) of the contach
+     * An e-mail address for the contact point.
+     * @param string|null $contactTypeCode
+     * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentReader
      */
     public function getDocumentShipFromContact(?string &$contactpersonname, ?string &$contactdepartmentname, ?string &$contactphoneno, ?string &$contactfaxno, ?string &$contactemailadd, ?string &$contacttypecode): OrderDocumentReader
@@ -1714,7 +1715,10 @@ class OrderDocumentReader extends OrderDocument
      * Set the universal communication info for the Ship-From Trade Party
      *
      * @param string|null $uriType
+     * Identifies the electronic address to which the application level response to the order may be delivered.
      * @param string|null $uriId
+     * The identification scheme identifier of the electronic address. The scheme identifier shall be chosen
+     * from a list to be maintained by the Connecting Europe Facility.
      * @return OrderDocumentReader
      */
     public function getDocumentShipFromElectronicAddress(?string &$uriType, ?string &$uriId): OrderDocumentReader
@@ -1793,13 +1797,12 @@ class OrderDocumentReader extends OrderDocument
      * Set detailed information on the Invoicee Trade Party
      *
      * @param string $name
-     * The name of the party
-     * @param array|null $id
-     * An identifier for the party. Multiple IDs can be assigned or specified. They can be differentiated by using
-     * different identification schemes. If no scheme is given, it should  be known to the buyer and seller, e.g.
-     * a previously exchanged identifier assigned by the buyer or seller.
+     * The full formal name by which the party is registered in the national registry of
+     * legal entities or as a Taxable person or otherwise trades as a person or persons.
+     * @param string|null $id
+     * An identification of the Party. The identification scheme identifier of the Party identifier.
      * @param string|null $description
-     * Further legal information that is relevant for the party
+     * Additional legal information relevant for the Paety.
      * @return OrderDocumentReader
      */
     public function getDocumentInvoicee(?string &$name, ?array &$id, ?string &$description): OrderDocumentReader
@@ -1834,8 +1837,8 @@ class OrderDocumentReader extends OrderDocument
      * Get Tax registration to Invoicee Trade Party
      *
      * @param array|null $taxreg
-     * Array of sales tax identification numbers of the invoicee indexed by __FC__ for _Tax number of the invoicee_ and __VA__
-     * for _Sales tax identification number of the invoicee_
+     * Array of sales tax identification numbers of the seller indexed by Scheme identifier (e.g.: __FC__ for _Tax number of the seller_ and __VA__
+     * for _Sales tax identification number of the seller_)
      * @return OrderDocumentReader
      */
     public function getDocumentInvoiceeTaxRegistration(?array &$taxreg): OrderDocumentReader
@@ -1859,7 +1862,7 @@ class OrderDocumentReader extends OrderDocument
      * Line 3 of the invoicee' address. This is an additional address line in an address that can be
      * used to provide additional details in addition to the main line
      * @param string|null $postcode
-     * Identifier for a group of properties, such as a zip code
+     * The identifier for an addressable group of properties according to the relevant postal service.
      * @param string|null $city
      * Usual name of the city or municipality in which the invoicee' address is located
      * @param string|null $country
@@ -1867,7 +1870,7 @@ class OrderDocumentReader extends OrderDocument
      * is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
      * representation of names of countries and their subdivisions”
      * @param string|null $subdivision
-     * The invoicee' state
+     * The subdivision of a country.
      * @return OrderDocumentReader
      */
     public function getDocumentInvoiceeAddress(?string &$lineone, ?string &$linetwo, ?string &$linethree, ?string &$postcode, ?string &$city, ?string &$country, ?string &$subdivision): OrderDocumentReader
@@ -1940,17 +1943,17 @@ class OrderDocumentReader extends OrderDocument
      * Get detailed information on the invoicee's contact person
      *
      * @param string|null $contactpersonname
-     * Contact point for a legal entity,
-     * such as a personal name of the contact person
+     * Contact point for a legal entity, such as a personal name of the contact person
      * @param string|null $contactdepartmentname
      * Contact point for a legal entity, such as a name of the department or office
      * @param string|null $contactphoneno
-     * Detailed information on the invoicee's phone number
+     * A phone number for the contact point.
      * @param string|null $contactfaxno
-     * Detailed information on the invoicee's fax number
+     * A fax number for the contact point.
      * @param string|null $contactemailadd
-     * Detailed information on the invoicee's email address
-     * @param string|null $contacttypecode
+     * An e-mail address for the contact point.
+     * @param string|null $contactTypeCode
+     * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentReader
      */
     public function getDocumentInvoiceeContact(?string &$contactpersonname, ?string &$contactdepartmentname, ?string &$contactphoneno, ?string &$contactfaxno, ?string &$contactemailadd, ?string &$contacttypecode): OrderDocumentReader
@@ -1971,7 +1974,10 @@ class OrderDocumentReader extends OrderDocument
      * Set the universal communication info for the invoicee
      *
      * @param string|null $uriType
+     * Identifies the electronic address to which the application level response to the order may be delivered.
      * @param string|null $uriId
+     * The identification scheme identifier of the electronic address. The scheme identifier shall be chosen
+     * from a list to be maintained by the Connecting Europe Facility.
      * @return OrderDocumentReader
      */
     public function getDocumentInvoiceeElectronicAddress(?string &$uriType, ?string &$uriId): OrderDocumentReader
