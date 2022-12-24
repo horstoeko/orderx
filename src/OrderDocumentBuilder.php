@@ -445,7 +445,7 @@ class OrderDocumentBuilder extends OrderDocument
      * Detailed information about the seller (=service provider)
      *
      * @param string $name
-     * TThe full formal name by which the party is registered in the national registry of
+     * The full formal name by which the party is registered in the national registry of
      * legal entities or as a Taxable person or otherwise trades as a person or persons.
      * @param string|null $id
      * An identification of the Party. The identification scheme identifier of the Party identifier.
@@ -590,14 +590,14 @@ class OrderDocumentBuilder extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentBuilder
      */
-    public function setDocumentSellerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
+    public function setDocumentSellerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
         $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
         $this->objectHelper->tryCallIfMethodExists($sellerTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
         return $this;
     }
@@ -615,14 +615,14 @@ class OrderDocumentBuilder extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentBuilder
      */
-    public function addDocumentSellerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
+    public function addDocumentSellerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
         $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
         $this->objectHelper->tryCall($sellerTradeParty, "addToDefinedTradeContact", $contact);
         return $this;
     }
@@ -649,7 +649,7 @@ class OrderDocumentBuilder extends OrderDocument
      * Set information about the Buyer.
      *
      * @param string $name
-     * TThe full formal name by which the party is registered in the national registry of
+     * The full formal name by which the party is registered in the national registry of
      * legal entities or as a Taxable person or otherwise trades as a person or persons.
      * @param string|null $id
      * An identification of the Party. The identification scheme identifier of the Party identifier.
@@ -787,14 +787,14 @@ class OrderDocumentBuilder extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentBuilder
      */
-    public function setDocumentBuyerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
+    public function setDocumentBuyerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
         $buyerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
         $this->objectHelper->tryCallIfMethodExists($buyerTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
         return $this;
     }
@@ -812,14 +812,14 @@ class OrderDocumentBuilder extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentBuilder
      */
-    public function addDocumentBuyerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
+    public function addDocumentBuyerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
         $buyerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
         $this->objectHelper->tryCall($buyerTradeParty, "addToDefinedTradeContact", $contact);
         return $this;
     }
@@ -846,7 +846,7 @@ class OrderDocumentBuilder extends OrderDocument
      * Detailed information about the party who raises the Order originally on behalf of the Buyer
      *
      * @param string $name
-     * TThe full formal name by which the party is registered in the national registry of
+     * The full formal name by which the party is registered in the national registry of
      * legal entities or as a Taxable person or otherwise trades as a person or persons.
      * @param string|null $id
      * An identification of the Party. The identification scheme identifier of the Party identifier.
@@ -983,14 +983,14 @@ class OrderDocumentBuilder extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentBuilder
      */
-    public function setDocumentBuyerRequisitionerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
+    public function setDocumentBuyerRequisitionerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
         $buyerRequisitionerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
         $this->objectHelper->tryCallIfMethodExists($buyerRequisitionerTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
         return $this;
     }
@@ -1008,14 +1008,14 @@ class OrderDocumentBuilder extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentBuilder
      */
-    public function addDocumentBuyerRequisitionerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
+    public function addDocumentBuyerRequisitionerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
         $buyerRequisitionerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
         $this->objectHelper->tryCall($buyerRequisitionerTradeParty, "addToDefinedTradeContact", $contact);
         return $this;
     }
@@ -1356,7 +1356,7 @@ class OrderDocumentBuilder extends OrderDocument
      * Ship-To
      *
      * @param string $name
-     * TThe full formal name by which the party is registered in the national registry of
+     * The full formal name by which the party is registered in the national registry of
      * legal entities or as a Taxable person or otherwise trades as a person or persons.
      * @param string|null $id
      * An identification of the Party. The identification scheme identifier of the Party identifier.
@@ -1492,14 +1492,14 @@ class OrderDocumentBuilder extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentBuilder
      */
-    public function setDocumentShipToContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
+    public function setDocumentShipToContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
         $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
         $this->objectHelper->tryCallIfMethodExists($shipToTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
         return $this;
     }
@@ -1517,7 +1517,7 @@ class OrderDocumentBuilder extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contactTypeCpde
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentBuilder
      */
@@ -1686,14 +1686,14 @@ class OrderDocumentBuilder extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentBuilder
      */
-    public function setDocumentShipFromContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
+    public function setDocumentShipFromContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
         $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
         $this->objectHelper->tryCallIfMethodExists($shipFromTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
         return $this;
     }
@@ -1711,14 +1711,14 @@ class OrderDocumentBuilder extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentBuilder
      */
-    public function addDocumentShipFromContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
+    public function addDocumentShipFromContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
         $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
         $this->objectHelper->tryCall($shipFromTradeParty, "addToDefinedTradeContact", $contact);
         return $this;
     }
@@ -1898,14 +1898,14 @@ class OrderDocumentBuilder extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentBuilder
      */
-    public function setDocumentInvoiceeContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
+    public function setDocumentInvoiceeContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
         $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
         $this->objectHelper->tryCallIfMethodExists($invoiceeTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
         return $this;
     }
@@ -1923,13 +1923,13 @@ class OrderDocumentBuilder extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      */
-    public function addDocumentInvoiceeContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCode = null): OrderDocumentBuilder
+    public function addDocumentInvoiceeContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
         $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCode);
+        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
         $this->objectHelper->tryCall($invoiceeTradeParty, "addToDefinedTradeContact", $contact);
         return $this;
     }

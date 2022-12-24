@@ -455,7 +455,7 @@ class OrderDocumentReader extends OrderDocument
      * @param string $name
      * The full formal name by which the party is registered in the national registry of
      * legal entities or as a Taxable person or otherwise trades as a person or persons.
-     * @param string|null $id
+     * @param array|null $id
      * An identification of the Party. The identification scheme identifier of the Party identifier.
      * @param string|null $description
      * Additional legal information relevant for the Paety.
@@ -610,7 +610,7 @@ class OrderDocumentReader extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentReader
      */
@@ -652,7 +652,7 @@ class OrderDocumentReader extends OrderDocument
      * @param string $name
      * The full formal name by which the party is registered in the national registry of
      * legal entities or as a Taxable person or otherwise trades as a person or persons.
-     * @param string|null $id
+     * @param array|null $id
      * An identification of the Party. The identification scheme identifier of the Party identifier.
      * @param string|null $description
      * Additional legal information relevant for the Paety.
@@ -673,9 +673,8 @@ class OrderDocumentReader extends OrderDocument
      * Get global identifier of the buyer.
      *
      * @param array|null $globalID
-     * Array of the buyers global ids indexed by the identification scheme. The identification scheme results
-     * from the list published by the ISO/IEC 6523 Maintenance Agency. In particular, the following scheme
-     * codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177 : ODETTE
+     * Array of the sellers global ids indexed by the identification scheme. The identification scheme results
+     * from the list published by the ISO/IEC 6523 Maintenance Agency.
      * @return OrderDocumentReader
      */
     public function getDocumentBuyerGlobalId(?array &$globalID): OrderDocumentReader
@@ -805,7 +804,7 @@ class OrderDocumentReader extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentReader
      */
@@ -847,7 +846,7 @@ class OrderDocumentReader extends OrderDocument
      * @param string $name
      * The full formal name by which the party is registered in the national registry of
      * legal entities or as a Taxable person or otherwise trades as a person or persons.
-     * @param string|null $id
+     * @param array|null $id
      * An identification of the Party. The identification scheme identifier of the Party identifier.
      * @param string|null $description
      * Additional legal information relevant for the Paety.
@@ -867,10 +866,9 @@ class OrderDocumentReader extends OrderDocument
     /**
      * Get global id's for the party who raises the Order originally on behalf of the buyer requisitioner
      *
-     * @param array $globalID
-     * Array of the buyer requisitioner's global ids indexed by the identification scheme. The identification scheme results
-     * from the list published by the ISO/IEC 6523 Maintenance Agency. In particular, the following scheme
-     * codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177 : ODETTE
+     * @param array|null $globalID
+     * Array of the sellers global ids indexed by the identification scheme. The identification scheme results
+     * from the list published by the ISO/IEC 6523 Maintenance Agency.
      * @return OrderDocumentReader
      */
     public function getDocumentBuyerRequisitionerGlobalId(?array &$globalID): OrderDocumentReader
@@ -999,7 +997,7 @@ class OrderDocumentReader extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentReader
      */
@@ -1349,7 +1347,7 @@ class OrderDocumentReader extends OrderDocument
      * @param string $name
      * The full formal name by which the party is registered in the national registry of
      * legal entities or as a Taxable person or otherwise trades as a person or persons.
-     * @param string|null $id
+     * @param array|null $id
      * An identification of the Party. The identification scheme identifier of the Party identifier.
      * @param string|null $description
      * Additional legal information relevant for the Paety.
@@ -1371,8 +1369,7 @@ class OrderDocumentReader extends OrderDocument
      *
      * @param array|null $globalID
      * Array of the sellers global ids indexed by the identification scheme. The identification scheme results
-     * from the list published by the ISO/IEC 6523 Maintenance Agency. In particular, the following scheme
-     * codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177 : ODETTE
+     * from the list published by the ISO/IEC 6523 Maintenance Agency.
      * @return OrderDocumentReader
      */
     public function getDocumentShipToGlobalId(?array &$globalID): OrderDocumentReader
@@ -1500,7 +1497,7 @@ class OrderDocumentReader extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentReader
      */
@@ -1542,7 +1539,7 @@ class OrderDocumentReader extends OrderDocument
      * @param string $name
      * The full formal name by which the party is registered in the national registry of
      * legal entities or as a Taxable person or otherwise trades as a person or persons.
-     * @param string|null $id
+     * @param array|null $id
      * An identification of the Party. The identification scheme identifier of the Party identifier.
      * @param string|null $description
      * Additional legal information relevant for the Paety.
@@ -1564,8 +1561,7 @@ class OrderDocumentReader extends OrderDocument
      *
      * @param array|null $globalID
      * Array of the sellers global ids indexed by the identification scheme. The identification scheme results
-     * from the list published by the ISO/IEC 6523 Maintenance Agency. In particular, the following scheme
-     * codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177 : ODETTE
+     * from the list published by the ISO/IEC 6523 Maintenance Agency.
      * @return OrderDocumentReader
      */
     public function getDocumentShipFromGlobalId(?array &$globalID): OrderDocumentReader
@@ -1693,7 +1689,7 @@ class OrderDocumentReader extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentReader
      */
@@ -1799,7 +1795,7 @@ class OrderDocumentReader extends OrderDocument
      * @param string $name
      * The full formal name by which the party is registered in the national registry of
      * legal entities or as a Taxable person or otherwise trades as a person or persons.
-     * @param string|null $id
+     * @param array|null $id
      * An identification of the Party. The identification scheme identifier of the Party identifier.
      * @param string|null $description
      * Additional legal information relevant for the Paety.
@@ -1820,9 +1816,8 @@ class OrderDocumentReader extends OrderDocument
      * Get global identifier of the Invoicee.
      *
      * @param array|null $globalID
-     * Array of the invoicees global ids indexed by the identification scheme. The identification scheme results
-     * from the list published by the ISO/IEC 6523 Maintenance Agency. In particular, the following scheme
-     * codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177 : ODETTE
+     * Array of the sellers global ids indexed by the identification scheme. The identification scheme results
+     * from the list published by the ISO/IEC 6523 Maintenance Agency.
      * @return OrderDocumentReader
      */
     public function getDocumentInvoiceeGlobalId(?array &$globalID): OrderDocumentReader
@@ -1952,7 +1947,7 @@ class OrderDocumentReader extends OrderDocument
      * A fax number for the contact point.
      * @param string|null $contactemailadd
      * An e-mail address for the contact point.
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * The code specifying the type of trade contact. To be chosen from the entries in UNTDID 3139
      * @return OrderDocumentReader
      */
@@ -2498,9 +2493,8 @@ class OrderDocumentReader extends OrderDocument
      * bilaterally agreed identification of the product. It can, for example, be the customer article
      * number or the article number assigned by the manufacturer.
      * @param array|null $globalID
-     * Array of the global ids indexed by the identification scheme. The identification scheme results
-     * from the list published by the ISO/IEC 6523 Maintenance Agency. In particular, the following scheme
-     * codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177 : ODETTE
+     * Array of the sellers global ids indexed by the identification scheme. The identification scheme results
+     * from the list published by the ISO/IEC 6523 Maintenance Agency.
      * @param string|null $batchId
      * A batch identifier for this item.
      * @param string|null $brandName
