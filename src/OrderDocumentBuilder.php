@@ -27,42 +27,42 @@ class OrderDocumentBuilder extends OrderDocument
     /**
      * HeaderTradeAgreement
      *
-     * @var object
+     * @var object|null
      */
     protected $headerTradeAgreement = null;
 
     /**
      * HeaderTradeDelivery
      *
-     * @var object
+     * @var object|null
      */
     protected $headerTradeDelivery = null;
 
     /**
      * HeaderTradeSettlement
      *
-     * @var object
+     * @var object|null
      */
     protected $headerTradeSettlement = null;
 
     /**
      * SupplyChainTradeTransactionType
      *
-     * @var object
+     * @var object|null
      */
     protected $headerSupplyChainTradeTransaction = null;
 
     /**
      * Last added payment terms
      *
-     * @var object
+     * @var object|null
      */
     protected $currentPaymentTerms = null;
 
     /**
      * Last added position (line) to the docuemnt
      *
-     * @var object
+     * @var object|null
      */
     protected $currentPosition = null;
 
@@ -2056,6 +2056,129 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
+     * Add a VAT breakdown (at document level)
+     *
+     * @param string $categoryCode
+     * Coded description of a sales tax category
+     *
+     * The following entries from UNTDID 5305 are used (details in brackets):
+     *  - Standard rate (sales tax is due according to the normal procedure)
+     *  - Goods to be taxed according to the zero rate (sales tax is charged with a percentage of zero)
+     *  - Tax exempt (USt./IGIC/IPSI)
+     *  - Reversal of the tax liability (the rules for reversing the tax liability at USt./IGIC/IPSI apply)
+     *  - VAT exempt for intra-community deliveries of goods (USt./IGIC/IPSI not levied due to rules on intra-community deliveries)
+     *  - Free export item, tax not levied (VAT / IGIC/IPSI not levied due to export outside the EU)
+     *  - Services outside the tax scope (sales are not subject to VAT / IGIC/IPSI)
+     *  - Canary Islands general indirect tax (IGIC tax applies)
+     *  - IPSI (tax for Ceuta / Melilla) applies.
+     *
+     * The codes for the VAT category are as follows:
+     *  - S = sales tax is due at the normal rate
+     *  - Z = goods to be taxed according to the zero rate
+     *  - E = tax exempt
+     *  - AE = reversal of tax liability
+     *  - K = VAT is not shown for intra-community deliveries
+     *  - G = tax not levied due to export outside the EU
+     *  - O = Outside the tax scope
+     *  - L = IGIC (Canary Islands)
+     *  - M = IPSI (Ceuta / Melilla)
+     * @param string $typeCode
+     * Coded description of a sales tax category. Note: Fixed value = "VAT"
+     * @param float $basisAmount
+     * Tax base amount, Each sales tax breakdown must show a category-specific tax base amount.
+     * @param float $calculatedAmount
+     * The total amount to be paid for the relevant VAT category. Note: Calculated by multiplying
+     * the amount to be taxed according to the sales tax category by the sales tax rate applicable
+     * for the sales tax category concerned
+     * @param float|null $rateApplicablePercent
+     * The sales tax rate, expressed as the percentage applicable to the sales tax category in
+     * question. Note: The code of the sales tax category and the category-specific sales tax rate
+     * must correspond to one another. The value to be given is the percentage. For example, the
+     * value 20 is given for 20% (and not 0.2)
+     * @param string|null $exemptionReason
+     * Reason for tax exemption (free text)
+     * @param string|null $exemptionReasonCode
+     * Reason given in code form for the exemption of the amount from VAT. Note: Code list issued
+     * and maintained by the Connecting Europe Facility.
+     * @param float|null $lineTotalBasisAmount
+     * Tax rate goods amount
+     * @param float|null $allowanceChargeBasisAmount
+     * Total amount of surcharges and deductions of the tax rate at document level
+     * @param string|null $dueDateTypeCode
+     * The code for the date on which sales tax becomes relevant for the seller and the buyer.
+     * The code must distinguish between the following entries from UNTDID 2005:
+     *  - date of issue of the invoice document
+     *  - actual delivery date
+     *  - Date of payment.
+     *
+     * The VAT Collection Date Code is used when the VAT Collection Date is not known for VAT purposes
+     * when the invoice is issued.
+     *
+     * The semantic values cited in the standard, which are represented by the values 3, 35, 432 in
+     * UNTDID2005, are mapped to the following values of UNTDID2475, which is the relevant code list
+     * supported by CII 16B:
+     *  - 5: date of issue of the invoice
+     *  - 29: Delivery date, current status
+     *  - 72: Paid to date
+     *
+     * In Germany, the date of delivery and service is decisive.
+     * @return OrderDocumentBuilder
+     */
+    public function addDocumentTax(string $categoryCode, string $typeCode, float $basisAmount, float $calculatedAmount, ?float $rateApplicablePercent = null, ?string $exemptionReason = null, ?string $exemptionReasonCode = null, ?float $lineTotalBasisAmount = null, ?float $allowanceChargeBasisAmount = null, ?string $dueDateTypeCode = null): OrderDocumentBuilder
+    {
+        $tax = $this->objectHelper->getTradeTaxType($categoryCode, $typeCode, $basisAmount, $calculatedAmount, $rateApplicablePercent, $exemptionReason, $exemptionReasonCode, $lineTotalBasisAmount, $allowanceChargeBasisAmount, $dueDateTypeCode);
+        $this->objectHelper->tryCall($this->headerTradeSettlement, "addToApplicableTradeTax", $tax);
+        return $this;
+    }
+
+    /**
+     * Add a VAT breakdown (at document level) in a more simple way
+     *
+     * @param string $categoryCode
+     * Coded description of a sales tax category
+     *
+     * The following entries from UNTDID 5305 are used (details in brackets):
+     *  - Standard rate (sales tax is due according to the normal procedure)
+     *  - Goods to be taxed according to the zero rate (sales tax is charged with a percentage of zero)
+     *  - Tax exempt (USt./IGIC/IPSI)
+     *  - Reversal of the tax liability (the rules for reversing the tax liability at USt./IGIC/IPSI apply)
+     *  - VAT exempt for intra-community deliveries of goods (USt./IGIC/IPSI not levied due to rules on intra-community deliveries)
+     *  - Free export item, tax not levied (VAT / IGIC/IPSI not levied due to export outside the EU)
+     *  - Services outside the tax scope (sales are not subject to VAT / IGIC/IPSI)
+     *  - Canary Islands general indirect tax (IGIC tax applies)
+     *  - IPSI (tax for Ceuta / Melilla) applies.
+     *
+     * The codes for the VAT category are as follows:
+     *  - S = sales tax is due at the normal rate
+     *  - Z = goods to be taxed according to the zero rate
+     *  - E = tax exempt
+     *  - AE = reversal of tax liability
+     *  - K = VAT is not shown for intra-community deliveries
+     *  - G = tax not levied due to export outside the EU
+     *  - O = Outside the tax scope
+     *  - L = IGIC (Canary Islands)
+     *  - M = IPSI (Ceuta / Melilla)
+     * @param string $typeCode
+     * Coded description of a sales tax category. Note: Fixed value = "VAT"
+     * @param float $basisAmount
+     * Tax base amount, Each sales tax breakdown must show a category-specific tax base amount.
+     * @param float $calculatedAmount
+     * The total amount to be paid for the relevant VAT category. Note: Calculated by multiplying
+     * the amount to be taxed according to the sales tax category by the sales tax rate applicable
+     * for the sales tax category concerned
+     * @param float|null $rateApplicablePercent
+     * The sales tax rate, expressed as the percentage applicable to the sales tax category in
+     * question. Note: The code of the sales tax category and the category-specific sales tax rate
+     * must correspond to one another. The value to be given is the percentage. For example, the
+     * value 20 is given for 20% (and not 0.2)
+     * @return OrderDocumentBuilder
+     */
+    public function addDocumentTaxSimple(string $categoryCode, string $typeCode, float $basisAmount, float $calculatedAmount, ?float $rateApplicablePercent = null): OrderDocumentBuilder
+    {
+        return $this->addDocumentTax($categoryCode, $typeCode, $basisAmount, $calculatedAmount, $rateApplicablePercent);
+    }
+
+    /**
      * Set information about surcharges and charges applicable to the bill as a whole, Deductions,
      * such as for withheld taxes may also be specified in this group
      *
@@ -2615,6 +2738,39 @@ class OrderDocumentBuilder extends OrderDocument
      * net price. Note: Only applies if the discount is given per unit and is not included in the gross price.
      * @param boolean $isCharge
      * Switch for surcharge/discount, if true then its an charge
+     * @param float|null $calculationPercent
+     * Discount/surcharge in percent. Up to level EN16931, only the final result of the discount (ActualAmount)
+     * is transferred
+     * @param float|null $basisAmount
+     * Base amount of the discount/surcharge
+     * @param string|null $reason
+     * Reason for surcharge/discount (free text)
+     * @param string|null $taxTypeCode
+     * @param string|null $taxCategoryCode
+     * @param float|null $rateApplicablePercent
+     * @param float|null $sequence
+     * @param float|null $basisQuantity
+     * @param string|null $basisQuantityUnitCode
+     * @param string|null $reasonCode
+     * @return OrderDocumentBuilder
+     */
+    public function addDocumentPositionGrossPriceAllowanceCharge(float $actualAmount, bool $isCharge, ?float $calculationPercent = null, ?float $basisAmount = null, ?string $reason = null, ?string $taxTypeCode = null, ?string $taxCategoryCode = null, ?float $rateApplicablePercent = null, ?float $sequence = null, ?float $basisQuantity = null, ?string $basisQuantityUnitCode = null, ?string $reasonCode = null): OrderDocumentBuilder
+    {
+        $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $grossPrice = $this->objectHelper->tryCallAndReturn($positionAgreement, "getGrossPriceProductTradePrice");
+        $allowanceCharge = $this->objectHelper->getTradeAllowanceChargeType($actualAmount, $isCharge, $taxTypeCode, $taxCategoryCode, $rateApplicablePercent, $sequence, $calculationPercent, $basisAmount, $basisQuantity, $basisQuantityUnitCode, $reasonCode, $reason);
+        $this->objectHelper->tryCallAll($grossPrice, ["addToAppliedTradeAllowanceCharge", "setAppliedTradeAllowanceCharge"], $allowanceCharge);
+        return $this;
+    }
+
+    /**
+     * Detailed information on surcharges and discounts on item gross price
+     *
+     * @param float $actualAmount
+     * Discount on the item price. The total discount subtracted from the gross price to calculate the
+     * net price. Note: Only applies if the discount is given per unit and is not included in the gross price.
+     * @param boolean $isCharge
+     * Switch for surcharge/discount, if true then its an charge
      * @param string|null $reason
      * The reason for the order line item trade price charge expressed as text.
      * @param string|null $reasonCode
@@ -2624,7 +2780,7 @@ class OrderDocumentBuilder extends OrderDocument
      * charge reason. Example AEW for WEEE.
      * @return OrderDocumentBuilder
      */
-    public function addDocumentPositionGrossPriceAllowanceCharge(float $actualAmount, bool $isCharge, ?string $reason = null, ?string $reasonCode = null): OrderDocumentBuilder
+    public function addDocumentPositionGrossPriceAllowanceChargeSimple(float $actualAmount, bool $isCharge, ?string $reason = null, ?string $reasonCode = null): OrderDocumentBuilder
     {
         $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
         $grossPrice = $this->objectHelper->tryCallAndReturn($positionAgreement, "getGrossPriceProductTradePrice");
@@ -2858,7 +3014,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set the supply chain event on position level
+     * Get the requested date or period on which delivery is requested (on position level)
      *
      * @param DateTime|null $occurrenceDateTime
      * @param DateTime|null $startDateTime
@@ -2874,7 +3030,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Add an additional supply chain event on position level
+     * Add an requested date or period on which delivery is requested (on position level)
      *
      * @param DateTime|null $occurrenceDateTime
      * @param DateTime|null $startDateTime
@@ -3146,7 +3302,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set information on item totals
+     * Set information on position totals
      *
      * @param float $lineTotalAmount
      * The total amount of the invoice item.
@@ -3165,8 +3321,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set an AccountingAccount on item level
-     * Detailinformationen zur Buchungsreferenz
+     * Set an AccountingAccount on position level
      *
      * @param string $id
      * The unique identifier for this trade accounting account.

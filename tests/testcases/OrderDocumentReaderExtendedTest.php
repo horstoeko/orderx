@@ -2575,4 +2575,1109 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals(1.00, $basisQuantity);
         $this->assertEquals("C62", $basisQuantityUnitCode);
     }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionGrossPriceAllowanceChargePos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        $this->assertTrue(self::$document->firstDocumentPositionGrossPriceAllowanceCharge());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionGrossPriceAllowanceChargePos1(): void
+    {
+        $this->assertTrue(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
+        $this->assertFalse(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionGrossPriceAllowanceChargePos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        $this->assertTrue(self::$document->firstDocumentPositionGrossPriceAllowanceCharge());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionGrossPriceAllowanceChargePos2(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionGrossPriceAllowanceChargePos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        $this->assertTrue(self::$document->firstDocumentPositionGrossPriceAllowanceCharge());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionGrossPriceAllowanceChargePos3(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionGrossPriceAllowanceChargePos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->firstDocumentPositionGrossPriceAllowanceCharge();
+        self::$document->getDocumentPositionGrossPriceAllowanceCharge($actualAmount, $isCharge, $calculationPercent, $basisAmount, $reason, $taxTypeCode, $taxCategoryCode, $rateApplicablePercent, $sequence, $basisQuantity, $basisQuantityUnitCode, $reasonCode);
+
+        $this->assertEquals(1.00, $actualAmount);
+        $this->assertEquals(false, $isCharge);
+        $this->assertEquals(0, $calculationPercent);
+        $this->assertEquals(0, $basisAmount);
+        $this->assertEquals("DISCOUNT", $reason);
+        $this->assertEquals("", $taxTypeCode);
+        $this->assertEquals("", $taxCategoryCode);
+        $this->assertEquals(0.0, $rateApplicablePercent);
+        $this->assertEquals(0, $sequence);
+        $this->assertEquals(0, $basisQuantity);
+        $this->assertEquals("", $basisQuantityUnitCode);
+        $this->assertEquals("95", $reasonCode);
+
+        self::$document->nextDocumentPositionGrossPriceAllowanceCharge();
+        self::$document->getDocumentPositionGrossPriceAllowanceCharge($actualAmount, $isCharge, $calculationPercent, $basisAmount, $reason, $taxTypeCode, $taxCategoryCode, $rateApplicablePercent, $sequence, $basisQuantity, $basisQuantityUnitCode, $reasonCode);
+
+        $this->assertEquals(0.50, $actualAmount);
+        $this->assertEquals(true, $isCharge);
+        $this->assertEquals(0, $calculationPercent);
+        $this->assertEquals(0, $basisAmount);
+        $this->assertEquals("WEEE", $reason);
+        $this->assertEquals("", $taxTypeCode);
+        $this->assertEquals("", $taxCategoryCode);
+        $this->assertEquals(0.0, $rateApplicablePercent);
+        $this->assertEquals(0, $sequence);
+        $this->assertEquals(0, $basisQuantity);
+        $this->assertEquals("", $basisQuantityUnitCode);
+        $this->assertEquals("AEW", $reasonCode);
+
+        $this->assertFalse(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionGrossPriceAllowanceChargePos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->firstDocumentPositionGrossPriceAllowanceCharge();
+        self::$document->getDocumentPositionGrossPriceAllowanceCharge($actualAmount, $isCharge, $calculationPercent, $basisAmount, $reason, $taxTypeCode, $taxCategoryCode, $rateApplicablePercent, $sequence, $basisQuantity, $basisQuantityUnitCode, $reasonCode);
+
+        $this->assertEquals(0.50, $actualAmount);
+        $this->assertEquals(true, $isCharge);
+        $this->assertEquals(0, $calculationPercent);
+        $this->assertEquals(0, $basisAmount);
+        $this->assertEquals("WEEE TAX", $reason);
+        $this->assertEquals("", $taxTypeCode);
+        $this->assertEquals("", $taxCategoryCode);
+        $this->assertEquals(0.0, $rateApplicablePercent);
+        $this->assertEquals(0, $sequence);
+        $this->assertEquals(0, $basisQuantity);
+        $this->assertEquals("", $basisQuantityUnitCode);
+        $this->assertEquals("AEW", $reasonCode);
+
+        $this->assertFalse(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionGrossPriceAllowanceChargePos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->firstDocumentPositionGrossPriceAllowanceCharge();
+        self::$document->getDocumentPositionGrossPriceAllowanceCharge($actualAmount, $isCharge, $calculationPercent, $basisAmount, $reason, $taxTypeCode, $taxCategoryCode, $rateApplicablePercent, $sequence, $basisQuantity, $basisQuantityUnitCode, $reasonCode);
+
+        $this->assertEquals(5.00, $actualAmount);
+        $this->assertEquals(false, $isCharge);
+        $this->assertEquals(0, $calculationPercent);
+        $this->assertEquals(0, $basisAmount);
+        $this->assertEquals("", $reason);
+        $this->assertEquals("", $taxTypeCode);
+        $this->assertEquals("", $taxCategoryCode);
+        $this->assertEquals(0.0, $rateApplicablePercent);
+        $this->assertEquals(0, $sequence);
+        $this->assertEquals(0, $basisQuantity);
+        $this->assertEquals("", $basisQuantityUnitCode);
+        $this->assertEquals("", $reasonCode);
+
+        $this->assertFalse(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionNetPricePos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionNetPrice($amount, $basisQuantity, $basisQuantityUnitCode);
+
+        $this->assertEquals(10.00, $amount);
+        $this->assertEquals(1.00, $basisQuantity);
+        $this->assertEquals("C62", $basisQuantityUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionNetPricePos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionNetPrice($amount, $basisQuantity, $basisQuantityUnitCode);
+
+        $this->assertEquals(20.00, $amount);
+        $this->assertEquals(2.00, $basisQuantity);
+        $this->assertEquals("C62", $basisQuantityUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionNetPricePos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionNetPrice($amount, $basisQuantity, $basisQuantityUnitCode);
+
+        $this->assertEquals(25.00, $amount);
+        $this->assertEquals(1.00, $basisQuantity);
+        $this->assertEquals("C62", $basisQuantityUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionNetPriceTaxPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionNetPriceTax(
+            $categoryCode,
+            $typeCode,
+            $rateApplicablePercent,
+            $calculatedAmount,
+            $exemptionReason,
+            $exemptionReasonCode
+        );
+
+        $this->assertEquals("", $categoryCode);
+        $this->assertEquals("", $typeCode);
+        $this->assertEquals(0.00, $rateApplicablePercent);
+        $this->assertEquals(0.00, $calculatedAmount);
+        $this->assertEquals("", $exemptionReason);
+        $this->assertEquals("", $exemptionReasonCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionNetPriceTaxPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionNetPriceTax(
+            $categoryCode,
+            $typeCode,
+            $rateApplicablePercent,
+            $calculatedAmount,
+            $exemptionReason,
+            $exemptionReasonCode
+        );
+
+        $this->assertEquals("", $categoryCode);
+        $this->assertEquals("", $typeCode);
+        $this->assertEquals(0.00, $rateApplicablePercent);
+        $this->assertEquals(0.00, $calculatedAmount);
+        $this->assertEquals("", $exemptionReason);
+        $this->assertEquals("", $exemptionReasonCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionNetPriceTaxPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionNetPriceTax(
+            $categoryCode,
+            $typeCode,
+            $rateApplicablePercent,
+            $calculatedAmount,
+            $exemptionReason,
+            $exemptionReasonCode
+        );
+
+        $this->assertEquals("", $categoryCode);
+        $this->assertEquals("", $typeCode);
+        $this->assertEquals(0.00, $rateApplicablePercent);
+        $this->assertEquals(0.00, $calculatedAmount);
+        $this->assertEquals("", $exemptionReason);
+        $this->assertEquals("", $exemptionReasonCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionCatalogueReferencedDocumentPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionCatalogueReferencedDocument($catalogueRefId, $catalogueRefLineId, $catalogueRefDate);
+
+        $this->assertEquals("CATALOG_REF_ID", $catalogueRefId);
+        $this->assertEquals("2", $catalogueRefLineId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionCatalogueReferencedDocumentPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionCatalogueReferencedDocument($catalogueRefId, $catalogueRefLineId, $catalogueRefDate);
+
+        $this->assertEquals("CATALOG_REF_ID", $catalogueRefId);
+        $this->assertEquals("2", $catalogueRefLineId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionCatalogueReferencedDocumentPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionCatalogueReferencedDocument($catalogueRefId, $catalogueRefLineId, $catalogueRefDate);
+
+        $this->assertEquals("CATALOG_REF_ID", $catalogueRefId);
+        $this->assertEquals("5", $catalogueRefLineId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionBlanketOrderReferencedDocumentPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionBlanketOrderReferencedDocument($blanketOrderRefLineId);
+
+        $this->assertEquals("2", $blanketOrderRefLineId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionBlanketOrderReferencedDocumentPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionBlanketOrderReferencedDocument($blanketOrderRefLineId);
+
+        $this->assertEquals("3", $blanketOrderRefLineId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionBlanketOrderReferencedDocumentPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionBlanketOrderReferencedDocument($blanketOrderRefLineId);
+
+        $this->assertEquals("4", $blanketOrderRefLineId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionPartialDeliveryPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionPartialDelivery($partialDelivery);
+
+        $this->assertTrue($partialDelivery);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionPartialDeliveryPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionPartialDelivery($partialDelivery);
+
+        $this->assertTrue($partialDelivery);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionPartialDeliveryPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionPartialDelivery($partialDelivery);
+
+        $this->assertTrue($partialDelivery);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionDeliverReqQuantityPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionDeliverReqQuantity($requestedQuantity, $requestedQuantityUnitCode);
+
+        $this->assertEquals(6.0, $requestedQuantity);
+        $this->assertEquals("C62", $requestedQuantityUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionDeliverReqQuantityPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionDeliverReqQuantity($requestedQuantity, $requestedQuantityUnitCode);
+
+        $this->assertEquals(10.0, $requestedQuantity);
+        $this->assertEquals("C62", $requestedQuantityUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionDeliverReqQuantityPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionDeliverReqQuantity($requestedQuantity, $requestedQuantityUnitCode);
+
+        $this->assertEquals(6.0, $requestedQuantity);
+        $this->assertEquals("C62", $requestedQuantityUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionDeliverPackageQuantityPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionDeliverPackageQuantity($packageQuantity, $packageQuantityUnitCode);
+
+        $this->assertEquals(3.0, $packageQuantity);
+        $this->assertEquals("C62", $packageQuantityUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionDeliverPackageQuantityPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionDeliverPackageQuantity($packageQuantity, $packageQuantityUnitCode);
+
+        $this->assertEquals(5.0, $packageQuantity);
+        $this->assertEquals("C62", $packageQuantityUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionDeliverPackageQuantityPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionDeliverPackageQuantity($packageQuantity, $packageQuantityUnitCode);
+
+        $this->assertEquals(3.0, $packageQuantity);
+        $this->assertEquals("C62", $packageQuantityUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionDeliverPerPackageQuantityPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionDeliverPerPackageQuantity($perPackageQuantity, $perPackageQuantityUnitCode);
+
+        $this->assertEquals(2.0, $perPackageQuantity);
+        $this->assertEquals("C62", $perPackageQuantityUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionDeliverPerPackageQuantityPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionDeliverPerPackageQuantity($perPackageQuantity, $perPackageQuantityUnitCode);
+
+        $this->assertEquals(2.0, $perPackageQuantity);
+        $this->assertEquals("C62", $perPackageQuantityUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionDeliverPerPackageQuantityPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionDeliverPerPackageQuantity($perPackageQuantity, $perPackageQuantityUnitCode);
+
+        $this->assertEquals(2.0, $perPackageQuantity);
+        $this->assertEquals("C62", $perPackageQuantityUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionDeliverAgreedQuantityPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionDeliverAgreedQuantity($agreedQuantity, $agreedQuantityUnitCode);
+
+        $this->assertEquals(0.0, $agreedQuantity);
+        $this->assertEquals("", $agreedQuantityUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionDeliverAgreedQuantityPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionDeliverAgreedQuantity($agreedQuantity, $agreedQuantityUnitCode);
+
+        $this->assertEquals(0.0, $agreedQuantity);
+        $this->assertEquals("", $agreedQuantityUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionDeliverAgreedQuantityPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionDeliverAgreedQuantity($agreedQuantity, $agreedQuantityUnitCode);
+
+        $this->assertEquals(0.0, $agreedQuantity);
+        $this->assertEquals("", $agreedQuantityUnitCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionRequestedDeliverySupplyChainEventPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        $this->assertTrue(self::$document->firstDocumentPositionRequestedDeliverySupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionRequestedDeliverySupplyChainEventPos1(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionRequestedDeliverySupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionRequestedDeliverySupplyChainEventPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        $this->assertTrue(self::$document->firstDocumentPositionRequestedDeliverySupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionRequestedDeliverySupplyChainEventPos2(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionRequestedDeliverySupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionRequestedDeliverySupplyChainEventPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        $this->assertTrue(self::$document->firstDocumentPositionRequestedDeliverySupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionRequestedDeliverySupplyChainEventPos3(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionRequestedDeliverySupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionRequestedDeliverySupplyChainEventPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionRequestedDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+
+        $this->assertNull($occurrenceDateTime);
+        $this->assertEquals("21.12.2022", $startDateTime->format('d.m.Y'));
+        $this->assertEquals("21.12.2022", $endDateTime->format('d.m.Y'));
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionRequestedDeliverySupplyChainEventPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionRequestedDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+
+        $this->assertEquals("21.12.2022", $occurrenceDateTime->format('d.m.Y'));
+        $this->assertNull($startDateTime);
+        $this->assertNull($endDateTime);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionRequestedDeliverySupplyChainEventPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionRequestedDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+
+        $this->assertNull($occurrenceDateTime);
+        $this->assertEquals("21.12.2022", $startDateTime->format('d.m.Y'));
+        $this->assertEquals("21.12.2022", $endDateTime->format('d.m.Y'));
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionAllowanceChargePos1(): void
+    {
+        self::$document->firstDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionAllowanceCharge());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionAllowanceChargePos1(): void
+    {
+        $this->assertTrue(self::$document->nextDocumentPositionAllowanceCharge());
+        $this->assertFalse(self::$document->nextDocumentPositionAllowanceCharge());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionAllowanceChargePos2(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionAllowanceCharge());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionAllowanceChargePos2(): void
+    {
+        $this->assertTrue(self::$document->nextDocumentPositionAllowanceCharge());
+        $this->assertFalse(self::$document->nextDocumentPositionAllowanceCharge());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionAllowanceChargePos3(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionAllowanceCharge());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionAllowanceChargePos3(): void
+    {
+        $this->assertTrue(self::$document->nextDocumentPositionAllowanceCharge());
+        $this->assertFalse(self::$document->nextDocumentPositionAllowanceCharge());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionAllowanceChargePos1(): void
+    {
+        self::$document->firstDocumentPosition();
+
+        self::$document->getDocumentPositionAllowanceCharge(
+            $actualAmount,
+            $isCharge,
+            $calculationPercent,
+            $basisAmount,
+            $reason,
+            $taxTypeCode,
+            $taxCategoryCode,
+            $rateApplicablePercent,
+            $sequence,
+            $basisQuantity,
+            $basisQuantityUnitCode,
+            $reasonCode
+        );
+
+        $this->assertEquals(6.00, $actualAmount);
+        $this->assertFalse($isCharge);
+        $this->assertEquals(10.00, $calculationPercent);
+        $this->assertEquals(60.00, $basisAmount);
+        $this->assertEquals("SPECIAL AGREEMENT", $reason);
+        $this->assertEquals("", $taxTypeCode);
+        $this->assertEquals("", $taxCategoryCode);
+        $this->assertEquals(0.00, $rateApplicablePercent);
+        $this->assertEquals(0.00, $sequence);
+        $this->assertEquals(0.00, $basisQuantity);
+        $this->assertEquals("", $basisQuantityUnitCode);
+        $this->assertEquals("64", $reasonCode);
+
+        self::$document->nextDocumentPositionAllowanceCharge();
+        self::$document->getDocumentPositionAllowanceCharge(
+            $actualAmount,
+            $isCharge,
+            $calculationPercent,
+            $basisAmount,
+            $reason,
+            $taxTypeCode,
+            $taxCategoryCode,
+            $rateApplicablePercent,
+            $sequence,
+            $basisQuantity,
+            $basisQuantityUnitCode,
+            $reasonCode
+        );
+
+        $this->assertEquals(6.00, $actualAmount);
+        $this->assertTrue($isCharge);
+        $this->assertEquals(10.00, $calculationPercent);
+        $this->assertEquals(60.00, $basisAmount);
+        $this->assertEquals("FREIGHT SERVICES", $reason);
+        $this->assertEquals("", $taxTypeCode);
+        $this->assertEquals("", $taxCategoryCode);
+        $this->assertEquals(0.00, $rateApplicablePercent);
+        $this->assertEquals(0.00, $sequence);
+        $this->assertEquals(0.00, $basisQuantity);
+        $this->assertEquals("", $basisQuantityUnitCode);
+        $this->assertEquals("FC", $reasonCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionAllowanceChargePos2(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        self::$document->getDocumentPositionAllowanceCharge(
+            $actualAmount,
+            $isCharge,
+            $calculationPercent,
+            $basisAmount,
+            $reason,
+            $taxTypeCode,
+            $taxCategoryCode,
+            $rateApplicablePercent,
+            $sequence,
+            $basisQuantity,
+            $basisQuantityUnitCode,
+            $reasonCode
+        );
+
+        $this->assertEquals(1.00, $actualAmount);
+        $this->assertFalse($isCharge);
+        $this->assertEquals(1.00, $calculationPercent);
+        $this->assertEquals(100.00, $basisAmount);
+        $this->assertEquals("SPECIAL AGREEMENT", $reason);
+        $this->assertEquals("", $taxTypeCode);
+        $this->assertEquals("", $taxCategoryCode);
+        $this->assertEquals(0.00, $rateApplicablePercent);
+        $this->assertEquals(0.00, $sequence);
+        $this->assertEquals(0.00, $basisQuantity);
+        $this->assertEquals("", $basisQuantityUnitCode);
+        $this->assertEquals("64", $reasonCode);
+
+        self::$document->nextDocumentPositionAllowanceCharge();
+        self::$document->getDocumentPositionAllowanceCharge(
+            $actualAmount,
+            $isCharge,
+            $calculationPercent,
+            $basisAmount,
+            $reason,
+            $taxTypeCode,
+            $taxCategoryCode,
+            $rateApplicablePercent,
+            $sequence,
+            $basisQuantity,
+            $basisQuantityUnitCode,
+            $reasonCode
+        );
+
+        $this->assertEquals(1.00, $actualAmount);
+        $this->assertTrue($isCharge);
+        $this->assertEquals(1.00, $calculationPercent);
+        $this->assertEquals(100.00, $basisAmount);
+        $this->assertEquals("FREIGHT SERVICES", $reason);
+        $this->assertEquals("", $taxTypeCode);
+        $this->assertEquals("", $taxCategoryCode);
+        $this->assertEquals(0.00, $rateApplicablePercent);
+        $this->assertEquals(0.00, $sequence);
+        $this->assertEquals(0.00, $basisQuantity);
+        $this->assertEquals("", $basisQuantityUnitCode);
+        $this->assertEquals("FC", $reasonCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionAllowanceChargePos3(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        self::$document->getDocumentPositionAllowanceCharge(
+            $actualAmount,
+            $isCharge,
+            $calculationPercent,
+            $basisAmount,
+            $reason,
+            $taxTypeCode,
+            $taxCategoryCode,
+            $rateApplicablePercent,
+            $sequence,
+            $basisQuantity,
+            $basisQuantityUnitCode,
+            $reasonCode
+        );
+
+        $this->assertEquals(15.00, $actualAmount);
+        $this->assertFalse($isCharge);
+        $this->assertEquals(10.00, $calculationPercent);
+        $this->assertEquals(150.00, $basisAmount);
+        $this->assertEquals("SPECIAL AGREEMENT", $reason);
+        $this->assertEquals("", $taxTypeCode);
+        $this->assertEquals("", $taxCategoryCode);
+        $this->assertEquals(0.00, $rateApplicablePercent);
+        $this->assertEquals(0.00, $sequence);
+        $this->assertEquals(0.00, $basisQuantity);
+        $this->assertEquals("", $basisQuantityUnitCode);
+        $this->assertEquals("64", $reasonCode);
+
+        self::$document->nextDocumentPositionAllowanceCharge();
+        self::$document->getDocumentPositionAllowanceCharge(
+            $actualAmount,
+            $isCharge,
+            $calculationPercent,
+            $basisAmount,
+            $reason,
+            $taxTypeCode,
+            $taxCategoryCode,
+            $rateApplicablePercent,
+            $sequence,
+            $basisQuantity,
+            $basisQuantityUnitCode,
+            $reasonCode
+        );
+
+        $this->assertEquals(15.00, $actualAmount);
+        $this->assertTrue($isCharge);
+        $this->assertEquals(10.00, $calculationPercent);
+        $this->assertEquals(150.00, $basisAmount);
+        $this->assertEquals("FREIGHT SERVICES", $reason);
+        $this->assertEquals("", $taxTypeCode);
+        $this->assertEquals("", $taxCategoryCode);
+        $this->assertEquals(0.00, $rateApplicablePercent);
+        $this->assertEquals(0.00, $sequence);
+        $this->assertEquals(0.00, $basisQuantity);
+        $this->assertEquals("", $basisQuantityUnitCode);
+        $this->assertEquals("FC", $reasonCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionLineSummationPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionLineSummation($lineTotalAmount, $totalAllowanceChargeAmount);
+
+        $this->assertEquals(60.00, $lineTotalAmount);
+        $this->assertEquals(0.00, $totalAllowanceChargeAmount);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionLineSummationPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionLineSummation($lineTotalAmount, $totalAllowanceChargeAmount);
+
+        $this->assertEquals(100.00, $lineTotalAmount);
+        $this->assertEquals(0.00, $totalAllowanceChargeAmount);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionLineSummationPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionLineSummation($lineTotalAmount, $totalAllowanceChargeAmount);
+
+        $this->assertEquals(150.00, $lineTotalAmount);
+        $this->assertEquals(0.00, $totalAllowanceChargeAmount);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionReceivableTradeAccountingAccountPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionReceivableTradeAccountingAccount($id, $typeCode);
+
+        $this->assertEquals("BUYER_ACCOUNTING_REF", $id);
+        $this->assertEquals("", $typeCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionReceivableTradeAccountingAccountPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionReceivableTradeAccountingAccount($id, $typeCode);
+
+        $this->assertEquals("BUYER_ACCOUNTING_REF", $id);
+        $this->assertEquals("", $typeCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionReceivableTradeAccountingAccountPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionReceivableTradeAccountingAccount($id, $typeCode);
+
+        $this->assertEquals("BUYER_ACCOUNTING_REF", $id);
+        $this->assertEquals("", $typeCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentTax(): void
+    {
+        $this->assertTrue(self::$document->firstDocumentTax());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentTax(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentTax());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentTax(): void
+    {
+        self::$document->firstDocumentTax();
+        self::$document->getDocumentTax(
+            $categoryCode,
+            $typeCode,
+            $basisAmount,
+            $calculatedAmount,
+            $rateApplicablePercent,
+            $exemptionReason,
+            $exemptionReasonCode,
+            $lineTotalBasisAmount,
+            $allowanceChargeBasisAmount,
+            $dueDateTypeCode
+        );
+
+        $this->assertEquals("S", $categoryCode);
+        $this->assertEquals("VAT", $typeCode);
+        $this->assertEquals(300.0, $basisAmount);
+        $this->assertEquals(60.0, $calculatedAmount);
+        $this->assertEquals(20.0, $rateApplicablePercent);
+        $this->assertEquals("ExcReason-1", $exemptionReason);
+        $this->assertEquals("ExcReasonCode-1", $exemptionReasonCode);
+        $this->assertEquals(300.0, $lineTotalBasisAmount);
+        $this->assertEquals(300.0, $allowanceChargeBasisAmount);
+        $this->assertEquals("", $dueDateTypeCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionTaxPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+
+        $this->assertTrue(self::$document->firstDocumentPositionTax());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionTaxPos1(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionTax());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionTaxPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        $this->assertFalse(self::$document->firstDocumentPositionTax());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionTaxPos2(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionTax());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionTaxPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+
+        $this->assertFalse(self::$document->firstDocumentPositionTax());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionTaxPos3(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionTax());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionTax(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionTax(
+            $categoryCode,
+            $typeCode,
+            $rateApplicablePercent,
+            $calculatedAmount,
+            $exemptionReason,
+            $exemptionReasonCode
+        );
+
+        $this->assertEquals("S", $categoryCode);
+        $this->assertEquals("VAT", $typeCode);
+        $this->assertEquals(19.0, $rateApplicablePercent);
+        $this->assertEquals(0.0, $calculatedAmount);
+        $this->assertEquals("Reason-1", $exemptionReason);
+        $this->assertEquals("RC1", $exemptionReasonCode);
+    }
 }

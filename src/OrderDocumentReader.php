@@ -98,6 +98,11 @@ class OrderDocumentReader extends OrderDocument
     private $documentPaymentTermsPointer = 0;
 
     /**
+     * @var integer
+     */
+    private $documentTaxPointer = 0;
+
+    /**
      * Internal pointer for the position
      *
      * @var integer
@@ -160,6 +165,11 @@ class OrderDocumentReader extends OrderDocument
     private $positionAddRefDocPointer = 0;
 
     /**
+     * @var integer
+     */
+    private $positionRequestedDeliverySupplyChainEventPointer = 0;
+
+    /**
      * Set the directory where the attached binary data from
      * additional referenced documents are temporary stored
      *
@@ -184,7 +194,6 @@ class OrderDocumentReader extends OrderDocument
      *
      * @param string $xmlfilename The filename to read invoice data from
      * @return OrderDocumentReader
-     * @throws Exception
      */
     public static function readAndGuessFromFile(string $xmlfilename): OrderDocumentReader
     {
@@ -200,7 +209,6 @@ class OrderDocumentReader extends OrderDocument
      *
      * @param string $xmlcontent The XML content as a string to read the invoice data from
      * @return OrderDocumentReader
-     * @throws Exception
      */
     public static function readAndGuessFromContent(string $xmlcontent): OrderDocumentReader
     {
@@ -516,7 +524,7 @@ class OrderDocumentReader extends OrderDocument
      * Code used to identify the country. If no tax agent is specified, this is the country in which the sales tax
      * is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
      * representation of names of countries and their subdivisions”
-     * @param array|null $subdivision
+     * @param string|null $subdivision
      * The sellers state
      * @return OrderDocumentReader
      */
@@ -717,7 +725,7 @@ class OrderDocumentReader extends OrderDocument
      * Code used to identify the country. If no tax agent is specified, this is the country in which the sales tax
      * is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
      * representation of names of countries and their subdivisions”
-     * @param array|null $subdivision
+     * @param string|null $subdivision
      * The buyers state
      * @return OrderDocumentReader
      */
@@ -838,7 +846,7 @@ class OrderDocumentReader extends OrderDocument
      *
      * @param string $name
      * The full name of the buyer requisitioner
-     * @param string|null $id
+     * @param array|null $id
      * An identifier of the buyer requisitioner
      * @param string|null $description
      * Further legal information about the buyer requisitioner
@@ -858,7 +866,7 @@ class OrderDocumentReader extends OrderDocument
     /**
      * Get global id's for the party who raises the Order originally on behalf of the buyer requisitioner
      *
-     * @param string $globalID
+     * @param array $globalID
      * Array of the buyer requisitioner's global ids indexed by the identification scheme. The identification scheme results
      * from the list published by the ISO/IEC 6523 Maintenance Agency. In particular, the following scheme
      * codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177 : ODETTE
@@ -1140,7 +1148,7 @@ class OrderDocumentReader extends OrderDocument
      * The identification of a Requisition Document, issued by the Buyer or the Buyer Requisitioner.
      * @param DateTime|null $requisitionRefDate
      * The formatted date or date time for the issuance of this referenced Requisition.
-     * @return OrderDocumentBuilder
+     * @return OrderDocumentReader
      */
     public function getDocumentRequisitionReferencedDocument(?string &$requisitionRefId, ?DateTime &$requisitionRefDate): OrderDocumentReader
     {
@@ -1337,7 +1345,7 @@ class OrderDocumentReader extends OrderDocument
      * @param string $name
      * The name of the party to whom the goods are being delivered or for whom the services are being
      * performed. Must be used if the recipient of the goods or services is not the same as the buyer.
-     * @param string|null $id
+     * @param array|null $id
      * An identifier for the place where the goods are delivered or where the services are provided.
      * Multiple IDs can be assigned or specified. They can be differentiated by using different
      * identification schemes. If no scheme is given, it should be known to the buyer and seller, e.g.
@@ -1491,7 +1499,7 @@ class OrderDocumentReader extends OrderDocument
      * Detailed information on the party's fax number
      * @param string|null $contactemailadd
      * Detailed information on the party's email address
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * Type (Code) of the contach
      * @return OrderDocumentReader
      */
@@ -1530,7 +1538,7 @@ class OrderDocumentReader extends OrderDocument
      * @param string $name
      * The name of the party to whom the goods are being delivered or for whom the services are being
      * performed. Must be used if the recipient of the goods or services is not the same as the buyer.
-     * @param string|null $id
+     * @param array|null $id
      * An identifier for the place where the goods are delivered or where the services are provided.
      * Multiple IDs can be assigned or specified. They can be differentiated by using different
      * identification schemes. If no scheme is given, it should be known to the buyer and seller, e.g.
@@ -1684,7 +1692,7 @@ class OrderDocumentReader extends OrderDocument
      * Detailed information on the party's fax number
      * @param string|null $contactemailadd
      * Detailed information on the party's email address
-     * @param string|null $contactTypeCode
+     * @param string|null $contacttypecode
      * Type (Code) of the contach
      * @return OrderDocumentReader
      */
@@ -1786,7 +1794,7 @@ class OrderDocumentReader extends OrderDocument
      *
      * @param string $name
      * The name of the party
-     * @param string|null $id
+     * @param array|null $id
      * An identifier for the party. Multiple IDs can be assigned or specified. They can be differentiated by using
      * different identification schemes. If no scheme is given, it should  be known to the buyer and seller, e.g.
      * a previously exchanged identifier assigned by the buyer or seller.
@@ -1858,7 +1866,7 @@ class OrderDocumentReader extends OrderDocument
      * Code used to identify the country. If no tax agent is specified, this is the country in which the sales tax
      * is due. The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance Agency “Codes for the
      * representation of names of countries and their subdivisions”
-     * @param array|null $subdivision
+     * @param string|null $subdivision
      * The invoicee' state
      * @return OrderDocumentReader
      */
@@ -2073,7 +2081,6 @@ class OrderDocumentReader extends OrderDocument
      * description of possible penalties). Note: This element can contain multiple lines and
      * multiple conditions.
      * @return OrderDocumentReader
-     * @throws Exception
      */
     public function getDocumentPaymentTerm(?string &$paymentTermsDescription): OrderDocumentReader
     {
@@ -2081,6 +2088,122 @@ class OrderDocumentReader extends OrderDocument
         $paymentTerm = $this->objectHelper->getArrayIndex($paymentTerms, $this->documentPaymentTermsPointer);
 
         $paymentTermsDescription = $paymentTerm;
+
+        return $this;
+    }
+
+    /**
+     * Seek to the first document tax
+     * Returns true if a first tax (at document level) is available, otherwise false
+     * You may use this together with OrderDocumentReader::getDocumentTax
+     *
+     * @return boolean
+     */
+    public function firstDocumentTax(): bool
+    {
+        $this->documentTaxPointer = 0;
+        $taxes = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getApplicableTradeTax", []));
+        return isset($taxes[$this->documentTaxPointer]);
+    }
+
+    /**
+     * Seek to the next document tax
+     * Returns true if another tax (at document level) is available, otherwise false
+     * You may use this together with OrderDocumentReader::getDocumentTax
+     *
+     * @return boolean
+     */
+    public function nextDocumentTax(): bool
+    {
+        $this->documentTaxPointer++;
+        $taxes = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getApplicableTradeTax", []));
+        return isset($taxes[$this->documentTaxPointer]);
+    }
+
+    /**
+     * Get current VAT breakdown (at document level)
+     *
+     * @param string|null $categoryCode
+     * Coded description of a sales tax category
+     *
+     * The following entries from UNTDID 5305 are used (details in brackets):
+     *  - Standard rate (sales tax is due according to the normal procedure)
+     *  - Goods to be taxed according to the zero rate (sales tax is charged with a percentage of zero)
+     *  - Tax exempt (USt./IGIC/IPSI)
+     *  - Reversal of the tax liability (the rules for reversing the tax liability at USt./IGIC/IPSI apply)
+     *  - VAT exempt for intra-community deliveries of goods (USt./IGIC/IPSI not levied due to rules on intra-community deliveries)
+     *  - Free export item, tax not levied (VAT / IGIC/IPSI not levied due to export outside the EU)
+     *  - Services outside the tax scope (sales are not subject to VAT / IGIC/IPSI)
+     *  - Canary Islands general indirect tax (IGIC tax applies)
+     *  - IPSI (tax for Ceuta / Melilla) applies.
+     *
+     * The codes for the VAT category are as follows:
+     *  - S = sales tax is due at the normal rate
+     *  - Z = goods to be taxed according to the zero rate
+     *  - E = tax exempt
+     *  - AE = reversal of tax liability
+     *  - K = VAT is not shown for intra-community deliveries
+     *  - G = tax not levied due to export outside the EU
+     *  - O = Outside the tax scope
+     *  - L = IGIC (Canary Islands)
+     *  - M = IPSI (Ceuta / Melilla)
+     * @param string|null $typeCode
+     * Coded description of a sales tax category. Note: Fixed value = "VAT"
+     * @param float|null $basisAmount
+     * Tax base amount, Each sales tax breakdown must show a category-specific tax base amount.
+     * @param float|null $calculatedAmount
+     * The total amount to be paid for the relevant VAT category. Note: Calculated by multiplying
+     * the amount to be taxed according to the sales tax category by the sales tax rate applicable
+     * for the sales tax category concerned
+     * @param float|null $rateApplicablePercent
+     * The sales tax rate, expressed as the percentage applicable to the sales tax category in
+     * question. Note: The code of the sales tax category and the category-specific sales tax rate
+     * must correspond to one another. The value to be given is the percentage. For example, the
+     * value 20 is given for 20% (and not 0.2)
+     * @param string|null $exemptionReason
+     * Reason for tax exemption (free text)
+     * @param string|null $exemptionReasonCode
+     * Reason given in code form for the exemption of the amount from VAT. Note: Code list issued
+     * and maintained by the Connecting Europe Facility.
+     * @param float|null $lineTotalBasisAmount
+     * Tax rate goods amount
+     * @param float|null $allowanceChargeBasisAmount
+     * Total amount of surcharges and deductions of the tax rate at document level
+     * @param string|null $dueDateTypeCode
+     * The code for the date on which sales tax becomes relevant for the seller and the buyer.
+     * The code must distinguish between the following entries from UNTDID 2005:
+     *  - date of issue of the invoice document
+     *  - actual delivery date
+     *  - Date of payment.
+     *
+     * The VAT Collection Date Code is used when the VAT Collection Date is not known for VAT purposes
+     * when the invoice is issued.
+     *
+     * The semantic values cited in the standard, which are represented by the values 3, 35, 432 in
+     * UNTDID2005, are mapped to the following values of UNTDID2475, which is the relevant code list
+     * supported by CII 16B:
+     *  - 5: date of issue of the invoice
+     *  - 29: Delivery date, current status
+     *  - 72: Paid to date
+     *
+     * In Germany, the date of delivery and service is decisive.
+     * @return OrderDocumentReader
+     */
+    public function getDocumentTax(?string &$categoryCode, ?string &$typeCode, ?float &$basisAmount, ?float &$calculatedAmount, ?float &$rateApplicablePercent, ?string &$exemptionReason, ?string &$exemptionReasonCode, ?float &$lineTotalBasisAmount, ?float &$allowanceChargeBasisAmount, ?string &$dueDateTypeCode): OrderDocumentReader
+    {
+        $taxes = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getApplicableTradeTax", []));
+        $tax = $this->objectHelper->getArrayIndex($taxes, $this->documentTaxPointer);
+
+        $categoryCode = $this->getInvoiceValueByPathFrom($tax, "getCategoryCode", "");
+        $typeCode = $this->getInvoiceValueByPathFrom($tax, "getTypeCode", "");
+        $basisAmount = $this->getInvoiceValueByPathFrom($tax, "getBasisAmount.value", 0.0);
+        $calculatedAmount = $this->getInvoiceValueByPathFrom($tax, "getCalculatedAmount.value", 0.0);
+        $rateApplicablePercent = $this->getInvoiceValueByPathFrom($tax, "getRateApplicablePercent.value", 0.0);
+        $exemptionReason = $this->getInvoiceValueByPathFrom($tax, "getExemptionReason", "");
+        $exemptionReasonCode = $this->getInvoiceValueByPathFrom($tax, "getExemptionReasonCode", "");
+        $lineTotalBasisAmount = $this->getInvoiceValueByPathFrom($tax, "getLineTotalBasisAmount.value", 0.0);
+        $allowanceChargeBasisAmount = $this->getInvoiceValueByPathFrom($tax, "getAllowanceChargeBasisAmount.value", 0.0);
+        $dueDateTypeCode = $this->getInvoiceValueByPathFrom($tax, "getDueDateTypeCode", "");
 
         return $this;
     }
@@ -2236,6 +2359,7 @@ class OrderDocumentReader extends OrderDocument
         $this->positionProductClassificationPointer = 0;
         $this->positionProductInstancePointer = 0;
         $this->positionProductReferencedDocumentPointer = 0;
+        $this->positionRequestedDeliverySupplyChainEventPointer = 0;
 
         $tradeLineItem = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
         return isset($tradeLineItem[$this->positionPointer]);
@@ -2261,6 +2385,7 @@ class OrderDocumentReader extends OrderDocument
         $this->positionProductClassificationPointer = 0;
         $this->positionProductInstancePointer = 0;
         $this->positionProductReferencedDocumentPointer = 0;
+        $this->positionRequestedDeliverySupplyChainEventPointer = 0;
 
         $tradeLineItem = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
         return isset($tradeLineItem[$this->positionPointer]);
@@ -2275,16 +2400,6 @@ class OrderDocumentReader extends OrderDocument
      * Indicates whether the invoice item contains prices that must be taken into account when
      * calculating the invoice amount, or whether it only contains information.
      * The following code should be used: TYPE_LINE
-     * @param string|null $lineStatusReasonCode
-     * Adds the type to specify whether the invoice line is:
-     *  - detail (normal position)
-     *  - Subtotal
-     *  - Information only
-     *
-     * If the $lineStatusCode field is used, the LineStatusReasonCode field must use the following codes:
-     *  - detail
-     *  - grouping
-     *  - information
      * @return OrderDocumentReader
      */
     public function getDocumentPositionGenerals(?string &$lineid, ?string &$lineStatusCode): OrderDocumentReader
@@ -2376,7 +2491,7 @@ class OrderDocumentReader extends OrderDocument
      * An identifier assigned to the item by the buyer. The article number of the buyer is a clear,
      * bilaterally agreed identification of the product. It can, for example, be the customer article
      * number or the article number assigned by the manufacturer.
-     * @param string|null $globalID
+     * @param array|null $globalID
      * Array of the global ids indexed by the identification scheme. The identification scheme results
      * from the list published by the ISO/IEC 6523 Maintenance Agency. In particular, the following scheme
      * codes are used: 0021 : SWIFT, 0088 : EAN, 0060 : DUNS, 0177 : ODETTE
@@ -2527,7 +2642,7 @@ class OrderDocumentReader extends OrderDocument
      * __Note__: The identification scheme must be selected from the entries from UNTDID 7143.
      * @param string|null $listVersionID
      * The version of the identification scheme
-     * @return OrderDocumentBuilder
+     * @return OrderDocumentReader
      */
     public function getDocumentPositionProductClassification(?string &$classCode, ?string &$className, ?string &$listID, ?string &$listVersionID): OrderDocumentReader
     {
@@ -2591,7 +2706,7 @@ class OrderDocumentReader extends OrderDocument
      * The unique batch identifier for this trade product instance
      * @param string|null $serialId
      * The unique supplier assigned serial identifier for this trade product instance.
-     * @return OrderDocumentBuilder
+     * @return OrderDocumentReader
      */
     public function getDocumentPositionProductInstance(?string &$batchID, ?string &$serialId): OrderDocumentReader
     {
@@ -2844,11 +2959,14 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get details of the related buyer order position
+     * Get details of the related quotation position
      *
-     * @param string $buyerOrderRefLineId
-     * An identifier for a position within an order placed by the buyer. Note: Reference is made to the order
-     * reference at the document level.
+     * @param string|null $quotationRefId
+     * The quotation document referenced in this line trade agreement
+     * @param string|null $quotationRefLineId
+     * The unique identifier of a line in this Quotation referenced document.
+     * @param DateTime|null $quotationRefDate
+     * The formatted date or date time for the issuance of this referenced Quotation.
      * @return OrderDocumentReader
      */
     public function getDocumentPositionQuotationReferencedDocument(?string &$quotationRefId, ?string &$quotationRefLineId, ?DateTime &$quotationRefDate): OrderDocumentReader
@@ -2887,6 +3005,675 @@ class OrderDocumentReader extends OrderDocument
         $chargeAmount = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getGrossPriceProductTradePrice.getChargeAmount.value", 0.0);
         $basisQuantity = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getGrossPriceProductTradePrice.getBasisQuantity.value", 0.0);
         $basisQuantityUnitCode = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getGrossPriceProductTradePrice.getBasisQuantity.getUnitCode", "");
+
+        return $this;
+    }
+
+    /**
+     * Seek to the first documents position gross price allowance charge position
+     * Returns true if the first position is available, otherwise false
+     * You may use it together with getDocumentPositionGrossPriceAllowanceCharge
+     *
+     * @return boolean
+     */
+    public function firstDocumentPositionGrossPriceAllowanceCharge(): bool
+    {
+        $this->positionGrossPriceAllowanceChargePointer = 0;
+
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $allowanceCharges = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getGrossPriceProductTradePrice.getAppliedTradeAllowanceCharge", []));
+
+        return isset($allowanceCharges[$this->positionGrossPriceAllowanceChargePointer]);
+    }
+
+    /**
+     * Seek to the next documents position gross price allowance charge position
+     * Returns true if a other position is available, otherwise false
+     * You may use it together with getDocumentPositionGrossPriceAllowanceCharge
+     *
+     * @return boolean
+     */
+    public function nextDocumentPositionGrossPriceAllowanceCharge(): bool
+    {
+        $this->positionGrossPriceAllowanceChargePointer++;
+
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $allowanceCharges = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getGrossPriceProductTradePrice.getAppliedTradeAllowanceCharge", []));
+
+        return isset($allowanceCharges[$this->positionGrossPriceAllowanceChargePointer]);
+    }
+
+    /**
+     * Get detailed information on surcharges and discounts
+     *
+     * @param float|null $actualAmount
+     * Discount on the item price. The total discount subtracted from the gross price to calculate the
+     * net price. Note: Only applies if the discount is given per unit and is not included in the gross price.
+     * @param boolean|null $isCharge
+     * Switch for surcharge/discount, if true then its an charge
+     * @param float|null $calculationPercent
+     * Discount/surcharge in percent. Up to level EN16931, only the final result of the discount (ActualAmount)
+     * is transferred
+     * @param float|null $basisAmount
+     * Base amount of the discount/surcharge
+     * @param string|null $reason
+     * Reason for surcharge/discount (free text)
+     * @param string|null $taxTypeCode
+     * @param string|null $taxCategoryCode
+     * @param float|null $rateApplicablePercent
+     * @param float|null $sequence
+     * @param float|null $basisQuantity
+     * @param string|null $basisQuantityUnitCode
+     * @param string|null $reasonCode
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionGrossPriceAllowanceCharge(?float &$actualAmount, ?bool &$isCharge, ?float &$calculationPercent, ?float &$basisAmount, ?string &$reason, ?string &$taxTypeCode, ?string &$taxCategoryCode, ?float &$rateApplicablePercent, ?float &$sequence, ?float &$basisQuantity, ?string &$basisQuantityUnitCode, ?string &$reasonCode): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $allowanceCharges = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getGrossPriceProductTradePrice.getAppliedTradeAllowanceCharge", []));
+        $allowanceCharge = $this->objectHelper->getArrayIndex($allowanceCharges, $this->positionGrossPriceAllowanceChargePointer);
+
+        $actualAmount = $this->getInvoiceValueByPathFrom($allowanceCharge, "getActualAmount.value", 0.0);
+        $isCharge = $this->getInvoiceValueByPathFrom($allowanceCharge, "getChargeIndicator.getIndicator", false);
+        $calculationPercent = $this->getInvoiceValueByPathFrom($allowanceCharge, "getCalculationPercent.value", 0.0);
+        $basisAmount = $this->getInvoiceValueByPathFrom($allowanceCharge, "getBasisAmount.value", 0.0);
+        $reason = $this->getInvoiceValueByPathFrom($allowanceCharge, "getReason", "");
+        $taxTypeCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getCategoryTradeTax.getTypeCode", "");
+        $taxCategoryCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getCategoryTradeTax.getCategoryCode", "");
+        $rateApplicablePercent = $this->getInvoiceValueByPathFrom($allowanceCharge, "getCategoryTradeTax.getRateApplicablePercent.value", 0.0);
+        $sequence = $this->getInvoiceValueByPathFrom($allowanceCharge, "getSequenceNumeric.value", 0.0);
+        $basisQuantity = $this->getInvoiceValueByPathFrom($allowanceCharge, "getBasisQuantity.value", 0.0);
+        $basisQuantityUnitCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getBasisQuantity.getUnitCode", "");
+        $reasonCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getReasonCode", "");
+
+        return $this;
+    }
+
+    /**
+     * Get detailed information on the net price of the item
+     *
+     * @param float|null $amount
+     * Net price of the item
+     * @param float|null $basisQuantity
+     * Base quantity at the item price
+     * @param string|null $basisQuantityUnitCode
+     * Code of the unit of measurement of the base quantity at the item price
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionNetPrice(?float &$amount, ?float &$basisQuantity, ?string &$basisQuantityUnitCode): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $amount = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getNetPriceProductTradePrice.getChargeAmount.value", 0.0);
+        $basisQuantity = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getNetPriceProductTradePrice.getBasisQuantity.value", 0.0);
+        $basisQuantityUnitCode = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getNetPriceProductTradePrice.getBasisQuantity.getUnitCode", "");
+
+        return $this;
+    }
+
+    /**
+     * Tax included for B2C on position level
+     *
+     * @param string|null $categoryCode
+     * Coded description of a sales tax category
+     *
+     * The following entries from UNTDID 5305 are used (details in brackets):
+     *  - Standard rate (sales tax is due according to the normal procedure)
+     *  - Goods to be taxed according to the zero rate (sales tax is charged with a percentage of zero)
+     *  - Tax exempt (USt./IGIC/IPSI)
+     *  - Reversal of the tax liability (the rules for reversing the tax liability at USt./IGIC/IPSI apply)
+     *  - VAT exempt for intra-community deliveries of goods (USt./IGIC/IPSI not levied due to rules on intra-community deliveries)
+     *  - Free export item, tax not levied (VAT / IGIC/IPSI not levied due to export outside the EU)
+     *  - Services outside the tax scope (sales are not subject to VAT / IGIC/IPSI)
+     *  - Canary Islands general indirect tax (IGIC tax applies)
+     *  - IPSI (tax for Ceuta / Melilla) applies.
+     *
+     * The codes for the VAT category are as follows:
+     *  - S = sales tax is due at the normal rate
+     *  - Z = goods to be taxed according to the zero rate
+     *  - E = tax exempt
+     *  - AE = reversal of tax liability
+     *  - K = VAT is not shown for intra-community deliveries
+     *  - G = tax not levied due to export outside the EU
+     *  - O = Outside the tax scope
+     *  - L = IGIC (Canary Islands)
+     *  - M = IPSI (Ceuta / Melilla)
+     * @param string|null $typeCode
+     * Coded description of a sales tax category. Note: Fixed value = "VAT"
+     * @param float|null $rateApplicablePercent
+     * The sales tax rate, expressed as the percentage applicable to the sales tax category in
+     * question. Note: The code of the sales tax category and the category-specific sales tax rate
+     * must correspond to one another. The value to be given is the percentage. For example, the
+     * value 20 is given for 20% (and not 0.2)
+     * @param float|null $calculatedAmount
+     * The total amount to be paid for the relevant VAT category. Note: Calculated by multiplying
+     * the amount to be taxed according to the sales tax category by the sales tax rate applicable
+     * for the sales tax category concerned
+     * @param string|null $exemptionReason
+     * Reason for tax exemption (free text)
+     * @param string|null $exemptionReasonCode
+     * Reason given in code form for the exemption of the amount from VAT. Note: Code list issued
+     * and maintained by the Connecting Europe Facility.
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionNetPriceTax(?string &$categoryCode, ?string &$typeCode, ?float &$rateApplicablePercent, ?float &$calculatedAmount, ?string &$exemptionReason, ?string &$exemptionReasonCode): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $categoryCode = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getNetPriceProductTradePrice.getIncludedTradeTax.getCategoryCode.value", "");
+        $typeCode = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getNetPriceProductTradePrice.getIncludedTradeTax.getTypeCode.value", "");
+        $rateApplicablePercent = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getNetPriceProductTradePrice.getIncludedTradeTax.getRateApplicablePercent.value", 0.0);
+        $calculatedAmount = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getNetPriceProductTradePrice.getIncludedTradeTax.getCalculatedAmount.value", 0.0);
+        $exemptionReason = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getNetPriceProductTradePrice.getIncludedTradeTax.getExemptionReason.value", "");
+        $exemptionReasonCode = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getNetPriceProductTradePrice.getIncludedTradeTax.getExemptionReasonCode.value", "");
+
+        return $this;
+    }
+
+    /**
+     * Get the Referenced Catalog ID applied to this line
+     *
+     * @param string|null $catalogueRefId
+     * Referenced Catalog ID applied to this line
+     * @param string|null $catalogueRefLineId
+     * Referenced Catalog LineID applied to this line
+     * @param DateTime|null $catalogueRefDate
+     * The formatted date or date time for the issuance of this referenced Catalog.
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionCatalogueReferencedDocument(?string &$catalogueRefId, ?string &$catalogueRefLineId, ?DateTime &$catalogueRefDate): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $catalogueRefId = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getCatalogueReferencedDocument.getIssuerAssignedID.value", "");
+        $catalogueRefLineId = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getCatalogueReferencedDocument.getLineID.value", "");
+        $catalogueRefDate = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getCatalogueReferencedDocument.getFormattedIssueDateTime.getDateTimeString", ""),
+            $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getCatalogueReferencedDocument.getFormattedIssueDateTime.getDateTimeString.getFormat", "")
+        );
+
+        return $this;
+    }
+
+    /**
+     * Get details of a blanket order referenced document on position-level
+     *
+     * @param string $blanketOrderRefLineId
+     * The unique identifier of a line in the Blanketl Order referenced document
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionBlanketOrderReferencedDocument(?string &$blanketOrderRefLineId): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $blanketOrderRefLineId = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getBlanketOrderReferencedDocument.getLineID.value", "");
+
+        return $this;
+    }
+
+    /**
+     * Get the indication, at line level, of whether or not this trade delivery can be partially delivered.
+     *
+     * @param boolean $partialDelivery
+     * If TRUE partial delivery is allowed
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionPartialDelivery(?bool &$partialDelivery): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $partialDelivery = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeDelivery.getPartialDeliveryAllowedIndicator.getIndicator", false);
+
+        return $this;
+    }
+
+    /**
+     * Get the quantity, at line level, requested for this trade delivery.
+     *
+     * @param float $requestedQuantity
+     * The quantity, at line level, requested for this trade delivery.
+     * @param string $requestedQuantityUnitCode
+     * Unit Code for the requested quantity.
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionDeliverReqQuantity(?float &$requestedQuantity, ?string &$requestedQuantityUnitCode): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $requestedQuantity = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeDelivery.getRequestedQuantity.value", 0.0);
+        $requestedQuantityUnitCode = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeDelivery.getRequestedQuantity.getUnitCode", "");
+
+        return $this;
+    }
+
+    /**
+     * Get the number of packages, at line level, in this trade delivery.
+     *
+     * @param float $packageQuantity
+     * The number of packages, at line level, in this trade delivery.
+     * @param string $packageQuantityUnitCode
+     * Unit Code for the package quantity.
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionDeliverPackageQuantity(?float &$packageQuantity, ?string &$packageQuantityUnitCode): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $packageQuantity = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeDelivery.getPackageQuantity.value", 0.0);
+        $packageQuantityUnitCode = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeDelivery.getPackageQuantity.getUnitCode", "");
+
+        return $this;
+    }
+
+    /**
+     * Get the number of packages, at line level, in this trade delivery.
+     *
+     * @param float $perPackageQuantity
+     * The number of packages, at line level, in this trade delivery.
+     * @param string $perPackageQuantityUnitCode
+     * Unit Code for the package quantity.
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionDeliverPerPackageQuantity(?float &$perPackageQuantity, ?string &$perPackageQuantityUnitCode): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $perPackageQuantity = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeDelivery.getPerPackageUnitQuantity.value", 0.0);
+        $perPackageQuantityUnitCode = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeDelivery.getPerPackageUnitQuantity.getUnitCode", "");
+
+        return $this;
+    }
+
+    /**
+     * Get the quantity, at line level, agreed for this trade delivery.
+     *
+     * @param float $agreedQuantity
+     * The quantity, at line level, agreed for this trade delivery.
+     * @param string $agreedQuantityUnitCode
+     * Unit Code for the package quantity.
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionDeliverAgreedQuantity(?float &$agreedQuantity, ?string &$agreedQuantityUnitCode): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $agreedQuantity = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeDelivery.getAgreedQuantity.value", 0.0);
+        $agreedQuantityUnitCode = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeDelivery.getAgreedQuantity.getUnitCode", "");
+
+        return $this;
+    }
+
+    /**
+     * Seek to the first document position requested delivery supply chain event
+     * Returns true if the first requested delivery supply chain event is available, otherwise false
+     * You may use it together with getDocumentPositionRequestedDeliverySupplyChainEvent
+     * (The Requested Date or Period on which Delivery is requested)
+     *
+     * @return boolean
+     */
+    public function firstDocumentPositionRequestedDeliverySupplyChainEvent(): bool
+    {
+        $this->positionRequestedDeliverySupplyChainEventPointer = 0;
+
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $tradeLineRequestedDeliverySupplyChainEvent = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeDelivery.getRequestedDeliverySupplyChainEvent", []));
+
+        return isset($tradeLineRequestedDeliverySupplyChainEvent[$this->positionRequestedDeliverySupplyChainEventPointer]);
+    }
+
+    /**
+     * Seek to the first document position requested delivery supply chain event
+     * Returns true if the first requested delivery supply chain event is available, otherwise false
+     * You may use it together with getDocumentPositionRequestedDeliverySupplyChainEvent
+     * (The Requested Date or Period on which Delivery is requested)
+     *
+     * @return boolean
+     */
+    public function nextDocumentPositionRequestedDeliverySupplyChainEvent(): bool
+    {
+        $this->positionRequestedDeliverySupplyChainEventPointer++;
+
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $tradeLineRequestedDeliverySupplyChainEvent = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeDelivery.getRequestedDeliverySupplyChainEvent", []));
+
+        return isset($tradeLineRequestedDeliverySupplyChainEvent[$this->positionRequestedDeliverySupplyChainEventPointer]);
+    }
+
+    /**
+     * Get the requested date or period on which delivery is requested (on position level)
+     *
+     * @param DateTime|null $occurrenceDateTime
+     * @param DateTime|null $startDateTime
+     * @param DateTime|null $endDateTime
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionRequestedDeliverySupplyChainEvent(?DateTime &$occurrenceDateTime, ?DateTime &$startDateTime, ?DateTime &$endDateTime): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $tradeLineRequestedDeliverySupplyChainEvents = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeDelivery.getRequestedDeliverySupplyChainEvent", []));
+        $tradeLineRequestedDeliverySupplyChainEvent = $this->objectHelper->getArrayIndex($tradeLineRequestedDeliverySupplyChainEvents, $this->positionRequestedDeliverySupplyChainEventPointer);
+
+        $occurrenceDateTime = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPathFrom($tradeLineRequestedDeliverySupplyChainEvent, "getOccurrenceDateTime.getDateTimeString", ""),
+            $this->getInvoiceValueByPathFrom($tradeLineRequestedDeliverySupplyChainEvent, "getOccurrenceDateTime.getDateTimeString.getFormat", "")
+        );
+        $startDateTime = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPathFrom($tradeLineRequestedDeliverySupplyChainEvent, "getOccurrenceSpecifiedPeriod.getStartDateTime.getDateTimeString", ""),
+            $this->getInvoiceValueByPathFrom($tradeLineRequestedDeliverySupplyChainEvent, "getOccurrenceSpecifiedPeriod.getStartDateTime.getDateTimeString.getFormat", "")
+        );
+        $endDateTime = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPathFrom($tradeLineRequestedDeliverySupplyChainEvent, "getOccurrenceSpecifiedPeriod.getEndDateTime.getDateTimeString", ""),
+            $this->getInvoiceValueByPathFrom($tradeLineRequestedDeliverySupplyChainEvent, "getOccurrenceSpecifiedPeriod.getEndDateTime.getDateTimeString.getFormat", "")
+        );
+
+        return $this;
+    }
+
+    /**
+     * Seek to the first document position tax
+     * Returns true if the first tax position is available, otherwise false
+     * You may use it together with OrderDocumentReader::getDocumentPositionTax
+     *
+     * @return boolean
+     */
+    public function firstDocumentPositionTax(): bool
+    {
+        $this->positionTaxPointer = 0;
+
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $taxes = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeSettlement.getApplicableTradeTax", []));
+
+        return isset($taxes[$this->positionTaxPointer]);
+    }
+
+    /**
+     * Seek to the next document position tax
+     * Returns true if another tax position is available, otherwise false
+     * You may use it together with OrderDocumentReader::getDocumentPositionTax
+     *
+     * @return boolean
+     */
+    public function nextDocumentPositionTax(): bool
+    {
+        $this->positionTaxPointer++;
+
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $taxes = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeSettlement.getApplicableTradeTax", []));
+
+        return isset($taxes[$this->positionTaxPointer]);
+    }
+
+    /**
+     * Get information about the sales tax that applies to the goods and services invoiced
+     * in the relevant invoice line
+     *
+     * @param string|null $categoryCode
+     * Coded description of a sales tax category
+     *
+     * The following entries from UNTDID 5305 are used (details in brackets):
+     *  - Standard rate (sales tax is due according to the normal procedure)
+     *  - Goods to be taxed according to the zero rate (sales tax is charged with a percentage of zero)
+     *  - Tax exempt (USt./IGIC/IPSI)
+     *  - Reversal of the tax liability (the rules for reversing the tax liability at USt./IGIC/IPSI apply)
+     *  - VAT exempt for intra-community deliveries of goods (USt./IGIC/IPSI not levied due to rules on intra-community deliveries)
+     *  - Free export item, tax not levied (VAT / IGIC/IPSI not levied due to export outside the EU)
+     *  - Services outside the tax scope (sales are not subject to VAT / IGIC/IPSI)
+     *  - Canary Islands general indirect tax (IGIC tax applies)
+     *  - IPSI (tax for Ceuta / Melilla) applies.
+     *
+     * The codes for the VAT category are as follows:
+     *  - S = sales tax is due at the normal rate
+     *  - Z = goods to be taxed according to the zero rate
+     *  - E = tax exempt
+     *  - AE = reversal of tax liability
+     *  - K = VAT is not shown for intra-community deliveries
+     *  - G = tax not levied due to export outside the EU
+     *  - O = Outside the tax scope
+     *  - L = IGIC (Canary Islands)
+     *  - M = IPSI (Ceuta / Melilla)
+     * @param string|null $typeCode
+     * Coded description of a sales tax category. Note: Fixed value = "VAT"
+     * In EN 16931 only the tax type “sales tax” with the code “VAT” is supported. If other types of tax are
+     * to be specified, such as an insurance tax or a mineral oil tax, the EXTENDED profile must be used. The
+     * code for the tax type must then be taken from the code list UNTDID 5153.
+     * @param float|null $rateApplicablePercent
+     * The VAT rate applicable to the item invoiced and expressed as a percentage. Note: The code of the sales
+     * tax category and the category-specific sales tax rate  must correspond to one another. The value to be
+     * given is the percentage. For example, the value 20 is given for 20% (and not 0.2)
+     * @param float|null $calculatedAmount
+     * Tax amount. Information only for taxes that are not VAT.
+     * @param string|null $exemptionReason
+     * Reason for tax exemption (free text)
+     * @param string|null $exemptionReasonCode
+     * Reason given in code form for the exemption of the amount from VAT. Note: Code list issued
+     * and maintained by the Connecting Europe Facility.
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionTax(?string &$categoryCode, ?string &$typeCode, ?float &$rateApplicablePercent, ?float &$calculatedAmount, ?string &$exemptionReason, ?string &$exemptionReasonCode): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $taxes = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeSettlement.getApplicableTradeTax", []));
+        $tax = $this->objectHelper->getArrayIndex($taxes, $this->positionTaxPointer);
+
+        $categoryCode = $this->getInvoiceValueByPathFrom($tax, "getCategoryCode", "");
+        $typeCode = $this->getInvoiceValueByPathFrom($tax, "getTypeCode", "");
+        $rateApplicablePercent = $this->getInvoiceValueByPathFrom($tax, "getRateApplicablePercent.value", 0.0);
+        $calculatedAmount = $this->getInvoiceValueByPathFrom($tax, "getCalculatedAmount.value", 0.0);
+        $exemptionReason = $this->getInvoiceValueByPathFrom($tax, "getExemptionReason", "");
+        $exemptionReasonCode = $this->getInvoiceValueByPathFrom($tax, "getExemptionReasonCode", "");
+
+        return $this;
+    }
+
+    /**
+     * Seek to the first allowance charge (on position level)
+     * Returns true if the first position is available, otherwise false
+     * You may use it together with OrderDocumentReader::getDocumentPositionAllowanceCharge
+     *
+     * @return boolean
+     */
+    public function firstDocumentPositionAllowanceCharge(): bool
+    {
+        $this->positionAllowanceChargePointer = 0;
+
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $allowanceCharges = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeSettlement.getSpecifiedTradeAllowanceCharge", []));
+
+        return isset($allowanceCharges[$this->positionAllowanceChargePointer]);
+    }
+
+    /**
+     * Seek to the next allowance charge (on position level)
+     * Returns true if another position is available, otherwise false
+     * You may use it together with OrderDocumentReader::getDocumentPositionAllowanceCharge
+     *
+     * @return boolean
+     */
+    public function nextDocumentPositionAllowanceCharge(): bool
+    {
+        $this->positionAllowanceChargePointer++;
+
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $allowanceCharges = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeSettlement.getSpecifiedTradeAllowanceCharge", []));
+
+        return isset($allowanceCharges[$this->positionAllowanceChargePointer]);
+    }
+
+    /**
+     * Detailed information on currentley seeked surcharges and discounts on position level
+     *
+     * @param float|null $actualAmount
+     * The surcharge / discount amount excluding sales tax
+     * @param boolean|null $isCharge
+     * Switch that indicates whether the following data refer to an allowance or a discount,
+     * true means that
+     * @param float|null $calculationPercent
+     * The percentage that may be used in conjunction with the base invoice line discount
+     * amount to calculate the invoice line discount amount
+     * @param float|null $basisAmount
+     * The base amount that may be used in conjunction with the invoice line discount percentage
+     * to calculate the invoice line discount amount
+     * @param string|null $reason
+     * The reason given in text form for the invoice item discount/surcharge
+     *
+     * __Notes__
+     *  - The invoice line discount reason code (BT-140) and the invoice line discount reason
+     *    (BT-139) must show the same allowance type.
+     *  - Each line item discount (BG-27) must include a corresponding line discount reason
+     *    (BT-139) or an appropriate line discount reason code (BT-140), or both.
+     *  - The code for the reason for the charge at the invoice line level (BT-145) and the
+     *    reason for the invoice line discount (BT-144) must show the same discount type
+     * @param string|null $taxTypeCode
+     * Not used, this is only a dummy
+     * @param string|null $taxCategoryCode
+     * Not used, this is only a dummy
+     * @param float|null $rateApplicablePercent
+     * Not used, this is only a dummy
+     * @param float|null $sequence
+     * Not used, this is only a dummy
+     * @param float|null $basisQuantity
+     * Not used, this is only a dummy
+     * @param string|null $basisQuantityUnitCode
+     * Not used, this is only a dummy
+     * @param string|null $reasonCode
+     * The reason given as a code for the invoice line discount
+     *
+     * __Notes__
+     *  - Use entries from the UNTDID 5189 code list (discounts) or the UNTDID 7161 code list
+     *    (surcharges). The invoice line discount reason code and the invoice line discount reason must
+     *    match.
+     *  - In the case of a discount, the code list UNTDID 5189 must be used.
+     *  - In the event of a surcharge, the code list UNTDID 7161 must be used.
+     *
+     * In particular, the following codes can be used:
+     *  - AA = Advertising
+     *  - ABL = Additional packaging
+     *  - ADR = Other services
+     *  - ADT = Pick-up
+     *  - FC = Freight service
+     *  - FI = Financing
+     *  - LA = Labelling
+     *
+     * Include PEPPOL subset:
+     *  - 41 - Bonus for works ahead of schedule
+     *  - 42 - Other bonus
+     *  - 60 - Manufacturer’s consumer discount
+     *  - 62 - Due to military status
+     *  - 63 - Due to work accident
+     *  - 64 - Special agreement
+     *  - 65 - Production error discount
+     *  - 66 - New outlet discount
+     *  - 67 - Sample discount
+     *  - 68 - End-of-range discount
+     *  - 70 - Incoterm discount
+     *  - 71 - Point of sales threshold allowance
+     *  - 88 - Material surcharge/deduction
+     *  - 95 - Discount
+     *  - 100 - Special rebate
+     *  - 102 - Fixed long term
+     *  - 103 - Temporary
+     *  - 104 - Standard
+     *  - 105 - Yearly turnover
+     *
+     * Codelists: UNTDID 7161 (Complete list), UNTDID 5189 (Restricted)
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionAllowanceCharge(?float &$actualAmount, ?bool &$isCharge, ?float &$calculationPercent, ?float &$basisAmount, ?string &$reason, ?string &$taxTypeCode, ?string &$taxCategoryCode, ?float &$rateApplicablePercent, ?float &$sequence, ?float &$basisQuantity, ?string &$basisQuantityUnitCode, ?string &$reasonCode): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $allowanceCharges = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeSettlement.getSpecifiedTradeAllowanceCharge", []));
+        $allowanceCharge = $this->objectHelper->getArrayIndex($allowanceCharges, $this->positionAllowanceChargePointer);
+
+        $isCharge = $this->getInvoiceValueByPathFrom($allowanceCharge, "getChargeIndicator.getIndicator", false);
+        $calculationPercent = $this->getInvoiceValueByPathFrom($allowanceCharge, "getCalculationPercent.value", 0.0);
+        $basisAmount = $this->getInvoiceValueByPathFrom($allowanceCharge, "getBasisAmount.value", 0.0);
+        $actualAmount = $this->getInvoiceValueByPathFrom($allowanceCharge, "getActualAmount.value", 0.0);
+        $reasonCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getReasonCode", "");
+        $reason = $this->getInvoiceValueByPathFrom($allowanceCharge, "getReason", "");
+
+        $taxTypeCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getCategoryTradeTax.getTypeCode", "");
+        $taxCategoryCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getCategoryTradeTax.getCategoryCode", "");
+        $rateApplicablePercent = $this->getInvoiceValueByPathFrom($allowanceCharge, "getCategoryTradeTax.getRateApplicablePercent.value", 0.0);
+
+        $sequence = $this->getInvoiceValueByPathFrom($allowanceCharge, "getSequenceNumeric.value", 0.0);
+        $basisQuantity = $this->getInvoiceValueByPathFrom($allowanceCharge, "getBasisQuantity.value", 0.0);
+        $basisQuantityUnitCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getBasisQuantity.getUnitCode", "");
+
+        return $this;
+    }
+
+    /**
+     * Get detailed information on item totals
+     *
+     * @param float|null $lineTotalAmount
+     * The total amount of the invoice item.
+     * __Note:__ This is the "net" amount, that is, excluding sales tax, but including all surcharges
+     * and discounts applicable to the item level, as well as other taxes.
+     * @param float|null $totalAllowanceChargeAmount
+     * Total amount of item surcharges and discounts
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionLineSummation(?float &$lineTotalAmount, ?float &$totalAllowanceChargeAmount): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $lineTotalAmount = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeSettlement.getSpecifiedTradeSettlementLineMonetarySummation.getLineTotalAmount.value", 0.0);
+        $totalAllowanceChargeAmount = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeSettlement.getSpecifiedTradeSettlementLineMonetarySummation.getTotalAllowanceChargeAmount.value", 0.0);
+
+        return $this;
+    }
+
+    /**
+     * Get an AccountingAccount on item level
+     *
+     * @param string $id
+     * The unique identifier for this trade accounting account.
+     * @param string|null $typeCode
+     * The code specifying the type of trade accounting account, such as
+     * general (main), secondary, cost accounting or budget account.
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionReceivableTradeAccountingAccount(?string &$id, ?string &$typeCode): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $id = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeSettlement.getReceivableSpecifiedTradeAccountingAccount.getID", "");
+        $typeCode = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeSettlement.getReceivableSpecifiedTradeAccountingAccount.getTypeCode", "");
 
         return $this;
     }

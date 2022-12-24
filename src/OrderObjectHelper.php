@@ -998,11 +998,10 @@ class OrderObjectHelper
      * @param string|null $exemptionReasonCode
      * @param float|null $lineTotalBasisAmount
      * @param float|null $allowanceChargeBasisAmount
-     * @param DateTime|null $taxPointDate
      * @param string|null $dueDateTypeCode
      * @return object|null
      */
-    public function getTradeTaxType(?string $categoryCode = null, ?string $typeCode = null, ?float $basisAmount = null, ?float $calculatedAmount = null, ?float $rateApplicablePercent = null, ?string $exemptionReason = null, ?string $exemptionReasonCode = null, ?float $lineTotalBasisAmount = null, ?float $allowanceChargeBasisAmount = null, ?DateTime $taxPointDate = null, ?string $dueDateTypeCode = null): ?object
+    public function getTradeTaxType(?string $categoryCode = null, ?string $typeCode = null, ?float $basisAmount = null, ?float $calculatedAmount = null, ?float $rateApplicablePercent = null, ?string $exemptionReason = null, ?string $exemptionReasonCode = null, ?float $lineTotalBasisAmount = null, ?float $allowanceChargeBasisAmount = null, ?string $dueDateTypeCode = null): ?object
     {
         if (self::isAllNullOrEmpty(func_get_args())) {
             return null;
@@ -1018,7 +1017,6 @@ class OrderObjectHelper
         $this->tryCall($taxBreakdown, "setAllowanceChargeBasisAmount", $this->getAmountType($allowanceChargeBasisAmount));
         $this->tryCall($taxBreakdown, "setCategoryCode", $this->getTaxCategoryCodeType($categoryCode));
         $this->tryCall($taxBreakdown, "setExemptionReasonCode", $this->getCodeType($exemptionReasonCode));
-        $this->tryCall($taxBreakdown, "setTaxPointDate", $this->getDateType($taxPointDate));
         $this->tryCall($taxBreakdown, "setDueDateTypeCode", $this->getTimeReferenceCodeType($dueDateTypeCode));
         $this->tryCall($taxBreakdown, "setRateApplicablePercent", $this->getPercentType($rateApplicablePercent));
 

@@ -156,6 +156,14 @@
                 </ram:RequestedDeliverySupplyChainEvent>
             </ram:SpecifiedLineTradeDelivery>
             <ram:SpecifiedLineTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:CalculatedAmount>0.00</ram:CalculatedAmount>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:ExemptionReason>Reason-1</ram:ExemptionReason>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:ExemptionReasonCode>RC1</ram:ExemptionReasonCode>
+                    <ram:RateApplicablePercent>19.00</ram:RateApplicablePercent>
+                </ram:ApplicableTradeTax>
                 <ram:SpecifiedTradeAllowanceCharge>
                     <ram:ChargeIndicator>
                         <udt:Indicator>false</udt:Indicator>
@@ -749,6 +757,17 @@
                 <ram:TypeCode>30</ram:TypeCode>
                 <ram:Information>Credit Transfer</ram:Information>
             </ram:SpecifiedTradeSettlementPaymentMeans>
+            <ram:ApplicableTradeTax>
+                <ram:CalculatedAmount>60.00</ram:CalculatedAmount>
+                <ram:TypeCode>VAT</ram:TypeCode>
+                <ram:ExemptionReason>ExcReason-1</ram:ExemptionReason>
+                <ram:BasisAmount>300.00</ram:BasisAmount>
+                <ram:LineTotalBasisAmount>300.00</ram:LineTotalBasisAmount>
+                <ram:AllowanceChargeBasisAmount>300.00</ram:AllowanceChargeBasisAmount>
+                <ram:CategoryCode>S</ram:CategoryCode>
+                <ram:ExemptionReasonCode>ExcReasonCode-1</ram:ExemptionReasonCode>
+                <ram:RateApplicablePercent>20.00</ram:RateApplicablePercent>
+            </ram:ApplicableTradeTax>
             <ram:SpecifiedTradeAllowanceCharge>
                 <ram:ChargeIndicator>
                     <udt:Indicator>false</udt:Indicator>
