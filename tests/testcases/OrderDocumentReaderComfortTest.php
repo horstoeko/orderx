@@ -3506,4 +3506,28 @@ class OrderDocumentReaderComfortTest extends TestCase
     {
         $this->assertFalse(self::$document->nextDocumentPositionTax());
     }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionTax(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionTax(
+            $categoryCode,
+            $typeCode,
+            $rateApplicablePercent,
+            $calculatedAmount,
+            $exemptionReason,
+            $exemptionReasonCode
+        );
+
+        $this->assertEquals("S", $categoryCode);
+        $this->assertEquals("VAT", $typeCode);
+        $this->assertEquals(19.0, $rateApplicablePercent);
+        $this->assertEquals(0.0, $calculatedAmount);
+        $this->assertEquals("", $exemptionReason);
+        $this->assertEquals("", $exemptionReasonCode);
+    }
 }
