@@ -8,8 +8,10 @@
             <file>../tests/testcases/OrderDocumentBuilderExtendedTest.php</file>
             <file>../tests/testcases/OrderDocumentPdfBuilderTest.php</file>
             <file>../tests/testcases/OrderDocumentValidatorTest.php</file>
-            <file>../tests/testcases/OrderDocumentReaderExtendedTest.php</file>
             <file>../tests/testcases/OrderDocumentReaderComfortTest.php</file>
+            <file>../tests/testcases/OrderDocumentReaderExtendedTest.php</file>
+            <file>../tests/testcases/OrderDocumentPdfReaderComfortTest.php</file>
+            <file>../tests/testcases/OrderDocumentPdfReaderExtendedTest.php</file>
         </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
