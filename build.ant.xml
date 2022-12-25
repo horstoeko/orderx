@@ -263,7 +263,7 @@
     </target>
     <target name="deploy" description="Deplay build">
         <zip destfile="${basedir}/build/dist/doc.zip">
-            <fileset dir="${basedir}/build/doc">
+            <fileset dir="${basedir}/doc">
                 <include name="**/*.*"/>
             </fileset>
         </zip>
