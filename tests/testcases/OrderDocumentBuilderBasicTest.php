@@ -2284,7 +2284,7 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableSupplyChainPackaging', 0);
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableSupplyChainPackaging', 1);
 
-        (self::$document)->setDocumentPositionApplicableSupplyChainPackaging("TC-1", 1, "MTR", 2, "MTR", 3, "MTR");
+        (self::$document)->setDocumentPositionSupplyChainPackaging("TC-1", 1, "MTR", 2, "MTR", 3, "MTR");
 
         $this->disableRenderXmlContent();
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableSupplyChainPackaging', 0);

@@ -1110,8 +1110,8 @@ You may use it together with getDocumentPositionGenerals</p>                </di
                 <div class="col-md-8 type">
                     <a href="#method_firstDocumentPositionNote">firstDocumentPositionNote</a>()
         
-                                            <p>Seek to the first document position
-Returns true if the first position is available, otherwise false
+                                            <p>Seek to the first document position note
+Returns true if the first note (at line level) is available, otherwise false
 You may use it together with getDocumentPositionNote</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -1122,8 +1122,8 @@ You may use it together with getDocumentPositionNote</p>                </div>
                 <div class="col-md-8 type">
                     <a href="#method_nextDocumentPositionNote">nextDocumentPositionNote</a>()
         
-                                            <p>Seek to the next document position
-Returns true if the first position is available, otherwise false
+                                            <p>Seek to the next document position note
+Returns true if there is one more note (at line level) available, otherwise false
 You may use it together with getDocumentPositionNote</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -1144,7 +1144,7 @@ You may use it together with getDocumentPositionNote</p>                </div>
                 <div class="col-md-8 type">
                     <a href="#method_getDocumentPositionProductDetails">getDocumentPositionProductDetails</a>(string|null $name, string|null $description, string|null $sellerAssignedID, string|null $buyerAssignedID, array|null $globalID, string|null $batchId, string|null $brandName)
         
-                                            <p>Get information about the goods and services billed</p>                </div>
+                                            <p>Get product details to the last retrieved position (line) in the document</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -1167,7 +1167,7 @@ You may use it together with getDocumentPositionProductCharacteristic</p>       
                     <a href="#method_nextDocumentPositionProductCharacteristic">nextDocumentPositionProductCharacteristic</a>()
         
                                             <p>Seek to the next document position product characteristic
-Returns true if the next position is available, otherwise false
+Returns true if the next position product characteristic is available, otherwise false
 You may use it together with getDocumentPositionProductCharacteristic</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -1212,7 +1212,7 @@ You may use it together with getDocumentPositionProductClassification</p>       
                 <div class="col-md-8 type">
                     <a href="#method_getDocumentPositionProductClassification">getDocumentPositionProductClassification</a>(string|null $classCode, string|null $className, string|null $listID, string|null $listVersionID)
         
-                                            <p>Get (single) detailed information on product classification</p>                </div>
+                                            <p>Get detailed information on product classification</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -1255,7 +1255,7 @@ the unique supplier assigned serial identifier for this trade product instance.<
                     <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_getDocumentPositionApplicableSupplyChainPackaging">getDocumentPositionApplicableSupplyChainPackaging</a>(string|null $typeCode, float|null $width, string|null $widthUnitCode, float|null $length, string|null $lengthUnitCode, float|null $height, string|null $heightUnitCode)
+                    <a href="#method_getDocumentPositionSupplyChainPackaging">getDocumentPositionSupplyChainPackaging</a>(string|null $typeCode, float|null $width, string|null $widthUnitCode, float|null $length, string|null $lengthUnitCode, float|null $height, string|null $heightUnitCode)
         
                                             <p>Get the supply chain packaging information</p>                </div>
                 <div class="col-md-2"></div>
@@ -1267,7 +1267,7 @@ the unique supplier assigned serial identifier for this trade product instance.<
                 <div class="col-md-8 type">
                     <a href="#method_getDocumentPositionProductOriginTradeCountry">getDocumentPositionProductOriginTradeCountry</a>(string|null $country)
         
-                                            <p>Get the detailed information on the product origin</p>                </div>
+                                            <p>Get information on the product origin</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -1343,6 +1343,16 @@ You may use it together with getDocumentPositionAdditionalReferencedDocument</p>
                     <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
                 </div>
                 <div class="col-md-8 type">
+                    <a href="#method_getDocumentPositionAdditionalReferencedDocumentBinaryData">getDocumentPositionAdditionalReferencedDocumentBinaryData</a>(string|null $binarydatafilename)
+        
+                                            <p>Get the binary data of an additional Document reference on a position</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_getDocumentPositionBuyerOrderReferencedDocument">getDocumentPositionBuyerOrderReferencedDocument</a>(string|null $buyerOrderRefLineId)
         
                                             <p>Get details of the related buyer order position</p>                </div>
@@ -1375,8 +1385,8 @@ You may use it together with getDocumentPositionAdditionalReferencedDocument</p>
                 <div class="col-md-8 type">
                     <a href="#method_firstDocumentPositionGrossPriceAllowanceCharge">firstDocumentPositionGrossPriceAllowanceCharge</a>()
         
-                                            <p>Seek to the first documents position gross price allowance charge position
-Returns true if the first position is available, otherwise false
+                                            <p>Seek to the first documents position gross price allowance/charge position
+Returns true if the first gross price allowance/charge position is available, otherwise false
 You may use it together with getDocumentPositionGrossPriceAllowanceCharge</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -1387,8 +1397,8 @@ You may use it together with getDocumentPositionGrossPriceAllowanceCharge</p>   
                 <div class="col-md-8 type">
                     <a href="#method_nextDocumentPositionGrossPriceAllowanceCharge">nextDocumentPositionGrossPriceAllowanceCharge</a>()
         
-                                            <p>Seek to the next documents position gross price allowance charge position
-Returns true if a other position is available, otherwise false
+                                            <p>Seek to the next documents position gross price allowance/charge position
+Returns true if a other gross price allowance/charge position is available, otherwise false
 You may use it together with getDocumentPositionGrossPriceAllowanceCharge</p>                </div>
                 <div class="col-md-2"></div>
             </div>
@@ -1407,7 +1417,7 @@ You may use it together with getDocumentPositionGrossPriceAllowanceCharge</p>   
                     <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_getDocumentPositionNetPrice">getDocumentPositionNetPrice</a>(float|null $amount, float|null $basisQuantity, string|null $basisQuantityUnitCode)
+                    <a href="#method_getDocumentPositionNetPrice">getDocumentPositionNetPrice</a>(float|null $chargeAmount, float|null $basisQuantity, string|null $basisQuantityUnitCode)
         
                                             <p>Get detailed information on the net price of the item</p>                </div>
                 <div class="col-md-2"></div>
@@ -1592,9 +1602,9 @@ You may use it together with OrderDocumentReader::getDocumentPositionAllowanceCh
                     <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_getDocumentPositionAllowanceCharge">getDocumentPositionAllowanceCharge</a>(float|null $actualAmount, bool|null $isCharge, float|null $calculationPercent, float|null $basisAmount, string|null $reason, string|null $taxTypeCode, string|null $taxCategoryCode, float|null $rateApplicablePercent, float|null $sequence, float|null $basisQuantity, string|null $basisQuantityUnitCode, string|null $reasonCode)
+                    <a href="#method_getDocumentPositionAllowanceCharge">getDocumentPositionAllowanceCharge</a>(float|null $actualAmount, bool|null $isCharge, float|null $calculationPercent, float|null $basisAmount, string|null $reasonCode, string|null $reason)
         
-                                            <p>Detailed information on currentley seeked surcharges and discounts on position level</p>                </div>
+                                            <p>Get surcharges and discounts on position level</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
@@ -1614,7 +1624,7 @@ You may use it together with OrderDocumentReader::getDocumentPositionAllowanceCh
                 <div class="col-md-8 type">
                     <a href="#method_getDocumentPositionReceivableTradeAccountingAccount">getDocumentPositionReceivableTradeAccountingAccount</a>(string|null $id, string|null $typeCode)
         
-                                            <p>Get an AccountingAccount on item level</p>                </div>
+                                            <p>Set an AccountingAccount on position level</p>                </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -6247,7 +6257,7 @@ You may use it together with getDocumentPositionGenerals</p>                    
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPosition">
-        <div class="location">at         line 2404</div>
+        <div class="location">at         line 2405</div>
         <code>                    bool
     <strong>nextDocumentPosition</strong>()
         </code>
@@ -6279,7 +6289,7 @@ You may use it together with getDocumentPositionGenerals</p>                    
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionGenerals">
-        <div class="location">at         line 2434</div>
+        <div class="location">at         line 2436</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionGenerals</strong>(string|null $lineid, string|null $lineStatusCode)
         </code>
@@ -6326,7 +6336,7 @@ The following code should be used: TYPE_LINE</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionNote">
-        <div class="location">at         line 2452</div>
+        <div class="location">at         line 2454</div>
         <code>                    bool
     <strong>firstDocumentPositionNote</strong>()
         </code>
@@ -6336,8 +6346,8 @@ The following code should be used: TYPE_LINE</td>
     
 
                     <div class="method-description">
-                                    <p>Seek to the first document position
-Returns true if the first position is available, otherwise false
+                                    <p>Seek to the first document position note
+Returns true if the first note (at line level) is available, otherwise false
 You may use it together with getDocumentPositionNote</p>                                                </div>
                 <div class="tags">
             
@@ -6358,7 +6368,7 @@ You may use it together with getDocumentPositionNote</p>                        
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionNote">
-        <div class="location">at         line 2471</div>
+        <div class="location">at         line 2473</div>
         <code>                    bool
     <strong>nextDocumentPositionNote</strong>()
         </code>
@@ -6368,8 +6378,8 @@ You may use it together with getDocumentPositionNote</p>                        
     
 
                     <div class="method-description">
-                                    <p>Seek to the next document position
-Returns true if the first position is available, otherwise false
+                                    <p>Seek to the next document position note
+Returns true if there is one more note (at line level) available, otherwise false
 You may use it together with getDocumentPositionNote</p>                                                </div>
                 <div class="tags">
             
@@ -6390,7 +6400,7 @@ You may use it together with getDocumentPositionNote</p>                        
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionNote">
-        <div class="location">at         line 2495</div>
+        <div class="location">at         line 2497</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionNote</strong>(string|null $content, string|null $contentCode, string|null $subjectCode)
         </code>
@@ -6441,7 +6451,7 @@ You may use it together with getDocumentPositionNote</p>                        
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionProductDetails">
-        <div class="location">at         line 2532</div>
+        <div class="location">at         line 2531</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionProductDetails</strong>(string|null $name, string|null $description, string|null $sellerAssignedID, string|null $buyerAssignedID, array|null $globalID, string|null $batchId, string|null $brandName)
         </code>
@@ -6451,7 +6461,7 @@ You may use it together with getDocumentPositionNote</p>                        
     
 
                     <div class="method-description">
-                                    <p>Get information about the goods and services billed</p>                                                </div>
+                                    <p>Get product details to the last retrieved position (line) in the document</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -6464,8 +6474,7 @@ You may use it together with getDocumentPositionNote</p>                        
                     <tr>
                 <td>string|null</td>
                 <td>$description</td>
-                <td>A description of the item, the item description makes it possible to describe the item and its
-properties in more detail than is possible with the item name.</td>
+                <td>A textual description of a use of this item.</td>
             </tr>
                     <tr>
                 <td>string|null</td>
@@ -6475,9 +6484,7 @@ properties in more detail than is possible with the item name.</td>
                     <tr>
                 <td>string|null</td>
                 <td>$buyerAssignedID</td>
-                <td>An identifier assigned to the item by the buyer. The article number of the buyer is a clear,
-bilaterally agreed identification of the product. It can, for example, be the customer article
-number or the article number assigned by the manufacturer.</td>
+                <td>An identifier, assigned by the Buyer, for the item.</td>
             </tr>
                     <tr>
                 <td>array|null</td>
@@ -6515,7 +6522,7 @@ from the list published by the ISO/IEC 6523 Maintenance Agency.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionProductCharacteristic">
-        <div class="location">at         line 2556</div>
+        <div class="location">at         line 2555</div>
         <code>                    bool
     <strong>firstDocumentPositionProductCharacteristic</strong>()
         </code>
@@ -6547,7 +6554,7 @@ You may use it together with getDocumentPositionProductCharacteristic</p>       
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionProductCharacteristic">
-        <div class="location">at         line 2575</div>
+        <div class="location">at         line 2574</div>
         <code>                    bool
     <strong>nextDocumentPositionProductCharacteristic</strong>()
         </code>
@@ -6558,7 +6565,7 @@ You may use it together with getDocumentPositionProductCharacteristic</p>       
 
                     <div class="method-description">
                                     <p>Seek to the next document position product characteristic
-Returns true if the next position is available, otherwise false
+Returns true if the next position product characteristic is available, otherwise false
 You may use it together with getDocumentPositionProductCharacteristic</p>                                                </div>
                 <div class="tags">
             
@@ -6579,7 +6586,7 @@ You may use it together with getDocumentPositionProductCharacteristic</p>       
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionProductCharacteristic">
-        <div class="location">at         line 2604</div>
+        <div class="location">at         line 2603</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionProductCharacteristic</strong>(string|null $description, array|null $values, string|null $typecode, float|null $measureValue, string|null $measureUnitCode)
         </code>
@@ -6640,7 +6647,7 @@ UNTDID 6313 codelist. Available only in the Extended-Profile</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionProductClassification">
-        <div class="location">at         line 2628</div>
+        <div class="location">at         line 2627</div>
         <code>                    bool
     <strong>firstDocumentPositionProductClassification</strong>()
         </code>
@@ -6672,7 +6679,7 @@ You may use it together with getDocumentPositionProductClassification</p>       
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionProductClassification">
-        <div class="location">at         line 2647</div>
+        <div class="location">at         line 2646</div>
         <code>                    bool
     <strong>nextDocumentPositionProductClassification</strong>()
         </code>
@@ -6714,7 +6721,7 @@ You may use it together with getDocumentPositionProductClassification</p>       
     
 
                     <div class="method-description">
-                                    <p>Get (single) detailed information on product classification</p>                                                </div>
+                                    <p>Get detailed information on product classification</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -6722,25 +6729,26 @@ You may use it together with getDocumentPositionProductClassification</p>       
                     <tr>
                 <td>string|null</td>
                 <td>$classCode</td>
-                <td>A code for classifying the item by type or nature or essence or condition.
-<strong>Note</strong>: Classification codes are used to group similar items for different purposes, such as public
-procurement (using the Common Procurement Vocabulary [CPV]), e-commerce (UNSPSC), etc.</td>
+                <td>A code for classifying the item by its type or nature.
+Classification codes are used to allow grouping of similar items for a various purposes e.g.
+public procurement (CPV), e-Commerce (UNSPSC) etc. The identification scheme shall be chosen
+from the entries in UNTDID 7143</td>
             </tr>
                     <tr>
                 <td>string|null</td>
                 <td>$className</td>
-                <td>Classification name</td>
+                <td>A class name, expressed as text, for this product classification</td>
             </tr>
                     <tr>
                 <td>string|null</td>
                 <td>$listID</td>
-                <td>The identifier for the identification scheme of the identifier of the article classification
-<strong>Note</strong>: The identification scheme must be selected from the entries from UNTDID 7143.</td>
+                <td>The identification scheme identifier of Item classification identifier
+Identification scheme must be chosen among the values available in UNTDID 7143</td>
             </tr>
                     <tr>
                 <td>string|null</td>
                 <td>$listVersionID</td>
-                <td>The version of the identification scheme</td>
+                <td>Scheme version identifier</td>
             </tr>
             </table>
 
@@ -6871,10 +6879,10 @@ the unique supplier assigned serial identifier for this trade product instance.<
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_getDocumentPositionApplicableSupplyChainPackaging">
-        <div class="location">at         line 2772</div>
+                    <h3 id="method_getDocumentPositionSupplyChainPackaging">
+        <div class="location">at         line 2773</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
-    <strong>getDocumentPositionApplicableSupplyChainPackaging</strong>(string|null $typeCode, float|null $width, string|null $widthUnitCode, float|null $length, string|null $lengthUnitCode, float|null $height, string|null $heightUnitCode)
+    <strong>getDocumentPositionSupplyChainPackaging</strong>(string|null $typeCode, float|null $width, string|null $widthUnitCode, float|null $length, string|null $lengthUnitCode, float|null $height, string|null $heightUnitCode)
         </code>
     </h3>
     <div class="details">
@@ -6890,7 +6898,8 @@ the unique supplier assigned serial identifier for this trade product instance.<
                     <tr>
                 <td>string|null</td>
                 <td>$typeCode</td>
-                <td>The code specifying the type of supply chain packaging. To be chosen from the entries in UNTDID 7065.</td>
+                <td>The code specifying the type of supply chain packaging.
+To be chosen from the entries in UNTDID 7065</td>
             </tr>
                     <tr>
                 <td>float|null</td>
@@ -6942,7 +6951,7 @@ the unique supplier assigned serial identifier for this trade product instance.<
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionProductOriginTradeCountry">
-        <div class="location">at         line 2797</div>
+        <div class="location">at         line 2798</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionProductOriginTradeCountry</strong>(string|null $country)
         </code>
@@ -6952,7 +6961,7 @@ the unique supplier assigned serial identifier for this trade product instance.<
     
 
                     <div class="method-description">
-                                    <p>Get the detailed information on the product origin</p>                                                </div>
+                                    <p>Get information on the product origin</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -6960,9 +6969,9 @@ the unique supplier assigned serial identifier for this trade product instance.<
                     <tr>
                 <td>string|null</td>
                 <td>$country</td>
-                <td>The code indicating the country the goods came from
-<strong>Note</strong>: The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance
-Agency “Codes for the representation of names of countries and their subdivisions”.</td>
+                <td>The code identifying the country from which the item originates.
+The lists of valid countries are registered with the EN ISO 3166-1 Maintenance agency, “Codes for the
+representation of names of countries and their subdivisions”.</td>
             </tr>
             </table>
 
@@ -6984,7 +6993,7 @@ Agency “Codes for the representation of names of countries and their subdivisi
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionProductReferencedDocument">
-        <div class="location">at         line 2814</div>
+        <div class="location">at         line 2815</div>
         <code>                    bool
     <strong>firstDocumentPositionProductReferencedDocument</strong>()
         </code>
@@ -7016,7 +7025,7 @@ You may use it together with getDocumentPositionProductReferencedDocument</p>   
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionProductReferencedDocument">
-        <div class="location">at         line 2833</div>
+        <div class="location">at         line 2834</div>
         <code>                    bool
     <strong>nextDocumentPositionProductReferencedDocument</strong>()
         </code>
@@ -7048,7 +7057,7 @@ You may use it together with getDocumentPositionProductReferencedDocument</p>   
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionProductReferencedDocument">
-        <div class="location">at         line 2861</div>
+        <div class="location">at         line 2863</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionProductReferencedDocument</strong>(string|null $issuerassignedid, string|null $typecode, string|null $uriid, string|null $lineid, string|null $name, string|null $reftypecode, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $issueddate)
         </code>
@@ -7071,7 +7080,8 @@ You may use it together with getDocumentPositionProductReferencedDocument</p>   
                     <tr>
                 <td>string|null</td>
                 <td>$typecode</td>
-                <td>The code specifying the type of referenced document.</td>
+                <td>The code specifying the type of referenced document.
+To be chosen from the entries in UNTDID 1001</td>
             </tr>
                     <tr>
                 <td>string|null</td>
@@ -7118,7 +7128,7 @@ You may use it together with getDocumentPositionProductReferencedDocument</p>   
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionAdditionalReferencedDocument">
-        <div class="location">at         line 2890</div>
+        <div class="location">at         line 2892</div>
         <code>                    bool
     <strong>firstDocumentPositionAdditionalReferencedDocument</strong>()
         </code>
@@ -7150,7 +7160,7 @@ You may use it together with getDocumentPositionAdditionalReferencedDocument</p>
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionAdditionalReferencedDocument">
-        <div class="location">at         line 2909</div>
+        <div class="location">at         line 2911</div>
         <code>                    bool
     <strong>nextDocumentPositionAdditionalReferencedDocument</strong>()
         </code>
@@ -7182,7 +7192,7 @@ You may use it together with getDocumentPositionAdditionalReferencedDocument</p>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionAdditionalReferencedDocument">
-        <div class="location">at         line 2949</div>
+        <div class="location">at         line 2951</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionAdditionalReferencedDocument</strong>(string|null $issuerassignedid, string|null $typecode, string|null $uriid, string|null $lineid, string|null $name, string|null $reftypecode, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $issueddate)
         </code>
@@ -7260,8 +7270,49 @@ from UNTDID 1153 in accordance with the code list entries.</td>
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_getDocumentPositionAdditionalReferencedDocumentBinaryData">
+        <div class="location">at         line 2981</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentPositionAdditionalReferencedDocumentBinaryData</strong>(string|null $binarydatafilename)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get the binary data of an additional Document reference on a position</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|null</td>
+                <td>$binarydatafilename</td>
+                <td>The fuill-qualified filename where the data where stored. If no binary data are
+available, this value will be empty</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_getDocumentPositionBuyerOrderReferencedDocument">
-        <div class="location">at         line 2979</div>
+        <div class="location">at         line 3014</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionBuyerOrderReferencedDocument</strong>(string|null $buyerOrderRefLineId)
         </code>
@@ -7302,7 +7353,7 @@ reference at the document level.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionQuotationReferencedDocument">
-        <div class="location">at         line 3000</div>
+        <div class="location">at         line 3035</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionQuotationReferencedDocument</strong>(string|null $quotationRefId, string|null $quotationRefLineId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $quotationRefDate)
         </code>
@@ -7325,7 +7376,7 @@ reference at the document level.</td>
                     <tr>
                 <td>string|null</td>
                 <td>$quotationRefLineId</td>
-                <td>The unique identifier of a line in this Quotation referenced document.</td>
+                <td>The unique identifier of a line in this Quotation referenced document</td>
             </tr>
                     <tr>
                 <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
@@ -7352,7 +7403,7 @@ reference at the document level.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionGrossPrice">
-        <div class="location">at         line 3028</div>
+        <div class="location">at         line 3063</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionGrossPrice</strong>(float|null $chargeAmount, float|null $basisQuantity, string|null $basisQuantityUnitCode)
         </code>
@@ -7404,7 +7455,7 @@ according to the gross calculation.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionGrossPriceAllowanceCharge">
-        <div class="location">at         line 3047</div>
+        <div class="location">at         line 3082</div>
         <code>                    bool
     <strong>firstDocumentPositionGrossPriceAllowanceCharge</strong>()
         </code>
@@ -7414,8 +7465,8 @@ according to the gross calculation.</td>
     
 
                     <div class="method-description">
-                                    <p>Seek to the first documents position gross price allowance charge position
-Returns true if the first position is available, otherwise false
+                                    <p>Seek to the first documents position gross price allowance/charge position
+Returns true if the first gross price allowance/charge position is available, otherwise false
 You may use it together with getDocumentPositionGrossPriceAllowanceCharge</p>                                                </div>
                 <div class="tags">
             
@@ -7436,7 +7487,7 @@ You may use it together with getDocumentPositionGrossPriceAllowanceCharge</p>   
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionGrossPriceAllowanceCharge">
-        <div class="location">at         line 3066</div>
+        <div class="location">at         line 3101</div>
         <code>                    bool
     <strong>nextDocumentPositionGrossPriceAllowanceCharge</strong>()
         </code>
@@ -7446,8 +7497,8 @@ You may use it together with getDocumentPositionGrossPriceAllowanceCharge</p>   
     
 
                     <div class="method-description">
-                                    <p>Seek to the next documents position gross price allowance charge position
-Returns true if a other position is available, otherwise false
+                                    <p>Seek to the next documents position gross price allowance/charge position
+Returns true if a other gross price allowance/charge position is available, otherwise false
 You may use it together with getDocumentPositionGrossPriceAllowanceCharge</p>                                                </div>
                 <div class="tags">
             
@@ -7468,7 +7519,7 @@ You may use it together with getDocumentPositionGrossPriceAllowanceCharge</p>   
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionGrossPriceAllowanceCharge">
-        <div class="location">at         line 3102</div>
+        <div class="location">at         line 3137</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionGrossPriceAllowanceCharge</strong>(float|null $actualAmount, bool|null $isCharge, float|null $calculationPercent, float|null $basisAmount, string|null $reason, string|null $taxTypeCode, string|null $taxCategoryCode, float|null $rateApplicablePercent, float|null $sequence, float|null $basisQuantity, string|null $basisQuantityUnitCode, string|null $reasonCode)
         </code>
@@ -7565,9 +7616,9 @@ is transferred</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionNetPrice">
-        <div class="location">at         line 3137</div>
+        <div class="location">at         line 3174</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
-    <strong>getDocumentPositionNetPrice</strong>(float|null $amount, float|null $basisQuantity, string|null $basisQuantityUnitCode)
+    <strong>getDocumentPositionNetPrice</strong>(float|null $chargeAmount, float|null $basisQuantity, string|null $basisQuantityUnitCode)
         </code>
     </h3>
     <div class="details">
@@ -7582,18 +7633,20 @@ is transferred</td>
                     <table class="table table-condensed">
                     <tr>
                 <td>float|null</td>
-                <td>$amount</td>
-                <td>Net price of the item</td>
+                <td>$chargeAmount</td>
+                <td>The price of an item, exclusive of VAT, after subtracting item price discount.
+The Item net price has to be equal with the Item gross price less the Item price discount.</td>
             </tr>
                     <tr>
                 <td>float|null</td>
                 <td>$basisQuantity</td>
-                <td>Base quantity at the item price</td>
+                <td>The number of item units to which the price applies.</td>
             </tr>
                     <tr>
                 <td>string|null</td>
                 <td>$basisQuantityUnitCode</td>
-                <td>Code of the unit of measurement of the base quantity at the item price</td>
+                <td>The unit of measure that applies to the Item price base quantity.
+The Item price base quantity unit of measure shall be the same as the requested quantity unit of measure.</td>
             </tr>
             </table>
 
@@ -7615,7 +7668,7 @@ is transferred</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionNetPriceTax">
-        <div class="location">at         line 3194</div>
+        <div class="location">at         line 3218</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionNetPriceTax</strong>(string|null $categoryCode, string|null $typeCode, float|null $rateApplicablePercent, float|null $calculatedAmount, string|null $exemptionReason, string|null $exemptionReasonCode)
         </code>
@@ -7633,49 +7686,36 @@ is transferred</td>
                     <tr>
                 <td>string|null</td>
                 <td>$categoryCode</td>
-                <td>Coded description of a sales tax category</p>
-
-<p>The following entries from UNTDID 5305 are used (details in brackets):
- - Standard rate (sales tax is due according to the normal procedure)
- - Goods to be taxed according to the zero rate (sales tax is charged with a percentage of zero)
- - Tax exempt (USt./IGIC/IPSI)
- - Reversal of the tax liability (the rules for reversing the tax liability at USt./IGIC/IPSI apply)
- - VAT exempt for intra-community deliveries of goods (USt./IGIC/IPSI not levied due to rules on intra-community deliveries)
- - Free export item, tax not levied (VAT / IGIC/IPSI not levied due to export outside the EU)
- - Services outside the tax scope (sales are not subject to VAT / IGIC/IPSI)
- - Canary Islands general indirect tax (IGIC tax applies)
- - IPSI (tax for Ceuta / Melilla) applies.</p>
-
-<p>The codes for the VAT category are as follows:
- - S = sales tax is due at the normal rate
- - Z = goods to be taxed according to the zero rate
- - E = tax exempt
- - AE = reversal of tax liability
- - K = VAT is not shown for intra-community deliveries
- - G = tax not levied due to export outside the EU
- - O = Outside the tax scope
- - L = IGIC (Canary Islands)
- - M = IPSI (Ceuta / Melilla)</td>
+                <td>Coded description of a sales tax category
+The code specifying the category to which this trade related tax, levy or duty applies, such as codes
+for "Exempt from Tax", "Standard Rate", "Free Export Item - Tax Not Charged". Reference United Nations Code List (UNCL) 5305.
+The following entries of UNTDID 5305  are used (further clarification between brackets):
+ - Standard rate (Liable for  TAX in a standard way)
+ - Zero rated goods (Liable for TAX with a percentage rate of zero)
+ - Exempt from tax
+ - VAT Reverse Charge (Reverse charge VAT/IGIC/IPSI rules apply)
+ - VAT exempt for intra community supply of goods (VAT/IGIC/IPSI not levied due to Intra-community supply rules)
+ - Free export item, tax not charged
+ - Services outside scope of tax (Sale is not subject to TAX)
+ - Canary Islands General Indirect Tax (Liable for IGIC tax)
+ - Liable for IPSI (Ceuta/Melilla tax)</td>
             </tr>
                     <tr>
                 <td>string|null</td>
                 <td>$typeCode</td>
-                <td>Coded description of a sales tax category. Note: Fixed value = "VAT"</td>
+                <td>The code specifying the type of trade related tax, levy or duty, such as a code for a Value Added Tax (VAT).
+Reference United Nations Code List (UNCL) 5153
+Value = VAT for VAT, ENV for Environmental, EXC for excise duty</td>
             </tr>
                     <tr>
                 <td>float|null</td>
                 <td>$rateApplicablePercent</td>
-                <td>The sales tax rate, expressed as the percentage applicable to the sales tax category in
-question. Note: The code of the sales tax category and the category-specific sales tax rate
-must correspond to one another. The value to be given is the percentage. For example, the
-value 20 is given for 20% (and not 0.2)</td>
+                <td>The VAT rate, represented as percentage that applies to the ordered item.</td>
             </tr>
                     <tr>
                 <td>float|null</td>
                 <td>$calculatedAmount</td>
-                <td>The total amount to be paid for the relevant VAT category. Note: Calculated by multiplying
-the amount to be taxed according to the sales tax category by the sales tax rate applicable
-for the sales tax category concerned</td>
+                <td>A monetary value resulting from the calculation of this trade related tax, levy or duty.</td>
             </tr>
                     <tr>
                 <td>string|null</td>
@@ -7708,7 +7748,7 @@ and maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionCatalogueReferencedDocument">
-        <div class="location">at         line 3220</div>
+        <div class="location">at         line 3244</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionCatalogueReferencedDocument</strong>(string|null $catalogueRefId, string|null $catalogueRefLineId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $catalogueRefDate)
         </code>
@@ -7758,7 +7798,7 @@ and maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionBlanketOrderReferencedDocument">
-        <div class="location">at         line 3242</div>
+        <div class="location">at         line 3266</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionBlanketOrderReferencedDocument</strong>(string|null $blanketOrderRefLineId)
         </code>
@@ -7776,7 +7816,7 @@ and maintained by the Connecting Europe Facility.</td>
                     <tr>
                 <td>string|null</td>
                 <td>$blanketOrderRefLineId</td>
-                <td>The unique identifier of a line in the Blanketl Order referenced document</td>
+                <td>The unique identifier of a line in the Blanket Order referenced document</td>
             </tr>
             </table>
 
@@ -7798,7 +7838,7 @@ and maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionPartialDelivery">
-        <div class="location">at         line 3259</div>
+        <div class="location">at         line 3283</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionPartialDelivery</strong>(bool|null $partialDelivery)
         </code>
@@ -7838,7 +7878,7 @@ and maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionDeliverReqQuantity">
-        <div class="location">at         line 3278</div>
+        <div class="location">at         line 3302</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionDeliverReqQuantity</strong>(float|null $requestedQuantity, string|null $requestedQuantityUnitCode)
         </code>
@@ -7883,7 +7923,7 @@ and maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionDeliverPackageQuantity">
-        <div class="location">at         line 3298</div>
+        <div class="location">at         line 3322</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionDeliverPackageQuantity</strong>(float|null $packageQuantity, string|null $packageQuantityUnitCode)
         </code>
@@ -7928,7 +7968,7 @@ and maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionDeliverPerPackageQuantity">
-        <div class="location">at         line 3318</div>
+        <div class="location">at         line 3342</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionDeliverPerPackageQuantity</strong>(float|null $perPackageQuantity, string|null $perPackageQuantityUnitCode)
         </code>
@@ -7973,7 +8013,7 @@ and maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionDeliverAgreedQuantity">
-        <div class="location">at         line 3338</div>
+        <div class="location">at         line 3362</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionDeliverAgreedQuantity</strong>(float|null $agreedQuantity, string|null $agreedQuantityUnitCode)
         </code>
@@ -8018,7 +8058,7 @@ and maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionRequestedDeliverySupplyChainEvent">
-        <div class="location">at         line 3357</div>
+        <div class="location">at         line 3381</div>
         <code>                    bool
     <strong>firstDocumentPositionRequestedDeliverySupplyChainEvent</strong>()
         </code>
@@ -8051,7 +8091,7 @@ You may use it together with getDocumentPositionRequestedDeliverySupplyChainEven
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionRequestedDeliverySupplyChainEvent">
-        <div class="location">at         line 3377</div>
+        <div class="location">at         line 3401</div>
         <code>                    bool
     <strong>nextDocumentPositionRequestedDeliverySupplyChainEvent</strong>()
         </code>
@@ -8084,7 +8124,7 @@ You may use it together with getDocumentPositionRequestedDeliverySupplyChainEven
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionRequestedDeliverySupplyChainEvent">
-        <div class="location">at         line 3397</div>
+        <div class="location">at         line 3424</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionRequestedDeliverySupplyChainEvent</strong>(<a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $occurrenceDateTime, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $startDateTime, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $endDateTime)
         </code>
@@ -8102,17 +8142,17 @@ You may use it together with getDocumentPositionRequestedDeliverySupplyChainEven
                     <tr>
                 <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
                 <td>$occurrenceDateTime</td>
-                <td></td>
+                <td>A Requested Date on which Delivery is requested</td>
             </tr>
                     <tr>
                 <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
                 <td>$startDateTime</td>
-                <td></td>
+                <td>The Start Date of he Requested Period on which Delivery is requested</td>
             </tr>
                     <tr>
                 <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
                 <td>$endDateTime</td>
-                <td></td>
+                <td>The End Date of he Requested Period on which Delivery is requested</td>
             </tr>
             </table>
 
@@ -8134,7 +8174,7 @@ You may use it together with getDocumentPositionRequestedDeliverySupplyChainEven
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionTax">
-        <div class="location">at         line 3428</div>
+        <div class="location">at         line 3455</div>
         <code>                    bool
     <strong>firstDocumentPositionTax</strong>()
         </code>
@@ -8166,7 +8206,7 @@ You may use it together with OrderDocumentReader::getDocumentPositionTax</p>    
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionTax">
-        <div class="location">at         line 3447</div>
+        <div class="location">at         line 3474</div>
         <code>                    bool
     <strong>nextDocumentPositionTax</strong>()
         </code>
@@ -8198,7 +8238,7 @@ You may use it together with OrderDocumentReader::getDocumentPositionTax</p>    
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionTax">
-        <div class="location">at         line 3505</div>
+        <div class="location">at         line 3519</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionTax</strong>(string|null $categoryCode, string|null $typeCode, float|null $rateApplicablePercent, float|null $calculatedAmount, string|null $exemptionReason, string|null $exemptionReasonCode)
         </code>
@@ -8217,49 +8257,36 @@ in the relevant invoice line</p>                                                
                     <tr>
                 <td>string|null</td>
                 <td>$categoryCode</td>
-                <td>Coded description of a sales tax category</p>
-
-<p>The following entries from UNTDID 5305 are used (details in brackets):
- - Standard rate (sales tax is due according to the normal procedure)
- - Goods to be taxed according to the zero rate (sales tax is charged with a percentage of zero)
- - Tax exempt (USt./IGIC/IPSI)
- - Reversal of the tax liability (the rules for reversing the tax liability at USt./IGIC/IPSI apply)
- - VAT exempt for intra-community deliveries of goods (USt./IGIC/IPSI not levied due to rules on intra-community deliveries)
- - Free export item, tax not levied (VAT / IGIC/IPSI not levied due to export outside the EU)
- - Services outside the tax scope (sales are not subject to VAT / IGIC/IPSI)
- - Canary Islands general indirect tax (IGIC tax applies)
- - IPSI (tax for Ceuta / Melilla) applies.</p>
-
-<p>The codes for the VAT category are as follows:
- - S = sales tax is due at the normal rate
- - Z = goods to be taxed according to the zero rate
- - E = tax exempt
- - AE = reversal of tax liability
- - K = VAT is not shown for intra-community deliveries
- - G = tax not levied due to export outside the EU
- - O = Outside the tax scope
- - L = IGIC (Canary Islands)
- - M = IPSI (Ceuta / Melilla)</td>
+                <td>Coded description of a sales tax category
+The code specifying the category to which this trade related tax, levy or duty applies, such as codes
+for "Exempt from Tax", "Standard Rate", "Free Export Item - Tax Not Charged". Reference United Nations Code List (UNCL) 5305.
+The following entries of UNTDID 5305  are used (further clarification between brackets):
+ - Standard rate (Liable for  TAX in a standard way)
+ - Zero rated goods (Liable for TAX with a percentage rate of zero)
+ - Exempt from tax
+ - VAT Reverse Charge (Reverse charge VAT/IGIC/IPSI rules apply)
+ - VAT exempt for intra community supply of goods (VAT/IGIC/IPSI not levied due to Intra-community supply rules)
+ - Free export item, tax not charged
+ - Services outside scope of tax (Sale is not subject to TAX)
+ - Canary Islands General Indirect Tax (Liable for IGIC tax)
+ - Liable for IPSI (Ceuta/Melilla tax)</td>
             </tr>
                     <tr>
                 <td>string|null</td>
                 <td>$typeCode</td>
-                <td>Coded description of a sales tax category. Note: Fixed value = "VAT"
-In EN 16931 only the tax type “sales tax” with the code “VAT” is supported. If other types of tax are
-to be specified, such as an insurance tax or a mineral oil tax, the EXTENDED profile must be used. The
-code for the tax type must then be taken from the code list UNTDID 5153.</td>
+                <td>The code specifying the type of trade related tax, levy or duty, such as a code for a Value Added Tax (VAT).
+Reference United Nations Code List (UNCL) 5153
+Value = VAT for VAT, ENV for Environmental, EXC for excise duty</td>
             </tr>
                     <tr>
                 <td>float|null</td>
                 <td>$rateApplicablePercent</td>
-                <td>The VAT rate applicable to the item invoiced and expressed as a percentage. Note: The code of the sales
-tax category and the category-specific sales tax rate  must correspond to one another. The value to be
-given is the percentage. For example, the value 20 is given for 20% (and not 0.2)</td>
+                <td>The VAT rate, represented as percentage that applies to the ordered item.</td>
             </tr>
                     <tr>
                 <td>float|null</td>
                 <td>$calculatedAmount</td>
-                <td>Tax amount. Information only for taxes that are not VAT.</td>
+                <td>A monetary value resulting from the calculation of this trade related tax, levy or duty.</td>
             </tr>
                     <tr>
                 <td>string|null</td>
@@ -8292,7 +8319,7 @@ and maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionAllowanceCharge">
-        <div class="location">at         line 3530</div>
+        <div class="location">at         line 3544</div>
         <code>                    bool
     <strong>firstDocumentPositionAllowanceCharge</strong>()
         </code>
@@ -8324,7 +8351,7 @@ You may use it together with OrderDocumentReader::getDocumentPositionAllowanceCh
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionAllowanceCharge">
-        <div class="location">at         line 3549</div>
+        <div class="location">at         line 3563</div>
         <code>                    bool
     <strong>nextDocumentPositionAllowanceCharge</strong>()
         </code>
@@ -8356,9 +8383,9 @@ You may use it together with OrderDocumentReader::getDocumentPositionAllowanceCh
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionAllowanceCharge">
-        <div class="location">at         line 3640</div>
+        <div class="location">at         line 3596</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
-    <strong>getDocumentPositionAllowanceCharge</strong>(float|null $actualAmount, bool|null $isCharge, float|null $calculationPercent, float|null $basisAmount, string|null $reason, string|null $taxTypeCode, string|null $taxCategoryCode, float|null $rateApplicablePercent, float|null $sequence, float|null $basisQuantity, string|null $basisQuantityUnitCode, string|null $reasonCode)
+    <strong>getDocumentPositionAllowanceCharge</strong>(float|null $actualAmount, bool|null $isCharge, float|null $calculationPercent, float|null $basisAmount, string|null $reasonCode, string|null $reason)
         </code>
     </h3>
     <div class="details">
@@ -8366,7 +8393,7 @@ You may use it together with OrderDocumentReader::getDocumentPositionAllowanceCh
     
 
                     <div class="method-description">
-                                    <p>Detailed information on currentley seeked surcharges and discounts on position level</p>                                                </div>
+                                    <p>Get surcharges and discounts on position level</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
@@ -8374,112 +8401,36 @@ You may use it together with OrderDocumentReader::getDocumentPositionAllowanceCh
                     <tr>
                 <td>float|null</td>
                 <td>$actualAmount</td>
-                <td>The surcharge / discount amount excluding sales tax</td>
+                <td>The amount of an allowance, without VAT.</td>
             </tr>
                     <tr>
                 <td>bool|null</td>
                 <td>$isCharge</td>
-                <td>Switch that indicates whether the following data refer to an allowance or a discount,
-true means that</td>
+                <td>Indicator indicating whether the following data is for a charge or an allowance.</td>
             </tr>
                     <tr>
                 <td>float|null</td>
                 <td>$calculationPercent</td>
-                <td>The percentage that may be used in conjunction with the base invoice line discount
-amount to calculate the invoice line discount amount</td>
+                <td>The percentage that may be used, in conjunction with the order line allowance base amount,
+to calculate the order line allowance amount.</td>
             </tr>
                     <tr>
                 <td>float|null</td>
                 <td>$basisAmount</td>
-                <td>The base amount that may be used in conjunction with the invoice line discount percentage
-to calculate the invoice line discount amount</td>
-            </tr>
-                    <tr>
-                <td>string|null</td>
-                <td>$reason</td>
-                <td>The reason given in text form for the invoice item discount/surcharge</p>
-
-<p><strong>Notes</strong>
- - The invoice line discount reason code (BT-140) and the invoice line discount reason
-   (BT-139) must show the same allowance type.
- - Each line item discount (BG-27) must include a corresponding line discount reason
-   (BT-139) or an appropriate line discount reason code (BT-140), or both.
- - The code for the reason for the charge at the invoice line level (BT-145) and the
-   reason for the invoice line discount (BT-144) must show the same discount type</td>
-            </tr>
-                    <tr>
-                <td>string|null</td>
-                <td>$taxTypeCode</td>
-                <td>Not used, this is only a dummy</td>
-            </tr>
-                    <tr>
-                <td>string|null</td>
-                <td>$taxCategoryCode</td>
-                <td>Not used, this is only a dummy</td>
-            </tr>
-                    <tr>
-                <td>float|null</td>
-                <td>$rateApplicablePercent</td>
-                <td>Not used, this is only a dummy</td>
-            </tr>
-                    <tr>
-                <td>float|null</td>
-                <td>$sequence</td>
-                <td>Not used, this is only a dummy</td>
-            </tr>
-                    <tr>
-                <td>float|null</td>
-                <td>$basisQuantity</td>
-                <td>Not used, this is only a dummy</td>
-            </tr>
-                    <tr>
-                <td>string|null</td>
-                <td>$basisQuantityUnitCode</td>
-                <td>Not used, this is only a dummy</td>
+                <td>The base amount that may be used, in conjunction with the order line allowance percentage,
+to calculate the order line allowance amount.</td>
             </tr>
                     <tr>
                 <td>string|null</td>
                 <td>$reasonCode</td>
-                <td>The reason given as a code for the invoice line discount</p>
-
-<p><strong>Notes</strong>
- - Use entries from the UNTDID 5189 code list (discounts) or the UNTDID 7161 code list
-   (surcharges). The invoice line discount reason code and the invoice line discount reason must
-   match.
- - In the case of a discount, the code list UNTDID 5189 must be used.
- - In the event of a surcharge, the code list UNTDID 7161 must be used.</p>
-
-<p>In particular, the following codes can be used:
- - AA = Advertising
- - ABL = Additional packaging
- - ADR = Other services
- - ADT = Pick-up
- - FC = Freight service
- - FI = Financing
- - LA = Labelling</p>
-
-<p>Include PEPPOL subset:
- - 41 - Bonus for works ahead of schedule
- - 42 - Other bonus
- - 60 - Manufacturer’s consumer discount
- - 62 - Due to military status
- - 63 - Due to work accident
- - 64 - Special agreement
- - 65 - Production error discount
- - 66 - New outlet discount
- - 67 - Sample discount
- - 68 - End-of-range discount
- - 70 - Incoterm discount
- - 71 - Point of sales threshold allowance
- - 88 - Material surcharge/deduction
- - 95 - Discount
- - 100 - Special rebate
- - 102 - Fixed long term
- - 103 - Temporary
- - 104 - Standard
- - 105 - Yearly turnover</p>
-
-<p>Codelists: UNTDID 7161 (Complete list), UNTDID 5189 (Restricted)</td>
+                <td>The reason for the order line allowance, expressed as a code.
+Use entries of the UNTDID 5189 code list. The order line level allowance reason code and the order
+line level allowance reason shall indicate the same allowance reason.</td>
+            </tr>
+                    <tr>
+                <td>string|null</td>
+                <td>$reason</td>
+                <td>The reason for the order line allowance, expressed as text.</td>
             </tr>
             </table>
 
@@ -8501,7 +8452,7 @@ to calculate the invoice line discount amount</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionLineSummation">
-        <div class="location">at         line 3677</div>
+        <div class="location">at         line 3625</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionLineSummation</strong>(float|null $lineTotalAmount, float|null $totalAllowanceChargeAmount)
         </code>
@@ -8519,14 +8470,14 @@ to calculate the invoice line discount amount</td>
                     <tr>
                 <td>float|null</td>
                 <td>$lineTotalAmount</td>
-                <td>The total amount of the invoice item.
-<strong>Note:</strong> This is the "net" amount, that is, excluding sales tax, but including all surcharges
-and discounts applicable to the item level, as well as other taxes.</td>
+                <td>The total amount of the order line.
+The amount is “net” without VAT, i.e. inclusive of line level allowances and charges as well as other relevant taxes.</td>
             </tr>
                     <tr>
                 <td>float|null</td>
                 <td>$totalAllowanceChargeAmount</td>
-                <td>Total amount of item surcharges and discounts</td>
+                <td>A monetary value of a total allowance and charge reported in this trade settlement line monetary summation.
+The amount is “net” without VAT, i.e. inclusive of line level allowances and charges as well as other relevant taxes.</td>
             </tr>
             </table>
 
@@ -8548,7 +8499,7 @@ and discounts applicable to the item level, as well as other taxes.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionReceivableTradeAccountingAccount">
-        <div class="location">at         line 3698</div>
+        <div class="location">at         line 3646</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionReceivableTradeAccountingAccount</strong>(string|null $id, string|null $typeCode)
         </code>
@@ -8558,7 +8509,7 @@ and discounts applicable to the item level, as well as other taxes.</td>
     
 
                     <div class="method-description">
-                                    <p>Get an AccountingAccount on item level</p>                                                </div>
+                                    <p>Set an AccountingAccount on position level</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 

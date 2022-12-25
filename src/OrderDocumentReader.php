@@ -2391,6 +2391,7 @@ class OrderDocumentReader extends OrderDocument
         $this->positionRequestedDeliverySupplyChainEventPointer = 0;
 
         $tradeLineItem = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+
         return isset($tradeLineItem[$this->positionPointer]);
     }
 
@@ -2417,6 +2418,7 @@ class OrderDocumentReader extends OrderDocument
         $this->positionRequestedDeliverySupplyChainEventPointer = 0;
 
         $tradeLineItem = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+
         return isset($tradeLineItem[$this->positionPointer]);
     }
 
@@ -2443,8 +2445,8 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Seek to the first document position
-     * Returns true if the first position is available, otherwise false
+     * Seek to the first document position note
+     * Returns true if the first note (at line level) is available, otherwise false
      * You may use it together with getDocumentPositionNote
      *
      * @return boolean
@@ -2462,8 +2464,8 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Seek to the next document position
-     * Returns true if the first position is available, otherwise false
+     * Seek to the next document position note
+     * Returns true if there is one more note (at line level) available, otherwise false
      * You may use it together with getDocumentPositionNote
      *
      * @return boolean
@@ -2507,19 +2509,16 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get information about the goods and services billed
+     * Get product details to the last retrieved position (line) in the document
      *
      * @param string|null $name
      * A name of the item (item name)
      * @param string|null $description
-     * A description of the item, the item description makes it possible to describe the item and its
-     * properties in more detail than is possible with the item name.
+     * A textual description of a use of this item.
      * @param string|null $sellerAssignedID
      * An identifier assigned to the item by the seller
      * @param string|null $buyerAssignedID
-     * An identifier assigned to the item by the buyer. The article number of the buyer is a clear,
-     * bilaterally agreed identification of the product. It can, for example, be the customer article
-     * number or the article number assigned by the manufacturer.
+     * An identifier, assigned by the Buyer, for the item.
      * @param array|null $globalID
      * Array of the sellers global ids indexed by the identification scheme. The identification scheme results
      * from the list published by the ISO/IEC 6523 Maintenance Agency.
@@ -2567,7 +2566,7 @@ class OrderDocumentReader extends OrderDocument
 
     /**
      * Seek to the next document position product characteristic
-     * Returns true if the next position is available, otherwise false
+     * Returns true if the next position product characteristic is available, otherwise false
      * You may use it together with getDocumentPositionProductCharacteristic
      *
      * @return boolean
@@ -2657,19 +2656,20 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get (single) detailed information on product classification
+     * Get detailed information on product classification
      *
      * @param string $classCode
-     * A code for classifying the item by type or nature or essence or condition.
-     * __Note__: Classification codes are used to group similar items for different purposes, such as public
-     * procurement (using the Common Procurement Vocabulary [CPV]), e-commerce (UNSPSC), etc.
+     * A code for classifying the item by its type or nature.
+     * Classification codes are used to allow grouping of similar items for a various purposes e.g.
+     * public procurement (CPV), e-Commerce (UNSPSC) etc. The identification scheme shall be chosen
+     * from the entries in UNTDID 7143
      * @param string|null $className
-     * Classification name
+     * A class name, expressed as text, for this product classification
      * @param string|null $listID
-     * The identifier for the identification scheme of the identifier of the article classification
-     * __Note__: The identification scheme must be selected from the entries from UNTDID 7143.
+     * The identification scheme identifier of Item classification identifier
+     * Identification scheme must be chosen among the values available in UNTDID 7143
      * @param string|null $listVersionID
-     * The version of the identification scheme
+     * Scheme version identifier
      * @return OrderDocumentReader
      */
     public function getDocumentPositionProductClassification(?string &$classCode, ?string &$className, ?string &$listID, ?string &$listVersionID): OrderDocumentReader
@@ -2754,7 +2754,8 @@ class OrderDocumentReader extends OrderDocument
      * Get the supply chain packaging information
      *
      * @param string|null $typeCode
-     * The code specifying the type of supply chain packaging. To be chosen from the entries in UNTDID 7065.
+     * The code specifying the type of supply chain packaging.
+     * To be chosen from the entries in UNTDID 7065
      * @param float|null $width
      * The measure of the width component of this spatial dimension.
      * @param string|null $widthUnitCode
@@ -2769,7 +2770,7 @@ class OrderDocumentReader extends OrderDocument
      * Unit Code of the measure of the Height component of this spatial dimension.
      * @return OrderDocumentReader
      */
-    public function getDocumentPositionApplicableSupplyChainPackaging(?string &$typeCode, ?float &$width, ?string &$widthUnitCode, ?float &$length, ?string &$lengthUnitCode, ?float &$height, ?string &$heightUnitCode): OrderDocumentReader
+    public function getDocumentPositionSupplyChainPackaging(?string &$typeCode, ?float &$width, ?string &$widthUnitCode, ?float &$length, ?string &$lengthUnitCode, ?float &$height, ?string &$heightUnitCode): OrderDocumentReader
     {
         $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
         $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
@@ -2786,12 +2787,12 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get the detailed information on the product origin
+     * Get information on the product origin
      *
      * @param string $country
-     * The code indicating the country the goods came from
-     * __Note__: The lists of approved countries are maintained by the EN ISO 3166-1 Maintenance
-     * Agency “Codes for the representation of names of countries and their subdivisions”.
+     * The code identifying the country from which the item originates.
+     * The lists of valid countries are registered with the EN ISO 3166-1 Maintenance agency, “Codes for the
+     * representation of names of countries and their subdivisions”.
      * @return OrderDocumentReader
      */
     public function getDocumentPositionProductOriginTradeCountry(?string &$country): OrderDocumentReader
@@ -2849,6 +2850,7 @@ class OrderDocumentReader extends OrderDocument
      * The unique issuer assigned identifier for this referenced document.
      * @param string|null $typecode
      * The code specifying the type of referenced document.
+     * To be chosen from the entries in UNTDID 1001
      * @param string|null $uriid
      * The unique Uniform Resource Identifier (URI) for this referenced document.
      * @param string|null $lineid
@@ -2951,19 +2953,52 @@ class OrderDocumentReader extends OrderDocument
         $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
         $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
 
-        $addRefDocs = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getAdditionalReferencedDocument", []));
-        $addRefDoc = $this->objectHelper->getArrayIndex($addRefDocs, $this->positionAddRefDocPointer);
+        $additionalDocuments = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getAdditionalReferencedDocument", []));
+        $additionalDocument = $this->objectHelper->getArrayIndex($additionalDocuments, $this->positionAddRefDocPointer);
 
-        $issuerassignedid = $this->getInvoiceValueByPathFrom($addRefDoc, "getIssuerAssignedID", "");
-        $typecode = $this->getInvoiceValueByPathFrom($addRefDoc, "getTypeCode", "");
-        $uriid = $this->getInvoiceValueByPathFrom($addRefDoc, "getURIID", "");
-        $lineid = $this->getInvoiceValueByPathFrom($addRefDoc, "getLineID.value", "");
-        $name = $this->getInvoiceValueByPathFrom($addRefDoc, "getName", "");
-        $reftypecode = $this->getInvoiceValueByPathFrom($addRefDoc, "getReferenceTypeCode", "");
+        $issuerassignedid = $this->getInvoiceValueByPathFrom($additionalDocument, "getIssuerAssignedID", "");
+        $typecode = $this->getInvoiceValueByPathFrom($additionalDocument, "getTypeCode", "");
+        $uriid = $this->getInvoiceValueByPathFrom($additionalDocument, "getURIID", "");
+        $lineid = $this->getInvoiceValueByPathFrom($additionalDocument, "getLineID.value", "");
+        $name = $this->getInvoiceValueByPathFrom($additionalDocument, "getName", "");
+        $reftypecode = $this->getInvoiceValueByPathFrom($additionalDocument, "getReferenceTypeCode", "");
         $issueddate = $this->objectHelper->toDateTime(
-            $this->getInvoiceValueByPathFrom($addRefDoc, 'getFormattedIssueDateTime.getDateTimeString', ''),
-            $this->getInvoiceValueByPathFrom($addRefDoc, 'getFormattedIssueDateTime.getDateTimeString.getFormat', '')
+            $this->getInvoiceValueByPathFrom($additionalDocument, 'getFormattedIssueDateTime.getDateTimeString', ''),
+            $this->getInvoiceValueByPathFrom($additionalDocument, 'getFormattedIssueDateTime.getDateTimeString.getFormat', '')
         );
+
+        return $this;
+    }
+
+    /**
+     * Get the binary data of an additional Document reference on a position
+     *
+     * @param string|null $binarydatafilename
+     * The fuill-qualified filename where the data where stored. If no binary data are
+     * available, this value will be empty
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionAdditionalReferencedDocumentBinaryData(?string &$binarydatafilename): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $additionalDocuments = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getAdditionalReferencedDocument", []));
+        $additionalDocument = $this->objectHelper->getArrayIndex($additionalDocuments, $this->positionAddRefDocPointer);
+
+        $binarydatafilename = $this->getInvoiceValueByPathFrom($additionalDocument, "getAttachmentBinaryObject.getFilename", "");
+        $binarydata = $this->getInvoiceValueByPathFrom($additionalDocument, "getAttachmentBinaryObject.value", "");
+
+        if (
+            StringUtils::stringIsNullOrEmpty($binarydatafilename) === false &&
+            StringUtils::stringIsNullOrEmpty($binarydata) === false &&
+            StringUtils::stringIsNullOrEmpty($this->binarydatadirectory) === false
+        ) {
+            $binarydatafilename = PathUtils::combinePathWithFile($this->binarydatadirectory, $binarydatafilename);
+            FileUtils::base64ToFile($binarydata, $binarydatafilename);
+        } else {
+            $binarydatafilename = "";
+        }
 
         return $this;
     }
@@ -2992,7 +3027,7 @@ class OrderDocumentReader extends OrderDocument
      * @param string|null $quotationRefId
      * The quotation document referenced in this line trade agreement
      * @param string|null $quotationRefLineId
-     * The unique identifier of a line in this Quotation referenced document.
+     * The unique identifier of a line in this Quotation referenced document
      * @param DateTime|null $quotationRefDate
      * The formatted date or date time for the issuance of this referenced Quotation.
      * @return OrderDocumentReader
@@ -3038,8 +3073,8 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Seek to the first documents position gross price allowance charge position
-     * Returns true if the first position is available, otherwise false
+     * Seek to the first documents position gross price allowance/charge position
+     * Returns true if the first gross price allowance/charge position is available, otherwise false
      * You may use it together with getDocumentPositionGrossPriceAllowanceCharge
      *
      * @return boolean
@@ -3057,8 +3092,8 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Seek to the next documents position gross price allowance charge position
-     * Returns true if a other position is available, otherwise false
+     * Seek to the next documents position gross price allowance/charge position
+     * Returns true if a other gross price allowance/charge position is available, otherwise false
      * You may use it together with getDocumentPositionGrossPriceAllowanceCharge
      *
      * @return boolean
@@ -3126,20 +3161,22 @@ class OrderDocumentReader extends OrderDocument
     /**
      * Get detailed information on the net price of the item
      *
-     * @param float|null $amount
-     * Net price of the item
+     * @param float $chargeAmount
+     * The price of an item, exclusive of VAT, after subtracting item price discount.
+     * The Item net price has to be equal with the Item gross price less the Item price discount.
      * @param float|null $basisQuantity
-     * Base quantity at the item price
+     * The number of item units to which the price applies.
      * @param string|null $basisQuantityUnitCode
-     * Code of the unit of measurement of the base quantity at the item price
+     * The unit of measure that applies to the Item price base quantity.
+     * The Item price base quantity unit of measure shall be the same as the requested quantity unit of measure.
      * @return OrderDocumentReader
      */
-    public function getDocumentPositionNetPrice(?float &$amount, ?float &$basisQuantity, ?string &$basisQuantityUnitCode): OrderDocumentReader
+    public function getDocumentPositionNetPrice(?float &$chargeAmount, ?float &$basisQuantity, ?string &$basisQuantityUnitCode): OrderDocumentReader
     {
         $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
         $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
 
-        $amount = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getNetPriceProductTradePrice.getChargeAmount.value", 0.0);
+        $chargeAmount = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getNetPriceProductTradePrice.getChargeAmount.value", 0.0);
         $basisQuantity = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getNetPriceProductTradePrice.getBasisQuantity.value", 0.0);
         $basisQuantityUnitCode = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getNetPriceProductTradePrice.getBasisQuantity.getUnitCode", "");
 
@@ -3149,41 +3186,28 @@ class OrderDocumentReader extends OrderDocument
     /**
      * Tax included for B2C on position level
      *
-     * @param string|null $categoryCode
+     * @param string $categoryCode
      * Coded description of a sales tax category
-     *
-     * The following entries from UNTDID 5305 are used (details in brackets):
-     *  - Standard rate (sales tax is due according to the normal procedure)
-     *  - Goods to be taxed according to the zero rate (sales tax is charged with a percentage of zero)
-     *  - Tax exempt (USt./IGIC/IPSI)
-     *  - Reversal of the tax liability (the rules for reversing the tax liability at USt./IGIC/IPSI apply)
-     *  - VAT exempt for intra-community deliveries of goods (USt./IGIC/IPSI not levied due to rules on intra-community deliveries)
-     *  - Free export item, tax not levied (VAT / IGIC/IPSI not levied due to export outside the EU)
-     *  - Services outside the tax scope (sales are not subject to VAT / IGIC/IPSI)
-     *  - Canary Islands general indirect tax (IGIC tax applies)
-     *  - IPSI (tax for Ceuta / Melilla) applies.
-     *
-     * The codes for the VAT category are as follows:
-     *  - S = sales tax is due at the normal rate
-     *  - Z = goods to be taxed according to the zero rate
-     *  - E = tax exempt
-     *  - AE = reversal of tax liability
-     *  - K = VAT is not shown for intra-community deliveries
-     *  - G = tax not levied due to export outside the EU
-     *  - O = Outside the tax scope
-     *  - L = IGIC (Canary Islands)
-     *  - M = IPSI (Ceuta / Melilla)
-     * @param string|null $typeCode
-     * Coded description of a sales tax category. Note: Fixed value = "VAT"
+     * The code specifying the category to which this trade related tax, levy or duty applies, such as codes
+     * for "Exempt from Tax", "Standard Rate", "Free Export Item - Tax Not Charged". Reference United Nations Code List (UNCL) 5305.
+     * The following entries of UNTDID 5305  are used (further clarification between brackets):
+     *  - Standard rate (Liable for  TAX in a standard way)
+     *  - Zero rated goods (Liable for TAX with a percentage rate of zero)
+     *  - Exempt from tax
+     *  - VAT Reverse Charge (Reverse charge VAT/IGIC/IPSI rules apply)
+     *  - VAT exempt for intra community supply of goods (VAT/IGIC/IPSI not levied due to Intra-community supply rules)
+     *  - Free export item, tax not charged
+     *  - Services outside scope of tax (Sale is not subject to TAX)
+     *  - Canary Islands General Indirect Tax (Liable for IGIC tax)
+     *  - Liable for IPSI (Ceuta/Melilla tax)
+     * @param string $typeCode
+     * The code specifying the type of trade related tax, levy or duty, such as a code for a Value Added Tax (VAT).
+     * Reference United Nations Code List (UNCL) 5153
+     * Value = VAT for VAT, ENV for Environmental, EXC for excise duty
      * @param float|null $rateApplicablePercent
-     * The sales tax rate, expressed as the percentage applicable to the sales tax category in
-     * question. Note: The code of the sales tax category and the category-specific sales tax rate
-     * must correspond to one another. The value to be given is the percentage. For example, the
-     * value 20 is given for 20% (and not 0.2)
+     * The VAT rate, represented as percentage that applies to the ordered item.
      * @param float|null $calculatedAmount
-     * The total amount to be paid for the relevant VAT category. Note: Calculated by multiplying
-     * the amount to be taxed according to the sales tax category by the sales tax rate applicable
-     * for the sales tax category concerned
+     * A monetary value resulting from the calculation of this trade related tax, levy or duty.
      * @param string|null $exemptionReason
      * Reason for tax exemption (free text)
      * @param string|null $exemptionReasonCode
@@ -3236,7 +3260,7 @@ class OrderDocumentReader extends OrderDocument
      * Get details of a blanket order referenced document on position-level
      *
      * @param string $blanketOrderRefLineId
-     * The unique identifier of a line in the Blanketl Order referenced document
+     * The unique identifier of a line in the Blanket Order referenced document
      * @return OrderDocumentReader
      */
     public function getDocumentPositionBlanketOrderReferencedDocument(?string &$blanketOrderRefLineId): OrderDocumentReader
@@ -3390,8 +3414,11 @@ class OrderDocumentReader extends OrderDocument
      * Get the requested date or period on which delivery is requested (on position level)
      *
      * @param DateTime|null $occurrenceDateTime
+     * A Requested Date on which Delivery is requested
      * @param DateTime|null $startDateTime
+     * The Start Date of he Requested Period on which Delivery is requested
      * @param DateTime|null $endDateTime
+     * The End Date of he Requested Period on which Delivery is requested
      * @return OrderDocumentReader
      */
     public function getDocumentPositionRequestedDeliverySupplyChainEvent(?DateTime &$occurrenceDateTime, ?DateTime &$startDateTime, ?DateTime &$endDateTime): OrderDocumentReader
@@ -3460,41 +3487,28 @@ class OrderDocumentReader extends OrderDocument
      * Get information about the sales tax that applies to the goods and services invoiced
      * in the relevant invoice line
      *
-     * @param string|null $categoryCode
+     * @param string $categoryCode
      * Coded description of a sales tax category
-     *
-     * The following entries from UNTDID 5305 are used (details in brackets):
-     *  - Standard rate (sales tax is due according to the normal procedure)
-     *  - Goods to be taxed according to the zero rate (sales tax is charged with a percentage of zero)
-     *  - Tax exempt (USt./IGIC/IPSI)
-     *  - Reversal of the tax liability (the rules for reversing the tax liability at USt./IGIC/IPSI apply)
-     *  - VAT exempt for intra-community deliveries of goods (USt./IGIC/IPSI not levied due to rules on intra-community deliveries)
-     *  - Free export item, tax not levied (VAT / IGIC/IPSI not levied due to export outside the EU)
-     *  - Services outside the tax scope (sales are not subject to VAT / IGIC/IPSI)
-     *  - Canary Islands general indirect tax (IGIC tax applies)
-     *  - IPSI (tax for Ceuta / Melilla) applies.
-     *
-     * The codes for the VAT category are as follows:
-     *  - S = sales tax is due at the normal rate
-     *  - Z = goods to be taxed according to the zero rate
-     *  - E = tax exempt
-     *  - AE = reversal of tax liability
-     *  - K = VAT is not shown for intra-community deliveries
-     *  - G = tax not levied due to export outside the EU
-     *  - O = Outside the tax scope
-     *  - L = IGIC (Canary Islands)
-     *  - M = IPSI (Ceuta / Melilla)
-     * @param string|null $typeCode
-     * Coded description of a sales tax category. Note: Fixed value = "VAT"
-     * In EN 16931 only the tax type “sales tax” with the code “VAT” is supported. If other types of tax are
-     * to be specified, such as an insurance tax or a mineral oil tax, the EXTENDED profile must be used. The
-     * code for the tax type must then be taken from the code list UNTDID 5153.
-     * @param float|null $rateApplicablePercent
-     * The VAT rate applicable to the item invoiced and expressed as a percentage. Note: The code of the sales
-     * tax category and the category-specific sales tax rate  must correspond to one another. The value to be
-     * given is the percentage. For example, the value 20 is given for 20% (and not 0.2)
+     * The code specifying the category to which this trade related tax, levy or duty applies, such as codes
+     * for "Exempt from Tax", "Standard Rate", "Free Export Item - Tax Not Charged". Reference United Nations Code List (UNCL) 5305.
+     * The following entries of UNTDID 5305  are used (further clarification between brackets):
+     *  - Standard rate (Liable for  TAX in a standard way)
+     *  - Zero rated goods (Liable for TAX with a percentage rate of zero)
+     *  - Exempt from tax
+     *  - VAT Reverse Charge (Reverse charge VAT/IGIC/IPSI rules apply)
+     *  - VAT exempt for intra community supply of goods (VAT/IGIC/IPSI not levied due to Intra-community supply rules)
+     *  - Free export item, tax not charged
+     *  - Services outside scope of tax (Sale is not subject to TAX)
+     *  - Canary Islands General Indirect Tax (Liable for IGIC tax)
+     *  - Liable for IPSI (Ceuta/Melilla tax)
+     * @param string $typeCode
+     * The code specifying the type of trade related tax, levy or duty, such as a code for a Value Added Tax (VAT).
+     * Reference United Nations Code List (UNCL) 5153
+     * Value = VAT for VAT, ENV for Environmental, EXC for excise duty
+     * @param float $rateApplicablePercent
+     * The VAT rate, represented as percentage that applies to the ordered item.
      * @param float|null $calculatedAmount
-     * Tax amount. Information only for taxes that are not VAT.
+     * A monetary value resulting from the calculation of this trade related tax, levy or duty.
      * @param string|null $exemptionReason
      * Reason for tax exemption (free text)
      * @param string|null $exemptionReasonCode
@@ -3559,85 +3573,27 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Detailed information on currentley seeked surcharges and discounts on position level
+     * Get surcharges and discounts on position level
      *
-     * @param float|null $actualAmount
-     * The surcharge / discount amount excluding sales tax
-     * @param boolean|null $isCharge
-     * Switch that indicates whether the following data refer to an allowance or a discount,
-     * true means that
+     * @param float $actualAmount
+     * The amount of an allowance, without VAT.
+     * @param boolean $isCharge
+     * Indicator indicating whether the following data is for a charge or an allowance.
      * @param float|null $calculationPercent
-     * The percentage that may be used in conjunction with the base invoice line discount
-     * amount to calculate the invoice line discount amount
+     * The percentage that may be used, in conjunction with the order line allowance base amount,
+     * to calculate the order line allowance amount.
      * @param float|null $basisAmount
-     * The base amount that may be used in conjunction with the invoice line discount percentage
-     * to calculate the invoice line discount amount
-     * @param string|null $reason
-     * The reason given in text form for the invoice item discount/surcharge
-     *
-     * __Notes__
-     *  - The invoice line discount reason code (BT-140) and the invoice line discount reason
-     *    (BT-139) must show the same allowance type.
-     *  - Each line item discount (BG-27) must include a corresponding line discount reason
-     *    (BT-139) or an appropriate line discount reason code (BT-140), or both.
-     *  - The code for the reason for the charge at the invoice line level (BT-145) and the
-     *    reason for the invoice line discount (BT-144) must show the same discount type
-     * @param string|null $taxTypeCode
-     * Not used, this is only a dummy
-     * @param string|null $taxCategoryCode
-     * Not used, this is only a dummy
-     * @param float|null $rateApplicablePercent
-     * Not used, this is only a dummy
-     * @param float|null $sequence
-     * Not used, this is only a dummy
-     * @param float|null $basisQuantity
-     * Not used, this is only a dummy
-     * @param string|null $basisQuantityUnitCode
-     * Not used, this is only a dummy
+     * The base amount that may be used, in conjunction with the order line allowance percentage,
+     * to calculate the order line allowance amount.
      * @param string|null $reasonCode
-     * The reason given as a code for the invoice line discount
-     *
-     * __Notes__
-     *  - Use entries from the UNTDID 5189 code list (discounts) or the UNTDID 7161 code list
-     *    (surcharges). The invoice line discount reason code and the invoice line discount reason must
-     *    match.
-     *  - In the case of a discount, the code list UNTDID 5189 must be used.
-     *  - In the event of a surcharge, the code list UNTDID 7161 must be used.
-     *
-     * In particular, the following codes can be used:
-     *  - AA = Advertising
-     *  - ABL = Additional packaging
-     *  - ADR = Other services
-     *  - ADT = Pick-up
-     *  - FC = Freight service
-     *  - FI = Financing
-     *  - LA = Labelling
-     *
-     * Include PEPPOL subset:
-     *  - 41 - Bonus for works ahead of schedule
-     *  - 42 - Other bonus
-     *  - 60 - Manufacturer’s consumer discount
-     *  - 62 - Due to military status
-     *  - 63 - Due to work accident
-     *  - 64 - Special agreement
-     *  - 65 - Production error discount
-     *  - 66 - New outlet discount
-     *  - 67 - Sample discount
-     *  - 68 - End-of-range discount
-     *  - 70 - Incoterm discount
-     *  - 71 - Point of sales threshold allowance
-     *  - 88 - Material surcharge/deduction
-     *  - 95 - Discount
-     *  - 100 - Special rebate
-     *  - 102 - Fixed long term
-     *  - 103 - Temporary
-     *  - 104 - Standard
-     *  - 105 - Yearly turnover
-     *
-     * Codelists: UNTDID 7161 (Complete list), UNTDID 5189 (Restricted)
+     * The reason for the order line allowance, expressed as a code.
+     * Use entries of the UNTDID 5189 code list. The order line level allowance reason code and the order
+     * line level allowance reason shall indicate the same allowance reason.
+     * @param string|null $reason
+     * The reason for the order line allowance, expressed as text.
      * @return OrderDocumentReader
      */
-    public function getDocumentPositionAllowanceCharge(?float &$actualAmount, ?bool &$isCharge, ?float &$calculationPercent, ?float &$basisAmount, ?string &$reason, ?string &$taxTypeCode, ?string &$taxCategoryCode, ?float &$rateApplicablePercent, ?float &$sequence, ?float &$basisQuantity, ?string &$basisQuantityUnitCode, ?string &$reasonCode): OrderDocumentReader
+    public function getDocumentPositionAllowanceCharge(?float &$actualAmount, ?bool &$isCharge, ?float &$calculationPercent, ?float &$basisAmount, ?string &$reasonCode, ?string &$reason): OrderDocumentReader
     {
         $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
         $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
@@ -3652,26 +3608,18 @@ class OrderDocumentReader extends OrderDocument
         $reasonCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getReasonCode", "");
         $reason = $this->getInvoiceValueByPathFrom($allowanceCharge, "getReason", "");
 
-        $taxTypeCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getCategoryTradeTax.getTypeCode", "");
-        $taxCategoryCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getCategoryTradeTax.getCategoryCode", "");
-        $rateApplicablePercent = $this->getInvoiceValueByPathFrom($allowanceCharge, "getCategoryTradeTax.getRateApplicablePercent.value", 0.0);
-
-        $sequence = $this->getInvoiceValueByPathFrom($allowanceCharge, "getSequenceNumeric.value", 0.0);
-        $basisQuantity = $this->getInvoiceValueByPathFrom($allowanceCharge, "getBasisQuantity.value", 0.0);
-        $basisQuantityUnitCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getBasisQuantity.getUnitCode", "");
-
         return $this;
     }
 
     /**
      * Get detailed information on item totals
      *
-     * @param float|null $lineTotalAmount
-     * The total amount of the invoice item.
-     * __Note:__ This is the "net" amount, that is, excluding sales tax, but including all surcharges
-     * and discounts applicable to the item level, as well as other taxes.
+     * @param float $lineTotalAmount
+     * The total amount of the order line.
+     * The amount is “net” without VAT, i.e. inclusive of line level allowances and charges as well as other relevant taxes.
      * @param float|null $totalAllowanceChargeAmount
-     * Total amount of item surcharges and discounts
+     * A monetary value of a total allowance and charge reported in this trade settlement line monetary summation.
+     * The amount is “net” without VAT, i.e. inclusive of line level allowances and charges as well as other relevant taxes.
      * @return OrderDocumentReader
      */
     public function getDocumentPositionLineSummation(?float &$lineTotalAmount, ?float &$totalAllowanceChargeAmount): OrderDocumentReader
@@ -3686,7 +3634,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get an AccountingAccount on item level
+     * Set an AccountingAccount on position level
      *
      * @param string $id
      * The unique identifier for this trade accounting account.

@@ -2044,7 +2044,7 @@ class OrderDocumentReaderExtendedTest extends TestCase
     public function testGetDocumentPositionApplicableSupplyChainPackagingPos1(): void
     {
         self::$document->firstDocumentPosition();
-        self::$document->getDocumentPositionApplicableSupplyChainPackaging(
+        self::$document->getDocumentPositionSupplyChainPackaging(
             $typeCode,
             $width,
             $widthUnitCode,
@@ -2070,7 +2070,7 @@ class OrderDocumentReaderExtendedTest extends TestCase
     public function testGetDocumentPositionApplicableSupplyChainPackagingPos2(): void
     {
         self::$document->nextDocumentPosition();
-        self::$document->getDocumentPositionApplicableSupplyChainPackaging(
+        self::$document->getDocumentPositionSupplyChainPackaging(
             $typeCode,
             $width,
             $widthUnitCode,
@@ -2096,7 +2096,7 @@ class OrderDocumentReaderExtendedTest extends TestCase
     public function testGetDocumentPositionApplicableSupplyChainPackagingPos3(): void
     {
         self::$document->nextDocumentPosition();
-        self::$document->getDocumentPositionApplicableSupplyChainPackaging(
+        self::$document->getDocumentPositionSupplyChainPackaging(
             $typeCode,
             $width,
             $widthUnitCode,
@@ -3296,14 +3296,8 @@ class OrderDocumentReaderExtendedTest extends TestCase
             $isCharge,
             $calculationPercent,
             $basisAmount,
-            $reason,
-            $taxTypeCode,
-            $taxCategoryCode,
-            $rateApplicablePercent,
-            $sequence,
-            $basisQuantity,
-            $basisQuantityUnitCode,
-            $reasonCode
+            $reasonCode,
+            $reason
         );
 
         $this->assertEquals(6.00, $actualAmount);
@@ -3311,13 +3305,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals(10.00, $calculationPercent);
         $this->assertEquals(60.00, $basisAmount);
         $this->assertEquals("SPECIAL AGREEMENT", $reason);
-        $this->assertEquals("", $taxTypeCode);
-        $this->assertEquals("", $taxCategoryCode);
-        $this->assertEquals(0.00, $rateApplicablePercent);
-        $this->assertEquals(0.00, $sequence);
-        $this->assertEquals(0.00, $basisQuantity);
-        $this->assertEquals("", $basisQuantityUnitCode);
-        $this->assertEquals("64", $reasonCode);
 
         self::$document->nextDocumentPositionAllowanceCharge();
         self::$document->getDocumentPositionAllowanceCharge(
@@ -3325,14 +3312,8 @@ class OrderDocumentReaderExtendedTest extends TestCase
             $isCharge,
             $calculationPercent,
             $basisAmount,
-            $reason,
-            $taxTypeCode,
-            $taxCategoryCode,
-            $rateApplicablePercent,
-            $sequence,
-            $basisQuantity,
-            $basisQuantityUnitCode,
-            $reasonCode
+            $reasonCode,
+            $reason
         );
 
         $this->assertEquals(6.00, $actualAmount);
@@ -3340,12 +3321,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals(10.00, $calculationPercent);
         $this->assertEquals(60.00, $basisAmount);
         $this->assertEquals("FREIGHT SERVICES", $reason);
-        $this->assertEquals("", $taxTypeCode);
-        $this->assertEquals("", $taxCategoryCode);
-        $this->assertEquals(0.00, $rateApplicablePercent);
-        $this->assertEquals(0.00, $sequence);
-        $this->assertEquals(0.00, $basisQuantity);
-        $this->assertEquals("", $basisQuantityUnitCode);
         $this->assertEquals("FC", $reasonCode);
     }
 
@@ -3362,14 +3337,8 @@ class OrderDocumentReaderExtendedTest extends TestCase
             $isCharge,
             $calculationPercent,
             $basisAmount,
-            $reason,
-            $taxTypeCode,
-            $taxCategoryCode,
-            $rateApplicablePercent,
-            $sequence,
-            $basisQuantity,
-            $basisQuantityUnitCode,
-            $reasonCode
+            $reasonCode,
+            $reason
         );
 
         $this->assertEquals(1.00, $actualAmount);
@@ -3377,12 +3346,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals(1.00, $calculationPercent);
         $this->assertEquals(100.00, $basisAmount);
         $this->assertEquals("SPECIAL AGREEMENT", $reason);
-        $this->assertEquals("", $taxTypeCode);
-        $this->assertEquals("", $taxCategoryCode);
-        $this->assertEquals(0.00, $rateApplicablePercent);
-        $this->assertEquals(0.00, $sequence);
-        $this->assertEquals(0.00, $basisQuantity);
-        $this->assertEquals("", $basisQuantityUnitCode);
         $this->assertEquals("64", $reasonCode);
 
         self::$document->nextDocumentPositionAllowanceCharge();
@@ -3391,14 +3354,8 @@ class OrderDocumentReaderExtendedTest extends TestCase
             $isCharge,
             $calculationPercent,
             $basisAmount,
-            $reason,
-            $taxTypeCode,
-            $taxCategoryCode,
-            $rateApplicablePercent,
-            $sequence,
-            $basisQuantity,
-            $basisQuantityUnitCode,
-            $reasonCode
+            $reasonCode,
+            $reason
         );
 
         $this->assertEquals(1.00, $actualAmount);
@@ -3406,12 +3363,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals(1.00, $calculationPercent);
         $this->assertEquals(100.00, $basisAmount);
         $this->assertEquals("FREIGHT SERVICES", $reason);
-        $this->assertEquals("", $taxTypeCode);
-        $this->assertEquals("", $taxCategoryCode);
-        $this->assertEquals(0.00, $rateApplicablePercent);
-        $this->assertEquals(0.00, $sequence);
-        $this->assertEquals(0.00, $basisQuantity);
-        $this->assertEquals("", $basisQuantityUnitCode);
         $this->assertEquals("FC", $reasonCode);
     }
 
@@ -3428,14 +3379,8 @@ class OrderDocumentReaderExtendedTest extends TestCase
             $isCharge,
             $calculationPercent,
             $basisAmount,
-            $reason,
-            $taxTypeCode,
-            $taxCategoryCode,
-            $rateApplicablePercent,
-            $sequence,
-            $basisQuantity,
-            $basisQuantityUnitCode,
-            $reasonCode
+            $reasonCode,
+            $reason
         );
 
         $this->assertEquals(15.00, $actualAmount);
@@ -3443,12 +3388,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals(10.00, $calculationPercent);
         $this->assertEquals(150.00, $basisAmount);
         $this->assertEquals("SPECIAL AGREEMENT", $reason);
-        $this->assertEquals("", $taxTypeCode);
-        $this->assertEquals("", $taxCategoryCode);
-        $this->assertEquals(0.00, $rateApplicablePercent);
-        $this->assertEquals(0.00, $sequence);
-        $this->assertEquals(0.00, $basisQuantity);
-        $this->assertEquals("", $basisQuantityUnitCode);
         $this->assertEquals("64", $reasonCode);
 
         self::$document->nextDocumentPositionAllowanceCharge();
@@ -3457,14 +3396,8 @@ class OrderDocumentReaderExtendedTest extends TestCase
             $isCharge,
             $calculationPercent,
             $basisAmount,
-            $reason,
-            $taxTypeCode,
-            $taxCategoryCode,
-            $rateApplicablePercent,
-            $sequence,
-            $basisQuantity,
-            $basisQuantityUnitCode,
-            $reasonCode
+            $reasonCode,
+            $reason
         );
 
         $this->assertEquals(15.00, $actualAmount);
@@ -3472,12 +3405,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals(10.00, $calculationPercent);
         $this->assertEquals(150.00, $basisAmount);
         $this->assertEquals("FREIGHT SERVICES", $reason);
-        $this->assertEquals("", $taxTypeCode);
-        $this->assertEquals("", $taxCategoryCode);
-        $this->assertEquals(0.00, $rateApplicablePercent);
-        $this->assertEquals(0.00, $sequence);
-        $this->assertEquals(0.00, $basisQuantity);
-        $this->assertEquals("", $basisQuantityUnitCode);
         $this->assertEquals("FC", $reasonCode);
     }
 
