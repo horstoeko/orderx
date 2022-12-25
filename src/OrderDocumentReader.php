@@ -2883,6 +2883,39 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
+     * Get the binary data of an additional product reference document at position level
+     *
+     * @param string|null $binarydatafilename
+     * The fuill-qualified filename where the data where stored. If no binary data are
+     * available, this value will be empty
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionProductReferencedDocumentBinaryData(?string &$binarydatafilename): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $tradeLineItemProdRefDocs = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedTradeProduct.getAdditionalReferenceReferencedDocument", []));
+        $tradeLineItemProdRefDoc = $this->objectHelper->getArrayIndex($tradeLineItemProdRefDocs, $this->positionProductReferencedDocumentPointer);
+
+        $binarydatafilename = $this->getInvoiceValueByPathFrom($tradeLineItemProdRefDoc, "getAttachmentBinaryObject.getFilename", "");
+        $binarydata = $this->getInvoiceValueByPathFrom($tradeLineItemProdRefDoc, "getAttachmentBinaryObject.value", "");
+
+        if (
+            StringUtils::stringIsNullOrEmpty($binarydatafilename) === false &&
+            StringUtils::stringIsNullOrEmpty($binarydata) === false &&
+            StringUtils::stringIsNullOrEmpty($this->binarydatadirectory) === false
+        ) {
+            $binarydatafilename = PathUtils::combinePathWithFile($this->binarydatadirectory, $binarydatafilename);
+            FileUtils::base64ToFile($binarydata, $binarydatafilename);
+        } else {
+            $binarydatafilename = "";
+        }
+
+        return $this;
+    }
+
+    /**
      * Seek to the first documents position additional referenced document
      * Returns true if the first position is available, otherwise false
      * You may use it together with getDocumentPositionAdditionalReferencedDocument
