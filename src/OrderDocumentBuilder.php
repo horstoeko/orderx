@@ -2361,7 +2361,7 @@ class OrderDocumentBuilder extends OrderDocument
     /**
      * Add detailed information on the free text on the position
      *
-     * @param string|null $content
+     * @param string $content
      * A free text that contains unstructured information that is relevant to the invoice item
      * @param string|null $contentCode
      * Text modules agreed bilaterally, which are transmitted here as code.
@@ -2370,7 +2370,7 @@ class OrderDocumentBuilder extends OrderDocument
      * __Codelist:__ UNTDID 4451
      * @return OrderDocumentBuilder
      */
-    public function setDocumentPositionNote(?string $content = null, ?string $contentCode = null, ?string $subjectCode = null): OrderDocumentBuilder
+    public function setDocumentPositionNote(string $content, ?string $contentCode = null, ?string $subjectCode = null): OrderDocumentBuilder
     {
         $linedoc = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getAssociatedDocumentLineDocument");
         $note = $this->objectHelper->getNoteType($content, $contentCode, $subjectCode);
