@@ -112,6 +112,7 @@
                             <udt:Indicator>false</udt:Indicator>
                         </ram:ChargeIndicator>
                         <ram:ActualAmount>1.00</ram:ActualAmount>
+                        <ram:ReasonCode>95</ram:ReasonCode>
                         <ram:Reason>DISCOUNT</ram:Reason>
                     </ram:AppliedTradeAllowanceCharge>
                     <ram:AppliedTradeAllowanceCharge>
@@ -119,6 +120,7 @@
                             <udt:Indicator>true</udt:Indicator>
                         </ram:ChargeIndicator>
                         <ram:ActualAmount>0.50</ram:ActualAmount>
+                        <ram:ReasonCode>AEW</ram:ReasonCode>
                         <ram:Reason>WEEE</ram:Reason>
                     </ram:AppliedTradeAllowanceCharge>
                 </ram:GrossPriceProductTradePrice>
@@ -143,6 +145,11 @@
                 <ram:PerPackageUnitQuantity unitCode="C62">2.00</ram:PerPackageUnitQuantity>
             </ram:SpecifiedLineTradeDelivery>
             <ram:SpecifiedLineTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    <ram:RateApplicablePercent>19.00</ram:RateApplicablePercent>
+                </ram:ApplicableTradeTax>
                 <ram:SpecifiedTradeAllowanceCharge>
                     <ram:ChargeIndicator>
                         <udt:Indicator>false</udt:Indicator>
@@ -246,6 +253,7 @@
                             <udt:Indicator>true</udt:Indicator>
                         </ram:ChargeIndicator>
                         <ram:ActualAmount>0.50</ram:ActualAmount>
+                        <ram:ReasonCode>AEW</ram:ReasonCode>
                         <ram:Reason>WEEE TAX</ram:Reason>
                     </ram:AppliedTradeAllowanceCharge>
                 </ram:GrossPriceProductTradePrice>
@@ -751,6 +759,7 @@
             </ram:SpecifiedTradeSettlementHeaderMonetarySummation>
             <ram:ReceivableSpecifiedTradeAccountingAccount>
                 <ram:ID>BUYER_ACCOUNT_REF</ram:ID>
+                <ram:TypeCode>BUYER_ACCOUNT_REF_TYPE</ram:TypeCode>
             </ram:ReceivableSpecifiedTradeAccountingAccount>
         </ram:ApplicableHeaderTradeSettlement>
     </rsm:SupplyChainTradeTransaction>

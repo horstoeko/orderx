@@ -92,7 +92,9 @@ $document
     ->addDocumentAllowanceCharge(31.00, false, "S", "VAT", 20, null, 10.00, 310.00, null, null, "64", "SPECIAL AGREEMENT")
     ->addDocumentAllowanceCharge(21.00, true, "S", "VAT", 20, null, 10.00, 210.00, null, null, "FC", "FREIGHT SERVICES")
     ->setDocumentSummation(310, 360, 21, 31, 300, 60)
-    ->setDocumentReceivableSpecifiedTradeAccountingAccount("BUYER_ACCOUNT_REF")
+    ->setDocumentReceivableSpecifiedTradeAccountingAccount("BUYER_ACCOUNT_REF", "BUYER_ACCOUNT_REF_TYPE")
+
+    ->addDocumentTax("S", "VAT", 300.00, 60.00, 20.00, "ExcReason-1", "ExcReasonCode-1", 300.00, 300.00, null)
 
     ->addNewPosition("1")
     ->setDocumentPositionNote("WEEE Tax of 0,50 euros per item included", null, "TXD")
@@ -108,8 +110,8 @@ $document
     ->addDocumentPositionAdditionalReferencedDocument("ADD_REF_DOC_ID", "916", "ADD_REF_DOC_URIID", 5, "ADD_REF_DOC_Desc")
     ->addDocumentPositionAdditionalReferencedDocument("OBJECT_125487", "130", null, null, null, "AWV")
     ->setDocumentPositionGrossPrice(10.50, 1, "C62")
-    ->addDocumentPositionGrossPriceAllowanceCharge(1.00, false, null, null, "DISCOUNT", null, null, null, null, null, null, null, "95")
-    ->addDocumentPositionGrossPriceAllowanceCharge(0.50, true, null, null, "WEEE", null, null, null, null, null, null, null, "AEW")
+    ->addDocumentPositionGrossPriceAllowanceCharge(1.00, false, null, null, "DISCOUNT", null, null, null, null, null, null, "95")
+    ->addDocumentPositionGrossPriceAllowanceCharge(0.50, true, null, null, "WEEE", null, null, null, null, null, null, "AEW")
     ->setDocumentPositionNetPrice(10, 1, "C62")
     ->setDocumentPositionCatalogueReferencedDocument("CATALOG_REF_ID", 2)
     ->setDocumentPositionBlanketOrderReferencedDocument(2)
@@ -118,11 +120,11 @@ $document
     ->setDocumentPositionDeliverPackageQuantity(3, "C62")
     ->setDocumentPositionDeliverPerPackageQuantity(2, "C62")
     ->addDocumentPositionRequestedDeliverySupplyChainEvent(null, new \DateTime(), new \DateTime())
-    ->addDocumentPositionTax("S", "VAT", 20.0)
     ->addDocumentPositionAllowanceCharge(6.00, false, 10.0, 60.0, "64", "SPECIAL AGREEMENT")
     ->addDocumentPositionAllowanceCharge(6.00, true, 10.0, 60.0, "FC", "FREIGHT SERVICES")
     ->setDocumentPositionLineSummation(60.0)
     ->setDocumentPositionReceivableTradeAccountingAccount("BUYER_ACCOUNTING_REF")
+    ->setDocumentPositionTax("S", "VAT", 19.0, 0.00, "Reason-1", "RC1")
 
     ->addNewPosition("2")
     ->setDocumentPositionNote("WEEE Tax of 0,50 euros per item included", null, "TXD")
@@ -138,7 +140,7 @@ $document
     ->addDocumentPositionAdditionalReferencedDocument("ADD_REF_DOC_ID", "916", "ADD_REF_DOC_URIID", 5, "ADD_REF_DOC_Desc")
     ->addDocumentPositionAdditionalReferencedDocument("OBJECT_125487", "130", null, null, null, "AWV")
     ->setDocumentPositionGrossPrice(19.50, 2, "C62")
-    ->addDocumentPositionGrossPriceAllowanceCharge(0.50, true, null, null, "WEEE TAX", null, null, null, null, null, null, null, "AEW")
+    ->addDocumentPositionGrossPriceAllowanceCharge(0.50, true, null, null, "WEEE TAX", null, null, null, null, null, null, "AEW")
     ->setDocumentPositionNetPrice(20, 2, "C62")
     ->setDocumentPositionCatalogueReferencedDocument("CATALOG_REF_ID", 2)
     ->setDocumentPositionBlanketOrderReferencedDocument(3)
@@ -147,7 +149,6 @@ $document
     ->setDocumentPositionDeliverPackageQuantity(5, "C62")
     ->setDocumentPositionDeliverPerPackageQuantity(2, "C62")
     ->addDocumentPositionRequestedDeliverySupplyChainEvent(new \DateTime())
-    ->addDocumentPositionTax("S", "VAT", 20.0)
     ->addDocumentPositionAllowanceCharge(1.00, false, 1.0, 100.0, "64", "SPECIAL AGREEMENT")
     ->addDocumentPositionAllowanceCharge(1.00, true, 1.0, 100.0, "FC", "FREIGHT SERVICES")
     ->setDocumentPositionLineSummation(100.0)
@@ -176,12 +177,10 @@ $document
     ->setDocumentPositionDeliverPackageQuantity(3, "C62")
     ->setDocumentPositionDeliverPerPackageQuantity(2, "C62")
     ->addDocumentPositionRequestedDeliverySupplyChainEvent(null, new \DateTime(), new \DateTime())
-    ->addDocumentPositionTax("S", "VAT", 20.0)
     ->addDocumentPositionAllowanceCharge(15.00, false, 10.0, 150.0, "64", "SPECIAL AGREEMENT")
     ->addDocumentPositionAllowanceCharge(15.00, true, 10.0, 150.0, "FC", "FREIGHT SERVICES")
     ->setDocumentPositionLineSummation(150.0)
     ->setDocumentPositionReceivableTradeAccountingAccount("BUYER_ACCOUNTING_REF")
-
     ->writeFile(getcwd() . "/order-x.xml");
 
 $pdfDocument = new OrderDocumentPdfBuilder(

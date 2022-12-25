@@ -1473,7 +1473,7 @@ class OrderDocumentReaderComfortTest extends TestCase
         self::$document->getDocumentReceivableSpecifiedTradeAccountingAccount($id, $typeCode);
 
         $this->assertEquals("BUYER_ACCOUNT_REF", $id);
-        $this->assertEquals("", $typeCode);
+        $this->assertEquals("BUYER_ACCOUNT_REF_TYPE", $typeCode);
     }
 
     /**
@@ -2652,7 +2652,7 @@ class OrderDocumentReaderComfortTest extends TestCase
         $this->assertEquals(0, $sequence);
         $this->assertEquals(0, $basisQuantity);
         $this->assertEquals("", $basisQuantityUnitCode);
-        $this->assertEquals("", $reasonCode);
+        $this->assertEquals("95", $reasonCode);
 
         self::$document->nextDocumentPositionGrossPriceAllowanceCharge();
         self::$document->getDocumentPositionGrossPriceAllowanceCharge($actualAmount, $isCharge, $calculationPercent, $basisAmount, $reason, $taxTypeCode, $taxCategoryCode, $rateApplicablePercent, $sequence, $basisQuantity, $basisQuantityUnitCode, $reasonCode);
@@ -2668,7 +2668,7 @@ class OrderDocumentReaderComfortTest extends TestCase
         $this->assertEquals(0, $sequence);
         $this->assertEquals(0, $basisQuantity);
         $this->assertEquals("", $basisQuantityUnitCode);
-        $this->assertEquals("", $reasonCode);
+        $this->assertEquals("AEW", $reasonCode);
 
         $this->assertFalse(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
     }
@@ -2694,7 +2694,7 @@ class OrderDocumentReaderComfortTest extends TestCase
         $this->assertEquals(0, $sequence);
         $this->assertEquals(0, $basisQuantity);
         $this->assertEquals("", $basisQuantityUnitCode);
-        $this->assertEquals("", $reasonCode);
+        $this->assertEquals("AEW", $reasonCode);
 
         $this->assertFalse(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
     }
@@ -3455,7 +3455,7 @@ class OrderDocumentReaderComfortTest extends TestCase
     {
         self::$document->firstDocumentPosition();
 
-        $this->assertFalse(self::$document->firstDocumentPositionTax());
+        $this->assertTrue(self::$document->firstDocumentPositionTax());
     }
 
     /**
