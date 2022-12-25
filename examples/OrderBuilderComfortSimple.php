@@ -8,7 +8,7 @@ use horstoeko\orderx\OrderDocumentPdfBuilder;
 require dirname(__FILE__) . "/../vendor/autoload.php";
 
 $document = OrderDocumentBuilder::CreateNew(
-    OrderProfiles::PROFILE_EXTENDED
+    OrderProfiles::PROFILE_COMFORT
 );
 
 $document
@@ -108,8 +108,8 @@ $document
     ->addDocumentPositionAdditionalReferencedDocument("ADD_REF_DOC_ID", "916", "ADD_REF_DOC_URIID", 5, "ADD_REF_DOC_Desc")
     ->addDocumentPositionAdditionalReferencedDocument("OBJECT_125487", "130", null, null, null, "AWV")
     ->setDocumentPositionGrossPrice(10.50, 1, "C62")
-    ->addDocumentPositionGrossPriceAllowanceCharge(1.00, false, "DISCOUNT", "95")
-    ->addDocumentPositionGrossPriceAllowanceCharge(0.50, true, "WEEE", "AEW")
+    ->addDocumentPositionGrossPriceAllowanceCharge(1.00, false, null, null, "DISCOUNT", null, null, null, null, null, null, null, "95")
+    ->addDocumentPositionGrossPriceAllowanceCharge(0.50, true, null, null, "WEEE", null, null, null, null, null, null, null, "AEW")
     ->setDocumentPositionNetPrice(10, 1, "C62")
     ->setDocumentPositionCatalogueReferencedDocument("CATALOG_REF_ID", 2)
     ->setDocumentPositionBlanketOrderReferencedDocument(2)
@@ -138,7 +138,7 @@ $document
     ->addDocumentPositionAdditionalReferencedDocument("ADD_REF_DOC_ID", "916", "ADD_REF_DOC_URIID", 5, "ADD_REF_DOC_Desc")
     ->addDocumentPositionAdditionalReferencedDocument("OBJECT_125487", "130", null, null, null, "AWV")
     ->setDocumentPositionGrossPrice(19.50, 2, "C62")
-    ->addDocumentPositionGrossPriceAllowanceCharge(0.50, true, "WEEE TAX", "AEW")
+    ->addDocumentPositionGrossPriceAllowanceCharge(0.50, true, null, null, "WEEE TAX", null, null, null, null, null, null, null, "AEW")
     ->setDocumentPositionNetPrice(20, 2, "C62")
     ->setDocumentPositionCatalogueReferencedDocument("CATALOG_REF_ID", 2)
     ->setDocumentPositionBlanketOrderReferencedDocument(3)
