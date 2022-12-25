@@ -77,7 +77,10 @@ echo "The Order No. is {$documentno}" . PHP_EOL;
 use horstoeko\orderx\OrderProfiles;
 use horstoeko\orderx\OrderDocumentBuilder;
 
-$document = OrderDocumentBuilder::CreateNew(OrderProfiles::PROFILE_EXTENDED);
+$document = OrderDocumentBuilder::createNew(
+    OrderProfiles::PROFILE_EXTENDED
+);
+
 $document
     ->setIsDocumentCopy(false)
     ->setIsTestDocument(false)
@@ -201,7 +204,10 @@ use horstoeko\orderx\OrderProfiles;
 use horstoeko\orderx\OrderDocumentBuilder;
 use horstoeko\orderx\OrderDocumentPdfBuilder;
 
-$document = OrderDocumentBuilder::CreateNew(OrderProfiles::PROFILE_EXTENDED);
+$document = OrderDocumentBuilder::createNew(
+    OrderProfiles::PROFILE_EXTENDED
+);
+
 $document
     ->setIsDocumentCopy(false)
     ->setIsTestDocument(false)
@@ -211,7 +217,11 @@ $document
 
     // Do some other stuff (see above)
 
-$pdfDocument = new OrderDocumentPdfBuilder($document, dirname(__FILE__) . "/../src/assets/empty.pdf"))
+$pdfDocument = new OrderDocumentPdfBuilder(
+    $document,
+    dirname(__FILE__) . "/../src/assets/empty.pdf"
+);
+
 $pdfDocument
     ->generateDocument()
     ->saveDocument(getcwd() . "/order-x.pdf");

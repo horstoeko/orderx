@@ -7,7 +7,10 @@ use horstoeko\orderx\OrderDocumentPdfBuilder;
 
 require dirname(__FILE__) . "/../vendor/autoload.php";
 
-$document = OrderDocumentBuilder::CreateNew(OrderProfiles::PROFILE_EXTENDED);
+$document = OrderDocumentBuilder::CreateNew(
+    OrderProfiles::PROFILE_EXTENDED
+);
+
 $document
     ->setIsDocumentCopy(false)
     ->setIsTestDocument(false)
@@ -181,7 +184,12 @@ $document
 
     ->writeFile(getcwd() . "/order-x.xml");
 
-(new OrderDocumentPdfBuilder($document, dirname(__FILE__) . "/../src/assets/empty.pdf"))
+$pdfDocument = new OrderDocumentPdfBuilder(
+    $document,
+    dirname(__FILE__) . "/../src/assets/empty.pdf"
+);
+
+$pdfDocument
     ->generateDocument()
     ->saveDocument(getcwd() . "/order-x.pdf");
 
