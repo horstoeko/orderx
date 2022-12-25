@@ -1184,8 +1184,8 @@ class OrderDocumentReader extends OrderDocument
     public function firstDocumentAdditionalReferencedDocument(): bool
     {
         $this->documentAddRefDocPointer = 0;
-        $additionalDocuments = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getAdditionalReferencedDocument", []));
-        return isset($additionalDocuments[$this->documentAddRefDocPointer]);
+        $additionalRefDoc = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getAdditionalReferencedDocument", []));
+        return isset($additionalRefDoc[$this->documentAddRefDocPointer]);
     }
 
     /**
@@ -1197,8 +1197,8 @@ class OrderDocumentReader extends OrderDocument
     public function nextDocumentAdditionalReferencedDocument(): bool
     {
         $this->documentAddRefDocPointer++;
-        $additionalDocuments = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getAdditionalReferencedDocument", []));
-        return isset($additionalDocuments[$this->documentAddRefDocPointer]);
+        $additionalRefDoc = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getAdditionalReferencedDocument", []));
+        return isset($additionalRefDoc[$this->documentAddRefDocPointer]);
     }
 
     /**
@@ -1236,17 +1236,17 @@ class OrderDocumentReader extends OrderDocument
      */
     public function getDocumentAdditionalReferencedDocument(?string &$additionalRefTypeCode, ?string &$additionalRefId, ?string &$additionalRefURIID, ?string &$additionalRefName, ?string &$additionalRefRefTypeCode, ?DateTime &$additionalRefDate): OrderDocumentReader
     {
-        $additionalDocuments = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getAdditionalReferencedDocument", []));
-        $additionalDocument = $this->objectHelper->getArrayIndex($additionalDocuments, $this->documentAddRefDocPointer);
+        $additionalRefDocs = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getAdditionalReferencedDocument", []));
+        $additionalRefDoc = $this->objectHelper->getArrayIndex($additionalRefDocs, $this->documentAddRefDocPointer);
 
-        $additionalRefTypeCode = $this->getInvoiceValueByPathFrom($additionalDocument, 'getTypeCode', '');
-        $additionalRefId = $this->getInvoiceValueByPathFrom($additionalDocument, 'getIssuerAssignedID', '');
-        $additionalRefURIID = $this->getInvoiceValueByPathFrom($additionalDocument, 'getURIID', '');
-        $additionalRefName = $this->getInvoiceValueByPathFrom($additionalDocument, 'getName', '');
-        $additionalRefRefTypeCode = $this->getInvoiceValueByPathFrom($additionalDocument, 'getReferenceTypeCode', '');
+        $additionalRefTypeCode = $this->getInvoiceValueByPathFrom($additionalRefDoc, 'getTypeCode', '');
+        $additionalRefId = $this->getInvoiceValueByPathFrom($additionalRefDoc, 'getIssuerAssignedID', '');
+        $additionalRefURIID = $this->getInvoiceValueByPathFrom($additionalRefDoc, 'getURIID', '');
+        $additionalRefName = $this->getInvoiceValueByPathFrom($additionalRefDoc, 'getName', '');
+        $additionalRefRefTypeCode = $this->getInvoiceValueByPathFrom($additionalRefDoc, 'getReferenceTypeCode', '');
         $additionalRefDate = $this->objectHelper->toDateTime(
-            $this->getInvoiceValueByPathFrom($additionalDocument, 'getFormattedIssueDateTime.getDateTimeString', ''),
-            $this->getInvoiceValueByPathFrom($additionalDocument, 'getFormattedIssueDateTime.getDateTimeString.getFormat', '')
+            $this->getInvoiceValueByPathFrom($additionalRefDoc, 'getFormattedIssueDateTime.getDateTimeString', ''),
+            $this->getInvoiceValueByPathFrom($additionalRefDoc, 'getFormattedIssueDateTime.getDateTimeString.getFormat', '')
         );
 
         return $this;
