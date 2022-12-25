@@ -811,6 +811,7 @@
             </ram:SpecifiedTradeSettlementHeaderMonetarySummation>
             <ram:ReceivableSpecifiedTradeAccountingAccount>
                 <ram:ID>BUYER_ACCOUNT_REF</ram:ID>
+                <ram:TypeCode>BUYER_ACCOUNT_REF_TYPE</ram:TypeCode>
             </ram:ReceivableSpecifiedTradeAccountingAccount>
         </ram:ApplicableHeaderTradeSettlement>
     </rsm:SupplyChainTradeTransaction>

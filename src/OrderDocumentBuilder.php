@@ -1041,7 +1041,7 @@ class OrderDocumentBuilder extends OrderDocument
     /**
      * Set information on the delivery conditions
      *
-     * @param string|null $code
+     * @param string|null $deliveryTypeCode
      * The code specifying the type of delivery for these trade delivery terms. To be chosen from the entries
      * in UNTDID 4053 + INCOTERMS List
      * - 1 : Delivery arranged by the supplier (Indicates that the supplier will arrange delivery of the goods).
@@ -1058,7 +1058,7 @@ class OrderDocumentBuilder extends OrderDocument
      * - FCA : Free Carrier (insert named place of delivery)
      * - FOB : Free On Board (insert named port of shipment)
      * @param string|null $description
-     * Simple description
+     * A textual description of these trade delivery terms
      * @param string|null $functionCode
      * A code specifying a function of these trade delivery terms (Pick up,or delivered) To be chosen from the entries
      * in UNTDID 4055
@@ -1068,9 +1068,9 @@ class OrderDocumentBuilder extends OrderDocument
      * The name, expressed as text, of this location used or referenced in trade.
      * @return OrderDocumentBuilder
      */
-    public function setDocumentDeliveryTerms(?string $code = null, ?string $description = null, ?string $functionCode = null, ?string $relevantTradeLocationId = null, ?string $relevantTradeLocationName = null): OrderDocumentBuilder
+    public function setDocumentDeliveryTerms(?string $deliveryTypeCode = null, ?string $description = null, ?string $functionCode = null, ?string $relevantTradeLocationId = null, ?string $relevantTradeLocationName = null): OrderDocumentBuilder
     {
-        $deliveryterms = $this->objectHelper->getTradeDeliveryTermsType($code, $description, $functionCode, $relevantTradeLocationId, $relevantTradeLocationName);
+        $deliveryterms = $this->objectHelper->getTradeDeliveryTermsType($deliveryTypeCode, $description, $functionCode, $relevantTradeLocationId, $relevantTradeLocationName);
         $this->objectHelper->tryCall($this->headerTradeAgreement, "setApplicableTradeDeliveryTerms", $deliveryterms);
         return $this;
     }
@@ -1079,9 +1079,9 @@ class OrderDocumentBuilder extends OrderDocument
      * Set details of the associated order confirmation
      *
      * @param string $sellerOrderRefId
-     * An identifier issued by the seller for a referenced sales order (Order confirmation number)
+     * An identifier of a referenced Sales order, issued by the Seller
      * @param DateTime|null $sellerOrderRefDate
-     * Order confirmation date
+     * The formatted date or date time for the issuance of this referenced Sales Order.
      * @return OrderDocumentBuilder
      */
     public function setDocumentSellerOrderReferencedDocument(string $sellerOrderRefId, ?DateTime $sellerOrderRefDate = null): OrderDocumentBuilder
@@ -1095,9 +1095,9 @@ class OrderDocumentBuilder extends OrderDocument
      * Set details of the related buyer order
      *
      * @param string $buyerOrderRefId
-     * An identifier issued by the buyer for a referenced order (order number)
+     * An identifier of a referenced purchase order, issued by the Buyer.
      * @param DateTime|null $buyerOrderRefDate
-     * Date of order
+     * The formatted date or date time for the issuance of this referenced Buyer Order.
      * @return OrderDocumentBuilder
      */
     public function setDocumentBuyerOrderReferencedDocument(string $buyerOrderRefId, ?DateTime $buyerOrderRefDate = null): OrderDocumentBuilder
@@ -1128,8 +1128,7 @@ class OrderDocumentBuilder extends OrderDocument
      * of the specific trading relationship and for a defined time period.
      *
      * @param string $contractRefId
-     * The contract reference should be assigned once in the context of the specific trade relationship and for a
-     * defined period of time (contract number)
+     * The identification of a contract.
      * @param DateTime|null $contractRefDate
      * The formatted date or date time for the issuance of this referenced Contract.
      * @return OrderDocumentBuilder
@@ -1159,7 +1158,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set details of the associated contract
+     * Set details of a Requisition Document, issued by the Buyer or the Buyer Requisitioner
      *
      * @param string $requisitionRefId
      * The identification of a Requisition Document, issued by the Buyer or the Buyer Requisitioner.
@@ -1175,7 +1174,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Add new details of the associated contract
+     * Add an addititonal Requisition Document, issued by the Buyer or the Buyer Requisitioner
      *
      * @param string $requisitionRefId
      * The identification of a Requisition Document, issued by the Buyer or the Buyer Requisitioner.
@@ -1191,14 +1190,11 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set information about billing documents that provide evidence of claims made in the bill
-     *
-     * __Notes__
-     * The additional supporting documents can be used for both referencing a document number which
-     * is expected to be known by the receiver, an external document (referenced by a URL) or as an
-     * embedded document (such as a time report in pdf). The option to link to an external document
-     * will be needed, for example in the case of large attachments and/or when sensitive information,
-     * e.g. person-related services, has to be separated from the order itself.
+     * Add an information about additional supporting documents substantiating the claims made in the order.
+     * The additional supporting documents can be used for both referencing a document number which is expected to be
+     * known by the receiver, an external document (referenced by a URL) or as an embedded document (such as a time
+     * report in pdf). The option to link to an external document will be needed, for example in the case of large
+     * attachments and/or when sensitive information, e.g. person-related services, has to be separated from the order itself.
      *
      * @param string $additionalRefTypeCode
      * Type of referenced document (See codelist UNTDID 1001)
@@ -1220,7 +1216,7 @@ class OrderDocumentBuilder extends OrderDocument
      * recipient which scheme is used for the identifier, an identifier of the scheme should be used, which must be selected
      * from UNTDID 1153 in accordance with the code list entries.
      * @param DateTime|null $additionalRefDate
-     * Document date
+     * The formatted date or date time for the issuance of this referenced Additional Document.
      * @param string|null $binarydatafilename
      * Contains a file name of an attachment document embedded as a binary object.
      * Allowed mime codes:
@@ -1246,7 +1242,7 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string $blanketOrderRefId
      * The identification of a Blanket Order, issued by the Buyer or the Buyer Requisitioner.
      * @param DateTime|null $blanketOrderRefDate
-     * The date or date time for the issuance of this referenced Blanket Order.
+     * The formatted date or date time for the issuance of this referenced Blanket Order.
      * @return OrderDocumentBuilder
      */
     public function setDocumentBlanketOrderReferencedDocument(string $blanketOrderRefId, ?DateTime $blanketOrderRefDate = null): OrderDocumentBuilder
@@ -1262,7 +1258,7 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string $blanketOrderRefId
      * The identification of a Blanket Order, issued by the Buyer or the Buyer Requisitioner.
      * @param DateTime|null $blanketOrderRefDate
-     * The date or date time for the issuance of this referenced Blanket Order.
+     * The formatted date or date time for the issuance of this referenced Blanket Order.
      * @return OrderDocumentBuilder
      */
     public function addDocumentBlanketOrderReferencedDocument(string $blanketOrderRefId, ?DateTime $blanketOrderRefDate = null): OrderDocumentBuilder
@@ -1278,7 +1274,7 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string $prevOrderChangeRefId
      * The identification of a the Previous Order Change Document, issued by the Buyer or the Buyer Requisitioner.
      * @param DateTime|null $prevOrderChangeRefDate
-     * Issued date
+     * The formatted date or date time for the issuance of this referenced Previous Order Change.
      * @return OrderDocumentBuilder
      */
     public function setDocumentPreviousOrderChangeReferencedDocument(string $prevOrderChangeRefId, ?DateTime $prevOrderChangeRefDate = null): OrderDocumentBuilder
@@ -1294,7 +1290,7 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string $prevOrderChangeRefId
      * The identification of a the Previous Order Change Document, issued by the Buyer or the Buyer Requisitioner.
      * @param DateTime|null $prevOrderChangeRefDate
-     * Issued date
+     * The formatted date or date time for the issuance of this referenced Previous Order Change.
      * @return OrderDocumentBuilder
      */
     public function addDocumentPreviousOrderChangeReferencedDocument(string $prevOrderChangeRefId, ?DateTime $prevOrderChangeRefDate = null): OrderDocumentBuilder
@@ -1310,7 +1306,7 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string $prevOrderResponseRefId
      * The identification of a the Previous Order Response Document, issued by the Seller.
      * @param DateTime|null $prevOrderResponseRefDate
-     * Issued date
+     * The formatted date or date time for the issuance of this referenced Previous Order Response.
      * @return OrderDocumentBuilder
      */
     public function setDocumentPreviousOrderResponseReferencedDocument(string $prevOrderResponseRefId, ?DateTime $prevOrderResponseRefDate = null): OrderDocumentBuilder
@@ -1326,7 +1322,7 @@ class OrderDocumentBuilder extends OrderDocument
      * @param string $prevOrderResponseRefId
      * The identification of a the Previous Order Response Document, issued by the Seller.
      * @param DateTime|null $prevOrderResponseRefDate
-     * Issued date
+     * The formatted date or date time for the issuance of this referenced Previous Order Response.
      * @return OrderDocumentBuilder
      */
     public function addDocumentPreviousOrderResponseReferencedDocument(string $prevOrderResponseRefId, ?DateTime $prevOrderResponseRefDate = null): OrderDocumentBuilder
@@ -1337,12 +1333,12 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set Details of a project reference
+     * Set the procuring project specified for this header trade agreement.
      *
      * @param string $procuringProjectId
-     * Project Data
+     * The unique identifier of this procuring project.
      * @param string $procuringProjectName
-     * Project Name
+     * The name of this procuring project.
      * @return OrderDocumentBuilder
      */
     public function setDocumentProcuringProject(string $procuringProjectId, string $procuringProjectName): OrderDocumentBuilder
@@ -1353,13 +1349,15 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Ship-To
+     * Set information about the Ship-To-Party
+     * The Ship-To-Party provides information about where and when the goods and services ordered are delivered.
      *
      * @param string $name
-     * The full formal name by which the party is registered in the national registry of
-     * legal entities or as a Taxable person or otherwise trades as a person or persons.
+     * The name of the party to which the goods and services are delivered.
      * @param string|null $id
-     * An identification of the Party. The identification scheme identifier of the Party identifier.
+     * An identification of the Party.
+     * If no scheme is specified, it should be known by Buyer and Seller, e.g. a previously exchanged Buyer or Seller assigned identifier.
+     * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
      * @param string|null $description
      * Additional legal information relevant for the Paety.
      * @return OrderDocumentBuilder
@@ -1375,10 +1373,11 @@ class OrderDocumentBuilder extends OrderDocument
      * Add a global id for the Ship-to Trade Party
      *
      * @param string $globalID
-     * Global identifier of the goods recipient
+     * GloablID, if global identifier exists and can be stated in @schemeID
      * @param string $globalIDType
-     * Type of global identification number, must be selected from the entries in
-     * the list published by the ISO / IEC 6523 Maintenance Agency.
+     * Scheme identifier of the identifier of the party
+     * If used, the identification scheme identifier shall be chosen from the entries of the list published
+     * by the ISO/IEC 6523 maintenance agency.
      * @return OrderDocumentBuilder
      */
     public function addDocumentShipToGlobalId(string $globalID, string $globalIDType): OrderDocumentBuilder
@@ -1410,10 +1409,13 @@ class OrderDocumentBuilder extends OrderDocument
      * Add Tax registration to Ship-To Trade party
      *
      * @param string $taxregtype
-     * Scheme identifier for supplier VAT identifier
+     * Scheme identifier for Ship-To VAT Identifier
+     *  - Value = "VA" for VAT ID
+     *  - Value = "FC" for local Tax ID
      * @param string $taxregid
-     * The Seller's VAT identifier (also known as Seller VAT identification number). VAT number prefixed by a country code.
-     * A VAT registered Supplier shall include his VAT ID, except when he uses a tax representative.
+     * The Ship-To's VAT identifier (also known as Buyer VAT identification number).
+     * VAT number prefixed by a country code based on EN ISO 3166-1 "Codes for the representation of names of
+     * countries and their subdivisions"
      * @return OrderDocumentBuilder
      */
     public function addDocumentShipToTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
@@ -1425,7 +1427,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Sets the postal address of the Ship-To party
+     * Set the postal address of the Ship-To party
      *
      * @param string|null $lineone
      * The main line in the party's address. This is usually the street name and house number or
@@ -1479,8 +1481,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set contact of the Ship-To party. All formerly assigned contacts will be
-     * overwritten
+     * Set contact of the Ship-To party
      *
      * @param string|null $contactpersonname
      * Contact point for a legal entity, such as a personal name of the contact person
@@ -1530,7 +1531,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set the universal communication info for the Buyer Requisitioner
+     * Get the universal communication info for the Ship-To Trade Party
      *
      * @param string|null $uriType
      * Identifies the electronic address to which the application level response to the order may be delivered.
@@ -1548,7 +1549,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set detailed information of the deviating consignor party
+     * Set information about the party from which the goods and services are delivered or picked up
      *
      * @param string $name
      * The full formal name by which the party is registered in the national registry of
@@ -1567,7 +1568,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Add a global id for the deviating consignor party
+     * Add a global id to the party from which the goods and services are delivered or picked up
      *
      * @param string $globalID
      * Global identifier of the goods recipient
@@ -1584,7 +1585,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set Tax registration to the deviating consignor party
+     * Set Tax registration of the party from which the goods and services are delivered or picked up
      *
      * @param string $taxregtype
      * Scheme identifier for supplier VAT identifier
@@ -1602,7 +1603,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Add an additional Tax registration to the deviating consignor party
+     * Add an additional Tax registration to the party from which the goods and services are delivered or picked up
      *
      * @param string $taxregtype
      * Scheme identifier for supplier VAT identifier
@@ -1620,7 +1621,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Sets the postal address of the deviating consignor party
+     * Sets the postal address of the party from which the goods and services are delivered or picked up
      *
      * @param string|null $lineone
      * The main line in the party's address. This is usually the street name and house number or
@@ -1652,7 +1653,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set legal organisation of the deviating consignor party
+     * Set legal organisation of the party from which the goods and services are delivered or picked up
      *
      * @param string|null $legalorgid
      * An identifier issued by an official registrar that identifies the
@@ -1674,7 +1675,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set contact of the deviating consignor party
+     * Set contact of the party from which the goods and services are delivered or picked up
      *
      * @param string|null $contactpersonname
      * Contact point for a legal entity, such as a personal name of the contact person
@@ -1699,7 +1700,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Add an additional contact to the deviating consignor party.
+     * Add an additional contact to the party from which the goods and services are delivered or picked up
      *
      * @param string|null $contactpersonname
      * Contact point for a legal entity, such as a personal name of the contact person
@@ -1724,7 +1725,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set the universal communication info for the Buyer Requisitioner
+     * Set the universal communication info for the party from which the goods and services are delivered or picked up
      *
      * @param string|null $uriType
      * Identifies the electronic address to which the application level response to the order may be delivered.
@@ -1760,7 +1761,25 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set detailed information on the Invoicee Trade Party
+     * Add an additional requested date or period on which delivery is requested
+     *
+     * @param DateTime $occurrenceDateTime
+     * A Requested Date on which Delivery is requested
+     * @param DateTime|null $startDateTime
+     * The Start Date of he Requested Period on which Delivery is requested
+     * @param DateTime|null $endDateTime
+     * The End Date of he Requested Period on which Delivery is requested
+     * @return OrderDocumentBuilder
+     */
+    public function addDocumentRequestedDeliverySupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): OrderDocumentBuilder
+    {
+        $supplychainevent = $this->objectHelper->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+        $this->objectHelper->tryCall($this->headerTradeDelivery, "addToRequestedDeliverySupplyChainEvent", $supplychainevent);
+        return $this;
+    }
+
+    /**
+     * Set detailed information on the Party to which the invoice must be sent
      *
      * @param string $name
      * The full formal name by which the party is registered in the national registry of
@@ -1779,7 +1798,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Add a global id for the Invoicee Trade Party
+     * Add a global id for the Party to which the invoice must be sent
      *
      * @param string $globalID
      * Global identification number
@@ -1796,7 +1815,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set Tax registration to Invoicee Trade Party
+     * Set Tax registration to the Party to which the invoice must be sent
      *
      * @param string $taxregtype
      * Scheme identifier for supplier VAT identifier
@@ -1814,7 +1833,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Add an additional Tax registration to Invoicee Trade Party
+     * Add an additional Tax registration to the Party to which the invoice must be sent
      *
      * @param string $taxregtype
      * Scheme identifier for supplier VAT identifier
@@ -1832,7 +1851,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Sets the postal address of the Invoicee Trade Party
+     * Sets the postal address of the Party to which the invoice must be sent
      *
      * @param string|null $lineone
      * The main line in the party's address. This is usually the street name and house number or
@@ -1864,7 +1883,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set legal organisation of the Invoicee Trade Party
+     * Set legal organisation of the Party to which the invoice must be sent
      *
      * @param string|null $legalorgid
      * An identifier issued by an official registrar that identifies the
@@ -1886,7 +1905,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set contact of the Invoicee Trade Party
+     * Set contact of the Party to which the invoice must be sent
      *
      * @param string|null $contactpersonname
      * Contact point for a legal entity, such as a personal name of the contact person
@@ -1911,7 +1930,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Add an additional contact to the ultimate Ship-from party
+     * Add an additional contact to the Party to which the invoice must be sent
      *
      * @param string|null $contactpersonname
      * Contact point for a legal entity, such as a personal name of the contact person
@@ -1935,7 +1954,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set the universal communication info for the Invoicee
+     * Set the universal communication info for the Party to which the invoice must be sent
      *
      * @param string|null $uriType
      * Identifies the electronic address to which the application level response to the order may be delivered.
@@ -1956,23 +1975,12 @@ class OrderDocumentBuilder extends OrderDocument
      * Set detailed information on the payment method
      *
      * @param string $paymentMeansCode
-     * The expected or used means of payment, expressed as a code. The entries from the UNTDID 4461 code list
-     * must be used. A distinction should be made between SEPA and non-SEPA payments as well as between credit
-     * payments, direct debits, card payments and other means of payment In particular, the following codes can
-     * be used:
-     *  - 10: cash
-     *  - 20: check
-     *  - 30: transfer
-     *  - 42: Payment to bank account
-     *  - 48: Card payment
-     *  - 49: direct debit
-     *  - 57: Standing order
-     *  - 58: SEPA Credit Transfer
-     *  - 59: SEPA Direct Debit
-     *  - 97: Report
+     * The means, expressed as code, for how a payment is expected to be or has been settled.
+     * Entries from the UNTDID 4461 code list  shall be used. Distinction should be made between
+     * SEPA and non-SEPA payments, and between credit payments, direct debits, card payments and
+     * other instruments.
      * @param string|null $paymentMeansInformation
-     * The expected or used means of payment expressed in text form, e.g. cash, bank transfer, direct debit,
-     * credit card, etc.
+     * Such as cash, credit transfer, direct debit, credit card, etc.
      * @return OrderDocumentBuilder
      */
     public function setDocumentPaymentMean(string $paymentMeansCode, ?string $paymentMeansInformation = null): OrderDocumentBuilder
@@ -1985,30 +1993,13 @@ class OrderDocumentBuilder extends OrderDocument
     /**
      * Add additional information on the payment method
      *
-     * __Notes__
-     *  - The SpecifiedTradeSettlementPaymentMeans element can only be repeated for each bank account if
-     *    several bank accounts are to be transferred for transfers. The code for the payment method in the Typecode
-     *    element must therefore not differ in the repetitions. The elements ApplicableTradeSettlementFinancialCard
-     *    and PayerPartyDebtorFinancialAccount must not be specified for bank transfers.
-     *
      * @param string $paymentMeansCode
-     * The expected or used means of payment, expressed as a code. The entries from the UNTDID 4461 code list
-     * must be used. A distinction should be made between SEPA and non-SEPA payments as well as between credit
-     * payments, direct debits, card payments and other means of payment In particular, the following codes can
-     * be used:
-     *  - 10: cash
-     *  - 20: check
-     *  - 30: transfer
-     *  - 42: Payment to bank account
-     *  - 48: Card payment
-     *  - 49: direct debit
-     *  - 57: Standing order
-     *  - 58: SEPA Credit Transfer
-     *  - 59: SEPA Direct Debit
-     *  - 97: Report
+     * The means, expressed as code, for how a payment is expected to be or has been settled.
+     * Entries from the UNTDID 4461 code list  shall be used. Distinction should be made between
+     * SEPA and non-SEPA payments, and between credit payments, direct debits, card payments and
+     * other instruments.
      * @param string|null $paymentMeansInformation
-     * The expected or used means of payment expressed in text form, e.g. cash, bank transfer, direct debit,
-     * credit card, etc.
+     * Such as cash, credit transfer, direct debit, credit card, etc.
      * @return OrderDocumentBuilder
      */
     public function addDocumentPaymentMean(string $paymentMeansCode, ?string $paymentMeansInformation = null): OrderDocumentBuilder
@@ -2301,10 +2292,11 @@ class OrderDocumentBuilder extends OrderDocument
 
     /**
      * Set an AccountingAccount
-     * Detailinformationen zur Buchungsreferenz
      *
      * @param string $id
+     * A textual value that specifies where to book the relevant data into the Buyer's financial accounts.
      * @param string|null $typeCode
+     * The code specifying the type of trade accounting account, such as general (main), secondary, cost accounting or budget account.
      * @return OrderDocumentBuilder
      */
     public function setDocumentReceivableSpecifiedTradeAccountingAccount(string $id, ?string $typeCode = null): OrderDocumentBuilder

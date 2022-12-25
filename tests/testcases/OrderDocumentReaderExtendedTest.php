@@ -1483,6 +1483,18 @@ class OrderDocumentReaderExtendedTest extends TestCase
      * @covers \horstoeko\orderx\OrderDocumentReader
      * @covers \horstoeko\orderx\OrderObjectHelper
      */
+    public function testGetDocumentReceivableSpecifiedTradeAccountingAccount(): void
+    {
+        self::$document->getDocumentReceivableSpecifiedTradeAccountingAccount($id, $typeCode);
+
+        $this->assertEquals("BUYER_ACCOUNT_REF", $id);
+        $this->assertEquals("BUYER_ACCOUNT_REF_TYPE", $typeCode);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
     public function testFirstDocumentPosition(): void
     {
         $this->assertTrue(self::$document->firstDocumentPosition());

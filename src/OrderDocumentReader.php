@@ -1039,8 +1039,21 @@ class OrderDocumentReader extends OrderDocument
      * @param string|null $code
      * The code specifying the type of delivery for these trade delivery terms. To be chosen from the entries
      * in UNTDID 4053 + INCOTERMS List
+     * - 1 : Delivery arranged by the supplier (Indicates that the supplier will arrange delivery of the goods).
+     * - 2 : Delivery arranged by logistic service provider (Code indicating that the logistic service provider has arranged the delivery of goods).
+     * - CFR : Cost and Freight (insert named port of destination)
+     * - CIF : Cost, Insurance and Freight (insert named port of destination)
+     * - CIP : Carriage and Insurance Paid to (insert named place of destination)
+     * - CPT : Carriage Paid To (insert named place of destination)
+     * - DAP : Delivered At Place (insert named place of destination)
+     * - DAT : Delivered At Terminal (insert named terminal at port or place of destination)
+     * - DDP : Delivered Duty Paid (insert named place of destination)
+     * - EXW : Ex Works (insert named place of delivery)
+     * - FAS : Free Alongside Ship (insert named port of shipment)
+     * - FCA : Free Carrier (insert named place of delivery)
+     * - FOB : Free On Board (insert named port of shipment)
      * @param string|null $description
-     * Simple description
+     * A textual description of these trade delivery terms
      * @param string|null $functionCode
      * A code specifying a function of these trade delivery terms (Pick up,or delivered) To be chosen from the entries
      * in UNTDID 4055
@@ -1064,10 +1077,10 @@ class OrderDocumentReader extends OrderDocument
     /**
      * Get details of the associated order confirmation
      *
-     * @param string|null $sellerOrderRefId
-     * An identifier issued by the seller for a referenced sales order (Order confirmation number)
+     * @param string $sellerOrderRefId
+     * An identifier of a referenced Sales order, issued by the Seller
      * @param DateTime|null $sellerOrderRefDate
-     * Order confirmation date
+     * The formatted date or date time for the issuance of this referenced Sales Order.
      * @return OrderDocumentReader
      */
     public function getDocumentSellerOrderReferencedDocument(?string &$sellerOrderRefId, ?DateTime &$sellerOrderRefDate): OrderDocumentReader
@@ -1085,9 +1098,9 @@ class OrderDocumentReader extends OrderDocument
      * Get details of the related buyer order
      *
      * @param string $buyerOrderRefId
-     * An identifier issued by the buyer for a referenced order (order number)
+     * An identifier of a referenced purchase order, issued by the Buyer.
      * @param DateTime|null $buyerOrderRefDate
-     * Date of order
+     * The formatted date or date time for the issuance of this referenced Buyer Order.
      * @return OrderDocumentReader
      */
     public function getDocumentBuyerOrderReferencedDocument(?string &$buyerOrderRefId, ?DateTime &$buyerOrderRefDate): OrderDocumentReader
@@ -1126,8 +1139,7 @@ class OrderDocumentReader extends OrderDocument
      * of the specific trading relationship and for a defined time period.
      *
      * @param string $contractRefId
-     * The contract reference should be assigned once in the context of the specific trade relationship and for a
-     * defined period of time (contract number)
+     * The identification of a contract.
      * @param DateTime|null $contractRefDate
      * The formatted date or date time for the issuance of this referenced Contract.
      * @return OrderDocumentReader
@@ -1144,7 +1156,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get details of the associated contract
+     * Get details of a Requisition Document, issued by the Buyer or the Buyer Requisitioner
      *
      * @param string $requisitionRefId
      * The identification of a Requisition Document, issued by the Buyer or the Buyer Requisitioner.
@@ -1164,8 +1176,8 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Set the intérnal additional ref. documents pointer to the first position
-     * It will return false if there is no additional ref. document
+     * Set the intérnal additional ref. documents pointer to the first position. This method will return false if there is no
+     * additional ref. document. This method should be used together with __OrderDocumentReader::getDocumentAdditionalReferencedDocument__
      *
      * @return boolean
      */
@@ -1177,8 +1189,8 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Set the intérnal additional ref. documents pointer to the next position
-     * It will return false if there is no next additional ref. document
+     * Set the intérnal additional ref. documents pointer to the next position. This method will return false if there is no more
+     * additional ref. document. This method should be used together with __OrderDocumentReader::getDocumentAdditionalReferencedDocument__
      *
      * @return boolean
      */
@@ -1190,7 +1202,14 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get information about billing documents that provide evidence of claims made in the bill
+     * Add an information about additional supporting documents substantiating the claims made in the order.
+     * The additional supporting documents can be used for both referencing a document number which is expected to be
+     * known by the receiver, an external document (referenced by a URL) or as an embedded document (such as a time
+     * report in pdf). The option to link to an external document will be needed, for example in the case of large
+     * attachments and/or when sensitive information, e.g. person-related services, has to be separated from the order itself.
+     *
+     * This method should be used together witd __OrderDocumentReader::firstDocumentAdditionalReferencedDocument__ and
+     * __OrderDocumentReader::nextDocumentAdditionalReferencedDocument__
      *
      * @param string|null $additionalRefTypeCode
      * Type of referenced document (See codelist UNTDID 1001)
@@ -1212,7 +1231,7 @@ class OrderDocumentReader extends OrderDocument
      * recipient which scheme is used for the identifier, an identifier of the scheme should be used, which must be selected
      * from UNTDID 1153 in accordance with the code list entries.
      * @param DateTime|null $additionalRefDate
-     * Document date
+     * The formatted date or date time for the issuance of this referenced Additional Document.
      * @return OrderDocumentReader
      */
     public function getDocumentAdditionalReferencedDocument(?string &$additionalRefTypeCode, ?string &$additionalRefId, ?string &$additionalRefURIID, ?string &$additionalRefName, ?string &$additionalRefRefTypeCode, ?DateTime &$additionalRefDate): OrderDocumentReader
@@ -1235,7 +1254,10 @@ class OrderDocumentReader extends OrderDocument
 
     /**
      * Get the binary data from the current additional document. You have to
-     * specify $binarydatadirectory-Property using the __setBinaryDataDirectory__ method
+     * specify $binarydatadirectory-Property using the __setBinaryDataDirectory__ method.
+     *
+     * This method should be used together witd __OrderDocumentReader::firstDocumentAdditionalReferencedDocument__ and
+     * __OrderDocumentReader::nextDocumentAdditionalReferencedDocument__
      *
      * @param string|null $binarydatafilename
      * The fuill-qualified filename where the data where stored. If no binary data are
@@ -1270,7 +1292,7 @@ class OrderDocumentReader extends OrderDocument
      * @param string $blanketOrderRefId
      * The identification of a Blanket Order, issued by the Buyer or the Buyer Requisitioner.
      * @param DateTime|null $blanketOrderRefDate
-     * The date or date time for the issuance of this referenced Blanket Order.
+     * The formatted date or date time for the issuance of this referenced Blanket Order.
      * @return OrderDocumentReader
      */
     public function getDocumentBlanketOrderReferencedDocument(?string &$blanketOrderRefId, ?DateTime &$blanketOrderRefDate): OrderDocumentReader
@@ -1290,7 +1312,7 @@ class OrderDocumentReader extends OrderDocument
      * @param string $prevOrderChangeRefId
      * The identification of a the Previous Order Change Document, issued by the Buyer or the Buyer Requisitioner.
      * @param DateTime|null $prevOrderChangeRefDate
-     * Issued date
+     * The formatted date or date time for the issuance of this referenced Previous Order Change.
      * @return OrderDocumentReader
      */
     public function getDocumentPreviousOrderChangeReferencedDocument(?string &$prevOrderChangeRefId, ?DateTime &$prevOrderChangeRefDate): OrderDocumentReader
@@ -1310,7 +1332,7 @@ class OrderDocumentReader extends OrderDocument
      * @param string $prevOrderResponseRefId
      * The identification of a the Previous Order Response Document, issued by the Seller.
      * @param DateTime|null $prevOrderResponseRefDate
-     * Issued date
+     * The formatted date or date time for the issuance of this referenced Previous Order Response.
      * @return OrderDocumentReader
      */
     public function getDocumentPreviousOrderResponseReferencedDocument(?string &$prevOrderResponseRefId, ?DateTime &$prevOrderResponseRefDate): OrderDocumentReader
@@ -1325,12 +1347,12 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get Details of a project reference
+     * Set the procuring project specified for this header trade agreement.
      *
      * @param string $procuringProjectId
-     * Project Data
+     * The unique identifier of this procuring project.
      * @param string $procuringProjectName
-     * Project Name
+     * The name of this procuring project.
      * @return OrderDocumentReader
      */
     public function getDocumentProcuringProject(?string &$procuringProjectId, ?string &$procuringProjectName): OrderDocumentReader
@@ -1342,13 +1364,15 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Ship-To
+     * Set information about the Ship-To-Party
+     * The Ship-To-Party provides information about where and when the goods and services ordered are delivered.
      *
      * @param string $name
-     * The full formal name by which the party is registered in the national registry of
-     * legal entities or as a Taxable person or otherwise trades as a person or persons.
+     * The name of the party to which the goods and services are delivered.
      * @param array|null $id
-     * An identification of the Party. The identification scheme identifier of the Party identifier.
+     * An identification of the Party.
+     * If no scheme is specified, it should be known by Buyer and Seller, e.g. a previously exchanged Buyer or Seller assigned identifier.
+     * If used, the identification scheme shall be chosen from the entries of the list published by the ISO/IEC 6523 maintenance agency.
      * @param string|null $description
      * Additional legal information relevant for the Paety.
      * @return OrderDocumentReader
@@ -1365,7 +1389,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get global identifier of the seller.
+     * Get global identifiers for the Ship-to Trade Party
      *
      * @param array|null $globalID
      * Array of the sellers global ids indexed by the identification scheme. The identification scheme results
@@ -1457,9 +1481,9 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Seek to the first ship-to contact of the document.
+     * Seek to the first ship-to contact.
      * Returns true if a first ship-to contact is available, otherwise false
-     * You may use this together with OrderDocumentReader::getDocumentShipToContact
+     * You should use this together with OrderDocumentReader::getDocumentShipToContact
      *
      * @return boolean
      */
@@ -1471,9 +1495,9 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Seek to the next available first ship-to contact of the document.
+     * Seek to the next available ship-to contact.
      * Returns true if another ship-to contact is available, otherwise false
-     * You may use this together with OrderDocumentReader::getDocumentShipToContact
+     * You should use this together with OrderDocumentReader::getDocumentShipToContact
      *
      * @return boolean
      */
@@ -1534,7 +1558,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Ship-From
+     * Get information about the party from which the goods and services are delivered or picked up
      *
      * @param string $name
      * The full formal name by which the party is registered in the national registry of
@@ -1557,7 +1581,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get global identifier of the Ship-From Trade party.
+     * Get global identifier of the party from which the goods and services are delivered or picked up
      *
      * @param array|null $globalID
      * Array of the sellers global ids indexed by the identification scheme. The identification scheme results
@@ -1573,7 +1597,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get Tax registration to Ship-From Trade party
+     * Get Tax registration of the party from which the goods and services are delivered or picked up
      *
      * @param array|null $taxreg
      * Array of sales tax identification numbers of the seller indexed by Scheme identifier (e.g.: __FC__ for _Tax number of the seller_ and __VA__
@@ -1589,7 +1613,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get the postal address of the Ship-From party
+     * Get the postal address of the party from which the goods and services are delivered or picked up
      *
      * @param string|null $lineone
      * The main line in the party's address. This is usually the street name and house number or
@@ -1626,7 +1650,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Set legal organisation of the Ship-From party
+     * Set legal organisation of the party from which the goods and services are delivered or picked up
      *
      * @param string|null $legalorgid
      * An identifier issued by an official registrar that identifies the
@@ -1650,7 +1674,7 @@ class OrderDocumentReader extends OrderDocument
 
     /**
      * Seek to the first ship-from contact of the document.
-     * Returns true if a first ship-to contact is available, otherwise false
+     * Returns true if a ship-to contact is available, otherwise false
      * You may use this together with OrderDocumentReader::getDocumentShipFromContact
      *
      * @return boolean
@@ -1677,7 +1701,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get contact of the Ship-From Trade party
+     * Get contact of the party from which the goods and services are delivered or picked up
      *
      * @param string|null $contactpersonname
      * Contact point for a legal entity, such as a personal name of the contact person
@@ -1708,7 +1732,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Set the universal communication info for the Ship-From Trade Party
+     * Get the universal communication info for the party from which the goods and services are delivered or picked up
      *
      * @param string|null $uriType
      * Identifies the electronic address to which the application level response to the order may be delivered.
@@ -1754,11 +1778,9 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get the requested date or period on which delivery is requested at current
-     * pointer position. See
-     *  - __$documentRequestedDeliverySupplyChainEventPointer)__
-     *  - __OrderDocumentReader::firstDocumentRequestedDeliverySupplyChainEvent__
-     *  - __OrderDocumentReader::nextDocumentRequestedDeliverySupplyChainEvent__
+     * Get the requested date or period on which delivery is requested
+     * This method should be used together with __OrderDocumentReader::firstDocumentRequestedDeliverySupplyChainEvent__
+     * and __OrderDocumentReader::nextDocumentRequestedDeliverySupplyChainEvent__
      *
      * @param DateTime $occurrenceDateTime
      * A Requested Date on which Delivery is requested
@@ -1790,7 +1812,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Set detailed information on the Invoicee Trade Party
+     * Get detailed information on the Party to which the invoice must be sent
      *
      * @param string $name
      * The full formal name by which the party is registered in the national registry of
@@ -1813,7 +1835,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get global identifier of the Invoicee.
+     * Get global identifier of the Party to which the invoice must be sent.
      *
      * @param array|null $globalID
      * Array of the sellers global ids indexed by the identification scheme. The identification scheme results
@@ -1829,7 +1851,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get Tax registration to Invoicee Trade Party
+     * Get Tax registration to the Party to which the invoice must be sent
      *
      * @param array|null $taxreg
      * Array of sales tax identification numbers of the seller indexed by Scheme identifier (e.g.: __FC__ for _Tax number of the seller_ and __VA__
@@ -1845,7 +1867,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get the address of Invoicee trade party
+     * Get the address of the Party to which the invoice must be sent
      *
      * @param string|null $lineone
      * The main line in the invoicee's address. This is usually the street name and house number or
@@ -1882,7 +1904,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get the legal organisation of invoice trade party
+     * Get the legal organisation of the Party to which the invoice must be sent
      *
      * @param string|null $legalorgid
      * An identifier issued by an official registrar that identifies the
@@ -1907,7 +1929,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Seek to the first invoice contact of the document.
+     * Seek to the first contact of the Party to which the invoice must be sent.
      * Returns true if a first invoice contact is available, otherwise false
      * You may use this together with OrderDocumentReader::getDocumentinvoiceeContact
      *
@@ -1921,7 +1943,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Seek to the next available first invoicee contact of the document.
+     * Seek to the next available contact of the Party to which the invoice must be sent.
      * Returns true if another invoicee contact is available, otherwise false
      * You may use this together with OrderDocumentReader::getDocumentInvoiceeContact
      *
@@ -1935,7 +1957,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Get detailed information on the invoicee's contact person
+     * Get detailed information on the Party to which the invoice must be sent
      *
      * @param string|null $contactpersonname
      * Contact point for a legal entity, such as a personal name of the contact person
@@ -1966,7 +1988,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Set the universal communication info for the invoicee
+     * Set the universal communication info for the Party to which the invoice must be sent
      *
      * @param string|null $uriType
      * Identifies the electronic address to which the application level response to the order may be delivered.
@@ -2014,24 +2036,13 @@ class OrderDocumentReader extends OrderDocument
     /**
      * Get detailed information on the payment method
      *
-     * @param string|null $paymentMeansCode
-     * The expected or used means of payment, expressed as a code. The entries from the UNTDID 4461 code list
-     * must be used. A distinction should be made between SEPA and non-SEPA payments as well as between credit
-     * payments, direct debits, card payments and other means of payment In particular, the following codes can
-     * be used:
-     *  - 10: cash
-     *  - 20: check
-     *  - 30: transfer
-     *  - 42: Payment to bank account
-     *  - 48: Card payment
-     *  - 49: direct debit
-     *  - 57: Standing order
-     *  - 58: SEPA Credit Transfer
-     *  - 59: SEPA Direct Debit
-     *  - 97: Report
+     * @param string $paymentMeansCode
+     * The means, expressed as code, for how a payment is expected to be or has been settled.
+     * Entries from the UNTDID 4461 code list  shall be used. Distinction should be made between
+     * SEPA and non-SEPA payments, and between credit payments, direct debits, card payments and
+     * other instruments.
      * @param string|null $paymentMeansInformation
-     * The expected or used means of payment expressed in text form, e.g. cash, bank transfer, direct debit,
-     * credit card, etc.
+     * Such as cash, credit transfer, direct debit, credit card, etc.
      * @return OrderDocumentReader
      */
     public function getDocumentPaymentMeans(?string &$paymentMeansCode, ?string &$paymentMeansInformation): OrderDocumentReader
@@ -2210,7 +2221,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Seek to the first documents allowance charge. Returns true if the first position is available, otherwise false
+     * Seek to the first documents allowance charge. Returns true if the first allowance/charge is available, otherwise false
      * You may use this together with OrderDocumentReader::getDocumentAllowanceCharge
      *
      * @return boolean
@@ -2223,7 +2234,7 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Seek to the next documents allowance charge. Returns true if a other position is available, otherwise false
+     * Seek to the next documents allowance charge. Returns true if another allowance/charge is available, otherwise false
      * You may use this together with OrderDocumentReader::getDocumentAllowanceCharge
      *
      * @return boolean
@@ -2336,6 +2347,23 @@ class OrderDocumentReader extends OrderDocument
         $basisQuantityUnitCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getBasisQuantity.getUnitCode", "");
         $reasonCode = $this->getInvoiceValueByPathFrom($allowanceCharge, "getReasonCode", "");
         $reason = $this->getInvoiceValueByPathFrom($allowanceCharge, "getReason", "");
+
+        return $this;
+    }
+
+    /**
+     * Get an AccountingAccount
+     *
+     * @param string|null $id
+     * A textual value that specifies where to book the relevant data into the Buyer's financial accounts.
+     * @param string|null $typeCode
+     * The code specifying the type of trade accounting account, such as general (main), secondary, cost accounting or budget account.
+     * @return OrderDocumentReader
+     */
+    public function getDocumentReceivableSpecifiedTradeAccountingAccount(?string &$id, ?string &$typeCode): OrderDocumentReader
+    {
+        $id = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getReceivableSpecifiedTradeAccountingAccount.getID", "");
+        $typeCode = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeSettlement.getReceivableSpecifiedTradeAccountingAccount.getTypeCode", "");
 
         return $this;
     }
