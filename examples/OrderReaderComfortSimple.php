@@ -2,7 +2,6 @@
 
 use horstoeko\orderx\OrderDocumentPdfReader;
 use horstoeko\orderx\OrderDocumentReader;
-use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 
 require dirname(__FILE__) . "/../vendor/autoload.php";
 
