@@ -2427,7 +2427,7 @@ class OrderDocumentBuilder extends OrderDocument
     public function setDocumentPositionProductCharacteristic(string $description, string $value, ?string $typecode = null, ?float $measureValue = null, ?string $measureUnitCode = null): OrderDocumentBuilder
     {
         $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
-        $productCharacteristic = $this->objectHelper->getProductCharacteristicType($typecode, $description, $value);
+        $productCharacteristic = $this->objectHelper->getProductCharacteristicType($typecode, $description, $value, $measureValue, $measureUnitCode);
         $this->objectHelper->tryCallIfMethodExists($product, "addToApplicableProductCharacteristic", "setApplicableProductCharacteristic", [$productCharacteristic], $productCharacteristic);
         return $this;
     }
@@ -2452,7 +2452,7 @@ class OrderDocumentBuilder extends OrderDocument
     public function addDocumentPositionProductCharacteristic(string $description, string $value, ?string $typecode = null, ?float $measureValue = null, ?string $measureUnitCode = null): OrderDocumentBuilder
     {
         $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
-        $productCharacteristic = $this->objectHelper->getProductCharacteristicType($typecode, $description, $value);
+        $productCharacteristic = $this->objectHelper->getProductCharacteristicType($typecode, $description, $value, $measureValue, $measureUnitCode);
         $this->objectHelper->tryCall($product, "addToApplicableProductCharacteristic", $productCharacteristic);
         return $this;
     }
@@ -2511,7 +2511,7 @@ class OrderDocumentBuilder extends OrderDocument
      * Set the unique batch identifier for this trade product instance and
      * the unique supplier assigned serial identifier for this trade product instance.
      *
-     * @param string $batchID
+     * @param string|null $batchID
      * The unique batch identifier for this trade product instance
      * @param string|null $serialId
      * The unique supplier assigned serial identifier for this trade product instance.
@@ -2529,7 +2529,7 @@ class OrderDocumentBuilder extends OrderDocument
      * Add a new unique batch identifier for this trade product instance and
      * the unique supplier assigned serial identifier for this trade product instance.
      *
-     * @param string $batchID
+     * @param string|null $batchID
      * The unique batch identifier for this trade product instance
      * @param string|null $serialId
      * The unique supplier assigned serial identifier for this trade product instance.
