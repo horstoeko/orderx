@@ -140,7 +140,7 @@ class OrderSettings
     /**
      * Set the decimal separator
      *
-     * @param string $decimalSeparator
+     * @param  string $decimalSeparator
      * @return void
      */
     public static function setDecimalSeparator(string $decimalSeparator): void
@@ -161,7 +161,7 @@ class OrderSettings
     /**
      * Set the thousands separator
      *
-     * @param string $thousandsSeparator
+     * @param  string $thousandsSeparator
      * @return void
      */
     public static function setThousandsSeparator(string $thousandsSeparator): void
@@ -182,7 +182,7 @@ class OrderSettings
     /**
      * Set the filename of the ICC Profile
      *
-     * @param string $iccProfileFilename
+     * @param  string $iccProfileFilename
      * @return void
      */
     public static function setIccProfileFilename(string $iccProfileFilename): void

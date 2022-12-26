@@ -225,18 +225,18 @@ class OrderDocumentPdfBuilder
         $docTypeCode = $docTypeXpath->item(0)->nodeValue;
 
         switch ($docTypeCode) {
-            case OrderDocumentTypes::ORDER:
-                $docTypeName = 'Order';
-                break;
-            case OrderDocumentTypes::ORDER_CHANGE:
-                $docTypeName = 'Order Change';
-                break;
-            case OrderDocumentTypes::ORDER_RESPONSE:
-                $docTypeName = 'Order Response';
-                break;
-            default:
-                $docTypeName = 'Order';
-                break;
+        case OrderDocumentTypes::ORDER:
+            $docTypeName = 'Order';
+            break;
+        case OrderDocumentTypes::ORDER_CHANGE:
+            $docTypeName = 'Order Change';
+            break;
+        case OrderDocumentTypes::ORDER_RESPONSE:
+            $docTypeName = 'Order Response';
+            break;
+        default:
+            $docTypeName = 'Order';
+            break;
         }
 
         $orderInformation = array(
@@ -253,7 +253,7 @@ class OrderDocumentPdfBuilder
      * Returns true if the submittet parameter $pdfData is a valid file.
      * Otherwise it will return false
      *
-     * @param string $pdfData
+     * @param  string $pdfData
      * @return boolean
      */
     private function pdfDataIsFile($pdfData): bool

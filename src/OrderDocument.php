@@ -32,42 +32,42 @@ class OrderDocument
     /**
      * @internal
      * Internal profile id (see OrderProfiles.php)
-     * @var integer
+     * @var      integer
      */
     public $profileId = -1;
 
     /**
      * @internal
      * Internal profile definition (see OrderProfiles.php)
-     * @var array
+     * @var      array
      */
     public $profileDefinition = [];
 
     /**
      * @internal
      * Serializer builder
-     * @var SerializerBuilder
+     * @var      SerializerBuilder
      */
     protected $serializerBuilder;
 
     /**
      * @internal
      * Serializer
-     * @var SerializerInterface
+     * @var      SerializerInterface
      */
     protected $serializer;
 
     /**
      * @internal
      * The internal invoice object
-     * @var \horstoeko\orderx\entities\basic\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure
+     * @var      \horstoeko\orderx\entities\basic\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure
      */
     protected $orderObject = null;
 
     /**
      * @internal
      * Object Helper
-     * @var OrderObjectHelper
+     * @var      OrderObjectHelper
      */
     protected $objectHelper = null;
 
@@ -215,11 +215,13 @@ class OrderDocument
         $this->serializerBuilder->addDefaultListeners();
         $this->serializerBuilder->addDefaultHandlers();
 
-        $this->serializerBuilder->configureHandlers(function (HandlerRegistryInterface $handler) {
-            $handler->registerSubscribingHandler(new BaseTypesHandler());
-            $handler->registerSubscribingHandler(new XmlSchemaDateHandler());
-            $handler->registerSubscribingHandler(new OrderTypesHandler());
-        });
+        $this->serializerBuilder->configureHandlers(
+            function (HandlerRegistryInterface $handler) {
+                $handler->registerSubscribingHandler(new BaseTypesHandler());
+                $handler->registerSubscribingHandler(new XmlSchemaDateHandler());
+                $handler->registerSubscribingHandler(new OrderTypesHandler());
+            }
+        );
 
         $this->serializer = $this->serializerBuilder->build();
 

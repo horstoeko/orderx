@@ -74,7 +74,7 @@ abstract class TestCase extends PhpUnitTestCase
     /**
      * Register a file to delete in testcase teardown
      *
-     * @param string $filename
+     * @param  string $filename
      * @return void
      */
     public function registerFileForTestCaseTeardown(string $filename): void
@@ -85,7 +85,7 @@ abstract class TestCase extends PhpUnitTestCase
     /**
      * Register a file to delete in testmethod teardown
      *
-     * @param string $filename
+     * @param  string $filename
      * @return void
      */
     public function registerFileForTestMethodTeardown(string $filename): void
@@ -111,8 +111,8 @@ abstract class TestCase extends PhpUnitTestCase
     /**
      * Access to private properties
      *
-     * @param string $className
-     * @param string $propertyName
+     * @param  string $className
+     * @param  string $propertyName
      * @return ReflectionProperty
      */
     public function getPrivatePropertyFromClassname(string $className, string $propertyName): ReflectionProperty
@@ -126,8 +126,8 @@ abstract class TestCase extends PhpUnitTestCase
     /**
      * Access to private properties
      *
-     * @param object $object
-     * @param string $propertyName
+     * @param  object $object
+     * @param  string $propertyName
      * @return ReflectionProperty
      */
     public function getPrivatePropertyFromObject(object $object, string $propertyName): ReflectionProperty
@@ -141,8 +141,8 @@ abstract class TestCase extends PhpUnitTestCase
     /**
      * Access to private method
      *
-     * @param string $className
-     * @param string $methodName
+     * @param  string $className
+     * @param  string $methodName
      * @return ReflectionMethod
      */
     public function getPrivateMethodFromClassname(string $className, string $methodName): ReflectionMethod
@@ -156,8 +156,8 @@ abstract class TestCase extends PhpUnitTestCase
     /**
      * Access to private method
      *
-     * @param object $object
-     * @param string $methodName
+     * @param  object $object
+     * @param  string $methodName
      * @return ReflectionMethod
      */
     public function getPrivateMethodFromObject(object $object, string $methodName): ReflectionMethod

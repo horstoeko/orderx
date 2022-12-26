@@ -25,7 +25,7 @@ class OrderMimeTypeNotSupportedException extends OrderBaseException
     /**
      * Constructor
      *
-     * @param string $mimetype
+     * @param string         $mimetype
      * @param Throwable|null $previous
      */
     public function __construct(string $mimetype, ?Throwable $previous = null)

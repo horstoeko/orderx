@@ -33,7 +33,7 @@ class OrderDocumentPdfReader
     /**
      * Load a PDF file (Order-X)
      *
-     * @param string $pdfFilename
+     * @param  string $pdfFilename
      * Contains a full-qualified filename which must exist and must be readable
      * @return OrderDocumentReader|null
      * @throws OrderFileNotFoundException

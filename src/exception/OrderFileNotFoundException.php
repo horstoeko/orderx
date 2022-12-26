@@ -25,7 +25,7 @@ class OrderFileNotFoundException extends OrderBaseException
     /**
      * Constructor
      *
-     * @param string $filename
+     * @param string         $filename
      * @param Throwable|null $previous
      */
     public function __construct(string $filename, ?Throwable $previous = null)

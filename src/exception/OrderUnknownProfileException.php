@@ -25,7 +25,7 @@ class OrderUnknownProfileException extends OrderBaseException
     /**
      * Constructor
      *
-     * @param string $profileString
+     * @param string         $profileString
      * @param Throwable|null $previous
      */
     public function __construct(string $profileString, ?Throwable $previous = null)

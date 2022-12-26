@@ -10,7 +10,7 @@ trait HandlesCreateTestDocument
     /**
      * Create a full test document (internal used only)
      *
-     * @param string $documentTypeCode
+     * @param  string $documentTypeCode
      * @return OrderDocumentBuilder
      */
     protected function createTestDocument(string $documentTypeCode): OrderDocumentBuilder
