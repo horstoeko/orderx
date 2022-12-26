@@ -63,7 +63,6 @@ class OrderObjectHelperExtendedTest extends TestCase
     public function testMethodExists(): void
     {
         $this->assertFalse(self::$objectHelper->methodExists(null, "test"));
-        $this->assertFalse(self::$objectHelper->methodExists(1.0, "test"));
         $this->assertTrue(self::$objectHelper->methodExists(self::$objectHelper->createClassInstance("udt\IDType"), "value"));
         $this->assertTrue(self::$objectHelper->methodExists(self::$objectHelper->createClassInstance("udt\IDType"), "getSchemeID"));
     }
@@ -75,13 +74,13 @@ class OrderObjectHelperExtendedTest extends TestCase
     {
         $array = ["1", "2"];
 
-        $this->assertNull(self::$objectHelper->checkArrayIndex($array, 0));
-        $this->assertNull(self::$objectHelper->checkArrayIndex($array, 1));
+        self::$objectHelper->checkArrayIndex($array, 0);
+        self::$objectHelper->checkArrayIndex($array, 1);
 
         $this->expectException(OutOfRangeException::class);
 
-        $this->assertNull(self::$objectHelper->checkArrayIndex($array, 2));
-        $this->assertNull(self::$objectHelper->checkArrayIndex($array, 3));
+        self::$objectHelper->checkArrayIndex($array, 2);
+        self::$objectHelper->checkArrayIndex($array, 3);
     }
 
     /**

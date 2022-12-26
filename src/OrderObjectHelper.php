@@ -1354,7 +1354,7 @@ class OrderObjectHelper
     /**
      * Tries to call a method
      *
-     * @param object $instance
+     * @param object|null $instance
      * @param string $method
      * @param mixed $value
      * @return OrderObjectHelper
@@ -1379,7 +1379,7 @@ class OrderObjectHelper
     /**
      * Tries to call a method with two parameters
      *
-     * @param object $instance
+     * @param object|null $instance
      * @param string $method
      * @param mixed $value1
      * @param mixed $value2
@@ -1408,7 +1408,7 @@ class OrderObjectHelper
     /**
      * Try call all methods
      *
-     * @param object $instance
+     * @param object|null $instance
      * @param string[] $methods
      * @param mixed $value
      * @return OrderObjectHelper
@@ -1434,7 +1434,7 @@ class OrderObjectHelper
      * Tries to call a method and return the returnvalue from call to $method
      * in object $instance
      *
-     * @param object $instance
+     * @param object|null $instance
      * @param string $method
      * @return mixed
      */
@@ -1455,7 +1455,7 @@ class OrderObjectHelper
     /**
      * Try call methods in a form .object.method1.method2.method3
      *
-     * @param object $instance
+     * @param object|null $instance
      * @param string $methods
      * @param mixed $value
      * @return void
@@ -1476,7 +1476,7 @@ class OrderObjectHelper
     /**
      * Try call methods in a form .object.method1.method2.method3
      *
-     * @param object $instance
+     * @param object|null $instance
      * @param string $methods
      * @return mixed
      */
@@ -1496,7 +1496,7 @@ class OrderObjectHelper
     /**
      * Call $method if exists, otherwise $method2 is calles with $value
      *
-     * @param object $instance
+     * @param object|null $instance
      * @param string $methodToLookFor
      * @param string $methodToCall
      * @param mixed $value
@@ -1599,7 +1599,7 @@ class OrderObjectHelper
     /**
      * Wrapper for method_exists for use in PHP8
      *
-     * @param string|object $instance
+     * @param string|object|null $instance
      * @param string $method
      * @return boolean
      */
