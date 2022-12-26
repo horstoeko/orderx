@@ -78,7 +78,7 @@ class OrderDocumentPdfReaderComfortTest extends TestCase
 
         $this->assertEquals("PO123456789", $documentNo);
         $this->assertEquals(OrderDocumentTypes::ORDER, $documentTypeCode);
-        $this->assertEquals("25.12.2022", $documentDate->format('d.m.Y'));
+        $this->assertEquals("26.12.2022", $documentDate->format('d.m.Y'));
         $this->assertEquals("EUR", $documentCurrency);
         $this->assertEquals("Doc Name", $documentName);
         $this->assertEmpty($documentLanguageId);
@@ -96,7 +96,7 @@ class OrderDocumentPdfReaderComfortTest extends TestCase
         self::$document->getIsDocumentCopy($documentIsCopy);
 
         $this->assertNotNull($documentIsCopy);
-        $this->assertFalse($documentIsCopy);
+        $this->assertTrue($documentIsCopy);
     }
 
     /**
@@ -1156,9 +1156,9 @@ class OrderDocumentPdfReaderComfortTest extends TestCase
         $this->assertNotNull($occurrenceDateTime);
         $this->assertNotNull($startDateTime);
         $this->assertNotNull($endDateTime);
-        $this->assertEquals("25.12.2022", $occurrenceDateTime->format('d.m.Y'));
-        $this->assertEquals("25.12.2022", $startDateTime->format('d.m.Y'));
-        $this->assertEquals("25.12.2022", $endDateTime->format('d.m.Y'));
+        $this->assertEquals("26.12.2022", $occurrenceDateTime->format('d.m.Y'));
+        $this->assertEquals("26.12.2022", $startDateTime->format('d.m.Y'));
+        $this->assertEquals("26.12.2022", $endDateTime->format('d.m.Y'));
     }
 
     /**
@@ -1486,7 +1486,7 @@ class OrderDocumentPdfReaderComfortTest extends TestCase
         self::$document->getDocumentReceivableSpecifiedTradeAccountingAccount($id, $typeCode);
 
         $this->assertEquals("BUYER_ACCOUNT_REF", $id);
-        $this->assertEquals("", $typeCode);
+        $this->assertEquals("BUYER_ACCOUNT_REF_TYPE", $typeCode);
     }
 
     /**
@@ -2665,7 +2665,7 @@ class OrderDocumentPdfReaderComfortTest extends TestCase
         $this->assertEquals(0, $sequence);
         $this->assertEquals(0, $basisQuantity);
         $this->assertEquals("", $basisQuantityUnitCode);
-        $this->assertEquals("", $reasonCode);
+        $this->assertEquals("95", $reasonCode);
 
         self::$document->nextDocumentPositionGrossPriceAllowanceCharge();
         self::$document->getDocumentPositionGrossPriceAllowanceCharge($actualAmount, $isCharge, $calculationPercent, $basisAmount, $reason, $taxTypeCode, $taxCategoryCode, $rateApplicablePercent, $sequence, $basisQuantity, $basisQuantityUnitCode, $reasonCode);
@@ -2681,7 +2681,7 @@ class OrderDocumentPdfReaderComfortTest extends TestCase
         $this->assertEquals(0, $sequence);
         $this->assertEquals(0, $basisQuantity);
         $this->assertEquals("", $basisQuantityUnitCode);
-        $this->assertEquals("", $reasonCode);
+        $this->assertEquals("AEW", $reasonCode);
 
         $this->assertFalse(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
     }
@@ -2707,7 +2707,7 @@ class OrderDocumentPdfReaderComfortTest extends TestCase
         $this->assertEquals(0, $sequence);
         $this->assertEquals(0, $basisQuantity);
         $this->assertEquals("", $basisQuantityUnitCode);
-        $this->assertEquals("", $reasonCode);
+        $this->assertEquals("AEW", $reasonCode);
 
         $this->assertFalse(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
     }
@@ -3468,7 +3468,7 @@ class OrderDocumentPdfReaderComfortTest extends TestCase
     {
         self::$document->firstDocumentPosition();
 
-        $this->assertFalse(self::$document->firstDocumentPositionTax());
+        $this->assertTrue(self::$document->firstDocumentPositionTax());
     }
 
     /**
@@ -3518,5 +3518,29 @@ class OrderDocumentPdfReaderComfortTest extends TestCase
     public function testNextDocumentPositionTaxPos3(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionTax());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionTax(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionTax(
+            $categoryCode,
+            $typeCode,
+            $rateApplicablePercent,
+            $calculatedAmount,
+            $exemptionReason,
+            $exemptionReasonCode
+        );
+
+        $this->assertEquals("S", $categoryCode);
+        $this->assertEquals("VAT", $typeCode);
+        $this->assertEquals(19.0, $rateApplicablePercent);
+        $this->assertEquals(0.0, $calculatedAmount);
+        $this->assertEquals("", $exemptionReason);
+        $this->assertEquals("", $exemptionReasonCode);
     }
 }
