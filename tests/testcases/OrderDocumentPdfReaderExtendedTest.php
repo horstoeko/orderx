@@ -3,6 +3,7 @@
 namespace horstoeko\orderx\tests\testcases;
 
 use horstoeko\orderx\codelists\OrderDocumentTypes;
+use horstoeko\orderx\exception\OrderFileNotFoundException;
 use horstoeko\orderx\exception\OrderNoValidAttachmentFoundInPdfException;
 use horstoeko\orderx\OrderDocumentPdfReader;
 use horstoeko\orderx\OrderProfiles;
@@ -14,6 +15,17 @@ class OrderDocumentPdfReaderExtendedTest extends TestCase
      * @var \horstoeko\orderx\OrderDocumentReader
      */
     protected static $document;
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentPdfReader
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testPdfReadNotExists(): void
+    {
+        $this->expectException(OrderFileNotFoundException::class);
+        self::$document = OrderDocumentPdfReader::readAndGuessFromFile(dirname(__FILE__) . '/../assets/reader-notexists.pdf');
+    }
 
     /**
      * @covers \horstoeko\orderx\OrderDocumentPdfReader
