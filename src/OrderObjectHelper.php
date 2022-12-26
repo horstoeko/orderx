@@ -229,28 +229,6 @@ class OrderObjectHelper
     }
 
     /**
-     * Get date
-     *
-     * @param DateTime|null $datetime
-     * @return object|null
-     */
-    public function getDateType(?DateTime $datetime = null): ?object
-    {
-        if (self::isAllNullOrEmpty(func_get_args())) {
-            return null;
-        }
-
-        $date2 = $this->createClassInstance('udt\DateType\DateStringAType');
-        $this->tryCall($date2, "value", $datetime->format("Ymd"));
-        $this->tryCall($date2, "setFormat", "102");
-
-        $date = $this->createClassInstance('udt\DateType');
-        $this->tryCall($date, "setDateString", $date2);
-
-        return $date;
-    }
-
-    /**
      * Representation of Amount
      *
      * @param float|null $value
@@ -410,11 +388,11 @@ class OrderObjectHelper
             return null;
         }
 
-        $category = $this->createClassInstance('qdt\TimeReferenceCodeType');
+        $timeReference = $this->createClassInstance('qdt\TimeReferenceCodeType');
 
-        $this->tryCall($category, "value", $value);
+        $this->tryCall($timeReference, "value", $value);
 
-        return $category;
+        return $timeReference;
     }
 
     /**
