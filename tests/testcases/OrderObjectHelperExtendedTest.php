@@ -2,11 +2,12 @@
 
 namespace horstoeko\orderx\tests\testcases;
 
+use horstoeko\orderx\exception\OrderMimeTypeNotSupportedException;
+use horstoeko\orderx\OrderObjectHelper;
 use horstoeko\orderx\OrderProfiles;
 use horstoeko\orderx\tests\TestCase;
-use horstoeko\orderx\OrderObjectHelper;
 use horstoeko\stringmanagement\FileUtils;
-use horstoeko\orderx\exception\OrderMimeTypeNotSupportedException;
+use OutOfRangeException;
 
 class OrderObjectHelperExtendedTest extends TestCase
 {
@@ -39,6 +40,135 @@ class OrderObjectHelperExtendedTest extends TestCase
         $this->assertArrayHasKey("schematronfilename", $property->getValue(self::$objectHelper));
         $this->assertEquals("extended", $property->getValue(self::$objectHelper)['name']);
         $this->assertEquals("EXTENDED", $property->getValue(self::$objectHelper)['altname']);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testCreateClassInstance(): void
+    {
+        $instance = self::$objectHelper->createClassInstance("Baum");
+
+        $this->assertNull($instance);
+
+        $instance = self::$objectHelper->createClassInstance("udt\IDType");
+
+        $this->assertNotNull($instance);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testMethodExists(): void
+    {
+        $this->assertFalse(self::$objectHelper->methodExists(null, "test"));
+        $this->assertFalse(self::$objectHelper->methodExists(1.0, "test"));
+        $this->assertTrue(self::$objectHelper->methodExists(self::$objectHelper->createClassInstance("udt\IDType"), "value"));
+        $this->assertTrue(self::$objectHelper->methodExists(self::$objectHelper->createClassInstance("udt\IDType"), "getSchemeID"));
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testCheckArrayIndex(): void
+    {
+        $array = ["1", "2"];
+
+        $this->assertNull(self::$objectHelper->checkArrayIndex($array, 0));
+        $this->assertNull(self::$objectHelper->checkArrayIndex($array, 1));
+
+        $this->expectException(OutOfRangeException::class);
+
+        $this->assertNull(self::$objectHelper->checkArrayIndex($array, 2));
+        $this->assertNull(self::$objectHelper->checkArrayIndex($array, 3));
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testEnsureArray(): void
+    {
+        $variable = "abc";
+
+        $this->assertIsArray(self::$objectHelper->ensureArray($variable));
+        $this->assertArrayHasKey(0, self::$objectHelper->ensureArray($variable));
+        $this->assertArrayNotHasKey(1, self::$objectHelper->ensureArray($variable));
+        $this->assertEquals("abc", self::$objectHelper->ensureArray($variable)[0]);
+
+        $variable = null;
+
+        $this->assertIsArray(self::$objectHelper->ensureArray($variable));
+        $this->assertArrayNotHasKey(0, self::$objectHelper->ensureArray($variable));
+        $this->assertArrayNotHasKey(1, self::$objectHelper->ensureArray($variable));
+
+        $variable = ["abc"];
+
+        $this->assertIsArray(self::$objectHelper->ensureArray($variable));
+        $this->assertArrayHasKey(0, self::$objectHelper->ensureArray($variable));
+        $this->assertArrayNotHasKey(1, self::$objectHelper->ensureArray($variable));
+        $this->assertEquals("abc", self::$objectHelper->ensureArray($variable)[0]);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testEnsureStringArray(): void
+    {
+        $variable = 1.0;
+
+        $this->assertIsArray(self::$objectHelper->ensureStringArray($variable));
+        $this->assertArrayHasKey(0, self::$objectHelper->ensureStringArray($variable));
+        $this->assertArrayNotHasKey(1, self::$objectHelper->ensureStringArray($variable));
+        $this->assertEquals("1", self::$objectHelper->ensureStringArray($variable)[0]);
+
+        $variable = 1.01;
+
+        $this->assertIsArray(self::$objectHelper->ensureStringArray($variable));
+        $this->assertArrayHasKey(0, self::$objectHelper->ensureStringArray($variable));
+        $this->assertArrayNotHasKey(1, self::$objectHelper->ensureStringArray($variable));
+        $this->assertEquals("1.01", self::$objectHelper->ensureStringArray($variable)[0]);
+
+        $variable = [1.02];
+
+        $this->assertIsArray(self::$objectHelper->ensureStringArray($variable));
+        $this->assertArrayHasKey(0, self::$objectHelper->ensureStringArray($variable));
+        $this->assertArrayNotHasKey(1, self::$objectHelper->ensureStringArray($variable));
+        $this->assertEquals("1.02", self::$objectHelper->ensureStringArray($variable)[0]);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetArrayIndex(): void
+    {
+        $array = ["1", "2"];
+
+        $this->assertEquals("1", self::$objectHelper->getArrayIndex($array, 0));
+        $this->assertEquals("2", self::$objectHelper->getArrayIndex($array, 1));
+
+        $this->expectException(OutOfRangeException::class);
+
+        $this->assertEquals("3", self::$objectHelper->getArrayIndex($array, 2));
+        $this->assertEquals("4", self::$objectHelper->getArrayIndex($array, 3));
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testTryCall(): void
+    {
+        $instance = null;
+
+        $this->assertNotNull(self::$objectHelper->tryCall($instance, "method", "parametervalue"));
+
+        $instance = self::$objectHelper->createClassInstance("udt\IDType");
+
+        $this->assertNotNull(self::$objectHelper->tryCall($instance, "", "parametervalue"));
+
+        $mock = $this->getMockBuilder(get_class($instance))->disableOriginalConstructor()->getMock();
+        $mock->expects($this->once())->method("value");
+
+        $this->assertNotNull(self::$objectHelper->tryCall($mock, "value", "1"));
     }
 
     /**
@@ -572,5 +702,245 @@ class OrderObjectHelperExtendedTest extends TestCase
         $this->assertEquals("NUMBER", $comm->getCompleteNumber());
         $this->assertEquals("URI", $comm->getURIID()->value());
         $this->assertEquals("URITYPE", $comm->getURIID()->getSchemeID());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetTaxRegistrationType(): void
+    {
+        $this->assertNull(self::$objectHelper->getTaxRegistrationType());
+        $this->assertNull(self::$objectHelper->getTaxRegistrationType(null));
+        $this->assertNull(self::$objectHelper->getTaxRegistrationType(null, null));
+        $this->assertNull(self::$objectHelper->getTaxRegistrationType(""));
+        $this->assertNull(self::$objectHelper->getTaxRegistrationType("", ""));
+        $this->assertNull(self::$objectHelper->getTaxRegistrationType("FC", ""));
+        $this->assertNull(self::$objectHelper->getTaxRegistrationType("", "ID"));
+
+        $this->assertNotNull(self::$objectHelper->getTaxRegistrationType("FC", "ID"));
+
+        $this->assertEquals("ID", self::$objectHelper->getTaxRegistrationType("FC", "ID")->getID()->value());
+        $this->assertEquals("FC", self::$objectHelper->getTaxRegistrationType("FC", "ID")->getID()->getSchemeID());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetTradeDeliveryTermsType(): void
+    {
+        $this->assertNull(self::$objectHelper->getTradeDeliveryTermsType());
+        $this->assertNull(self::$objectHelper->getTradeDeliveryTermsType(null));
+        $this->assertNull(self::$objectHelper->getTradeDeliveryTermsType(null, null));
+        $this->assertNull(self::$objectHelper->getTradeDeliveryTermsType(null, null, null));
+        $this->assertNull(self::$objectHelper->getTradeDeliveryTermsType(null, null, null, null));
+        $this->assertNull(self::$objectHelper->getTradeDeliveryTermsType(null, null, null, null, null));
+        $this->assertNull(self::$objectHelper->getTradeDeliveryTermsType(""));
+        $this->assertNull(self::$objectHelper->getTradeDeliveryTermsType("", ""));
+        $this->assertNull(self::$objectHelper->getTradeDeliveryTermsType("", "", ""));
+        $this->assertNull(self::$objectHelper->getTradeDeliveryTermsType("", "", "", ""));
+        $this->assertNull(self::$objectHelper->getTradeDeliveryTermsType("", "", "", "", ""));
+
+        $this->assertNotNull(self::$objectHelper->getTradeDeliveryTermsType("CODE", "DESC", "FUNCCODE", "LOCID", "LOCNAME"));
+
+        $devTermsType = self::$objectHelper->getTradeDeliveryTermsType("CODE", "DESC", "FUNCCODE", "LOCID", "LOCNAME");
+
+        $this->assertEquals("CODE", $devTermsType->getDeliveryTypeCode()->value());
+        $this->assertEquals("DESC", $devTermsType->getDescription()->value());
+        $this->assertEquals("FUNCCODE", $devTermsType->getFunctionCode()->value());
+        $this->assertEquals("LOCID", $devTermsType->getRelevantTradeLocation()->getID()->value());
+        $this->assertEquals("LOCNAME", $devTermsType->getRelevantTradeLocation()->getName()->value());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetProcuringProjectType(): void
+    {
+        $this->assertNull(self::$objectHelper->getProcuringProjectType());
+        $this->assertNull(self::$objectHelper->getProcuringProjectType(null));
+        $this->assertNull(self::$objectHelper->getProcuringProjectType(null, null));
+        $this->assertNull(self::$objectHelper->getProcuringProjectType(""));
+        $this->assertNull(self::$objectHelper->getProcuringProjectType("", ""));
+
+        $this->assertNotNull(self::$objectHelper->getProcuringProjectType("ID", "NAME"));
+
+        $this->assertEquals("ID", self::$objectHelper->getProcuringProjectType("ID", "NAME")->getId()->value());
+        $this->assertEquals("NAME", self::$objectHelper->getProcuringProjectType("ID", "NAME")->getName()->value());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetSupplyChainEventType(): void
+    {
+        $dt = new \DateTime();
+
+        $this->assertNull(self::$objectHelper->getSupplyChainEventType());
+        $this->assertNull(self::$objectHelper->getSupplyChainEventType(null));
+
+        $this->assertNotNull(self::$objectHelper->getSupplyChainEventType($dt));
+
+        $this->assertEquals($dt->format("Ymd"), self::$objectHelper->getSupplyChainEventType($dt)->getOccurrenceDateTime()->getDateTimeString()->value());
+        $this->assertEquals("102", self::$objectHelper->getSupplyChainEventType($dt)->getOccurrenceDateTime()->getDateTimeString()->getFormat());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDeliverySupplyChainEvent(): void
+    {
+        $dt = new \DateTime();
+
+        $this->assertNull(self::$objectHelper->getDeliverySupplyChainEvent());
+        $this->assertNull(self::$objectHelper->getDeliverySupplyChainEvent(null));
+        $this->assertNull(self::$objectHelper->getDeliverySupplyChainEvent(null, null));
+        $this->assertNull(self::$objectHelper->getDeliverySupplyChainEvent(null, null, null));
+
+        $devSupplyChainEvent = self::$objectHelper->getDeliverySupplyChainEvent($dt);
+
+        $this->assertNotNull($devSupplyChainEvent);
+
+        $this->assertEquals($dt->format("Ymd"), $devSupplyChainEvent->getOccurrenceDateTime()->getDateTimeString()->value());
+        $this->assertEquals("102", $devSupplyChainEvent->getOccurrenceDateTime()->getDateTimeString()->getFormat());
+        $this->assertNull($devSupplyChainEvent->getOccurrenceSpecifiedPeriod());
+
+        $devSupplyChainEvent = self::$objectHelper->getDeliverySupplyChainEvent($dt, $dt);
+
+        $this->assertNotNull($devSupplyChainEvent);
+
+        $this->assertEquals($dt->format("Ymd"), $devSupplyChainEvent->getOccurrenceDateTime()->getDateTimeString()->value());
+        $this->assertEquals("102", $devSupplyChainEvent->getOccurrenceDateTime()->getDateTimeString()->getFormat());
+        $this->assertNotNull($devSupplyChainEvent->getOccurrenceSpecifiedPeriod());
+        $this->assertNotNull($devSupplyChainEvent->getOccurrenceSpecifiedPeriod()->getStartDateTime());
+        $this->assertEquals($dt->format("Ymd"), $devSupplyChainEvent->getOccurrenceSpecifiedPeriod()->getStartDateTime()->getDateTimeString()->value());
+        $this->assertEquals("102", $devSupplyChainEvent->getOccurrenceSpecifiedPeriod()->getStartDateTime()->getDateTimeString()->getFormat());
+        $this->assertNull($devSupplyChainEvent->getOccurrenceSpecifiedPeriod()->getEndDateTime());
+
+        $devSupplyChainEvent = self::$objectHelper->getDeliverySupplyChainEvent($dt, $dt, $dt);
+
+        $this->assertNotNull($devSupplyChainEvent);
+
+        $this->assertEquals($dt->format("Ymd"), $devSupplyChainEvent->getOccurrenceDateTime()->getDateTimeString()->value());
+        $this->assertEquals("102", $devSupplyChainEvent->getOccurrenceDateTime()->getDateTimeString()->getFormat());
+        $this->assertNotNull($devSupplyChainEvent->getOccurrenceSpecifiedPeriod());
+        $this->assertNotNull($devSupplyChainEvent->getOccurrenceSpecifiedPeriod()->getStartDateTime());
+        $this->assertEquals($dt->format("Ymd"), $devSupplyChainEvent->getOccurrenceSpecifiedPeriod()->getStartDateTime()->getDateTimeString()->value());
+        $this->assertEquals("102", $devSupplyChainEvent->getOccurrenceSpecifiedPeriod()->getStartDateTime()->getDateTimeString()->getFormat());
+        $this->assertNotNull($devSupplyChainEvent->getOccurrenceSpecifiedPeriod()->getEndDateTime());
+        $this->assertEquals($dt->format("Ymd"), $devSupplyChainEvent->getOccurrenceSpecifiedPeriod()->getEndDateTime()->getDateTimeString()->value());
+        $this->assertEquals("102", $devSupplyChainEvent->getOccurrenceSpecifiedPeriod()->getEndDateTime()->getDateTimeString()->getFormat());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetTradeSettlementPaymentMeansType(): void
+    {
+        $this->assertNull(self::$objectHelper->getTradeSettlementPaymentMeansType());
+        $this->assertNull(self::$objectHelper->getTradeSettlementPaymentMeansType(null));
+        $this->assertNull(self::$objectHelper->getTradeSettlementPaymentMeansType(null, null));
+        $this->assertNull(self::$objectHelper->getTradeSettlementPaymentMeansType(""));
+        $this->assertNull(self::$objectHelper->getTradeSettlementPaymentMeansType("", ""));
+
+        $paymentMean = self::$objectHelper->getTradeSettlementPaymentMeansType("CODE", "INFO");
+
+        $this->assertNotNull($paymentMean);
+        $this->assertEquals("CODE", $paymentMean->getTypeCode()->value());
+        $this->assertIsArray($paymentMean->getInformation());
+        $this->assertArrayHasKey(0, $paymentMean->getInformation());
+        $this->assertArrayNotHasKey(1, $paymentMean->getInformation());
+        $this->assertEquals("INFO", $paymentMean->getInformation()[0]);
+
+        $paymentMean = self::$objectHelper->getTradeSettlementPaymentMeansType("CODE");
+
+        $this->assertNotNull($paymentMean);
+        $this->assertEquals("CODE", $paymentMean->getTypeCode()->value());
+        $this->assertIsArray($paymentMean->getInformation());
+        $this->assertArrayHasKey(0, $paymentMean->getInformation());
+        $this->assertNull($paymentMean->getInformation()[0]);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetTradePaymentTermsType(): void
+    {
+        $this->assertNull(self::$objectHelper->getTradePaymentTermsType());
+        $this->assertNull(self::$objectHelper->getTradePaymentTermsType(null));
+        $this->assertNull(self::$objectHelper->getTradePaymentTermsType(""));
+
+        $paymentTerm = self::$objectHelper->getTradePaymentTermsType("TERM");
+
+        $this->assertNotNull($paymentTerm);
+        $this->assertIsArray($paymentTerm->getDescription());
+        $this->assertArrayHasKey(0, $paymentTerm->getDescription());
+        $this->assertArrayNotHasKey(1, $paymentTerm->getDescription());
+        $this->assertEquals("TERM", $paymentTerm->getDescription()[0]);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetTradeTaxType(): void
+    {
+        $this->assertNull(self::$objectHelper->getTradeTaxType());
+
+        $tradeTax = self::$objectHelper->getTradeTaxType("S", "VAT", 100.0, 19.0, 19.0, "Reason", "RC", 100.0, 0.0, "DDTC");
+
+        $this->assertNotNull($tradeTax);
+        $this->assertEquals("S", $tradeTax->getCategoryCode()->value());
+        $this->assertEquals("VAT", $tradeTax->getTypeCode()->value());
+        $this->assertEquals(100.0, $tradeTax->getBasisAmount()->value());
+        $this->assertEquals(19.0, $tradeTax->getCalculatedAmount()->value());
+        $this->assertEquals(19.0, $tradeTax->getRateApplicablePercent()->value());
+        $this->assertEquals("Reason", $tradeTax->getExemptionReason()->value());
+        $this->assertEquals("RC", $tradeTax->getExemptionReasonCode()->value());
+        $this->assertEquals(100.0, $tradeTax->getLineTotalBasisAmount()->value());
+        $this->assertEquals(0.0, $tradeTax->getAllowanceChargeBasisAmount()->value());
+        $this->assertEquals("DDTC", $tradeTax->getDueDateTypeCode()->value());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetTradeAllowanceChargeType(): void
+    {
+        $this->assertNull(self::$objectHelper->getTradeAllowanceChargeType());
+
+        $allowanceCharge = self::$objectHelper->getTradeAllowanceChargeType(100.0, false, "VAT", "S", 10.0, 1, 20.0, 100.0, 5, "C62", "RC", "Reason");
+
+        $this->assertNotNull($allowanceCharge);
+        $this->assertEquals(100.0, $allowanceCharge->getActualAmount()->value());
+        $this->assertFalse($allowanceCharge->getChargeIndicator()->getIndicator());
+        $this->assertEquals("VAT", $allowanceCharge->getCategoryTradeTax()->getTypeCode()->value());
+        $this->assertEquals("S", $allowanceCharge->getCategoryTradeTax()->getCategoryCode()->value());
+        $this->assertEquals(10.0, $allowanceCharge->getCategoryTradeTax()->getRateApplicablePercent()->value());
+        $this->assertEquals(1, $allowanceCharge->getSequenceNumeric());
+        $this->assertEquals(20, $allowanceCharge->getCalculationPercent()->value());
+        $this->assertEquals(100.0, $allowanceCharge->getBasisAmount()->value());
+        $this->assertEquals(5, $allowanceCharge->getBasisQuantity()->value());
+        $this->assertEquals("C62", $allowanceCharge->getBasisQuantity()->getUnitCode());
+        $this->assertEquals("Reason", $allowanceCharge->getReason()->value());
+        $this->assertEquals("RC", $allowanceCharge->getReasonCode()->value());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetLogisticsServiceChargeType(): void
+    {
+        $this->assertNull(self::$objectHelper->getLogisticsServiceChargeType());
+
+        $serviceCharge = self::$objectHelper->getLogisticsServiceChargeType("DESC", 10.0, ["VAT"], ["S"], [20.0]);
+
+        $this->assertNotNull($serviceCharge);
+        $this->assertEquals("DESC", $serviceCharge->getDescription()->value());
+        $this->assertEquals(10.0, $serviceCharge->getAppliedAmount()->value());
+        $this->assertIsArray($serviceCharge->getAppliedTradeTax());
+        $this->assertArrayHasKey(0, $serviceCharge->getAppliedTradeTax());
+        $this->assertArrayNotHasKey(1, $serviceCharge->getAppliedTradeTax());
+        $this->assertEquals("VAT", $serviceCharge->getAppliedTradeTax()[0]->getTypeCode()->value());
+        $this->assertEquals("S", $serviceCharge->getAppliedTradeTax()[0]->getCategoryCode()->value());
+        $this->assertEquals(20.0, $serviceCharge->getAppliedTradeTax()[0]->getRateApplicablePercent()->value());
     }
 }

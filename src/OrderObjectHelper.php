@@ -758,7 +758,7 @@ class OrderObjectHelper
      */
     public function getProcuringProjectType(?string $id = null, ?string $name = null): ?object
     {
-        if (self::isOneNullOrEmpty(func_get_args())) {
+        if (self::isAllNullOrEmpty(func_get_args())) {
             return null;
         }
 
@@ -797,7 +797,7 @@ class OrderObjectHelper
      * @param DateTime|null $endDateTime
      * @return object|null
      */
-    public function getDeliverySupplyChainEvent(?DateTime $occurrenceDateTime, ?DateTime $startDateTime, ?DateTime $endDateTime): ?object
+    public function getDeliverySupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): ?object
     {
         if (self::isAllNullOrEmpty(func_get_args())) {
             return null;
@@ -810,89 +810,6 @@ class OrderObjectHelper
         $this->tryCall($supplychainevent, 'setOccurrenceSpecifiedPeriod', $period);
 
         return $supplychainevent;
-    }
-
-    /**
-     * Get instance of TradeSettlementFinancialCardType
-     *
-     * @param string|null $type
-     * @param string|null $id
-     * @param string|null $holderName
-     * @return object|null
-     */
-    public function getTradeSettlementFinancialCardType(?string $type = null, ?string $id = null, ?string $holderName = null): ?object
-    {
-        if (self::isAllNullOrEmpty(func_get_args())) {
-            return null;
-        }
-
-        $card = $this->createClassInstance('ram\TradeSettlementFinancialCardType');
-
-        $this->tryCall($card, "setID", $this->getIdType($id, $type));
-        $this->tryCall($card, "setCardholderName", $this->getTextType($holderName));
-
-        return $card;
-    }
-
-    /**
-     * Get instance of DebtorFinancialAccountType
-     *
-     * @param string|null $iban
-     * @return object|null
-     */
-    public function getDebtorFinancialAccountType(?string $iban = null): ?object
-    {
-        if (self::isAllNullOrEmpty(func_get_args())) {
-            return null;
-        }
-
-        $card = $this->createClassInstance('ram\DebtorFinancialAccountType');
-
-        $this->tryCall($card, "setIBANID", $this->getIdType($iban));
-
-        return $card;
-    }
-
-    /**
-     * Get instance of CreditorFinancialAccountType
-     *
-     * @param string|null $iban
-     * @param string|null $accountName
-     * @param string|null $proprietaryID
-     * @return object|null
-     */
-    public function getCreditorFinancialAccountType(?string $iban = null, ?string $accountName = null, ?string $proprietaryID = null): ?object
-    {
-        if (self::isAllNullOrEmpty(func_get_args())) {
-            return null;
-        }
-
-        $account = $this->createClassInstance('ram\CreditorFinancialAccountType');
-
-        $this->tryCall($account, "setIBANID", $this->getIdType($iban));
-        $this->tryCall($account, "setAccountName", $this->getTextType($accountName));
-        $this->tryCall($account, "setProprietaryID", $this->getIdType($proprietaryID));
-
-        return $account;
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @param string|null $bic
-     * @return object|null
-     */
-    public function getCreditorFinancialInstitutionType(?string $bic = null): ?object
-    {
-        if (self::isAllNullOrEmpty(func_get_args())) {
-            return null;
-        }
-
-        $institution = $this->createClassInstance('ram\CreditorFinancialInstitutionType');
-
-        $this->tryCall($institution, "setBICID", $this->getIdType($bic));
-
-        return $institution;
     }
 
     /**
@@ -933,34 +850,6 @@ class OrderObjectHelper
         $this->tryCallIfMethodExists($paymentTerms, "unsetDescription", "setDescription", [$this->getTextType($description)], $this->getTextType($description));
 
         return $paymentTerms;
-    }
-
-    /**
-     * Get instance of TradePaymentDiscountTermsType
-     *
-     * @param DateTime|null $basisDateTime
-     * @param float|null $basisPeriodMeasureValue
-     * @param string|null $basisPeriodMeasureUnitCode
-     * @param float|null $basisAmount
-     * @param float|null $calculationPercent
-     * @param float|null $actualDiscountAmount
-     * @return object|null
-     */
-    public function getTradePaymentDiscountTermsType(?DateTime $basisDateTime = null, ?float $basisPeriodMeasureValue = null, ?string $basisPeriodMeasureUnitCode = null, ?float $basisAmount = null, ?float $calculationPercent = null, ?float $actualDiscountAmount = null): ?object
-    {
-        if (self::isAllNullOrEmpty(func_get_args())) {
-            return null;
-        }
-
-        $discountTerms = $this->createClassInstance('ram\TradePaymentDiscountTermsType');
-
-        $this->tryCall($discountTerms, "setBasisDateTime", $this->getDateTimeType($basisDateTime));
-        $this->tryCall($discountTerms, "setBasisPeriodMeasure", $this->getMeasureType($basisPeriodMeasureValue, $basisPeriodMeasureUnitCode));
-        $this->tryCall($discountTerms, "setBasisAmount", $this->getAmountType($basisAmount));
-        $this->tryCall($discountTerms, "setCalculationPercent", $this->getPercentType($calculationPercent));
-        $this->tryCall($discountTerms, "setActualDiscountAmount", $this->getAmountType($actualDiscountAmount));
-
-        return $discountTerms;
     }
 
     /**
@@ -1401,7 +1290,7 @@ class OrderObjectHelper
      */
     public function getTaxApplicableTradeCurrencyExchangeType(?string $sourceCurrencyCode = null, ?string $targetCurrencyCode = null, ?float $rate = null, ?DateTime $rateDateTime = null): ?object
     {
-        if (self::isOneNullOrEmpty(func_get_args())) {
+        if (self::isAllNullOrEmpty(func_get_args())) {
             return null;
         }
 
@@ -1733,48 +1622,6 @@ class OrderObjectHelper
             }
         }
         return true;
-    }
-
-    /**
-     * Checks if all function arguments are null or empty
-     *
-     * @param array $args
-     * @return boolean
-     */
-    public static function isOneNullOrEmpty(array $args): bool
-    {
-        foreach ($args as $arg) {
-            if ($arg instanceof DateTime) {
-                if ($arg == null) {
-                    return true;
-                }
-            } else {
-                if (self::isNullOrEmpty($arg)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * If $value is an array and has at least one array element the first
-     * array element is returned otherwise null is returned. If $value is not an
-     * array $value is returned
-     *
-     * @param mixed $value
-     * @return mixed
-     */
-    public function getFirstFromArrayIfArray($value)
-    {
-        if (is_array($value)) {
-            $first = reset($value);
-            if ($first !== false) {
-                return $first;
-            }
-            return null;
-        }
-        return $value;
     }
 
     /**
