@@ -993,16 +993,6 @@ class OrderObjectHelper
     }
 
     /**
-     * Create summation class only
-     *
-     * @return object|null
-     */
-    public function getTradeSettlementHeaderMonetarySummationTypeOnly(): ?object
-    {
-        return $this->createClassInstance('ram\TradeSettlementHeaderMonetarySummationType');
-    }
-
-    /**
      * Get an instance of TradeAccountingAccountType
      *
      * @param string|null $id
@@ -1111,9 +1101,11 @@ class OrderObjectHelper
      * @param string|null $typeCode
      * @param string|null $description
      * @param string|null $value
+     * @param float|null $measureValue
+     * @param string|null $measureUnitCode
      * @return object|null
      */
-    public function getProductCharacteristicType(?string $typeCode = null, ?string $description = null, ?string $value, ?float $measureValue = null, ?string $measureUnitCode = null): ?object
+    public function getProductCharacteristicType(?string $typeCode = null, ?string $description = null, ?string $value = null, ?float $measureValue = null, ?string $measureUnitCode = null): ?object
     {
         if (self::isAllNullOrEmpty(func_get_args())) {
             return null;
@@ -1165,7 +1157,7 @@ class OrderObjectHelper
      * @param string|null $unitCode
      * @return object|null
      */
-    public function getReferencedProductType(?string $globalID, ?string $globalIDType, ?string $sellerAssignedID, ?string $buyerAssignedID, ?string $name, ?string $description = null, ?float $unitQuantity, ?string $unitCode): ?object
+    public function getReferencedProductType(?string $globalID = null, ?string $globalIDType = null, ?string $sellerAssignedID = null, ?string $buyerAssignedID = null, ?string $name = null, ?string $description = null, ?float $unitQuantity = null, ?string $unitCode = null): ?object
     {
         if (self::isAllNullOrEmpty(func_get_args())) {
             return null;
@@ -1190,7 +1182,7 @@ class OrderObjectHelper
      * @param string|null $serialId
      * @return object|null
      */
-    public function getTradeProductInstanceType(?string $batchID, ?string $serialId): ?object
+    public function getTradeProductInstanceType(?string $batchID = null, ?string $serialId = null): ?object
     {
         if (self::isAllNullOrEmpty(func_get_args())) {
             return null;
@@ -1280,37 +1272,17 @@ class OrderObjectHelper
     }
 
     /**
-     * Undocumented function
-     *
-     * @param string|null $sourceCurrencyCode
-     * @param string|null $targetCurrencyCode
-     * @param float|null $rate
-     * @param DateTime|null $rateDateTime
-     * @return object|null
-     */
-    public function getTaxApplicableTradeCurrencyExchangeType(?string $sourceCurrencyCode = null, ?string $targetCurrencyCode = null, ?float $rate = null, ?DateTime $rateDateTime = null): ?object
-    {
-        if (self::isAllNullOrEmpty(func_get_args())) {
-            return null;
-        }
-
-        $currencyExchange = $this->createClassInstance('ram\TradeCurrencyExchangeType');
-
-        $this->tryCall($currencyExchange, "setSourceCurrencyCode", $this->getIdType($sourceCurrencyCode));
-        $this->tryCall($currencyExchange, "setTargetCurrencyCode", $this->getIdType($targetCurrencyCode));
-        $this->tryCall($currencyExchange, "setConversionRate", $this->getRateType($rate));
-
-        return $currencyExchange;
-    }
-
-    /**
      * Set contect parameter
      *
      * @param string|null $id
      * @return object|null
      */
-    public function getDocumentContextParameterType(?string $id): ?object
+    public function getDocumentContextParameterType(?string $id = null): ?object
     {
+        if (self::isAllNullOrEmpty(func_get_args())) {
+            return null;
+        }
+
         $contextParameter = $this->createClassInstance('ram\DocumentContextParameterType');
 
         $this->tryCall($contextParameter, "setID", $this->getIdType($id));
@@ -1326,7 +1298,7 @@ class OrderObjectHelper
      * @return DateTime|null
      * @throws \Exception
      */
-    public function toDateTime(?string $dateTimeString, ?string $format): ?DateTime
+    public function toDateTime(?string $dateTimeString = null, ?string $format = null): ?DateTime
     {
         if (self::isNullOrEmpty($dateTimeString) || self::isNullOrEmpty($format)) {
             return null;
@@ -1354,7 +1326,7 @@ class OrderObjectHelper
      * @param float|null $rateValue
      * @return object|null
      */
-    public function getRateType(?float $rateValue): ?object
+    public function getRateType(?float $rateValue = null): ?object
     {
         $rate = $this->createClassInstance('udt\RateType');
         $this->tryCall($rate, "value", $rateValue);

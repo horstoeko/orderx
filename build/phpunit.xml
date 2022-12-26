@@ -3,7 +3,6 @@
     <testsuites>
         <testsuite name="default">
             <file>../tests/testcases/OrderObjectHelperExtendedTest.php</file>
-            <!--
             <file>../tests/testcases/OrderSettingsTest.php</file>
             <file>../tests/testcases/OrderDocumentBaseTest.php</file>
             <file>../tests/testcases/OrderDocumentBuilderBasicTest.php</file>
@@ -15,7 +14,6 @@
             <file>../tests/testcases/OrderDocumentReaderExtendedTest.php</file>
             <file>../tests/testcases/OrderDocumentPdfReaderComfortTest.php</file>
             <file>../tests/testcases/OrderDocumentPdfReaderExtendedTest.php</file>
-            -->
         </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
