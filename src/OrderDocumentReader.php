@@ -2978,7 +2978,7 @@ class OrderDocumentReader extends OrderDocument
      * recipient which scheme is used for the identifier, an identifier of the scheme should be used, which must be selected
      * from UNTDID 1153 in accordance with the code list entries.
      * @param DateTime|null $issueddate
-     * Document date
+     * The formatted date or date time for the issuance of this referenced Additional Document.
      * @return OrderDocumentReader
      */
     public function getDocumentPositionAdditionalReferencedDocument(?string &$issuerassignedid, ?string &$typecode, ?string &$uriid, ?string &$lineid, ?string &$name, ?string &$reftypecode, ?DateTime &$issueddate): OrderDocumentReader
