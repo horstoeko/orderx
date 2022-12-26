@@ -2598,18 +2598,16 @@ class OrderDocumentBuilder extends OrderDocument
      * To be chosen from the entries in UNTDID 1001
      * @param string|null $uriid
      * The unique Uniform Resource Identifier (URI) for this referenced document.
-     * @param string|null $lineid
      * @param string|null $name
      * A name, expressed as text, for this referenced document.
-     * @param string|null $reftypecode
-     * @param DateTime|null $issueddate
      * @param string|null $binarydatafilename
+     * A binary object that is attached or otherwise appended to this referenced document.
      * @return OrderDocumentBuilder
      */
-    public function setDocumentPositionProductReferencedDocument(?string $issuerassignedid = null, ?string $typecode = null, ?string $uriid = null, ?string $lineid = null, ?string $name = null, ?string $reftypecode = null, ?DateTime $issueddate = null, ?string $binarydatafilename = null): OrderDocumentBuilder
+    public function setDocumentPositionProductReferencedDocument(?string $issuerassignedid = null, ?string $typecode = null, ?string $uriid = null, ?string $name = null, ?string $binarydatafilename = null): OrderDocumentBuilder
     {
         $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
-        $tradeLineItemProdRefDoc = $this->objectHelper->getReferencedDocumentType($issuerassignedid, $uriid, $lineid, $typecode, $name, $reftypecode, $issueddate, $binarydatafilename);
+        $tradeLineItemProdRefDoc = $this->objectHelper->getReferencedDocumentType($issuerassignedid, $uriid, null, $typecode, $name, null, null, $binarydatafilename);
         $this->objectHelper->tryCallIfMethodExists($product, "addToAdditionalReferenceReferencedDocument", "setAdditionalReferenceReferencedDocument", [$tradeLineItemProdRefDoc], $tradeLineItemProdRefDoc);
         return $this;
     }
@@ -2621,20 +2619,19 @@ class OrderDocumentBuilder extends OrderDocument
      * The unique issuer assigned identifier for this referenced document.
      * @param string|null $typecode
      * The code specifying the type of referenced document.
+     * To be chosen from the entries in UNTDID 1001
      * @param string|null $uriid
      * The unique Uniform Resource Identifier (URI) for this referenced document.
-     * @param string|null $lineid
      * @param string|null $name
      * A name, expressed as text, for this referenced document.
-     * @param string|null $reftypecode
-     * @param DateTime|null $issueddate
      * @param string|null $binarydatafilename
+     * A binary object that is attached or otherwise appended to this referenced document.
      * @return OrderDocumentBuilder
      */
-    public function addDocumentPositionProductReferencedDocument(?string $issuerassignedid = null, ?string $typecode = null, ?string $uriid = null, ?string $lineid = null, ?string $name = null, ?string $reftypecode = null, ?DateTime $issueddate = null, ?string $binarydatafilename = null): OrderDocumentBuilder
+    public function addDocumentPositionProductReferencedDocument(?string $issuerassignedid = null, ?string $typecode = null, ?string $uriid = null, ?string $name = null, ?string $binarydatafilename = null): OrderDocumentBuilder
     {
         $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
-        $contractrefdoc = $this->objectHelper->getReferencedDocumentType($issuerassignedid, $uriid, $lineid, $typecode, $name, $reftypecode, $issueddate, $binarydatafilename);
+        $contractrefdoc = $this->objectHelper->getReferencedDocumentType($issuerassignedid, $uriid, null, $typecode, $name, null, null, $binarydatafilename);
         $this->objectHelper->tryCall($product, "addToAdditionalReferenceReferencedDocument", $contractrefdoc);
         return $this;
     }

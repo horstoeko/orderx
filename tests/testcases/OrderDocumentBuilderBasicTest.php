@@ -2322,7 +2322,7 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:AdditionalReferenceReferencedDocument', 0);
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:AdditionalReferenceReferencedDocument', 1);
 
-        (self::$document)->setDocumentPositionProductReferencedDocument("ID1", "TC1", "URIID1", "1", "Name-1", "REFTC-1", $this->getDummyDateTime());
+        (self::$document)->setDocumentPositionProductReferencedDocument("ID1", "TC1", "URIID1", "Name-1");
 
         $this->disableRenderXmlContent();
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:AdditionalReferenceReferencedDocument', 0);
