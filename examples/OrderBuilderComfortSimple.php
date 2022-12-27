@@ -7,16 +7,18 @@ use horstoeko\orderx\OrderDocumentPdfBuilder;
 
 require dirname(__FILE__) . "/../vendor/autoload.php";
 
+$dt = \DateTime::createFromFormat("Ymd", "20221221");
+
 $document = OrderDocumentBuilder::CreateNew(
-    OrderProfiles::PROFILE_COMFORT
+    OrderProfiles::PROFILE_EXTENDED
 );
 
 $document
-    ->setIsDocumentCopy(false)
+    ->setIsDocumentCopy(true)
     ->setIsTestDocument(false)
     ->setDocumentBusinessProcessSpecifiedDocumentContextParameter("A1")
 
-    ->setDocumentInformation("PO123456789", "220", new \DateTime(), "EUR", "Doc Name", null, new \DateTime(), "9", "AC")
+    ->setDocumentInformation("PO123456789", "220", $dt, "EUR", "Doc Name", null, $dt, "9", "AC")
     ->addDocumentNote("Content of Note", "AAI", "AAI")
     ->setDocumentBuyerReference("BUYER_REF_BU123")
 
@@ -55,9 +57,9 @@ $document
     ->addDocumentAdditionalReferencedDocument("916", "ADD_REF_DOC_ID", "ADD_REF_DOC_URIID", "ADD_REF_DOC_Desc")
     ->addDocumentAdditionalReferencedDocument("50", "TENDER_ID")
     ->addDocumentAdditionalReferencedDocument("130", "OBJECT_ID", null, null, "AWV")
-    ->setDocumentBlanketOrderReferencedDocument("BLANKET_ORDER_OD", new \DateTime())
-    ->setDocumentPreviousOrderChangeReferencedDocument("PREV_ORDER_C_ID", new \DateTime())
-    ->setDocumentPreviousOrderResponseReferencedDocument("PREV_ORDER_R_ID", new \DateTime())
+    ->setDocumentBlanketOrderReferencedDocument("BLANKET_ORDER_OD", $dt)
+    ->setDocumentPreviousOrderChangeReferencedDocument("PREV_ORDER_C_ID", $dt)
+    ->setDocumentPreviousOrderResponseReferencedDocument("PREV_ORDER_R_ID", $dt)
     ->setDocumentProcuringProject("PROJECT_ID", "Project Reference")
 
     ->setDocumentShipTo("SHIP_TO_NAME", "SHIP_TO_ID")
@@ -76,7 +78,7 @@ $document
     ->setDocumentShipFromContact("SHIP_FROM_CONTACT_NAME", "SHIP_FROM_CONTACT_DEP", "+33 6 85 96 32 41", null, "shipfrom@seller.com", "SD")
     ->setDocumentShipFromElectronicAddress("EM", "warehouse@seller.com")
 
-    ->setDocumentRequestedDeliverySupplyChainEvent(new \DateTime(), new \DateTime(), new \DateTime())
+    ->setDocumentRequestedDeliverySupplyChainEvent($dt, $dt, $dt)
 
     ->setDocumentInvoicee("INVOICEE_NAME", "INVOICEE_ID_9587456")
     ->addDocumentInvoiceeGlobalId("98765432179", "0088")
@@ -96,6 +98,8 @@ $document
 
     ->addDocumentTax("S", "VAT", 300.00, 60.00, 20.00, "ExcReason-1", "ExcReasonCode-1", 300.00, 300.00, null)
 
+    ->setDocumentUltimateCustomerOrderReferencedDocument("ULTCUSTORDEREF-1", $dt)
+
     ->addNewPosition("1")
     ->setDocumentPositionNote("WEEE Tax of 0,50 euros per item included", null, "TXD")
     ->setDocumentPositionProductDetails("Product Name", "Product Description", "987654321", "654987321", "0160", "1234567890123", "Product Batch ID (lot ID)", "Product Brand Name")
@@ -104,7 +108,7 @@ $document
     ->setDocumentPositionProductInstance("Product Instances Batch ID", "Product Instances Supplier Serial ID")
     ->setDocumentPositionSupplyChainPackaging("7B", 5, "MTR", 3, "MTR", 1, "MTR")
     ->setDocumentPositionProductOriginTradeCountry("FR")
-    ->setDocumentPositionProductReferencedDocument("ADD_REF_PROD_ID", "6", "ADD_REF_PROD_URIID", null, "ADD_REF_PROD_Desc")
+    ->setDocumentPositionProductReferencedDocument("ADD_REF_PROD_ID", "6", "ADD_REF_PROD_URIID", "ADD_REF_PROD_Desc")
     ->setDocumentPositionBuyerOrderReferencedDocument("1")
     ->setDocumentPositionQuotationReferencedDocument("QUOT_125487", "3")
     ->addDocumentPositionAdditionalReferencedDocument("ADD_REF_DOC_ID", "916", "ADD_REF_DOC_URIID", 5, "ADD_REF_DOC_Desc")
@@ -119,12 +123,13 @@ $document
     ->setDocumentPositionDeliverReqQuantity(6, "C62")
     ->setDocumentPositionDeliverPackageQuantity(3, "C62")
     ->setDocumentPositionDeliverPerPackageQuantity(2, "C62")
-    ->addDocumentPositionRequestedDeliverySupplyChainEvent(null, new \DateTime(), new \DateTime())
+    ->addDocumentPositionRequestedDeliverySupplyChainEvent(null, $dt, $dt)
     ->addDocumentPositionAllowanceCharge(6.00, false, 10.0, 60.0, "64", "SPECIAL AGREEMENT")
     ->addDocumentPositionAllowanceCharge(6.00, true, 10.0, 60.0, "FC", "FREIGHT SERVICES")
     ->setDocumentPositionLineSummation(60.0)
     ->setDocumentPositionReceivableTradeAccountingAccount("BUYER_ACCOUNTING_REF")
     ->setDocumentPositionTax("S", "VAT", 19.0, 0.00, "Reason-1", "RC1")
+    ->setDocumentPositionUltimateCustomerOrderReferencedDocument("ULTCUSTORDEREF-1", "1", $dt)
 
     ->addNewPosition("2")
     ->setDocumentPositionNote("WEEE Tax of 0,50 euros per item included", null, "TXD")
@@ -134,7 +139,7 @@ $document
     ->setDocumentPositionProductInstance("Product Instances Batch ID", "Product Instances Supplier Serial ID")
     ->setDocumentPositionSupplyChainPackaging("7B", 2, "MTR", 1, "MTR", 3, "MTR")
     ->setDocumentPositionProductOriginTradeCountry("FR")
-    ->setDocumentPositionProductReferencedDocument("ADD_REF_PROD_ID", "6", "ADD_REF_PROD_URIID", null, "ADD_REF_PROD_Desc")
+    ->setDocumentPositionProductReferencedDocument("ADD_REF_PROD_ID", "6", "ADD_REF_PROD_URIID", "ADD_REF_PROD_Desc")
     ->setDocumentPositionBuyerOrderReferencedDocument("3")
     ->setDocumentPositionQuotationReferencedDocument("QUOT_125487", "2")
     ->addDocumentPositionAdditionalReferencedDocument("ADD_REF_DOC_ID", "916", "ADD_REF_DOC_URIID", 5, "ADD_REF_DOC_Desc")
@@ -148,11 +153,12 @@ $document
     ->setDocumentPositionDeliverReqQuantity(10, "C62")
     ->setDocumentPositionDeliverPackageQuantity(5, "C62")
     ->setDocumentPositionDeliverPerPackageQuantity(2, "C62")
-    ->addDocumentPositionRequestedDeliverySupplyChainEvent(new \DateTime())
+    ->addDocumentPositionRequestedDeliverySupplyChainEvent($dt)
     ->addDocumentPositionAllowanceCharge(1.00, false, 1.0, 100.0, "64", "SPECIAL AGREEMENT")
     ->addDocumentPositionAllowanceCharge(1.00, true, 1.0, 100.0, "FC", "FREIGHT SERVICES")
     ->setDocumentPositionLineSummation(100.0)
     ->setDocumentPositionReceivableTradeAccountingAccount("BUYER_ACCOUNTING_REF")
+    ->setDocumentPositionUltimateCustomerOrderReferencedDocument("ULTCUSTORDEREF-1", "2", $dt)
 
     ->addNewPosition("3")
     ->setDocumentPositionNote("Content of Note", null, "AAI")
@@ -162,7 +168,7 @@ $document
     ->setDocumentPositionProductInstance("Product Instances Batch ID", "Product Instances Supplier Serial ID")
     ->setDocumentPositionSupplyChainPackaging("7B", 2, "MTR", 1, "MTR", 3, "MTR")
     ->setDocumentPositionProductOriginTradeCountry("FR")
-    ->setDocumentPositionProductReferencedDocument("ADD_REF_PROD_ID", "6", "ADD_REF_PROD_URIID", null, "ADD_REF_PROD_Desc")
+    ->setDocumentPositionProductReferencedDocument("ADD_REF_PROD_ID", "6", "ADD_REF_PROD_URIID", "ADD_REF_PROD_Desc")
     ->setDocumentPositionBuyerOrderReferencedDocument("4")
     ->setDocumentPositionQuotationReferencedDocument("QUOT_125487", "1")
     ->addDocumentPositionAdditionalReferencedDocument("ADD_REF_DOC_ID", "916", "ADD_REF_DOC_URIID", 5, "ADD_REF_DOC_Desc")
@@ -176,11 +182,12 @@ $document
     ->setDocumentPositionDeliverReqQuantity(6, "C62")
     ->setDocumentPositionDeliverPackageQuantity(3, "C62")
     ->setDocumentPositionDeliverPerPackageQuantity(2, "C62")
-    ->addDocumentPositionRequestedDeliverySupplyChainEvent(null, new \DateTime(), new \DateTime())
+    ->addDocumentPositionRequestedDeliverySupplyChainEvent(null, $dt, $dt)
     ->addDocumentPositionAllowanceCharge(15.00, false, 10.0, 150.0, "64", "SPECIAL AGREEMENT")
     ->addDocumentPositionAllowanceCharge(15.00, true, 10.0, 150.0, "FC", "FREIGHT SERVICES")
     ->setDocumentPositionLineSummation(150.0)
     ->setDocumentPositionReceivableTradeAccountingAccount("BUYER_ACCOUNTING_REF")
+    ->setDocumentPositionUltimateCustomerOrderReferencedDocument("ULTCUSTORDEREF-1", "3", $dt)
     ->writeFile(getcwd() . "/order-x.xml");
 
 $pdfDocument = new OrderDocumentPdfBuilder(

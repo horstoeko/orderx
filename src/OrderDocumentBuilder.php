@@ -1357,6 +1357,38 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
+     * Set the ultimate customer order referenced document (on document level)
+     *
+     * @param  string|null   $ultimateCustomerOrderRefId
+     * Ultimate Customer Order Referenced Doc ID applied to this line
+     * @param  DateTime|null $ultimateCustomerOrderRefDate
+     * The formatted date or date time for the issuance of this Ultimate Customer Order Referenced Doc.
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentUltimateCustomerOrderReferencedDocument(?string $ultimateCustomerOrderRefId = null, ?DateTime $ultimateCustomerOrderRefDate = null): OrderDocumentBuilder
+    {
+        $ultimateCustomerOrderRefDoc = $this->objectHelper->getReferencedDocumentType($ultimateCustomerOrderRefId, null, null, null, null, null, $ultimateCustomerOrderRefDate, null);
+        $this->objectHelper->tryCallIfMethodExists($this->headerTradeAgreement, "addToUltimateCustomerOrderReferencedDocument", "setUltimateCustomerOrderReferencedDocument", [$ultimateCustomerOrderRefDoc], $ultimateCustomerOrderRefDoc);
+        return $this;
+    }
+
+    /**
+     * Add an additional ultimate customer order referenced document (on document level)
+     *
+     * @param  string|null   $ultimateCustomerOrderRefId
+     * Ultimate Customer Order Referenced Doc ID applied to this line
+     * @param  DateTime|null $ultimateCustomerOrderRefDate
+     * The formatted date or date time for the issuance of this Ultimate Customer Order Referenced Doc.
+     * @return OrderDocumentBuilder
+     */
+    public function addDocumentUltimateCustomerOrderReferencedDocument(?string $ultimateCustomerOrderRefId = null, ?DateTime $ultimateCustomerOrderRefDate = null): OrderDocumentBuilder
+    {
+        $ultimateCustomerOrderRefDoc = $this->objectHelper->getReferencedDocumentType($ultimateCustomerOrderRefId, null, null, null, null, null, $ultimateCustomerOrderRefDate, null);
+        $this->objectHelper->tryCall($this->headerTradeAgreement, "addToUltimateCustomerOrderReferencedDocument", $ultimateCustomerOrderRefDoc);
+        return $this;
+    }
+
+    /**
      * Set information about the Ship-To-Party
      * The Ship-To-Party provides information about where and when the goods and services ordered are delivered.
      *
@@ -2819,7 +2851,7 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Set tax included in this trade price (for instance in case of other Tax, or B2C Order with VAT)
+     * Set the tax included in this trade price (for instance in case of  other Tax, or B2C Order with VAT)
      *
      * @param  string      $categoryCode
      * Coded description of a sales tax category
@@ -2860,9 +2892,35 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
-     * Add a additional tax included in this trade price (for instance in case of other Tax, or B2C Order with VAT)
-     * For detailed information see __setDocumentPositionNetPriceTax__
+     * Add a tax included in this trade price (for instance in case of  other Tax, or B2C Order with VAT)
      *
+     * @param  string      $categoryCode
+     * Coded description of a sales tax category
+     * The code specifying the category to which this trade related tax, levy or duty applies, such as codes
+     * for "Exempt from Tax", "Standard Rate", "Free Export Item - Tax Not Charged". Reference United Nations Code List (UNCL) 5305.
+     * The following entries of UNTDID 5305  are used (further clarification between brackets):
+     *  - Standard rate (Liable for  TAX in a standard way)
+     *  - Zero rated goods (Liable for TAX with a percentage rate of zero)
+     *  - Exempt from tax
+     *  - VAT Reverse Charge (Reverse charge VAT/IGIC/IPSI rules apply)
+     *  - VAT exempt for intra community supply of goods (VAT/IGIC/IPSI not levied due to Intra-community supply rules)
+     *  - Free export item, tax not charged
+     *  - Services outside scope of tax (Sale is not subject to TAX)
+     *  - Canary Islands General Indirect Tax (Liable for IGIC tax)
+     *  - Liable for IPSI (Ceuta/Melilla tax)
+     * @param  string      $typeCode
+     * The code specifying the type of trade related tax, levy or duty, such as a code for a Value Added Tax (VAT).
+     * Reference United Nations Code List (UNCL) 5153
+     * Value = VAT for VAT, ENV for Environmental, EXC for excise duty
+     * @param  float|null  $rateApplicablePercent
+     * The VAT rate, represented as percentage that applies to the ordered item.
+     * @param  float|null  $calculatedAmount
+     * A monetary value resulting from the calculation of this trade related tax, levy or duty.
+     * @param  string|null $exemptionReason
+     * Reason for tax exemption (free text)
+     * @param  string|null $exemptionReasonCode
+     * Reason given in code form for the exemption of the amount from VAT. Note: Code list issued
+     * and maintained by the Connecting Europe Facility.
      * @return OrderDocumentBuilder
      */
     public function addDocumentPositionNetPriceTax(string $categoryCode, string $typeCode, ?float $rateApplicablePercent = null, ?float $calculatedAmount = null, ?string $exemptionReason = null, ?string $exemptionReasonCode = null): OrderDocumentBuilder
@@ -2887,9 +2945,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionCatalogueReferencedDocument(?string $catalogueRefId = null, ?string $catalogueRefLineId = null, ?DateTime $catalogueRefDate = null): OrderDocumentBuilder
     {
-        $quotationrefdoc = $this->objectHelper->getReferencedDocumentType($catalogueRefId, null, $catalogueRefLineId, null, null, null, $catalogueRefDate, null);
+        $catalogueRefDoc = $this->objectHelper->getReferencedDocumentType($catalogueRefId, null, $catalogueRefLineId, null, null, null, $catalogueRefDate, null);
         $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
-        $this->objectHelper->tryCallIfMethodExists($positionAgreement, "addToCatalogueReferencedDocument", "setCatalogueReferencedDocument", [$quotationrefdoc], $quotationrefdoc);
+        $this->objectHelper->tryCallIfMethodExists($positionAgreement, "addToCatalogueReferencedDocument", "setCatalogueReferencedDocument", [$catalogueRefDoc], $catalogueRefDoc);
         return $this;
     }
 
@@ -2906,9 +2964,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPositionCatalogueReferencedDocument(?string $catalogueRefId = null, ?string $catalogueRefLineId = null, ?DateTime $catalogueRefDate = null): OrderDocumentBuilder
     {
-        $quotationrefdoc = $this->objectHelper->getReferencedDocumentType($catalogueRefId, null, $catalogueRefLineId, null, null, null, $catalogueRefDate, null);
+        $catalogueRefDoc = $this->objectHelper->getReferencedDocumentType($catalogueRefId, null, $catalogueRefLineId, null, null, null, $catalogueRefDate, null);
         $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
-        $this->objectHelper->tryCall($positionAgreement, "addToCatalogueReferencedDocument", $quotationrefdoc);
+        $this->objectHelper->tryCall($positionAgreement, "addToCatalogueReferencedDocument", $catalogueRefDoc);
         return $this;
     }
 
@@ -2924,6 +2982,44 @@ class OrderDocumentBuilder extends OrderDocument
         $blanketOrderRefDoc = $this->objectHelper->getReferencedDocumentType(null, null, $blanketOrderRefLineId, null, null, null, null);
         $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
         $this->objectHelper->tryCall($positionAgreement, "setBlanketOrderReferencedDocument", $blanketOrderRefDoc);
+        return $this;
+    }
+
+    /**
+     * Set the ultimate customer order referenced document (on line level)
+     *
+     * @param  string|null   $ultimateCustomerOrderRefId
+     * Ultimate Customer Order Referenced Doc ID applied to this line
+     * @param  string|null   $ultimateCustomerOrderRefLineId
+     * Ultimate Customer Order Referenced Doc LineID applied to this line
+     * @param  DateTime|null $ultimateCustomerOrderRefDate
+     * The formatted date or date time for the issuance of this Ultimate Customer Order Referenced Doc.
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentPositionUltimateCustomerOrderReferencedDocument(?string $ultimateCustomerOrderRefId = null, ?string $ultimateCustomerOrderRefLineId = null, ?DateTime $ultimateCustomerOrderRefDate = null): OrderDocumentBuilder
+    {
+        $ultimateCustomerOrderRefDoc = $this->objectHelper->getReferencedDocumentType($ultimateCustomerOrderRefId, null, $ultimateCustomerOrderRefLineId, null, null, null, $ultimateCustomerOrderRefDate, null);
+        $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $this->objectHelper->tryCallIfMethodExists($positionAgreement, "addToUltimateCustomerOrderReferencedDocument", "setUltimateCustomerOrderReferencedDocument", [$ultimateCustomerOrderRefDoc], $ultimateCustomerOrderRefDoc);
+        return $this;
+    }
+
+    /**
+     * Add an additional ultimate customer order referenced document (on line level)
+     *
+     * @param  string|null   $ultimateCustomerOrderRefId
+     * Ultimate Customer Order Referenced Doc ID applied to this line
+     * @param  string|null   $ultimateCustomerOrderRefLineId
+     * Ultimate Customer Order Referenced Doc LineID applied to this line
+     * @param  DateTime|null $ultimateCustomerOrderRefDate
+     * The formatted date or date time for the issuance of this Ultimate Customer Order Referenced Doc.
+     * @return OrderDocumentBuilder
+     */
+    public function addDocumentPositionUltimateCustomerOrderReferencedDocument(?string $ultimateCustomerOrderRefId = null, ?string $ultimateCustomerOrderRefLineId = null, ?DateTime $ultimateCustomerOrderRefDate = null): OrderDocumentBuilder
+    {
+        $ultimateCustomerOrderRefDoc = $this->objectHelper->getReferencedDocumentType($ultimateCustomerOrderRefId, null, $ultimateCustomerOrderRefLineId, null, null, null, $ultimateCustomerOrderRefDate, null);
+        $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $this->objectHelper->tryCall($positionAgreement, "addToUltimateCustomerOrderReferencedDocument", $ultimateCustomerOrderRefDoc);
         return $this;
     }
 

@@ -827,6 +827,24 @@ class OrderDocumentReaderComfortTest extends TestCase
      * @covers \horstoeko\orderx\OrderDocumentReader
      * @covers \horstoeko\orderx\OrderObjectHelper
      */
+    public function testFirstDocumentUltimateCustomerOrderReferencedDocument(): void
+    {
+        $this->assertFalse(self::$document->firstDocumentUltimateCustomerOrderReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentUltimateCustomerOrderReferencedDocument(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentUltimateCustomerOrderReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
     public function testGetDocumentShipTo(): void
     {
         self::$document->getDocumentShipTo($name, $id, $description);

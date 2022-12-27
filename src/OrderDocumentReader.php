@@ -75,6 +75,11 @@ class OrderDocumentReader extends OrderDocument
     /**
      * @var integer
      */
+    private $documentUltimateCustomerOrderRefDocPointer = 0;
+
+    /**
+     * @var integer
+     */
     private $documentRequestedDeliverySupplyChainEventPointer = 0;
 
     /**
@@ -163,6 +168,11 @@ class OrderDocumentReader extends OrderDocument
      * @var integer
      */
     private $positionAddRefDocPointer = 0;
+
+    /**
+     * @var integer
+     */
+    private $positionUltimateCustomerOrderRefDocPointer = 0;
 
     /**
      * @var integer
@@ -1276,8 +1286,8 @@ class OrderDocumentReader extends OrderDocument
         $binarydatafilename = $this->getInvoiceValueByPathFrom($additionalDocument, "getAttachmentBinaryObject.getFilename", "");
         $binarydata = $this->getInvoiceValueByPathFrom($additionalDocument, "getAttachmentBinaryObject.value", "");
 
-        if (StringUtils::stringIsNullOrEmpty($binarydatafilename) === false 
-            && StringUtils::stringIsNullOrEmpty($binarydata) === false 
+        if (StringUtils::stringIsNullOrEmpty($binarydatafilename) === false
+            && StringUtils::stringIsNullOrEmpty($binarydata) === false
             && StringUtils::stringIsNullOrEmpty($this->binarydatadirectory) === false
         ) {
             $binarydatafilename = PathUtils::combinePathWithFile($this->binarydatadirectory, $binarydatafilename);
@@ -1362,6 +1372,55 @@ class OrderDocumentReader extends OrderDocument
     {
         $procuringProjectId = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSpecifiedProcuringProject.getID", "");
         $procuringProjectName = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getSpecifiedProcuringProject.getName", "");
+
+        return $this;
+    }
+
+    /**
+     * Seek to the first ultimate customer order referenced document (on document-level)
+     * If an applicable document exists, this function will return true, otherwise false
+     *
+     * @return boolean
+     */
+    public function firstDocumentUltimateCustomerOrderReferencedDocument(): bool
+    {
+        $this->documentUltimateCustomerOrderRefDocPointer = 0;
+        $ultimateCustomerOrderRefDocs = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getUltimateCustomerOrderReferencedDocument", []));
+        return isset($ultimateCustomerOrderRefDocs[$this->documentUltimateCustomerOrderRefDocPointer]);
+    }
+
+    /**
+     * Seek to the next ultimate customer order referenced document (on document-level)
+     * If another applicable document exists, this function will return true, otherwise false
+     *
+     * @return boolean
+     */
+    public function nextDocumentUltimateCustomerOrderReferencedDocument(): bool
+    {
+        $this->documentUltimateCustomerOrderRefDocPointer++;
+        $ultimateCustomerOrderRefDocs = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getUltimateCustomerOrderReferencedDocument", []));
+        return isset($ultimateCustomerOrderRefDocs[$this->documentUltimateCustomerOrderRefDocPointer]);
+    }
+
+    /**
+     * Set the ultimate customer order referenced document (on document level)
+     *
+     * @param  string|null   $ultimateCustomerOrderRefId
+     * Ultimate Customer Order Referenced Doc ID applied to this line
+     * @param  DateTime|null $ultimateCustomerOrderRefDate
+     * The formatted date or date time for the issuance of this Ultimate Customer Order Referenced Doc.
+     * @return OrderDocumentReader
+     */
+    public function getDocumentUltimateCustomerOrderReferencedDocument(?string &$ultimateCustomerOrderRefId, ?DateTime &$ultimateCustomerOrderRefDate): OrderDocumentReader
+    {
+        $ultimateCustomerOrderRefDocs = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeAgreement.getUltimateCustomerOrderReferencedDocument", []));
+        $ultimateCustomerOrderRefDoc = $this->objectHelper->getArrayIndex($ultimateCustomerOrderRefDocs, $this->documentUltimateCustomerOrderRefDocPointer);
+
+        $ultimateCustomerOrderRefId = $this->getInvoiceValueByPathFrom($ultimateCustomerOrderRefDoc, 'getIssuerAssignedID', '');
+        $ultimateCustomerOrderRefDate = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPathFrom($ultimateCustomerOrderRefDoc, 'getFormattedIssueDateTime.getDateTimeString', ''),
+            $this->getInvoiceValueByPathFrom($ultimateCustomerOrderRefDoc, 'getFormattedIssueDateTime.getDateTimeString.getFormat', '')
+        );
 
         return $this;
     }
@@ -2387,6 +2446,7 @@ class OrderDocumentReader extends OrderDocument
         $this->positionTaxPointer = 0;
         $this->positionAllowanceChargePointer = 0;
         $this->positionAddRefDocPointer = 0;
+        $this->positionUltimateCustomerOrderRefDocPointer = 0;
         $this->positionProductCharacteristicPointer = 0;
         $this->positionProductClassificationPointer = 0;
         $this->positionProductInstancePointer = 0;
@@ -2414,6 +2474,7 @@ class OrderDocumentReader extends OrderDocument
         $this->positionTaxPointer = 0;
         $this->positionAllowanceChargePointer = 0;
         $this->positionAddRefDocPointer = 0;
+        $this->positionUltimateCustomerOrderRefDocPointer = 0;
         $this->positionProductCharacteristicPointer = 0;
         $this->positionProductClassificationPointer = 0;
         $this->positionProductInstancePointer = 0;
@@ -2904,8 +2965,8 @@ class OrderDocumentReader extends OrderDocument
         $binarydatafilename = $this->getInvoiceValueByPathFrom($tradeLineItemProdRefDoc, "getAttachmentBinaryObject.getFilename", "");
         $binarydata = $this->getInvoiceValueByPathFrom($tradeLineItemProdRefDoc, "getAttachmentBinaryObject.value", "");
 
-        if (StringUtils::stringIsNullOrEmpty($binarydatafilename) === false 
-            && StringUtils::stringIsNullOrEmpty($binarydata) === false 
+        if (StringUtils::stringIsNullOrEmpty($binarydatafilename) === false
+            && StringUtils::stringIsNullOrEmpty($binarydata) === false
             && StringUtils::stringIsNullOrEmpty($this->binarydatadirectory) === false
         ) {
             $binarydatafilename = PathUtils::combinePathWithFile($this->binarydatadirectory, $binarydatafilename);
@@ -3024,8 +3085,8 @@ class OrderDocumentReader extends OrderDocument
         $binarydatafilename = $this->getInvoiceValueByPathFrom($additionalDocument, "getAttachmentBinaryObject.getFilename", "");
         $binarydata = $this->getInvoiceValueByPathFrom($additionalDocument, "getAttachmentBinaryObject.value", "");
 
-        if (StringUtils::stringIsNullOrEmpty($binarydatafilename) === false 
-            && StringUtils::stringIsNullOrEmpty($binarydata) === false 
+        if (StringUtils::stringIsNullOrEmpty($binarydatafilename) === false
+            && StringUtils::stringIsNullOrEmpty($binarydata) === false
             && StringUtils::stringIsNullOrEmpty($this->binarydatadirectory) === false
         ) {
             $binarydatafilename = PathUtils::combinePathWithFile($this->binarydatadirectory, $binarydatafilename);
@@ -3303,6 +3364,75 @@ class OrderDocumentReader extends OrderDocument
         $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
 
         $blanketOrderRefLineId = $this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getBlanketOrderReferencedDocument.getLineID.value", "");
+
+        return $this;
+    }
+
+    /**
+     * Seek to the first ultimate customer order referenced document (on line-level)
+     * If an applicable document exists, this function will return true, otherwise false
+     * You should use this together with OrderDocumentReader::getDocumentPositionUltimateCustomerOrderReferencedDocument
+     *
+     * @return boolean
+     */
+    public function firstDocumentPositionUltimateCustomerOrderReferencedDocument(): bool
+    {
+        $this->positionUltimateCustomerOrderRefDocPointer = 0;
+
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $ultimateCustomerOrderRefDocs = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getUltimateCustomerOrderReferencedDocument", []));
+
+        return isset($ultimateCustomerOrderRefDocs[$this->positionUltimateCustomerOrderRefDocPointer]);
+    }
+
+    /**
+     * Seek to the next ultimate customer order referenced document (on line-level)
+     * If another applicable document exists, this function will return true, otherwise false
+     * You should use this together with OrderDocumentReader::getDocumentPositionUltimateCustomerOrderReferencedDocument
+     *
+     * @return boolean
+     */
+    public function nextDocumentPositionUltimateCustomerOrderReferencedDocument(): bool
+    {
+        $this->positionUltimateCustomerOrderRefDocPointer++;
+
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $ultimateCustomerOrderRefDocs = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getUltimateCustomerOrderReferencedDocument", []));
+
+        return isset($ultimateCustomerOrderRefDocs[$this->positionUltimateCustomerOrderRefDocPointer]);
+    }
+
+    /**
+     * Get the ultimate customer order referenced document (on line level)
+     * Use this together with OrderDocumentReader::firstDocumentPositionUltimateCustomerOrderReferencedDocument
+     * and OrderDocumentReader::nextDocumentPositionUltimateCustomerOrderReferencedDocument
+     *
+     * @param  string|null   $ultimateCustomerOrderRefId
+     * Ultimate Customer Order Referenced Doc ID applied to this line
+     * @param  string|null   $ultimateCustomerOrderRefLineId
+     * Ultimate Customer Order Referenced Doc LineID applied to this line
+     * @param  DateTime|null $ultimateCustomerOrderRefDate
+     * The formatted date or date time for the issuance of this Ultimate Customer Order Referenced Doc.
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionUltimateCustomerOrderReferencedDocument(?string &$ultimateCustomerOrderRefId, ?string &$ultimateCustomerOrderRefLineId, ?DateTime &$ultimateCustomerOrderRefDate): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $ultimateCustomerOrderRefDocs = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeAgreement.getUltimateCustomerOrderReferencedDocument", []));
+        $ultimateCustomerOrderRefDoc = $this->objectHelper->getArrayIndex($ultimateCustomerOrderRefDocs, $this->documentUltimateCustomerOrderRefDocPointer);
+
+        $ultimateCustomerOrderRefId = $this->getInvoiceValueByPathFrom($ultimateCustomerOrderRefDoc, 'getIssuerAssignedID', '');
+        $ultimateCustomerOrderRefLineId = $this->getInvoiceValueByPathFrom($ultimateCustomerOrderRefDoc, 'getLineID.value', '');
+        $ultimateCustomerOrderRefDate = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPathFrom($ultimateCustomerOrderRefDoc, 'getFormattedIssueDateTime.getDateTimeString', ''),
+            $this->getInvoiceValueByPathFrom($ultimateCustomerOrderRefDoc, 'getFormattedIssueDateTime.getDateTimeString.getFormat', '')
+        );
 
         return $this;
     }

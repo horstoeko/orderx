@@ -136,6 +136,13 @@
                 <ram:BlanketOrderReferencedDocument>
                     <ram:LineID>2</ram:LineID>
                 </ram:BlanketOrderReferencedDocument>
+                <ram:UltimateCustomerOrderReferencedDocument>
+                    <ram:IssuerAssignedID>ULTCUSTORDEREF-1</ram:IssuerAssignedID>
+                    <ram:LineID>1</ram:LineID>
+                    <ram:FormattedIssueDateTime>
+                        <qdt:DateTimeString format="102">20221221</qdt:DateTimeString>
+                    </ram:FormattedIssueDateTime>
+                </ram:UltimateCustomerOrderReferencedDocument>
             </ram:SpecifiedLineTradeAgreement>
             <ram:SpecifiedLineTradeDelivery>
                 <ram:PartialDeliveryAllowedIndicator>
@@ -282,6 +289,13 @@
                 <ram:BlanketOrderReferencedDocument>
                     <ram:LineID>3</ram:LineID>
                 </ram:BlanketOrderReferencedDocument>
+                <ram:UltimateCustomerOrderReferencedDocument>
+                    <ram:IssuerAssignedID>ULTCUSTORDEREF-1</ram:IssuerAssignedID>
+                    <ram:LineID>2</ram:LineID>
+                    <ram:FormattedIssueDateTime>
+                        <qdt:DateTimeString format="102">20221221</qdt:DateTimeString>
+                    </ram:FormattedIssueDateTime>
+                </ram:UltimateCustomerOrderReferencedDocument>
             </ram:SpecifiedLineTradeAgreement>
             <ram:SpecifiedLineTradeDelivery>
                 <ram:PartialDeliveryAllowedIndicator>
@@ -413,6 +427,13 @@
                 <ram:BlanketOrderReferencedDocument>
                     <ram:LineID>4</ram:LineID>
                 </ram:BlanketOrderReferencedDocument>
+                <ram:UltimateCustomerOrderReferencedDocument>
+                    <ram:IssuerAssignedID>ULTCUSTORDEREF-1</ram:IssuerAssignedID>
+                    <ram:LineID>3</ram:LineID>
+                    <ram:FormattedIssueDateTime>
+                        <qdt:DateTimeString format="102">20221221</qdt:DateTimeString>
+                    </ram:FormattedIssueDateTime>
+                </ram:UltimateCustomerOrderReferencedDocument>
             </ram:SpecifiedLineTradeAgreement>
             <ram:SpecifiedLineTradeDelivery>
                 <ram:PartialDeliveryAllowedIndicator>
@@ -630,6 +651,12 @@
                 <ram:ID>PROJECT_ID</ram:ID>
                 <ram:Name>Project Reference</ram:Name>
             </ram:SpecifiedProcuringProject>
+            <ram:UltimateCustomerOrderReferencedDocument>
+                <ram:IssuerAssignedID>ULTCUSTORDEREF-1</ram:IssuerAssignedID>
+                <ram:FormattedIssueDateTime>
+                    <qdt:DateTimeString format="102">20221221</qdt:DateTimeString>
+                </ram:FormattedIssueDateTime>
+            </ram:UltimateCustomerOrderReferencedDocument>
         </ram:ApplicableHeaderTradeAgreement>
         <ram:ApplicableHeaderTradeDelivery>
             <ram:ShipToTradeParty>

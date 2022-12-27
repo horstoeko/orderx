@@ -108,7 +108,7 @@ class OrderDocumentPdfReaderExtendedTest extends TestCase
         self::$document->getIsDocumentCopy($documentIsCopy);
 
         $this->assertNotNull($documentIsCopy);
-        $this->assertFalse($documentIsCopy);
+        $this->assertTrue($documentIsCopy);
     }
 
     /**
@@ -855,6 +855,37 @@ class OrderDocumentPdfReaderExtendedTest extends TestCase
      * @covers \horstoeko\orderx\OrderDocumentReader
      * @covers \horstoeko\orderx\OrderObjectHelper
      */
+    public function testFirstDocumentUltimateCustomerOrderReferencedDocument(): void
+    {
+        $this->assertTrue(self::$document->firstDocumentUltimateCustomerOrderReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentUltimateCustomerOrderReferencedDocument(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentUltimateCustomerOrderReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentUltimateCustomerOrderReferencedDocument(): void
+    {
+        self::$document->firstDocumentUltimateCustomerOrderReferencedDocument();
+        self::$document->getDocumentUltimateCustomerOrderReferencedDocument($ultimateCustomerOrderRefId, $ultimateCustomerOrderRefDate);
+
+        $this->assertEquals("ULTCUSTORDEREF-1", $ultimateCustomerOrderRefId);
+        $this->assertEquals("21.12.2022", $ultimateCustomerOrderRefDate->format("d.m.Y"));
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
     public function testGetDocumentShipTo(): void
     {
         self::$document->getDocumentShipTo($name, $id, $description);
@@ -1513,7 +1544,7 @@ class OrderDocumentPdfReaderExtendedTest extends TestCase
         self::$document->getDocumentReceivableSpecifiedTradeAccountingAccount($id, $typeCode);
 
         $this->assertEquals("BUYER_ACCOUNT_REF", $id);
-        $this->assertEquals("", $typeCode);
+        $this->assertEquals("BUYER_ACCOUNT_REF_TYPE", $typeCode);
     }
 
     /**
@@ -2952,6 +2983,117 @@ class OrderDocumentPdfReaderExtendedTest extends TestCase
         self::$document->getDocumentPositionBlanketOrderReferencedDocument($blanketOrderRefLineId);
 
         $this->assertEquals("4", $blanketOrderRefLineId);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionUltimateCustomerOrderReferencedDocumentPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        $this->assertTrue(self::$document->firstDocumentPositionUltimateCustomerOrderReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionUltimateCustomerOrderReferencedDocumentPos1(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionUltimateCustomerOrderReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionUltimateCustomerOrderReferencedDocumentPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        $this->assertTrue(self::$document->firstDocumentPositionUltimateCustomerOrderReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionUltimateCustomerOrderReferencedDocumentPos2(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionUltimateCustomerOrderReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionUltimateCustomerOrderReferencedDocumentPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        $this->assertTrue(self::$document->firstDocumentPositionUltimateCustomerOrderReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionUltimateCustomerOrderReferencedDocumentPos3(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionUltimateCustomerOrderReferencedDocument());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionUltimateCustomerOrderReferencedDocumentPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionUltimateCustomerOrderReferencedDocument(
+            $ultimateCustomerOrderRefId,
+            $ultimateCustomerOrderRefLineId,
+            $ultimateCustomerOrderRefDate
+        );
+
+        $this->assertEquals("ULTCUSTORDEREF-1", $ultimateCustomerOrderRefId);
+        $this->assertEquals("1", $ultimateCustomerOrderRefLineId);
+        $this->assertEquals("21.12.2022", $ultimateCustomerOrderRefDate->format("d.m.Y"));
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionUltimateCustomerOrderReferencedDocumentPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionUltimateCustomerOrderReferencedDocument(
+            $ultimateCustomerOrderRefId,
+            $ultimateCustomerOrderRefLineId,
+            $ultimateCustomerOrderRefDate
+        );
+
+        $this->assertEquals("ULTCUSTORDEREF-1", $ultimateCustomerOrderRefId);
+        $this->assertEquals("2", $ultimateCustomerOrderRefLineId);
+        $this->assertEquals("21.12.2022", $ultimateCustomerOrderRefDate->format("d.m.Y"));
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionUltimateCustomerOrderReferencedDocumentPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionUltimateCustomerOrderReferencedDocument(
+            $ultimateCustomerOrderRefId,
+            $ultimateCustomerOrderRefLineId,
+            $ultimateCustomerOrderRefDate
+        );
+
+        $this->assertEquals("ULTCUSTORDEREF-1", $ultimateCustomerOrderRefId);
+        $this->assertEquals("3", $ultimateCustomerOrderRefLineId);
+        $this->assertEquals("21.12.2022", $ultimateCustomerOrderRefDate->format("d.m.Y"));
     }
 
     /**
