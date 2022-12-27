@@ -7,14 +7,14 @@ use horstoeko\orderx\OrderDocumentPdfBuilder;
 
 require dirname(__FILE__) . "/../vendor/autoload.php";
 
-$dt = \DateTime::createFromFormat("Ymd", "20221221");
+$dt = \DateTime::createFromFormat("Ymd", "20221225");
 
 $document = OrderDocumentBuilder::CreateNew(
-    OrderProfiles::PROFILE_EXTENDED
+    OrderProfiles::PROFILE_COMFORT
 );
 
 $document
-    ->setIsDocumentCopy(true)
+    ->setIsDocumentCopy(false)
     ->setIsTestDocument(false)
     ->setDocumentBusinessProcessSpecifiedDocumentContextParameter("A1")
 

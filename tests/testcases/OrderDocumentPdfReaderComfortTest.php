@@ -90,7 +90,7 @@ class OrderDocumentPdfReaderComfortTest extends TestCase
 
         $this->assertEquals("PO123456789", $documentNo);
         $this->assertEquals(OrderDocumentTypes::ORDER, $documentTypeCode);
-        $this->assertEquals("26.12.2022", $documentDate->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $documentDate->format('d.m.Y'));
         $this->assertEquals("EUR", $documentCurrency);
         $this->assertEquals("Doc Name", $documentName);
         $this->assertEmpty($documentLanguageId);
@@ -108,7 +108,7 @@ class OrderDocumentPdfReaderComfortTest extends TestCase
         self::$document->getIsDocumentCopy($documentIsCopy);
 
         $this->assertNotNull($documentIsCopy);
-        $this->assertTrue($documentIsCopy);
+        $this->assertFalse($documentIsCopy);
     }
 
     /**
@@ -1186,9 +1186,9 @@ class OrderDocumentPdfReaderComfortTest extends TestCase
         $this->assertNotNull($occurrenceDateTime);
         $this->assertNotNull($startDateTime);
         $this->assertNotNull($endDateTime);
-        $this->assertEquals("26.12.2022", $occurrenceDateTime->format('d.m.Y'));
-        $this->assertEquals("26.12.2022", $startDateTime->format('d.m.Y'));
-        $this->assertEquals("26.12.2022", $endDateTime->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $occurrenceDateTime->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $startDateTime->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $endDateTime->format('d.m.Y'));
     }
 
     /**
