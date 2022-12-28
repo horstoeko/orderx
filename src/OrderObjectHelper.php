@@ -792,12 +792,14 @@ class OrderObjectHelper
     /**
      * Get a DeliverySupplyChainEvent
      *
-     * @param  DateTime|null $occurrenceDateTime
-     * @param  DateTime|null $startDateTime
-     * @param  DateTime|null $endDateTime
+     * @param DateTime|null $occurrenceDateTime
+     * @param DateTime|null $startDateTime
+     * @param DateTime|null $endDateTime
+     * @param float|null $unitQuantity
+     * @param string|null $unitCode
      * @return object|null
      */
-    public function getDeliverySupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): ?object
+    public function getDeliverySupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null, ?float $unitQuantity = null, ?string $unitCode = null): ?object
     {
         if (self::isAllNullOrEmpty(func_get_args())) {
             return null;
@@ -807,7 +809,8 @@ class OrderObjectHelper
         $period = $this->getSpecifiedPeriodType($startDateTime, $endDateTime);
 
         $this->tryCall($supplychainevent, "setOccurrenceDateTime", $this->getDateTimeType($occurrenceDateTime));
-        $this->tryCall($supplychainevent, 'setOccurrenceSpecifiedPeriod', $period);
+        $this->tryCall($supplychainevent, "setOccurrenceSpecifiedPeriod", $period);
+        $this->tryCall($supplychainevent, "setUnitQuantity", $this->getQuantityType($unitQuantity, $unitCode));
 
         return $supplychainevent;
     }

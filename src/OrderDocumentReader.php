@@ -1887,6 +1887,7 @@ class OrderDocumentReader extends OrderDocument
      * Seek to the first document requested despatch supply chain event of the document.
      * Returns true if a first event is available, otherwise false
      * You may use this together with OrderDocumentReader::getRequestedDespatchSupplyChainEvent
+     * (This is the date or period on which delivery is requested)
      *
      * @return boolean
      */
@@ -1901,6 +1902,7 @@ class OrderDocumentReader extends OrderDocument
      * Seek to the next document requested despatch supply chain event of the document.
      * Returns true if a event is available, otherwise false
      * You may use this together with OrderDocumentReader::getRequestedDespatchSupplyChainEvent
+     * (This is the date or period on which delivery is requested)
      *
      * @return boolean
      */
