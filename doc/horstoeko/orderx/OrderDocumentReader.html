@@ -1632,8 +1632,8 @@ You may use it together with getDocumentPositionRequestedDeliverySupplyChainEven
                 <div class="col-md-8 type">
                     <a href="#method_nextDocumentPositionRequestedDeliverySupplyChainEvent">nextDocumentPositionRequestedDeliverySupplyChainEvent</a>()
         
-                                            <p>Seek to the first document position requested delivery supply chain event
-Returns true if the first requested delivery supply chain event is available, otherwise false
+                                            <p>Seek to the next document position requested delivery supply chain event
+Returns true if another requested delivery supply chain event is available, otherwise false
 You may use it together with getDocumentPositionRequestedDeliverySupplyChainEvent
 (The Requested Date or Period on which Delivery is requested)</p>                </div>
                 <div class="col-md-2"></div>
@@ -1644,6 +1644,42 @@ You may use it together with getDocumentPositionRequestedDeliverySupplyChainEven
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_getDocumentPositionRequestedDeliverySupplyChainEvent">getDocumentPositionRequestedDeliverySupplyChainEvent</a>(<a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $occurrenceDateTime, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $startDateTime, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $endDateTime)
+        
+                                            <p>Get the requested date or period on which delivery is requested (on position level)</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_firstDocumentPositionRequestedDespatchSupplyChainEvent">firstDocumentPositionRequestedDespatchSupplyChainEvent</a>()
+        
+                                            <p>Seek to the first document position requested despatch supply chain event
+Returns true if the first requested despatch supply chain event is available, otherwise false
+You may use it together with getDocumentPositionRequestedDespatchSupplyChainEvent
+This is the Requested date or period on which pick up is requested (on position level)</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    bool
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_nextDocumentPositionRequestedDespatchSupplyChainEvent">nextDocumentPositionRequestedDespatchSupplyChainEvent</a>()
+        
+                                            <p>Seek to the next document position requested despatch supply chain event
+Returns true if another requested despatch supply chain event is available, otherwise false
+You may use it together with getDocumentPositionRequestedDespatchSupplyChainEvent
+This is the Requested date or period on which pick up is requested (on position level)</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDocumentPositionRequestedDespatchSupplyChainEvent">getDocumentPositionRequestedDespatchSupplyChainEvent</a>(<a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $occurrenceDateTime, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $startDateTime, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $endDateTime)
         
                                             <p>Get the requested date or period on which delivery is requested (on position level)</p>                </div>
                 <div class="col-md-2"></div>
@@ -1745,7 +1781,7 @@ You may use it together with OrderDocumentReader::getDocumentPositionAllowanceCh
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_setBinaryDataDirectory">
-        <div class="location">at         line 194</div>
+        <div class="location">at         line 199</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>setBinaryDataDirectory</strong>(string $binarydatadirectory)
         </code>
@@ -1786,7 +1822,7 @@ additional referenced documents are temporary stored</p>                        
             </div>
                     <div class="method-item">
                     <h3 id="method_readAndGuessFromFile">
-        <div class="location">at         line 213</div>
+        <div class="location">at         line 218</div>
         <code>        static            <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>readAndGuessFromFile</strong>(string $xmlfilename)
         </code>
@@ -1826,7 +1862,7 @@ additional referenced documents are temporary stored</p>                        
             </div>
                     <div class="method-item">
                     <h3 id="method_readAndGuessFromContent">
-        <div class="location">at         line 228</div>
+        <div class="location">at         line 233</div>
         <code>        static            <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>readAndGuessFromContent</strong>(string $xmlcontent)
         </code>
@@ -1866,7 +1902,7 @@ additional referenced documents are temporary stored</p>                        
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentInformation">
-        <div class="location">at         line 290</div>
+        <div class="location">at         line 295</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentInformation</strong>(string|null $documentNo, string|null $documentTypeCode, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $documentDate, string|null $documentCurrency, string|null $documentName, string|null $documentLanguageId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $documentEffectiveSpecifiedPeriod, string|null $documentPurposeCode, string|null $documentRequestedResponseTypeCode)
         </code>
@@ -1955,7 +1991,7 @@ Value = AC to request an Order_Response</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getIsDocumentCopy">
-        <div class="location">at         line 319</div>
+        <div class="location">at         line 324</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getIsDocumentCopy</strong>(bool|null $copyindicator)
         </code>
@@ -1995,7 +2031,7 @@ Value = AC to request an Order_Response</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getIsTestDocument">
-        <div class="location">at         line 332</div>
+        <div class="location">at         line 337</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getIsTestDocument</strong>(bool|null $testdocumentindicator)
         </code>
@@ -2035,7 +2071,7 @@ Value = AC to request an Order_Response</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentNote">
-        <div class="location">at         line 344</div>
+        <div class="location">at         line 349</div>
         <code>                    bool
     <strong>firstDocumentNote</strong>()
         </code>
@@ -2066,7 +2102,7 @@ It will return false if there is no note on the first position</p>              
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentNote">
-        <div class="location">at         line 357</div>
+        <div class="location">at         line 362</div>
         <code>                    bool
     <strong>nextDocumentNote</strong>()
         </code>
@@ -2096,7 +2132,7 @@ It will return false if there is no note on the first position</p>              
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentNote">
-        <div class="location">at         line 377</div>
+        <div class="location">at         line 382</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentNote</strong>(array|null $content, string|null $subjectCode, string|null $contentCode)
         </code>
@@ -2156,7 +2192,7 @@ the firstDocumentNote/nextDocumentNote methods</p>                              
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentSummation">
-        <div class="location">at         line 408</div>
+        <div class="location">at         line 413</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentSummation</strong>(float|null $lineTotalAmount, float|null $grandTotalAmount, float|null $chargeTotalAmount, float|null $allowanceTotalAmount, float|null $taxBasisTotalAmount, float|null $taxTotalAmount)
         </code>
@@ -2231,7 +2267,7 @@ the firstDocumentNote/nextDocumentNote methods</p>                              
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentBuyerReference">
-        <div class="location">at         line 465</div>
+        <div class="location">at         line 470</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentBuyerReference</strong>(string|null $buyerreference)
         </code>
@@ -2271,7 +2307,7 @@ the firstDocumentNote/nextDocumentNote methods</p>                              
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentSeller">
-        <div class="location">at         line 483</div>
+        <div class="location">at         line 488</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentSeller</strong>(string|null $name, array|null $id, string|null $description)
         </code>
@@ -2322,7 +2358,7 @@ legal entities or as a Taxable person or otherwise trades as a person or persons
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentSellerGlobalId">
-        <div class="location">at         line 502</div>
+        <div class="location">at         line 507</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentSellerGlobalId</strong>(array|null $globalID)
         </code>
@@ -2363,7 +2399,7 @@ from the list published by the ISO/IEC 6523 Maintenance Agency.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentSellerTaxRegistration">
-        <div class="location">at         line 518</div>
+        <div class="location">at         line 523</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentSellerTaxRegistration</strong>(array|null $taxreg)
         </code>
@@ -2404,7 +2440,7 @@ for <em>Sales tax identification number of the seller</em>)</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentSellerAddress">
-        <div class="location">at         line 553</div>
+        <div class="location">at         line 558</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentSellerAddress</strong>(string|null $lineone, string|null $linetwo, string|null $linethree, string|null $postcode, string|null $city, string|null $country, string|null $subdivision)
         </code>
@@ -2482,7 +2518,7 @@ and their subdivisions”.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentSellerLegalOrganisation">
-        <div class="location">at         line 582</div>
+        <div class="location">at         line 587</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentSellerLegalOrganisation</strong>(string|null $legalorgid, string|null $legalorgtype, string|null $legalorgname)
         </code>
@@ -2537,7 +2573,7 @@ the company name). Note: This may be used if different from the seller's name.</
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentSellerContact">
-        <div class="location">at         line 598</div>
+        <div class="location">at         line 603</div>
         <code>                    bool
     <strong>firstDocumentSellerContact</strong>()
         </code>
@@ -2568,7 +2604,7 @@ You may use this together with OrderDocumentReader::getDocumentSellerContact</p>
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentSellerContact">
-        <div class="location">at         line 612</div>
+        <div class="location">at         line 617</div>
         <code>                    bool
     <strong>nextDocumentSellerContact</strong>()
         </code>
@@ -2599,7 +2635,7 @@ You may use this together with OrderDocumentReader::getDocumentSellerContact</p>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentSellerContact">
-        <div class="location">at         line 636</div>
+        <div class="location">at         line 641</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentSellerContact</strong>(string|null $contactpersonname, string|null $contactdepartmentname, string|null $contactphoneno, string|null $contactfaxno, string|null $contactemailadd, string|null $contacttypecode)
         </code>
@@ -2664,7 +2700,7 @@ You may use this together with OrderDocumentReader::getDocumentSellerContact</p>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentSellerElectronicAddress">
-        <div class="location">at         line 660</div>
+        <div class="location">at         line 665</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentSellerElectronicAddress</strong>(string|null $uriType, string|null $uriId)
         </code>
@@ -2710,7 +2746,7 @@ from a list to be maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentBuyer">
-        <div class="location">at         line 680</div>
+        <div class="location">at         line 685</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentBuyer</strong>(string|null $name, array|null $id, string|null $description)
         </code>
@@ -2761,7 +2797,7 @@ legal entities or as a Taxable person or otherwise trades as a person or persons
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentBuyerGlobalId">
-        <div class="location">at         line 699</div>
+        <div class="location">at         line 704</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentBuyerGlobalId</strong>(array|null $globalID)
         </code>
@@ -2802,7 +2838,7 @@ from the list published by the ISO/IEC 6523 Maintenance Agency.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentBuyerTaxRegistration">
-        <div class="location">at         line 715</div>
+        <div class="location">at         line 720</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentBuyerTaxRegistration</strong>(array|null $taxreg)
         </code>
@@ -2843,7 +2879,7 @@ for <em>Sales tax identification number of the seller</em>)</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentBuyerAddress">
-        <div class="location">at         line 747</div>
+        <div class="location">at         line 752</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentBuyerAddress</strong>(string|null $lineone, string|null $linetwo, string|null $linethree, string|null $postcode, string|null $city, string|null $country, string|null $subdivision)
         </code>
@@ -2918,7 +2954,7 @@ representation of names of countries and their subdivisions”</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentBuyerLegalOrganisation">
-        <div class="location">at         line 776</div>
+        <div class="location">at         line 781</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentBuyerLegalOrganisation</strong>(string|null $legalorgid, string|null $legalorgtype, string|null $legalorgname)
         </code>
@@ -2973,7 +3009,7 @@ ISO/IEC 6523 list</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentBuyerContact">
-        <div class="location">at         line 792</div>
+        <div class="location">at         line 797</div>
         <code>                    bool
     <strong>firstDocumentBuyerContact</strong>()
         </code>
@@ -3004,7 +3040,7 @@ You may use this together with OrderDocumentReader::getDocumentBuyerContact</p> 
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentBuyerContact">
-        <div class="location">at         line 806</div>
+        <div class="location">at         line 811</div>
         <code>                    bool
     <strong>nextDocumentBuyerContact</strong>()
         </code>
@@ -3035,7 +3071,7 @@ You may use this together with OrderDocumentReader::getDocumentBuyerContact</p> 
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentBuyerContact">
-        <div class="location">at         line 830</div>
+        <div class="location">at         line 835</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentBuyerContact</strong>(string|null $contactpersonname, string|null $contactdepartmentname, string|null $contactphoneno, string|null $contactfaxno, string|null $contactemailadd, string|null $contacttypecode)
         </code>
@@ -3100,7 +3136,7 @@ You may use this together with OrderDocumentReader::getDocumentBuyerContact</p> 
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentBuyerElectronicAddress">
-        <div class="location">at         line 854</div>
+        <div class="location">at         line 859</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentBuyerElectronicAddress</strong>(string|null $uriType, string|null $uriId)
         </code>
@@ -3146,7 +3182,7 @@ from a list to be maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentBuyerRequisitioner">
-        <div class="location">at         line 874</div>
+        <div class="location">at         line 879</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentBuyerRequisitioner</strong>(string|null $name, array|null $id, string|null $description)
         </code>
@@ -3197,7 +3233,7 @@ legal entities or as a Taxable person or otherwise trades as a person or persons
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentBuyerRequisitionerGlobalId">
-        <div class="location">at         line 893</div>
+        <div class="location">at         line 898</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentBuyerRequisitionerGlobalId</strong>(array|null $globalID)
         </code>
@@ -3238,7 +3274,7 @@ from the list published by the ISO/IEC 6523 Maintenance Agency.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentBuyerRequisitionerTaxRegistration">
-        <div class="location">at         line 909</div>
+        <div class="location">at         line 914</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentBuyerRequisitionerTaxRegistration</strong>(array|null $taxreg)
         </code>
@@ -3279,7 +3315,7 @@ for <em>Sales tax identification number of the seller</em>)</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentBuyerRequisitionerAddress">
-        <div class="location">at         line 941</div>
+        <div class="location">at         line 946</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentBuyerRequisitionerAddress</strong>(string|null $lineone, string|null $linetwo, string|null $linethree, string|null $postcode, string|null $city, string|null $country, string|null $subdivision)
         </code>
@@ -3354,7 +3390,7 @@ representation of names of countries and their subdivisions”</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentBuyerRequisitionerLegalOrganisation">
-        <div class="location">at         line 969</div>
+        <div class="location">at         line 974</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentBuyerRequisitionerLegalOrganisation</strong>(string|null $legalorgid, string|null $legalorgtype, string|null $legalorgname)
         </code>
@@ -3408,7 +3444,7 @@ ISO/IEC 6523 list</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentBuyerRequisitionerContact">
-        <div class="location">at         line 985</div>
+        <div class="location">at         line 990</div>
         <code>                    bool
     <strong>firstDocumentBuyerRequisitionerContact</strong>()
         </code>
@@ -3439,7 +3475,7 @@ You may use this together with OrderDocumentReader::getDocumentBuyerContact</p> 
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentBuyerRequisitionerContact">
-        <div class="location">at         line 999</div>
+        <div class="location">at         line 1004</div>
         <code>                    bool
     <strong>nextDocumentBuyerRequisitionerContact</strong>()
         </code>
@@ -3470,7 +3506,7 @@ You may use this together with OrderDocumentReader::getDocumentBuyerContact</p> 
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentBuyerRequisitionerContact">
-        <div class="location">at         line 1023</div>
+        <div class="location">at         line 1028</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentBuyerRequisitionerContact</strong>(string|null $contactpersonname, string|null $contactdepartmentname, string|null $contactphoneno, string|null $contactfaxno, string|null $contactemailadd, string|null $contacttypecode)
         </code>
@@ -3535,7 +3571,7 @@ You may use this together with OrderDocumentReader::getDocumentBuyerContact</p> 
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentBuyerRequisitionerElectronicAddress">
-        <div class="location">at         line 1047</div>
+        <div class="location">at         line 1052</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentBuyerRequisitionerElectronicAddress</strong>(string|null $uriType, string|null $uriId)
         </code>
@@ -3581,7 +3617,7 @@ from a list to be maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentDeliveryTerms">
-        <div class="location">at         line 1085</div>
+        <div class="location">at         line 1090</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentDeliveryTerms</strong>(string|null $code, string|null $description, string|null $functionCode, string|null $relevantTradeLocationId, string|null $relevantTradeLocationName)
         </code>
@@ -3656,7 +3692,7 @@ in UNTDID 4055</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentSellerOrderReferencedDocument">
-        <div class="location">at         line 1105</div>
+        <div class="location">at         line 1110</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentSellerOrderReferencedDocument</strong>(string|null $sellerOrderRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $sellerOrderRefDate)
         </code>
@@ -3701,7 +3737,7 @@ in UNTDID 4055</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentBuyerOrderReferencedDocument">
-        <div class="location">at         line 1125</div>
+        <div class="location">at         line 1130</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentBuyerOrderReferencedDocument</strong>(string|null $buyerOrderRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $buyerOrderRefDate)
         </code>
@@ -3746,7 +3782,7 @@ in UNTDID 4055</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentQuotationReferencedDocument">
-        <div class="location">at         line 1145</div>
+        <div class="location">at         line 1150</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentQuotationReferencedDocument</strong>(string|null $quotationRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $quotationRefDate)
         </code>
@@ -3791,7 +3827,7 @@ in UNTDID 4055</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentContractReferencedDocument">
-        <div class="location">at         line 1166</div>
+        <div class="location">at         line 1171</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentContractReferencedDocument</strong>(string|null $contractRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $contractRefDate)
         </code>
@@ -3837,7 +3873,7 @@ of the specific trading relationship and for a defined time period.</p>         
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentRequisitionReferencedDocument">
-        <div class="location">at         line 1186</div>
+        <div class="location">at         line 1191</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentRequisitionReferencedDocument</strong>(string|null $requisitionRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $requisitionRefDate)
         </code>
@@ -3882,7 +3918,7 @@ of the specific trading relationship and for a defined time period.</p>         
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentAdditionalReferencedDocument">
-        <div class="location">at         line 1203</div>
+        <div class="location">at         line 1208</div>
         <code>                    bool
     <strong>firstDocumentAdditionalReferencedDocument</strong>()
         </code>
@@ -3913,7 +3949,7 @@ additional ref. document. This method should be used together with <strong>Order
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentAdditionalReferencedDocument">
-        <div class="location">at         line 1216</div>
+        <div class="location">at         line 1221</div>
         <code>                    bool
     <strong>nextDocumentAdditionalReferencedDocument</strong>()
         </code>
@@ -3944,7 +3980,7 @@ additional ref. document. This method should be used together with <strong>Order
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentAdditionalReferencedDocument">
-        <div class="location">at         line 1256</div>
+        <div class="location">at         line 1261</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentAdditionalReferencedDocument</strong>(string|null $additionalRefTypeCode, string|null $additionalRefId, string|null $additionalRefURIID, string|null $additionalRefName, string|null $additionalRefRefTypeCode, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $additionalRefDate)
         </code>
@@ -4024,7 +4060,7 @@ from UNTDID 1153 in accordance with the code list entries.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentAdditionalReferencedDocumentBinaryData">
-        <div class="location">at         line 1286</div>
+        <div class="location">at         line 1291</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentAdditionalReferencedDocumentBinaryData</strong>(string|null $binarydatafilename)
         </code>
@@ -4067,7 +4103,7 @@ available, this value will be empty</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentBlanketOrderReferencedDocument">
-        <div class="location">at         line 1316</div>
+        <div class="location">at         line 1321</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentBlanketOrderReferencedDocument</strong>(string|null $blanketOrderRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $blanketOrderRefDate)
         </code>
@@ -4112,7 +4148,7 @@ available, this value will be empty</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPreviousOrderChangeReferencedDocument">
-        <div class="location">at         line 1336</div>
+        <div class="location">at         line 1341</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPreviousOrderChangeReferencedDocument</strong>(string|null $prevOrderChangeRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $prevOrderChangeRefDate)
         </code>
@@ -4157,7 +4193,7 @@ available, this value will be empty</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPreviousOrderResponseReferencedDocument">
-        <div class="location">at         line 1356</div>
+        <div class="location">at         line 1361</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPreviousOrderResponseReferencedDocument</strong>(string|null $prevOrderResponseRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $prevOrderResponseRefDate)
         </code>
@@ -4202,7 +4238,7 @@ available, this value will be empty</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentProcuringProject">
-        <div class="location">at         line 1376</div>
+        <div class="location">at         line 1381</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentProcuringProject</strong>(string|null $procuringProjectId, string|null $procuringProjectName)
         </code>
@@ -4247,7 +4283,7 @@ available, this value will be empty</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentUltimateCustomerOrderReferencedDocument">
-        <div class="location">at         line 1390</div>
+        <div class="location">at         line 1395</div>
         <code>                    bool
     <strong>firstDocumentUltimateCustomerOrderReferencedDocument</strong>()
         </code>
@@ -4278,7 +4314,7 @@ If an applicable document exists, this function will return true, otherwise fals
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentUltimateCustomerOrderReferencedDocument">
-        <div class="location">at         line 1403</div>
+        <div class="location">at         line 1408</div>
         <code>                    bool
     <strong>nextDocumentUltimateCustomerOrderReferencedDocument</strong>()
         </code>
@@ -4309,7 +4345,7 @@ If another applicable document exists, this function will return true, otherwise
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentUltimateCustomerOrderReferencedDocument">
-        <div class="location">at         line 1419</div>
+        <div class="location">at         line 1424</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentUltimateCustomerOrderReferencedDocument</strong>(string|null $ultimateCustomerOrderRefId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $ultimateCustomerOrderRefDate)
         </code>
@@ -4354,7 +4390,7 @@ If another applicable document exists, this function will return true, otherwise
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentShipTo">
-        <div class="location">at         line 1447</div>
+        <div class="location">at         line 1452</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentShipTo</strong>(string|null $name, array|null $id, string|null $description)
         </code>
@@ -4407,7 +4443,7 @@ If used, the identification scheme shall be chosen from the entries of the list 
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentShipToGlobalId">
-        <div class="location">at         line 1466</div>
+        <div class="location">at         line 1471</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentShipToGlobalId</strong>(array|null $globalID)
         </code>
@@ -4448,7 +4484,7 @@ from the list published by the ISO/IEC 6523 Maintenance Agency.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentShipToTaxRegistration">
-        <div class="location">at         line 1482</div>
+        <div class="location">at         line 1487</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentShipToTaxRegistration</strong>(array|null $taxreg)
         </code>
@@ -4489,7 +4525,7 @@ for <em>Sales tax identification number of the seller</em>)</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentShipToAddress">
-        <div class="location">at         line 1514</div>
+        <div class="location">at         line 1519</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentShipToAddress</strong>(string|null $lineone, string|null $linetwo, string|null $linethree, string|null $postcode, string|null $city, string|null $country, string|null $subdivision)
         </code>
@@ -4564,7 +4600,7 @@ representation of names of countries and their subdivisions”</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentShipToLegalOrganisation">
-        <div class="location">at         line 1541</div>
+        <div class="location">at         line 1546</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentShipToLegalOrganisation</strong>(string|null $legalorgid, string|null $legalorgtype, string|null $legalorgname)
         </code>
@@ -4619,7 +4655,7 @@ it should be known to the buyer or seller party</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentShipToContact">
-        <div class="location">at         line 1557</div>
+        <div class="location">at         line 1562</div>
         <code>                    bool
     <strong>firstDocumentShipToContact</strong>()
         </code>
@@ -4650,7 +4686,7 @@ You should use this together with OrderDocumentReader::getDocumentShipToContact<
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentShipToContact">
-        <div class="location">at         line 1571</div>
+        <div class="location">at         line 1576</div>
         <code>                    bool
     <strong>nextDocumentShipToContact</strong>()
         </code>
@@ -4681,7 +4717,7 @@ You should use this together with OrderDocumentReader::getDocumentShipToContact<
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentShipToContact">
-        <div class="location">at         line 1595</div>
+        <div class="location">at         line 1600</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentShipToContact</strong>(string|null $contactpersonname, string|null $contactdepartmentname, string|null $contactphoneno, string|null $contactfaxno, string|null $contactemailadd, string|null $contacttypecode)
         </code>
@@ -4746,7 +4782,7 @@ You should use this together with OrderDocumentReader::getDocumentShipToContact<
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentShipToElectronicAddress">
-        <div class="location">at         line 1619</div>
+        <div class="location">at         line 1624</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentShipToElectronicAddress</strong>(string|null $uriType, string|null $uriId)
         </code>
@@ -4792,7 +4828,7 @@ from a list to be maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentShipFrom">
-        <div class="location">at         line 1639</div>
+        <div class="location">at         line 1644</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentShipFrom</strong>(string|null $name, array|null $id, string|null $description)
         </code>
@@ -4843,7 +4879,7 @@ legal entities or as a Taxable person or otherwise trades as a person or persons
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentShipFromGlobalId">
-        <div class="location">at         line 1658</div>
+        <div class="location">at         line 1663</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentShipFromGlobalId</strong>(array|null $globalID)
         </code>
@@ -4884,7 +4920,7 @@ from the list published by the ISO/IEC 6523 Maintenance Agency.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentShipFromTaxRegistration">
-        <div class="location">at         line 1674</div>
+        <div class="location">at         line 1679</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentShipFromTaxRegistration</strong>(array|null $taxreg)
         </code>
@@ -4925,7 +4961,7 @@ for <em>Sales tax identification number of the seller</em>)</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentShipFromAddress">
-        <div class="location">at         line 1706</div>
+        <div class="location">at         line 1711</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentShipFromAddress</strong>(string|null $lineone, string|null $linetwo, string|null $linethree, string|null $postcode, string|null $city, string|null $country, string|null $subdivision)
         </code>
@@ -5000,7 +5036,7 @@ representation of names of countries and their subdivisions”</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentShipFromLegalOrganisation">
-        <div class="location">at         line 1733</div>
+        <div class="location">at         line 1738</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentShipFromLegalOrganisation</strong>(string|null $legalorgid, string|null $legalorgtype, string|null $legalorgname)
         </code>
@@ -5055,7 +5091,7 @@ it should be known to the buyer or seller party</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentShipFromContact">
-        <div class="location">at         line 1749</div>
+        <div class="location">at         line 1754</div>
         <code>                    bool
     <strong>firstDocumentShipFromContact</strong>()
         </code>
@@ -5086,7 +5122,7 @@ You may use this together with OrderDocumentReader::getDocumentShipFromContact</
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentShipFromContact">
-        <div class="location">at         line 1763</div>
+        <div class="location">at         line 1768</div>
         <code>                    bool
     <strong>nextDocumentShipFromContact</strong>()
         </code>
@@ -5117,7 +5153,7 @@ You may use this together with OrderDocumentReader::getDocumentShipFromContact</
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentShipFromContact">
-        <div class="location">at         line 1787</div>
+        <div class="location">at         line 1792</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentShipFromContact</strong>(string|null $contactpersonname, string|null $contactdepartmentname, string|null $contactphoneno, string|null $contactfaxno, string|null $contactemailadd, string|null $contacttypecode)
         </code>
@@ -5182,7 +5218,7 @@ You may use this together with OrderDocumentReader::getDocumentShipFromContact</
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentShipFromElectronicAddress">
-        <div class="location">at         line 1811</div>
+        <div class="location">at         line 1816</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentShipFromElectronicAddress</strong>(string|null $uriType, string|null $uriId)
         </code>
@@ -5228,7 +5264,7 @@ from a list to be maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentRequestedDeliverySupplyChainEvent">
-        <div class="location">at         line 1826</div>
+        <div class="location">at         line 1831</div>
         <code>                    bool
     <strong>firstDocumentRequestedDeliverySupplyChainEvent</strong>()
         </code>
@@ -5259,7 +5295,7 @@ You may use this together with OrderDocumentReader::getDocumentRequestedDelivery
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentRequestedDeliverySupplyChainEvent">
-        <div class="location">at         line 1840</div>
+        <div class="location">at         line 1845</div>
         <code>                    bool
     <strong>nextDocumentRequestedDeliverySupplyChainEvent</strong>()
         </code>
@@ -5290,7 +5326,7 @@ You may use this together with OrderDocumentReader::getDocumentRequestedDelivery
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentRequestedDeliverySupplyChainEvent">
-        <div class="location">at         line 1860</div>
+        <div class="location">at         line 1865</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentRequestedDeliverySupplyChainEvent</strong>(<a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $occurrenceDateTime, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $startDateTime, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $endDateTime)
         </code>
@@ -5342,7 +5378,7 @@ and <strong>OrderDocumentReader::nextDocumentRequestedDeliverySupplyChainEvent</
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentRequestedDespatchSupplyChainEvent">
-        <div class="location">at         line 1888</div>
+        <div class="location">at         line 1893</div>
         <code>                    bool
     <strong>firstDocumentRequestedDespatchSupplyChainEvent</strong>()
         </code>
@@ -5373,7 +5409,7 @@ You may use this together with OrderDocumentReader::getRequestedDespatchSupplyCh
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentRequestedDespatchSupplyChainEvent">
-        <div class="location">at         line 1902</div>
+        <div class="location">at         line 1907</div>
         <code>                    bool
     <strong>nextDocumentRequestedDespatchSupplyChainEvent</strong>()
         </code>
@@ -5404,7 +5440,7 @@ You may use this together with OrderDocumentReader::getRequestedDespatchSupplyCh
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentRequestedDespatchSupplyChainEvent">
-        <div class="location">at         line 1922</div>
+        <div class="location">at         line 1927</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentRequestedDespatchSupplyChainEvent</strong>(<a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $occurrenceDateTime, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $startDateTime, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $endDateTime)
         </code>
@@ -5424,17 +5460,17 @@ and <strong>OrderDocumentReader::nextDocumentRequestedDespatchSupplyChainEvent</
                     <tr>
                 <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
                 <td>$occurrenceDateTime</td>
-                <td>A Requested Date on which Delivery is requested</td>
+                <td>A Requested Date on which Pick up is requested</td>
             </tr>
                     <tr>
                 <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
                 <td>$startDateTime</td>
-                <td>The Start Date of he Requested Period on which Delivery is requested</td>
+                <td>The Start Date of he Requested Period on which Pick up is requested</td>
             </tr>
                     <tr>
                 <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
                 <td>$endDateTime</td>
-                <td>The End Date of he Requested Period on which Delivery is requested</td>
+                <td>The End Date of he Requested Period on which Pick up is requested</td>
             </tr>
             </table>
 
@@ -5456,7 +5492,7 @@ and <strong>OrderDocumentReader::nextDocumentRequestedDespatchSupplyChainEvent</
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentInvoicee">
-        <div class="location">at         line 1955</div>
+        <div class="location">at         line 1960</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentInvoicee</strong>(string|null $name, array|null $id, string|null $description)
         </code>
@@ -5507,7 +5543,7 @@ legal entities or as a Taxable person or otherwise trades as a person or persons
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentInvoiceeGlobalId">
-        <div class="location">at         line 1974</div>
+        <div class="location">at         line 1979</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentInvoiceeGlobalId</strong>(array|null $globalID)
         </code>
@@ -5548,7 +5584,7 @@ from the list published by the ISO/IEC 6523 Maintenance Agency.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentInvoiceeTaxRegistration">
-        <div class="location">at         line 1990</div>
+        <div class="location">at         line 1995</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentInvoiceeTaxRegistration</strong>(array|null $taxreg)
         </code>
@@ -5589,7 +5625,7 @@ for <em>Sales tax identification number of the seller</em>)</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentInvoiceeAddress">
-        <div class="location">at         line 2022</div>
+        <div class="location">at         line 2027</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentInvoiceeAddress</strong>(string|null $lineone, string|null $linetwo, string|null $linethree, string|null $postcode, string|null $city, string|null $country, string|null $subdivision)
         </code>
@@ -5664,7 +5700,7 @@ representation of names of countries and their subdivisions”</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentInvoiceeLegalOrganisation">
-        <div class="location">at         line 2051</div>
+        <div class="location">at         line 2056</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentInvoiceeLegalOrganisation</strong>(string|null $legalorgid, string|null $legalorgtype, string|null $legalorgname)
         </code>
@@ -5719,7 +5755,7 @@ ISO/IEC 6523 list</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentInvoiceeContact">
-        <div class="location">at         line 2067</div>
+        <div class="location">at         line 2072</div>
         <code>                    bool
     <strong>firstDocumentInvoiceeContact</strong>()
         </code>
@@ -5750,7 +5786,7 @@ You may use this together with OrderDocumentReader::getDocumentinvoiceeContact</
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentInvoiceeContact">
-        <div class="location">at         line 2081</div>
+        <div class="location">at         line 2086</div>
         <code>                    bool
     <strong>nextDocumentInvoiceeContact</strong>()
         </code>
@@ -5781,7 +5817,7 @@ You may use this together with OrderDocumentReader::getDocumentInvoiceeContact</
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentInvoiceeContact">
-        <div class="location">at         line 2105</div>
+        <div class="location">at         line 2110</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentInvoiceeContact</strong>(string|null $contactpersonname, string|null $contactdepartmentname, string|null $contactphoneno, string|null $contactfaxno, string|null $contactemailadd, string|null $contacttypecode)
         </code>
@@ -5846,7 +5882,7 @@ You may use this together with OrderDocumentReader::getDocumentInvoiceeContact</
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentInvoiceeElectronicAddress">
-        <div class="location">at         line 2129</div>
+        <div class="location">at         line 2134</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentInvoiceeElectronicAddress</strong>(string|null $uriType, string|null $uriId)
         </code>
@@ -5892,7 +5928,7 @@ from a list to be maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPaymentMeans">
-        <div class="location">at         line 2144</div>
+        <div class="location">at         line 2149</div>
         <code>                    bool
     <strong>firstDocumentPaymentMeans</strong>()
         </code>
@@ -5923,7 +5959,7 @@ You may use this together with OrderDocumentReader::getDocumentPaymentMeans</p> 
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPaymentMeans">
-        <div class="location">at         line 2158</div>
+        <div class="location">at         line 2163</div>
         <code>                    bool
     <strong>nextDocumentPaymentMeans</strong>()
         </code>
@@ -5955,7 +5991,7 @@ You may use this together with OrderDocumentReader::getDocumentPaymentMeans</p> 
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPaymentMeans">
-        <div class="location">at         line 2177</div>
+        <div class="location">at         line 2182</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPaymentMeans</strong>(string|null $paymentMeansCode, string|null $paymentMeansInformation)
         </code>
@@ -6003,7 +6039,7 @@ other instruments.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPaymentTerms">
-        <div class="location">at         line 2195</div>
+        <div class="location">at         line 2200</div>
         <code>                    bool
     <strong>firstDocumentPaymentTerms</strong>()
         </code>
@@ -6035,7 +6071,7 @@ You may use this together with OrderDocumentReader::getDocumentPaymentTerm</p>  
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPaymentTerms">
-        <div class="location">at         line 2209</div>
+        <div class="location">at         line 2214</div>
         <code>                    bool
     <strong>nextDocumentPaymentTerms</strong>()
         </code>
@@ -6067,7 +6103,7 @@ You may use this together with OrderDocumentReader::getDocumentPaymentTerm</p>  
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPaymentTerm">
-        <div class="location">at         line 2226</div>
+        <div class="location">at         line 2231</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPaymentTerm</strong>(string|null $paymentTermsDescription)
         </code>
@@ -6110,7 +6146,7 @@ multiple conditions.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentTax">
-        <div class="location">at         line 2243</div>
+        <div class="location">at         line 2248</div>
         <code>                    bool
     <strong>firstDocumentTax</strong>()
         </code>
@@ -6142,7 +6178,7 @@ You may use this together with OrderDocumentReader::getDocumentTax</p>          
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentTax">
-        <div class="location">at         line 2257</div>
+        <div class="location">at         line 2262</div>
         <code>                    bool
     <strong>nextDocumentTax</strong>()
         </code>
@@ -6174,7 +6210,7 @@ You may use this together with OrderDocumentReader::getDocumentTax</p>          
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentTax">
-        <div class="location">at         line 2333</div>
+        <div class="location">at         line 2338</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentTax</strong>(string|null $categoryCode, string|null $typeCode, float|null $basisAmount, float|null $calculatedAmount, float|null $rateApplicablePercent, string|null $exemptionReason, string|null $exemptionReasonCode, float|null $lineTotalBasisAmount, float|null $allowanceChargeBasisAmount, string|null $dueDateTypeCode)
         </code>
@@ -6303,7 +6339,7 @@ supported by CII 16B:
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentAllowanceCharge">
-        <div class="location">at         line 2358</div>
+        <div class="location">at         line 2363</div>
         <code>                    bool
     <strong>firstDocumentAllowanceCharge</strong>()
         </code>
@@ -6334,7 +6370,7 @@ You may use this together with OrderDocumentReader::getDocumentAllowanceCharge</
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentAllowanceCharge">
-        <div class="location">at         line 2371</div>
+        <div class="location">at         line 2376</div>
         <code>                    bool
     <strong>nextDocumentAllowanceCharge</strong>()
         </code>
@@ -6365,7 +6401,7 @@ You may use this together with OrderDocumentReader::getDocumentAllowanceCharge</
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentAllowanceCharge">
-        <div class="location">at         line 2462</div>
+        <div class="location">at         line 2467</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentAllowanceCharge</strong>(float|null $actualAmount, bool|null $isCharge, string|null $taxCategoryCode, string|null $taxTypeCode, float|null $rateApplicablePercent, float|null $sequence, float|null $calculationPercent, float|null $basisAmount, float|null $basisQuantity, string|null $basisQuantityUnitCode, string|null $reasonCode, string|null $reason)
         </code>
@@ -6515,7 +6551,7 @@ Include PEPPOL subset:
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentReceivableSpecifiedTradeAccountingAccount">
-        <div class="location">at         line 2492</div>
+        <div class="location">at         line 2497</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentReceivableSpecifiedTradeAccountingAccount</strong>(string|null $id, string|null $typeCode)
         </code>
@@ -6560,7 +6596,7 @@ Include PEPPOL subset:
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPosition">
-        <div class="location">at         line 2507</div>
+        <div class="location">at         line 2512</div>
         <code>                    bool
     <strong>firstDocumentPosition</strong>()
         </code>
@@ -6592,7 +6628,7 @@ You may use it together with getDocumentPositionGenerals</p>                    
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPosition">
-        <div class="location">at         line 2535</div>
+        <div class="location">at         line 2541</div>
         <code>                    bool
     <strong>nextDocumentPosition</strong>()
         </code>
@@ -6624,7 +6660,7 @@ You may use it together with getDocumentPositionGenerals</p>                    
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionGenerals">
-        <div class="location">at         line 2567</div>
+        <div class="location">at         line 2574</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionGenerals</strong>(string|null $lineid, string|null $lineStatusCode)
         </code>
@@ -6671,7 +6707,7 @@ The following code should be used: TYPE_LINE</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionNote">
-        <div class="location">at         line 2585</div>
+        <div class="location">at         line 2592</div>
         <code>                    bool
     <strong>firstDocumentPositionNote</strong>()
         </code>
@@ -6703,7 +6739,7 @@ You may use it together with getDocumentPositionNote</p>                        
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionNote">
-        <div class="location">at         line 2604</div>
+        <div class="location">at         line 2611</div>
         <code>                    bool
     <strong>nextDocumentPositionNote</strong>()
         </code>
@@ -6735,7 +6771,7 @@ You may use it together with getDocumentPositionNote</p>                        
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionNote">
-        <div class="location">at         line 2628</div>
+        <div class="location">at         line 2635</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionNote</strong>(string|null $content, string|null $contentCode, string|null $subjectCode)
         </code>
@@ -6786,7 +6822,7 @@ You may use it together with getDocumentPositionNote</p>                        
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionProductDetails">
-        <div class="location">at         line 2662</div>
+        <div class="location">at         line 2669</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionProductDetails</strong>(string|null $name, string|null $description, string|null $sellerAssignedID, string|null $buyerAssignedID, array|null $globalID, string|null $batchId, string|null $brandName)
         </code>
@@ -6857,7 +6893,7 @@ from the list published by the ISO/IEC 6523 Maintenance Agency.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionProductCharacteristic">
-        <div class="location">at         line 2686</div>
+        <div class="location">at         line 2693</div>
         <code>                    bool
     <strong>firstDocumentPositionProductCharacteristic</strong>()
         </code>
@@ -6889,7 +6925,7 @@ You may use it together with getDocumentPositionProductCharacteristic</p>       
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionProductCharacteristic">
-        <div class="location">at         line 2705</div>
+        <div class="location">at         line 2712</div>
         <code>                    bool
     <strong>nextDocumentPositionProductCharacteristic</strong>()
         </code>
@@ -6921,7 +6957,7 @@ You may use it together with getDocumentPositionProductCharacteristic</p>       
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionProductCharacteristic">
-        <div class="location">at         line 2734</div>
+        <div class="location">at         line 2741</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionProductCharacteristic</strong>(string|null $description, array|null $values, string|null $typecode, float|null $measureValue, string|null $measureUnitCode)
         </code>
@@ -6982,7 +7018,7 @@ UNTDID 6313 codelist. Available only in the Extended-Profile</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionProductClassification">
-        <div class="location">at         line 2758</div>
+        <div class="location">at         line 2765</div>
         <code>                    bool
     <strong>firstDocumentPositionProductClassification</strong>()
         </code>
@@ -7014,7 +7050,7 @@ You may use it together with getDocumentPositionProductClassification</p>       
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionProductClassification">
-        <div class="location">at         line 2777</div>
+        <div class="location">at         line 2784</div>
         <code>                    bool
     <strong>nextDocumentPositionProductClassification</strong>()
         </code>
@@ -7046,7 +7082,7 @@ You may use it together with getDocumentPositionProductClassification</p>       
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionProductClassification">
-        <div class="location">at         line 2806</div>
+        <div class="location">at         line 2813</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionProductClassification</strong>(string|null $classCode, string|null $className, string|null $listID, string|null $listVersionID)
         </code>
@@ -7105,7 +7141,7 @@ Identification scheme must be chosen among the values available in UNTDID 7143</
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionProductInstance">
-        <div class="location">at         line 2829</div>
+        <div class="location">at         line 2836</div>
         <code>                    bool
     <strong>firstDocumentPositionProductInstance</strong>()
         </code>
@@ -7137,7 +7173,7 @@ You may use it together with getDocumentPositionProductInstance</p>             
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionProductInstance">
-        <div class="location">at         line 2848</div>
+        <div class="location">at         line 2855</div>
         <code>                    bool
     <strong>nextDocumentPositionProductInstance</strong>()
         </code>
@@ -7169,7 +7205,7 @@ You may use it together with getDocumentPositionProductInstance</p>             
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionProductInstance">
-        <div class="location">at         line 2870</div>
+        <div class="location">at         line 2877</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionProductInstance</strong>(string|null $batchID, string|null $serialId)
         </code>
@@ -7215,7 +7251,7 @@ the unique supplier assigned serial identifier for this trade product instance.<
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionSupplyChainPackaging">
-        <div class="location">at         line 2904</div>
+        <div class="location">at         line 2911</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionSupplyChainPackaging</strong>(string|null $typeCode, float|null $width, string|null $widthUnitCode, float|null $length, string|null $lengthUnitCode, float|null $height, string|null $heightUnitCode)
         </code>
@@ -7286,7 +7322,7 @@ To be chosen from the entries in UNTDID 7065</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionProductOriginTradeCountry">
-        <div class="location">at         line 2929</div>
+        <div class="location">at         line 2936</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionProductOriginTradeCountry</strong>(string|null $country)
         </code>
@@ -7328,7 +7364,7 @@ representation of names of countries and their subdivisions”.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionProductReferencedDocument">
-        <div class="location">at         line 2946</div>
+        <div class="location">at         line 2953</div>
         <code>                    bool
     <strong>firstDocumentPositionProductReferencedDocument</strong>()
         </code>
@@ -7360,7 +7396,7 @@ You may use it together with getDocumentPositionProductReferencedDocument</p>   
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionProductReferencedDocument">
-        <div class="location">at         line 2965</div>
+        <div class="location">at         line 2972</div>
         <code>                    bool
     <strong>nextDocumentPositionProductReferencedDocument</strong>()
         </code>
@@ -7392,7 +7428,7 @@ You may use it together with getDocumentPositionProductReferencedDocument</p>   
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionProductReferencedDocument">
-        <div class="location">at         line 2994</div>
+        <div class="location">at         line 3001</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionProductReferencedDocument</strong>(string|null $issuerassignedid, string|null $typecode, string|null $uriid, string|null $lineid, string|null $name, string|null $reftypecode, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $issueddate)
         </code>
@@ -7463,7 +7499,7 @@ To be chosen from the entries in UNTDID 1001</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionProductReferencedDocumentBinaryData">
-        <div class="location">at         line 3024</div>
+        <div class="location">at         line 3031</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionProductReferencedDocumentBinaryData</strong>(string|null $binarydatafilename)
         </code>
@@ -7504,7 +7540,7 @@ available, this value will be empty</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionAdditionalReferencedDocument">
-        <div class="location">at         line 3055</div>
+        <div class="location">at         line 3062</div>
         <code>                    bool
     <strong>firstDocumentPositionAdditionalReferencedDocument</strong>()
         </code>
@@ -7536,7 +7572,7 @@ You may use it together with getDocumentPositionAdditionalReferencedDocument</p>
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionAdditionalReferencedDocument">
-        <div class="location">at         line 3074</div>
+        <div class="location">at         line 3081</div>
         <code>                    bool
     <strong>nextDocumentPositionAdditionalReferencedDocument</strong>()
         </code>
@@ -7568,7 +7604,7 @@ You may use it together with getDocumentPositionAdditionalReferencedDocument</p>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionAdditionalReferencedDocument">
-        <div class="location">at         line 3114</div>
+        <div class="location">at         line 3121</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionAdditionalReferencedDocument</strong>(string|null $issuerassignedid, string|null $typecode, string|null $uriid, string|null $lineid, string|null $name, string|null $reftypecode, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $issueddate)
         </code>
@@ -7647,7 +7683,7 @@ from UNTDID 1153 in accordance with the code list entries.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionAdditionalReferencedDocumentBinaryData">
-        <div class="location">at         line 3144</div>
+        <div class="location">at         line 3151</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionAdditionalReferencedDocumentBinaryData</strong>(string|null $binarydatafilename)
         </code>
@@ -7688,7 +7724,7 @@ available, this value will be empty</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionBuyerOrderReferencedDocument">
-        <div class="location">at         line 3176</div>
+        <div class="location">at         line 3183</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionBuyerOrderReferencedDocument</strong>(string|null $buyerOrderRefLineId)
         </code>
@@ -7729,7 +7765,7 @@ reference at the document level.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionQuotationReferencedDocument">
-        <div class="location">at         line 3197</div>
+        <div class="location">at         line 3204</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionQuotationReferencedDocument</strong>(string|null $quotationRefId, string|null $quotationRefLineId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $quotationRefDate)
         </code>
@@ -7779,7 +7815,7 @@ reference at the document level.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionGrossPrice">
-        <div class="location">at         line 3225</div>
+        <div class="location">at         line 3232</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionGrossPrice</strong>(float|null $chargeAmount, float|null $basisQuantity, string|null $basisQuantityUnitCode)
         </code>
@@ -7831,7 +7867,7 @@ according to the gross calculation.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionGrossPriceAllowanceCharge">
-        <div class="location">at         line 3244</div>
+        <div class="location">at         line 3251</div>
         <code>                    bool
     <strong>firstDocumentPositionGrossPriceAllowanceCharge</strong>()
         </code>
@@ -7863,7 +7899,7 @@ You may use it together with getDocumentPositionGrossPriceAllowanceCharge</p>   
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionGrossPriceAllowanceCharge">
-        <div class="location">at         line 3263</div>
+        <div class="location">at         line 3270</div>
         <code>                    bool
     <strong>nextDocumentPositionGrossPriceAllowanceCharge</strong>()
         </code>
@@ -7895,7 +7931,7 @@ You may use it together with getDocumentPositionGrossPriceAllowanceCharge</p>   
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionGrossPriceAllowanceCharge">
-        <div class="location">at         line 3299</div>
+        <div class="location">at         line 3306</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionGrossPriceAllowanceCharge</strong>(float|null $actualAmount, bool|null $isCharge, float|null $calculationPercent, float|null $basisAmount, string|null $reason, string|null $taxTypeCode, string|null $taxCategoryCode, float|null $rateApplicablePercent, float|null $sequence, float|null $basisQuantity, string|null $basisQuantityUnitCode, string|null $reasonCode)
         </code>
@@ -7992,7 +8028,7 @@ is transferred</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionNetPrice">
-        <div class="location">at         line 3336</div>
+        <div class="location">at         line 3343</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionNetPrice</strong>(float|null $chargeAmount, float|null $basisQuantity, string|null $basisQuantityUnitCode)
         </code>
@@ -8044,7 +8080,7 @@ The Item price base quantity unit of measure shall be the same as the requested 
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionNetPriceTax">
-        <div class="location">at         line 3380</div>
+        <div class="location">at         line 3387</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionNetPriceTax</strong>(string|null $categoryCode, string|null $typeCode, float|null $rateApplicablePercent, float|null $calculatedAmount, string|null $exemptionReason, string|null $exemptionReasonCode)
         </code>
@@ -8124,7 +8160,7 @@ and maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionCatalogueReferencedDocument">
-        <div class="location">at         line 3406</div>
+        <div class="location">at         line 3413</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionCatalogueReferencedDocument</strong>(string|null $catalogueRefId, string|null $catalogueRefLineId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $catalogueRefDate)
         </code>
@@ -8174,7 +8210,7 @@ and maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionBlanketOrderReferencedDocument">
-        <div class="location">at         line 3428</div>
+        <div class="location">at         line 3435</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionBlanketOrderReferencedDocument</strong>(string|null $blanketOrderRefLineId)
         </code>
@@ -8214,7 +8250,7 @@ and maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionUltimateCustomerOrderReferencedDocument">
-        <div class="location">at         line 3445</div>
+        <div class="location">at         line 3452</div>
         <code>                    bool
     <strong>firstDocumentPositionUltimateCustomerOrderReferencedDocument</strong>()
         </code>
@@ -8246,7 +8282,7 @@ You should use this together with OrderDocumentReader::getDocumentPositionUltima
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionUltimateCustomerOrderReferencedDocument">
-        <div class="location">at         line 3464</div>
+        <div class="location">at         line 3471</div>
         <code>                    bool
     <strong>nextDocumentPositionUltimateCustomerOrderReferencedDocument</strong>()
         </code>
@@ -8278,7 +8314,7 @@ You should use this together with OrderDocumentReader::getDocumentPositionUltima
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionUltimateCustomerOrderReferencedDocument">
-        <div class="location">at         line 3489</div>
+        <div class="location">at         line 3496</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionUltimateCustomerOrderReferencedDocument</strong>(string|null $ultimateCustomerOrderRefId, string|null $ultimateCustomerOrderRefLineId, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $ultimateCustomerOrderRefDate)
         </code>
@@ -8330,7 +8366,7 @@ and OrderDocumentReader::nextDocumentPositionUltimateCustomerOrderReferencedDocu
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionPartialDelivery">
-        <div class="location">at         line 3514</div>
+        <div class="location">at         line 3521</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionPartialDelivery</strong>(bool|null $partialDelivery)
         </code>
@@ -8370,7 +8406,7 @@ and OrderDocumentReader::nextDocumentPositionUltimateCustomerOrderReferencedDocu
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionDeliverReqQuantity">
-        <div class="location">at         line 3533</div>
+        <div class="location">at         line 3540</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionDeliverReqQuantity</strong>(float|null $requestedQuantity, string|null $requestedQuantityUnitCode)
         </code>
@@ -8415,7 +8451,7 @@ and OrderDocumentReader::nextDocumentPositionUltimateCustomerOrderReferencedDocu
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionDeliverPackageQuantity">
-        <div class="location">at         line 3553</div>
+        <div class="location">at         line 3560</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionDeliverPackageQuantity</strong>(float|null $packageQuantity, string|null $packageQuantityUnitCode)
         </code>
@@ -8460,7 +8496,7 @@ and OrderDocumentReader::nextDocumentPositionUltimateCustomerOrderReferencedDocu
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionDeliverPerPackageQuantity">
-        <div class="location">at         line 3573</div>
+        <div class="location">at         line 3580</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionDeliverPerPackageQuantity</strong>(float|null $perPackageQuantity, string|null $perPackageQuantityUnitCode)
         </code>
@@ -8505,7 +8541,7 @@ and OrderDocumentReader::nextDocumentPositionUltimateCustomerOrderReferencedDocu
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionDeliverAgreedQuantity">
-        <div class="location">at         line 3593</div>
+        <div class="location">at         line 3600</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionDeliverAgreedQuantity</strong>(float|null $agreedQuantity, string|null $agreedQuantityUnitCode)
         </code>
@@ -8550,7 +8586,7 @@ and OrderDocumentReader::nextDocumentPositionUltimateCustomerOrderReferencedDocu
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionRequestedDeliverySupplyChainEvent">
-        <div class="location">at         line 3612</div>
+        <div class="location">at         line 3619</div>
         <code>                    bool
     <strong>firstDocumentPositionRequestedDeliverySupplyChainEvent</strong>()
         </code>
@@ -8583,7 +8619,7 @@ You may use it together with getDocumentPositionRequestedDeliverySupplyChainEven
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionRequestedDeliverySupplyChainEvent">
-        <div class="location">at         line 3632</div>
+        <div class="location">at         line 3639</div>
         <code>                    bool
     <strong>nextDocumentPositionRequestedDeliverySupplyChainEvent</strong>()
         </code>
@@ -8593,8 +8629,8 @@ You may use it together with getDocumentPositionRequestedDeliverySupplyChainEven
     
 
                     <div class="method-description">
-                                    <p>Seek to the first document position requested delivery supply chain event
-Returns true if the first requested delivery supply chain event is available, otherwise false
+                                    <p>Seek to the next document position requested delivery supply chain event
+Returns true if another requested delivery supply chain event is available, otherwise false
 You may use it together with getDocumentPositionRequestedDeliverySupplyChainEvent
 (The Requested Date or Period on which Delivery is requested)</p>                                                </div>
                 <div class="tags">
@@ -8616,7 +8652,7 @@ You may use it together with getDocumentPositionRequestedDeliverySupplyChainEven
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionRequestedDeliverySupplyChainEvent">
-        <div class="location">at         line 3655</div>
+        <div class="location">at         line 3662</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionRequestedDeliverySupplyChainEvent</strong>(<a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $occurrenceDateTime, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $startDateTime, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $endDateTime)
         </code>
@@ -8665,8 +8701,124 @@ You may use it together with getDocumentPositionRequestedDeliverySupplyChainEven
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_firstDocumentPositionRequestedDespatchSupplyChainEvent">
+        <div class="location">at         line 3694</div>
+        <code>                    bool
+    <strong>firstDocumentPositionRequestedDespatchSupplyChainEvent</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Seek to the first document position requested despatch supply chain event
+Returns true if the first requested despatch supply chain event is available, otherwise false
+You may use it together with getDocumentPositionRequestedDespatchSupplyChainEvent
+This is the Requested date or period on which pick up is requested (on position level)</p>                                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_nextDocumentPositionRequestedDespatchSupplyChainEvent">
+        <div class="location">at         line 3714</div>
+        <code>                    bool
+    <strong>nextDocumentPositionRequestedDespatchSupplyChainEvent</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Seek to the next document position requested despatch supply chain event
+Returns true if another requested despatch supply chain event is available, otherwise false
+You may use it together with getDocumentPositionRequestedDespatchSupplyChainEvent
+This is the Requested date or period on which pick up is requested (on position level)</p>                                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>bool</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDocumentPositionRequestedDespatchSupplyChainEvent">
+        <div class="location">at         line 3737</div>
+        <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
+    <strong>getDocumentPositionRequestedDespatchSupplyChainEvent</strong>(<a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $occurrenceDateTime, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $startDateTime, <a target="_blank" href="http://php.net/DateTime">DateTime</a>|null $endDateTime)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get the requested date or period on which delivery is requested (on position level)</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
+                <td>$occurrenceDateTime</td>
+                <td>A Requested Date on which Pick up is requested</td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
+                <td>$startDateTime</td>
+                <td>The Start Date of he Requested Period on which Pick up is requested</td>
+            </tr>
+                    <tr>
+                <td><a target="_blank" href="http://php.net/DateTime">DateTime</a>|null</td>
+                <td>$endDateTime</td>
+                <td>The End Date of he Requested Period on which Pick up is requested</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_firstDocumentPositionTax">
-        <div class="location">at         line 3686</div>
+        <div class="location">at         line 3768</div>
         <code>                    bool
     <strong>firstDocumentPositionTax</strong>()
         </code>
@@ -8698,7 +8850,7 @@ You may use it together with OrderDocumentReader::getDocumentPositionTax</p>    
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionTax">
-        <div class="location">at         line 3705</div>
+        <div class="location">at         line 3787</div>
         <code>                    bool
     <strong>nextDocumentPositionTax</strong>()
         </code>
@@ -8730,7 +8882,7 @@ You may use it together with OrderDocumentReader::getDocumentPositionTax</p>    
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionTax">
-        <div class="location">at         line 3750</div>
+        <div class="location">at         line 3832</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionTax</strong>(string|null $categoryCode, string|null $typeCode, float|null $rateApplicablePercent, float|null $calculatedAmount, string|null $exemptionReason, string|null $exemptionReasonCode)
         </code>
@@ -8811,7 +8963,7 @@ and maintained by the Connecting Europe Facility.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_firstDocumentPositionAllowanceCharge">
-        <div class="location">at         line 3775</div>
+        <div class="location">at         line 3857</div>
         <code>                    bool
     <strong>firstDocumentPositionAllowanceCharge</strong>()
         </code>
@@ -8843,7 +8995,7 @@ You may use it together with OrderDocumentReader::getDocumentPositionAllowanceCh
             </div>
                     <div class="method-item">
                     <h3 id="method_nextDocumentPositionAllowanceCharge">
-        <div class="location">at         line 3794</div>
+        <div class="location">at         line 3876</div>
         <code>                    bool
     <strong>nextDocumentPositionAllowanceCharge</strong>()
         </code>
@@ -8875,7 +9027,7 @@ You may use it together with OrderDocumentReader::getDocumentPositionAllowanceCh
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionAllowanceCharge">
-        <div class="location">at         line 3827</div>
+        <div class="location">at         line 3909</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionAllowanceCharge</strong>(float|null $actualAmount, bool|null $isCharge, float|null $calculationPercent, float|null $basisAmount, string|null $reasonCode, string|null $reason)
         </code>
@@ -8944,7 +9096,7 @@ line level allowance reason shall indicate the same allowance reason.</td>
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionLineSummation">
-        <div class="location">at         line 3856</div>
+        <div class="location">at         line 3938</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionLineSummation</strong>(float|null $lineTotalAmount, float|null $totalAllowanceChargeAmount)
         </code>
@@ -8991,7 +9143,7 @@ The amount is “net” without VAT, i.e. inclusive of line level allowances and
             </div>
                     <div class="method-item">
                     <h3 id="method_getDocumentPositionReceivableTradeAccountingAccount">
-        <div class="location">at         line 3877</div>
+        <div class="location">at         line 3959</div>
         <code>                    <a href="../../horstoeko/orderx/OrderDocumentReader.html"><abbr title="horstoeko\orderx\OrderDocumentReader">OrderDocumentReader</abbr></a>
     <strong>getDocumentPositionReceivableTradeAccountingAccount</strong>(string|null $id, string|null $typeCode)
         </code>

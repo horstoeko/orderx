@@ -3178,6 +3178,44 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
+     * Set the requested date or period on which pick up is requested (on position level)
+     *
+     * @param  DateTime|null $occurrenceDateTime
+     * A Requested Date on which Pick up is requested
+     * @param  DateTime|null $startDateTime
+     * The Start Date of he Requested Period on which Pick up is requested
+     * @param  DateTime|null $endDateTime
+     * The End Date of he Requested Period on which Pick up is requested
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentPositionRequestedDespatchSupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): OrderDocumentBuilder
+    {
+        $supplychainevent = $this->objectHelper->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->objectHelper->tryCallIfMethodExists($positionDelivery, "addToRequestedDespatchSupplyChainEvent", "setRequestedDespatchSupplyChainEvent", [$supplychainevent], $supplychainevent);
+        return $this;
+    }
+
+    /**
+     * Add an additional requested date or period on which pick up is requested (on position level)
+     *
+     * @param  DateTime|null $occurrenceDateTime
+     * A Requested Date on which Pick up is requested
+     * @param  DateTime|null $startDateTime
+     * The Start Date of he Requested Period on which Pick up is requested
+     * @param  DateTime|null $endDateTime
+     * The End Date of he Requested Period on which Pick up is requested
+     * @return OrderDocumentBuilder
+     */
+    public function addDocumentPositionRequestedDespatchSupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): OrderDocumentBuilder
+    {
+        $supplychainevent = $this->objectHelper->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->objectHelper->tryCall($positionDelivery, "addToRequestedDespatchSupplyChainEvent", $supplychainevent);
+        return $this;
+    }
+
+    /**
      * Set the group of business terms providing information about the VAT applicable for the goods and
      * services ordered on the order line.
      *

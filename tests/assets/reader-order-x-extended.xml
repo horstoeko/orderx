@@ -151,6 +151,16 @@
                 <ram:RequestedQuantity unitCode="C62">6.00</ram:RequestedQuantity>
                 <ram:PackageQuantity unitCode="C62">3.00</ram:PackageQuantity>
                 <ram:PerPackageUnitQuantity unitCode="C62">2.00</ram:PerPackageUnitQuantity>
+                <ram:RequestedDespatchSupplyChainEvent>
+                    <ram:OccurrenceSpecifiedPeriod>
+                        <ram:StartDateTime>
+                            <udt:DateTimeString format="102">20221225</udt:DateTimeString>
+                        </ram:StartDateTime>
+                        <ram:EndDateTime>
+                            <udt:DateTimeString format="102">20221225</udt:DateTimeString>
+                        </ram:EndDateTime>
+                    </ram:OccurrenceSpecifiedPeriod>
+                </ram:RequestedDespatchSupplyChainEvent>
                 <ram:RequestedDeliverySupplyChainEvent>
                     <ram:OccurrenceSpecifiedPeriod>
                         <ram:StartDateTime>
@@ -304,6 +314,11 @@
                 <ram:RequestedQuantity unitCode="C62">10.00</ram:RequestedQuantity>
                 <ram:PackageQuantity unitCode="C62">5.00</ram:PackageQuantity>
                 <ram:PerPackageUnitQuantity unitCode="C62">2.00</ram:PerPackageUnitQuantity>
+                <ram:RequestedDespatchSupplyChainEvent>
+                    <ram:OccurrenceDateTime>
+                        <udt:DateTimeString format="102">20221225</udt:DateTimeString>
+                    </ram:OccurrenceDateTime>
+                </ram:RequestedDespatchSupplyChainEvent>
                 <ram:RequestedDeliverySupplyChainEvent>
                     <ram:OccurrenceDateTime>
                         <udt:DateTimeString format="102">20221225</udt:DateTimeString>
@@ -442,6 +457,16 @@
                 <ram:RequestedQuantity unitCode="C62">6.00</ram:RequestedQuantity>
                 <ram:PackageQuantity unitCode="C62">3.00</ram:PackageQuantity>
                 <ram:PerPackageUnitQuantity unitCode="C62">2.00</ram:PerPackageUnitQuantity>
+                <ram:RequestedDespatchSupplyChainEvent>
+                    <ram:OccurrenceSpecifiedPeriod>
+                        <ram:StartDateTime>
+                            <udt:DateTimeString format="102">20221225</udt:DateTimeString>
+                        </ram:StartDateTime>
+                        <ram:EndDateTime>
+                            <udt:DateTimeString format="102">20221225</udt:DateTimeString>
+                        </ram:EndDateTime>
+                    </ram:OccurrenceSpecifiedPeriod>
+                </ram:RequestedDespatchSupplyChainEvent>
                 <ram:RequestedDeliverySupplyChainEvent>
                     <ram:OccurrenceSpecifiedPeriod>
                         <ram:StartDateTime>

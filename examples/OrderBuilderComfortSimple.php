@@ -124,7 +124,8 @@ $document
     ->setDocumentPositionDeliverReqQuantity(6, "C62")
     ->setDocumentPositionDeliverPackageQuantity(3, "C62")
     ->setDocumentPositionDeliverPerPackageQuantity(2, "C62")
-    ->addDocumentPositionRequestedDeliverySupplyChainEvent(null, $dt, $dt)
+    ->setDocumentPositionRequestedDeliverySupplyChainEvent(null, $dt, $dt)
+    ->setDocumentPositionRequestedDespatchSupplyChainEvent(null, $dt, $dt)
     ->addDocumentPositionAllowanceCharge(6.00, false, 10.0, 60.0, "64", "SPECIAL AGREEMENT")
     ->addDocumentPositionAllowanceCharge(6.00, true, 10.0, 60.0, "FC", "FREIGHT SERVICES")
     ->setDocumentPositionLineSummation(60.0)
@@ -154,7 +155,8 @@ $document
     ->setDocumentPositionDeliverReqQuantity(10, "C62")
     ->setDocumentPositionDeliverPackageQuantity(5, "C62")
     ->setDocumentPositionDeliverPerPackageQuantity(2, "C62")
-    ->addDocumentPositionRequestedDeliverySupplyChainEvent($dt)
+    ->setDocumentPositionRequestedDeliverySupplyChainEvent($dt)
+    ->setDocumentPositionRequestedDespatchSupplyChainEvent($dt)
     ->addDocumentPositionAllowanceCharge(1.00, false, 1.0, 100.0, "64", "SPECIAL AGREEMENT")
     ->addDocumentPositionAllowanceCharge(1.00, true, 1.0, 100.0, "FC", "FREIGHT SERVICES")
     ->setDocumentPositionLineSummation(100.0)
@@ -183,12 +185,14 @@ $document
     ->setDocumentPositionDeliverReqQuantity(6, "C62")
     ->setDocumentPositionDeliverPackageQuantity(3, "C62")
     ->setDocumentPositionDeliverPerPackageQuantity(2, "C62")
-    ->addDocumentPositionRequestedDeliverySupplyChainEvent(null, $dt, $dt)
+    ->setDocumentPositionRequestedDeliverySupplyChainEvent(null, $dt, $dt)
+    ->setDocumentPositionRequestedDespatchSupplyChainEvent(null, $dt, $dt)
     ->addDocumentPositionAllowanceCharge(15.00, false, 10.0, 150.0, "64", "SPECIAL AGREEMENT")
     ->addDocumentPositionAllowanceCharge(15.00, true, 10.0, 150.0, "FC", "FREIGHT SERVICES")
     ->setDocumentPositionLineSummation(150.0)
     ->setDocumentPositionReceivableTradeAccountingAccount("BUYER_ACCOUNTING_REF")
     ->setDocumentPositionUltimateCustomerOrderReferencedDocument("ULTCUSTORDEREF-1", "3", $dt)
+
     ->writeFile(getcwd() . "/order-x.xml");
 
 $pdfDocument = new OrderDocumentPdfBuilder(

@@ -185,6 +185,11 @@ class OrderDocumentReader extends OrderDocument
     private $positionRequestedDeliverySupplyChainEventPointer = 0;
 
     /**
+     * @var integer
+     */
+    private $positionRequestedDespatchSupplyChainEventPointer = 0;
+
+    /**
      * Set the directory where the attached binary data from
      * additional referenced documents are temporary stored
      *
@@ -2519,6 +2524,7 @@ class OrderDocumentReader extends OrderDocument
         $this->positionProductInstancePointer = 0;
         $this->positionProductReferencedDocumentPointer = 0;
         $this->positionRequestedDeliverySupplyChainEventPointer = 0;
+        $this->positionRequestedDespatchSupplyChainEventPointer = 0;
 
         $tradeLineItem = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
 
@@ -2547,6 +2553,7 @@ class OrderDocumentReader extends OrderDocument
         $this->positionProductInstancePointer = 0;
         $this->positionProductReferencedDocumentPointer = 0;
         $this->positionRequestedDeliverySupplyChainEventPointer = 0;
+        $this->positionRequestedDespatchSupplyChainEventPointer = 0;
 
         $tradeLineItem = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
 
@@ -3622,8 +3629,8 @@ class OrderDocumentReader extends OrderDocument
     }
 
     /**
-     * Seek to the first document position requested delivery supply chain event
-     * Returns true if the first requested delivery supply chain event is available, otherwise false
+     * Seek to the next document position requested delivery supply chain event
+     * Returns true if another requested delivery supply chain event is available, otherwise false
      * You may use it together with getDocumentPositionRequestedDeliverySupplyChainEvent
      * (The Requested Date or Period on which Delivery is requested)
      *
@@ -3671,6 +3678,81 @@ class OrderDocumentReader extends OrderDocument
         $endDateTime = $this->objectHelper->toDateTime(
             $this->getInvoiceValueByPathFrom($tradeLineRequestedDeliverySupplyChainEvent, "getOccurrenceSpecifiedPeriod.getEndDateTime.getDateTimeString", ""),
             $this->getInvoiceValueByPathFrom($tradeLineRequestedDeliverySupplyChainEvent, "getOccurrenceSpecifiedPeriod.getEndDateTime.getDateTimeString.getFormat", "")
+        );
+
+        return $this;
+    }
+
+    /**
+     * Seek to the first document position requested despatch supply chain event
+     * Returns true if the first requested despatch supply chain event is available, otherwise false
+     * You may use it together with getDocumentPositionRequestedDespatchSupplyChainEvent
+     * This is the Requested date or period on which pick up is requested (on position level)
+     *
+     * @return boolean
+     */
+    public function firstDocumentPositionRequestedDespatchSupplyChainEvent(): bool
+    {
+        $this->positionRequestedDespatchSupplyChainEventPointer = 0;
+
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $tradeLineRequestedDespatchSupplyChainEvent = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeDelivery.getRequestedDespatchSupplyChainEvent", []));
+
+        return isset($tradeLineRequestedDespatchSupplyChainEvent[$this->positionRequestedDespatchSupplyChainEventPointer]);
+    }
+
+    /**
+     * Seek to the next document position requested despatch supply chain event
+     * Returns true if another requested despatch supply chain event is available, otherwise false
+     * You may use it together with getDocumentPositionRequestedDespatchSupplyChainEvent
+     * This is the Requested date or period on which pick up is requested (on position level)
+     *
+     * @return boolean
+     */
+    public function nextDocumentPositionRequestedDespatchSupplyChainEvent(): bool
+    {
+        $this->positionRequestedDespatchSupplyChainEventPointer++;
+
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $tradeLineRequestedDespatchSupplyChainEvent = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeDelivery.getRequestedDespatchSupplyChainEvent", []));
+
+        return isset($tradeLineRequestedDespatchSupplyChainEvent[$this->positionRequestedDespatchSupplyChainEventPointer]);
+    }
+
+    /**
+     * Get the requested date or period on which delivery is requested (on position level)
+     *
+     * @param  DateTime|null $occurrenceDateTime
+     * A Requested Date on which Pick up is requested
+     * @param  DateTime|null $startDateTime
+     * The Start Date of he Requested Period on which Pick up is requested
+     * @param  DateTime|null $endDateTime
+     * The End Date of he Requested Period on which Pick up is requested
+     * @return OrderDocumentReader
+     */
+    public function getDocumentPositionRequestedDespatchSupplyChainEvent(?DateTime &$occurrenceDateTime, ?DateTime &$startDateTime, ?DateTime &$endDateTime): OrderDocumentReader
+    {
+        $tradeLineItems = $this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getIncludedSupplyChainTradeLineItem", []);
+        $tradeLineItem = $this->objectHelper->getArrayIndex($tradeLineItems, $this->positionPointer);
+
+        $tradeLineRequestedDespatchSupplyChainEvents = $this->objectHelper->ensureArray($this->getInvoiceValueByPathFrom($tradeLineItem, "getSpecifiedLineTradeDelivery.getRequestedDespatchSupplyChainEvent", []));
+        $tradeLineRequestedDespatchSupplyChainEvent = $this->objectHelper->getArrayIndex($tradeLineRequestedDespatchSupplyChainEvents, $this->positionRequestedDespatchSupplyChainEventPointer);
+
+        $occurrenceDateTime = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPathFrom($tradeLineRequestedDespatchSupplyChainEvent, "getOccurrenceDateTime.getDateTimeString", ""),
+            $this->getInvoiceValueByPathFrom($tradeLineRequestedDespatchSupplyChainEvent, "getOccurrenceDateTime.getDateTimeString.getFormat", "")
+        );
+        $startDateTime = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPathFrom($tradeLineRequestedDespatchSupplyChainEvent, "getOccurrenceSpecifiedPeriod.getStartDateTime.getDateTimeString", ""),
+            $this->getInvoiceValueByPathFrom($tradeLineRequestedDespatchSupplyChainEvent, "getOccurrenceSpecifiedPeriod.getStartDateTime.getDateTimeString.getFormat", "")
+        );
+        $endDateTime = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPathFrom($tradeLineRequestedDespatchSupplyChainEvent, "getOccurrenceSpecifiedPeriod.getEndDateTime.getDateTimeString", ""),
+            $this->getInvoiceValueByPathFrom($tradeLineRequestedDespatchSupplyChainEvent, "getOccurrenceSpecifiedPeriod.getEndDateTime.getDateTimeString.getFormat", "")
         );
 
         return $this;

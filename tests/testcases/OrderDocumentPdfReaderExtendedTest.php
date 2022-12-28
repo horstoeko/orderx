@@ -3438,6 +3438,105 @@ class OrderDocumentPdfReaderExtendedTest extends TestCase
      * @covers \horstoeko\orderx\OrderDocumentReader
      * @covers \horstoeko\orderx\OrderObjectHelper
      */
+    public function testFirstDocumentPositionRequestedDespatchSupplyChainEventPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        $this->assertTrue(self::$document->firstDocumentPositionRequestedDespatchSupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionRequestedDespatchSupplyChainEventPos1(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionRequestedDespatchSupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionRequestedDespatchSupplyChainEventPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        $this->assertTrue(self::$document->firstDocumentPositionRequestedDespatchSupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionRequestedDespatchSupplyChainEventPos2(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionRequestedDespatchSupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstDocumentPositionRequestedDespatchSupplyChainEventPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        $this->assertTrue(self::$document->firstDocumentPositionRequestedDespatchSupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextDocumentPositionRequestedDespatchSupplyChainEventPos3(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentPositionRequestedDespatchSupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionRequestedDespatchSupplyChainEventPos1(): void
+    {
+        self::$document->firstDocumentPosition();
+        self::$document->getDocumentPositionRequestedDespatchSupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+
+        $this->assertNull($occurrenceDateTime);
+        $this->assertEquals("25.12.2022", $startDateTime->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $endDateTime->format('d.m.Y'));
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionRequestedDespatchSupplyChainEventPos2(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionRequestedDespatchSupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+
+        $this->assertEquals("25.12.2022", $occurrenceDateTime->format('d.m.Y'));
+        $this->assertNull($startDateTime);
+        $this->assertNull($endDateTime);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentPositionRequestedDespatchSupplyChainEventPos3(): void
+    {
+        self::$document->nextDocumentPosition();
+        self::$document->getDocumentPositionRequestedDespatchSupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+
+        $this->assertNull($occurrenceDateTime);
+        $this->assertEquals("25.12.2022", $startDateTime->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $endDateTime->format('d.m.Y'));
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
     public function testFirstDocumentPositionAllowanceChargePos1(): void
     {
         self::$document->firstDocumentPosition();
