@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" bootstrap="../vendor/autoload.php">
     <testsuites>
-        <testsuite name="default">
+        <testsuite name="OrderObjectHelper">
             <file>../tests/testcases/OrderObjectHelperBasicTest.php</file>
             <file>../tests/testcases/OrderObjectHelperComfortTest.php</file>
             <file>../tests/testcases/OrderObjectHelperExtendedTest.php</file>
+        </testsuite>
+        <testsuite name="OrderSettings">
             <file>../tests/testcases/OrderSettingsTest.php</file>
+        </testsuite>
+        <testsuite name="OrderBase">
             <file>../tests/testcases/OrderDocumentBaseTest.php</file>
+        </testsuite>
+        <testsuite name="OrderBuilder">
             <file>../tests/testcases/OrderDocumentBuilderBasicTest.php</file>
             <file>../tests/testcases/OrderDocumentBuilderComfortTest.php</file>
             <file>../tests/testcases/OrderDocumentBuilderExtendedTest.php</file>
+        </testsuite>
+        <testsuite name="OrderPdfBase">
             <file>../tests/testcases/OrderDocumentPdfBuilderTest.php</file>
+        </testsuite>
+        <testsuite name="OrderValidator">
             <file>../tests/testcases/OrderDocumentValidatorTest.php</file>
+        </testsuite>
+        <testsuite name="OrderReader">
             <file>../tests/testcases/OrderDocumentReaderComfortTest.php</file>
             <file>../tests/testcases/OrderDocumentReaderExtendedTest.php</file>
+        </testsuite>
+        <testsuite name="OrderPdfReader">
             <file>../tests/testcases/OrderDocumentPdfReaderComfortTest.php</file>
             <file>../tests/testcases/OrderDocumentPdfReaderExtendedTest.php</file>
         </testsuite>
