@@ -10,7 +10,7 @@ require dirname(__FILE__) . "/../vendor/autoload.php";
 $dt = \DateTime::createFromFormat("Ymd", "20221225");
 
 $document = OrderDocumentBuilder::CreateNew(
-    OrderProfiles::PROFILE_COMFORT
+    OrderProfiles::PROFILE_EXTENDED
 );
 
 $document
@@ -79,6 +79,7 @@ $document
     ->setDocumentShipFromElectronicAddress("EM", "warehouse@seller.com")
 
     ->setDocumentRequestedDeliverySupplyChainEvent($dt, $dt, $dt)
+    ->setDocumentRequestedDespatchSupplyChainEvent($dt, $dt, $dt)
 
     ->setDocumentInvoicee("INVOICEE_NAME", "INVOICEE_ID_9587456")
     ->addDocumentInvoiceeGlobalId("98765432179", "0088")

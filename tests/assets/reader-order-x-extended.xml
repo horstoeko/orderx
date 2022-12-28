@@ -16,10 +16,10 @@
         <ram:Name>Doc Name</ram:Name>
         <ram:TypeCode>220</ram:TypeCode>
         <ram:IssueDateTime>
-            <udt:DateTimeString format="102">20221221</udt:DateTimeString>
+            <udt:DateTimeString format="102">20221225</udt:DateTimeString>
         </ram:IssueDateTime>
         <ram:CopyIndicator>
-            <udt:Indicator>true</udt:Indicator>
+            <udt:Indicator>false</udt:Indicator>
         </ram:CopyIndicator>
         <ram:PurposeCode>9</ram:PurposeCode>
         <ram:RequestedResponseTypeCode>AC</ram:RequestedResponseTypeCode>
@@ -30,10 +30,10 @@
         </ram:IncludedNote>
         <ram:EffectiveSpecifiedPeriod>
             <ram:StartDateTime>
-                <udt:DateTimeString format="102">20221221</udt:DateTimeString>
+                <udt:DateTimeString format="102">20221225</udt:DateTimeString>
             </ram:StartDateTime>
             <ram:EndDateTime>
-                <udt:DateTimeString format="102">20221221</udt:DateTimeString>
+                <udt:DateTimeString format="102">20221225</udt:DateTimeString>
             </ram:EndDateTime>
         </ram:EffectiveSpecifiedPeriod>
     </rsm:ExchangedDocument>
@@ -140,7 +140,7 @@
                     <ram:IssuerAssignedID>ULTCUSTORDEREF-1</ram:IssuerAssignedID>
                     <ram:LineID>1</ram:LineID>
                     <ram:FormattedIssueDateTime>
-                        <qdt:DateTimeString format="102">20221221</qdt:DateTimeString>
+                        <qdt:DateTimeString format="102">20221225</qdt:DateTimeString>
                     </ram:FormattedIssueDateTime>
                 </ram:UltimateCustomerOrderReferencedDocument>
             </ram:SpecifiedLineTradeAgreement>
@@ -154,10 +154,10 @@
                 <ram:RequestedDeliverySupplyChainEvent>
                     <ram:OccurrenceSpecifiedPeriod>
                         <ram:StartDateTime>
-                            <udt:DateTimeString format="102">20221221</udt:DateTimeString>
+                            <udt:DateTimeString format="102">20221225</udt:DateTimeString>
                         </ram:StartDateTime>
                         <ram:EndDateTime>
-                            <udt:DateTimeString format="102">20221221</udt:DateTimeString>
+                            <udt:DateTimeString format="102">20221225</udt:DateTimeString>
                         </ram:EndDateTime>
                     </ram:OccurrenceSpecifiedPeriod>
                 </ram:RequestedDeliverySupplyChainEvent>
@@ -293,7 +293,7 @@
                     <ram:IssuerAssignedID>ULTCUSTORDEREF-1</ram:IssuerAssignedID>
                     <ram:LineID>2</ram:LineID>
                     <ram:FormattedIssueDateTime>
-                        <qdt:DateTimeString format="102">20221221</qdt:DateTimeString>
+                        <qdt:DateTimeString format="102">20221225</qdt:DateTimeString>
                     </ram:FormattedIssueDateTime>
                 </ram:UltimateCustomerOrderReferencedDocument>
             </ram:SpecifiedLineTradeAgreement>
@@ -306,7 +306,7 @@
                 <ram:PerPackageUnitQuantity unitCode="C62">2.00</ram:PerPackageUnitQuantity>
                 <ram:RequestedDeliverySupplyChainEvent>
                     <ram:OccurrenceDateTime>
-                        <udt:DateTimeString format="102">20221221</udt:DateTimeString>
+                        <udt:DateTimeString format="102">20221225</udt:DateTimeString>
                     </ram:OccurrenceDateTime>
                 </ram:RequestedDeliverySupplyChainEvent>
             </ram:SpecifiedLineTradeDelivery>
@@ -431,7 +431,7 @@
                     <ram:IssuerAssignedID>ULTCUSTORDEREF-1</ram:IssuerAssignedID>
                     <ram:LineID>3</ram:LineID>
                     <ram:FormattedIssueDateTime>
-                        <qdt:DateTimeString format="102">20221221</qdt:DateTimeString>
+                        <qdt:DateTimeString format="102">20221225</qdt:DateTimeString>
                     </ram:FormattedIssueDateTime>
                 </ram:UltimateCustomerOrderReferencedDocument>
             </ram:SpecifiedLineTradeAgreement>
@@ -445,10 +445,10 @@
                 <ram:RequestedDeliverySupplyChainEvent>
                     <ram:OccurrenceSpecifiedPeriod>
                         <ram:StartDateTime>
-                            <udt:DateTimeString format="102">20221221</udt:DateTimeString>
+                            <udt:DateTimeString format="102">20221225</udt:DateTimeString>
                         </ram:StartDateTime>
                         <ram:EndDateTime>
-                            <udt:DateTimeString format="102">20221221</udt:DateTimeString>
+                            <udt:DateTimeString format="102">20221225</udt:DateTimeString>
                         </ram:EndDateTime>
                     </ram:OccurrenceSpecifiedPeriod>
                 </ram:RequestedDeliverySupplyChainEvent>
@@ -632,19 +632,19 @@
             <ram:BlanketOrderReferencedDocument>
                 <ram:IssuerAssignedID>BLANKET_ORDER_OD</ram:IssuerAssignedID>
                 <ram:FormattedIssueDateTime>
-                    <qdt:DateTimeString format="102">20221221</qdt:DateTimeString>
+                    <qdt:DateTimeString format="102">20221225</qdt:DateTimeString>
                 </ram:FormattedIssueDateTime>
             </ram:BlanketOrderReferencedDocument>
             <ram:PreviousOrderChangeReferencedDocument>
                 <ram:IssuerAssignedID>PREV_ORDER_C_ID</ram:IssuerAssignedID>
                 <ram:FormattedIssueDateTime>
-                    <qdt:DateTimeString format="102">20221221</qdt:DateTimeString>
+                    <qdt:DateTimeString format="102">20221225</qdt:DateTimeString>
                 </ram:FormattedIssueDateTime>
             </ram:PreviousOrderChangeReferencedDocument>
             <ram:PreviousOrderResponseReferencedDocument>
                 <ram:IssuerAssignedID>PREV_ORDER_R_ID</ram:IssuerAssignedID>
                 <ram:FormattedIssueDateTime>
-                    <qdt:DateTimeString format="102">20221221</qdt:DateTimeString>
+                    <qdt:DateTimeString format="102">20221225</qdt:DateTimeString>
                 </ram:FormattedIssueDateTime>
             </ram:PreviousOrderResponseReferencedDocument>
             <ram:SpecifiedProcuringProject>
@@ -654,7 +654,7 @@
             <ram:UltimateCustomerOrderReferencedDocument>
                 <ram:IssuerAssignedID>ULTCUSTORDEREF-1</ram:IssuerAssignedID>
                 <ram:FormattedIssueDateTime>
-                    <qdt:DateTimeString format="102">20221221</qdt:DateTimeString>
+                    <qdt:DateTimeString format="102">20221225</qdt:DateTimeString>
                 </ram:FormattedIssueDateTime>
             </ram:UltimateCustomerOrderReferencedDocument>
         </ram:ApplicableHeaderTradeAgreement>
@@ -729,17 +729,30 @@
             </ram:ShipFromTradeParty>
             <ram:RequestedDeliverySupplyChainEvent>
                 <ram:OccurrenceDateTime>
-                    <udt:DateTimeString format="102">20221221</udt:DateTimeString>
+                    <udt:DateTimeString format="102">20221225</udt:DateTimeString>
                 </ram:OccurrenceDateTime>
                 <ram:OccurrenceSpecifiedPeriod>
                     <ram:StartDateTime>
-                        <udt:DateTimeString format="102">20221221</udt:DateTimeString>
+                        <udt:DateTimeString format="102">20221225</udt:DateTimeString>
                     </ram:StartDateTime>
                     <ram:EndDateTime>
-                        <udt:DateTimeString format="102">20221221</udt:DateTimeString>
+                        <udt:DateTimeString format="102">20221225</udt:DateTimeString>
                     </ram:EndDateTime>
                 </ram:OccurrenceSpecifiedPeriod>
             </ram:RequestedDeliverySupplyChainEvent>
+            <ram:RequestedDespatchSupplyChainEvent>
+                <ram:OccurrenceDateTime>
+                    <udt:DateTimeString format="102">20221225</udt:DateTimeString>
+                </ram:OccurrenceDateTime>
+                <ram:OccurrenceSpecifiedPeriod>
+                    <ram:StartDateTime>
+                        <udt:DateTimeString format="102">20221225</udt:DateTimeString>
+                    </ram:StartDateTime>
+                    <ram:EndDateTime>
+                        <udt:DateTimeString format="102">20221225</udt:DateTimeString>
+                    </ram:EndDateTime>
+                </ram:OccurrenceSpecifiedPeriod>
+            </ram:RequestedDespatchSupplyChainEvent>
         </ram:ApplicableHeaderTradeDelivery>
         <ram:ApplicableHeaderTradeSettlement>
             <ram:OrderCurrencyCode>EUR</ram:OrderCurrencyCode>

@@ -1819,6 +1819,42 @@ class OrderDocumentBuilder extends OrderDocument
     }
 
     /**
+     * Set the requested date or period on which Pick up is requested
+     *
+     * @param  DateTime|null $occurrenceDateTime
+     * A Requested Date on which Pick up is requested
+     * @param  DateTime|null $startDateTime
+     * The Start Date of he Requested Period on which Pick up is requested
+     * @param  DateTime|null $endDateTime
+     * The End Date of he Requested Period on which Pick up is requested
+     * @return OrderDocumentBuilder
+     */
+    public function setDocumentRequestedDespatchSupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): OrderDocumentBuilder
+    {
+        $supplychainevent = $this->objectHelper->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+        $this->objectHelper->tryCallIfMethodExists($this->headerTradeDelivery, "addToRequestedDespatchSupplyChainEvent", "setRequestedDespatchSupplyChainEvent", [$supplychainevent], $supplychainevent);
+        return $this;
+    }
+
+    /**
+     * Add an additional requested date or period on which Pick up is requested
+     *
+     * @param  DateTime|null $occurrenceDateTime
+     * A Requested Date on which Pick up is requested
+     * @param  DateTime|null $startDateTime
+     * The Start Date of he Requested Period on which Pick up is requested
+     * @param  DateTime|null $endDateTime
+     * The End Date of he Requested Period on which Pick up is requested
+     * @return OrderDocumentBuilder
+     */
+    public function addDocumentRequestedDespatchSupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): OrderDocumentBuilder
+    {
+        $supplychainevent = $this->objectHelper->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+        $this->objectHelper->tryCall($this->headerTradeDelivery, "addToRequestedDespatchSupplyChainEvent", $supplychainevent);
+        return $this;
+    }
+
+    /**
      * Set detailed information on the Party to which the invoice must be sent
      *
      * @param  string      $name

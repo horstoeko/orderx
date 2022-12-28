@@ -65,7 +65,7 @@ class OrderDocumentReaderExtendedTest extends TestCase
 
         $this->assertEquals("PO123456789", $documentNo);
         $this->assertEquals(OrderDocumentTypes::ORDER, $documentTypeCode);
-        $this->assertEquals("21.12.2022", $documentDate->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $documentDate->format('d.m.Y'));
         $this->assertEquals("EUR", $documentCurrency);
         $this->assertEquals("Doc Name", $documentName);
         $this->assertEmpty($documentLanguageId);
@@ -83,7 +83,7 @@ class OrderDocumentReaderExtendedTest extends TestCase
         self::$document->getIsDocumentCopy($documentIsCopy);
 
         $this->assertNotNull($documentIsCopy);
-        $this->assertTrue($documentIsCopy);
+        $this->assertFalse($documentIsCopy);
     }
 
     /**
@@ -785,7 +785,7 @@ class OrderDocumentReaderExtendedTest extends TestCase
 
         $this->assertEquals("BLANKET_ORDER_OD", $blanketOrderRefId);
         $this->assertNotNull($blanketOrderRefDate);
-        $this->assertEquals($blanketOrderRefDate->format("d.m.Y"), "21.12.2022");
+        $this->assertEquals($blanketOrderRefDate->format("d.m.Y"), "25.12.2022");
     }
 
     /**
@@ -798,7 +798,7 @@ class OrderDocumentReaderExtendedTest extends TestCase
 
         $this->assertEquals("PREV_ORDER_C_ID", $prevOrderChangeRefId);
         $this->assertNotNull($prevOrderChangeRefDate);
-        $this->assertEquals($prevOrderChangeRefDate->format("d.m.Y"), "21.12.2022");
+        $this->assertEquals($prevOrderChangeRefDate->format("d.m.Y"), "25.12.2022");
     }
 
     /**
@@ -811,7 +811,7 @@ class OrderDocumentReaderExtendedTest extends TestCase
 
         $this->assertEquals("PREV_ORDER_R_ID", $prevOrderResponseRefId);
         $this->assertNotNull($prevOrderResponseRefDate);
-        $this->assertEquals($prevOrderResponseRefDate->format("d.m.Y"), "21.12.2022");
+        $this->assertEquals($prevOrderResponseRefDate->format("d.m.Y"), "25.12.2022");
     }
 
     /**
@@ -854,7 +854,7 @@ class OrderDocumentReaderExtendedTest extends TestCase
         self::$document->getDocumentUltimateCustomerOrderReferencedDocument($ultimateCustomerOrderRefId, $ultimateCustomerOrderRefDate);
 
         $this->assertEquals("ULTCUSTORDEREF-1", $ultimateCustomerOrderRefId);
-        $this->assertEquals("21.12.2022", $ultimateCustomerOrderRefDate->format("d.m.Y"));
+        $this->assertEquals("25.12.2022", $ultimateCustomerOrderRefDate->format("d.m.Y"));
     }
 
     /**
@@ -1177,9 +1177,9 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertNotNull($occurrenceDateTime);
         $this->assertNotNull($startDateTime);
         $this->assertNotNull($endDateTime);
-        $this->assertEquals("21.12.2022", $occurrenceDateTime->format('d.m.Y'));
-        $this->assertEquals("21.12.2022", $startDateTime->format('d.m.Y'));
-        $this->assertEquals("21.12.2022", $endDateTime->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $occurrenceDateTime->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $startDateTime->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $endDateTime->format('d.m.Y'));
     }
 
     /**
@@ -1192,6 +1192,53 @@ class OrderDocumentReaderExtendedTest extends TestCase
 
         self::$document->nextDocumentRequestedDeliverySupplyChainEvent();
         self::$document->getDocumentRequestedDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testFirstRequestedDespatchSupplyChainEvent(): void
+    {
+        $this->assertTrue(self::$document->firstDocumentRequestedDespatchSupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextRequestedDespatchSupplyChainEvent(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentRequestedDespatchSupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextRequestedDespatchSupplyChainEventNoNext(): void
+    {
+        $this->expectException(\OutOfRangeException::class);
+
+        self::$document->nextDocumentRequestedDespatchSupplyChainEvent();
+        self::$document->getDocumentRequestedDespatchSupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentRequestedDespatchSupplyChainEvent(): void
+    {
+        self::$document->firstDocumentRequestedDeliverySupplyChainEvent();
+        self::$document->getDocumentRequestedDespatchSupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+
+        $this->assertNotNull($occurrenceDateTime);
+        $this->assertNotNull($startDateTime);
+        $this->assertNotNull($endDateTime);
+        $this->assertEquals("25.12.2022", $occurrenceDateTime->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $startDateTime->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $endDateTime->format('d.m.Y'));
     }
 
     /**
@@ -3032,7 +3079,7 @@ class OrderDocumentReaderExtendedTest extends TestCase
 
         $this->assertEquals("ULTCUSTORDEREF-1", $ultimateCustomerOrderRefId);
         $this->assertEquals("1", $ultimateCustomerOrderRefLineId);
-        $this->assertEquals("21.12.2022", $ultimateCustomerOrderRefDate->format("d.m.Y"));
+        $this->assertEquals("25.12.2022", $ultimateCustomerOrderRefDate->format("d.m.Y"));
     }
 
     /**
@@ -3050,7 +3097,7 @@ class OrderDocumentReaderExtendedTest extends TestCase
 
         $this->assertEquals("ULTCUSTORDEREF-1", $ultimateCustomerOrderRefId);
         $this->assertEquals("2", $ultimateCustomerOrderRefLineId);
-        $this->assertEquals("21.12.2022", $ultimateCustomerOrderRefDate->format("d.m.Y"));
+        $this->assertEquals("25.12.2022", $ultimateCustomerOrderRefDate->format("d.m.Y"));
     }
 
     /**
@@ -3068,7 +3115,7 @@ class OrderDocumentReaderExtendedTest extends TestCase
 
         $this->assertEquals("ULTCUSTORDEREF-1", $ultimateCustomerOrderRefId);
         $this->assertEquals("3", $ultimateCustomerOrderRefLineId);
-        $this->assertEquals("21.12.2022", $ultimateCustomerOrderRefDate->format("d.m.Y"));
+        $this->assertEquals("25.12.2022", $ultimateCustomerOrderRefDate->format("d.m.Y"));
     }
 
     /**
@@ -3330,8 +3377,8 @@ class OrderDocumentReaderExtendedTest extends TestCase
         self::$document->getDocumentPositionRequestedDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
 
         $this->assertNull($occurrenceDateTime);
-        $this->assertEquals("21.12.2022", $startDateTime->format('d.m.Y'));
-        $this->assertEquals("21.12.2022", $endDateTime->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $startDateTime->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $endDateTime->format('d.m.Y'));
     }
 
     /**
@@ -3343,7 +3390,7 @@ class OrderDocumentReaderExtendedTest extends TestCase
         self::$document->nextDocumentPosition();
         self::$document->getDocumentPositionRequestedDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
 
-        $this->assertEquals("21.12.2022", $occurrenceDateTime->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $occurrenceDateTime->format('d.m.Y'));
         $this->assertNull($startDateTime);
         $this->assertNull($endDateTime);
     }
@@ -3358,8 +3405,8 @@ class OrderDocumentReaderExtendedTest extends TestCase
         self::$document->getDocumentPositionRequestedDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
 
         $this->assertNull($occurrenceDateTime);
-        $this->assertEquals("21.12.2022", $startDateTime->format('d.m.Y'));
-        $this->assertEquals("21.12.2022", $endDateTime->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $startDateTime->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $endDateTime->format('d.m.Y'));
     }
 
     /**

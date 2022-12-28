@@ -675,6 +675,19 @@
                     </ram:EndDateTime>
                 </ram:OccurrenceSpecifiedPeriod>
             </ram:RequestedDeliverySupplyChainEvent>
+            <ram:RequestedDespatchSupplyChainEvent>
+                <ram:OccurrenceDateTime>
+                    <udt:DateTimeString format="102">20221225</udt:DateTimeString>
+                </ram:OccurrenceDateTime>
+                <ram:OccurrenceSpecifiedPeriod>
+                    <ram:StartDateTime>
+                        <udt:DateTimeString format="102">20221225</udt:DateTimeString>
+                    </ram:StartDateTime>
+                    <ram:EndDateTime>
+                        <udt:DateTimeString format="102">20221225</udt:DateTimeString>
+                    </ram:EndDateTime>
+                </ram:OccurrenceSpecifiedPeriod>
+            </ram:RequestedDespatchSupplyChainEvent>
         </ram:ApplicableHeaderTradeDelivery>
         <ram:ApplicableHeaderTradeSettlement>
             <ram:OrderCurrencyCode>EUR</ram:OrderCurrencyCode>

@@ -1182,6 +1182,53 @@ class OrderDocumentReaderComfortTest extends TestCase
      * @covers \horstoeko\orderx\OrderDocumentReader
      * @covers \horstoeko\orderx\OrderObjectHelper
      */
+    public function testFirstRequestedDespatchSupplyChainEvent(): void
+    {
+        $this->assertTrue(self::$document->firstDocumentRequestedDespatchSupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextRequestedDespatchSupplyChainEvent(): void
+    {
+        $this->assertFalse(self::$document->nextDocumentRequestedDespatchSupplyChainEvent());
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testNextRequestedDespatchSupplyChainEventNoNext(): void
+    {
+        $this->expectException(\OutOfRangeException::class);
+
+        self::$document->nextDocumentRequestedDespatchSupplyChainEvent();
+        self::$document->getDocumentRequestedDespatchSupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
+    public function testGetDocumentRequestedDespatchSupplyChainEvent(): void
+    {
+        self::$document->firstDocumentRequestedDeliverySupplyChainEvent();
+        self::$document->getDocumentRequestedDespatchSupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+
+        $this->assertNotNull($occurrenceDateTime);
+        $this->assertNotNull($startDateTime);
+        $this->assertNotNull($endDateTime);
+        $this->assertEquals("25.12.2022", $occurrenceDateTime->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $startDateTime->format('d.m.Y'));
+        $this->assertEquals("25.12.2022", $endDateTime->format('d.m.Y'));
+    }
+
+    /**
+     * @covers \horstoeko\orderx\OrderDocumentReader
+     * @covers \horstoeko\orderx\OrderObjectHelper
+     */
     public function testGetDocumentInvoicee(): void
     {
         self::$document->getDocumentInvoicee($name, $id, $description);

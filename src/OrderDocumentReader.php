@@ -85,6 +85,11 @@ class OrderDocumentReader extends OrderDocument
     /**
      * @var integer
      */
+    private $documentRequestedDespatchSupplyChainEventPointer = 0;
+
+    /**
+     * @var integer
+     */
     private $documentInvoiceeContactPointer = 0;
 
     /**
@@ -1855,6 +1860,68 @@ class OrderDocumentReader extends OrderDocument
     public function getDocumentRequestedDeliverySupplyChainEvent(?DateTime &$occurrenceDateTime, ?DateTime &$startDateTime, ?DateTime &$endDateTime): OrderDocumentReader
     {
         $events = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getRequestedDeliverySupplyChainEvent", []));
+        $event = $this->objectHelper->getArrayIndex($events, $this->documentRequestedDeliverySupplyChainEventPointer);
+
+        $occurrenceDateTime = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPathFrom($event, "getOccurrenceDateTime.getDateTimeString", ""),
+            $this->getInvoiceValueByPathFrom($event, "getOccurrenceDateTime.getDateTimeString.getFormat", "")
+        );
+        $startDateTime = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPathFrom($event, "getOccurrenceSpecifiedPeriod.getStartDateTime.getDateTimeString", ""),
+            $this->getInvoiceValueByPathFrom($event, "getOccurrenceSpecifiedPeriod.getStartDateTime.getDateTimeString.getFormat", "")
+        );
+        $endDateTime = $this->objectHelper->toDateTime(
+            $this->getInvoiceValueByPathFrom($event, "getOccurrenceSpecifiedPeriod.getEndDateTime.getDateTimeString", ""),
+            $this->getInvoiceValueByPathFrom($event, "getOccurrenceSpecifiedPeriod.getEndDateTime.getDateTimeString.getFormat", "")
+        );
+
+        return $this;
+    }
+
+    /**
+     * Seek to the first document requested despatch supply chain event of the document.
+     * Returns true if a first event is available, otherwise false
+     * You may use this together with OrderDocumentReader::getRequestedDespatchSupplyChainEvent
+     *
+     * @return boolean
+     */
+    public function firstDocumentRequestedDespatchSupplyChainEvent(): bool
+    {
+        $this->documentRequestedDespatchSupplyChainEventPointer = 0;
+        $events = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getRequestedDespatchSupplyChainEvent", []));
+        return isset($events[$this->documentRequestedDespatchSupplyChainEventPointer]);
+    }
+
+    /**
+     * Seek to the next document requested despatch supply chain event of the document.
+     * Returns true if a event is available, otherwise false
+     * You may use this together with OrderDocumentReader::getRequestedDespatchSupplyChainEvent
+     *
+     * @return boolean
+     */
+    public function nextDocumentRequestedDespatchSupplyChainEvent(): bool
+    {
+        $this->documentRequestedDespatchSupplyChainEventPointer++;
+        $events = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getRequestedDespatchSupplyChainEvent", []));
+        return isset($events[$this->documentRequestedDespatchSupplyChainEventPointer]);
+    }
+
+    /**
+     * Get the requested date or period on which delivery is requested
+     * This method should be used together with __OrderDocumentReader::firstDocumentRequestedDespatchSupplyChainEvent__
+     * and __OrderDocumentReader::nextDocumentRequestedDespatchSupplyChainEvent__
+     *
+     * @param  DateTime      $occurrenceDateTime
+     * A Requested Date on which Pick up is requested
+     * @param  DateTime|null $startDateTime
+     * The Start Date of he Requested Period on which Pick up is requested
+     * @param  DateTime|null $endDateTime
+     * The End Date of he Requested Period on which Pick up is requested
+     * @return OrderDocumentReader
+     */
+    public function getDocumentRequestedDespatchSupplyChainEvent(?DateTime &$occurrenceDateTime, ?DateTime &$startDateTime, ?DateTime &$endDateTime): OrderDocumentReader
+    {
+        $events = $this->objectHelper->ensureArray($this->getInvoiceValueByPath("getSupplyChainTradeTransaction.getApplicableHeaderTradeDelivery.getRequestedDespatchSupplyChainEvent", []));
         $event = $this->objectHelper->getArrayIndex($events, $this->documentRequestedDeliverySupplyChainEventPointer);
 
         $occurrenceDateTime = $this->objectHelper->toDateTime(
