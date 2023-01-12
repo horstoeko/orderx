@@ -11,7 +11,7 @@ namespace horstoeko\orderx;
 
 use DateTime;
 use horstoeko\orderx\exception\OrderMimeTypeNotSupportedException;
-use horstoeko\orderx\exception\OrderUnknownDateFormat;
+use horstoeko\orderx\exception\OrderUnknownDateFormatException;
 use horstoeko\stringmanagement\FileUtils;
 use horstoeko\stringmanagement\StringUtils;
 use MimeTyper\Repository\MimeDbRepository;
@@ -1319,7 +1319,7 @@ class OrderObjectHelper
         } elseif ($format == "204") {
             return DateTime::createFromFormat("YmdHis", $dateTimeString);
         } else {
-            throw new OrderUnknownDateFormat($format);
+            throw new OrderUnknownDateFormatException($format);
         }
     }
 

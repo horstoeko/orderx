@@ -30,6 +30,6 @@ class OrderFileNotFoundException extends OrderBaseException
      */
     public function __construct(string $filename, ?Throwable $previous = null)
     {
-        parent::__construct(sprintf("The file %s was not found", $filename), -2000, $previous);
+        parent::__construct(sprintf("The file %s was not found", $filename), OrderExceptionCodes::FILENOTFOUND, $previous);
     }
 }

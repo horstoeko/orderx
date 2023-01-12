@@ -29,6 +29,6 @@ class OrderNoValidAttachmentFoundInPdfException extends OrderBaseException
      */
     public function __construct(?Throwable $previous = null)
     {
-        parent::__construct("No valid attachment file found in PDF", -1105, $previous);
+        parent::__construct("No valid attachment file found in PDF", OrderExceptionCodes::NOVALIDATTACHMENTFOUNDINPDF, $previous);
     }
 }

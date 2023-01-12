@@ -30,6 +30,6 @@ class OrderMimeTypeNotSupportedException extends OrderBaseException
      */
     public function __construct(string $mimetype, ?Throwable $previous = null)
     {
-        parent::__construct(sprintf("The Mime Type %s is not supported", $mimetype), -1103, $previous);
+        parent::__construct(sprintf("The Mime Type %s is not supported", $mimetype), OrderExceptionCodes::MIMETYPENOTSUPPORTED, $previous);
     }
 }

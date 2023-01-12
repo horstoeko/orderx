@@ -30,6 +30,6 @@ class OrderUnknownProfileException extends OrderBaseException
      */
     public function __construct(string $profileString, ?Throwable $previous = null)
     {
-        parent::__construct(sprintf("Cannot determain the profile by %s", $profileString), -1102, $previous);
+        parent::__construct(sprintf("Cannot determain the profile by %s", $profileString), OrderExceptionCodes::UNKNOWNPROFILE, $previous);
     }
 }

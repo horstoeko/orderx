@@ -29,6 +29,6 @@ class OrderCannotFindProfileString extends OrderBaseException
      */
     public function __construct(?Throwable $previous = null)
     {
-        parent::__construct("The string containing the profile was not found", -1101, $previous);
+        parent::__construct("The string containing the profile was not found", OrderExceptionCodes::CANNOTFINDPROFILESTRING, $previous);
     }
 }

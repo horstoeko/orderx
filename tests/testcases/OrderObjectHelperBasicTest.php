@@ -2,7 +2,7 @@
 
 namespace horstoeko\orderx\tests\testcases;
 
-use horstoeko\orderx\exception\OrderUnknownDateFormat;
+use horstoeko\orderx\exception\OrderUnknownDateFormatException;
 use horstoeko\orderx\OrderObjectHelper;
 use horstoeko\orderx\OrderProfiles;
 use horstoeko\orderx\tests\TestCase;
@@ -1120,7 +1120,7 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("31.12.2022 14:30:00", self::$objectHelper->toDateTime("202212311430", "203")->format("d.m.Y H:i:s"));
         $this->assertEquals("31.12.2022 14:30:44", self::$objectHelper->toDateTime("20221231143044", "204")->format("d.m.Y H:i:s"));
 
-        $this->expectException(OrderUnknownDateFormat::class);
+        $this->expectException(OrderUnknownDateFormatException::class);
         self::$objectHelper->toDateTime("20221231", "999");
     }
 

@@ -21,7 +21,7 @@ use Throwable;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/orderx
  */
-class OrderUnknownDateFormat extends OrderBaseException
+class OrderUnknownDateFormatException extends OrderBaseException
 {
     /**
      * Constructor
@@ -30,6 +30,6 @@ class OrderUnknownDateFormat extends OrderBaseException
      */
     public function __construct(string $dateFormatCode, ?Throwable $previous = null)
     {
-        parent::__construct(sprintf("Invalid date format %s", $dateFormatCode), -1104, $previous);
+        parent::__construct(sprintf("Invalid date format %s", $dateFormatCode), OrderExceptionCodes::UNKNOWNDATEFORMAT, $previous);
     }
 }
