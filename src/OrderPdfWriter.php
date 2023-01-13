@@ -133,7 +133,7 @@ class OrderPdfWriter extends PdfFpdi
         }
 
         if (!$isUTF8) {
-            $desc = utf8_encode($desc);
+            $desc = mb_convert_encoding($desc, 'UTF-8', mb_list_encodings());
         }
 
         if ('' == $mimetype) {
@@ -213,7 +213,7 @@ class OrderPdfWriter extends PdfFpdi
         $this->_put('<<');
         $this->_put('/F (' . $this->_escape($file_info['name']) . ')');
         $this->_put('/Type /Filespec');
-        $this->_put('/UF ' . $this->_textstring(utf8_encode($file_info['name'])));
+        $this->_put('/UF ' . $this->_textstring(mb_convert_encoding($file_info['name'], 'UTF-8', mb_list_encodings())));
         if ($file_info['relationship']) {
             $this->_put('/AFRelationship /' . $file_info['relationship']);
         }
