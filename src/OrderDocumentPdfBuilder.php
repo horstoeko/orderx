@@ -11,6 +11,7 @@ namespace horstoeko\orderx;
 
 use horstoeko\orderx\codelists\OrderDocumentTypes;
 use horstoeko\orderx\OrderDocumentBuilder;
+use horstoeko\orderx\OrderPackageVersion;
 use horstoeko\orderx\OrderPdfWriter;
 use horstoeko\stringmanagement\PathUtils;
 use setasign\Fpdi\PdfParser\StreamReader as PdfStreamReader;
@@ -170,7 +171,7 @@ class OrderDocumentPdfBuilder
         $descPdfNodes->Producer = 'FPDF';
 
         $descXmpNodes = $descNode->children('xmp', true);
-        $descXmpNodes->CreatorTool = sprintf('Order-X PHP library v%s by HorstOeko', "1.0");
+        $descXmpNodes->CreatorTool = sprintf('Order-X PHP library %s by HorstOeko', OrderPackageVersion::getInstalledVersion());
         $descXmpNodes->CreateDate = $pdfMetadataInfos['createdDate'];
         $descXmpNodes->ModifyDate = $pdfMetadataInfos['modifiedDate'];
 

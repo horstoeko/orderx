@@ -1460,27 +1460,6 @@ class OrderObjectHelper
      *
      * @param  object|null $instance
      * @param  string      $methods
-     * @param  mixed       $value
-     * @return void
-     */
-    public function tryCallByPath($instance, string $methods, $value)
-    {
-        $methods = explode(".", $methods);
-
-        foreach ($methods as $index => $method) {
-            if ($index == count($methods) - 1) {
-                $this->tryCall($instance, $method, $value);
-            } else {
-                $instance = $this->tryCallAndReturn($instance, $method);
-            }
-        }
-    }
-
-    /**
-     * Try call methods in a form .object.method1.method2.method3
-     *
-     * @param  object|null $instance
-     * @param  string      $methods
      * @return mixed
      */
     public function tryCallByPathAndReturn($instance, string $methods)
