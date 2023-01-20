@@ -160,7 +160,7 @@ class OrderDocumentPdfBuilder
         $descNodes = $xmp->xpath('rdf:Description');
         $descNode = $descNodes[0];
 
-        $descNode->children('fx_1_', true)->ConformanceLevel = strtoupper($this->documentBuiler->getProfileDefinition()["xmpname"]);
+        $descNode->children('fx_1_', true)->{'ConformanceLevel'} = strtoupper($this->documentBuiler->getProfileDefinition()["xmpname"]);
 
         $descDcNodes = $descNode->children('dc', true);
         $descDcNodes->title->children('rdf', true)->Alt->li = $pdfMetadataInfos['title'];
@@ -168,12 +168,12 @@ class OrderDocumentPdfBuilder
         $descDcNodes->description->children('rdf', true)->Alt->li = $pdfMetadataInfos['subject'];
 
         $descPdfNodes = $descNode->children('pdf', true);
-        $descPdfNodes->Producer = 'FPDF';
+        $descPdfNodes->{'Producer'} = 'FPDF';
 
         $descXmpNodes = $descNode->children('xmp', true);
-        $descXmpNodes->CreatorTool = sprintf('Order-X PHP library %s by HorstOeko', OrderPackageVersion::getInstalledVersion());
-        $descXmpNodes->CreateDate = $pdfMetadataInfos['createdDate'];
-        $descXmpNodes->ModifyDate = $pdfMetadataInfos['modifiedDate'];
+        $descXmpNodes->{'CreatorTool'} = sprintf('Order-X PHP library %s by HorstOeko', OrderPackageVersion::getInstalledVersion());
+        $descXmpNodes->{'CreateDate'} = $pdfMetadataInfos['createdDate'];
+        $descXmpNodes->{'ModifyDate'} = $pdfMetadataInfos['modifiedDate'];
 
         $this->pdfWriter->addMetadataDescriptionNode($descNode->asXML());
     }
