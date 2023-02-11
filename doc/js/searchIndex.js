@@ -18948,7 +18948,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\horstoeko\\orderx\\exception\\OrderExceptionCodes",
             "name": "OrderExceptionCodes",
-            "summary": "",
+            "summary": "Class\u0020representing\u0020the\u0020internal\u0020coes\u0020for\u0020Order\u002DX\u002DExceptions",
             "url": "classes/horstoeko-orderx-exception-OrderExceptionCodes.html"
         },                {
             "fqsen": "\\horstoeko\\orderx\\exception\\OrderExceptionCodes\u003A\u003ACANNOTFINDPROFILESTRING",

@@ -9,6 +9,15 @@
 
 namespace horstoeko\orderx\exception;
 
+/**
+ * Class representing the internal coes for Order-X-Exceptions
+ *
+ * @category Order-X
+ * @package  Order-X
+ * @author   D. Erling <horstoeko@erling.com.de>
+ * @license  https://opensource.org/licenses/MIT MIT
+ * @link     https://github.com/horstoeko/orderx
+ */
 class OrderExceptionCodes
 {
     public const CANNOTFINDPROFILESTRING = -1101;
