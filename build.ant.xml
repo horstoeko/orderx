@@ -251,11 +251,14 @@
             </fileset>
         </zip>
     </target>
-    <target name="projectdoc" description="Generate documentation" depends="clean,downloadphpdocumentor">
+    <target name="projectdoc" description="Generate documentation">
+        <antcall target="clean"/>
+        <antcall target="downloadphpdocumentor"/>
         <delete dir="${basedir}/doc"/>
         <exec executable="php" dir="${basedir}/build">
             <arg path="${phpdocumentor}"/>
         </exec>
         <delete file="${phpdocumentor}"/>
+        <antcall target="clean"/>
     </target>
 </project>
