@@ -49,7 +49,7 @@ class ExchangedDocumentContextType
      *
      * Test Indicator
      *
-     * @param \horstoeko\orderx\entities\basic\udt\IndicatorType $testIndicator
+     * @param  \horstoeko\orderx\entities\basic\udt\IndicatorType $testIndicator
      * @return self
      */
     public function setTestIndicator(?\horstoeko\orderx\entities\basic\udt\IndicatorType $testIndicator = null)
@@ -75,7 +75,7 @@ class ExchangedDocumentContextType
      *
      * Business Process
      *
-     * @param \horstoeko\orderx\entities\basic\ram\DocumentContextParameterType $businessProcessSpecifiedDocumentContextParameter
+     * @param  \horstoeko\orderx\entities\basic\ram\DocumentContextParameterType $businessProcessSpecifiedDocumentContextParameter
      * @return self
      */
     public function setBusinessProcessSpecifiedDocumentContextParameter(?\horstoeko\orderx\entities\basic\ram\DocumentContextParameterType $businessProcessSpecifiedDocumentContextParameter = null)
@@ -101,7 +101,7 @@ class ExchangedDocumentContextType
      *
      * Guideline
      *
-     * @param \horstoeko\orderx\entities\basic\ram\DocumentContextParameterType $guidelineSpecifiedDocumentContextParameter
+     * @param  \horstoeko\orderx\entities\basic\ram\DocumentContextParameterType $guidelineSpecifiedDocumentContextParameter
      * @return self
      */
     public function setGuidelineSpecifiedDocumentContextParameter(\horstoeko\orderx\entities\basic\ram\DocumentContextParameterType $guidelineSpecifiedDocumentContextParameter)
@@ -109,7 +109,4 @@ class ExchangedDocumentContextType
         $this->guidelineSpecifiedDocumentContextParameter = $guidelineSpecifiedDocumentContextParameter;
         return $this;
     }
-
-
 }
-

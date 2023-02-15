@@ -5,7 +5,6 @@ namespace horstoeko\orderx\entities\basic\qdt;
 /**
  * Class representing CurrencyCodeType
  *
- *
  * XSD Type: CurrencyCodeType
  */
 class CurrencyCodeType
@@ -29,7 +28,7 @@ class CurrencyCodeType
     /**
      * Gets or sets the inner value
      *
-     * @param string $value
+     * @param  string $value
      * @return string
      */
     public function value()
@@ -49,7 +48,4 @@ class CurrencyCodeType
     {
         return strval($this->__value);
     }
-
-
 }
-

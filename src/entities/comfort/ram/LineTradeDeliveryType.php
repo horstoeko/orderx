@@ -77,7 +77,7 @@ class LineTradeDeliveryType
      *
      * Partial Delivery Allowed Indicator
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\IndicatorType $partialDeliveryAllowedIndicator
+     * @param  \horstoeko\orderx\entities\comfort\udt\IndicatorType $partialDeliveryAllowedIndicator
      * @return self
      */
     public function setPartialDeliveryAllowedIndicator(?\horstoeko\orderx\entities\comfort\udt\IndicatorType $partialDeliveryAllowedIndicator = null)
@@ -103,7 +103,7 @@ class LineTradeDeliveryType
      *
      * Requested Quantity
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\QuantityType $requestedQuantity
+     * @param  \horstoeko\orderx\entities\comfort\udt\QuantityType $requestedQuantity
      * @return self
      */
     public function setRequestedQuantity(\horstoeko\orderx\entities\comfort\udt\QuantityType $requestedQuantity)
@@ -129,7 +129,7 @@ class LineTradeDeliveryType
      *
      * Agreed Quantity
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\QuantityType $agreedQuantity
+     * @param  \horstoeko\orderx\entities\comfort\udt\QuantityType $agreedQuantity
      * @return self
      */
     public function setAgreedQuantity(?\horstoeko\orderx\entities\comfort\udt\QuantityType $agreedQuantity = null)
@@ -155,7 +155,7 @@ class LineTradeDeliveryType
      *
      * Package Quantity
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\QuantityType $packageQuantity
+     * @param  \horstoeko\orderx\entities\comfort\udt\QuantityType $packageQuantity
      * @return self
      */
     public function setPackageQuantity(?\horstoeko\orderx\entities\comfort\udt\QuantityType $packageQuantity = null)
@@ -181,7 +181,7 @@ class LineTradeDeliveryType
      *
      * Per Package Unit Quantity
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\QuantityType $perPackageUnitQuantity
+     * @param  \horstoeko\orderx\entities\comfort\udt\QuantityType $perPackageUnitQuantity
      * @return self
      */
     public function setPerPackageUnitQuantity(?\horstoeko\orderx\entities\comfort\udt\QuantityType $perPackageUnitQuantity = null)
@@ -207,7 +207,7 @@ class LineTradeDeliveryType
      *
      * Requested Despatch Event
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\SupplyChainEventType $requestedDespatchSupplyChainEvent
+     * @param  \horstoeko\orderx\entities\comfort\ram\SupplyChainEventType $requestedDespatchSupplyChainEvent
      * @return self
      */
     public function setRequestedDespatchSupplyChainEvent(?\horstoeko\orderx\entities\comfort\ram\SupplyChainEventType $requestedDespatchSupplyChainEvent = null)
@@ -233,7 +233,7 @@ class LineTradeDeliveryType
      *
      * Requested Delivery Event
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\SupplyChainEventType $requestedDeliverySupplyChainEvent
+     * @param  \horstoeko\orderx\entities\comfort\ram\SupplyChainEventType $requestedDeliverySupplyChainEvent
      * @return self
      */
     public function setRequestedDeliverySupplyChainEvent(?\horstoeko\orderx\entities\comfort\ram\SupplyChainEventType $requestedDeliverySupplyChainEvent = null)
@@ -241,7 +241,4 @@ class LineTradeDeliveryType
         $this->requestedDeliverySupplyChainEvent = $requestedDeliverySupplyChainEvent;
         return $this;
     }
-
-
 }
-

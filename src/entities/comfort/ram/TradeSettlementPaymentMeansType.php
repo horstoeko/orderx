@@ -42,7 +42,7 @@ class TradeSettlementPaymentMeansType
      *
      * Type Code
      *
-     * @param string $typeCode
+     * @param  string $typeCode
      * @return self
      */
     public function setTypeCode($typeCode)
@@ -68,7 +68,7 @@ class TradeSettlementPaymentMeansType
      *
      * Information
      *
-     * @param string $information
+     * @param  string $information
      * @return self
      */
     public function setInformation($information)
@@ -76,7 +76,4 @@ class TradeSettlementPaymentMeansType
         $this->information = $information;
         return $this;
     }
-
-
 }
-

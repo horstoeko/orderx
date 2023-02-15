@@ -42,7 +42,7 @@ class LegalOrganizationType
      *
      * ID
      *
-     * @param \horstoeko\orderx\entities\basic\udt\IDType $iD
+     * @param  \horstoeko\orderx\entities\basic\udt\IDType $iD
      * @return self
      */
     public function setID(?\horstoeko\orderx\entities\basic\udt\IDType $iD = null)
@@ -68,7 +68,7 @@ class LegalOrganizationType
      *
      * Trading Name
      *
-     * @param string $tradingBusinessName
+     * @param  string $tradingBusinessName
      * @return self
      */
     public function setTradingBusinessName($tradingBusinessName)
@@ -76,7 +76,4 @@ class LegalOrganizationType
         $this->tradingBusinessName = $tradingBusinessName;
         return $this;
     }
-
-
 }
-

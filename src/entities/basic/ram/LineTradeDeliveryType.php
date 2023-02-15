@@ -49,7 +49,7 @@ class LineTradeDeliveryType
      *
      * Partial Delivery Allowed Indicator
      *
-     * @param \horstoeko\orderx\entities\basic\udt\IndicatorType $partialDeliveryAllowedIndicator
+     * @param  \horstoeko\orderx\entities\basic\udt\IndicatorType $partialDeliveryAllowedIndicator
      * @return self
      */
     public function setPartialDeliveryAllowedIndicator(?\horstoeko\orderx\entities\basic\udt\IndicatorType $partialDeliveryAllowedIndicator = null)
@@ -75,7 +75,7 @@ class LineTradeDeliveryType
      *
      * Requested Quantity
      *
-     * @param \horstoeko\orderx\entities\basic\udt\QuantityType $requestedQuantity
+     * @param  \horstoeko\orderx\entities\basic\udt\QuantityType $requestedQuantity
      * @return self
      */
     public function setRequestedQuantity(\horstoeko\orderx\entities\basic\udt\QuantityType $requestedQuantity)
@@ -101,7 +101,7 @@ class LineTradeDeliveryType
      *
      * Agreed Quantity
      *
-     * @param \horstoeko\orderx\entities\basic\udt\QuantityType $agreedQuantity
+     * @param  \horstoeko\orderx\entities\basic\udt\QuantityType $agreedQuantity
      * @return self
      */
     public function setAgreedQuantity(?\horstoeko\orderx\entities\basic\udt\QuantityType $agreedQuantity = null)
@@ -109,7 +109,4 @@ class LineTradeDeliveryType
         $this->agreedQuantity = $agreedQuantity;
         return $this;
     }
-
-
 }
-

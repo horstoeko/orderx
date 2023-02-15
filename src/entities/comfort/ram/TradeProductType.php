@@ -127,7 +127,7 @@ class TradeProductType
      *
      * Global ID
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\IDType $globalID
+     * @param  \horstoeko\orderx\entities\comfort\udt\IDType $globalID
      * @return self
      */
     public function setGlobalID(?\horstoeko\orderx\entities\comfort\udt\IDType $globalID = null)
@@ -153,7 +153,7 @@ class TradeProductType
      *
      * Seller Assigned ID
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\IDType $sellerAssignedID
+     * @param  \horstoeko\orderx\entities\comfort\udt\IDType $sellerAssignedID
      * @return self
      */
     public function setSellerAssignedID(?\horstoeko\orderx\entities\comfort\udt\IDType $sellerAssignedID = null)
@@ -179,7 +179,7 @@ class TradeProductType
      *
      * Buyer Assigned ID
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\IDType $buyerAssignedID
+     * @param  \horstoeko\orderx\entities\comfort\udt\IDType $buyerAssignedID
      * @return self
      */
     public function setBuyerAssignedID(?\horstoeko\orderx\entities\comfort\udt\IDType $buyerAssignedID = null)
@@ -205,7 +205,7 @@ class TradeProductType
      *
      * Name
      *
-     * @param string $name
+     * @param  string $name
      * @return self
      */
     public function setName($name)
@@ -231,7 +231,7 @@ class TradeProductType
      *
      * Description
      *
-     * @param string $description
+     * @param  string $description
      * @return self
      */
     public function setDescription($description)
@@ -257,7 +257,7 @@ class TradeProductType
      *
      * Batch ID
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\IDType $batchID
+     * @param  \horstoeko\orderx\entities\comfort\udt\IDType $batchID
      * @return self
      */
     public function setBatchID(?\horstoeko\orderx\entities\comfort\udt\IDType $batchID = null)
@@ -283,7 +283,7 @@ class TradeProductType
      *
      * Brand Name
      *
-     * @param string $brandName
+     * @param  string $brandName
      * @return self
      */
     public function setBrandName($brandName)
@@ -298,7 +298,7 @@ class TradeProductType
      * Characteristic
      *
      * @return self
-     * @param \horstoeko\orderx\entities\comfort\ram\ProductCharacteristicType $applicableProductCharacteristic
+     * @param  \horstoeko\orderx\entities\comfort\ram\ProductCharacteristicType $applicableProductCharacteristic
      */
     public function addToApplicableProductCharacteristic(\horstoeko\orderx\entities\comfort\ram\ProductCharacteristicType $applicableProductCharacteristic)
     {
@@ -311,7 +311,7 @@ class TradeProductType
      *
      * Characteristic
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetApplicableProductCharacteristic($index)
@@ -324,7 +324,7 @@ class TradeProductType
      *
      * Characteristic
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetApplicableProductCharacteristic($index)
@@ -349,7 +349,7 @@ class TradeProductType
      *
      * Characteristic
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\ProductCharacteristicType[] $applicableProductCharacteristic
+     * @param  \horstoeko\orderx\entities\comfort\ram\ProductCharacteristicType[] $applicableProductCharacteristic
      * @return self
      */
     public function setApplicableProductCharacteristic(array $applicableProductCharacteristic = null)
@@ -364,7 +364,7 @@ class TradeProductType
      * Classification
      *
      * @return self
-     * @param \horstoeko\orderx\entities\comfort\ram\ProductClassificationType $designatedProductClassification
+     * @param  \horstoeko\orderx\entities\comfort\ram\ProductClassificationType $designatedProductClassification
      */
     public function addToDesignatedProductClassification(\horstoeko\orderx\entities\comfort\ram\ProductClassificationType $designatedProductClassification)
     {
@@ -377,7 +377,7 @@ class TradeProductType
      *
      * Classification
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetDesignatedProductClassification($index)
@@ -390,7 +390,7 @@ class TradeProductType
      *
      * Classification
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetDesignatedProductClassification($index)
@@ -415,7 +415,7 @@ class TradeProductType
      *
      * Classification
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\ProductClassificationType[] $designatedProductClassification
+     * @param  \horstoeko\orderx\entities\comfort\ram\ProductClassificationType[] $designatedProductClassification
      * @return self
      */
     public function setDesignatedProductClassification(array $designatedProductClassification = null)
@@ -430,7 +430,7 @@ class TradeProductType
      * Individual Product Instance
      *
      * @return self
-     * @param \horstoeko\orderx\entities\comfort\ram\TradeProductInstanceType $individualTradeProductInstance
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradeProductInstanceType $individualTradeProductInstance
      */
     public function addToIndividualTradeProductInstance(\horstoeko\orderx\entities\comfort\ram\TradeProductInstanceType $individualTradeProductInstance)
     {
@@ -443,7 +443,7 @@ class TradeProductType
      *
      * Individual Product Instance
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetIndividualTradeProductInstance($index)
@@ -456,7 +456,7 @@ class TradeProductType
      *
      * Individual Product Instance
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetIndividualTradeProductInstance($index)
@@ -481,7 +481,7 @@ class TradeProductType
      *
      * Individual Product Instance
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\TradeProductInstanceType[] $individualTradeProductInstance
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradeProductInstanceType[] $individualTradeProductInstance
      * @return self
      */
     public function setIndividualTradeProductInstance(array $individualTradeProductInstance = null)
@@ -507,7 +507,7 @@ class TradeProductType
      *
      * Packaging
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\SupplyChainPackagingType $applicableSupplyChainPackaging
+     * @param  \horstoeko\orderx\entities\comfort\ram\SupplyChainPackagingType $applicableSupplyChainPackaging
      * @return self
      */
     public function setApplicableSupplyChainPackaging(?\horstoeko\orderx\entities\comfort\ram\SupplyChainPackagingType $applicableSupplyChainPackaging = null)
@@ -533,7 +533,7 @@ class TradeProductType
      *
      * Origin Country
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\TradeCountryType $originTradeCountry
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradeCountryType $originTradeCountry
      * @return self
      */
     public function setOriginTradeCountry(?\horstoeko\orderx\entities\comfort\ram\TradeCountryType $originTradeCountry = null)
@@ -548,7 +548,7 @@ class TradeProductType
      * Additional Document
      *
      * @return self
-     * @param \horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $additionalReferenceReferencedDocument
+     * @param  \horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $additionalReferenceReferencedDocument
      */
     public function addToAdditionalReferenceReferencedDocument(\horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $additionalReferenceReferencedDocument)
     {
@@ -561,7 +561,7 @@ class TradeProductType
      *
      * Additional Document
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetAdditionalReferenceReferencedDocument($index)
@@ -574,7 +574,7 @@ class TradeProductType
      *
      * Additional Document
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetAdditionalReferenceReferencedDocument($index)
@@ -599,7 +599,7 @@ class TradeProductType
      *
      * Additional Document
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType[] $additionalReferenceReferencedDocument
+     * @param  \horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType[] $additionalReferenceReferencedDocument
      * @return self
      */
     public function setAdditionalReferenceReferencedDocument(array $additionalReferenceReferencedDocument = null)
@@ -607,7 +607,4 @@ class TradeProductType
         $this->additionalReferenceReferencedDocument = $additionalReferenceReferencedDocument;
         return $this;
     }
-
-
 }
-

@@ -42,7 +42,7 @@ class SpecifiedPeriodType
      *
      * Start Date Time
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\DateTimeType $startDateTime
+     * @param  \horstoeko\orderx\entities\comfort\udt\DateTimeType $startDateTime
      * @return self
      */
     public function setStartDateTime(?\horstoeko\orderx\entities\comfort\udt\DateTimeType $startDateTime = null)
@@ -68,7 +68,7 @@ class SpecifiedPeriodType
      *
      * End Date Time
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\DateTimeType $endDateTime
+     * @param  \horstoeko\orderx\entities\comfort\udt\DateTimeType $endDateTime
      * @return self
      */
     public function setEndDateTime(?\horstoeko\orderx\entities\comfort\udt\DateTimeType $endDateTime = null)
@@ -76,7 +76,4 @@ class SpecifiedPeriodType
         $this->endDateTime = $endDateTime;
         return $this;
     }
-
-
 }
-

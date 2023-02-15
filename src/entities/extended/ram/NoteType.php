@@ -51,7 +51,7 @@ class NoteType
      *
      * Content Code
      *
-     * @param \horstoeko\orderx\entities\extended\udt\CodeType $contentCode
+     * @param  \horstoeko\orderx\entities\extended\udt\CodeType $contentCode
      * @return self
      */
     public function setContentCode(?\horstoeko\orderx\entities\extended\udt\CodeType $contentCode = null)
@@ -66,7 +66,7 @@ class NoteType
      * Content Text
      *
      * @return self
-     * @param string $content
+     * @param  string $content
      */
     public function addToContent($content)
     {
@@ -79,7 +79,7 @@ class NoteType
      *
      * Content Text
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetContent($index)
@@ -92,7 +92,7 @@ class NoteType
      *
      * Content Text
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetContent($index)
@@ -117,7 +117,7 @@ class NoteType
      *
      * Content Text
      *
-     * @param string $content
+     * @param  string $content
      * @return self
      */
     public function setContent(array $content)
@@ -143,7 +143,7 @@ class NoteType
      *
      * Subject Code
      *
-     * @param \horstoeko\orderx\entities\extended\udt\CodeType $subjectCode
+     * @param  \horstoeko\orderx\entities\extended\udt\CodeType $subjectCode
      * @return self
      */
     public function setSubjectCode(?\horstoeko\orderx\entities\extended\udt\CodeType $subjectCode = null)
@@ -151,7 +151,4 @@ class NoteType
         $this->subjectCode = $subjectCode;
         return $this;
     }
-
-
 }
-

@@ -49,7 +49,7 @@ class SupplyChainEventType
      *
      * Occurrence Date Time
      *
-     * @param \horstoeko\orderx\entities\extended\udt\DateTimeType $occurrenceDateTime
+     * @param  \horstoeko\orderx\entities\extended\udt\DateTimeType $occurrenceDateTime
      * @return self
      */
     public function setOccurrenceDateTime(?\horstoeko\orderx\entities\extended\udt\DateTimeType $occurrenceDateTime = null)
@@ -75,7 +75,7 @@ class SupplyChainEventType
      *
      * Unit Quantity
      *
-     * @param \horstoeko\orderx\entities\extended\udt\QuantityType $unitQuantity
+     * @param  \horstoeko\orderx\entities\extended\udt\QuantityType $unitQuantity
      * @return self
      */
     public function setUnitQuantity(?\horstoeko\orderx\entities\extended\udt\QuantityType $unitQuantity = null)
@@ -101,7 +101,7 @@ class SupplyChainEventType
      *
      * Occurrence Period
      *
-     * @param \horstoeko\orderx\entities\extended\ram\SpecifiedPeriodType $occurrenceSpecifiedPeriod
+     * @param  \horstoeko\orderx\entities\extended\ram\SpecifiedPeriodType $occurrenceSpecifiedPeriod
      * @return self
      */
     public function setOccurrenceSpecifiedPeriod(?\horstoeko\orderx\entities\extended\ram\SpecifiedPeriodType $occurrenceSpecifiedPeriod = null)
@@ -109,7 +109,4 @@ class SupplyChainEventType
         $this->occurrenceSpecifiedPeriod = $occurrenceSpecifiedPeriod;
         return $this;
     }
-
-
 }
-

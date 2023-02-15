@@ -35,7 +35,7 @@ class TradeSettlementLineMonetarySummationType
      *
      * Line Total Amount
      *
-     * @param \horstoeko\orderx\entities\basic\udt\AmountType $lineTotalAmount
+     * @param  \horstoeko\orderx\entities\basic\udt\AmountType $lineTotalAmount
      * @return self
      */
     public function setLineTotalAmount(\horstoeko\orderx\entities\basic\udt\AmountType $lineTotalAmount)
@@ -43,7 +43,4 @@ class TradeSettlementLineMonetarySummationType
         $this->lineTotalAmount = $lineTotalAmount;
         return $this;
     }
-
-
 }
-

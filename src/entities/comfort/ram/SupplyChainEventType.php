@@ -42,7 +42,7 @@ class SupplyChainEventType
      *
      * Occurrence Date Time
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\DateTimeType $occurrenceDateTime
+     * @param  \horstoeko\orderx\entities\comfort\udt\DateTimeType $occurrenceDateTime
      * @return self
      */
     public function setOccurrenceDateTime(?\horstoeko\orderx\entities\comfort\udt\DateTimeType $occurrenceDateTime = null)
@@ -68,7 +68,7 @@ class SupplyChainEventType
      *
      * Occurrence Period
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\SpecifiedPeriodType $occurrenceSpecifiedPeriod
+     * @param  \horstoeko\orderx\entities\comfort\ram\SpecifiedPeriodType $occurrenceSpecifiedPeriod
      * @return self
      */
     public function setOccurrenceSpecifiedPeriod(?\horstoeko\orderx\entities\comfort\ram\SpecifiedPeriodType $occurrenceSpecifiedPeriod = null)
@@ -76,7 +76,4 @@ class SupplyChainEventType
         $this->occurrenceSpecifiedPeriod = $occurrenceSpecifiedPeriod;
         return $this;
     }
-
-
 }
-

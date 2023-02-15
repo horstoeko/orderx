@@ -5,7 +5,6 @@ namespace horstoeko\orderx\entities\extended\qdt;
 /**
  * Class representing DeliveryTermsFunctionCodeType
  *
- *
  * XSD Type: DeliveryTermsFunctionCodeType
  */
 class DeliveryTermsFunctionCodeType
@@ -29,7 +28,7 @@ class DeliveryTermsFunctionCodeType
     /**
      * Gets or sets the inner value
      *
-     * @param string $value
+     * @param  string $value
      * @return string
      */
     public function value()
@@ -49,7 +48,4 @@ class DeliveryTermsFunctionCodeType
     {
         return strval($this->__value);
     }
-
-
 }
-

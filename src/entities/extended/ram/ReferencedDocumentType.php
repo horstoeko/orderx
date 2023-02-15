@@ -84,7 +84,7 @@ class ReferencedDocumentType
      *
      * Issuer Assigned ID
      *
-     * @param \horstoeko\orderx\entities\extended\udt\IDType $issuerAssignedID
+     * @param  \horstoeko\orderx\entities\extended\udt\IDType $issuerAssignedID
      * @return self
      */
     public function setIssuerAssignedID(?\horstoeko\orderx\entities\extended\udt\IDType $issuerAssignedID = null)
@@ -110,7 +110,7 @@ class ReferencedDocumentType
      *
      * URI
      *
-     * @param \horstoeko\orderx\entities\extended\udt\IDType $uRIID
+     * @param  \horstoeko\orderx\entities\extended\udt\IDType $uRIID
      * @return self
      */
     public function setURIID(?\horstoeko\orderx\entities\extended\udt\IDType $uRIID = null)
@@ -136,7 +136,7 @@ class ReferencedDocumentType
      *
      * Line ID
      *
-     * @param \horstoeko\orderx\entities\extended\udt\IDType $lineID
+     * @param  \horstoeko\orderx\entities\extended\udt\IDType $lineID
      * @return self
      */
     public function setLineID(?\horstoeko\orderx\entities\extended\udt\IDType $lineID = null)
@@ -162,7 +162,7 @@ class ReferencedDocumentType
      *
      * Type Code
      *
-     * @param string $typeCode
+     * @param  string $typeCode
      * @return self
      */
     public function setTypeCode($typeCode)
@@ -188,7 +188,7 @@ class ReferencedDocumentType
      *
      * Name
      *
-     * @param string $name
+     * @param  string $name
      * @return self
      */
     public function setName($name)
@@ -214,7 +214,7 @@ class ReferencedDocumentType
      *
      * Attached Binary Object
      *
-     * @param \horstoeko\orderx\entities\extended\udt\BinaryObjectType $attachmentBinaryObject
+     * @param  \horstoeko\orderx\entities\extended\udt\BinaryObjectType $attachmentBinaryObject
      * @return self
      */
     public function setAttachmentBinaryObject(?\horstoeko\orderx\entities\extended\udt\BinaryObjectType $attachmentBinaryObject = null)
@@ -240,7 +240,7 @@ class ReferencedDocumentType
      *
      * Reference Type Code
      *
-     * @param string $referenceTypeCode
+     * @param  string $referenceTypeCode
      * @return self
      */
     public function setReferenceTypeCode($referenceTypeCode)
@@ -266,7 +266,7 @@ class ReferencedDocumentType
      *
      * Formatted Issue Date Time
      *
-     * @param \horstoeko\orderx\entities\extended\qdt\FormattedDateTimeType $formattedIssueDateTime
+     * @param  \horstoeko\orderx\entities\extended\qdt\FormattedDateTimeType $formattedIssueDateTime
      * @return self
      */
     public function setFormattedIssueDateTime(?\horstoeko\orderx\entities\extended\qdt\FormattedDateTimeType $formattedIssueDateTime = null)
@@ -274,7 +274,4 @@ class ReferencedDocumentType
         $this->formattedIssueDateTime = $formattedIssueDateTime;
         return $this;
     }
-
-
 }
-

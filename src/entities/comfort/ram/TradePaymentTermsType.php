@@ -35,7 +35,7 @@ class TradePaymentTermsType
      *
      * Description
      *
-     * @param string $description
+     * @param  string $description
      * @return self
      */
     public function setDescription($description)
@@ -43,7 +43,4 @@ class TradePaymentTermsType
         $this->description = $description;
         return $this;
     }
-
-
 }
-

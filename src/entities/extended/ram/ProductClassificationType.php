@@ -42,7 +42,7 @@ class ProductClassificationType
      *
      * Class Code
      *
-     * @param \horstoeko\orderx\entities\extended\udt\CodeType $classCode
+     * @param  \horstoeko\orderx\entities\extended\udt\CodeType $classCode
      * @return self
      */
     public function setClassCode(\horstoeko\orderx\entities\extended\udt\CodeType $classCode)
@@ -68,7 +68,7 @@ class ProductClassificationType
      *
      * Class Name
      *
-     * @param string $className
+     * @param  string $className
      * @return self
      */
     public function setClassName($className)
@@ -76,7 +76,4 @@ class ProductClassificationType
         $this->className = $className;
         return $this;
     }
-
-
 }
-

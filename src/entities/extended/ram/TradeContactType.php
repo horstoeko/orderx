@@ -70,7 +70,7 @@ class TradeContactType
      *
      * Person Name
      *
-     * @param string $personName
+     * @param  string $personName
      * @return self
      */
     public function setPersonName($personName)
@@ -96,7 +96,7 @@ class TradeContactType
      *
      * Department Name
      *
-     * @param string $departmentName
+     * @param  string $departmentName
      * @return self
      */
     public function setDepartmentName($departmentName)
@@ -122,7 +122,7 @@ class TradeContactType
      *
      * Type Code
      *
-     * @param string $typeCode
+     * @param  string $typeCode
      * @return self
      */
     public function setTypeCode($typeCode)
@@ -148,7 +148,7 @@ class TradeContactType
      *
      * Telephone
      *
-     * @param \horstoeko\orderx\entities\extended\ram\UniversalCommunicationType $telephoneUniversalCommunication
+     * @param  \horstoeko\orderx\entities\extended\ram\UniversalCommunicationType $telephoneUniversalCommunication
      * @return self
      */
     public function setTelephoneUniversalCommunication(?\horstoeko\orderx\entities\extended\ram\UniversalCommunicationType $telephoneUniversalCommunication = null)
@@ -174,7 +174,7 @@ class TradeContactType
      *
      * Fax
      *
-     * @param \horstoeko\orderx\entities\extended\ram\UniversalCommunicationType $faxUniversalCommunication
+     * @param  \horstoeko\orderx\entities\extended\ram\UniversalCommunicationType $faxUniversalCommunication
      * @return self
      */
     public function setFaxUniversalCommunication(?\horstoeko\orderx\entities\extended\ram\UniversalCommunicationType $faxUniversalCommunication = null)
@@ -200,7 +200,7 @@ class TradeContactType
      *
      * Email Address
      *
-     * @param \horstoeko\orderx\entities\extended\ram\UniversalCommunicationType $emailURIUniversalCommunication
+     * @param  \horstoeko\orderx\entities\extended\ram\UniversalCommunicationType $emailURIUniversalCommunication
      * @return self
      */
     public function setEmailURIUniversalCommunication(?\horstoeko\orderx\entities\extended\ram\UniversalCommunicationType $emailURIUniversalCommunication = null)
@@ -208,7 +208,4 @@ class TradeContactType
         $this->emailURIUniversalCommunication = $emailURIUniversalCommunication;
         return $this;
     }
-
-
 }
-

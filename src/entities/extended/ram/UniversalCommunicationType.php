@@ -42,7 +42,7 @@ class UniversalCommunicationType
      *
      * URI
      *
-     * @param \horstoeko\orderx\entities\extended\udt\IDType $uRIID
+     * @param  \horstoeko\orderx\entities\extended\udt\IDType $uRIID
      * @return self
      */
     public function setURIID(?\horstoeko\orderx\entities\extended\udt\IDType $uRIID = null)
@@ -68,7 +68,7 @@ class UniversalCommunicationType
      *
      * Complete Number
      *
-     * @param string $completeNumber
+     * @param  string $completeNumber
      * @return self
      */
     public function setCompleteNumber($completeNumber)
@@ -76,7 +76,4 @@ class UniversalCommunicationType
         $this->completeNumber = $completeNumber;
         return $this;
     }
-
-
 }
-

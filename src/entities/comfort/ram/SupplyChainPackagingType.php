@@ -42,7 +42,7 @@ class SupplyChainPackagingType
      *
      * Type Code
      *
-     * @param string $typeCode
+     * @param  string $typeCode
      * @return self
      */
     public function setTypeCode($typeCode)
@@ -68,7 +68,7 @@ class SupplyChainPackagingType
      *
      * Dimensions
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\SpatialDimensionType $linearSpatialDimension
+     * @param  \horstoeko\orderx\entities\comfort\ram\SpatialDimensionType $linearSpatialDimension
      * @return self
      */
     public function setLinearSpatialDimension(?\horstoeko\orderx\entities\comfort\ram\SpatialDimensionType $linearSpatialDimension = null)
@@ -76,7 +76,4 @@ class SupplyChainPackagingType
         $this->linearSpatialDimension = $linearSpatialDimension;
         return $this;
     }
-
-
 }
-

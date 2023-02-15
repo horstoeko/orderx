@@ -35,7 +35,7 @@ class DocumentContextParameterType
      *
      * ID
      *
-     * @param \horstoeko\orderx\entities\basic\udt\IDType $iD
+     * @param  \horstoeko\orderx\entities\basic\udt\IDType $iD
      * @return self
      */
     public function setID(\horstoeko\orderx\entities\basic\udt\IDType $iD)
@@ -43,7 +43,4 @@ class DocumentContextParameterType
         $this->iD = $iD;
         return $this;
     }
-
-
 }
-

@@ -56,7 +56,7 @@ class TradeDeliveryTermsType
      *
      * Code
      *
-     * @param string $deliveryTypeCode
+     * @param  string $deliveryTypeCode
      * @return self
      */
     public function setDeliveryTypeCode($deliveryTypeCode)
@@ -82,7 +82,7 @@ class TradeDeliveryTermsType
      *
      * Description
      *
-     * @param string $description
+     * @param  string $description
      * @return self
      */
     public function setDescription($description)
@@ -108,7 +108,7 @@ class TradeDeliveryTermsType
      *
      * Function Code
      *
-     * @param string $functionCode
+     * @param  string $functionCode
      * @return self
      */
     public function setFunctionCode($functionCode)
@@ -134,7 +134,7 @@ class TradeDeliveryTermsType
      *
      * Relevant Location
      *
-     * @param \horstoeko\orderx\entities\extended\ram\TradeLocationType $relevantTradeLocation
+     * @param  \horstoeko\orderx\entities\extended\ram\TradeLocationType $relevantTradeLocation
      * @return self
      */
     public function setRelevantTradeLocation(?\horstoeko\orderx\entities\extended\ram\TradeLocationType $relevantTradeLocation = null)
@@ -142,7 +142,4 @@ class TradeDeliveryTermsType
         $this->relevantTradeLocation = $relevantTradeLocation;
         return $this;
     }
-
-
 }
-

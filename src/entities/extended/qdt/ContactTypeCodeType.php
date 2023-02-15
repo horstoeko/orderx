@@ -5,7 +5,6 @@ namespace horstoeko\orderx\entities\extended\qdt;
 /**
  * Class representing ContactTypeCodeType
  *
- *
  * XSD Type: ContactTypeCodeType
  */
 class ContactTypeCodeType
@@ -29,7 +28,7 @@ class ContactTypeCodeType
     /**
      * Gets or sets the inner value
      *
-     * @param string $value
+     * @param  string $value
      * @return string
      */
     public function value()
@@ -49,7 +48,4 @@ class ContactTypeCodeType
     {
         return strval($this->__value);
     }
-
-
 }
-

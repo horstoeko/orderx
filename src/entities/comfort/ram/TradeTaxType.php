@@ -49,7 +49,7 @@ class TradeTaxType
      *
      * Type Code
      *
-     * @param string $typeCode
+     * @param  string $typeCode
      * @return self
      */
     public function setTypeCode($typeCode)
@@ -75,7 +75,7 @@ class TradeTaxType
      *
      * Category Code
      *
-     * @param string $categoryCode
+     * @param  string $categoryCode
      * @return self
      */
     public function setCategoryCode($categoryCode)
@@ -101,7 +101,7 @@ class TradeTaxType
      *
      * Applicable Rate Percent
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\PercentType $rateApplicablePercent
+     * @param  \horstoeko\orderx\entities\comfort\udt\PercentType $rateApplicablePercent
      * @return self
      */
     public function setRateApplicablePercent($rateApplicablePercent)
@@ -109,7 +109,4 @@ class TradeTaxType
         $this->rateApplicablePercent = $rateApplicablePercent;
         return $this;
     }
-
-
 }
-

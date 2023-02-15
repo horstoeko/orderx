@@ -166,7 +166,7 @@ class TradeProductType
      *
      * ID
      *
-     * @param \horstoeko\orderx\entities\extended\udt\IDType $iD
+     * @param  \horstoeko\orderx\entities\extended\udt\IDType $iD
      * @return self
      */
     public function setID(?\horstoeko\orderx\entities\extended\udt\IDType $iD = null)
@@ -181,7 +181,7 @@ class TradeProductType
      * Global ID
      *
      * @return self
-     * @param \horstoeko\orderx\entities\extended\udt\IDType $globalID
+     * @param  \horstoeko\orderx\entities\extended\udt\IDType $globalID
      */
     public function addToGlobalID(\horstoeko\orderx\entities\extended\udt\IDType $globalID)
     {
@@ -194,7 +194,7 @@ class TradeProductType
      *
      * Global ID
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetGlobalID($index)
@@ -207,7 +207,7 @@ class TradeProductType
      *
      * Global ID
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetGlobalID($index)
@@ -232,7 +232,7 @@ class TradeProductType
      *
      * Global ID
      *
-     * @param \horstoeko\orderx\entities\extended\udt\IDType[] $globalID
+     * @param  \horstoeko\orderx\entities\extended\udt\IDType[] $globalID
      * @return self
      */
     public function setGlobalID(array $globalID = null)
@@ -258,7 +258,7 @@ class TradeProductType
      *
      * Seller Assigned ID
      *
-     * @param \horstoeko\orderx\entities\extended\udt\IDType $sellerAssignedID
+     * @param  \horstoeko\orderx\entities\extended\udt\IDType $sellerAssignedID
      * @return self
      */
     public function setSellerAssignedID(?\horstoeko\orderx\entities\extended\udt\IDType $sellerAssignedID = null)
@@ -284,7 +284,7 @@ class TradeProductType
      *
      * Buyer Assigned ID
      *
-     * @param \horstoeko\orderx\entities\extended\udt\IDType $buyerAssignedID
+     * @param  \horstoeko\orderx\entities\extended\udt\IDType $buyerAssignedID
      * @return self
      */
     public function setBuyerAssignedID(?\horstoeko\orderx\entities\extended\udt\IDType $buyerAssignedID = null)
@@ -310,7 +310,7 @@ class TradeProductType
      *
      * Industry Assigned ID
      *
-     * @param \horstoeko\orderx\entities\extended\udt\IDType $industryAssignedID
+     * @param  \horstoeko\orderx\entities\extended\udt\IDType $industryAssignedID
      * @return self
      */
     public function setIndustryAssignedID(?\horstoeko\orderx\entities\extended\udt\IDType $industryAssignedID = null)
@@ -336,7 +336,7 @@ class TradeProductType
      *
      * Model ID
      *
-     * @param \horstoeko\orderx\entities\extended\udt\IDType $modelID
+     * @param  \horstoeko\orderx\entities\extended\udt\IDType $modelID
      * @return self
      */
     public function setModelID(?\horstoeko\orderx\entities\extended\udt\IDType $modelID = null)
@@ -362,7 +362,7 @@ class TradeProductType
      *
      * Name
      *
-     * @param string $name
+     * @param  string $name
      * @return self
      */
     public function setName($name)
@@ -388,7 +388,7 @@ class TradeProductType
      *
      * Description
      *
-     * @param string $description
+     * @param  string $description
      * @return self
      */
     public function setDescription($description)
@@ -414,7 +414,7 @@ class TradeProductType
      *
      * Batch ID
      *
-     * @param \horstoeko\orderx\entities\extended\udt\IDType $batchID
+     * @param  \horstoeko\orderx\entities\extended\udt\IDType $batchID
      * @return self
      */
     public function setBatchID(?\horstoeko\orderx\entities\extended\udt\IDType $batchID = null)
@@ -440,7 +440,7 @@ class TradeProductType
      *
      * Brand Name
      *
-     * @param string $brandName
+     * @param  string $brandName
      * @return self
      */
     public function setBrandName($brandName)
@@ -466,7 +466,7 @@ class TradeProductType
      *
      * Model Name
      *
-     * @param string $modelName
+     * @param  string $modelName
      * @return self
      */
     public function setModelName($modelName)
@@ -481,7 +481,7 @@ class TradeProductType
      * Characteristic
      *
      * @return self
-     * @param \horstoeko\orderx\entities\extended\ram\ProductCharacteristicType $applicableProductCharacteristic
+     * @param  \horstoeko\orderx\entities\extended\ram\ProductCharacteristicType $applicableProductCharacteristic
      */
     public function addToApplicableProductCharacteristic(\horstoeko\orderx\entities\extended\ram\ProductCharacteristicType $applicableProductCharacteristic)
     {
@@ -494,7 +494,7 @@ class TradeProductType
      *
      * Characteristic
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetApplicableProductCharacteristic($index)
@@ -507,7 +507,7 @@ class TradeProductType
      *
      * Characteristic
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetApplicableProductCharacteristic($index)
@@ -532,7 +532,7 @@ class TradeProductType
      *
      * Characteristic
      *
-     * @param \horstoeko\orderx\entities\extended\ram\ProductCharacteristicType[] $applicableProductCharacteristic
+     * @param  \horstoeko\orderx\entities\extended\ram\ProductCharacteristicType[] $applicableProductCharacteristic
      * @return self
      */
     public function setApplicableProductCharacteristic(array $applicableProductCharacteristic = null)
@@ -547,7 +547,7 @@ class TradeProductType
      * Classification
      *
      * @return self
-     * @param \horstoeko\orderx\entities\extended\ram\ProductClassificationType $designatedProductClassification
+     * @param  \horstoeko\orderx\entities\extended\ram\ProductClassificationType $designatedProductClassification
      */
     public function addToDesignatedProductClassification(\horstoeko\orderx\entities\extended\ram\ProductClassificationType $designatedProductClassification)
     {
@@ -560,7 +560,7 @@ class TradeProductType
      *
      * Classification
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetDesignatedProductClassification($index)
@@ -573,7 +573,7 @@ class TradeProductType
      *
      * Classification
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetDesignatedProductClassification($index)
@@ -598,7 +598,7 @@ class TradeProductType
      *
      * Classification
      *
-     * @param \horstoeko\orderx\entities\extended\ram\ProductClassificationType[] $designatedProductClassification
+     * @param  \horstoeko\orderx\entities\extended\ram\ProductClassificationType[] $designatedProductClassification
      * @return self
      */
     public function setDesignatedProductClassification(array $designatedProductClassification = null)
@@ -613,7 +613,7 @@ class TradeProductType
      * Individual Product Instance
      *
      * @return self
-     * @param \horstoeko\orderx\entities\extended\ram\TradeProductInstanceType $individualTradeProductInstance
+     * @param  \horstoeko\orderx\entities\extended\ram\TradeProductInstanceType $individualTradeProductInstance
      */
     public function addToIndividualTradeProductInstance(\horstoeko\orderx\entities\extended\ram\TradeProductInstanceType $individualTradeProductInstance)
     {
@@ -626,7 +626,7 @@ class TradeProductType
      *
      * Individual Product Instance
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetIndividualTradeProductInstance($index)
@@ -639,7 +639,7 @@ class TradeProductType
      *
      * Individual Product Instance
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetIndividualTradeProductInstance($index)
@@ -664,7 +664,7 @@ class TradeProductType
      *
      * Individual Product Instance
      *
-     * @param \horstoeko\orderx\entities\extended\ram\TradeProductInstanceType[] $individualTradeProductInstance
+     * @param  \horstoeko\orderx\entities\extended\ram\TradeProductInstanceType[] $individualTradeProductInstance
      * @return self
      */
     public function setIndividualTradeProductInstance(array $individualTradeProductInstance = null)
@@ -690,7 +690,7 @@ class TradeProductType
      *
      * Packaging
      *
-     * @param \horstoeko\orderx\entities\extended\ram\SupplyChainPackagingType $applicableSupplyChainPackaging
+     * @param  \horstoeko\orderx\entities\extended\ram\SupplyChainPackagingType $applicableSupplyChainPackaging
      * @return self
      */
     public function setApplicableSupplyChainPackaging(?\horstoeko\orderx\entities\extended\ram\SupplyChainPackagingType $applicableSupplyChainPackaging = null)
@@ -716,7 +716,7 @@ class TradeProductType
      *
      * Origin Country
      *
-     * @param \horstoeko\orderx\entities\extended\ram\TradeCountryType $originTradeCountry
+     * @param  \horstoeko\orderx\entities\extended\ram\TradeCountryType $originTradeCountry
      * @return self
      */
     public function setOriginTradeCountry(?\horstoeko\orderx\entities\extended\ram\TradeCountryType $originTradeCountry = null)
@@ -731,7 +731,7 @@ class TradeProductType
      * Additional Document
      *
      * @return self
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $additionalReferenceReferencedDocument
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $additionalReferenceReferencedDocument
      */
     public function addToAdditionalReferenceReferencedDocument(\horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $additionalReferenceReferencedDocument)
     {
@@ -744,7 +744,7 @@ class TradeProductType
      *
      * Additional Document
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetAdditionalReferenceReferencedDocument($index)
@@ -757,7 +757,7 @@ class TradeProductType
      *
      * Additional Document
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetAdditionalReferenceReferencedDocument($index)
@@ -782,7 +782,7 @@ class TradeProductType
      *
      * Additional Document
      *
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType[] $additionalReferenceReferencedDocument
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType[] $additionalReferenceReferencedDocument
      * @return self
      */
     public function setAdditionalReferenceReferencedDocument(array $additionalReferenceReferencedDocument = null)
@@ -797,7 +797,7 @@ class TradeProductType
      * Included Product
      *
      * @return self
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedProductType $includedReferencedProduct
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedProductType $includedReferencedProduct
      */
     public function addToIncludedReferencedProduct(\horstoeko\orderx\entities\extended\ram\ReferencedProductType $includedReferencedProduct)
     {
@@ -810,7 +810,7 @@ class TradeProductType
      *
      * Included Product
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetIncludedReferencedProduct($index)
@@ -823,7 +823,7 @@ class TradeProductType
      *
      * Included Product
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetIncludedReferencedProduct($index)
@@ -848,7 +848,7 @@ class TradeProductType
      *
      * Included Product
      *
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedProductType[] $includedReferencedProduct
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedProductType[] $includedReferencedProduct
      * @return self
      */
     public function setIncludedReferencedProduct(array $includedReferencedProduct = null)
@@ -856,7 +856,4 @@ class TradeProductType
         $this->includedReferencedProduct = $includedReferencedProduct;
         return $this;
     }
-
-
 }
-

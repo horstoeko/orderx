@@ -72,7 +72,7 @@ class ReferencedProductType
      *
      * ID
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\IDType $iD
+     * @param  \horstoeko\orderx\entities\comfort\udt\IDType $iD
      * @return self
      */
     public function setID(?\horstoeko\orderx\entities\comfort\udt\IDType $iD = null)
@@ -87,7 +87,7 @@ class ReferencedProductType
      * Global ID
      *
      * @return self
-     * @param \horstoeko\orderx\entities\comfort\udt\IDType $globalID
+     * @param  \horstoeko\orderx\entities\comfort\udt\IDType $globalID
      */
     public function addToGlobalID(\horstoeko\orderx\entities\comfort\udt\IDType $globalID)
     {
@@ -100,7 +100,7 @@ class ReferencedProductType
      *
      * Global ID
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetGlobalID($index)
@@ -113,7 +113,7 @@ class ReferencedProductType
      *
      * Global ID
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetGlobalID($index)
@@ -138,7 +138,7 @@ class ReferencedProductType
      *
      * Global ID
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\IDType[] $globalID
+     * @param  \horstoeko\orderx\entities\comfort\udt\IDType[] $globalID
      * @return self
      */
     public function setGlobalID(array $globalID = null)
@@ -164,7 +164,7 @@ class ReferencedProductType
      *
      * Seller Assigned ID
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\IDType $sellerAssignedID
+     * @param  \horstoeko\orderx\entities\comfort\udt\IDType $sellerAssignedID
      * @return self
      */
     public function setSellerAssignedID(?\horstoeko\orderx\entities\comfort\udt\IDType $sellerAssignedID = null)
@@ -190,7 +190,7 @@ class ReferencedProductType
      *
      * Buyer Assigned ID
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\IDType $buyerAssignedID
+     * @param  \horstoeko\orderx\entities\comfort\udt\IDType $buyerAssignedID
      * @return self
      */
     public function setBuyerAssignedID(?\horstoeko\orderx\entities\comfort\udt\IDType $buyerAssignedID = null)
@@ -216,7 +216,7 @@ class ReferencedProductType
      *
      * Name
      *
-     * @param string $name
+     * @param  string $name
      * @return self
      */
     public function setName($name)
@@ -242,7 +242,7 @@ class ReferencedProductType
      *
      * Description
      *
-     * @param string $description
+     * @param  string $description
      * @return self
      */
     public function setDescription($description)
@@ -250,7 +250,4 @@ class ReferencedProductType
         $this->description = $description;
         return $this;
     }
-
-
 }
-

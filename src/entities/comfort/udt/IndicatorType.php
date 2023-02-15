@@ -5,7 +5,6 @@ namespace horstoeko\orderx\entities\comfort\udt;
 /**
  * Class representing IndicatorType
  *
- *
  * XSD Type: IndicatorType
  */
 class IndicatorType
@@ -34,7 +33,7 @@ class IndicatorType
     /**
      * Sets a new indicatorString
      *
-     * @param string $indicatorString
+     * @param  string $indicatorString
      * @return self
      */
     public function setIndicatorString($indicatorString)
@@ -56,7 +55,7 @@ class IndicatorType
     /**
      * Sets a new indicator
      *
-     * @param bool $indicator
+     * @param  bool $indicator
      * @return self
      */
     public function setIndicator($indicator)
@@ -64,7 +63,4 @@ class IndicatorType
         $this->indicator = $indicator;
         return $this;
     }
-
-
 }
-

@@ -65,7 +65,7 @@ class ReferencedProductType
      *
      * ID
      *
-     * @param \horstoeko\orderx\entities\basic\udt\IDType $iD
+     * @param  \horstoeko\orderx\entities\basic\udt\IDType $iD
      * @return self
      */
     public function setID(?\horstoeko\orderx\entities\basic\udt\IDType $iD = null)
@@ -80,7 +80,7 @@ class ReferencedProductType
      * Global ID
      *
      * @return self
-     * @param \horstoeko\orderx\entities\basic\udt\IDType $globalID
+     * @param  \horstoeko\orderx\entities\basic\udt\IDType $globalID
      */
     public function addToGlobalID(\horstoeko\orderx\entities\basic\udt\IDType $globalID)
     {
@@ -93,7 +93,7 @@ class ReferencedProductType
      *
      * Global ID
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetGlobalID($index)
@@ -106,7 +106,7 @@ class ReferencedProductType
      *
      * Global ID
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetGlobalID($index)
@@ -131,7 +131,7 @@ class ReferencedProductType
      *
      * Global ID
      *
-     * @param \horstoeko\orderx\entities\basic\udt\IDType[] $globalID
+     * @param  \horstoeko\orderx\entities\basic\udt\IDType[] $globalID
      * @return self
      */
     public function setGlobalID(array $globalID = null)
@@ -157,7 +157,7 @@ class ReferencedProductType
      *
      * Seller Assigned ID
      *
-     * @param \horstoeko\orderx\entities\basic\udt\IDType $sellerAssignedID
+     * @param  \horstoeko\orderx\entities\basic\udt\IDType $sellerAssignedID
      * @return self
      */
     public function setSellerAssignedID(?\horstoeko\orderx\entities\basic\udt\IDType $sellerAssignedID = null)
@@ -183,7 +183,7 @@ class ReferencedProductType
      *
      * Buyer Assigned ID
      *
-     * @param \horstoeko\orderx\entities\basic\udt\IDType $buyerAssignedID
+     * @param  \horstoeko\orderx\entities\basic\udt\IDType $buyerAssignedID
      * @return self
      */
     public function setBuyerAssignedID(?\horstoeko\orderx\entities\basic\udt\IDType $buyerAssignedID = null)
@@ -209,7 +209,7 @@ class ReferencedProductType
      *
      * Name
      *
-     * @param string $name
+     * @param  string $name
      * @return self
      */
     public function setName($name)
@@ -217,7 +217,4 @@ class ReferencedProductType
         $this->name = $name;
         return $this;
     }
-
-
 }
-

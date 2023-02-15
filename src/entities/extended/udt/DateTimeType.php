@@ -5,7 +5,6 @@ namespace horstoeko\orderx\entities\extended\udt;
 /**
  * Class representing DateTimeType
  *
- *
  * XSD Type: DateTimeType
  */
 class DateTimeType
@@ -34,7 +33,7 @@ class DateTimeType
     /**
      * Sets a new dateTimeString
      *
-     * @param \horstoeko\orderx\entities\extended\udt\DateTimeType\DateTimeStringAType $dateTimeString
+     * @param  \horstoeko\orderx\entities\extended\udt\DateTimeType\DateTimeStringAType $dateTimeString
      * @return self
      */
     public function setDateTimeString(?\horstoeko\orderx\entities\extended\udt\DateTimeType\DateTimeStringAType $dateTimeString = null)
@@ -56,7 +55,7 @@ class DateTimeType
     /**
      * Sets a new dateTime
      *
-     * @param \DateTime $dateTime
+     * @param  \DateTime $dateTime
      * @return self
      */
     public function setDateTime(?\DateTime $dateTime = null)
@@ -64,7 +63,4 @@ class DateTimeType
         $this->dateTime = $dateTime;
         return $this;
     }
-
-
 }
-

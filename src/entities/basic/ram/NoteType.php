@@ -42,7 +42,7 @@ class NoteType
      *
      * Content Text
      *
-     * @param string $content
+     * @param  string $content
      * @return self
      */
     public function setContent($content)
@@ -68,7 +68,7 @@ class NoteType
      *
      * Subject Code
      *
-     * @param string $subjectCode
+     * @param  string $subjectCode
      * @return self
      */
     public function setSubjectCode($subjectCode)
@@ -76,7 +76,4 @@ class NoteType
         $this->subjectCode = $subjectCode;
         return $this;
     }
-
-
 }
-

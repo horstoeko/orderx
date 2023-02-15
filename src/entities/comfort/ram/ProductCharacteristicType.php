@@ -49,7 +49,7 @@ class ProductCharacteristicType
      *
      * Type Code
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\CodeType $typeCode
+     * @param  \horstoeko\orderx\entities\comfort\udt\CodeType $typeCode
      * @return self
      */
     public function setTypeCode(?\horstoeko\orderx\entities\comfort\udt\CodeType $typeCode = null)
@@ -75,7 +75,7 @@ class ProductCharacteristicType
      *
      * Description
      *
-     * @param string $description
+     * @param  string $description
      * @return self
      */
     public function setDescription($description)
@@ -101,7 +101,7 @@ class ProductCharacteristicType
      *
      * Value Text
      *
-     * @param string $value
+     * @param  string $value
      * @return self
      */
     public function setValue($value)
@@ -109,7 +109,4 @@ class ProductCharacteristicType
         $this->value = $value;
         return $this;
     }
-
-
 }
-

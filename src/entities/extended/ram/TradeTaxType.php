@@ -98,7 +98,7 @@ class TradeTaxType
      *
      * Calculated Amount
      *
-     * @param \horstoeko\orderx\entities\extended\udt\AmountType $calculatedAmount
+     * @param  \horstoeko\orderx\entities\extended\udt\AmountType $calculatedAmount
      * @return self
      */
     public function setCalculatedAmount(?\horstoeko\orderx\entities\extended\udt\AmountType $calculatedAmount = null)
@@ -124,7 +124,7 @@ class TradeTaxType
      *
      * Type Code
      *
-     * @param string $typeCode
+     * @param  string $typeCode
      * @return self
      */
     public function setTypeCode($typeCode)
@@ -150,7 +150,7 @@ class TradeTaxType
      *
      * Exemption Reason Text
      *
-     * @param string $exemptionReason
+     * @param  string $exemptionReason
      * @return self
      */
     public function setExemptionReason($exemptionReason)
@@ -176,7 +176,7 @@ class TradeTaxType
      *
      * Basis Amount
      *
-     * @param \horstoeko\orderx\entities\extended\udt\AmountType $basisAmount
+     * @param  \horstoeko\orderx\entities\extended\udt\AmountType $basisAmount
      * @return self
      */
     public function setBasisAmount(?\horstoeko\orderx\entities\extended\udt\AmountType $basisAmount = null)
@@ -202,7 +202,7 @@ class TradeTaxType
      *
      * Line Total Basis Amount
      *
-     * @param \horstoeko\orderx\entities\extended\udt\AmountType $lineTotalBasisAmount
+     * @param  \horstoeko\orderx\entities\extended\udt\AmountType $lineTotalBasisAmount
      * @return self
      */
     public function setLineTotalBasisAmount(?\horstoeko\orderx\entities\extended\udt\AmountType $lineTotalBasisAmount = null)
@@ -228,7 +228,7 @@ class TradeTaxType
      *
      * Allowance/Charge Basis Amount
      *
-     * @param \horstoeko\orderx\entities\extended\udt\AmountType $allowanceChargeBasisAmount
+     * @param  \horstoeko\orderx\entities\extended\udt\AmountType $allowanceChargeBasisAmount
      * @return self
      */
     public function setAllowanceChargeBasisAmount(?\horstoeko\orderx\entities\extended\udt\AmountType $allowanceChargeBasisAmount = null)
@@ -254,7 +254,7 @@ class TradeTaxType
      *
      * Category Code
      *
-     * @param string $categoryCode
+     * @param  string $categoryCode
      * @return self
      */
     public function setCategoryCode($categoryCode)
@@ -280,7 +280,7 @@ class TradeTaxType
      *
      * Exemption Reason Code
      *
-     * @param \horstoeko\orderx\entities\extended\udt\CodeType $exemptionReasonCode
+     * @param  \horstoeko\orderx\entities\extended\udt\CodeType $exemptionReasonCode
      * @return self
      */
     public function setExemptionReasonCode(?\horstoeko\orderx\entities\extended\udt\CodeType $exemptionReasonCode = null)
@@ -306,7 +306,7 @@ class TradeTaxType
      *
      * Due Date Type Code
      *
-     * @param string $dueDateTypeCode
+     * @param  string $dueDateTypeCode
      * @return self
      */
     public function setDueDateTypeCode($dueDateTypeCode)
@@ -332,7 +332,7 @@ class TradeTaxType
      *
      * Applicable Rate Percent
      *
-     * @param \horstoeko\orderx\entities\extended\udt\PercentType $rateApplicablePercent
+     * @param  \horstoeko\orderx\entities\extended\udt\PercentType $rateApplicablePercent
      * @return self
      */
     public function setRateApplicablePercent($rateApplicablePercent)
@@ -340,7 +340,4 @@ class TradeTaxType
         $this->rateApplicablePercent = $rateApplicablePercent;
         return $this;
     }
-
-
 }
-

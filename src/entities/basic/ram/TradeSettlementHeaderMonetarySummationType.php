@@ -70,7 +70,7 @@ class TradeSettlementHeaderMonetarySummationType
      *
      * Line Total Amount
      *
-     * @param \horstoeko\orderx\entities\basic\udt\AmountType $lineTotalAmount
+     * @param  \horstoeko\orderx\entities\basic\udt\AmountType $lineTotalAmount
      * @return self
      */
     public function setLineTotalAmount(\horstoeko\orderx\entities\basic\udt\AmountType $lineTotalAmount)
@@ -96,7 +96,7 @@ class TradeSettlementHeaderMonetarySummationType
      *
      * Charge Total Amount
      *
-     * @param \horstoeko\orderx\entities\basic\udt\AmountType $chargeTotalAmount
+     * @param  \horstoeko\orderx\entities\basic\udt\AmountType $chargeTotalAmount
      * @return self
      */
     public function setChargeTotalAmount(?\horstoeko\orderx\entities\basic\udt\AmountType $chargeTotalAmount = null)
@@ -122,7 +122,7 @@ class TradeSettlementHeaderMonetarySummationType
      *
      * Allowance Total Amount
      *
-     * @param \horstoeko\orderx\entities\basic\udt\AmountType $allowanceTotalAmount
+     * @param  \horstoeko\orderx\entities\basic\udt\AmountType $allowanceTotalAmount
      * @return self
      */
     public function setAllowanceTotalAmount(?\horstoeko\orderx\entities\basic\udt\AmountType $allowanceTotalAmount = null)
@@ -148,7 +148,7 @@ class TradeSettlementHeaderMonetarySummationType
      *
      * Tax Basis Total Amount
      *
-     * @param \horstoeko\orderx\entities\basic\udt\AmountType $taxBasisTotalAmount
+     * @param  \horstoeko\orderx\entities\basic\udt\AmountType $taxBasisTotalAmount
      * @return self
      */
     public function setTaxBasisTotalAmount(\horstoeko\orderx\entities\basic\udt\AmountType $taxBasisTotalAmount)
@@ -174,7 +174,7 @@ class TradeSettlementHeaderMonetarySummationType
      *
      * Tax Total Amount
      *
-     * @param \horstoeko\orderx\entities\basic\udt\AmountType $taxTotalAmount
+     * @param  \horstoeko\orderx\entities\basic\udt\AmountType $taxTotalAmount
      * @return self
      */
     public function setTaxTotalAmount(?\horstoeko\orderx\entities\basic\udt\AmountType $taxTotalAmount = null)
@@ -200,7 +200,7 @@ class TradeSettlementHeaderMonetarySummationType
      *
      * Grand Total Amount
      *
-     * @param \horstoeko\orderx\entities\basic\udt\AmountType $grandTotalAmount
+     * @param  \horstoeko\orderx\entities\basic\udt\AmountType $grandTotalAmount
      * @return self
      */
     public function setGrandTotalAmount(?\horstoeko\orderx\entities\basic\udt\AmountType $grandTotalAmount = null)
@@ -208,7 +208,4 @@ class TradeSettlementHeaderMonetarySummationType
         $this->grandTotalAmount = $grandTotalAmount;
         return $this;
     }
-
-
 }
-

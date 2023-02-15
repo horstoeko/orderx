@@ -5,7 +5,6 @@ namespace horstoeko\orderx\entities\comfort\udt;
 /**
  * Class representing MeasureType
  *
- *
  * XSD Type: MeasureType
  */
 class MeasureType
@@ -34,7 +33,7 @@ class MeasureType
     /**
      * Gets or sets the inner value
      *
-     * @param float $value
+     * @param  float $value
      * @return float
      */
     public function value()
@@ -68,7 +67,7 @@ class MeasureType
     /**
      * Sets a new unitCode
      *
-     * @param string $unitCode
+     * @param  string $unitCode
      * @return self
      */
     public function setUnitCode($unitCode)
@@ -76,7 +75,4 @@ class MeasureType
         $this->unitCode = $unitCode;
         return $this;
     }
-
-
 }
-

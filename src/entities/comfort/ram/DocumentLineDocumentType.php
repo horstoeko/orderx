@@ -51,7 +51,7 @@ class DocumentLineDocumentType
      *
      * Line ID
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\IDType $lineID
+     * @param  \horstoeko\orderx\entities\comfort\udt\IDType $lineID
      * @return self
      */
     public function setLineID(\horstoeko\orderx\entities\comfort\udt\IDType $lineID)
@@ -77,7 +77,7 @@ class DocumentLineDocumentType
      *
      * Status Code
      *
-     * @param string $lineStatusCode
+     * @param  string $lineStatusCode
      * @return self
      */
     public function setLineStatusCode($lineStatusCode)
@@ -92,7 +92,7 @@ class DocumentLineDocumentType
      * Note
      *
      * @return self
-     * @param \horstoeko\orderx\entities\comfort\ram\NoteType $includedNote
+     * @param  \horstoeko\orderx\entities\comfort\ram\NoteType $includedNote
      */
     public function addToIncludedNote(\horstoeko\orderx\entities\comfort\ram\NoteType $includedNote)
     {
@@ -105,7 +105,7 @@ class DocumentLineDocumentType
      *
      * Note
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetIncludedNote($index)
@@ -118,7 +118,7 @@ class DocumentLineDocumentType
      *
      * Note
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetIncludedNote($index)
@@ -143,7 +143,7 @@ class DocumentLineDocumentType
      *
      * Note
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\NoteType[] $includedNote
+     * @param  \horstoeko\orderx\entities\comfort\ram\NoteType[] $includedNote
      * @return self
      */
     public function setIncludedNote(array $includedNote = null)
@@ -151,7 +151,4 @@ class DocumentLineDocumentType
         $this->includedNote = $includedNote;
         return $this;
     }
-
-
 }
-

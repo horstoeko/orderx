@@ -42,7 +42,7 @@ class TradeDeliveryTermsType
      *
      * Code
      *
-     * @param string $deliveryTypeCode
+     * @param  string $deliveryTypeCode
      * @return self
      */
     public function setDeliveryTypeCode($deliveryTypeCode)
@@ -68,7 +68,7 @@ class TradeDeliveryTermsType
      *
      * Function Code
      *
-     * @param string $functionCode
+     * @param  string $functionCode
      * @return self
      */
     public function setFunctionCode($functionCode)
@@ -76,7 +76,4 @@ class TradeDeliveryTermsType
         $this->functionCode = $functionCode;
         return $this;
     }
-
-
 }
-

@@ -74,7 +74,7 @@ class TradePriceType
      *
      * Charge Amount
      *
-     * @param \horstoeko\orderx\entities\extended\udt\AmountType $chargeAmount
+     * @param  \horstoeko\orderx\entities\extended\udt\AmountType $chargeAmount
      * @return self
      */
     public function setChargeAmount(\horstoeko\orderx\entities\extended\udt\AmountType $chargeAmount)
@@ -100,7 +100,7 @@ class TradePriceType
      *
      * Basis Quantity
      *
-     * @param \horstoeko\orderx\entities\extended\udt\QuantityType $basisQuantity
+     * @param  \horstoeko\orderx\entities\extended\udt\QuantityType $basisQuantity
      * @return self
      */
     public function setBasisQuantity(?\horstoeko\orderx\entities\extended\udt\QuantityType $basisQuantity = null)
@@ -126,7 +126,7 @@ class TradePriceType
      *
      * Minimum Quantity
      *
-     * @param \horstoeko\orderx\entities\extended\udt\QuantityType $minimumQuantity
+     * @param  \horstoeko\orderx\entities\extended\udt\QuantityType $minimumQuantity
      * @return self
      */
     public function setMinimumQuantity(?\horstoeko\orderx\entities\extended\udt\QuantityType $minimumQuantity = null)
@@ -152,7 +152,7 @@ class TradePriceType
      *
      * Maximum Quantity
      *
-     * @param \horstoeko\orderx\entities\extended\udt\QuantityType $maximumQuantity
+     * @param  \horstoeko\orderx\entities\extended\udt\QuantityType $maximumQuantity
      * @return self
      */
     public function setMaximumQuantity(?\horstoeko\orderx\entities\extended\udt\QuantityType $maximumQuantity = null)
@@ -167,7 +167,7 @@ class TradePriceType
      * Applied Allowance/Charge
      *
      * @return self
-     * @param \horstoeko\orderx\entities\extended\ram\TradeAllowanceChargeType $appliedTradeAllowanceCharge
+     * @param  \horstoeko\orderx\entities\extended\ram\TradeAllowanceChargeType $appliedTradeAllowanceCharge
      */
     public function addToAppliedTradeAllowanceCharge(\horstoeko\orderx\entities\extended\ram\TradeAllowanceChargeType $appliedTradeAllowanceCharge)
     {
@@ -180,7 +180,7 @@ class TradePriceType
      *
      * Applied Allowance/Charge
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetAppliedTradeAllowanceCharge($index)
@@ -193,7 +193,7 @@ class TradePriceType
      *
      * Applied Allowance/Charge
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetAppliedTradeAllowanceCharge($index)
@@ -218,7 +218,7 @@ class TradePriceType
      *
      * Applied Allowance/Charge
      *
-     * @param \horstoeko\orderx\entities\extended\ram\TradeAllowanceChargeType[] $appliedTradeAllowanceCharge
+     * @param  \horstoeko\orderx\entities\extended\ram\TradeAllowanceChargeType[] $appliedTradeAllowanceCharge
      * @return self
      */
     public function setAppliedTradeAllowanceCharge(array $appliedTradeAllowanceCharge = null)
@@ -233,7 +233,7 @@ class TradePriceType
      * Included Tax
      *
      * @return self
-     * @param \horstoeko\orderx\entities\extended\ram\TradeTaxType $includedTradeTax
+     * @param  \horstoeko\orderx\entities\extended\ram\TradeTaxType $includedTradeTax
      */
     public function addToIncludedTradeTax(\horstoeko\orderx\entities\extended\ram\TradeTaxType $includedTradeTax)
     {
@@ -246,7 +246,7 @@ class TradePriceType
      *
      * Included Tax
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetIncludedTradeTax($index)
@@ -259,7 +259,7 @@ class TradePriceType
      *
      * Included Tax
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetIncludedTradeTax($index)
@@ -284,7 +284,7 @@ class TradePriceType
      *
      * Included Tax
      *
-     * @param \horstoeko\orderx\entities\extended\ram\TradeTaxType[] $includedTradeTax
+     * @param  \horstoeko\orderx\entities\extended\ram\TradeTaxType[] $includedTradeTax
      * @return self
      */
     public function setIncludedTradeTax(array $includedTradeTax = null)
@@ -292,7 +292,4 @@ class TradePriceType
         $this->includedTradeTax = $includedTradeTax;
         return $this;
     }
-
-
 }
-

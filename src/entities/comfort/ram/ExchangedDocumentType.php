@@ -98,7 +98,7 @@ class ExchangedDocumentType
      *
      * ID
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\IDType $iD
+     * @param  \horstoeko\orderx\entities\comfort\udt\IDType $iD
      * @return self
      */
     public function setID(\horstoeko\orderx\entities\comfort\udt\IDType $iD)
@@ -124,7 +124,7 @@ class ExchangedDocumentType
      *
      * Name
      *
-     * @param string $name
+     * @param  string $name
      * @return self
      */
     public function setName($name)
@@ -150,7 +150,7 @@ class ExchangedDocumentType
      *
      * Type Code
      *
-     * @param string $typeCode
+     * @param  string $typeCode
      * @return self
      */
     public function setTypeCode($typeCode)
@@ -176,7 +176,7 @@ class ExchangedDocumentType
      *
      * Status Code
      *
-     * @param string $statusCode
+     * @param  string $statusCode
      * @return self
      */
     public function setStatusCode($statusCode)
@@ -202,7 +202,7 @@ class ExchangedDocumentType
      *
      * Issue Date Time
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\DateTimeType $issueDateTime
+     * @param  \horstoeko\orderx\entities\comfort\udt\DateTimeType $issueDateTime
      * @return self
      */
     public function setIssueDateTime(\horstoeko\orderx\entities\comfort\udt\DateTimeType $issueDateTime)
@@ -224,7 +224,7 @@ class ExchangedDocumentType
     /**
      * Sets a new copyIndicator
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\IndicatorType $copyIndicator
+     * @param  \horstoeko\orderx\entities\comfort\udt\IndicatorType $copyIndicator
      * @return self
      */
     public function setCopyIndicator(?\horstoeko\orderx\entities\comfort\udt\IndicatorType $copyIndicator = null)
@@ -250,7 +250,7 @@ class ExchangedDocumentType
      *
      * Purpose Code
      *
-     * @param string $purposeCode
+     * @param  string $purposeCode
      * @return self
      */
     public function setPurposeCode($purposeCode)
@@ -276,7 +276,7 @@ class ExchangedDocumentType
      *
      * Response Request Type Code
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\CodeType $requestedResponseTypeCode
+     * @param  \horstoeko\orderx\entities\comfort\udt\CodeType $requestedResponseTypeCode
      * @return self
      */
     public function setRequestedResponseTypeCode(?\horstoeko\orderx\entities\comfort\udt\CodeType $requestedResponseTypeCode = null)
@@ -291,7 +291,7 @@ class ExchangedDocumentType
      * Note
      *
      * @return self
-     * @param \horstoeko\orderx\entities\comfort\ram\NoteType $includedNote
+     * @param  \horstoeko\orderx\entities\comfort\ram\NoteType $includedNote
      */
     public function addToIncludedNote(\horstoeko\orderx\entities\comfort\ram\NoteType $includedNote)
     {
@@ -304,7 +304,7 @@ class ExchangedDocumentType
      *
      * Note
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetIncludedNote($index)
@@ -317,7 +317,7 @@ class ExchangedDocumentType
      *
      * Note
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetIncludedNote($index)
@@ -342,7 +342,7 @@ class ExchangedDocumentType
      *
      * Note
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\NoteType[] $includedNote
+     * @param  \horstoeko\orderx\entities\comfort\ram\NoteType[] $includedNote
      * @return self
      */
     public function setIncludedNote(array $includedNote = null)
@@ -368,7 +368,7 @@ class ExchangedDocumentType
      *
      * Effective Period
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\SpecifiedPeriodType $effectiveSpecifiedPeriod
+     * @param  \horstoeko\orderx\entities\comfort\ram\SpecifiedPeriodType $effectiveSpecifiedPeriod
      * @return self
      */
     public function setEffectiveSpecifiedPeriod(?\horstoeko\orderx\entities\comfort\ram\SpecifiedPeriodType $effectiveSpecifiedPeriod = null)
@@ -376,7 +376,4 @@ class ExchangedDocumentType
         $this->effectiveSpecifiedPeriod = $effectiveSpecifiedPeriod;
         return $this;
     }
-
-
 }
-

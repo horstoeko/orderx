@@ -42,7 +42,7 @@ class TradeAccountingAccountType
      *
      * ID
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\IDType $iD
+     * @param  \horstoeko\orderx\entities\comfort\udt\IDType $iD
      * @return self
      */
     public function setID(\horstoeko\orderx\entities\comfort\udt\IDType $iD)
@@ -68,7 +68,7 @@ class TradeAccountingAccountType
      *
      * Type Code
      *
-     * @param string $typeCode
+     * @param  string $typeCode
      * @return self
      */
     public function setTypeCode($typeCode)
@@ -76,7 +76,4 @@ class TradeAccountingAccountType
         $this->typeCode = $typeCode;
         return $this;
     }
-
-
 }
-

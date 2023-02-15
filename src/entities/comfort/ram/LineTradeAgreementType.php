@@ -79,7 +79,7 @@ class LineTradeAgreementType
      *
      * Buyer Order Document
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $buyerOrderReferencedDocument
+     * @param  \horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $buyerOrderReferencedDocument
      * @return self
      */
     public function setBuyerOrderReferencedDocument(?\horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $buyerOrderReferencedDocument = null)
@@ -105,7 +105,7 @@ class LineTradeAgreementType
      *
      * Quotation Document
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $quotationReferencedDocument
+     * @param  \horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $quotationReferencedDocument
      * @return self
      */
     public function setQuotationReferencedDocument(?\horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $quotationReferencedDocument = null)
@@ -120,7 +120,7 @@ class LineTradeAgreementType
      * Additional Document
      *
      * @return self
-     * @param \horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $additionalReferencedDocument
+     * @param  \horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $additionalReferencedDocument
      */
     public function addToAdditionalReferencedDocument(\horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $additionalReferencedDocument)
     {
@@ -133,7 +133,7 @@ class LineTradeAgreementType
      *
      * Additional Document
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetAdditionalReferencedDocument($index)
@@ -146,7 +146,7 @@ class LineTradeAgreementType
      *
      * Additional Document
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetAdditionalReferencedDocument($index)
@@ -171,7 +171,7 @@ class LineTradeAgreementType
      *
      * Additional Document
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType[] $additionalReferencedDocument
+     * @param  \horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType[] $additionalReferencedDocument
      * @return self
      */
     public function setAdditionalReferencedDocument(array $additionalReferencedDocument = null)
@@ -197,7 +197,7 @@ class LineTradeAgreementType
      *
      * Product Gross Price
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\TradePriceType $grossPriceProductTradePrice
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradePriceType $grossPriceProductTradePrice
      * @return self
      */
     public function setGrossPriceProductTradePrice(?\horstoeko\orderx\entities\comfort\ram\TradePriceType $grossPriceProductTradePrice = null)
@@ -223,7 +223,7 @@ class LineTradeAgreementType
      *
      * Product Net Price
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\TradePriceType $netPriceProductTradePrice
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradePriceType $netPriceProductTradePrice
      * @return self
      */
     public function setNetPriceProductTradePrice(\horstoeko\orderx\entities\comfort\ram\TradePriceType $netPriceProductTradePrice)
@@ -249,7 +249,7 @@ class LineTradeAgreementType
      *
      * Catalogue Document
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $catalogueReferencedDocument
+     * @param  \horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $catalogueReferencedDocument
      * @return self
      */
     public function setCatalogueReferencedDocument(?\horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $catalogueReferencedDocument = null)
@@ -275,7 +275,7 @@ class LineTradeAgreementType
      *
      * Blanket Order Document
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $blanketOrderReferencedDocument
+     * @param  \horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $blanketOrderReferencedDocument
      * @return self
      */
     public function setBlanketOrderReferencedDocument(?\horstoeko\orderx\entities\comfort\ram\ReferencedDocumentType $blanketOrderReferencedDocument = null)
@@ -283,7 +283,4 @@ class LineTradeAgreementType
         $this->blanketOrderReferencedDocument = $blanketOrderReferencedDocument;
         return $this;
     }
-
-
 }
-

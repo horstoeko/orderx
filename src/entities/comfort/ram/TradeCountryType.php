@@ -35,7 +35,7 @@ class TradeCountryType
      *
      * Code
      *
-     * @param string $iD
+     * @param  string $iD
      * @return self
      */
     public function setID($iD)
@@ -43,7 +43,4 @@ class TradeCountryType
         $this->iD = $iD;
         return $this;
     }
-
-
 }
-

@@ -60,7 +60,7 @@ class ProductCharacteristicType
      *
      * Type Code
      *
-     * @param \horstoeko\orderx\entities\extended\udt\CodeType $typeCode
+     * @param  \horstoeko\orderx\entities\extended\udt\CodeType $typeCode
      * @return self
      */
     public function setTypeCode(?\horstoeko\orderx\entities\extended\udt\CodeType $typeCode = null)
@@ -75,7 +75,7 @@ class ProductCharacteristicType
      * Description
      *
      * @return self
-     * @param string $description
+     * @param  string $description
      */
     public function addToDescription($description)
     {
@@ -88,7 +88,7 @@ class ProductCharacteristicType
      *
      * Description
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetDescription($index)
@@ -101,7 +101,7 @@ class ProductCharacteristicType
      *
      * Description
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetDescription($index)
@@ -126,7 +126,7 @@ class ProductCharacteristicType
      *
      * Description
      *
-     * @param string $description
+     * @param  string $description
      * @return self
      */
     public function setDescription(array $description)
@@ -152,7 +152,7 @@ class ProductCharacteristicType
      *
      * Value Measure
      *
-     * @param \horstoeko\orderx\entities\extended\udt\MeasureType $valueMeasure
+     * @param  \horstoeko\orderx\entities\extended\udt\MeasureType $valueMeasure
      * @return self
      */
     public function setValueMeasure(?\horstoeko\orderx\entities\extended\udt\MeasureType $valueMeasure = null)
@@ -167,7 +167,7 @@ class ProductCharacteristicType
      * Value Text
      *
      * @return self
-     * @param string $value
+     * @param  string $value
      */
     public function addToValue($value)
     {
@@ -180,7 +180,7 @@ class ProductCharacteristicType
      *
      * Value Text
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetValue($index)
@@ -193,7 +193,7 @@ class ProductCharacteristicType
      *
      * Value Text
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetValue($index)
@@ -218,7 +218,7 @@ class ProductCharacteristicType
      *
      * Value Text
      *
-     * @param string $value
+     * @param  string $value
      * @return self
      */
     public function setValue(array $value)
@@ -226,7 +226,4 @@ class ProductCharacteristicType
         $this->value = $value;
         return $this;
     }
-
-
 }
-

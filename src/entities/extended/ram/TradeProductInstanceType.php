@@ -42,7 +42,7 @@ class TradeProductInstanceType
      *
      * Batch ID
      *
-     * @param \horstoeko\orderx\entities\extended\udt\IDType $batchID
+     * @param  \horstoeko\orderx\entities\extended\udt\IDType $batchID
      * @return self
      */
     public function setBatchID(?\horstoeko\orderx\entities\extended\udt\IDType $batchID = null)
@@ -68,7 +68,7 @@ class TradeProductInstanceType
      *
      * Serial ID
      *
-     * @param \horstoeko\orderx\entities\extended\udt\IDType $serialID
+     * @param  \horstoeko\orderx\entities\extended\udt\IDType $serialID
      * @return self
      */
     public function setSerialID(?\horstoeko\orderx\entities\extended\udt\IDType $serialID = null)
@@ -76,7 +76,4 @@ class TradeProductInstanceType
         $this->serialID = $serialID;
         return $this;
     }
-
-
 }
-

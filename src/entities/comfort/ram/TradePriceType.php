@@ -51,7 +51,7 @@ class TradePriceType
      *
      * Charge Amount
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\AmountType $chargeAmount
+     * @param  \horstoeko\orderx\entities\comfort\udt\AmountType $chargeAmount
      * @return self
      */
     public function setChargeAmount(\horstoeko\orderx\entities\comfort\udt\AmountType $chargeAmount)
@@ -77,7 +77,7 @@ class TradePriceType
      *
      * Basis Quantity
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\QuantityType $basisQuantity
+     * @param  \horstoeko\orderx\entities\comfort\udt\QuantityType $basisQuantity
      * @return self
      */
     public function setBasisQuantity(?\horstoeko\orderx\entities\comfort\udt\QuantityType $basisQuantity = null)
@@ -92,7 +92,7 @@ class TradePriceType
      * Applied Allowance/Charge
      *
      * @return self
-     * @param \horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType $appliedTradeAllowanceCharge
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType $appliedTradeAllowanceCharge
      */
     public function addToAppliedTradeAllowanceCharge(\horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType $appliedTradeAllowanceCharge)
     {
@@ -105,7 +105,7 @@ class TradePriceType
      *
      * Applied Allowance/Charge
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetAppliedTradeAllowanceCharge($index)
@@ -118,7 +118,7 @@ class TradePriceType
      *
      * Applied Allowance/Charge
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetAppliedTradeAllowanceCharge($index)
@@ -143,7 +143,7 @@ class TradePriceType
      *
      * Applied Allowance/Charge
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType[] $appliedTradeAllowanceCharge
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType[] $appliedTradeAllowanceCharge
      * @return self
      */
     public function setAppliedTradeAllowanceCharge(array $appliedTradeAllowanceCharge = null)
@@ -151,7 +151,4 @@ class TradePriceType
         $this->appliedTradeAllowanceCharge = $appliedTradeAllowanceCharge;
         return $this;
     }
-
-
 }
-

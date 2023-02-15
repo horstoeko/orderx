@@ -58,7 +58,7 @@ class LineTradeSettlementType
      *
      * Trade Tax
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\TradeTaxType $applicableTradeTax
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradeTaxType $applicableTradeTax
      * @return self
      */
     public function setApplicableTradeTax(?\horstoeko\orderx\entities\comfort\ram\TradeTaxType $applicableTradeTax = null)
@@ -73,7 +73,7 @@ class LineTradeSettlementType
      * Allowance/Charge
      *
      * @return self
-     * @param \horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType $specifiedTradeAllowanceCharge
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType $specifiedTradeAllowanceCharge
      */
     public function addToSpecifiedTradeAllowanceCharge(\horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType $specifiedTradeAllowanceCharge)
     {
@@ -86,7 +86,7 @@ class LineTradeSettlementType
      *
      * Allowance/Charge
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetSpecifiedTradeAllowanceCharge($index)
@@ -99,7 +99,7 @@ class LineTradeSettlementType
      *
      * Allowance/Charge
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetSpecifiedTradeAllowanceCharge($index)
@@ -124,7 +124,7 @@ class LineTradeSettlementType
      *
      * Allowance/Charge
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType[] $specifiedTradeAllowanceCharge
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType[] $specifiedTradeAllowanceCharge
      * @return self
      */
     public function setSpecifiedTradeAllowanceCharge(array $specifiedTradeAllowanceCharge = null)
@@ -150,7 +150,7 @@ class LineTradeSettlementType
      *
      * Monetary Summation
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\TradeSettlementLineMonetarySummationType $specifiedTradeSettlementLineMonetarySummation
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradeSettlementLineMonetarySummationType $specifiedTradeSettlementLineMonetarySummation
      * @return self
      */
     public function setSpecifiedTradeSettlementLineMonetarySummation(\horstoeko\orderx\entities\comfort\ram\TradeSettlementLineMonetarySummationType $specifiedTradeSettlementLineMonetarySummation)
@@ -176,7 +176,7 @@ class LineTradeSettlementType
      *
      * Accounts Receivable
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\TradeAccountingAccountType $receivableSpecifiedTradeAccountingAccount
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradeAccountingAccountType $receivableSpecifiedTradeAccountingAccount
      * @return self
      */
     public function setReceivableSpecifiedTradeAccountingAccount(?\horstoeko\orderx\entities\comfort\ram\TradeAccountingAccountType $receivableSpecifiedTradeAccountingAccount = null)
@@ -184,7 +184,4 @@ class LineTradeSettlementType
         $this->receivableSpecifiedTradeAccountingAccount = $receivableSpecifiedTradeAccountingAccount;
         return $this;
     }
-
-
 }
-

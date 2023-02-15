@@ -56,7 +56,7 @@ class TradeProductType
      *
      * Global ID
      *
-     * @param \horstoeko\orderx\entities\basic\udt\IDType $globalID
+     * @param  \horstoeko\orderx\entities\basic\udt\IDType $globalID
      * @return self
      */
     public function setGlobalID(?\horstoeko\orderx\entities\basic\udt\IDType $globalID = null)
@@ -82,7 +82,7 @@ class TradeProductType
      *
      * Seller Assigned ID
      *
-     * @param \horstoeko\orderx\entities\basic\udt\IDType $sellerAssignedID
+     * @param  \horstoeko\orderx\entities\basic\udt\IDType $sellerAssignedID
      * @return self
      */
     public function setSellerAssignedID(?\horstoeko\orderx\entities\basic\udt\IDType $sellerAssignedID = null)
@@ -108,7 +108,7 @@ class TradeProductType
      *
      * Buyer Assigned ID
      *
-     * @param \horstoeko\orderx\entities\basic\udt\IDType $buyerAssignedID
+     * @param  \horstoeko\orderx\entities\basic\udt\IDType $buyerAssignedID
      * @return self
      */
     public function setBuyerAssignedID(?\horstoeko\orderx\entities\basic\udt\IDType $buyerAssignedID = null)
@@ -134,7 +134,7 @@ class TradeProductType
      *
      * Name
      *
-     * @param string $name
+     * @param  string $name
      * @return self
      */
     public function setName($name)
@@ -142,7 +142,4 @@ class TradeProductType
         $this->name = $name;
         return $this;
     }
-
-
 }
-

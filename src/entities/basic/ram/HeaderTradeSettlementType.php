@@ -49,7 +49,7 @@ class HeaderTradeSettlementType
      *
      * Order Currency Code
      *
-     * @param string $orderCurrencyCode
+     * @param  string $orderCurrencyCode
      * @return self
      */
     public function setOrderCurrencyCode($orderCurrencyCode)
@@ -75,7 +75,7 @@ class HeaderTradeSettlementType
      *
      * Monetary Summation
      *
-     * @param \horstoeko\orderx\entities\basic\ram\TradeSettlementHeaderMonetarySummationType $specifiedTradeSettlementHeaderMonetarySummation
+     * @param  \horstoeko\orderx\entities\basic\ram\TradeSettlementHeaderMonetarySummationType $specifiedTradeSettlementHeaderMonetarySummation
      * @return self
      */
     public function setSpecifiedTradeSettlementHeaderMonetarySummation(\horstoeko\orderx\entities\basic\ram\TradeSettlementHeaderMonetarySummationType $specifiedTradeSettlementHeaderMonetarySummation)
@@ -101,7 +101,7 @@ class HeaderTradeSettlementType
      *
      * Accounts Receivable
      *
-     * @param \horstoeko\orderx\entities\basic\ram\TradeAccountingAccountType $receivableSpecifiedTradeAccountingAccount
+     * @param  \horstoeko\orderx\entities\basic\ram\TradeAccountingAccountType $receivableSpecifiedTradeAccountingAccount
      * @return self
      */
     public function setReceivableSpecifiedTradeAccountingAccount(?\horstoeko\orderx\entities\basic\ram\TradeAccountingAccountType $receivableSpecifiedTradeAccountingAccount = null)
@@ -109,7 +109,4 @@ class HeaderTradeSettlementType
         $this->receivableSpecifiedTradeAccountingAccount = $receivableSpecifiedTradeAccountingAccount;
         return $this;
     }
-
-
 }
-

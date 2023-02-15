@@ -56,7 +56,7 @@ class TradeContactType
      *
      * Person Name
      *
-     * @param string $personName
+     * @param  string $personName
      * @return self
      */
     public function setPersonName($personName)
@@ -82,7 +82,7 @@ class TradeContactType
      *
      * Department Name
      *
-     * @param string $departmentName
+     * @param  string $departmentName
      * @return self
      */
     public function setDepartmentName($departmentName)
@@ -108,7 +108,7 @@ class TradeContactType
      *
      * Telephone
      *
-     * @param \horstoeko\orderx\entities\basic\ram\UniversalCommunicationType $telephoneUniversalCommunication
+     * @param  \horstoeko\orderx\entities\basic\ram\UniversalCommunicationType $telephoneUniversalCommunication
      * @return self
      */
     public function setTelephoneUniversalCommunication(?\horstoeko\orderx\entities\basic\ram\UniversalCommunicationType $telephoneUniversalCommunication = null)
@@ -134,7 +134,7 @@ class TradeContactType
      *
      * Email Address
      *
-     * @param \horstoeko\orderx\entities\basic\ram\UniversalCommunicationType $emailURIUniversalCommunication
+     * @param  \horstoeko\orderx\entities\basic\ram\UniversalCommunicationType $emailURIUniversalCommunication
      * @return self
      */
     public function setEmailURIUniversalCommunication(?\horstoeko\orderx\entities\basic\ram\UniversalCommunicationType $emailURIUniversalCommunication = null)
@@ -142,7 +142,4 @@ class TradeContactType
         $this->emailURIUniversalCommunication = $emailURIUniversalCommunication;
         return $this;
     }
-
-
 }
-

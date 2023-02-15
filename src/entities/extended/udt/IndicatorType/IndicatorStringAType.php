@@ -26,7 +26,7 @@ class IndicatorStringAType
     /**
      * Gets or sets the inner value
      *
-     * @param string $value
+     * @param  string $value
      * @return string
      */
     public function value()
@@ -46,7 +46,4 @@ class IndicatorStringAType
     {
         return strval($this->__value);
     }
-
-
 }
-

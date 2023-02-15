@@ -49,7 +49,7 @@ class LineTradeAgreementType
      *
      * Buyer Order Document
      *
-     * @param \horstoeko\orderx\entities\basic\ram\ReferencedDocumentType $buyerOrderReferencedDocument
+     * @param  \horstoeko\orderx\entities\basic\ram\ReferencedDocumentType $buyerOrderReferencedDocument
      * @return self
      */
     public function setBuyerOrderReferencedDocument(?\horstoeko\orderx\entities\basic\ram\ReferencedDocumentType $buyerOrderReferencedDocument = null)
@@ -75,7 +75,7 @@ class LineTradeAgreementType
      *
      * Product Net Price
      *
-     * @param \horstoeko\orderx\entities\basic\ram\TradePriceType $netPriceProductTradePrice
+     * @param  \horstoeko\orderx\entities\basic\ram\TradePriceType $netPriceProductTradePrice
      * @return self
      */
     public function setNetPriceProductTradePrice(\horstoeko\orderx\entities\basic\ram\TradePriceType $netPriceProductTradePrice)
@@ -101,7 +101,7 @@ class LineTradeAgreementType
      *
      * Blanket Order Document
      *
-     * @param \horstoeko\orderx\entities\basic\ram\ReferencedDocumentType $blanketOrderReferencedDocument
+     * @param  \horstoeko\orderx\entities\basic\ram\ReferencedDocumentType $blanketOrderReferencedDocument
      * @return self
      */
     public function setBlanketOrderReferencedDocument(?\horstoeko\orderx\entities\basic\ram\ReferencedDocumentType $blanketOrderReferencedDocument = null)
@@ -109,7 +109,4 @@ class LineTradeAgreementType
         $this->blanketOrderReferencedDocument = $blanketOrderReferencedDocument;
         return $this;
     }
-
-
 }
-

@@ -42,7 +42,7 @@ class ReferencedDocumentType
      *
      * Issuer Assigned ID
      *
-     * @param \horstoeko\orderx\entities\basic\udt\IDType $issuerAssignedID
+     * @param  \horstoeko\orderx\entities\basic\udt\IDType $issuerAssignedID
      * @return self
      */
     public function setIssuerAssignedID(?\horstoeko\orderx\entities\basic\udt\IDType $issuerAssignedID = null)
@@ -68,7 +68,7 @@ class ReferencedDocumentType
      *
      * Line ID
      *
-     * @param \horstoeko\orderx\entities\basic\udt\IDType $lineID
+     * @param  \horstoeko\orderx\entities\basic\udt\IDType $lineID
      * @return self
      */
     public function setLineID(?\horstoeko\orderx\entities\basic\udt\IDType $lineID = null)
@@ -76,7 +76,4 @@ class ReferencedDocumentType
         $this->lineID = $lineID;
         return $this;
     }
-
-
 }
-

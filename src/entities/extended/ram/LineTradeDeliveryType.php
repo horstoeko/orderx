@@ -102,7 +102,7 @@ class LineTradeDeliveryType
      *
      * Partial Delivery Allowed Indicator
      *
-     * @param \horstoeko\orderx\entities\extended\udt\IndicatorType $partialDeliveryAllowedIndicator
+     * @param  \horstoeko\orderx\entities\extended\udt\IndicatorType $partialDeliveryAllowedIndicator
      * @return self
      */
     public function setPartialDeliveryAllowedIndicator(?\horstoeko\orderx\entities\extended\udt\IndicatorType $partialDeliveryAllowedIndicator = null)
@@ -128,7 +128,7 @@ class LineTradeDeliveryType
      *
      * Requested Quantity
      *
-     * @param \horstoeko\orderx\entities\extended\udt\QuantityType $requestedQuantity
+     * @param  \horstoeko\orderx\entities\extended\udt\QuantityType $requestedQuantity
      * @return self
      */
     public function setRequestedQuantity(\horstoeko\orderx\entities\extended\udt\QuantityType $requestedQuantity)
@@ -154,7 +154,7 @@ class LineTradeDeliveryType
      *
      * Agreed Quantity
      *
-     * @param \horstoeko\orderx\entities\extended\udt\QuantityType $agreedQuantity
+     * @param  \horstoeko\orderx\entities\extended\udt\QuantityType $agreedQuantity
      * @return self
      */
     public function setAgreedQuantity(?\horstoeko\orderx\entities\extended\udt\QuantityType $agreedQuantity = null)
@@ -180,7 +180,7 @@ class LineTradeDeliveryType
      *
      * Package Quantity
      *
-     * @param \horstoeko\orderx\entities\extended\udt\QuantityType $packageQuantity
+     * @param  \horstoeko\orderx\entities\extended\udt\QuantityType $packageQuantity
      * @return self
      */
     public function setPackageQuantity(?\horstoeko\orderx\entities\extended\udt\QuantityType $packageQuantity = null)
@@ -206,7 +206,7 @@ class LineTradeDeliveryType
      *
      * Per Package Unit Quantity
      *
-     * @param \horstoeko\orderx\entities\extended\udt\QuantityType $perPackageUnitQuantity
+     * @param  \horstoeko\orderx\entities\extended\udt\QuantityType $perPackageUnitQuantity
      * @return self
      */
     public function setPerPackageUnitQuantity(?\horstoeko\orderx\entities\extended\udt\QuantityType $perPackageUnitQuantity = null)
@@ -232,7 +232,7 @@ class LineTradeDeliveryType
      *
      * Ship To Party
      *
-     * @param \horstoeko\orderx\entities\extended\ram\TradePartyType $shipToTradeParty
+     * @param  \horstoeko\orderx\entities\extended\ram\TradePartyType $shipToTradeParty
      * @return self
      */
     public function setShipToTradeParty(?\horstoeko\orderx\entities\extended\ram\TradePartyType $shipToTradeParty = null)
@@ -258,7 +258,7 @@ class LineTradeDeliveryType
      *
      * Ultimate Ship To Party
      *
-     * @param \horstoeko\orderx\entities\extended\ram\TradePartyType $ultimateShipToTradeParty
+     * @param  \horstoeko\orderx\entities\extended\ram\TradePartyType $ultimateShipToTradeParty
      * @return self
      */
     public function setUltimateShipToTradeParty(?\horstoeko\orderx\entities\extended\ram\TradePartyType $ultimateShipToTradeParty = null)
@@ -284,7 +284,7 @@ class LineTradeDeliveryType
      *
      * Ship From Party
      *
-     * @param \horstoeko\orderx\entities\extended\ram\TradePartyType $shipFromTradeParty
+     * @param  \horstoeko\orderx\entities\extended\ram\TradePartyType $shipFromTradeParty
      * @return self
      */
     public function setShipFromTradeParty(?\horstoeko\orderx\entities\extended\ram\TradePartyType $shipFromTradeParty = null)
@@ -299,7 +299,7 @@ class LineTradeDeliveryType
      * Requested Despatch Event
      *
      * @return self
-     * @param \horstoeko\orderx\entities\extended\ram\SupplyChainEventType $requestedDespatchSupplyChainEvent
+     * @param  \horstoeko\orderx\entities\extended\ram\SupplyChainEventType $requestedDespatchSupplyChainEvent
      */
     public function addToRequestedDespatchSupplyChainEvent(\horstoeko\orderx\entities\extended\ram\SupplyChainEventType $requestedDespatchSupplyChainEvent)
     {
@@ -312,7 +312,7 @@ class LineTradeDeliveryType
      *
      * Requested Despatch Event
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetRequestedDespatchSupplyChainEvent($index)
@@ -325,7 +325,7 @@ class LineTradeDeliveryType
      *
      * Requested Despatch Event
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetRequestedDespatchSupplyChainEvent($index)
@@ -350,7 +350,7 @@ class LineTradeDeliveryType
      *
      * Requested Despatch Event
      *
-     * @param \horstoeko\orderx\entities\extended\ram\SupplyChainEventType[] $requestedDespatchSupplyChainEvent
+     * @param  \horstoeko\orderx\entities\extended\ram\SupplyChainEventType[] $requestedDespatchSupplyChainEvent
      * @return self
      */
     public function setRequestedDespatchSupplyChainEvent(array $requestedDespatchSupplyChainEvent = null)
@@ -365,7 +365,7 @@ class LineTradeDeliveryType
      * Requested Delivery Event
      *
      * @return self
-     * @param \horstoeko\orderx\entities\extended\ram\SupplyChainEventType $requestedDeliverySupplyChainEvent
+     * @param  \horstoeko\orderx\entities\extended\ram\SupplyChainEventType $requestedDeliverySupplyChainEvent
      */
     public function addToRequestedDeliverySupplyChainEvent(\horstoeko\orderx\entities\extended\ram\SupplyChainEventType $requestedDeliverySupplyChainEvent)
     {
@@ -378,7 +378,7 @@ class LineTradeDeliveryType
      *
      * Requested Delivery Event
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetRequestedDeliverySupplyChainEvent($index)
@@ -391,7 +391,7 @@ class LineTradeDeliveryType
      *
      * Requested Delivery Event
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetRequestedDeliverySupplyChainEvent($index)
@@ -416,7 +416,7 @@ class LineTradeDeliveryType
      *
      * Requested Delivery Event
      *
-     * @param \horstoeko\orderx\entities\extended\ram\SupplyChainEventType[] $requestedDeliverySupplyChainEvent
+     * @param  \horstoeko\orderx\entities\extended\ram\SupplyChainEventType[] $requestedDeliverySupplyChainEvent
      * @return self
      */
     public function setRequestedDeliverySupplyChainEvent(array $requestedDeliverySupplyChainEvent = null)
@@ -424,7 +424,4 @@ class LineTradeDeliveryType
         $this->requestedDeliverySupplyChainEvent = $requestedDeliverySupplyChainEvent;
         return $this;
     }
-
-
 }
-

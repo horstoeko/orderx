@@ -42,7 +42,7 @@ class TradeLocationType
      *
      * ID
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\IDType $iD
+     * @param  \horstoeko\orderx\entities\comfort\udt\IDType $iD
      * @return self
      */
     public function setID(?\horstoeko\orderx\entities\comfort\udt\IDType $iD = null)
@@ -68,7 +68,7 @@ class TradeLocationType
      *
      * Name
      *
-     * @param string $name
+     * @param  string $name
      * @return self
      */
     public function setName($name)
@@ -76,7 +76,4 @@ class TradeLocationType
         $this->name = $name;
         return $this;
     }
-
-
 }
-

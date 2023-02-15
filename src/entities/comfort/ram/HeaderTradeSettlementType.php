@@ -79,7 +79,7 @@ class HeaderTradeSettlementType
      *
      * Order Currency Code
      *
-     * @param string $orderCurrencyCode
+     * @param  string $orderCurrencyCode
      * @return self
      */
     public function setOrderCurrencyCode($orderCurrencyCode)
@@ -105,7 +105,7 @@ class HeaderTradeSettlementType
      *
      * Invoicee
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\TradePartyType $invoiceeTradeParty
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradePartyType $invoiceeTradeParty
      * @return self
      */
     public function setInvoiceeTradeParty(?\horstoeko\orderx\entities\comfort\ram\TradePartyType $invoiceeTradeParty = null)
@@ -131,7 +131,7 @@ class HeaderTradeSettlementType
      *
      * Payment Means
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\TradeSettlementPaymentMeansType $specifiedTradeSettlementPaymentMeans
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradeSettlementPaymentMeansType $specifiedTradeSettlementPaymentMeans
      * @return self
      */
     public function setSpecifiedTradeSettlementPaymentMeans(?\horstoeko\orderx\entities\comfort\ram\TradeSettlementPaymentMeansType $specifiedTradeSettlementPaymentMeans = null)
@@ -146,7 +146,7 @@ class HeaderTradeSettlementType
      * Allowance/Charge
      *
      * @return self
-     * @param \horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType $specifiedTradeAllowanceCharge
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType $specifiedTradeAllowanceCharge
      */
     public function addToSpecifiedTradeAllowanceCharge(\horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType $specifiedTradeAllowanceCharge)
     {
@@ -159,7 +159,7 @@ class HeaderTradeSettlementType
      *
      * Allowance/Charge
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetSpecifiedTradeAllowanceCharge($index)
@@ -172,7 +172,7 @@ class HeaderTradeSettlementType
      *
      * Allowance/Charge
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetSpecifiedTradeAllowanceCharge($index)
@@ -197,7 +197,7 @@ class HeaderTradeSettlementType
      *
      * Allowance/Charge
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType[] $specifiedTradeAllowanceCharge
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType[] $specifiedTradeAllowanceCharge
      * @return self
      */
     public function setSpecifiedTradeAllowanceCharge(array $specifiedTradeAllowanceCharge = null)
@@ -223,7 +223,7 @@ class HeaderTradeSettlementType
      *
      * Payment Terms
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\TradePaymentTermsType $specifiedTradePaymentTerms
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradePaymentTermsType $specifiedTradePaymentTerms
      * @return self
      */
     public function setSpecifiedTradePaymentTerms(?\horstoeko\orderx\entities\comfort\ram\TradePaymentTermsType $specifiedTradePaymentTerms = null)
@@ -249,7 +249,7 @@ class HeaderTradeSettlementType
      *
      * Monetary Summation
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\TradeSettlementHeaderMonetarySummationType $specifiedTradeSettlementHeaderMonetarySummation
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradeSettlementHeaderMonetarySummationType $specifiedTradeSettlementHeaderMonetarySummation
      * @return self
      */
     public function setSpecifiedTradeSettlementHeaderMonetarySummation(\horstoeko\orderx\entities\comfort\ram\TradeSettlementHeaderMonetarySummationType $specifiedTradeSettlementHeaderMonetarySummation)
@@ -275,7 +275,7 @@ class HeaderTradeSettlementType
      *
      * Accounts Receivable
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\TradeAccountingAccountType $receivableSpecifiedTradeAccountingAccount
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradeAccountingAccountType $receivableSpecifiedTradeAccountingAccount
      * @return self
      */
     public function setReceivableSpecifiedTradeAccountingAccount(?\horstoeko\orderx\entities\comfort\ram\TradeAccountingAccountType $receivableSpecifiedTradeAccountingAccount = null)
@@ -283,7 +283,4 @@ class HeaderTradeSettlementType
         $this->receivableSpecifiedTradeAccountingAccount = $receivableSpecifiedTradeAccountingAccount;
         return $this;
     }
-
-
 }
-

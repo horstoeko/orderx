@@ -5,7 +5,6 @@ namespace horstoeko\orderx\entities\comfort\qdt;
 /**
  * Class representing PackageTypeCodeType
  *
- *
  * XSD Type: PackageTypeCodeType
  */
 class PackageTypeCodeType
@@ -29,7 +28,7 @@ class PackageTypeCodeType
     /**
      * Gets or sets the inner value
      *
-     * @param string $value
+     * @param  string $value
      * @return string
      */
     public function value()
@@ -49,7 +48,4 @@ class PackageTypeCodeType
     {
         return strval($this->__value);
     }
-
-
 }
-

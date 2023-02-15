@@ -84,7 +84,7 @@ class TradeAllowanceChargeType
      *
      * Charge Indicator
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\IndicatorType $chargeIndicator
+     * @param  \horstoeko\orderx\entities\comfort\udt\IndicatorType $chargeIndicator
      * @return self
      */
     public function setChargeIndicator(\horstoeko\orderx\entities\comfort\udt\IndicatorType $chargeIndicator)
@@ -110,7 +110,7 @@ class TradeAllowanceChargeType
      *
      * Sequence Number
      *
-     * @param float $sequenceNumeric
+     * @param  float $sequenceNumeric
      * @return self
      */
     public function setSequenceNumeric($sequenceNumeric)
@@ -136,7 +136,7 @@ class TradeAllowanceChargeType
      *
      * Calculation Percent
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\PercentType $calculationPercent
+     * @param  \horstoeko\orderx\entities\comfort\udt\PercentType $calculationPercent
      * @return self
      */
     public function setCalculationPercent($calculationPercent)
@@ -162,7 +162,7 @@ class TradeAllowanceChargeType
      *
      * Basis Amount
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\AmountType $basisAmount
+     * @param  \horstoeko\orderx\entities\comfort\udt\AmountType $basisAmount
      * @return self
      */
     public function setBasisAmount(?\horstoeko\orderx\entities\comfort\udt\AmountType $basisAmount = null)
@@ -188,7 +188,7 @@ class TradeAllowanceChargeType
      *
      * Actual Amount
      *
-     * @param \horstoeko\orderx\entities\comfort\udt\AmountType $actualAmount
+     * @param  \horstoeko\orderx\entities\comfort\udt\AmountType $actualAmount
      * @return self
      */
     public function setActualAmount(\horstoeko\orderx\entities\comfort\udt\AmountType $actualAmount)
@@ -214,7 +214,7 @@ class TradeAllowanceChargeType
      *
      * Reason Code
      *
-     * @param string $reasonCode
+     * @param  string $reasonCode
      * @return self
      */
     public function setReasonCode($reasonCode)
@@ -240,7 +240,7 @@ class TradeAllowanceChargeType
      *
      * Reason Text
      *
-     * @param string $reason
+     * @param  string $reason
      * @return self
      */
     public function setReason($reason)
@@ -266,7 +266,7 @@ class TradeAllowanceChargeType
      *
      * Tax Category
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\TradeTaxType $categoryTradeTax
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradeTaxType $categoryTradeTax
      * @return self
      */
     public function setCategoryTradeTax(?\horstoeko\orderx\entities\comfort\ram\TradeTaxType $categoryTradeTax = null)
@@ -274,7 +274,4 @@ class TradeAllowanceChargeType
         $this->categoryTradeTax = $categoryTradeTax;
         return $this;
     }
-
-
 }
-

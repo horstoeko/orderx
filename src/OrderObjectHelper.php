@@ -792,11 +792,11 @@ class OrderObjectHelper
     /**
      * Get a DeliverySupplyChainEvent
      *
-     * @param DateTime|null $occurrenceDateTime
-     * @param DateTime|null $startDateTime
-     * @param DateTime|null $endDateTime
-     * @param float|null $unitQuantity
-     * @param string|null $unitCode
+     * @param  DateTime|null $occurrenceDateTime
+     * @param  DateTime|null $startDateTime
+     * @param  DateTime|null $endDateTime
+     * @param  float|null    $unitQuantity
+     * @param  string|null   $unitCode
      * @return object|null
      */
     public function getDeliverySupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null, ?float $unitQuantity = null, ?string $unitCode = null): ?object

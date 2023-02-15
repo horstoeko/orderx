@@ -5,7 +5,6 @@ namespace horstoeko\orderx\entities\comfort\qdt;
 /**
  * Class representing TaxTypeCodeType
  *
- *
  * XSD Type: TaxTypeCodeType
  */
 class TaxTypeCodeType
@@ -29,7 +28,7 @@ class TaxTypeCodeType
     /**
      * Gets or sets the inner value
      *
-     * @param string $value
+     * @param  string $value
      * @return string
      */
     public function value()
@@ -49,7 +48,4 @@ class TaxTypeCodeType
     {
         return strval($this->__value);
     }
-
-
 }
-

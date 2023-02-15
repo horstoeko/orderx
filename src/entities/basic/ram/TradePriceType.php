@@ -42,7 +42,7 @@ class TradePriceType
      *
      * Charge Amount
      *
-     * @param \horstoeko\orderx\entities\basic\udt\AmountType $chargeAmount
+     * @param  \horstoeko\orderx\entities\basic\udt\AmountType $chargeAmount
      * @return self
      */
     public function setChargeAmount(\horstoeko\orderx\entities\basic\udt\AmountType $chargeAmount)
@@ -68,7 +68,7 @@ class TradePriceType
      *
      * Basis Quantity
      *
-     * @param \horstoeko\orderx\entities\basic\udt\QuantityType $basisQuantity
+     * @param  \horstoeko\orderx\entities\basic\udt\QuantityType $basisQuantity
      * @return self
      */
     public function setBasisQuantity(?\horstoeko\orderx\entities\basic\udt\QuantityType $basisQuantity = null)
@@ -76,7 +76,4 @@ class TradePriceType
         $this->basisQuantity = $basisQuantity;
         return $this;
     }
-
-
 }
-

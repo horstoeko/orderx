@@ -5,7 +5,6 @@ namespace horstoeko\orderx\entities\extended\qdt;
 /**
  * Class representing DocumentStatusCodeType
  *
- *
  * XSD Type: DocumentStatusCodeType
  */
 class DocumentStatusCodeType
@@ -29,7 +28,7 @@ class DocumentStatusCodeType
     /**
      * Gets or sets the inner value
      *
-     * @param string $value
+     * @param  string $value
      * @return string
      */
     public function value()
@@ -49,7 +48,4 @@ class DocumentStatusCodeType
     {
         return strval($this->__value);
     }
-
-
 }
-

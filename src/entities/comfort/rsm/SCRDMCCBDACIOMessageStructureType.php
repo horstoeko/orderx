@@ -39,7 +39,7 @@ class SCRDMCCBDACIOMessageStructureType
     /**
      * Sets a new exchangedDocumentContext
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\ExchangedDocumentContextType $exchangedDocumentContext
+     * @param  \horstoeko\orderx\entities\comfort\ram\ExchangedDocumentContextType $exchangedDocumentContext
      * @return self
      */
     public function setExchangedDocumentContext(\horstoeko\orderx\entities\comfort\ram\ExchangedDocumentContextType $exchangedDocumentContext)
@@ -61,7 +61,7 @@ class SCRDMCCBDACIOMessageStructureType
     /**
      * Sets a new exchangedDocument
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\ExchangedDocumentType $exchangedDocument
+     * @param  \horstoeko\orderx\entities\comfort\ram\ExchangedDocumentType $exchangedDocument
      * @return self
      */
     public function setExchangedDocument(\horstoeko\orderx\entities\comfort\ram\ExchangedDocumentType $exchangedDocument)
@@ -83,7 +83,7 @@ class SCRDMCCBDACIOMessageStructureType
     /**
      * Sets a new supplyChainTradeTransaction
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\SupplyChainTradeTransactionType $supplyChainTradeTransaction
+     * @param  \horstoeko\orderx\entities\comfort\ram\SupplyChainTradeTransactionType $supplyChainTradeTransaction
      * @return self
      */
     public function setSupplyChainTradeTransaction(\horstoeko\orderx\entities\comfort\ram\SupplyChainTradeTransactionType $supplyChainTradeTransaction)
@@ -91,7 +91,4 @@ class SCRDMCCBDACIOMessageStructureType
         $this->supplyChainTradeTransaction = $supplyChainTradeTransaction;
         return $this;
     }
-
-
 }
-

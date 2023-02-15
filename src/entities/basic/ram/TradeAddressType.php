@@ -77,7 +77,7 @@ class TradeAddressType
      *
      * Postcode
      *
-     * @param string $postcodeCode
+     * @param  string $postcodeCode
      * @return self
      */
     public function setPostcodeCode($postcodeCode)
@@ -103,7 +103,7 @@ class TradeAddressType
      *
      * Line One
      *
-     * @param string $lineOne
+     * @param  string $lineOne
      * @return self
      */
     public function setLineOne($lineOne)
@@ -129,7 +129,7 @@ class TradeAddressType
      *
      * Line Two
      *
-     * @param string $lineTwo
+     * @param  string $lineTwo
      * @return self
      */
     public function setLineTwo($lineTwo)
@@ -155,7 +155,7 @@ class TradeAddressType
      *
      * Line Three
      *
-     * @param string $lineThree
+     * @param  string $lineThree
      * @return self
      */
     public function setLineThree($lineThree)
@@ -181,7 +181,7 @@ class TradeAddressType
      *
      * City Name
      *
-     * @param string $cityName
+     * @param  string $cityName
      * @return self
      */
     public function setCityName($cityName)
@@ -207,7 +207,7 @@ class TradeAddressType
      *
      * Country Code
      *
-     * @param string $countryID
+     * @param  string $countryID
      * @return self
      */
     public function setCountryID($countryID)
@@ -233,7 +233,7 @@ class TradeAddressType
      *
      * Country Sub-Division Name
      *
-     * @param string $countrySubDivisionName
+     * @param  string $countrySubDivisionName
      * @return self
      */
     public function setCountrySubDivisionName($countrySubDivisionName)
@@ -241,7 +241,4 @@ class TradeAddressType
         $this->countrySubDivisionName = $countrySubDivisionName;
         return $this;
     }
-
-
 }
-

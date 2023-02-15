@@ -26,7 +26,7 @@ class TradePaymentTermsType
      * Description
      *
      * @return self
-     * @param string $description
+     * @param  string $description
      */
     public function addToDescription($description)
     {
@@ -39,7 +39,7 @@ class TradePaymentTermsType
      *
      * Description
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetDescription($index)
@@ -52,7 +52,7 @@ class TradePaymentTermsType
      *
      * Description
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetDescription($index)
@@ -77,7 +77,7 @@ class TradePaymentTermsType
      *
      * Description
      *
-     * @param string $description
+     * @param  string $description
      * @return self
      */
     public function setDescription(array $description)
@@ -85,7 +85,4 @@ class TradePaymentTermsType
         $this->description = $description;
         return $this;
     }
-
-
 }
-

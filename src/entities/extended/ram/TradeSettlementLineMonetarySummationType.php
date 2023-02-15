@@ -63,7 +63,7 @@ class TradeSettlementLineMonetarySummationType
      *
      * Line Total Amount
      *
-     * @param \horstoeko\orderx\entities\extended\udt\AmountType $lineTotalAmount
+     * @param  \horstoeko\orderx\entities\extended\udt\AmountType $lineTotalAmount
      * @return self
      */
     public function setLineTotalAmount(\horstoeko\orderx\entities\extended\udt\AmountType $lineTotalAmount)
@@ -89,7 +89,7 @@ class TradeSettlementLineMonetarySummationType
      *
      * Charge Total Amount
      *
-     * @param \horstoeko\orderx\entities\extended\udt\AmountType $chargeTotalAmount
+     * @param  \horstoeko\orderx\entities\extended\udt\AmountType $chargeTotalAmount
      * @return self
      */
     public function setChargeTotalAmount(?\horstoeko\orderx\entities\extended\udt\AmountType $chargeTotalAmount = null)
@@ -115,7 +115,7 @@ class TradeSettlementLineMonetarySummationType
      *
      * Allowance Total Amount
      *
-     * @param \horstoeko\orderx\entities\extended\udt\AmountType $allowanceTotalAmount
+     * @param  \horstoeko\orderx\entities\extended\udt\AmountType $allowanceTotalAmount
      * @return self
      */
     public function setAllowanceTotalAmount(?\horstoeko\orderx\entities\extended\udt\AmountType $allowanceTotalAmount = null)
@@ -141,7 +141,7 @@ class TradeSettlementLineMonetarySummationType
      *
      * Tax Total Amount
      *
-     * @param \horstoeko\orderx\entities\extended\udt\AmountType $taxTotalAmount
+     * @param  \horstoeko\orderx\entities\extended\udt\AmountType $taxTotalAmount
      * @return self
      */
     public function setTaxTotalAmount(?\horstoeko\orderx\entities\extended\udt\AmountType $taxTotalAmount = null)
@@ -167,7 +167,7 @@ class TradeSettlementLineMonetarySummationType
      *
      * Total Allowance/Charge Amount
      *
-     * @param \horstoeko\orderx\entities\extended\udt\AmountType $totalAllowanceChargeAmount
+     * @param  \horstoeko\orderx\entities\extended\udt\AmountType $totalAllowanceChargeAmount
      * @return self
      */
     public function setTotalAllowanceChargeAmount(?\horstoeko\orderx\entities\extended\udt\AmountType $totalAllowanceChargeAmount = null)
@@ -175,7 +175,4 @@ class TradeSettlementLineMonetarySummationType
         $this->totalAllowanceChargeAmount = $totalAllowanceChargeAmount;
         return $this;
     }
-
-
 }
-

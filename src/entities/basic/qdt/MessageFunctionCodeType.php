@@ -5,7 +5,6 @@ namespace horstoeko\orderx\entities\basic\qdt;
 /**
  * Class representing MessageFunctionCodeType
  *
- *
  * XSD Type: MessageFunctionCodeType
  */
 class MessageFunctionCodeType
@@ -29,7 +28,7 @@ class MessageFunctionCodeType
     /**
      * Gets or sets the inner value
      *
-     * @param string $value
+     * @param  string $value
      * @return string
      */
     public function value()
@@ -49,7 +48,4 @@ class MessageFunctionCodeType
     {
         return strval($this->__value);
     }
-
-
 }
-

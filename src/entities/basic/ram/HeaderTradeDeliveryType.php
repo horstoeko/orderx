@@ -60,7 +60,7 @@ class HeaderTradeDeliveryType
      *
      * Ship To Party
      *
-     * @param \horstoeko\orderx\entities\basic\ram\TradePartyType $shipToTradeParty
+     * @param  \horstoeko\orderx\entities\basic\ram\TradePartyType $shipToTradeParty
      * @return self
      */
     public function setShipToTradeParty(?\horstoeko\orderx\entities\basic\ram\TradePartyType $shipToTradeParty = null)
@@ -86,7 +86,7 @@ class HeaderTradeDeliveryType
      *
      * Ship From Party
      *
-     * @param \horstoeko\orderx\entities\basic\ram\TradePartyType $shipFromTradeParty
+     * @param  \horstoeko\orderx\entities\basic\ram\TradePartyType $shipFromTradeParty
      * @return self
      */
     public function setShipFromTradeParty(?\horstoeko\orderx\entities\basic\ram\TradePartyType $shipFromTradeParty = null)
@@ -101,7 +101,7 @@ class HeaderTradeDeliveryType
      * Requested Delivery Event
      *
      * @return self
-     * @param \horstoeko\orderx\entities\basic\ram\SupplyChainEventType $requestedDeliverySupplyChainEvent
+     * @param  \horstoeko\orderx\entities\basic\ram\SupplyChainEventType $requestedDeliverySupplyChainEvent
      */
     public function addToRequestedDeliverySupplyChainEvent(\horstoeko\orderx\entities\basic\ram\SupplyChainEventType $requestedDeliverySupplyChainEvent)
     {
@@ -114,7 +114,7 @@ class HeaderTradeDeliveryType
      *
      * Requested Delivery Event
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetRequestedDeliverySupplyChainEvent($index)
@@ -127,7 +127,7 @@ class HeaderTradeDeliveryType
      *
      * Requested Delivery Event
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetRequestedDeliverySupplyChainEvent($index)
@@ -152,7 +152,7 @@ class HeaderTradeDeliveryType
      *
      * Requested Delivery Event
      *
-     * @param \horstoeko\orderx\entities\basic\ram\SupplyChainEventType[] $requestedDeliverySupplyChainEvent
+     * @param  \horstoeko\orderx\entities\basic\ram\SupplyChainEventType[] $requestedDeliverySupplyChainEvent
      * @return self
      */
     public function setRequestedDeliverySupplyChainEvent(array $requestedDeliverySupplyChainEvent = null)
@@ -167,7 +167,7 @@ class HeaderTradeDeliveryType
      * Requested Despatch Event
      *
      * @return self
-     * @param \horstoeko\orderx\entities\basic\ram\SupplyChainEventType $requestedDespatchSupplyChainEvent
+     * @param  \horstoeko\orderx\entities\basic\ram\SupplyChainEventType $requestedDespatchSupplyChainEvent
      */
     public function addToRequestedDespatchSupplyChainEvent(\horstoeko\orderx\entities\basic\ram\SupplyChainEventType $requestedDespatchSupplyChainEvent)
     {
@@ -180,7 +180,7 @@ class HeaderTradeDeliveryType
      *
      * Requested Despatch Event
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetRequestedDespatchSupplyChainEvent($index)
@@ -193,7 +193,7 @@ class HeaderTradeDeliveryType
      *
      * Requested Despatch Event
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetRequestedDespatchSupplyChainEvent($index)
@@ -218,7 +218,7 @@ class HeaderTradeDeliveryType
      *
      * Requested Despatch Event
      *
-     * @param \horstoeko\orderx\entities\basic\ram\SupplyChainEventType[] $requestedDespatchSupplyChainEvent
+     * @param  \horstoeko\orderx\entities\basic\ram\SupplyChainEventType[] $requestedDespatchSupplyChainEvent
      * @return self
      */
     public function setRequestedDespatchSupplyChainEvent(array $requestedDespatchSupplyChainEvent = null)
@@ -226,7 +226,4 @@ class HeaderTradeDeliveryType
         $this->requestedDespatchSupplyChainEvent = $requestedDespatchSupplyChainEvent;
         return $this;
     }
-
-
 }
-

@@ -70,7 +70,7 @@ class SupplyChainTradeLineItemType
      *
      * Associated Document Line
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\DocumentLineDocumentType $associatedDocumentLineDocument
+     * @param  \horstoeko\orderx\entities\comfort\ram\DocumentLineDocumentType $associatedDocumentLineDocument
      * @return self
      */
     public function setAssociatedDocumentLineDocument(\horstoeko\orderx\entities\comfort\ram\DocumentLineDocumentType $associatedDocumentLineDocument)
@@ -96,7 +96,7 @@ class SupplyChainTradeLineItemType
      *
      * Trade Product
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\TradeProductType $specifiedTradeProduct
+     * @param  \horstoeko\orderx\entities\comfort\ram\TradeProductType $specifiedTradeProduct
      * @return self
      */
     public function setSpecifiedTradeProduct(?\horstoeko\orderx\entities\comfort\ram\TradeProductType $specifiedTradeProduct = null)
@@ -122,7 +122,7 @@ class SupplyChainTradeLineItemType
      *
      * Substituted Product
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\ReferencedProductType $substitutedReferencedProduct
+     * @param  \horstoeko\orderx\entities\comfort\ram\ReferencedProductType $substitutedReferencedProduct
      * @return self
      */
     public function setSubstitutedReferencedProduct(?\horstoeko\orderx\entities\comfort\ram\ReferencedProductType $substitutedReferencedProduct = null)
@@ -148,7 +148,7 @@ class SupplyChainTradeLineItemType
      *
      * Line Trade Agreement
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\LineTradeAgreementType $specifiedLineTradeAgreement
+     * @param  \horstoeko\orderx\entities\comfort\ram\LineTradeAgreementType $specifiedLineTradeAgreement
      * @return self
      */
     public function setSpecifiedLineTradeAgreement(\horstoeko\orderx\entities\comfort\ram\LineTradeAgreementType $specifiedLineTradeAgreement)
@@ -174,7 +174,7 @@ class SupplyChainTradeLineItemType
      *
      * Line Trade Delivery
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\LineTradeDeliveryType $specifiedLineTradeDelivery
+     * @param  \horstoeko\orderx\entities\comfort\ram\LineTradeDeliveryType $specifiedLineTradeDelivery
      * @return self
      */
     public function setSpecifiedLineTradeDelivery(\horstoeko\orderx\entities\comfort\ram\LineTradeDeliveryType $specifiedLineTradeDelivery)
@@ -200,7 +200,7 @@ class SupplyChainTradeLineItemType
      *
      * Line Trade Settlement
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\LineTradeSettlementType $specifiedLineTradeSettlement
+     * @param  \horstoeko\orderx\entities\comfort\ram\LineTradeSettlementType $specifiedLineTradeSettlement
      * @return self
      */
     public function setSpecifiedLineTradeSettlement(\horstoeko\orderx\entities\comfort\ram\LineTradeSettlementType $specifiedLineTradeSettlement)
@@ -208,7 +208,4 @@ class SupplyChainTradeLineItemType
         $this->specifiedLineTradeSettlement = $specifiedLineTradeSettlement;
         return $this;
     }
-
-
 }
-

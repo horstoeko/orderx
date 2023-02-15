@@ -47,7 +47,7 @@ class SupplyChainTradeTransactionType
      * Included Trade Line Item
      *
      * @return self
-     * @param \horstoeko\orderx\entities\comfort\ram\SupplyChainTradeLineItemType $includedSupplyChainTradeLineItem
+     * @param  \horstoeko\orderx\entities\comfort\ram\SupplyChainTradeLineItemType $includedSupplyChainTradeLineItem
      */
     public function addToIncludedSupplyChainTradeLineItem(\horstoeko\orderx\entities\comfort\ram\SupplyChainTradeLineItemType $includedSupplyChainTradeLineItem)
     {
@@ -60,7 +60,7 @@ class SupplyChainTradeTransactionType
      *
      * Included Trade Line Item
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetIncludedSupplyChainTradeLineItem($index)
@@ -73,7 +73,7 @@ class SupplyChainTradeTransactionType
      *
      * Included Trade Line Item
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetIncludedSupplyChainTradeLineItem($index)
@@ -98,7 +98,7 @@ class SupplyChainTradeTransactionType
      *
      * Included Trade Line Item
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\SupplyChainTradeLineItemType[] $includedSupplyChainTradeLineItem
+     * @param  \horstoeko\orderx\entities\comfort\ram\SupplyChainTradeLineItemType[] $includedSupplyChainTradeLineItem
      * @return self
      */
     public function setIncludedSupplyChainTradeLineItem(array $includedSupplyChainTradeLineItem = null)
@@ -124,7 +124,7 @@ class SupplyChainTradeTransactionType
      *
      * Header Trade Agreement
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\HeaderTradeAgreementType $applicableHeaderTradeAgreement
+     * @param  \horstoeko\orderx\entities\comfort\ram\HeaderTradeAgreementType $applicableHeaderTradeAgreement
      * @return self
      */
     public function setApplicableHeaderTradeAgreement(\horstoeko\orderx\entities\comfort\ram\HeaderTradeAgreementType $applicableHeaderTradeAgreement)
@@ -150,7 +150,7 @@ class SupplyChainTradeTransactionType
      *
      * Header Trade Delivery
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\HeaderTradeDeliveryType $applicableHeaderTradeDelivery
+     * @param  \horstoeko\orderx\entities\comfort\ram\HeaderTradeDeliveryType $applicableHeaderTradeDelivery
      * @return self
      */
     public function setApplicableHeaderTradeDelivery(\horstoeko\orderx\entities\comfort\ram\HeaderTradeDeliveryType $applicableHeaderTradeDelivery)
@@ -176,7 +176,7 @@ class SupplyChainTradeTransactionType
      *
      * Header Trade Settlement
      *
-     * @param \horstoeko\orderx\entities\comfort\ram\HeaderTradeSettlementType $applicableHeaderTradeSettlement
+     * @param  \horstoeko\orderx\entities\comfort\ram\HeaderTradeSettlementType $applicableHeaderTradeSettlement
      * @return self
      */
     public function setApplicableHeaderTradeSettlement(\horstoeko\orderx\entities\comfort\ram\HeaderTradeSettlementType $applicableHeaderTradeSettlement)
@@ -184,7 +184,4 @@ class SupplyChainTradeTransactionType
         $this->applicableHeaderTradeSettlement = $applicableHeaderTradeSettlement;
         return $this;
     }
-
-
 }
-

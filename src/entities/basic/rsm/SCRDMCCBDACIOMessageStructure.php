@@ -10,4 +10,3 @@ class SCRDMCCBDACIOMessageStructure extends SCRDMCCBDACIOMessageStructureType
 
 
 }
-

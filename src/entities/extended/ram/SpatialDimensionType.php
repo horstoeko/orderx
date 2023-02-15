@@ -49,7 +49,7 @@ class SpatialDimensionType
      *
      * Width
      *
-     * @param \horstoeko\orderx\entities\extended\udt\MeasureType $widthMeasure
+     * @param  \horstoeko\orderx\entities\extended\udt\MeasureType $widthMeasure
      * @return self
      */
     public function setWidthMeasure(?\horstoeko\orderx\entities\extended\udt\MeasureType $widthMeasure = null)
@@ -75,7 +75,7 @@ class SpatialDimensionType
      *
      * Length
      *
-     * @param \horstoeko\orderx\entities\extended\udt\MeasureType $lengthMeasure
+     * @param  \horstoeko\orderx\entities\extended\udt\MeasureType $lengthMeasure
      * @return self
      */
     public function setLengthMeasure(?\horstoeko\orderx\entities\extended\udt\MeasureType $lengthMeasure = null)
@@ -101,7 +101,7 @@ class SpatialDimensionType
      *
      * Height
      *
-     * @param \horstoeko\orderx\entities\extended\udt\MeasureType $heightMeasure
+     * @param  \horstoeko\orderx\entities\extended\udt\MeasureType $heightMeasure
      * @return self
      */
     public function setHeightMeasure(?\horstoeko\orderx\entities\extended\udt\MeasureType $heightMeasure = null)
@@ -109,7 +109,4 @@ class SpatialDimensionType
         $this->heightMeasure = $heightMeasure;
         return $this;
     }
-
-
 }
-

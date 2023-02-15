@@ -49,7 +49,7 @@ class LegalOrganizationType
      *
      * ID
      *
-     * @param \horstoeko\orderx\entities\extended\udt\IDType $iD
+     * @param  \horstoeko\orderx\entities\extended\udt\IDType $iD
      * @return self
      */
     public function setID(?\horstoeko\orderx\entities\extended\udt\IDType $iD = null)
@@ -75,7 +75,7 @@ class LegalOrganizationType
      *
      * Trading Name
      *
-     * @param string $tradingBusinessName
+     * @param  string $tradingBusinessName
      * @return self
      */
     public function setTradingBusinessName($tradingBusinessName)
@@ -101,7 +101,7 @@ class LegalOrganizationType
      *
      * Postal Address
      *
-     * @param \horstoeko\orderx\entities\extended\ram\TradeAddressType $postalTradeAddress
+     * @param  \horstoeko\orderx\entities\extended\ram\TradeAddressType $postalTradeAddress
      * @return self
      */
     public function setPostalTradeAddress(?\horstoeko\orderx\entities\extended\ram\TradeAddressType $postalTradeAddress = null)
@@ -109,7 +109,4 @@ class LegalOrganizationType
         $this->postalTradeAddress = $postalTradeAddress;
         return $this;
     }
-
-
 }
-

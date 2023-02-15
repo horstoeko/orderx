@@ -172,7 +172,7 @@ class HeaderTradeAgreementType
      *
      * Buyer Reference Text
      *
-     * @param string $buyerReference
+     * @param  string $buyerReference
      * @return self
      */
     public function setBuyerReference($buyerReference)
@@ -198,7 +198,7 @@ class HeaderTradeAgreementType
      *
      * Seller
      *
-     * @param \horstoeko\orderx\entities\extended\ram\TradePartyType $sellerTradeParty
+     * @param  \horstoeko\orderx\entities\extended\ram\TradePartyType $sellerTradeParty
      * @return self
      */
     public function setSellerTradeParty(\horstoeko\orderx\entities\extended\ram\TradePartyType $sellerTradeParty)
@@ -224,7 +224,7 @@ class HeaderTradeAgreementType
      *
      * Buyer
      *
-     * @param \horstoeko\orderx\entities\extended\ram\TradePartyType $buyerTradeParty
+     * @param  \horstoeko\orderx\entities\extended\ram\TradePartyType $buyerTradeParty
      * @return self
      */
     public function setBuyerTradeParty(\horstoeko\orderx\entities\extended\ram\TradePartyType $buyerTradeParty)
@@ -250,7 +250,7 @@ class HeaderTradeAgreementType
      *
      * Buyer Requisitioner
      *
-     * @param \horstoeko\orderx\entities\extended\ram\TradePartyType $buyerRequisitionerTradeParty
+     * @param  \horstoeko\orderx\entities\extended\ram\TradePartyType $buyerRequisitionerTradeParty
      * @return self
      */
     public function setBuyerRequisitionerTradeParty(?\horstoeko\orderx\entities\extended\ram\TradePartyType $buyerRequisitionerTradeParty = null)
@@ -276,7 +276,7 @@ class HeaderTradeAgreementType
      *
      * End User
      *
-     * @param \horstoeko\orderx\entities\extended\ram\TradePartyType $productEndUserTradeParty
+     * @param  \horstoeko\orderx\entities\extended\ram\TradePartyType $productEndUserTradeParty
      * @return self
      */
     public function setProductEndUserTradeParty(?\horstoeko\orderx\entities\extended\ram\TradePartyType $productEndUserTradeParty = null)
@@ -302,7 +302,7 @@ class HeaderTradeAgreementType
      *
      * Trade Delivery Terms
      *
-     * @param \horstoeko\orderx\entities\extended\ram\TradeDeliveryTermsType $applicableTradeDeliveryTerms
+     * @param  \horstoeko\orderx\entities\extended\ram\TradeDeliveryTermsType $applicableTradeDeliveryTerms
      * @return self
      */
     public function setApplicableTradeDeliveryTerms(?\horstoeko\orderx\entities\extended\ram\TradeDeliveryTermsType $applicableTradeDeliveryTerms = null)
@@ -328,7 +328,7 @@ class HeaderTradeAgreementType
      *
      * Seller Order Document
      *
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $sellerOrderReferencedDocument
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $sellerOrderReferencedDocument
      * @return self
      */
     public function setSellerOrderReferencedDocument(?\horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $sellerOrderReferencedDocument = null)
@@ -354,7 +354,7 @@ class HeaderTradeAgreementType
      *
      * Buyer Order Document
      *
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $buyerOrderReferencedDocument
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $buyerOrderReferencedDocument
      * @return self
      */
     public function setBuyerOrderReferencedDocument(?\horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $buyerOrderReferencedDocument = null)
@@ -380,7 +380,7 @@ class HeaderTradeAgreementType
      *
      * Quotation Document
      *
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $quotationReferencedDocument
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $quotationReferencedDocument
      * @return self
      */
     public function setQuotationReferencedDocument(?\horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $quotationReferencedDocument = null)
@@ -406,7 +406,7 @@ class HeaderTradeAgreementType
      *
      * Contract Document
      *
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $contractReferencedDocument
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $contractReferencedDocument
      * @return self
      */
     public function setContractReferencedDocument(?\horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $contractReferencedDocument = null)
@@ -432,7 +432,7 @@ class HeaderTradeAgreementType
      *
      * Requisition Document
      *
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $requisitionReferencedDocument
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $requisitionReferencedDocument
      * @return self
      */
     public function setRequisitionReferencedDocument(?\horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $requisitionReferencedDocument = null)
@@ -447,7 +447,7 @@ class HeaderTradeAgreementType
      * Additional Document
      *
      * @return self
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $additionalReferencedDocument
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $additionalReferencedDocument
      */
     public function addToAdditionalReferencedDocument(\horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $additionalReferencedDocument)
     {
@@ -460,7 +460,7 @@ class HeaderTradeAgreementType
      *
      * Additional Document
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetAdditionalReferencedDocument($index)
@@ -473,7 +473,7 @@ class HeaderTradeAgreementType
      *
      * Additional Document
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetAdditionalReferencedDocument($index)
@@ -498,7 +498,7 @@ class HeaderTradeAgreementType
      *
      * Additional Document
      *
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType[] $additionalReferencedDocument
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType[] $additionalReferencedDocument
      * @return self
      */
     public function setAdditionalReferencedDocument(array $additionalReferencedDocument = null)
@@ -524,7 +524,7 @@ class HeaderTradeAgreementType
      *
      * Buyer Agent
      *
-     * @param \horstoeko\orderx\entities\extended\ram\TradePartyType $buyerAgentTradeParty
+     * @param  \horstoeko\orderx\entities\extended\ram\TradePartyType $buyerAgentTradeParty
      * @return self
      */
     public function setBuyerAgentTradeParty(?\horstoeko\orderx\entities\extended\ram\TradePartyType $buyerAgentTradeParty = null)
@@ -550,7 +550,7 @@ class HeaderTradeAgreementType
      *
      * Catalogue Document
      *
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $catalogueReferencedDocument
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $catalogueReferencedDocument
      * @return self
      */
     public function setCatalogueReferencedDocument(?\horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $catalogueReferencedDocument = null)
@@ -576,7 +576,7 @@ class HeaderTradeAgreementType
      *
      * Blanket Order Document
      *
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $blanketOrderReferencedDocument
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $blanketOrderReferencedDocument
      * @return self
      */
     public function setBlanketOrderReferencedDocument(?\horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $blanketOrderReferencedDocument = null)
@@ -602,7 +602,7 @@ class HeaderTradeAgreementType
      *
      * Previous Order Document
      *
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $previousOrderReferencedDocument
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $previousOrderReferencedDocument
      * @return self
      */
     public function setPreviousOrderReferencedDocument(?\horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $previousOrderReferencedDocument = null)
@@ -628,7 +628,7 @@ class HeaderTradeAgreementType
      *
      * Previous Order Change Document
      *
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $previousOrderChangeReferencedDocument
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $previousOrderChangeReferencedDocument
      * @return self
      */
     public function setPreviousOrderChangeReferencedDocument(?\horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $previousOrderChangeReferencedDocument = null)
@@ -654,7 +654,7 @@ class HeaderTradeAgreementType
      *
      * Previous Order Response Document
      *
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $previousOrderResponseReferencedDocument
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $previousOrderResponseReferencedDocument
      * @return self
      */
     public function setPreviousOrderResponseReferencedDocument(?\horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $previousOrderResponseReferencedDocument = null)
@@ -680,7 +680,7 @@ class HeaderTradeAgreementType
      *
      * Procuring Project
      *
-     * @param \horstoeko\orderx\entities\extended\ram\ProcuringProjectType $specifiedProcuringProject
+     * @param  \horstoeko\orderx\entities\extended\ram\ProcuringProjectType $specifiedProcuringProject
      * @return self
      */
     public function setSpecifiedProcuringProject(?\horstoeko\orderx\entities\extended\ram\ProcuringProjectType $specifiedProcuringProject = null)
@@ -695,7 +695,7 @@ class HeaderTradeAgreementType
      * Ultimate Customer Order Document
      *
      * @return self
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $ultimateCustomerOrderReferencedDocument
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $ultimateCustomerOrderReferencedDocument
      */
     public function addToUltimateCustomerOrderReferencedDocument(\horstoeko\orderx\entities\extended\ram\ReferencedDocumentType $ultimateCustomerOrderReferencedDocument)
     {
@@ -708,7 +708,7 @@ class HeaderTradeAgreementType
      *
      * Ultimate Customer Order Document
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetUltimateCustomerOrderReferencedDocument($index)
@@ -721,7 +721,7 @@ class HeaderTradeAgreementType
      *
      * Ultimate Customer Order Document
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetUltimateCustomerOrderReferencedDocument($index)
@@ -746,7 +746,7 @@ class HeaderTradeAgreementType
      *
      * Ultimate Customer Order Document
      *
-     * @param \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType[] $ultimateCustomerOrderReferencedDocument
+     * @param  \horstoeko\orderx\entities\extended\ram\ReferencedDocumentType[] $ultimateCustomerOrderReferencedDocument
      * @return self
      */
     public function setUltimateCustomerOrderReferencedDocument(array $ultimateCustomerOrderReferencedDocument = null)
@@ -754,7 +754,4 @@ class HeaderTradeAgreementType
         $this->ultimateCustomerOrderReferencedDocument = $ultimateCustomerOrderReferencedDocument;
         return $this;
     }
-
-
 }
-

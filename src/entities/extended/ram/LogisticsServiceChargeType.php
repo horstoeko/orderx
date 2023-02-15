@@ -51,7 +51,7 @@ class LogisticsServiceChargeType
      *
      * Description
      *
-     * @param string $description
+     * @param  string $description
      * @return self
      */
     public function setDescription($description)
@@ -77,7 +77,7 @@ class LogisticsServiceChargeType
      *
      * Applied Amount
      *
-     * @param \horstoeko\orderx\entities\extended\udt\AmountType $appliedAmount
+     * @param  \horstoeko\orderx\entities\extended\udt\AmountType $appliedAmount
      * @return self
      */
     public function setAppliedAmount(\horstoeko\orderx\entities\extended\udt\AmountType $appliedAmount)
@@ -92,7 +92,7 @@ class LogisticsServiceChargeType
      * Trade Tax
      *
      * @return self
-     * @param \horstoeko\orderx\entities\extended\ram\TradeTaxType $appliedTradeTax
+     * @param  \horstoeko\orderx\entities\extended\ram\TradeTaxType $appliedTradeTax
      */
     public function addToAppliedTradeTax(\horstoeko\orderx\entities\extended\ram\TradeTaxType $appliedTradeTax)
     {
@@ -105,7 +105,7 @@ class LogisticsServiceChargeType
      *
      * Trade Tax
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return bool
      */
     public function issetAppliedTradeTax($index)
@@ -118,7 +118,7 @@ class LogisticsServiceChargeType
      *
      * Trade Tax
      *
-     * @param int|string $index
+     * @param  int|string $index
      * @return void
      */
     public function unsetAppliedTradeTax($index)
@@ -143,7 +143,7 @@ class LogisticsServiceChargeType
      *
      * Trade Tax
      *
-     * @param \horstoeko\orderx\entities\extended\ram\TradeTaxType[] $appliedTradeTax
+     * @param  \horstoeko\orderx\entities\extended\ram\TradeTaxType[] $appliedTradeTax
      * @return self
      */
     public function setAppliedTradeTax(array $appliedTradeTax = null)
@@ -151,7 +151,4 @@ class LogisticsServiceChargeType
         $this->appliedTradeTax = $appliedTradeTax;
         return $this;
     }
-
-
 }
-
