@@ -63,7 +63,7 @@ class OrderProfiles
             'name' => 'extended',
             'altname' => 'EXTENDED',
             'description' => 'The EXTENDED Profile is the COMFORT profile, with more information on line level, allowing for instance multiple delivery location, Buyer Requisitioner on line level, minimum and maximum requested quantities, Seller and Buyer legal Address (if different of Address), VAT Breakdown, … and all information on EXTENDED profile for Factur-X that can be present at the Order step of the global supply chain.',
-            'contextparameter' => 'urn:order-x.eu:1p0:basicurn:order-x.eu:1p0:extended',
+            'contextparameter' => 'urn:order-x.eu:1p0:extended',
             'attachmentfilename' => 'order-x.xml',
             'xmpname' => 'EXTENDED',
             'xsdfilename' => 'SCRDMCCBDACIOMessageStructure_100pD20B.xsd',
