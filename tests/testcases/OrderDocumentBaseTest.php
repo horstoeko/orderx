@@ -46,7 +46,7 @@ class OrderDocumentBaseTest extends TestCase
         $this->assertEquals(OrderProfiles::PROFILE_EXTENDED, $doc->getProfileId());
         $this->assertArrayHasKey("contextparameter", $doc->getProfileDefinition());
         $this->assertArrayHasKey("name", $doc->getProfileDefinition());
-        $this->assertEquals("urn:order-x.eu:1p0:basicurn:order-x.eu:1p0:extended", $doc->getProfileDefinition()["contextparameter"]);
+        $this->assertEquals("urn:order-x.eu:1p0:extended", $doc->getProfileDefinition()["contextparameter"]);
         $this->assertEquals("extended", $doc->getProfileDefinition()["name"]);
     }
 
