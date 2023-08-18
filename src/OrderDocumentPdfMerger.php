@@ -1,0 +1,143 @@
+<?php
+
+/**
+ * This file is a part of horstoeko/orderx.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace horstoeko\orderx;
+
+use Exception;
+use horstoeko\orderx\exception\OrderCannotFindProfileString;
+use horstoeko\orderx\exception\OrderUnknownProfileException;
+use horstoeko\orderx\OrderDocumentPdfBuilderAbstract;
+use horstoeko\orderx\OrderProfiles;
+use SimpleXMLElement;
+
+/**
+ * Class representing the facillity adding existing XML data (file or data-string)
+ * to an existing PDF with conversion to PDF/A
+ *
+ * @category Order-X
+ * @package  Order-X
+ * @author   D. Erling <horstoeko@erling.com.de>
+ * @license  https://opensource.org/licenses/MIT MIT
+ * @link     https://github.com/horstoeko/orderx
+ */
+class OrderDocumentPdfMerger extends OrderDocumentPdfBuilderAbstract
+{
+    /**
+     * Internal reference to the xml data (file or data-string)
+     *
+     * @var string
+     */
+    private $xmlDataOrFilename = "";
+
+    /**
+     * Cached XML data
+     *
+     * @var string
+     */
+    private $xmlDataCache = "";
+
+    /**
+     * Constructor
+     *
+     * @param string $xmlDataOrFilename
+     * The XML data as a string or the full qualified path to an XML-File
+     * containing the XML-data
+     * @param string $pdfData
+     * The full filename or a string containing the binary pdf data. This
+     * is the original PDF (e.g. created by a ERP system)
+     */
+    public function __construct(string $xmlDataOrFilename, string $pdfData)
+    {
+        $this->xmlDataOrFilename = $xmlDataOrFilename;
+
+        parent::__construct($pdfData);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getXmlContent(): string
+    {
+        if ($this->xmlDataCache) {
+            return $this->xmlDataCache;
+        }
+
+        if ($this->xmlDataIsFile()) {
+            $xmlContent = file_get_contents($this->xmlDataOrFilename);
+            if ($xmlContent === false) {
+                throw new Exception('Could read XML file...');
+            }
+        } else {
+            $xmlContent = $this->xmlDataOrFilename;
+        }
+
+        $this->xmlDataCache = $xmlContent;
+
+        return $xmlContent;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getXmlAttachmentFilename(): string
+    {
+        return $this->getProfileDefinition()['attachmentfilename'];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getXmlAttachmentXmpName(): string
+    {
+        return $this->getProfileDefinition()["xmpname"];
+    }
+
+    /**
+     * Returns true if the submitted $xmlDataOrFilename is a valid file.
+     * Otherwise it will return false
+     *
+     * @return boolean
+     */
+    private function xmlDataIsFile(): bool
+    {
+        try {
+            return @is_file($this->xmlDataOrFilename);
+        } catch (\TypeError $ex) {
+            return false;
+        }
+    }
+
+    /**
+     * Guess the profile type of the readden xml document
+     *
+     * @codeCoverageIgnore
+     *
+     * @return array
+     * @throws Exception
+     */
+    private function getProfileDefinition(): array
+    {
+        $xmlContent = $this->getXmlContent();
+
+        $xmldocument = new SimpleXMLElement($xmlContent);
+        $typeelement = $xmldocument->xpath('/rsm:SCRDMCCBDACIOMessageStructure/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID');
+
+        if (!is_array($typeelement) || !isset($typeelement[0])) {
+            throw new OrderCannotFindProfileString();
+        }
+
+        foreach (OrderProfiles::PROFILEDEF as $profile => $profiledef) {
+            if ($typeelement[0] == $profiledef["contextparameter"]) {
+                return $profiledef;
+            }
+        }
+
+        throw new OrderUnknownProfileException((string)$typeelement[0]);
+    }
+}
