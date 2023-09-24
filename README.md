@@ -2,6 +2,8 @@
 
 [![Latest Stable Version](https://poser.pugx.org/horstoeko/orderx/v/stable.png)](https://packagist.org/packages/horstoeko/orderx) [![Total Downloads](https://poser.pugx.org/horstoeko/orderx/downloads.png)](https://packagist.org/packages/horstoeko/orderx) [![Latest Unstable Version](https://poser.pugx.org/horstoeko/orderx/v/unstable.png)](https://packagist.org/packages/horstoeko/orderx) [![License](https://poser.pugx.org/horstoeko/orderx/license.png)](https://packagist.org/packages/horstoeko/orderx) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/horstoeko/orderx)
 
+[![CI (Ant, PHP 7.3)](https://github.com/horstoeko/orderx/actions/workflows/build.php73.ant.yml/badge.svg)](https://github.com/horstoeko/orderx/actions/workflows/build.php73.ant.yml) [![CI (Ant, PHP 7.4)](https://github.com/horstoeko/orderx/actions/workflows/build.php74.ant.yml/badge.svg)](https://github.com/horstoeko/orderx/actions/workflows/build.php74.ant.yml) [![CI (PHP 8.0)](https://github.com/horstoeko/orderx/actions/workflows/build.php80.ant.yml/badge.svg)](https://github.com/horstoeko/orderx/actions/workflows/build.php80.ant.yml) [![CI (PHP 8.1)](https://github.com/horstoeko/orderx/actions/workflows/build.php81.ant.yml/badge.svg)](https://github.com/horstoeko/orderx/actions/workflows/build.php81.ant.yml)
+
 A simple Order-X Library
 
 With `horstoeko/orderx` you can read and write xml files containing electronic orders data in all Profiles.
