@@ -82,6 +82,21 @@ class OrderObjectHelper
     }
 
     /**
+     * Creates an instance of DocumentStatusCodeType
+     *
+     * @param  string|null $value
+     * @return object|null
+     */
+    public function getDocumentStatusCodeType(?string $value = null): ?object
+    {
+        if (self::isAllNullOrEmpty(func_get_args())) {
+            return null;
+        }
+
+        return $this->createClassInstance('qdt\DocumentStatusCodeType', $value);
+    }
+
+    /**
      * Creates an instance of CurrencyCodeType
      *
      * @param  string|null $value
@@ -524,7 +539,7 @@ class OrderObjectHelper
         $this->tryCall($refdoctype, 'setURIID', $this->getIdType($uriid));
         $this->tryCall($refdoctype, 'setLineID', $this->getIdType($lineid));
         $this->tryCall($refdoctype, 'setTypeCode', $this->getCodeType($typecode));
-        $this->tryCall($refdoctype, 'setReferenceTypeCode', $this->getCodeType($reftypecode));
+        $this->tryCall($refdoctype, 'setReferenceTypeCode', $this->getReferenceCodeType($reftypecode));
         $this->tryCall($refdoctype, 'setFormattedIssueDateTime', $this->getFormattedDateTimeType($issueddate));
 
         foreach ($this->ensureStringArray($name) as $name) {
@@ -801,9 +816,9 @@ class OrderObjectHelper
 
         $deliveryterms = $this->createClassInstance('ram\TradeDeliveryTermsType');
 
-        $this->tryCall($deliveryterms, "setDeliveryTypeCode", $this->getCodeType($code));
+        $this->tryCall($deliveryterms, "setDeliveryTypeCode", $this->getDeliveryTermsCodeType($code));
         $this->tryCall($deliveryterms, "setDescription", $this->getTextType($description));
-        $this->tryCall($deliveryterms, "setFunctionCode", $this->getCodeType($functionCode));
+        $this->tryCall($deliveryterms, "setFunctionCode", $this->getDeliveryTermsFunctionCodeType($functionCode));
         $this->tryCall($deliveryterms, "setRelevantTradeLocation", $this->getTradeLocation($relevantTradeLocationId, $relevantTradeLocationName));
 
         return $deliveryterms;
@@ -890,7 +905,7 @@ class OrderObjectHelper
 
         $paymentMeans = $this->createClassInstance('ram\TradeSettlementPaymentMeansType');
 
-        $this->tryCall($paymentMeans, "setTypeCode", $this->getCodeType($typecode));
+        $this->tryCall($paymentMeans, "setTypeCode", $this->getPaymentMeansCodeType($typecode));
         $this->tryCallIfMethodExists($paymentMeans, "unsetInformation", "setInformation", [$this->getTextType($information)], $this->getTextType($information));
 
         return $paymentMeans;
@@ -1116,7 +1131,7 @@ class OrderObjectHelper
         $lineSettlement = $this->createClassInstance('ram\LineTradeSettlementType');
 
         $this->tryCall($line, "setAssociatedDocumentLineDocument", $doclinedoc);
-        $this->tryCall($doclinedoc, "setLineStatusCode", $this->getCodeType($lineStatusCode));
+        $this->tryCall($doclinedoc, "setLineStatusCode", $this->getLineStatusCodeType($lineStatusCode));
         if ($isTextPosition == false) {
             $this->tryCall($line, "setSpecifiedLineTradeAgreement", $lineAgreement);
             $this->tryCall($line, "setSpecifiedLineTradeDelivery", $lineDelivery);
@@ -1285,7 +1300,7 @@ class OrderObjectHelper
 
         $packaging = $this->createClassInstance('ram\SupplyChainPackagingType');
 
-        $this->tryCall($packaging, "setTypeCode", $this->getCodeType($typeCode));
+        $this->tryCall($packaging, "setTypeCode", $this->getPackageTypeCodeType($typeCode));
         $this->tryCall($packaging, "setLinearSpatialDimension", $spatialDimension);
 
         return $packaging;
@@ -1424,6 +1439,96 @@ class OrderObjectHelper
         }
 
         return $this->createClassInstance('qdt\AllowanceChargeReasonCodeType', $value);
+    }
+
+    /**
+     * Get delivery terms code type instance
+     *
+     * @param string|null $reason
+     * @return object|null
+     */
+    public function getDeliveryTermsCodeType(?string $value): ?object
+    {
+        if (self::isAllNullOrEmpty(func_get_args())) {
+            return null;
+        }
+
+        return $this->createClassInstance('qdt\DeliveryTermsCodeType', $value);
+    }
+
+    /**
+     * Get delivery terms function code type instance
+     *
+     * @param string|null $reason
+     * @return object|null
+     */
+    public function getDeliveryTermsFunctionCodeType(?string $value): ?object
+    {
+        if (self::isAllNullOrEmpty(func_get_args())) {
+            return null;
+        }
+
+        return $this->createClassInstance('qdt\DeliveryTermsFunctionCodeType', $value);
+    }
+
+    /**
+     * Get line status code type instance
+     *
+     * @param string|null $reason
+     * @return object|null
+     */
+    public function getLineStatusCodeType(?string $value): ?object
+    {
+        if (self::isAllNullOrEmpty(func_get_args())) {
+            return null;
+        }
+
+        return $this->createClassInstance('qdt\LineStatusCodeType', $value);
+    }
+
+    /**
+     * Get package type code type instance
+     *
+     * @param string|null $reason
+     * @return object|null
+     */
+    public function getPackageTypeCodeType(?string $value): ?object
+    {
+        if (self::isAllNullOrEmpty(func_get_args())) {
+            return null;
+        }
+
+        return $this->createClassInstance('qdt\PackageTypeCodeType', $value);
+    }
+
+    /**
+     * Get payment means code type instance
+     *
+     * @param string|null $reason
+     * @return object|null
+     */
+    public function getPaymentMeansCodeType(?string $value): ?object
+    {
+        if (self::isAllNullOrEmpty(func_get_args())) {
+            return null;
+        }
+
+        return $this->createClassInstance('qdt\PaymentMeansCodeType', $value);
+    }
+
+    /**
+     * Get reference code type instance
+     *
+     * @param string|null $reason
+     * @return object|null
+     */
+    public function getReferenceCodeType(?string $value): ?object
+    {
+        if (self::isAllNullOrEmpty(func_get_args())) {
+            return null;
+        }
+
+        return $this->createClassInstance('qdt\ReferenceCodeType', $value);
     }
 
     /**
