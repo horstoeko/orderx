@@ -271,7 +271,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentCurrency(string $documentCurrency): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->headerTradeSettlement, "setOrderCurrencyCode", $this->objectHelper->getIdType($documentCurrency));
+        $this->objectHelper->tryCall($this->headerTradeSettlement, "setOrderCurrencyCode", $this->objectHelper->getCurrencyCodeType($documentCurrency));
         return $this;
     }
 
