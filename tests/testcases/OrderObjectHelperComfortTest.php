@@ -280,7 +280,7 @@ class OrderObjectHelperComfortTest extends TestCase
         $this->assertEquals("SC", self::$objectHelper->getNoteType("Content", null, "SC")->getSubjectCode());
         $this->assertEquals("", self::$objectHelper->getNoteType("Content", "CC", null)->getSubjectCode());
 
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\entities\comfort\ram\NoteType::getContentCode()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\entities\comfort\ram\NoteType::getContentCode()');
         $this->assertEquals("CC", self::$objectHelper->getNoteType("Content", "CC", "SC")->getContentCode());
         $this->assertEquals("", self::$objectHelper->getNoteType("Content", "", "SC")->getContentCode());
         $this->assertEquals("CC", self::$objectHelper->getNoteType("Content", "CC", "")->getContentCode());
@@ -675,7 +675,7 @@ class OrderObjectHelperComfortTest extends TestCase
         $this->assertEquals("EMAIL", $contact->getEmailURIUniversalCommunication()->getURIID()->value());
         $this->assertNull($contact->getEmailURIUniversalCommunication()->getURIID()->getSchemeID());
 
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\entities\comfort\ram\TradeContactType::getFaxUniversalCommunication()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\entities\comfort\ram\TradeContactType::getFaxUniversalCommunication()');
         $this->assertEquals("FAX", $contact->getFaxUniversalCommunication()->getCompleteNumber());
     }
 
@@ -880,7 +880,7 @@ class OrderObjectHelperComfortTest extends TestCase
         $this->assertEquals("S", $tradeTax->getCategoryCode()->value());
         $this->assertEquals("VAT", $tradeTax->getTypeCode()->value());
         $this->assertEquals(19.0, $tradeTax->getRateApplicablePercent()->value());
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\entities\comfort\ram\TradeTaxType::getBasisAmount()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\entities\comfort\ram\TradeTaxType::getBasisAmount()');
         $this->assertEquals(100.0, $tradeTax->getBasisAmount()->value());
         $this->assertEquals(19.0, $tradeTax->getCalculatedAmount()->value());
         $this->assertEquals("Reason", $tradeTax->getExemptionReason()->value());
@@ -911,7 +911,7 @@ class OrderObjectHelperComfortTest extends TestCase
         $this->assertEquals("Reason", $allowanceCharge->getReason()->value());
         $this->assertEquals("RC", $allowanceCharge->getReasonCode()->value());
 
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType::getBasisQuantity()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\entities\comfort\ram\TradeAllowanceChargeType::getBasisQuantity()');
         $this->assertEquals(5, $allowanceCharge->getBasisQuantity()->value());
         $this->assertEquals("C62", $allowanceCharge->getBasisQuantity()->getUnitCode());
     }
@@ -1038,7 +1038,7 @@ class OrderObjectHelperComfortTest extends TestCase
         $this->assertEquals("DESC", $characteristic->getDescription());
         $this->assertEquals("VALUE", $characteristic->getValue()->value());
 
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\entities\comfort\ram\ProductCharacteristicType::getValueMeasure()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\entities\comfort\ram\ProductCharacteristicType::getValueMeasure()');
         $this->assertEquals(2.00, $characteristic->getValueMeasure()->value());
         $this->assertEquals("C62", $characteristic->getValueMeasure()->getUnitCode());
     }
@@ -1094,7 +1094,7 @@ class OrderObjectHelperComfortTest extends TestCase
         $this->assertEquals("BUYERID", $product->getBuyerAssignedID()->value());
         $this->assertEquals("NAME", $product->getName()->value());
         $this->assertEquals("DESC", $product->getDescription()->value());
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\entities\comfort\ram\ReferencedProductType::getUnitQuantity()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\entities\comfort\ram\ReferencedProductType::getUnitQuantity()');
         $this->assertEquals(5, $product->getUnitQuantity()->value());
         $this->assertEquals("C62", $product->getUnitQuantity()->getUnitCode());
     }
@@ -1174,7 +1174,7 @@ class OrderObjectHelperComfortTest extends TestCase
 
         $this->assertNotNull($summation);
         $this->assertEquals(100.0, $summation->getLineTotalAmount()->value());
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\entities\comfort\ram\TradeSettlementLineMonetarySummationType::getTotalAllowanceChargeAmount()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\entities\comfort\ram\TradeSettlementLineMonetarySummationType::getTotalAllowanceChargeAmount()');
         $this->assertEquals(50.0, $summation->getTotalAllowanceChargeAmount()->value());
     }
 

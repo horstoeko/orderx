@@ -234,9 +234,9 @@ class OrderObjectHelperBasicTest extends TestCase
 
         $this->assertEquals("", self::$objectHelper->getCodeType2("", "listid", "listversionid")->value());
 
-        $this->expectErrorMessage("Call to undefined method horstoeko\orderx\\entities\basic\udt\CodeType::getListID()");
+        $this->expectExceptionMessage("Call to undefined method horstoeko\orderx\\entities\basic\udt\CodeType::getListID()");
         $this->assertEquals("", self::$objectHelper->getCodeType2("Code")->getListID());
-        $this->expectErrorMessage("Call to undefined method horstoeko\orderx\\entities\basic\udt\CodeType::getListVersionID()");
+        $this->expectExceptionMessage("Call to undefined method horstoeko\orderx\\entities\basic\udt\CodeType::getListVersionID()");
         $this->assertEquals("", self::$objectHelper->getCodeType2("Code")->getListVersionID());
     }
 
@@ -275,7 +275,7 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("SC", self::$objectHelper->getNoteType("Content", null, "SC")->getSubjectCode());
         $this->assertEquals("", self::$objectHelper->getNoteType("Content", "CC", null)->getSubjectCode());
 
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\\entities\basic\ram\NoteType::getContentCode()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\\entities\basic\ram\NoteType::getContentCode()');
         $this->assertEquals("CC", self::$objectHelper->getNoteType("Content", "CC", "SC")->getContentCode());
         $this->assertEquals("", self::$objectHelper->getNoteType("Content", "", "SC")->getContentCode());
         $this->assertEquals("CC", self::$objectHelper->getNoteType("Content", "CC", "")->getContentCode());
@@ -523,7 +523,7 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("NAME", self::$objectHelper->getTradeParty("NAME", "ID", "DESC")->getName()->value());
         $this->assertEquals("ID", self::$objectHelper->getTradeParty("NAME", "ID", "DESC")->getID()->value());
 
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\entities\basic\ram\TradePartyType::getDescription()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\entities\basic\ram\TradePartyType::getDescription()');
         $this->assertEquals("DESC", self::$objectHelper->getTradeParty("NAME", "ID", "DESC")->getDescription()->value());
     }
 
@@ -640,7 +640,7 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("EMAIL", $contact->getEmailURIUniversalCommunication()->getURIID()->value());
         $this->assertNull($contact->getEmailURIUniversalCommunication()->getURIID()->getSchemeID());
 
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\\entities\basic\ram\TradeContactType::getFaxUniversalCommunication()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\\entities\basic\ram\TradeContactType::getFaxUniversalCommunication()');
         $this->assertEquals("FAX", $contact->getFaxUniversalCommunication()->getCompleteNumber());
     }
 
@@ -709,9 +709,9 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("CODE", $devTermsType->getDeliveryTypeCode()->value());
         $this->assertEquals("FUNCCODE", $devTermsType->getFunctionCode()->value());
 
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\entities\basic\ram\TradeDeliveryTermsType::getDescription()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\entities\basic\ram\TradeDeliveryTermsType::getDescription()');
         $this->assertEquals("DESC", $devTermsType->getDescription()->value());
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\entities\basic\ram\TradeDeliveryTermsType::getRelevantTradeLocation()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\entities\basic\ram\TradeDeliveryTermsType::getRelevantTradeLocation()');
         $this->assertEquals("LOCID", $devTermsType->getRelevantTradeLocation()->getID()->value());
         $this->assertEquals("LOCNAME", $devTermsType->getRelevantTradeLocation()->getName()->value());
     }
@@ -895,7 +895,7 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNotNull(self::$objectHelper->getTradeAccountingAccountType("ID", "TYPECODE"));
 
         $this->assertEquals("ID", self::$objectHelper->getTradeAccountingAccountType("ID", "TYPECODE")->getId()->value());
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\entities\basic\ram\TradeAccountingAccountType::getTypeCode()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\entities\basic\ram\TradeAccountingAccountType::getTypeCode()');
         $this->assertEquals("TYPECODE", self::$objectHelper->getTradeAccountingAccountType("ID", "TYPECODE")->getTypeCode()->value());
     }
 
@@ -946,9 +946,9 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("BUYERID", $product->getBuyerAssignedID()->value());
         $this->assertEquals("GID", $product->getGlobalID()->value());
         $this->assertEquals("GIDTYPE", $product->getGlobalID()->getSchemeID());
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\entities\basic\ram\TradeProductType::getBatchID()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\entities\basic\ram\TradeProductType::getBatchID()');
         $this->assertEquals("BATCHID", $product->getBatchID()->value());
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\entities\basic\ram\TradeProductType::getBrandName()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\entities\basic\ram\TradeProductType::getBrandName()');
         $this->assertEquals("BRANDNAME", $product->getBrandName()->value());
     }
 
@@ -1019,9 +1019,9 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("SELLERID", $product->getSellerAssignedID()->value());
         $this->assertEquals("BUYERID", $product->getBuyerAssignedID()->value());
         $this->assertEquals("NAME", $product->getName()->value());
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\\entities\basic\ram\ReferencedProductType::getDescription()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\\entities\basic\ram\ReferencedProductType::getDescription()');
         $this->assertEquals("DESC", $product->getDescription()->value());
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\\entities\basic\ram\ReferencedProductType::getUnitQuantity()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\\entities\basic\ram\ReferencedProductType::getUnitQuantity()');
         $this->assertEquals(5, $product->getUnitQuantity()->value());
         $this->assertEquals("C62", $product->getUnitQuantity()->getUnitCode());
     }
@@ -1092,7 +1092,7 @@ class OrderObjectHelperBasicTest extends TestCase
 
         $this->assertNotNull($summation);
         $this->assertEquals(100.0, $summation->getLineTotalAmount()->value());
-        $this->expectErrorMessage('Call to undefined method horstoeko\orderx\\entities\basic\ram\TradeSettlementLineMonetarySummationType::getTotalAllowanceChargeAmount()');
+        $this->expectExceptionMessage('Call to undefined method horstoeko\orderx\\entities\basic\ram\TradeSettlementLineMonetarySummationType::getTotalAllowanceChargeAmount()');
         $this->assertEquals(50.0, $summation->getTotalAllowanceChargeAmount()->value());
     }
 
