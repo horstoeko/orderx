@@ -321,7 +321,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPurposeCode(string $documentPurposeCode): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setPurposeCode", $this->objectHelper->getCodeType($documentPurposeCode));
+        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setPurposeCode", $this->objectHelper->getMessageFunctionCodeType($documentPurposeCode));
         return $this;
     }
 

@@ -97,6 +97,21 @@ class OrderObjectHelper
     }
 
     /**
+     * Creates an instance of CurrencyCodeType
+     *
+     * @param  string|null $value
+     * @return object|null
+     */
+    public function getMessageFunctionCodeType(?string $value = null): ?object
+    {
+        if (self::isAllNullOrEmpty(func_get_args())) {
+            return null;
+        }
+
+        return $this->createClassInstance('qdt\MessageFunctionCodeType', $value);
+    }
+
+    /**
      * Creates an instance of IDType
      *
      * @param  string|null $value
