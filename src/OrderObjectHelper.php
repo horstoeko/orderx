@@ -162,6 +162,21 @@ class OrderObjectHelper
     }
 
     /**
+     * Creates an instance of AccountingAccountTypeCodeType
+     *
+     * @param  string|null $value
+     * @return object|null
+     */
+    public function getAccountingAccountTypeCodeType(?string $value = null): ?object
+    {
+        if (self::isAllNullOrEmpty(func_get_args())) {
+            return null;
+        }
+
+        return $this->createClassInstance('qdt\AccountingAccountTypeCodeType', $value);
+    }
+
+    /**
      * Creates an instance of CodeType with extended list
      * information
      *
@@ -292,7 +307,7 @@ class OrderObjectHelper
         $amount = $this->createClassInstance('udt\AmountType');
 
         $this->tryCall($amount, "value", $value);
-        $this->tryCall($amount, "setCurrencyID", $currencyCode);
+        $this->tryCall($amount, "setCurrencyID", $this->getCurrencyCodeType($currencyCode));
 
         return $amount;
     }
@@ -662,7 +677,7 @@ class OrderObjectHelper
         $this->tryCall($address, "setLineThree", $this->getTextType($linethree));
         $this->tryCall($address, "setPostcodeCode", $this->getCodeType($postcode));
         $this->tryCall($address, "setCityName", $this->getTextType($city));
-        $this->tryCall($address, "setCountryID", $this->getCodeType($country));
+        $this->tryCall($address, "setCountryID", $this->getCountryIDType($country));
         $this->tryCallAll($address, ["addToCountrySubDivisionName", "setCountrySubDivisionName"], $this->getTextType($subdivision));
 
         return $address;
@@ -717,7 +732,7 @@ class OrderObjectHelper
         $this->tryCall($contact, "setTelephoneUniversalCommunication", $contactphone);
         $this->tryCall($contact, "setFaxUniversalCommunication", $contactfax);
         $this->tryCall($contact, "setEmailURIUniversalCommunication", $contactemail);
-        $this->tryCall($contact, "setTypeCode", $contactTypeCode);
+        $this->tryCall($contact, "setTypeCode", $this->getContactTypeCodeType($contactTypeCode));
 
         return $contact;
     }
@@ -970,7 +985,7 @@ class OrderObjectHelper
         $this->tryCall($allowanceCharge, "setBasisAmount", $this->getAmountType($basisAmount));
         $this->tryCall($allowanceCharge, "setBasisQuantity", $this->getQuantityType($basisQuantity, $basisQuantityUnitCode));
         $this->tryCall($allowanceCharge, "setActualAmount", $this->getAmountType($actualAmount));
-        $this->tryCall($allowanceCharge, "setReasonCode", $this->getCodeType($reasonCode));
+        $this->tryCall($allowanceCharge, "setReasonCode", $this->getAllowanceChargeReasonCodeType($reasonCode));
         $this->tryCall($allowanceCharge, "setReason", $this->getTextType($reason));
 
         if (!is_null($taxCategoryCode) && !is_null($taxTypeCode) && !is_null($rateApplicablePercent)) {
@@ -1056,7 +1071,7 @@ class OrderObjectHelper
         $account = $this->createClassInstance('ram\TradeAccountingAccountType');
 
         $this->tryCall($account, "setID", $this->getIdType($id));
-        $this->tryCall($account, "setTypeCode", $this->getCodeType($typeCode));
+        $this->tryCall($account, "setTypeCode", $this->getAccountingAccountTypeCodeType($typeCode));
 
         return $account;
     }
@@ -1379,6 +1394,36 @@ class OrderObjectHelper
         $rate = $this->createClassInstance('udt\RateType');
         $this->tryCall($rate, "value", $rateValue);
         return $rate;
+    }
+
+    /**
+     * Get Allowance Charge ReasonCode type instance
+     *
+     * @param string|null $reason
+     * @return object|null
+     */
+    public function getAllowanceChargeReasonCodeType(?string $reason): ?object
+    {
+        if (self::isAllNullOrEmpty(func_get_args())) {
+            return null;
+        }
+
+        return $this->createClassInstance('qdt\AllowanceChargeReasonCodeType', $reason);
+    }
+
+    /**
+     * Get contact type code type instance
+     *
+     * @param string|null $reason
+     * @return object|null
+     */
+    public function getContactTypeCodeType(?string $value): ?object
+    {
+        if (self::isAllNullOrEmpty(func_get_args())) {
+            return null;
+        }
+
+        return $this->createClassInstance('qdt\AllowanceChargeReasonCodeType', $value);
     }
 
     /**
