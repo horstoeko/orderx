@@ -247,7 +247,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentTypeCode(string $documentTypeCode): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setTypeCode", $this->objectHelper->getCodeType($documentTypeCode));
+        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setTypeCode", $this->objectHelper->getDocumentCodeType($documentTypeCode));
         return $this;
     }
 
