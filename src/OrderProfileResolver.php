@@ -29,7 +29,7 @@ class OrderProfileResolver
     /**
      * Resolve profile id and profile definition by the content of $xmlContent
      *
-     * @param string $xmlContent
+     * @param  string $xmlContent
      * @return array
      * @throws Exception
      */
@@ -58,7 +58,7 @@ class OrderProfileResolver
     /**
      * Resolve profile id by the content of $xmlContent
      *
-     * @param string $xmlContent
+     * @param  string $xmlContent
      * @return int
      * @throws Exception
      */
@@ -70,7 +70,7 @@ class OrderProfileResolver
     /**
      * Resolve profile definition by the content of $xmlContent
      *
-     * @param string $xmlContent
+     * @param  string $xmlContent
      * @return array
      * @throws Exception
      */
@@ -82,10 +82,10 @@ class OrderProfileResolver
     /**
      * Resolve profile id and profile definition by it's id
      *
-     * @param integer $profileId
+     * @param  integer $profileId
      * @return array
      * @throws Exception
-    */
+     */
     public static function resolveById(int $profileId): array
     {
         if (!isset(OrderProfiles::PROFILEDEF[$profileId])) {
@@ -98,7 +98,7 @@ class OrderProfileResolver
     /**
      * Resolve profile profile definition by it's id
      *
-     * @param int $profileId
+     * @param  int $profileId
      * @return array
      * @throws Exception
      */

@@ -1415,7 +1415,7 @@ class OrderObjectHelper
     /**
      * Get Allowance Charge ReasonCode type instance
      *
-     * @param string|null $reason
+     * @param  string|null $reason
      * @return object|null
      */
     public function getAllowanceChargeReasonCodeType(?string $reason): ?object
@@ -1430,7 +1430,7 @@ class OrderObjectHelper
     /**
      * Get contact type code type instance
      *
-     * @param string|null $reason
+     * @param  string|null $reason
      * @return object|null
      */
     public function getContactTypeCodeType(?string $value): ?object
@@ -1445,7 +1445,7 @@ class OrderObjectHelper
     /**
      * Get delivery terms code type instance
      *
-     * @param string|null $reason
+     * @param  string|null $reason
      * @return object|null
      */
     public function getDeliveryTermsCodeType(?string $value): ?object
@@ -1460,7 +1460,7 @@ class OrderObjectHelper
     /**
      * Get delivery terms function code type instance
      *
-     * @param string|null $reason
+     * @param  string|null $reason
      * @return object|null
      */
     public function getDeliveryTermsFunctionCodeType(?string $value): ?object
@@ -1475,7 +1475,7 @@ class OrderObjectHelper
     /**
      * Get line status code type instance
      *
-     * @param string|null $reason
+     * @param  string|null $reason
      * @return object|null
      */
     public function getLineStatusCodeType(?string $value): ?object
@@ -1490,7 +1490,7 @@ class OrderObjectHelper
     /**
      * Get package type code type instance
      *
-     * @param string|null $reason
+     * @param  string|null $reason
      * @return object|null
      */
     public function getPackageTypeCodeType(?string $value): ?object
@@ -1505,7 +1505,7 @@ class OrderObjectHelper
     /**
      * Get payment means code type instance
      *
-     * @param string|null $reason
+     * @param  string|null $reason
      * @return object|null
      */
     public function getPaymentMeansCodeType(?string $value): ?object
@@ -1520,7 +1520,7 @@ class OrderObjectHelper
     /**
      * Get reference code type instance
      *
-     * @param string|null $reason
+     * @param  string|null $reason
      * @return object|null
      */
     public function getReferenceCodeType(?string $value): ?object

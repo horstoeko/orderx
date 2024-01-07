@@ -46,7 +46,7 @@ abstract class OrderDocumentPdfBuilderAbstract
     /**
      * Constructor
      *
-     * @param string               $pdfData
+     * @param string $pdfData
      * The full filename or a string containing the binary pdf data. This
      * is the original PDF (e.g. created by a ERP system)
      */
@@ -252,18 +252,18 @@ abstract class OrderDocumentPdfBuilderAbstract
         $docTypeCode = $docTypeXpath->item(0)->nodeValue;
 
         switch ($docTypeCode) {
-        case OrderDocumentTypes::ORDER:
-            $docTypeName = 'Order';
-            break;
-        case OrderDocumentTypes::ORDER_CHANGE:
-            $docTypeName = 'Order Change';
-            break;
-        case OrderDocumentTypes::ORDER_RESPONSE:
-            $docTypeName = 'Order Response';
-            break;
-        default:
-            $docTypeName = 'Order';
-            break;
+            case OrderDocumentTypes::ORDER:
+                $docTypeName = 'Order';
+                break;
+            case OrderDocumentTypes::ORDER_CHANGE:
+                $docTypeName = 'Order Change';
+                break;
+            case OrderDocumentTypes::ORDER_RESPONSE:
+                $docTypeName = 'Order Response';
+                break;
+            default:
+                $docTypeName = 'Order';
+                break;
         }
 
         $orderInformation = array(
