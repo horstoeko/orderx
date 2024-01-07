@@ -9,8 +9,10 @@
 
 namespace horstoeko\orderx;
 
+use Exception;
 use horstoeko\orderx\exception\OrderFileNotFoundException;
 use horstoeko\orderx\exception\OrderNoValidAttachmentFoundInPdfException;
+use JMS\Serializer\Exception\RuntimeException;
 use Smalot\PdfParser\Parser as PdfParser;
 
 /**
@@ -33,10 +35,12 @@ class OrderDocumentPdfReader
     /**
      * Load a PDF file (Order-X)
      *
-     * @param  string $pdfFilename
+     * @param string $pdfFilename
      * Contains a full-qualified filename which must exist and must be readable
-     * @return OrderDocumentReader|null
+     * @return null|OrderDocumentReader
      * @throws OrderFileNotFoundException
+     * @throws Exception
+     * @throws RuntimeException
      * @throws OrderNoValidAttachmentFoundInPdfException
      */
     public static function readAndGuessFromFile(string $pdfFilename): ?OrderDocumentReader
