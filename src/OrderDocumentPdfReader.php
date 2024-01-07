@@ -50,16 +50,16 @@ class OrderDocumentPdfReader
 
         $pdfParser = new PdfParser();
         $pdfParsed = $pdfParser->parseFile($pdfFilename);
-        $filespec = $pdfParsed->getObjectsByType('Filespec');
+        $filespecs = $pdfParsed->getObjectsByType('Filespec');
 
         $attachmentFound = false;
         $attachmentIndex = 0;
         $embeddedFileIndex = 0;
         $orderDocument = null;
 
-        foreach ($filespec as $spec) {
-            $specDetails = $spec->getDetails();
-            if (in_array($specDetails['F'], static::ATTACHMENT_FILEAMES)) {
+        foreach ($filespecs as $filespec) {
+            $filespecDetails = $filespec->getDetails();
+            if (in_array($filespecDetails['F'], static::ATTACHMENT_FILEAMES)) {
                 $attachmentFound = true;
                 break;
             }
@@ -71,9 +71,9 @@ class OrderDocumentPdfReader
              * @var array<\Smalot\PdfParser\PDFObject>
              */
             $embeddedFiles = $pdfParsed->getObjectsByType('EmbeddedFile');
-            foreach ($embeddedFiles as $embedFile) {
+            foreach ($embeddedFiles as $embeddedFile) {
                 if ($attachmentIndex == $embeddedFileIndex) {
-                    $orderDocument = OrderDocumentReader::readAndGuessFromContent($embedFile->getContent());
+                    $orderDocument = OrderDocumentReader::readAndGuessFromContent($embeddedFile->getContent());
                     break;
                 }
                 $embeddedFileIndex++;
