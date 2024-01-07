@@ -67,29 +67,16 @@ class OrderDocumentBuilder extends OrderDocument
     protected $currentPosition = null;
 
     /**
-     * Constructor
-     *
-     * @codeCoverageIgnore
-     * @param              int $profile
-     */
-    public function __construct(int $profile)
-    {
-        parent::__construct($profile);
-
-        $this->initNewDocument();
-    }
-
-    /**
      * Creates a new OrderDocumentBuilder with profile $profile
      *
      * @codeCoverageIgnore
      *
-     * @param  integer $profile
+     * @param  integer $profileId
      * @return OrderDocumentBuilder
      */
-    public static function createNew(int $profile): OrderDocumentBuilder
+    public static function createNew(int $profileId): OrderDocumentBuilder
     {
-        return (new self($profile));
+        return (new static($profileId))->initNewDocument();
     }
 
     /**

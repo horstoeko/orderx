@@ -10,11 +10,8 @@
 namespace horstoeko\orderx;
 
 use Exception;
-use horstoeko\orderx\exception\OrderCannotFindProfileString;
-use horstoeko\orderx\exception\OrderUnknownProfileException;
+use horstoeko\orderx\OrderProfileResolver;
 use horstoeko\orderx\OrderDocumentPdfBuilderAbstract;
-use horstoeko\orderx\OrderProfiles;
-use SimpleXMLElement;
 
 /**
  * Class representing the facillity adding existing XML data (file or data-string)
@@ -123,21 +120,6 @@ class OrderDocumentPdfMerger extends OrderDocumentPdfBuilderAbstract
      */
     private function getProfileDefinition(): array
     {
-        $xmlContent = $this->getXmlContent();
-
-        $xmldocument = new SimpleXMLElement($xmlContent);
-        $typeelement = $xmldocument->xpath('/rsm:SCRDMCCBDACIOMessageStructure/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID');
-
-        if (!is_array($typeelement) || !isset($typeelement[0])) {
-            throw new OrderCannotFindProfileString();
-        }
-
-        foreach (OrderProfiles::PROFILEDEF as $profile => $profiledef) {
-            if ($typeelement[0] == $profiledef["contextparameter"]) {
-                return $profiledef;
-            }
-        }
-
-        throw new OrderUnknownProfileException((string)$typeelement[0]);
+        return OrderProfileResolver::resolveProfileDef($this->getXmlContent());
     }
 }

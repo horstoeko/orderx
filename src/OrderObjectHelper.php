@@ -12,6 +12,7 @@ namespace horstoeko\orderx;
 use DateTime;
 use horstoeko\orderx\exception\OrderMimeTypeNotSupportedException;
 use horstoeko\orderx\exception\OrderUnknownDateFormatException;
+use horstoeko\orderx\OrderProfileResolver;
 use horstoeko\stringmanagement\FileUtils;
 use horstoeko\stringmanagement\StringUtils;
 use MimeTyper\Repository\MimeDbRepository;
@@ -63,7 +64,7 @@ class OrderObjectHelper
     public function __construct(int $profile)
     {
         $this->profile = $profile;
-        $this->profiledef = OrderProfiles::PROFILEDEF[$profile];
+        $this->profiledef = OrderProfileResolver::resolveProfileDefById($profile);
     }
 
     /**

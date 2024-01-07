@@ -12,6 +12,9 @@
         <testsuite name="OrderPackageVersion">
             <file>../tests/testcases/OrderPackageVersionTest.php</file>
         </testsuite>
+        <testsuite name="OrderProfile">
+            <file>../tests/testcases/OrderProfileResolverTest.php</file>
+        </testsuite>
         <testsuite name="OrderBase">
             <file>../tests/testcases/OrderDocumentBaseTest.php</file>
         </testsuite>

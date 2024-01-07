@@ -11,14 +11,12 @@ namespace horstoeko\orderx;
 
 use Closure;
 use DateTime;
-use SimpleXMLElement;
-use OutOfRangeException;
+use horstoeko\orderx\exception\OrderFileNotFoundException;
+use horstoeko\orderx\OrderProfileResolver;
 use horstoeko\stringmanagement\FileUtils;
 use horstoeko\stringmanagement\PathUtils;
 use horstoeko\stringmanagement\StringUtils;
-use horstoeko\orderx\exception\OrderFileNotFoundException;
-use horstoeko\orderx\exception\OrderCannotFindProfileString;
-use horstoeko\orderx\exception\OrderUnknownProfileException;
+use OutOfRangeException;
 
 /**
  * Class representing the document reader for incoming XML-Documents with
@@ -232,20 +230,9 @@ class OrderDocumentReader extends OrderDocument
      */
     public static function readAndGuessFromContent(string $xmlcontent): OrderDocumentReader
     {
-        $xmldocument = new SimpleXMLElement($xmlcontent);
-        $typeelement = $xmldocument->xpath('/rsm:SCRDMCCBDACIOMessageStructure/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID');
+        $profileId = OrderProfileResolver::resolveProfileId($xmlcontent);
 
-        if (!is_array($typeelement) || !isset($typeelement[0])) {
-            throw new OrderCannotFindProfileString();
-        }
-
-        foreach (OrderProfiles::PROFILEDEF as $profile => $profiledef) {
-            if ($typeelement[0] == $profiledef["contextparameter"]) {
-                return (new self($profile))->readContent($xmlcontent);
-            }
-        }
-
-        throw new OrderUnknownProfileException((string)$typeelement[0]);
+        return (new static($profileId))->readContent($xmlcontent);
     }
 
     /**

@@ -13,6 +13,7 @@ use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
 use horstoeko\orderx\jms\OrderTypesHandler;
 use horstoeko\orderx\OrderObjectHelper;
+use horstoeko\orderx\OrderProfileResolver;
 use horstoeko\stringmanagement\PathUtils;
 use JMS\Serializer\Handler\HandlerRegistryInterface;
 use JMS\Serializer\SerializerBuilder;
@@ -79,7 +80,7 @@ class OrderDocument
      *
      * @codeCoverageIgnore
      */
-    public function __construct(int $profile)
+    protected function __construct(int $profile)
     {
         $this->initProfile($profile);
         $this->initObjectHelper();
@@ -132,7 +133,7 @@ class OrderDocument
     private function initProfile(int $profile): OrderDocument
     {
         $this->profileId = $profile;
-        $this->profileDefinition = OrderProfiles::PROFILEDEF[$profile];
+        $this->profileDefinition = OrderProfileResolver::resolveProfileDefById($profile);
 
         return $this;
     }
