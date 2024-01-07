@@ -37,6 +37,9 @@
             <file>../tests/testcases/OrderDocumentPdfReaderComfortTest.php</file>
             <file>../tests/testcases/OrderDocumentPdfReaderExtendedTest.php</file>
         </testsuite>
+        <testsuite name="Exporter">
+            <file>../tests/testcases/OrderDocumentJsonExporterTest.php</file>
+        </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
         <include>
