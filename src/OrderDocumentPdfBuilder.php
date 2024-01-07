@@ -28,7 +28,7 @@ class OrderDocumentPdfBuilder extends OrderDocumentPdfBuilderAbstract
      *
      * @var OrderDocumentBuilder
      */
-    private $documentBuiler = null;
+    private $documentBuilder = null;
 
     /**
      * Cached XML data
@@ -40,15 +40,15 @@ class OrderDocumentPdfBuilder extends OrderDocumentPdfBuilderAbstract
     /**
      * Constructor
      *
-     * @param OrderDocumentBuilder $documentBuiler
+     * @param OrderDocumentBuilder $documentBuilder
      * The instance of the document builder. Needed to get the XML data
      * @param string               $pdfData
      * The full filename or a string containing the binary pdf data. This
      * is the original PDF (e.g. created by a ERP system)
      */
-    public function __construct(OrderDocumentBuilder $documentBuiler, string $pdfData)
+    public function __construct(OrderDocumentBuilder $documentBuilder, string $pdfData)
     {
-        $this->documentBuiler = $documentBuiler;
+        $this->documentBuilder = $documentBuilder;
 
         parent::__construct($pdfData);
     }
@@ -62,7 +62,7 @@ class OrderDocumentPdfBuilder extends OrderDocumentPdfBuilderAbstract
             return $this->xmlDataCache;
         }
 
-        $this->xmlDataCache = $this->documentBuiler->getContentAsDomDocument()->saveXML();
+        $this->xmlDataCache = $this->documentBuilder->getContentAsDomDocument()->saveXML();
 
         return $this->xmlDataCache;
     }
@@ -72,7 +72,7 @@ class OrderDocumentPdfBuilder extends OrderDocumentPdfBuilderAbstract
      */
     protected function getXmlAttachmentFilename(): string
     {
-        return $this->documentBuiler->getProfileDefinition()['attachmentfilename'];
+        return $this->documentBuilder->getProfileDefinition()['attachmentfilename'];
     }
 
     /**
@@ -80,6 +80,6 @@ class OrderDocumentPdfBuilder extends OrderDocumentPdfBuilderAbstract
      */
     protected function getXmlAttachmentXmpName(): string
     {
-        return $this->documentBuiler->getProfileDefinition()["xmpname"];
+        return $this->documentBuilder->getProfileDefinition()["xmpname"];
     }
 }
