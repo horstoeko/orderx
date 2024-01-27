@@ -14,7 +14,6 @@ use \DOMXpath;
 use horstoeko\orderx\codelists\OrderDocumentTypes;
 use horstoeko\orderx\OrderPackageVersion;
 use horstoeko\orderx\OrderPdfWriter;
-use horstoeko\stringmanagement\PathUtils;
 use setasign\Fpdi\PdfParser\StreamReader as PdfStreamReader;
 
 /**
@@ -178,7 +177,7 @@ abstract class OrderDocumentPdfBuilderAbstract
         $pdfMetadataInfos = $this->preparePdfMetadata();
         $this->pdfWriter->setPdfMetadataInfos($pdfMetadataInfos);
 
-        $xmp = simplexml_load_file(PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), 'orderx_extension_schema.xmp'));
+        $xmp = simplexml_load_file(OrderSettings::getFullXmpMetaDataFilename());
 
         $descNodes = $xmp->xpath('rdf:Description');
         $descNode = $descNodes[0];
