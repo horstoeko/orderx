@@ -55,8 +55,7 @@ class OrderDocumentPdfReaderComfortTest extends TestCase
      */
     public function testDocumentProperties(): void
     {
-        $property = $this->getPrivatePropertyFromObject(self::$document, 'orderObject');
-        $this->assertNotNull($property->getValue(self::$document));
+        $this->assertNotNull(self::$document->getOrderObject());
     }
 
     /**

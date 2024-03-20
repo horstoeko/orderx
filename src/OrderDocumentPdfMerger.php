@@ -84,7 +84,7 @@ class OrderDocumentPdfMerger extends OrderDocumentPdfBuilderAbstract
      */
     protected function getXmlAttachmentFilename(): string
     {
-        return $this->getProfileDefinition()['attachmentfilename'];
+        return $this->getProfileDefinitionParameter('attachmentfilename');
     }
 
     /**
@@ -92,7 +92,7 @@ class OrderDocumentPdfMerger extends OrderDocumentPdfBuilderAbstract
      */
     protected function getXmlAttachmentXmpName(): string
     {
-        return $this->getProfileDefinition()["xmpname"];
+        return $this->getProfileDefinitionParameter("xmpname");
     }
 
     /**
@@ -121,5 +121,22 @@ class OrderDocumentPdfMerger extends OrderDocumentPdfBuilderAbstract
     private function getProfileDefinition(): array
     {
         return OrderProfileResolver::resolveProfileDef($this->getXmlContent());
+    }
+
+    /**
+     * Get a parameter from profile definition
+     *
+     * @param string $parameterName
+     * @return mixed
+     */
+    private function getProfileDefinitionParameter(string $parameterName)
+    {
+        $profileDefinition = $this->getProfileDefinition();
+
+        if (is_array($profileDefinition) && isset($profileDefinition[$parameterName])) {
+            return $profileDefinition[$parameterName];
+        }
+
+        throw new Exception(sprintf("Unknown profile definition parameter %s", $parameterName));
     }
 }

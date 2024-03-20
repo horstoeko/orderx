@@ -30,8 +30,7 @@ class OrderDocumentBuilderExtendedTest extends TestCase
     {
         (self::$document)->initNewDocument();
 
-        $property = $this->getPrivatePropertyFromObject(self::$document, 'orderObject');
-        $this->assertNotNull($property->getValue(self::$document));
+        $this->assertNotNull(self::$document->getOrderObject());
         $property = $this->getPrivatePropertyFromObject(self::$document, 'headerTradeAgreement');
         $this->assertNotNull($property->getValue(self::$document));
         $property = $this->getPrivatePropertyFromObject(self::$document, 'headerTradeDelivery');
@@ -85,7 +84,7 @@ class OrderDocumentBuilderExtendedTest extends TestCase
         $this->disableRenderXmlContent();
         $this->assertArrayHasKey("rsm", $namespaces);
         $this->assertArrayHasKey("ram", $namespaces);
-        $this->assertXPathValue('/rsm:SCRDMCCBDACIOMessageStructure/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID', (self::$document)->getProfileDefinition()["contextparameter"]);
+        $this->assertXPathValue('/rsm:SCRDMCCBDACIOMessageStructure/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID', (self::$document)->getProfileDefinitionParameter("contextparameter"));
     }
 
     /**

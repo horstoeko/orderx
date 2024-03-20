@@ -35,42 +35,42 @@ class OrderDocument
      * Internal profile id (see OrderProfiles.php)
      * @var      integer
      */
-    public $profileId = -1;
+    private $profileId = -1;
 
     /**
      * @internal
      * Internal profile definition (see OrderProfiles.php)
      * @var      array
      */
-    public $profileDefinition = [];
+    private $profileDefinition = [];
 
     /**
      * @internal
      * Serializer builder
      * @var      SerializerBuilder
      */
-    protected $serializerBuilder;
+    private $serializerBuilder;
 
     /**
      * @internal
      * Serializer
      * @var      SerializerInterface
      */
-    protected $serializer;
+    private $serializer;
 
     /**
      * @internal
      * The internal invoice object
      * @var      \horstoeko\orderx\entities\basic\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure
      */
-    protected $orderObject = null;
+    private $orderObject = null;
 
     /**
      * @internal
      * Object Helper
      * @var      OrderObjectHelper
      */
-    protected $objectHelper = null;
+    private $objectHelper = null;
 
     /**
      * Constructor
@@ -80,7 +80,7 @@ class OrderDocument
      *
      * @codeCoverageIgnore
      */
-    protected function __construct(int $profile)
+    final protected function __construct(int $profile)
     {
         $this->initProfile($profile);
         $this->initObjectHelper();
@@ -101,6 +101,38 @@ class OrderDocument
     }
 
     /**
+     * Create a new instance of the internal order object
+     *
+     * @return \horstoeko\orderx\entities\basic\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure
+     */
+    protected function createOrderObject()
+    {
+        $this->orderObject = $this->getObjectHelper()->getOrderX();
+
+        return $this->orderObject;
+    }
+
+    /**
+     * Get the instance of the internal serializuer
+     *
+     * @return SerializerInterface
+     */
+    public function getSerializer()
+    {
+        return $this->serializer;
+    }
+
+    /**
+     * Get object helper instance
+     *
+     * @return OrderObjectHelper
+     */
+    public function getObjectHelper()
+    {
+        return $this->objectHelper;
+    }
+
+    /**
      * Returns the selected profile id
      *
      * @return integer
@@ -118,6 +150,23 @@ class OrderDocument
     public function getProfileDefinition(): array
     {
         return $this->profileDefinition;
+    }
+
+    /**
+     * Get a parameter from profile definition
+     *
+     * @param string $parameterName
+     * @return mixed
+     */
+    public function getProfileDefinitionParameter(string $parameterName)
+    {
+        $profileDefinition = $this->getProfileDefinition();
+
+        if (is_array($profileDefinition) && isset($profileDefinition[$parameterName])) {
+            return $profileDefinition[$parameterName];
+        }
+
+        throw new \Exception(sprintf("Unknown profile definition parameter %s", $parameterName));
     }
 
     /**
@@ -168,48 +217,48 @@ class OrderDocument
         $this->serializerBuilder->addMetadataDir(
             PathUtils::combineAllPaths(
                 OrderSettings::getYamlDirectory(),
-                $this->getProfileDefinition()["name"],
+                $this->getProfileDefinitionParameter("name"),
                 'qdt'
             ),
             sprintf(
                 'horstoeko\orderx\entities\%s\qdt',
-                $this->getProfileDefinition()["name"]
+                $this->getProfileDefinitionParameter("name")
             )
         );
 
         $this->serializerBuilder->addMetadataDir(
             PathUtils::combineAllPaths(
                 OrderSettings::getYamlDirectory(),
-                $this->getProfileDefinition()["name"],
+                $this->getProfileDefinitionParameter("name"),
                 'ram'
             ),
             sprintf(
                 'horstoeko\orderx\entities\%s\ram',
-                $this->getProfileDefinition()["name"]
+                $this->getProfileDefinitionParameter("name")
             )
         );
 
         $this->serializerBuilder->addMetadataDir(
             PathUtils::combineAllPaths(
                 OrderSettings::getYamlDirectory(),
-                $this->getProfileDefinition()["name"],
+                $this->getProfileDefinitionParameter("name"),
                 'rsm'
             ),
             sprintf(
                 'horstoeko\orderx\entities\%s\rsm',
-                $this->getProfileDefinition()["name"]
+                $this->getProfileDefinitionParameter("name")
             )
         );
 
         $this->serializerBuilder->addMetadataDir(
             PathUtils::combineAllPaths(
                 OrderSettings::getYamlDirectory(),
-                $this->getProfileDefinition()["name"],
+                $this->getProfileDefinitionParameter("name"),
                 'udt'
             ),
             sprintf(
                 'horstoeko\orderx\entities\%s\udt',
-                $this->getProfileDefinition()["name"]
+                $this->getProfileDefinitionParameter("name")
             )
         );
 
@@ -227,5 +276,37 @@ class OrderDocument
         $this->serializer = $this->serializerBuilder->build();
 
         return $this;
+    }
+    /**
+     * Deserialize XML content to internal invoice object
+     *
+     * @param string $xmlContent
+     * @return \horstoeko\orderx\entities\basic\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure
+     */
+    public function deserialize($xmlContent)
+    {
+        $this->orderObject = $this->getSerializer()->deserialize($xmlContent, 'horstoeko\orderx\entities\\' . $this->getProfileDefinitionParameter("name") . '\rsm\SCRDMCCBDACIOMessageStructure', 'xml');
+
+        return $this->orderObject;
+    }
+
+    /**
+     * Serialize internal invoice object as XML
+     *
+     * @return string
+     */
+    public function serializeAsXml(): string
+    {
+        return $this->getSerializer()->serialize($this->getOrderObject(), 'xml');
+    }
+
+    /**
+     * Serialize internal invoice object as JSON
+     *
+     * @return string
+     */
+    public function serializeAsJson(): string
+    {
+        return $this->getSerializer()->serialize($this->getOrderObject(), 'json');
     }
 }

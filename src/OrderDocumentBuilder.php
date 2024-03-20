@@ -86,11 +86,12 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function initNewDocument(): OrderDocumentBuilder
     {
-        $this->orderObject = $this->objectHelper->getOrderX();
-        $this->headerTradeAgreement = $this->orderObject->getSupplyChainTradeTransaction()->getApplicableHeaderTradeAgreement();
-        $this->headerTradeDelivery = $this->orderObject->getSupplyChainTradeTransaction()->getApplicableHeaderTradeDelivery();
-        $this->headerTradeSettlement = $this->orderObject->getSupplyChainTradeTransaction()->getApplicableHeaderTradeSettlement();
-        $this->headerSupplyChainTradeTransaction = $this->orderObject->getSupplyChainTradeTransaction();
+        $this->createOrderObject();
+
+        $this->headerTradeAgreement = $this->getOrderObject()->getSupplyChainTradeTransaction()->getApplicableHeaderTradeAgreement();
+        $this->headerTradeDelivery = $this->getOrderObject()->getSupplyChainTradeTransaction()->getApplicableHeaderTradeDelivery();
+        $this->headerTradeSettlement = $this->getOrderObject()->getSupplyChainTradeTransaction()->getApplicableHeaderTradeSettlement();
+        $this->headerSupplyChainTradeTransaction = $this->getOrderObject()->getSupplyChainTradeTransaction();
 
         return $this;
     }
@@ -115,7 +116,7 @@ class OrderDocumentBuilder extends OrderDocument
     {
         $this->onBeforeGetContent();
 
-        return $this->serializer->serialize($this->orderObject, 'xml');
+        return $this->serializeAsXml();
     }
 
     /**
@@ -189,15 +190,15 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentInformation(string $documentNo, string $documentTypeCode, DateTime $documentDate, string $documentCurrency, ?string $documentName = null, ?string $documentLanguageId = null, ?DateTime $documentEffectiveSpecifiedPeriod = null, ?string $documentPurposeCode = null, ?string $documentRequestedResponseTypeCode = null): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this, "setDocumentNo", $documentNo);
-        $this->objectHelper->tryCall($this, "setDocumentTypeCode", $documentTypeCode);
-        $this->objectHelper->tryCall($this, "setDocumentDate", $documentDate);
-        $this->objectHelper->tryCall($this, "setDocumentCurrency", $documentCurrency);
-        $this->objectHelper->tryCall($this, "setDocumentName", $documentName);
-        $this->objectHelper->tryCall($this, "setDocumentLanguageId", $documentLanguageId);
-        $this->objectHelper->tryCall($this, "setDocumentPurposeCode", $documentPurposeCode);
-        $this->objectHelper->tryCall($this, "setDocumentRequestedResponseTypeCode", $documentRequestedResponseTypeCode);
-        $this->objectHelper->tryCall2($this, "setDocumentEffectiveSpecifiedPeriod", $documentEffectiveSpecifiedPeriod, $documentEffectiveSpecifiedPeriod);
+        $this->getObjectHelper()->tryCall($this, "setDocumentNo", $documentNo);
+        $this->getObjectHelper()->tryCall($this, "setDocumentTypeCode", $documentTypeCode);
+        $this->getObjectHelper()->tryCall($this, "setDocumentDate", $documentDate);
+        $this->getObjectHelper()->tryCall($this, "setDocumentCurrency", $documentCurrency);
+        $this->getObjectHelper()->tryCall($this, "setDocumentName", $documentName);
+        $this->getObjectHelper()->tryCall($this, "setDocumentLanguageId", $documentLanguageId);
+        $this->getObjectHelper()->tryCall($this, "setDocumentPurposeCode", $documentPurposeCode);
+        $this->getObjectHelper()->tryCall($this, "setDocumentRequestedResponseTypeCode", $documentRequestedResponseTypeCode);
+        $this->getObjectHelper()->tryCall2($this, "setDocumentEffectiveSpecifiedPeriod", $documentEffectiveSpecifiedPeriod, $documentEffectiveSpecifiedPeriod);
 
         return $this;
     }
@@ -210,7 +211,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentNo(string $documentNo): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setID", $this->objectHelper->getIdType($documentNo));
+        $this->getObjectHelper()->tryCall($this->getOrderObject()->getExchangedDocument(), "setID", $this->getObjectHelper()->getIdType($documentNo));
         return $this;
     }
 
@@ -222,7 +223,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentName(string $documentName): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setName", $this->objectHelper->getTextType($documentName));
+        $this->getObjectHelper()->tryCall($this->getOrderObject()->getExchangedDocument(), "setName", $this->getObjectHelper()->getTextType($documentName));
         return $this;
     }
 
@@ -234,7 +235,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentTypeCode(string $documentTypeCode): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setTypeCode", $this->objectHelper->getDocumentCodeType($documentTypeCode));
+        $this->getObjectHelper()->tryCall($this->getOrderObject()->getExchangedDocument(), "setTypeCode", $this->getObjectHelper()->getDocumentCodeType($documentTypeCode));
         return $this;
     }
 
@@ -246,7 +247,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentDate(DateTime $documentDate): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setIssueDateTime", $this->objectHelper->getDateTimeType($documentDate));
+        $this->getObjectHelper()->tryCall($this->getOrderObject()->getExchangedDocument(), "setIssueDateTime", $this->getObjectHelper()->getDateTimeType($documentDate));
         return $this;
     }
 
@@ -258,7 +259,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentCurrency(string $documentCurrency): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->headerTradeSettlement, "setOrderCurrencyCode", $this->objectHelper->getCurrencyCodeType($documentCurrency));
+        $this->getObjectHelper()->tryCall($this->headerTradeSettlement, "setOrderCurrencyCode", $this->getObjectHelper()->getCurrencyCodeType($documentCurrency));
         return $this;
     }
 
@@ -270,12 +271,12 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentLanguageId(string $documentLanguageId): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCallIfMethodExists(
-            $this->orderObject->getExchangedDocument(),
+        $this->getObjectHelper()->tryCallIfMethodExists(
+            $this->getOrderObject()->getExchangedDocument(),
             "addToLanguageID",
             "setLanguageID",
-            [$this->objectHelper->getIdType($documentLanguageId)],
-            $this->objectHelper->getIdType($documentLanguageId)
+            [$this->getObjectHelper()->getIdType($documentLanguageId)],
+            $this->getObjectHelper()->getIdType($documentLanguageId)
         );
         return $this;
     }
@@ -292,7 +293,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentEffectiveSpecifiedPeriod(DateTime $effectiveSpecifiedPeriodFrom, DateTime $effectiveSpecifiedPeriodTo): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setEffectiveSpecifiedPeriod", $this->objectHelper->getSpecifiedPeriodType($effectiveSpecifiedPeriodFrom, $effectiveSpecifiedPeriodTo));
+        $this->getObjectHelper()->tryCall($this->getOrderObject()->getExchangedDocument(), "setEffectiveSpecifiedPeriod", $this->getObjectHelper()->getSpecifiedPeriodType($effectiveSpecifiedPeriodFrom, $effectiveSpecifiedPeriodTo));
         return $this;
     }
 
@@ -308,7 +309,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPurposeCode(string $documentPurposeCode): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setPurposeCode", $this->objectHelper->getMessageFunctionCodeType($documentPurposeCode));
+        $this->getObjectHelper()->tryCall($this->getOrderObject()->getExchangedDocument(), "setPurposeCode", $this->getObjectHelper()->getMessageFunctionCodeType($documentPurposeCode));
         return $this;
     }
 
@@ -322,7 +323,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentRequestedResponseTypeCode(string $documentRequestedResponseTypeCode): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setRequestedResponseTypeCode", $this->objectHelper->getCodeType($documentRequestedResponseTypeCode));
+        $this->getObjectHelper()->tryCall($this->getOrderObject()->getExchangedDocument(), "setRequestedResponseTypeCode", $this->getObjectHelper()->getCodeType($documentRequestedResponseTypeCode));
         return $this;
     }
 
@@ -337,7 +338,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentBusinessProcessSpecifiedDocumentContextParameter(string $businessProcessSpecifiedDocumentContextParameter): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->orderObject->getExchangedDocumentContext(), "setBusinessProcessSpecifiedDocumentContextParameter", $this->objectHelper->getDocumentContextParameterType($businessProcessSpecifiedDocumentContextParameter));
+        $this->getObjectHelper()->tryCall($this->getOrderObject()->getExchangedDocumentContext(), "setBusinessProcessSpecifiedDocumentContextParameter", $this->getObjectHelper()->getDocumentContextParameterType($businessProcessSpecifiedDocumentContextParameter));
         return $this;
     }
 
@@ -350,7 +351,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setIsDocumentCopy(?bool $isDocumentCopy = null): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "setCopyIndicator", $this->objectHelper->getIndicatorType($isDocumentCopy ?? true));
+        $this->getObjectHelper()->tryCall($this->getOrderObject()->getExchangedDocument(), "setCopyIndicator", $this->getObjectHelper()->getIndicatorType($isDocumentCopy ?? true));
         return $this;
     }
 
@@ -363,7 +364,7 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setIsTestDocument(?bool $isTestDocument = null): OrderDocumentBuilder
     {
-        $this->objectHelper->tryCall($this->orderObject->getExchangedDocumentContext(), "setTestIndicator", $this->objectHelper->getIndicatorType($isTestDocument ?? true));
+        $this->getObjectHelper()->tryCall($this->getOrderObject()->getExchangedDocumentContext(), "setTestIndicator", $this->getObjectHelper()->getIndicatorType($isTestDocument ?? true));
         return $this;
     }
 
@@ -384,8 +385,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentNote(string $content, ?string $subjectCode = null, ?string $contentCode = null): OrderDocumentBuilder
     {
-        $note = $this->objectHelper->getNoteType($content, $contentCode, $subjectCode);
-        $this->objectHelper->tryCall($this->orderObject->getExchangedDocument(), "addToIncludedNote", $note);
+        $note = $this->getObjectHelper()->getNoteType($content, $contentCode, $subjectCode);
+        $this->getObjectHelper()->tryCall($this->getOrderObject()->getExchangedDocument(), "addToIncludedNote", $note);
         return $this;
     }
 
@@ -412,12 +413,12 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentSummation(float $lineTotalAmount, ?float $grandTotalAmount = null, ?float $chargeTotalAmount = null, ?float $allowanceTotalAmount = null, ?float $taxBasisTotalAmount = null, ?float $taxTotalAmount = null): OrderDocumentBuilder
     {
-        $summation = $this->objectHelper->getTradeSettlementHeaderMonetarySummationType($grandTotalAmount, $lineTotalAmount, $chargeTotalAmount, $allowanceTotalAmount, $taxBasisTotalAmount, $taxTotalAmount);
-        $this->objectHelper->tryCall($this->headerTradeSettlement, "setSpecifiedTradeSettlementHeaderMonetarySummation", $summation);
-        $taxTotalAmount = $this->objectHelper->tryCallAndReturn($summation, "getTaxTotalAmount");
-        $orderCurrencyCode = $this->objectHelper->tryCallByPathAndReturn($this->headerTradeSettlement, "getOrderCurrencyCode.value");
-        if (isset($this->objectHelper->ensureArray($taxTotalAmount)[0])) {
-            $this->objectHelper->tryCall($this->objectHelper->ensureArray($taxTotalAmount)[0], 'setCurrencyID', $orderCurrencyCode);
+        $summation = $this->getObjectHelper()->getTradeSettlementHeaderMonetarySummationType($grandTotalAmount, $lineTotalAmount, $chargeTotalAmount, $allowanceTotalAmount, $taxBasisTotalAmount, $taxTotalAmount);
+        $this->getObjectHelper()->tryCall($this->headerTradeSettlement, "setSpecifiedTradeSettlementHeaderMonetarySummation", $summation);
+        $taxTotalAmount = $this->getObjectHelper()->tryCallAndReturn($summation, "getTaxTotalAmount");
+        $orderCurrencyCode = $this->getObjectHelper()->tryCallByPathAndReturn($this->headerTradeSettlement, "getOrderCurrencyCode.value");
+        if (isset($this->getObjectHelper()->ensureArray($taxTotalAmount)[0])) {
+            $this->getObjectHelper()->tryCall($this->getObjectHelper()->ensureArray($taxTotalAmount)[0], 'setCurrencyID', $orderCurrencyCode);
         }
         return $this;
     }
@@ -431,8 +432,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentBuyerReference(string $buyerreference): OrderDocumentBuilder
     {
-        $reference = $this->objectHelper->getTextType($buyerreference);
-        $this->objectHelper->tryCall($this->headerTradeAgreement, "setBuyerReference", $reference);
+        $reference = $this->getObjectHelper()->getTextType($buyerreference);
+        $this->getObjectHelper()->tryCall($this->headerTradeAgreement, "setBuyerReference", $reference);
         return $this;
     }
 
@@ -450,8 +451,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentSeller(string $name, ?string $id = null, ?string $description = null): OrderDocumentBuilder
     {
-        $sellerTradeParty = $this->objectHelper->getTradeParty($name, $id, $description);
-        $this->objectHelper->tryCall($this->headerTradeAgreement, "setSellerTradeParty", $sellerTradeParty);
+        $sellerTradeParty = $this->getObjectHelper()->getTradeParty($name, $id, $description);
+        $this->getObjectHelper()->tryCall($this->headerTradeAgreement, "setSellerTradeParty", $sellerTradeParty);
         return $this;
     }
 
@@ -472,8 +473,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentSellerGlobalId(string $globalID, string $globalIDType): OrderDocumentBuilder
     {
-        $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
-        $this->objectHelper->tryCall($sellerTradeParty, "addToGlobalID", $this->objectHelper->getIdType($globalID, $globalIDType));
+        $sellerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
+        $this->getObjectHelper()->tryCall($sellerTradeParty, "addToGlobalID", $this->getObjectHelper()->getIdType($globalID, $globalIDType));
         return $this;
     }
 
@@ -489,9 +490,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentSellerTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
     {
-        $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
-        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
-        $this->objectHelper->tryCallIfMethodExists($sellerTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
+        $sellerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
+        $taxreg = $this->getObjectHelper()->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->getObjectHelper()->tryCallIfMethodExists($sellerTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
         return $this;
     }
 
@@ -507,9 +508,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentSellerTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
     {
-        $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
-        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
-        $this->objectHelper->tryCall($sellerTradeParty, "addToSpecifiedTaxRegistration", $taxreg);
+        $sellerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
+        $taxreg = $this->getObjectHelper()->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->getObjectHelper()->tryCall($sellerTradeParty, "addToSpecifiedTaxRegistration", $taxreg);
         return $this;
     }
 
@@ -542,9 +543,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentSellerAddress(?string $lineone = null, ?string $linetwo = null, ?string $linethree = null, ?string $postcode = null, ?string $city = null, ?string $country = null, ?string $subdivision = null): OrderDocumentBuilder
     {
-        $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
-        $address = $this->objectHelper->getTradeAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
-        $this->objectHelper->tryCall($sellerTradeParty, "setPostalTradeAddress", $address);
+        $sellerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
+        $address = $this->getObjectHelper()->getTradeAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
+        $this->getObjectHelper()->tryCall($sellerTradeParty, "setPostalTradeAddress", $address);
         return $this;
     }
 
@@ -566,9 +567,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentSellerLegalOrganisation(?string $legalorgid = null, ?string $legalorgtype = null, ?string $legalorgname = null): OrderDocumentBuilder
     {
-        $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
-        $legalorg = $this->objectHelper->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
-        $this->objectHelper->tryCall($sellerTradeParty, "setSpecifiedLegalOrganization", $legalorg);
+        $sellerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
+        $legalorg = $this->getObjectHelper()->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
+        $this->getObjectHelper()->tryCall($sellerTradeParty, "setSpecifiedLegalOrganization", $legalorg);
         return $this;
     }
 
@@ -591,9 +592,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentSellerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
-        $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
-        $this->objectHelper->tryCallIfMethodExists($sellerTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
+        $sellerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
+        $contact = $this->getObjectHelper()->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
+        $this->getObjectHelper()->tryCallIfMethodExists($sellerTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
         return $this;
     }
 
@@ -616,9 +617,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentSellerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
-        $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
-        $this->objectHelper->tryCall($sellerTradeParty, "addToDefinedTradeContact", $contact);
+        $sellerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
+        $contact = $this->getObjectHelper()->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
+        $this->getObjectHelper()->tryCall($sellerTradeParty, "addToDefinedTradeContact", $contact);
         return $this;
     }
 
@@ -634,9 +635,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentSellerElectronicAddress(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
     {
-        $sellerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
-        $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
-        $this->objectHelper->tryCall($sellerTradeParty, "setURIUniversalCommunication", $universalCommunication);
+        $sellerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getSellerTradeParty");
+        $universalCommunication = $this->getObjectHelper()->getUniversalCommunicationType(null, $uriId, $uriType);
+        $this->getObjectHelper()->tryCall($sellerTradeParty, "setURIUniversalCommunication", $universalCommunication);
         return $this;
     }
 
@@ -654,8 +655,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentBuyer(string $name, ?string $id = null, ?string $description = null): OrderDocumentBuilder
     {
-        $buyerTradeParty = $this->objectHelper->getTradeParty($name, $id, $description);
-        $this->objectHelper->tryCall($this->headerTradeAgreement, "setBuyerTradeParty", $buyerTradeParty);
+        $buyerTradeParty = $this->getObjectHelper()->getTradeParty($name, $id, $description);
+        $this->getObjectHelper()->tryCall($this->headerTradeAgreement, "setBuyerTradeParty", $buyerTradeParty);
         return $this;
     }
 
@@ -672,8 +673,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentBuyerGlobalId(string $globalID, string $globalIDType): OrderDocumentBuilder
     {
-        $buyerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
-        $this->objectHelper->tryCall($buyerTradeParty, "addToGlobalID", $this->objectHelper->getIdType($globalID, $globalIDType));
+        $buyerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
+        $this->getObjectHelper()->tryCall($buyerTradeParty, "addToGlobalID", $this->getObjectHelper()->getIdType($globalID, $globalIDType));
         return $this;
     }
 
@@ -689,9 +690,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentBuyerTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
     {
-        $buyerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
-        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
-        $this->objectHelper->tryCallIfMethodExists($buyerTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
+        $buyerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
+        $taxreg = $this->getObjectHelper()->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->getObjectHelper()->tryCallIfMethodExists($buyerTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
         return $this;
     }
 
@@ -707,9 +708,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentBuyerTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
     {
-        $buyerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
-        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
-        $this->objectHelper->tryCall($buyerTradeParty, "addToSpecifiedTaxRegistration", $taxreg);
+        $buyerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
+        $taxreg = $this->getObjectHelper()->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->getObjectHelper()->tryCall($buyerTradeParty, "addToSpecifiedTaxRegistration", $taxreg);
         return $this;
     }
 
@@ -739,9 +740,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentBuyerAddress(?string $lineone = null, ?string $linetwo = null, ?string $linethree = null, ?string $postcode = null, ?string $city = null, ?string $country = null, ?string $subdivision = null): OrderDocumentBuilder
     {
-        $buyerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
-        $address = $this->objectHelper->getTradeAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
-        $this->objectHelper->tryCall($buyerTradeParty, "setPostalTradeAddress", $address);
+        $buyerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
+        $address = $this->getObjectHelper()->getTradeAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
+        $this->getObjectHelper()->tryCall($buyerTradeParty, "setPostalTradeAddress", $address);
         return $this;
     }
 
@@ -763,9 +764,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentBuyerLegalOrganisation(?string $legalorgid = null, ?string $legalorgtype = null, ?string $legalorgname = null): OrderDocumentBuilder
     {
-        $buyerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
-        $legalorg = $this->objectHelper->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
-        $this->objectHelper->tryCall($buyerTradeParty, "setSpecifiedLegalOrganization", $legalorg);
+        $buyerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
+        $legalorg = $this->getObjectHelper()->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
+        $this->getObjectHelper()->tryCall($buyerTradeParty, "setSpecifiedLegalOrganization", $legalorg);
         return $this;
     }
 
@@ -788,9 +789,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentBuyerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
-        $buyerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
-        $this->objectHelper->tryCallIfMethodExists($buyerTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
+        $buyerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
+        $contact = $this->getObjectHelper()->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
+        $this->getObjectHelper()->tryCallIfMethodExists($buyerTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
         return $this;
     }
 
@@ -813,9 +814,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentBuyerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
-        $buyerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
-        $this->objectHelper->tryCall($buyerTradeParty, "addToDefinedTradeContact", $contact);
+        $buyerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
+        $contact = $this->getObjectHelper()->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
+        $this->getObjectHelper()->tryCall($buyerTradeParty, "addToDefinedTradeContact", $contact);
         return $this;
     }
 
@@ -831,9 +832,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentBuyerElectronicAddress(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
     {
-        $buyerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
-        $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
-        $this->objectHelper->tryCall($buyerTradeParty, "setURIUniversalCommunication", $universalCommunication);
+        $buyerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getBuyerTradeParty");
+        $universalCommunication = $this->getObjectHelper()->getUniversalCommunicationType(null, $uriId, $uriType);
+        $this->getObjectHelper()->tryCall($buyerTradeParty, "setURIUniversalCommunication", $universalCommunication);
         return $this;
     }
 
@@ -851,8 +852,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentBuyerRequisitioner(string $name, ?string $id = null, ?string $description = null): OrderDocumentBuilder
     {
-        $buyerRequisitionerTradeParty = $this->objectHelper->getTradeParty($name, $id, $description);
-        $this->objectHelper->tryCall($this->headerTradeAgreement, "setBuyerRequisitionerTradeParty", $buyerRequisitionerTradeParty);
+        $buyerRequisitionerTradeParty = $this->getObjectHelper()->getTradeParty($name, $id, $description);
+        $this->getObjectHelper()->tryCall($this->headerTradeAgreement, "setBuyerRequisitionerTradeParty", $buyerRequisitionerTradeParty);
         return $this;
     }
 
@@ -869,8 +870,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentBuyerRequisitionerGlobalId(string $globalID, string $globalIDType): OrderDocumentBuilder
     {
-        $buyerRequisitionerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
-        $this->objectHelper->tryCall($buyerRequisitionerTradeParty, "addToGlobalID", $this->objectHelper->getIdType($globalID, $globalIDType));
+        $buyerRequisitionerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
+        $this->getObjectHelper()->tryCall($buyerRequisitionerTradeParty, "addToGlobalID", $this->getObjectHelper()->getIdType($globalID, $globalIDType));
         return $this;
     }
 
@@ -886,9 +887,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentBuyerRequisitionerTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
     {
-        $buyerRequisitionerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
-        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
-        $this->objectHelper->tryCallIfMethodExists($buyerRequisitionerTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
+        $buyerRequisitionerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
+        $taxreg = $this->getObjectHelper()->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->getObjectHelper()->tryCallIfMethodExists($buyerRequisitionerTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
         return $this;
     }
 
@@ -904,9 +905,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentBuyerRequisitionerTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
     {
-        $buyerRequisitionerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
-        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
-        $this->objectHelper->tryCall($buyerRequisitionerTradeParty, "addToSpecifiedTaxRegistration", $taxreg);
+        $buyerRequisitionerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
+        $taxreg = $this->getObjectHelper()->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->getObjectHelper()->tryCall($buyerRequisitionerTradeParty, "addToSpecifiedTaxRegistration", $taxreg);
         return $this;
     }
 
@@ -936,9 +937,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentBuyerRequisitionerAddress(?string $lineone = null, ?string $linetwo = null, ?string $linethree = null, ?string $postcode = null, ?string $city = null, ?string $country = null, ?string $subdivision = null): OrderDocumentBuilder
     {
-        $buyerRequisitionerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
-        $address = $this->objectHelper->getTradeAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
-        $this->objectHelper->tryCall($buyerRequisitionerTradeParty, "setPostalTradeAddress", $address);
+        $buyerRequisitionerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
+        $address = $this->getObjectHelper()->getTradeAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
+        $this->getObjectHelper()->tryCall($buyerRequisitionerTradeParty, "setPostalTradeAddress", $address);
         return $this;
     }
 
@@ -959,9 +960,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentBuyerRequisitionerLegalOrganisation(?string $legalorgid = null, ?string $legalorgtype = null, ?string $legalorgname = null): OrderDocumentBuilder
     {
-        $buyerRequisitionerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
-        $legalorg = $this->objectHelper->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
-        $this->objectHelper->tryCall($buyerRequisitionerTradeParty, "setSpecifiedLegalOrganization", $legalorg);
+        $buyerRequisitionerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
+        $legalorg = $this->getObjectHelper()->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
+        $this->getObjectHelper()->tryCall($buyerRequisitionerTradeParty, "setSpecifiedLegalOrganization", $legalorg);
         return $this;
     }
 
@@ -984,9 +985,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentBuyerRequisitionerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
-        $buyerRequisitionerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
-        $this->objectHelper->tryCallIfMethodExists($buyerRequisitionerTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
+        $buyerRequisitionerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
+        $contact = $this->getObjectHelper()->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
+        $this->getObjectHelper()->tryCallIfMethodExists($buyerRequisitionerTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
         return $this;
     }
 
@@ -1009,9 +1010,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentBuyerRequisitionerContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
-        $buyerRequisitionerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
-        $this->objectHelper->tryCall($buyerRequisitionerTradeParty, "addToDefinedTradeContact", $contact);
+        $buyerRequisitionerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
+        $contact = $this->getObjectHelper()->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
+        $this->getObjectHelper()->tryCall($buyerRequisitionerTradeParty, "addToDefinedTradeContact", $contact);
         return $this;
     }
 
@@ -1027,9 +1028,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentBuyerRequisitionerElectronicAddress(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
     {
-        $buyerRequisitionerTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
-        $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
-        $this->objectHelper->tryCall($buyerRequisitionerTradeParty, "setURIUniversalCommunication", $universalCommunication);
+        $buyerRequisitionerTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeAgreement, "getBuyerRequisitionerTradeParty");
+        $universalCommunication = $this->getObjectHelper()->getUniversalCommunicationType(null, $uriId, $uriType);
+        $this->getObjectHelper()->tryCall($buyerRequisitionerTradeParty, "setURIUniversalCommunication", $universalCommunication);
         return $this;
     }
 
@@ -1065,8 +1066,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentDeliveryTerms(?string $deliveryTypeCode = null, ?string $description = null, ?string $functionCode = null, ?string $relevantTradeLocationId = null, ?string $relevantTradeLocationName = null): OrderDocumentBuilder
     {
-        $deliveryterms = $this->objectHelper->getTradeDeliveryTermsType($deliveryTypeCode, $description, $functionCode, $relevantTradeLocationId, $relevantTradeLocationName);
-        $this->objectHelper->tryCall($this->headerTradeAgreement, "setApplicableTradeDeliveryTerms", $deliveryterms);
+        $deliveryterms = $this->getObjectHelper()->getTradeDeliveryTermsType($deliveryTypeCode, $description, $functionCode, $relevantTradeLocationId, $relevantTradeLocationName);
+        $this->getObjectHelper()->tryCall($this->headerTradeAgreement, "setApplicableTradeDeliveryTerms", $deliveryterms);
         return $this;
     }
 
@@ -1081,8 +1082,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentSellerOrderReferencedDocument(string $sellerOrderRefId, ?DateTime $sellerOrderRefDate = null): OrderDocumentBuilder
     {
-        $sellerOrderRefDoc = $this->objectHelper->getReferencedDocumentType($sellerOrderRefId, null, null, null, null, null, $sellerOrderRefDate, null);
-        $this->objectHelper->tryCall($this->headerTradeAgreement, "setSellerOrderReferencedDocument", $sellerOrderRefDoc);
+        $sellerOrderRefDoc = $this->getObjectHelper()->getReferencedDocumentType($sellerOrderRefId, null, null, null, null, null, $sellerOrderRefDate, null);
+        $this->getObjectHelper()->tryCall($this->headerTradeAgreement, "setSellerOrderReferencedDocument", $sellerOrderRefDoc);
         return $this;
     }
 
@@ -1097,8 +1098,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentBuyerOrderReferencedDocument(string $buyerOrderRefId, ?DateTime $buyerOrderRefDate = null): OrderDocumentBuilder
     {
-        $buyerOrderRefDoc = $this->objectHelper->getReferencedDocumentType($buyerOrderRefId, null, null, null, null, null, $buyerOrderRefDate, null);
-        $this->objectHelper->tryCall($this->headerTradeAgreement, "setBuyerOrderReferencedDocument", $buyerOrderRefDoc);
+        $buyerOrderRefDoc = $this->getObjectHelper()->getReferencedDocumentType($buyerOrderRefId, null, null, null, null, null, $buyerOrderRefDate, null);
+        $this->getObjectHelper()->tryCall($this->headerTradeAgreement, "setBuyerOrderReferencedDocument", $buyerOrderRefDoc);
         return $this;
     }
 
@@ -1113,8 +1114,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentQuotationReferencedDocument(string $quotationRefId, ?DateTime $quotationRefDate = null): OrderDocumentBuilder
     {
-        $quotationRefDoc = $this->objectHelper->getReferencedDocumentType($quotationRefId, null, null, null, null, null, $quotationRefDate, null);
-        $this->objectHelper->tryCall($this->headerTradeAgreement, "setQuotationReferencedDocument", $quotationRefDoc);
+        $quotationRefDoc = $this->getObjectHelper()->getReferencedDocumentType($quotationRefId, null, null, null, null, null, $quotationRefDate, null);
+        $this->getObjectHelper()->tryCall($this->headerTradeAgreement, "setQuotationReferencedDocument", $quotationRefDoc);
         return $this;
     }
 
@@ -1130,8 +1131,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentContractReferencedDocument(string $contractRefId, ?DateTime $contractRefDate = null): OrderDocumentBuilder
     {
-        $contractRefDoc = $this->objectHelper->getReferencedDocumentType($contractRefId, null, null, null, null, null, $contractRefDate, null);
-        $this->objectHelper->tryCallIfMethodExists($this->headerTradeAgreement, "addToContractReferencedDocument", "setContractReferencedDocument", [$contractRefDoc], $contractRefDoc);
+        $contractRefDoc = $this->getObjectHelper()->getReferencedDocumentType($contractRefId, null, null, null, null, null, $contractRefDate, null);
+        $this->getObjectHelper()->tryCallIfMethodExists($this->headerTradeAgreement, "addToContractReferencedDocument", "setContractReferencedDocument", [$contractRefDoc], $contractRefDoc);
         return $this;
     }
 
@@ -1147,8 +1148,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentContractReferencedDocument(string $contractRefId, ?DateTime $contractRefDate = null): OrderDocumentBuilder
     {
-        $contractRefDoc = $this->objectHelper->getReferencedDocumentType($contractRefId, null, null, null, null, null, $contractRefDate, null);
-        $this->objectHelper->tryCall($this->headerTradeAgreement, "addToContractReferencedDocument", $contractRefDoc);
+        $contractRefDoc = $this->getObjectHelper()->getReferencedDocumentType($contractRefId, null, null, null, null, null, $contractRefDate, null);
+        $this->getObjectHelper()->tryCall($this->headerTradeAgreement, "addToContractReferencedDocument", $contractRefDoc);
         return $this;
     }
 
@@ -1163,8 +1164,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentRequisitionReferencedDocument(string $requisitionRefId, ?DateTime $requisitionRefDate = null): OrderDocumentBuilder
     {
-        $requisitionRefDoc = $this->objectHelper->getReferencedDocumentType($requisitionRefId, null, null, null, null, null, $requisitionRefDate, null);
-        $this->objectHelper->tryCallIfMethodExists($this->headerTradeAgreement, "addToRequisitionReferencedDocument", "setRequisitionReferencedDocument", [$requisitionRefDoc], $requisitionRefDoc);
+        $requisitionRefDoc = $this->getObjectHelper()->getReferencedDocumentType($requisitionRefId, null, null, null, null, null, $requisitionRefDate, null);
+        $this->getObjectHelper()->tryCallIfMethodExists($this->headerTradeAgreement, "addToRequisitionReferencedDocument", "setRequisitionReferencedDocument", [$requisitionRefDoc], $requisitionRefDoc);
         return $this;
     }
 
@@ -1179,8 +1180,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentRequisitionReferencedDocument(string $requisitionRefId, ?DateTime $requisitionRefDate = null): OrderDocumentBuilder
     {
-        $requisitionRefDoc = $this->objectHelper->getReferencedDocumentType($requisitionRefId, null, null, null, null, null, $requisitionRefDate, null);
-        $this->objectHelper->tryCall($this->headerTradeAgreement, "addToRequisitionReferencedDocument", $requisitionRefDoc);
+        $requisitionRefDoc = $this->getObjectHelper()->getReferencedDocumentType($requisitionRefId, null, null, null, null, null, $requisitionRefDate, null);
+        $this->getObjectHelper()->tryCall($this->headerTradeAgreement, "addToRequisitionReferencedDocument", $requisitionRefDoc);
         return $this;
     }
 
@@ -1226,8 +1227,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentAdditionalReferencedDocument(string $additionalRefTypeCode, ?string $additionalRefId, ?string $additionalRefURIID = null, $additionalRefName = null, ?string $additionalRefRefTypeCode = null, ?DateTime $additionalRefDate = null, ?string $binarydatafilename = null): OrderDocumentBuilder
     {
-        $additionalRefDoc = $this->objectHelper->getReferencedDocumentType($additionalRefId, $additionalRefURIID, null, $additionalRefTypeCode, $additionalRefName, $additionalRefRefTypeCode, $additionalRefDate, $binarydatafilename);
-        $this->objectHelper->tryCall($this->headerTradeAgreement, "addToAdditionalReferencedDocument", $additionalRefDoc);
+        $additionalRefDoc = $this->getObjectHelper()->getReferencedDocumentType($additionalRefId, $additionalRefURIID, null, $additionalRefTypeCode, $additionalRefName, $additionalRefRefTypeCode, $additionalRefDate, $binarydatafilename);
+        $this->getObjectHelper()->tryCall($this->headerTradeAgreement, "addToAdditionalReferencedDocument", $additionalRefDoc);
         return $this;
     }
 
@@ -1242,8 +1243,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentBlanketOrderReferencedDocument(string $blanketOrderRefId, ?DateTime $blanketOrderRefDate = null): OrderDocumentBuilder
     {
-        $blanketOrderRefDoc = $this->objectHelper->getReferencedDocumentType($blanketOrderRefId, null, null, null, null, null, $blanketOrderRefDate, null);
-        $this->objectHelper->tryCallIfMethodExists($this->headerTradeAgreement, "addToBlanketOrderReferencedDocument", "setBlanketOrderReferencedDocument", [$blanketOrderRefDoc], $blanketOrderRefDoc);
+        $blanketOrderRefDoc = $this->getObjectHelper()->getReferencedDocumentType($blanketOrderRefId, null, null, null, null, null, $blanketOrderRefDate, null);
+        $this->getObjectHelper()->tryCallIfMethodExists($this->headerTradeAgreement, "addToBlanketOrderReferencedDocument", "setBlanketOrderReferencedDocument", [$blanketOrderRefDoc], $blanketOrderRefDoc);
         return $this;
     }
 
@@ -1258,8 +1259,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentBlanketOrderReferencedDocument(string $blanketOrderRefId, ?DateTime $blanketOrderRefDate = null): OrderDocumentBuilder
     {
-        $blanketOrderRefDoc = $this->objectHelper->getReferencedDocumentType($blanketOrderRefId, null, null, null, null, null, $blanketOrderRefDate, null);
-        $this->objectHelper->tryCall($this->headerTradeAgreement, "addToBlanketOrderReferencedDocument", $blanketOrderRefDoc);
+        $blanketOrderRefDoc = $this->getObjectHelper()->getReferencedDocumentType($blanketOrderRefId, null, null, null, null, null, $blanketOrderRefDate, null);
+        $this->getObjectHelper()->tryCall($this->headerTradeAgreement, "addToBlanketOrderReferencedDocument", $blanketOrderRefDoc);
         return $this;
     }
 
@@ -1274,8 +1275,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPreviousOrderChangeReferencedDocument(string $prevOrderChangeRefId, ?DateTime $prevOrderChangeRefDate = null): OrderDocumentBuilder
     {
-        $prevOrderChangeRefDoc = $this->objectHelper->getReferencedDocumentType($prevOrderChangeRefId, null, null, null, null, null, $prevOrderChangeRefDate, null);
-        $this->objectHelper->tryCallIfMethodExists($this->headerTradeAgreement, "addToPreviousOrderChangeReferencedDocument", "setPreviousOrderChangeReferencedDocument", [$prevOrderChangeRefDoc], $prevOrderChangeRefDoc);
+        $prevOrderChangeRefDoc = $this->getObjectHelper()->getReferencedDocumentType($prevOrderChangeRefId, null, null, null, null, null, $prevOrderChangeRefDate, null);
+        $this->getObjectHelper()->tryCallIfMethodExists($this->headerTradeAgreement, "addToPreviousOrderChangeReferencedDocument", "setPreviousOrderChangeReferencedDocument", [$prevOrderChangeRefDoc], $prevOrderChangeRefDoc);
         return $this;
     }
 
@@ -1290,8 +1291,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPreviousOrderChangeReferencedDocument(string $prevOrderChangeRefId, ?DateTime $prevOrderChangeRefDate = null): OrderDocumentBuilder
     {
-        $prevOrderChangeRefDoc = $this->objectHelper->getReferencedDocumentType($prevOrderChangeRefId, null, null, null, null, null, $prevOrderChangeRefDate, null);
-        $this->objectHelper->tryCall($this->headerTradeAgreement, "addToPreviousOrderChangeReferencedDocument", $prevOrderChangeRefDoc);
+        $prevOrderChangeRefDoc = $this->getObjectHelper()->getReferencedDocumentType($prevOrderChangeRefId, null, null, null, null, null, $prevOrderChangeRefDate, null);
+        $this->getObjectHelper()->tryCall($this->headerTradeAgreement, "addToPreviousOrderChangeReferencedDocument", $prevOrderChangeRefDoc);
         return $this;
     }
 
@@ -1306,8 +1307,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPreviousOrderResponseReferencedDocument(string $prevOrderResponseRefId, ?DateTime $prevOrderResponseRefDate = null): OrderDocumentBuilder
     {
-        $prevOrderResponseRefDoc = $this->objectHelper->getReferencedDocumentType($prevOrderResponseRefId, null, null, null, null, null, $prevOrderResponseRefDate, null);
-        $this->objectHelper->tryCallIfMethodExists($this->headerTradeAgreement, "addToPreviousOrderResponseReferencedDocument", "setPreviousOrderResponseReferencedDocument", [$prevOrderResponseRefDoc], $prevOrderResponseRefDoc);
+        $prevOrderResponseRefDoc = $this->getObjectHelper()->getReferencedDocumentType($prevOrderResponseRefId, null, null, null, null, null, $prevOrderResponseRefDate, null);
+        $this->getObjectHelper()->tryCallIfMethodExists($this->headerTradeAgreement, "addToPreviousOrderResponseReferencedDocument", "setPreviousOrderResponseReferencedDocument", [$prevOrderResponseRefDoc], $prevOrderResponseRefDoc);
         return $this;
     }
 
@@ -1322,8 +1323,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPreviousOrderResponseReferencedDocument(string $prevOrderResponseRefId, ?DateTime $prevOrderResponseRefDate = null): OrderDocumentBuilder
     {
-        $prevOrderResponseRefDoc = $this->objectHelper->getReferencedDocumentType($prevOrderResponseRefId, null, null, null, null, null, $prevOrderResponseRefDate, null);
-        $this->objectHelper->tryCall($this->headerTradeAgreement, "addToPreviousOrderResponseReferencedDocument", $prevOrderResponseRefDoc);
+        $prevOrderResponseRefDoc = $this->getObjectHelper()->getReferencedDocumentType($prevOrderResponseRefId, null, null, null, null, null, $prevOrderResponseRefDate, null);
+        $this->getObjectHelper()->tryCall($this->headerTradeAgreement, "addToPreviousOrderResponseReferencedDocument", $prevOrderResponseRefDoc);
         return $this;
     }
 
@@ -1338,8 +1339,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentProcuringProject(string $procuringProjectId, string $procuringProjectName): OrderDocumentBuilder
     {
-        $procuringProject = $this->objectHelper->getProcuringProjectType($procuringProjectId, $procuringProjectName);
-        $this->objectHelper->tryCall($this->headerTradeAgreement, "setSpecifiedProcuringProject", $procuringProject);
+        $procuringProject = $this->getObjectHelper()->getProcuringProjectType($procuringProjectId, $procuringProjectName);
+        $this->getObjectHelper()->tryCall($this->headerTradeAgreement, "setSpecifiedProcuringProject", $procuringProject);
         return $this;
     }
 
@@ -1354,8 +1355,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentUltimateCustomerOrderReferencedDocument(?string $ultimateCustomerOrderRefId = null, ?DateTime $ultimateCustomerOrderRefDate = null): OrderDocumentBuilder
     {
-        $ultimateCustomerOrderRefDoc = $this->objectHelper->getReferencedDocumentType($ultimateCustomerOrderRefId, null, null, null, null, null, $ultimateCustomerOrderRefDate, null);
-        $this->objectHelper->tryCallIfMethodExists($this->headerTradeAgreement, "addToUltimateCustomerOrderReferencedDocument", "setUltimateCustomerOrderReferencedDocument", [$ultimateCustomerOrderRefDoc], $ultimateCustomerOrderRefDoc);
+        $ultimateCustomerOrderRefDoc = $this->getObjectHelper()->getReferencedDocumentType($ultimateCustomerOrderRefId, null, null, null, null, null, $ultimateCustomerOrderRefDate, null);
+        $this->getObjectHelper()->tryCallIfMethodExists($this->headerTradeAgreement, "addToUltimateCustomerOrderReferencedDocument", "setUltimateCustomerOrderReferencedDocument", [$ultimateCustomerOrderRefDoc], $ultimateCustomerOrderRefDoc);
         return $this;
     }
 
@@ -1370,8 +1371,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentUltimateCustomerOrderReferencedDocument(?string $ultimateCustomerOrderRefId = null, ?DateTime $ultimateCustomerOrderRefDate = null): OrderDocumentBuilder
     {
-        $ultimateCustomerOrderRefDoc = $this->objectHelper->getReferencedDocumentType($ultimateCustomerOrderRefId, null, null, null, null, null, $ultimateCustomerOrderRefDate, null);
-        $this->objectHelper->tryCall($this->headerTradeAgreement, "addToUltimateCustomerOrderReferencedDocument", $ultimateCustomerOrderRefDoc);
+        $ultimateCustomerOrderRefDoc = $this->getObjectHelper()->getReferencedDocumentType($ultimateCustomerOrderRefId, null, null, null, null, null, $ultimateCustomerOrderRefDate, null);
+        $this->getObjectHelper()->tryCall($this->headerTradeAgreement, "addToUltimateCustomerOrderReferencedDocument", $ultimateCustomerOrderRefDoc);
         return $this;
     }
 
@@ -1391,8 +1392,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentShipTo(string $name, ?string $id = null, ?string $description = null): OrderDocumentBuilder
     {
-        $shipToTradeParty = $this->objectHelper->getTradeParty($name, $id, $description);
-        $this->objectHelper->tryCall($this->headerTradeDelivery, "setShipToTradeParty", $shipToTradeParty);
+        $shipToTradeParty = $this->getObjectHelper()->getTradeParty($name, $id, $description);
+        $this->getObjectHelper()->tryCall($this->headerTradeDelivery, "setShipToTradeParty", $shipToTradeParty);
         return $this;
     }
 
@@ -1409,8 +1410,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentShipToGlobalId(string $globalID, string $globalIDType): OrderDocumentBuilder
     {
-        $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
-        $this->objectHelper->tryCall($shipToTradeParty, "addToGlobalID", $this->objectHelper->getIdType($globalID, $globalIDType));
+        $shipToTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
+        $this->getObjectHelper()->tryCall($shipToTradeParty, "addToGlobalID", $this->getObjectHelper()->getIdType($globalID, $globalIDType));
         return $this;
     }
 
@@ -1426,9 +1427,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentShipToTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
     {
-        $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
-        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
-        $this->objectHelper->tryCallIfMethodExists($shipToTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
+        $shipToTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
+        $taxreg = $this->getObjectHelper()->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->getObjectHelper()->tryCallIfMethodExists($shipToTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
         return $this;
     }
 
@@ -1447,9 +1448,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentShipToTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
     {
-        $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
-        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
-        $this->objectHelper->tryCall($shipToTradeParty, "addToSpecifiedTaxRegistration", $taxreg);
+        $shipToTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
+        $taxreg = $this->getObjectHelper()->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->getObjectHelper()->tryCall($shipToTradeParty, "addToSpecifiedTaxRegistration", $taxreg);
         return $this;
     }
 
@@ -1479,9 +1480,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentShipToAddress(?string $lineone = null, ?string $linetwo = null, ?string $linethree = null, ?string $postcode = null, ?string $city = null, ?string $country = null, ?string $subdivision = null): OrderDocumentBuilder
     {
-        $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
-        $address = $this->objectHelper->getTradeAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
-        $this->objectHelper->tryCall($shipToTradeParty, "setPostalTradeAddress", $address);
+        $shipToTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
+        $address = $this->getObjectHelper()->getTradeAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
+        $this->getObjectHelper()->tryCall($shipToTradeParty, "setPostalTradeAddress", $address);
         return $this;
     }
 
@@ -1501,9 +1502,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentShipToLegalOrganisation(?string $legalorgid = null, ?string $legalorgtype = null, ?string $legalorgname = null): OrderDocumentBuilder
     {
-        $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
-        $legalorg = $this->objectHelper->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
-        $this->objectHelper->tryCall($shipToTradeParty, "setSpecifiedLegalOrganization", $legalorg);
+        $shipToTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
+        $legalorg = $this->getObjectHelper()->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
+        $this->getObjectHelper()->tryCall($shipToTradeParty, "setSpecifiedLegalOrganization", $legalorg);
         return $this;
     }
 
@@ -1526,9 +1527,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentShipToContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
-        $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
-        $this->objectHelper->tryCallIfMethodExists($shipToTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
+        $shipToTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
+        $contact = $this->getObjectHelper()->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
+        $this->getObjectHelper()->tryCallIfMethodExists($shipToTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
         return $this;
     }
 
@@ -1551,9 +1552,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentShipToContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contactTypeCpde = null): OrderDocumentBuilder
     {
-        $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCpde);
-        $this->objectHelper->tryCall($shipToTradeParty, "addToDefinedTradeContact", $contact);
+        $shipToTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
+        $contact = $this->getObjectHelper()->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contactTypeCpde);
+        $this->getObjectHelper()->tryCall($shipToTradeParty, "addToDefinedTradeContact", $contact);
         return $this;
     }
 
@@ -1569,9 +1570,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentShipToElectronicAddress(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
     {
-        $shipToTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
-        $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
-        $this->objectHelper->tryCall($shipToTradeParty, "setURIUniversalCommunication", $universalCommunication);
+        $shipToTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeDelivery, "getShipToTradeParty");
+        $universalCommunication = $this->getObjectHelper()->getUniversalCommunicationType(null, $uriId, $uriType);
+        $this->getObjectHelper()->tryCall($shipToTradeParty, "setURIUniversalCommunication", $universalCommunication);
         return $this;
     }
 
@@ -1589,8 +1590,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentShipFrom(string $name, ?string $id = null, ?string $description = null): OrderDocumentBuilder
     {
-        $shipToTradeParty = $this->objectHelper->getTradeParty($name, $id, $description);
-        $this->objectHelper->tryCall($this->headerTradeDelivery, "setShipFromTradeParty", $shipToTradeParty);
+        $shipToTradeParty = $this->getObjectHelper()->getTradeParty($name, $id, $description);
+        $this->getObjectHelper()->tryCall($this->headerTradeDelivery, "setShipFromTradeParty", $shipToTradeParty);
         return $this;
     }
 
@@ -1606,8 +1607,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentShipFromGlobalId(string $globalID, string $globalIDType): OrderDocumentBuilder
     {
-        $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
-        $this->objectHelper->tryCall($shipFromTradeParty, "addToGlobalID", $this->objectHelper->getIdType($globalID, $globalIDType));
+        $shipFromTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
+        $this->getObjectHelper()->tryCall($shipFromTradeParty, "addToGlobalID", $this->getObjectHelper()->getIdType($globalID, $globalIDType));
         return $this;
     }
 
@@ -1623,9 +1624,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentShipFromTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
     {
-        $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
-        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
-        $this->objectHelper->tryCallIfMethodExists($shipFromTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
+        $shipFromTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
+        $taxreg = $this->getObjectHelper()->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->getObjectHelper()->tryCallIfMethodExists($shipFromTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
         return $this;
     }
 
@@ -1641,9 +1642,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentShipFromTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
     {
-        $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
-        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
-        $this->objectHelper->tryCall($shipFromTradeParty, "addToSpecifiedTaxRegistration", $taxreg);
+        $shipFromTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
+        $taxreg = $this->getObjectHelper()->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->getObjectHelper()->tryCall($shipFromTradeParty, "addToSpecifiedTaxRegistration", $taxreg);
         return $this;
     }
 
@@ -1673,9 +1674,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentShipFromAddress(?string $lineone = null, ?string $linetwo = null, ?string $linethree = null, ?string $postcode = null, ?string $city = null, ?string $country = null, ?string $subdivision = null): OrderDocumentBuilder
     {
-        $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
-        $address = $this->objectHelper->getTradeAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
-        $this->objectHelper->tryCall($shipFromTradeParty, "setPostalTradeAddress", $address);
+        $shipFromTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
+        $address = $this->getObjectHelper()->getTradeAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
+        $this->getObjectHelper()->tryCall($shipFromTradeParty, "setPostalTradeAddress", $address);
         return $this;
     }
 
@@ -1695,9 +1696,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentShipFromLegalOrganisation(?string $legalorgid = null, ?string $legalorgtype = null, ?string $legalorgname = null): OrderDocumentBuilder
     {
-        $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
-        $legalorg = $this->objectHelper->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
-        $this->objectHelper->tryCall($shipFromTradeParty, "setSpecifiedLegalOrganization", $legalorg);
+        $shipFromTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
+        $legalorg = $this->getObjectHelper()->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
+        $this->getObjectHelper()->tryCall($shipFromTradeParty, "setSpecifiedLegalOrganization", $legalorg);
         return $this;
     }
 
@@ -1720,9 +1721,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentShipFromContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
-        $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
-        $this->objectHelper->tryCallIfMethodExists($shipFromTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
+        $shipFromTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
+        $contact = $this->getObjectHelper()->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
+        $this->getObjectHelper()->tryCallIfMethodExists($shipFromTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
         return $this;
     }
 
@@ -1745,9 +1746,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentShipFromContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
-        $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
-        $this->objectHelper->tryCall($shipFromTradeParty, "addToDefinedTradeContact", $contact);
+        $shipFromTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
+        $contact = $this->getObjectHelper()->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
+        $this->getObjectHelper()->tryCall($shipFromTradeParty, "addToDefinedTradeContact", $contact);
         return $this;
     }
 
@@ -1763,9 +1764,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentShipFromElectronicAddress(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
     {
-        $shipFromTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
-        $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
-        $this->objectHelper->tryCall($shipFromTradeParty, "setURIUniversalCommunication", $universalCommunication);
+        $shipFromTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeDelivery, "getShipFromTradeParty");
+        $universalCommunication = $this->getObjectHelper()->getUniversalCommunicationType(null, $uriId, $uriType);
+        $this->getObjectHelper()->tryCall($shipFromTradeParty, "setURIUniversalCommunication", $universalCommunication);
         return $this;
     }
 
@@ -1782,8 +1783,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentRequestedDeliverySupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): OrderDocumentBuilder
     {
-        $supplychainevent = $this->objectHelper->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
-        $this->objectHelper->tryCallIfMethodExists($this->headerTradeDelivery, "addToRequestedDeliverySupplyChainEvent", "setRequestedDeliverySupplyChainEvent", [$supplychainevent], $supplychainevent);
+        $supplychainevent = $this->getObjectHelper()->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+        $this->getObjectHelper()->tryCallIfMethodExists($this->headerTradeDelivery, "addToRequestedDeliverySupplyChainEvent", "setRequestedDeliverySupplyChainEvent", [$supplychainevent], $supplychainevent);
         return $this;
     }
 
@@ -1800,8 +1801,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentRequestedDeliverySupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): OrderDocumentBuilder
     {
-        $supplychainevent = $this->objectHelper->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
-        $this->objectHelper->tryCall($this->headerTradeDelivery, "addToRequestedDeliverySupplyChainEvent", $supplychainevent);
+        $supplychainevent = $this->getObjectHelper()->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+        $this->getObjectHelper()->tryCall($this->headerTradeDelivery, "addToRequestedDeliverySupplyChainEvent", $supplychainevent);
         return $this;
     }
 
@@ -1818,8 +1819,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentRequestedDespatchSupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): OrderDocumentBuilder
     {
-        $supplychainevent = $this->objectHelper->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
-        $this->objectHelper->tryCallIfMethodExists($this->headerTradeDelivery, "addToRequestedDespatchSupplyChainEvent", "setRequestedDespatchSupplyChainEvent", [$supplychainevent], $supplychainevent);
+        $supplychainevent = $this->getObjectHelper()->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+        $this->getObjectHelper()->tryCallIfMethodExists($this->headerTradeDelivery, "addToRequestedDespatchSupplyChainEvent", "setRequestedDespatchSupplyChainEvent", [$supplychainevent], $supplychainevent);
         return $this;
     }
 
@@ -1836,8 +1837,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentRequestedDespatchSupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): OrderDocumentBuilder
     {
-        $supplychainevent = $this->objectHelper->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
-        $this->objectHelper->tryCall($this->headerTradeDelivery, "addToRequestedDespatchSupplyChainEvent", $supplychainevent);
+        $supplychainevent = $this->getObjectHelper()->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+        $this->getObjectHelper()->tryCall($this->headerTradeDelivery, "addToRequestedDespatchSupplyChainEvent", $supplychainevent);
         return $this;
     }
 
@@ -1855,8 +1856,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentInvoicee(string $name, ?string $id = null, ?string $description = null): OrderDocumentBuilder
     {
-        $invoiceeTradeParty = $this->objectHelper->getTradeParty($name, $id, $description);
-        $this->objectHelper->tryCall($this->headerTradeSettlement, "setInvoiceeTradeParty", $invoiceeTradeParty);
+        $invoiceeTradeParty = $this->getObjectHelper()->getTradeParty($name, $id, $description);
+        $this->getObjectHelper()->tryCall($this->headerTradeSettlement, "setInvoiceeTradeParty", $invoiceeTradeParty);
         return $this;
     }
 
@@ -1872,8 +1873,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentInvoiceeGlobalId(string $globalID, string $globalIDType): OrderDocumentBuilder
     {
-        $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
-        $this->objectHelper->tryCall($invoiceeTradeParty, "addToGlobalID", $this->objectHelper->getIdType($globalID, $globalIDType));
+        $invoiceeTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
+        $this->getObjectHelper()->tryCall($invoiceeTradeParty, "addToGlobalID", $this->getObjectHelper()->getIdType($globalID, $globalIDType));
         return $this;
     }
 
@@ -1889,9 +1890,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentInvoiceeTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
     {
-        $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
-        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
-        $this->objectHelper->tryCallIfMethodExists($invoiceeTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
+        $invoiceeTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
+        $taxreg = $this->getObjectHelper()->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->getObjectHelper()->tryCallIfMethodExists($invoiceeTradeParty, "addToSpecifiedTaxRegistration", "setSpecifiedTaxRegistration", [$taxreg], $taxreg);
         return $this;
     }
 
@@ -1907,9 +1908,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentInvoiceeTaxRegistration(string $taxregtype, string $taxregid): OrderDocumentBuilder
     {
-        $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
-        $taxreg = $this->objectHelper->getTaxRegistrationType($taxregtype, $taxregid);
-        $this->objectHelper->tryCall($invoiceeTradeParty, "addToSpecifiedTaxRegistration", $taxreg);
+        $invoiceeTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
+        $taxreg = $this->getObjectHelper()->getTaxRegistrationType($taxregtype, $taxregid);
+        $this->getObjectHelper()->tryCall($invoiceeTradeParty, "addToSpecifiedTaxRegistration", $taxreg);
         return $this;
     }
 
@@ -1939,9 +1940,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentInvoiceeAddress(?string $lineone = null, ?string $linetwo = null, ?string $linethree = null, ?string $postcode = null, ?string $city = null, ?string $country = null, ?string $subdivision = null): OrderDocumentBuilder
     {
-        $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
-        $address = $this->objectHelper->getTradeAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
-        $this->objectHelper->tryCall($invoiceeTradeParty, "setPostalTradeAddress", $address);
+        $invoiceeTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
+        $address = $this->getObjectHelper()->getTradeAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
+        $this->getObjectHelper()->tryCall($invoiceeTradeParty, "setPostalTradeAddress", $address);
         return $this;
     }
 
@@ -1961,9 +1962,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentInvoiceeLegalOrganisation(?string $legalorgid = null, ?string $legalorgtype = null, ?string $legalorgname = null): OrderDocumentBuilder
     {
-        $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
-        $legalorg = $this->objectHelper->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
-        $this->objectHelper->tryCall($invoiceeTradeParty, "setSpecifiedLegalOrganization", $legalorg);
+        $invoiceeTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
+        $legalorg = $this->getObjectHelper()->getLegalOrganization($legalorgid, $legalorgtype, $legalorgname);
+        $this->getObjectHelper()->tryCall($invoiceeTradeParty, "setSpecifiedLegalOrganization", $legalorg);
         return $this;
     }
 
@@ -1986,9 +1987,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentInvoiceeContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
-        $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
-        $this->objectHelper->tryCallIfMethodExists($invoiceeTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
+        $invoiceeTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
+        $contact = $this->getObjectHelper()->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
+        $this->getObjectHelper()->tryCallIfMethodExists($invoiceeTradeParty, "addToDefinedTradeContact", "setDefinedTradeContact", [$contact], $contact);
         return $this;
     }
 
@@ -2010,9 +2011,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentInvoiceeContact(?string $contactpersonname = null, ?string $contactdepartmentname = null, ?string $contactphoneno = null, ?string $contactfaxno = null, ?string $contactemailadd = null, ?string $contacttypecode = null): OrderDocumentBuilder
     {
-        $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
-        $contact = $this->objectHelper->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
-        $this->objectHelper->tryCall($invoiceeTradeParty, "addToDefinedTradeContact", $contact);
+        $invoiceeTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
+        $contact = $this->getObjectHelper()->getTradeContact($contactpersonname, $contactdepartmentname, $contactphoneno, $contactfaxno, $contactemailadd, $contacttypecode);
+        $this->getObjectHelper()->tryCall($invoiceeTradeParty, "addToDefinedTradeContact", $contact);
         return $this;
     }
 
@@ -2028,9 +2029,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentInvoiceeElectronicAddress(?string $uriType = null, ?string $uriId = null): OrderDocumentBuilder
     {
-        $invoiceeTradeParty = $this->objectHelper->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
-        $universalCommunication = $this->objectHelper->getUniversalCommunicationType(null, $uriId, $uriType);
-        $this->objectHelper->tryCall($invoiceeTradeParty, "setURIUniversalCommunication", $universalCommunication);
+        $invoiceeTradeParty = $this->getObjectHelper()->tryCallAndReturn($this->headerTradeSettlement, "getInvoiceeTradeParty");
+        $universalCommunication = $this->getObjectHelper()->getUniversalCommunicationType(null, $uriId, $uriType);
+        $this->getObjectHelper()->tryCall($invoiceeTradeParty, "setURIUniversalCommunication", $universalCommunication);
         return $this;
     }
 
@@ -2048,8 +2049,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPaymentMean(string $paymentMeansCode, ?string $paymentMeansInformation = null): OrderDocumentBuilder
     {
-        $paymentMeans = $this->objectHelper->getTradeSettlementPaymentMeansType($paymentMeansCode, $paymentMeansInformation);
-        $this->objectHelper->tryCallIfMethodExists($this->headerTradeSettlement, "addToSpecifiedTradeSettlementPaymentMeans", "setSpecifiedTradeSettlementPaymentMeans", [$paymentMeans], $paymentMeans);
+        $paymentMeans = $this->getObjectHelper()->getTradeSettlementPaymentMeansType($paymentMeansCode, $paymentMeansInformation);
+        $this->getObjectHelper()->tryCallIfMethodExists($this->headerTradeSettlement, "addToSpecifiedTradeSettlementPaymentMeans", "setSpecifiedTradeSettlementPaymentMeans", [$paymentMeans], $paymentMeans);
         return $this;
     }
 
@@ -2067,8 +2068,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPaymentMean(string $paymentMeansCode, ?string $paymentMeansInformation = null): OrderDocumentBuilder
     {
-        $paymentMeans = $this->objectHelper->getTradeSettlementPaymentMeansType($paymentMeansCode, $paymentMeansInformation);
-        $this->objectHelper->tryCall($this->headerTradeSettlement, "addToSpecifiedTradeSettlementPaymentMeans", $paymentMeans);
+        $paymentMeans = $this->getObjectHelper()->getTradeSettlementPaymentMeansType($paymentMeansCode, $paymentMeansInformation);
+        $this->getObjectHelper()->tryCall($this->headerTradeSettlement, "addToSpecifiedTradeSettlementPaymentMeans", $paymentMeans);
         return $this;
     }
 
@@ -2083,12 +2084,12 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPaymentTerm(string $paymentTermsDescription): OrderDocumentBuilder
     {
-        if ($this->profileId == OrderProfiles::PROFILE_EXTENDED) {
+        if ($this->getProfileId() == OrderProfiles::PROFILE_EXTENDED) {
             $paymentTerms = $paymentTermsDescription;
         } else {
-            $paymentTerms = $this->objectHelper->getTradePaymentTermsType($paymentTermsDescription);
+            $paymentTerms = $this->getObjectHelper()->getTradePaymentTermsType($paymentTermsDescription);
         }
-        $this->objectHelper->tryCallIfMethodExists($this->headerTradeSettlement, "addToSpecifiedTradePaymentTerms", "setSpecifiedTradePaymentTerms", [$paymentTerms], $paymentTerms);
+        $this->getObjectHelper()->tryCallIfMethodExists($this->headerTradeSettlement, "addToSpecifiedTradePaymentTerms", "setSpecifiedTradePaymentTerms", [$paymentTerms], $paymentTerms);
         $this->currentPaymentTerms = $paymentTerms;
         return $this;
     }
@@ -2104,12 +2105,12 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPaymentTerm(string $paymentTermsDescription): OrderDocumentBuilder
     {
-        if ($this->profileId == OrderProfiles::PROFILE_EXTENDED) {
+        if ($this->getProfileId() == OrderProfiles::PROFILE_EXTENDED) {
             $paymentTerms = $paymentTermsDescription;
         } else {
-            $paymentTerms = $this->objectHelper->getTradePaymentTermsType($paymentTermsDescription);
+            $paymentTerms = $this->getObjectHelper()->getTradePaymentTermsType($paymentTermsDescription);
         }
-        $this->objectHelper->tryCall($this->headerTradeSettlement, "addToSpecifiedTradePaymentTerms", $paymentTerms);
+        $this->getObjectHelper()->tryCall($this->headerTradeSettlement, "addToSpecifiedTradePaymentTerms", $paymentTerms);
         $this->currentPaymentTerms = $paymentTerms;
         return $this;
     }
@@ -2185,8 +2186,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentTax(string $categoryCode, string $typeCode, float $basisAmount, float $calculatedAmount, ?float $rateApplicablePercent = null, ?string $exemptionReason = null, ?string $exemptionReasonCode = null, ?float $lineTotalBasisAmount = null, ?float $allowanceChargeBasisAmount = null, ?string $dueDateTypeCode = null): OrderDocumentBuilder
     {
-        $tax = $this->objectHelper->getTradeTaxType($categoryCode, $typeCode, $basisAmount, $calculatedAmount, $rateApplicablePercent, $exemptionReason, $exemptionReasonCode, $lineTotalBasisAmount, $allowanceChargeBasisAmount, $dueDateTypeCode);
-        $this->objectHelper->tryCall($this->headerTradeSettlement, "addToApplicableTradeTax", $tax);
+        $tax = $this->getObjectHelper()->getTradeTaxType($categoryCode, $typeCode, $basisAmount, $calculatedAmount, $rateApplicablePercent, $exemptionReason, $exemptionReasonCode, $lineTotalBasisAmount, $allowanceChargeBasisAmount, $dueDateTypeCode);
+        $this->getObjectHelper()->tryCall($this->headerTradeSettlement, "addToApplicableTradeTax", $tax);
         return $this;
     }
 
@@ -2323,8 +2324,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentAllowanceCharge(float $actualAmount, bool $isCharge, ?string $taxCategoryCode = null, ?string $taxTypeCode = null, ?float $rateApplicablePercent = null, ?float $sequence = null, ?float $calculationPercent = null, ?float $basisAmount = null, ?float $basisQuantity = null, ?string $basisQuantityUnitCode = null, ?string $reasonCode = null, ?string $reason = null): OrderDocumentBuilder
     {
-        $allowanceCharge = $this->objectHelper->getTradeAllowanceChargeType($actualAmount, $isCharge, $taxTypeCode, $taxCategoryCode, $rateApplicablePercent, $sequence, $calculationPercent, $basisAmount, $basisQuantity, $basisQuantityUnitCode, $reasonCode, $reason);
-        $this->objectHelper->tryCallIfMethodExists($this->headerTradeSettlement, "addToSpecifiedTradeAllowanceCharge", "setSpecifiedTradeAllowanceCharge", [$allowanceCharge], $allowanceCharge);
+        $allowanceCharge = $this->getObjectHelper()->getTradeAllowanceChargeType($actualAmount, $isCharge, $taxTypeCode, $taxCategoryCode, $rateApplicablePercent, $sequence, $calculationPercent, $basisAmount, $basisQuantity, $basisQuantityUnitCode, $reasonCode, $reason);
+        $this->getObjectHelper()->tryCallIfMethodExists($this->headerTradeSettlement, "addToSpecifiedTradeAllowanceCharge", "setSpecifiedTradeAllowanceCharge", [$allowanceCharge], $allowanceCharge);
         return $this;
     }
 
@@ -2348,8 +2349,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentAllowanceCharge(float $actualAmount, bool $isCharge, ?string $taxCategoryCode = null, ?string $taxTypeCode = null, ?float $rateApplicablePercent = null, ?float $sequence = null, ?float $calculationPercent = null, ?float $basisAmount = null, ?float $basisQuantity = null, ?string $basisQuantityUnitCode = null, ?string $reasonCode = null, ?string $reason = null): OrderDocumentBuilder
     {
-        $allowanceCharge = $this->objectHelper->getTradeAllowanceChargeType($actualAmount, $isCharge, $taxTypeCode, $taxCategoryCode, $rateApplicablePercent, $sequence, $calculationPercent, $basisAmount, $basisQuantity, $basisQuantityUnitCode, $reasonCode, $reason);
-        $this->objectHelper->tryCall($this->headerTradeSettlement, "addToSpecifiedTradeAllowanceCharge", $allowanceCharge);
+        $allowanceCharge = $this->getObjectHelper()->getTradeAllowanceChargeType($actualAmount, $isCharge, $taxTypeCode, $taxCategoryCode, $rateApplicablePercent, $sequence, $calculationPercent, $basisAmount, $basisQuantity, $basisQuantityUnitCode, $reasonCode, $reason);
+        $this->getObjectHelper()->tryCall($this->headerTradeSettlement, "addToSpecifiedTradeAllowanceCharge", $allowanceCharge);
         return $this;
     }
 
@@ -2364,8 +2365,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentReceivableSpecifiedTradeAccountingAccount(string $id, ?string $typeCode = null): OrderDocumentBuilder
     {
-        $account = $this->objectHelper->getTradeAccountingAccountType($id, $typeCode);
-        $this->objectHelper->tryCall($this->headerTradeSettlement, "setReceivableSpecifiedTradeAccountingAccount", $account);
+        $account = $this->getObjectHelper()->getTradeAccountingAccountType($id, $typeCode);
+        $this->getObjectHelper()->tryCall($this->headerTradeSettlement, "setReceivableSpecifiedTradeAccountingAccount", $account);
         return $this;
     }
 
@@ -2387,8 +2388,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addNewPosition(string $lineid, ?string $lineStatusCode = null): OrderDocumentBuilder
     {
-        $position = $this->objectHelper->getSupplyChainTradeLineItemType($lineid, $lineStatusCode);
-        $this->objectHelper->tryCall($this->headerSupplyChainTradeTransaction, "addToIncludedSupplyChainTradeLineItem", $position);
+        $position = $this->getObjectHelper()->getSupplyChainTradeLineItemType($lineid, $lineStatusCode);
+        $this->getObjectHelper()->tryCall($this->headerSupplyChainTradeTransaction, "addToIncludedSupplyChainTradeLineItem", $position);
         $this->currentPosition = $position;
         return $this;
     }
@@ -2400,16 +2401,16 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function removeLatestPosition(): OrderDocumentBuilder
     {
-        $positions = $this->objectHelper->tryCallAndReturn($this->headerSupplyChainTradeTransaction, "getIncludedSupplyChainTradeLineItem");
+        $positions = $this->getObjectHelper()->tryCallAndReturn($this->headerSupplyChainTradeTransaction, "getIncludedSupplyChainTradeLineItem");
         $noOfPositions = count($positions);
 
         if ($noOfPositions == 0) {
             return $this;
         }
 
-        $this->objectHelper->tryCall($this->headerSupplyChainTradeTransaction, "unsetIncludedSupplyChainTradeLineItem", $noOfPositions - 1);
+        $this->getObjectHelper()->tryCall($this->headerSupplyChainTradeTransaction, "unsetIncludedSupplyChainTradeLineItem", $noOfPositions - 1);
 
-        $positions = $this->objectHelper->tryCallAndReturn($this->headerSupplyChainTradeTransaction, "getIncludedSupplyChainTradeLineItem");
+        $positions = $this->getObjectHelper()->tryCallAndReturn($this->headerSupplyChainTradeTransaction, "getIncludedSupplyChainTradeLineItem");
         $noOfPositions = count($positions);
 
         if ($noOfPositions > 0) {
@@ -2435,9 +2436,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionNote(string $content, ?string $contentCode = null, ?string $subjectCode = null): OrderDocumentBuilder
     {
-        $linedoc = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getAssociatedDocumentLineDocument");
-        $note = $this->objectHelper->getNoteType($content, $contentCode, $subjectCode);
-        $this->objectHelper->tryCallAll($linedoc, ["addToIncludedNote", "setIncludedNote"], $note);
+        $linedoc = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getAssociatedDocumentLineDocument");
+        $note = $this->getObjectHelper()->getNoteType($content, $contentCode, $subjectCode);
+        $this->getObjectHelper()->tryCallAll($linedoc, ["addToIncludedNote", "setIncludedNote"], $note);
         return $this;
     }
 
@@ -2465,8 +2466,8 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionProductDetails(?string $name = null, ?string $description = null, ?string $sellerAssignedID = null, ?string $buyerAssignedID = null, ?string $globalIDType = null, ?string $globalID = null, ?string $batchId = null, ?string $brandName = null): OrderDocumentBuilder
     {
-        $product = $this->objectHelper->getTradeProductType($name, $description, $sellerAssignedID, $buyerAssignedID, $globalIDType, $globalID, $batchId, $brandName);
-        $this->objectHelper->tryCall($this->currentPosition, "setSpecifiedTradeProduct", $product);
+        $product = $this->getObjectHelper()->getTradeProductType($name, $description, $sellerAssignedID, $buyerAssignedID, $globalIDType, $globalID, $batchId, $brandName);
+        $this->getObjectHelper()->tryCall($this->currentPosition, "setSpecifiedTradeProduct", $product);
         return $this;
     }
 
@@ -2489,9 +2490,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionProductCharacteristic(string $description, string $value, ?string $typecode = null, ?float $measureValue = null, ?string $measureUnitCode = null): OrderDocumentBuilder
     {
-        $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
-        $productCharacteristic = $this->objectHelper->getProductCharacteristicType($typecode, $description, $value, $measureValue, $measureUnitCode);
-        $this->objectHelper->tryCallIfMethodExists($product, "addToApplicableProductCharacteristic", "setApplicableProductCharacteristic", [$productCharacteristic], $productCharacteristic);
+        $product = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
+        $productCharacteristic = $this->getObjectHelper()->getProductCharacteristicType($typecode, $description, $value, $measureValue, $measureUnitCode);
+        $this->getObjectHelper()->tryCallIfMethodExists($product, "addToApplicableProductCharacteristic", "setApplicableProductCharacteristic", [$productCharacteristic], $productCharacteristic);
         return $this;
     }
 
@@ -2514,9 +2515,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPositionProductCharacteristic(string $description, string $value, ?string $typecode = null, ?float $measureValue = null, ?string $measureUnitCode = null): OrderDocumentBuilder
     {
-        $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
-        $productCharacteristic = $this->objectHelper->getProductCharacteristicType($typecode, $description, $value, $measureValue, $measureUnitCode);
-        $this->objectHelper->tryCall($product, "addToApplicableProductCharacteristic", $productCharacteristic);
+        $product = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
+        $productCharacteristic = $this->getObjectHelper()->getProductCharacteristicType($typecode, $description, $value, $measureValue, $measureUnitCode);
+        $this->getObjectHelper()->tryCall($product, "addToApplicableProductCharacteristic", $productCharacteristic);
         return $this;
     }
 
@@ -2539,9 +2540,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionProductClassification(string $classCode, ?string $className = null, ?string $listID = null, ?string $listVersionID = null): OrderDocumentBuilder
     {
-        $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
-        $productClassification = $this->objectHelper->getProductClassificationType($classCode, $className, $listID, $listVersionID);
-        $this->objectHelper->tryCallIfMethodExists($product, "addToDesignatedProductClassification", "setDesignatedProductClassification", [$productClassification], $productClassification);
+        $product = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
+        $productClassification = $this->getObjectHelper()->getProductClassificationType($classCode, $className, $listID, $listVersionID);
+        $this->getObjectHelper()->tryCallIfMethodExists($product, "addToDesignatedProductClassification", "setDesignatedProductClassification", [$productClassification], $productClassification);
         return $this;
     }
 
@@ -2564,9 +2565,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPositionProductClassification(string $classCode, ?string $className = null, ?string $listID = null, ?string $listVersionID = null): OrderDocumentBuilder
     {
-        $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
-        $productClassification = $this->objectHelper->getProductClassificationType($classCode, $className, $listID, $listVersionID);
-        $this->objectHelper->tryCall($product, "addToDesignatedProductClassification", $productClassification);
+        $product = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
+        $productClassification = $this->getObjectHelper()->getProductClassificationType($classCode, $className, $listID, $listVersionID);
+        $this->getObjectHelper()->tryCall($product, "addToDesignatedProductClassification", $productClassification);
         return $this;
     }
 
@@ -2582,9 +2583,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionProductInstance(?string $batchID = null, ?string $serialId = null): OrderDocumentBuilder
     {
-        $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
-        $productInstance = $this->objectHelper->getTradeProductInstanceType($batchID, $serialId);
-        $this->objectHelper->tryCallIfMethodExists($product, "addToIndividualTradeProductInstance", "setIndividualTradeProductInstance", [$productInstance], $productInstance);
+        $product = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
+        $productInstance = $this->getObjectHelper()->getTradeProductInstanceType($batchID, $serialId);
+        $this->getObjectHelper()->tryCallIfMethodExists($product, "addToIndividualTradeProductInstance", "setIndividualTradeProductInstance", [$productInstance], $productInstance);
         return $this;
     }
 
@@ -2600,9 +2601,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPositionProductInstance(?string $batchID = null, ?string $serialId = null): OrderDocumentBuilder
     {
-        $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
-        $productInstance = $this->objectHelper->getTradeProductInstanceType($batchID, $serialId);
-        $this->objectHelper->tryCall($product, "addToIndividualTradeProductInstance", $productInstance);
+        $product = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
+        $productInstance = $this->getObjectHelper()->getTradeProductInstanceType($batchID, $serialId);
+        $this->getObjectHelper()->tryCall($product, "addToIndividualTradeProductInstance", $productInstance);
         return $this;
     }
 
@@ -2628,9 +2629,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionSupplyChainPackaging(?string $typeCode = null, ?float $width = null, ?string $widthUnitCode = null, ?float $length = null, ?string $lengthUnitCode = null, ?float $height = null, ?string $heightUnitCode = null): OrderDocumentBuilder
     {
-        $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
-        $packaging = $this->objectHelper->getSupplyChainPackagingType($typeCode, $width, $widthUnitCode, $length, $lengthUnitCode, $height, $heightUnitCode);
-        $this->objectHelper->tryCall($product, "setApplicableSupplyChainPackaging", $packaging);
+        $product = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
+        $packaging = $this->getObjectHelper()->getSupplyChainPackagingType($typeCode, $width, $widthUnitCode, $length, $lengthUnitCode, $height, $heightUnitCode);
+        $this->getObjectHelper()->tryCall($product, "setApplicableSupplyChainPackaging", $packaging);
         return $this;
     }
 
@@ -2645,9 +2646,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionProductOriginTradeCountry(string $country): OrderDocumentBuilder
     {
-        $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
-        $productTradeCounty = $this->objectHelper->getTradeCountryType($country);
-        $this->objectHelper->tryCall($product, "setOriginTradeCountry", $productTradeCounty);
+        $product = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
+        $productTradeCounty = $this->getObjectHelper()->getTradeCountryType($country);
+        $this->getObjectHelper()->tryCall($product, "setOriginTradeCountry", $productTradeCounty);
         return $this;
     }
 
@@ -2669,9 +2670,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionProductReferencedDocument(?string $issuerassignedid = null, ?string $typecode = null, ?string $uriid = null, ?string $name = null, ?string $binarydatafilename = null): OrderDocumentBuilder
     {
-        $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
-        $tradeLineItemProdRefDoc = $this->objectHelper->getReferencedDocumentType($issuerassignedid, $uriid, null, $typecode, $name, null, null, $binarydatafilename);
-        $this->objectHelper->tryCallIfMethodExists($product, "addToAdditionalReferenceReferencedDocument", "setAdditionalReferenceReferencedDocument", [$tradeLineItemProdRefDoc], $tradeLineItemProdRefDoc);
+        $product = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
+        $tradeLineItemProdRefDoc = $this->getObjectHelper()->getReferencedDocumentType($issuerassignedid, $uriid, null, $typecode, $name, null, null, $binarydatafilename);
+        $this->getObjectHelper()->tryCallIfMethodExists($product, "addToAdditionalReferenceReferencedDocument", "setAdditionalReferenceReferencedDocument", [$tradeLineItemProdRefDoc], $tradeLineItemProdRefDoc);
         return $this;
     }
 
@@ -2693,9 +2694,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPositionProductReferencedDocument(?string $issuerassignedid = null, ?string $typecode = null, ?string $uriid = null, ?string $name = null, ?string $binarydatafilename = null): OrderDocumentBuilder
     {
-        $product = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
-        $contractrefdoc = $this->objectHelper->getReferencedDocumentType($issuerassignedid, $uriid, null, $typecode, $name, null, null, $binarydatafilename);
-        $this->objectHelper->tryCall($product, "addToAdditionalReferenceReferencedDocument", $contractrefdoc);
+        $product = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedTradeProduct");
+        $contractrefdoc = $this->getObjectHelper()->getReferencedDocumentType($issuerassignedid, $uriid, null, $typecode, $name, null, null, $binarydatafilename);
+        $this->getObjectHelper()->tryCall($product, "addToAdditionalReferenceReferencedDocument", $contractrefdoc);
         return $this;
     }
 
@@ -2731,9 +2732,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPositionAdditionalReferencedDocument(?string $issuerassignedid = null, ?string $typecode = null, ?string $uriid = null, ?string $lineid = null, ?string $name = null, ?string $reftypecode = null, ?DateTime $issueddate = null, ?string $binarydatafilename = null): OrderDocumentBuilder
     {
-        $additionalRefDoc = $this->objectHelper->getReferencedDocumentType($issuerassignedid, $uriid, $lineid, $typecode, $name, $reftypecode, $issueddate, $binarydatafilename);
-        $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
-        $this->objectHelper->tryCall($positionAgreement, "addToAdditionalReferencedDocument", $additionalRefDoc);
+        $additionalRefDoc = $this->getObjectHelper()->getReferencedDocumentType($issuerassignedid, $uriid, $lineid, $typecode, $name, $reftypecode, $issueddate, $binarydatafilename);
+        $positionAgreement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $this->getObjectHelper()->tryCall($positionAgreement, "addToAdditionalReferencedDocument", $additionalRefDoc);
         return $this;
     }
 
@@ -2747,9 +2748,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionBuyerOrderReferencedDocument(string $buyerOrderRefLineId): OrderDocumentBuilder
     {
-        $buyerOrderRefDoc = $this->objectHelper->getReferencedDocumentType(null, null, $buyerOrderRefLineId, null, null, null, null, null);
-        $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
-        $this->objectHelper->tryCall($positionAgreement, "setBuyerOrderReferencedDocument", $buyerOrderRefDoc);
+        $buyerOrderRefDoc = $this->getObjectHelper()->getReferencedDocumentType(null, null, $buyerOrderRefLineId, null, null, null, null, null);
+        $positionAgreement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $this->getObjectHelper()->tryCall($positionAgreement, "setBuyerOrderReferencedDocument", $buyerOrderRefDoc);
         return $this;
     }
 
@@ -2766,9 +2767,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionQuotationReferencedDocument(?string $quotationRefId = null, ?string $quotationRefLineId = null, ?DateTime $quotationRefDate = null): OrderDocumentBuilder
     {
-        $quotationRefDoc = $this->objectHelper->getReferencedDocumentType($quotationRefId, null, $quotationRefLineId, null, null, null, $quotationRefDate, null);
-        $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
-        $this->objectHelper->tryCall($positionAgreement, "setQuotationReferencedDocument", $quotationRefDoc);
+        $quotationRefDoc = $this->getObjectHelper()->getReferencedDocumentType($quotationRefId, null, $quotationRefLineId, null, null, null, $quotationRefDate, null);
+        $positionAgreement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $this->getObjectHelper()->tryCall($positionAgreement, "setQuotationReferencedDocument", $quotationRefDoc);
         return $this;
     }
 
@@ -2787,9 +2788,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionGrossPrice(float $chargeAmount, ?float $basisQuantity = null, ?string $basisQuantityUnitCode = null): OrderDocumentBuilder
     {
-        $grossPrice = $this->objectHelper->getTradePriceType($chargeAmount, $basisQuantity, $basisQuantityUnitCode);
-        $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
-        $this->objectHelper->tryCall($positionAgreement, "setGrossPriceProductTradePrice", $grossPrice);
+        $grossPrice = $this->getObjectHelper()->getTradePriceType($chargeAmount, $basisQuantity, $basisQuantityUnitCode);
+        $positionAgreement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $this->getObjectHelper()->tryCall($positionAgreement, "setGrossPriceProductTradePrice", $grossPrice);
         return $this;
     }
 
@@ -2819,10 +2820,10 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPositionGrossPriceAllowanceCharge(float $actualAmount, bool $isCharge, ?float $calculationPercent = null, ?float $basisAmount = null, ?string $reason = null, ?string $taxTypeCode = null, ?string $taxCategoryCode = null, ?float $rateApplicablePercent = null, ?float $sequence = null, ?float $basisQuantity = null, ?string $basisQuantityUnitCode = null, ?string $reasonCode = null): OrderDocumentBuilder
     {
-        $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
-        $grossPrice = $this->objectHelper->tryCallAndReturn($positionAgreement, "getGrossPriceProductTradePrice");
-        $allowanceCharge = $this->objectHelper->getTradeAllowanceChargeType($actualAmount, $isCharge, $taxTypeCode, $taxCategoryCode, $rateApplicablePercent, $sequence, $calculationPercent, $basisAmount, $basisQuantity, $basisQuantityUnitCode, $reasonCode, $reason);
-        $this->objectHelper->tryCallAll($grossPrice, ["addToAppliedTradeAllowanceCharge", "setAppliedTradeAllowanceCharge"], $allowanceCharge);
+        $positionAgreement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $grossPrice = $this->getObjectHelper()->tryCallAndReturn($positionAgreement, "getGrossPriceProductTradePrice");
+        $allowanceCharge = $this->getObjectHelper()->getTradeAllowanceChargeType($actualAmount, $isCharge, $taxTypeCode, $taxCategoryCode, $rateApplicablePercent, $sequence, $calculationPercent, $basisAmount, $basisQuantity, $basisQuantityUnitCode, $reasonCode, $reason);
+        $this->getObjectHelper()->tryCallAll($grossPrice, ["addToAppliedTradeAllowanceCharge", "setAppliedTradeAllowanceCharge"], $allowanceCharge);
         return $this;
     }
 
@@ -2845,10 +2846,10 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPositionGrossPriceAllowanceChargeSimple(float $actualAmount, bool $isCharge, ?string $reason = null, ?string $reasonCode = null): OrderDocumentBuilder
     {
-        $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
-        $grossPrice = $this->objectHelper->tryCallAndReturn($positionAgreement, "getGrossPriceProductTradePrice");
-        $allowanceCharge = $this->objectHelper->getTradeAllowanceChargeType($actualAmount, $isCharge, null, null, null, null, null, null, null, null, $reasonCode, $reason);
-        $this->objectHelper->tryCallAll($grossPrice, ["addToAppliedTradeAllowanceCharge", "setAppliedTradeAllowanceCharge"], $allowanceCharge);
+        $positionAgreement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $grossPrice = $this->getObjectHelper()->tryCallAndReturn($positionAgreement, "getGrossPriceProductTradePrice");
+        $allowanceCharge = $this->getObjectHelper()->getTradeAllowanceChargeType($actualAmount, $isCharge, null, null, null, null, null, null, null, null, $reasonCode, $reason);
+        $this->getObjectHelper()->tryCallAll($grossPrice, ["addToAppliedTradeAllowanceCharge", "setAppliedTradeAllowanceCharge"], $allowanceCharge);
         return $this;
     }
 
@@ -2867,9 +2868,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionNetPrice(float $chargeAmount, ?float $basisQuantity = null, ?string $basisQuantityUnitCode = null): OrderDocumentBuilder
     {
-        $netPrice = $this->objectHelper->getTradePriceType($chargeAmount, $basisQuantity, $basisQuantityUnitCode);
-        $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
-        $this->objectHelper->tryCall($positionAgreement, "setNetPriceProductTradePrice", $netPrice);
+        $netPrice = $this->getObjectHelper()->getTradePriceType($chargeAmount, $basisQuantity, $basisQuantityUnitCode);
+        $positionAgreement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $this->getObjectHelper()->tryCall($positionAgreement, "setNetPriceProductTradePrice", $netPrice);
         return $this;
     }
 
@@ -2907,10 +2908,10 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionNetPriceTax(string $categoryCode, string $typeCode, ?float $rateApplicablePercent = null, ?float $calculatedAmount = null, ?string $exemptionReason = null, ?string $exemptionReasonCode = null): OrderDocumentBuilder
     {
-        $positionagreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
-        $netPrice = $this->objectHelper->tryCallAndReturn($positionagreement, "getNetPriceProductTradePrice");
-        $tax = $this->objectHelper->getTradeTaxType($categoryCode, $typeCode, null, $calculatedAmount, $rateApplicablePercent, $exemptionReason, $exemptionReasonCode, null, null, null, null);
-        $this->objectHelper->tryCallIfMethodExists($netPrice, "addToIncludedTradeTax", "setIncludedTradeTax", [$tax], $tax);
+        $positionagreement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $netPrice = $this->getObjectHelper()->tryCallAndReturn($positionagreement, "getNetPriceProductTradePrice");
+        $tax = $this->getObjectHelper()->getTradeTaxType($categoryCode, $typeCode, null, $calculatedAmount, $rateApplicablePercent, $exemptionReason, $exemptionReasonCode, null, null, null, null);
+        $this->getObjectHelper()->tryCallIfMethodExists($netPrice, "addToIncludedTradeTax", "setIncludedTradeTax", [$tax], $tax);
         return $this;
     }
 
@@ -2948,10 +2949,10 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPositionNetPriceTax(string $categoryCode, string $typeCode, ?float $rateApplicablePercent = null, ?float $calculatedAmount = null, ?string $exemptionReason = null, ?string $exemptionReasonCode = null): OrderDocumentBuilder
     {
-        $positionagreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
-        $netPrice = $this->objectHelper->tryCallAndReturn($positionagreement, "getNetPriceProductTradePrice");
-        $tax = $this->objectHelper->getTradeTaxType($categoryCode, $typeCode, null, $calculatedAmount, $rateApplicablePercent, $exemptionReason, $exemptionReasonCode, null, null, null, null);
-        $this->objectHelper->tryCall($netPrice, "addToIncludedTradeTax", $tax);
+        $positionagreement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $netPrice = $this->getObjectHelper()->tryCallAndReturn($positionagreement, "getNetPriceProductTradePrice");
+        $tax = $this->getObjectHelper()->getTradeTaxType($categoryCode, $typeCode, null, $calculatedAmount, $rateApplicablePercent, $exemptionReason, $exemptionReasonCode, null, null, null, null);
+        $this->getObjectHelper()->tryCall($netPrice, "addToIncludedTradeTax", $tax);
         return $this;
     }
 
@@ -2968,9 +2969,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionCatalogueReferencedDocument(?string $catalogueRefId = null, ?string $catalogueRefLineId = null, ?DateTime $catalogueRefDate = null): OrderDocumentBuilder
     {
-        $catalogueRefDoc = $this->objectHelper->getReferencedDocumentType($catalogueRefId, null, $catalogueRefLineId, null, null, null, $catalogueRefDate, null);
-        $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
-        $this->objectHelper->tryCallIfMethodExists($positionAgreement, "addToCatalogueReferencedDocument", "setCatalogueReferencedDocument", [$catalogueRefDoc], $catalogueRefDoc);
+        $catalogueRefDoc = $this->getObjectHelper()->getReferencedDocumentType($catalogueRefId, null, $catalogueRefLineId, null, null, null, $catalogueRefDate, null);
+        $positionAgreement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $this->getObjectHelper()->tryCallIfMethodExists($positionAgreement, "addToCatalogueReferencedDocument", "setCatalogueReferencedDocument", [$catalogueRefDoc], $catalogueRefDoc);
         return $this;
     }
 
@@ -2987,9 +2988,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPositionCatalogueReferencedDocument(?string $catalogueRefId = null, ?string $catalogueRefLineId = null, ?DateTime $catalogueRefDate = null): OrderDocumentBuilder
     {
-        $catalogueRefDoc = $this->objectHelper->getReferencedDocumentType($catalogueRefId, null, $catalogueRefLineId, null, null, null, $catalogueRefDate, null);
-        $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
-        $this->objectHelper->tryCall($positionAgreement, "addToCatalogueReferencedDocument", $catalogueRefDoc);
+        $catalogueRefDoc = $this->getObjectHelper()->getReferencedDocumentType($catalogueRefId, null, $catalogueRefLineId, null, null, null, $catalogueRefDate, null);
+        $positionAgreement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $this->getObjectHelper()->tryCall($positionAgreement, "addToCatalogueReferencedDocument", $catalogueRefDoc);
         return $this;
     }
 
@@ -3002,9 +3003,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionBlanketOrderReferencedDocument(string $blanketOrderRefLineId): OrderDocumentBuilder
     {
-        $blanketOrderRefDoc = $this->objectHelper->getReferencedDocumentType(null, null, $blanketOrderRefLineId, null, null, null, null);
-        $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
-        $this->objectHelper->tryCall($positionAgreement, "setBlanketOrderReferencedDocument", $blanketOrderRefDoc);
+        $blanketOrderRefDoc = $this->getObjectHelper()->getReferencedDocumentType(null, null, $blanketOrderRefLineId, null, null, null, null);
+        $positionAgreement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $this->getObjectHelper()->tryCall($positionAgreement, "setBlanketOrderReferencedDocument", $blanketOrderRefDoc);
         return $this;
     }
 
@@ -3021,9 +3022,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionUltimateCustomerOrderReferencedDocument(?string $ultimateCustomerOrderRefId = null, ?string $ultimateCustomerOrderRefLineId = null, ?DateTime $ultimateCustomerOrderRefDate = null): OrderDocumentBuilder
     {
-        $ultimateCustomerOrderRefDoc = $this->objectHelper->getReferencedDocumentType($ultimateCustomerOrderRefId, null, $ultimateCustomerOrderRefLineId, null, null, null, $ultimateCustomerOrderRefDate, null);
-        $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
-        $this->objectHelper->tryCallIfMethodExists($positionAgreement, "addToUltimateCustomerOrderReferencedDocument", "setUltimateCustomerOrderReferencedDocument", [$ultimateCustomerOrderRefDoc], $ultimateCustomerOrderRefDoc);
+        $ultimateCustomerOrderRefDoc = $this->getObjectHelper()->getReferencedDocumentType($ultimateCustomerOrderRefId, null, $ultimateCustomerOrderRefLineId, null, null, null, $ultimateCustomerOrderRefDate, null);
+        $positionAgreement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $this->getObjectHelper()->tryCallIfMethodExists($positionAgreement, "addToUltimateCustomerOrderReferencedDocument", "setUltimateCustomerOrderReferencedDocument", [$ultimateCustomerOrderRefDoc], $ultimateCustomerOrderRefDoc);
         return $this;
     }
 
@@ -3040,9 +3041,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPositionUltimateCustomerOrderReferencedDocument(?string $ultimateCustomerOrderRefId = null, ?string $ultimateCustomerOrderRefLineId = null, ?DateTime $ultimateCustomerOrderRefDate = null): OrderDocumentBuilder
     {
-        $ultimateCustomerOrderRefDoc = $this->objectHelper->getReferencedDocumentType($ultimateCustomerOrderRefId, null, $ultimateCustomerOrderRefLineId, null, null, null, $ultimateCustomerOrderRefDate, null);
-        $positionAgreement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
-        $this->objectHelper->tryCall($positionAgreement, "addToUltimateCustomerOrderReferencedDocument", $ultimateCustomerOrderRefDoc);
+        $ultimateCustomerOrderRefDoc = $this->getObjectHelper()->getReferencedDocumentType($ultimateCustomerOrderRefId, null, $ultimateCustomerOrderRefLineId, null, null, null, $ultimateCustomerOrderRefDate, null);
+        $positionAgreement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeAgreement");
+        $this->getObjectHelper()->tryCall($positionAgreement, "addToUltimateCustomerOrderReferencedDocument", $ultimateCustomerOrderRefDoc);
         return $this;
     }
 
@@ -3055,9 +3056,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionPartialDelivery(bool $partialDelivery = false): OrderDocumentBuilder
     {
-        $indicator = $this->objectHelper->getIndicatorType($partialDelivery);
-        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
-        $this->objectHelper->tryCall($positionDelivery, "setPartialDeliveryAllowedIndicator", $indicator);
+        $indicator = $this->getObjectHelper()->getIndicatorType($partialDelivery);
+        $positionDelivery = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->getObjectHelper()->tryCall($positionDelivery, "setPartialDeliveryAllowedIndicator", $indicator);
         return $this;
     }
 
@@ -3072,9 +3073,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionDeliverReqQuantity(float $requestedQuantity, string $requestedQuantityUnitCode): OrderDocumentBuilder
     {
-        $quantity = $this->objectHelper->getQuantityType($requestedQuantity, $requestedQuantityUnitCode);
-        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
-        $this->objectHelper->tryCall($positionDelivery, "setRequestedQuantity", $quantity);
+        $quantity = $this->getObjectHelper()->getQuantityType($requestedQuantity, $requestedQuantityUnitCode);
+        $positionDelivery = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->getObjectHelper()->tryCall($positionDelivery, "setRequestedQuantity", $quantity);
         return $this;
     }
 
@@ -3089,9 +3090,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionDeliverPackageQuantity(float $packageQuantity, string $packageQuantityUnitCode): OrderDocumentBuilder
     {
-        $quantity = $this->objectHelper->getQuantityType($packageQuantity, $packageQuantityUnitCode);
-        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
-        $this->objectHelper->tryCall($positionDelivery, "setPackageQuantity", $quantity);
+        $quantity = $this->getObjectHelper()->getQuantityType($packageQuantity, $packageQuantityUnitCode);
+        $positionDelivery = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->getObjectHelper()->tryCall($positionDelivery, "setPackageQuantity", $quantity);
         return $this;
     }
 
@@ -3106,9 +3107,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionDeliverPerPackageQuantity(float $perPackageQuantity, string $perPackageQuantityUnitCode): OrderDocumentBuilder
     {
-        $quantity = $this->objectHelper->getQuantityType($perPackageQuantity, $perPackageQuantityUnitCode);
-        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
-        $this->objectHelper->tryCall($positionDelivery, "setPerPackageUnitQuantity", $quantity);
+        $quantity = $this->getObjectHelper()->getQuantityType($perPackageQuantity, $perPackageQuantityUnitCode);
+        $positionDelivery = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->getObjectHelper()->tryCall($positionDelivery, "setPerPackageUnitQuantity", $quantity);
         return $this;
     }
 
@@ -3123,9 +3124,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionDeliverAgreedQuantity(float $agreedQuantity, string $agreedQuantityUnitCode): OrderDocumentBuilder
     {
-        $quantity = $this->objectHelper->getQuantityType($agreedQuantity, $agreedQuantityUnitCode);
-        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
-        $this->objectHelper->tryCall($positionDelivery, "setAgreedQuantity", $quantity);
+        $quantity = $this->getObjectHelper()->getQuantityType($agreedQuantity, $agreedQuantityUnitCode);
+        $positionDelivery = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->getObjectHelper()->tryCall($positionDelivery, "setAgreedQuantity", $quantity);
         return $this;
     }
 
@@ -3142,9 +3143,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionRequestedDeliverySupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): OrderDocumentBuilder
     {
-        $supplychainevent = $this->objectHelper->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
-        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
-        $this->objectHelper->tryCallIfMethodExists($positionDelivery, "addToRequestedDeliverySupplyChainEvent", "setRequestedDeliverySupplyChainEvent", [$supplychainevent], $supplychainevent);
+        $supplychainevent = $this->getObjectHelper()->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+        $positionDelivery = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->getObjectHelper()->tryCallIfMethodExists($positionDelivery, "addToRequestedDeliverySupplyChainEvent", "setRequestedDeliverySupplyChainEvent", [$supplychainevent], $supplychainevent);
         return $this;
     }
 
@@ -3158,9 +3159,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPositionRequestedDeliverySupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): OrderDocumentBuilder
     {
-        $supplychainevent = $this->objectHelper->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
-        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
-        $this->objectHelper->tryCall($positionDelivery, "addToRequestedDeliverySupplyChainEvent", $supplychainevent);
+        $supplychainevent = $this->getObjectHelper()->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+        $positionDelivery = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->getObjectHelper()->tryCall($positionDelivery, "addToRequestedDeliverySupplyChainEvent", $supplychainevent);
         return $this;
     }
 
@@ -3177,9 +3178,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionRequestedDespatchSupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): OrderDocumentBuilder
     {
-        $supplychainevent = $this->objectHelper->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
-        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
-        $this->objectHelper->tryCallIfMethodExists($positionDelivery, "addToRequestedDespatchSupplyChainEvent", "setRequestedDespatchSupplyChainEvent", [$supplychainevent], $supplychainevent);
+        $supplychainevent = $this->getObjectHelper()->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+        $positionDelivery = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->getObjectHelper()->tryCallIfMethodExists($positionDelivery, "addToRequestedDespatchSupplyChainEvent", "setRequestedDespatchSupplyChainEvent", [$supplychainevent], $supplychainevent);
         return $this;
     }
 
@@ -3196,9 +3197,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPositionRequestedDespatchSupplyChainEvent(?DateTime $occurrenceDateTime = null, ?DateTime $startDateTime = null, ?DateTime $endDateTime = null): OrderDocumentBuilder
     {
-        $supplychainevent = $this->objectHelper->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
-        $positionDelivery = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
-        $this->objectHelper->tryCall($positionDelivery, "addToRequestedDespatchSupplyChainEvent", $supplychainevent);
+        $supplychainevent = $this->getObjectHelper()->getDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
+        $positionDelivery = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeDelivery");
+        $this->getObjectHelper()->tryCall($positionDelivery, "addToRequestedDespatchSupplyChainEvent", $supplychainevent);
         return $this;
     }
 
@@ -3237,9 +3238,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionTax(string $categoryCode, string $typeCode, float $rateApplicablePercent, ?float $calculatedAmount = null, ?string $exemptionReason = null, ?string $exemptionReasonCode = null): OrderDocumentBuilder
     {
-        $tax = $this->objectHelper->getTradeTaxType($categoryCode, $typeCode, null, $calculatedAmount, $rateApplicablePercent, $exemptionReason, $exemptionReasonCode, null, null, null, null);
-        $positionsettlement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
-        $this->objectHelper->tryCallIfMethodExists($positionsettlement, "addToApplicableTradeTax", "setApplicableTradeTax", [$tax], $tax);
+        $tax = $this->getObjectHelper()->getTradeTaxType($categoryCode, $typeCode, null, $calculatedAmount, $rateApplicablePercent, $exemptionReason, $exemptionReasonCode, null, null, null, null);
+        $positionsettlement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
+        $this->getObjectHelper()->tryCallIfMethodExists($positionsettlement, "addToApplicableTradeTax", "setApplicableTradeTax", [$tax], $tax);
         return $this;
     }
 
@@ -3278,9 +3279,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPositionTax(string $categoryCode, string $typeCode, float $rateApplicablePercent, ?float $calculatedAmount = null, ?string $exemptionReason = null, ?string $exemptionReasonCode = null): OrderDocumentBuilder
     {
-        $tax = $this->objectHelper->getTradeTaxType($categoryCode, $typeCode, null, $calculatedAmount, $rateApplicablePercent, $exemptionReason, $exemptionReasonCode, null, null, null, null);
-        $positionsettlement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
-        $this->objectHelper->tryCall($positionsettlement, "addToApplicableTradeTax", $tax);
+        $tax = $this->getObjectHelper()->getTradeTaxType($categoryCode, $typeCode, null, $calculatedAmount, $rateApplicablePercent, $exemptionReason, $exemptionReasonCode, null, null, null, null);
+        $positionsettlement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
+        $this->getObjectHelper()->tryCall($positionsettlement, "addToApplicableTradeTax", $tax);
         return $this;
     }
 
@@ -3307,9 +3308,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionAllowanceCharge(float $actualAmount, bool $isCharge, ?float $calculationPercent = null, ?float $basisAmount = null, ?string $reasonCode = null, ?string $reason = null): OrderDocumentBuilder
     {
-        $positionsettlement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
-        $allowanceCharge = $this->objectHelper->getTradeAllowanceChargeType($actualAmount, $isCharge, null, null, null, null, $calculationPercent, $basisAmount, null, null, $reasonCode, $reason);
-        $this->objectHelper->tryCallIfMethodExists($positionsettlement, "addToSpecifiedTradeAllowanceCharge", "setSpecifiedTradeAllowanceCharge", [$allowanceCharge], $allowanceCharge);
+        $positionsettlement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
+        $allowanceCharge = $this->getObjectHelper()->getTradeAllowanceChargeType($actualAmount, $isCharge, null, null, null, null, $calculationPercent, $basisAmount, null, null, $reasonCode, $reason);
+        $this->getObjectHelper()->tryCallIfMethodExists($positionsettlement, "addToSpecifiedTradeAllowanceCharge", "setSpecifiedTradeAllowanceCharge", [$allowanceCharge], $allowanceCharge);
         return $this;
     }
 
@@ -3336,9 +3337,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function addDocumentPositionAllowanceCharge(float $actualAmount, bool $isCharge, ?float $calculationPercent = null, ?float $basisAmount = null, ?string $reasonCode = null, ?string $reason = null): OrderDocumentBuilder
     {
-        $positionsettlement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
-        $allowanceCharge = $this->objectHelper->getTradeAllowanceChargeType($actualAmount, $isCharge, null, null, null, null, $calculationPercent, $basisAmount, null, null, $reasonCode, $reason);
-        $this->objectHelper->tryCall($positionsettlement, "addToSpecifiedTradeAllowanceCharge", $allowanceCharge);
+        $positionsettlement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
+        $allowanceCharge = $this->getObjectHelper()->getTradeAllowanceChargeType($actualAmount, $isCharge, null, null, null, null, $calculationPercent, $basisAmount, null, null, $reasonCode, $reason);
+        $this->getObjectHelper()->tryCall($positionsettlement, "addToSpecifiedTradeAllowanceCharge", $allowanceCharge);
         return $this;
     }
 
@@ -3355,9 +3356,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionLineSummation(float $lineTotalAmount, ?float $totalAllowanceChargeAmount = null): OrderDocumentBuilder
     {
-        $positionsettlement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
-        $summation = $this->objectHelper->getTradeSettlementLineMonetarySummationType($lineTotalAmount, $totalAllowanceChargeAmount);
-        $this->objectHelper->tryCall($positionsettlement, "setSpecifiedTradeSettlementLineMonetarySummation", $summation);
+        $positionsettlement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
+        $summation = $this->getObjectHelper()->getTradeSettlementLineMonetarySummationType($lineTotalAmount, $totalAllowanceChargeAmount);
+        $this->getObjectHelper()->tryCall($positionsettlement, "setSpecifiedTradeSettlementLineMonetarySummation", $summation);
         return $this;
     }
 
@@ -3373,9 +3374,9 @@ class OrderDocumentBuilder extends OrderDocument
      */
     public function setDocumentPositionReceivableTradeAccountingAccount(string $id, ?string $typeCode = null): OrderDocumentBuilder
     {
-        $positionsettlement = $this->objectHelper->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
-        $account = $this->objectHelper->getTradeAccountingAccountType($id, $typeCode);
-        $this->objectHelper->tryCall($positionsettlement, "setReceivableSpecifiedTradeAccountingAccount", $account);
+        $positionsettlement = $this->getObjectHelper()->tryCallAndReturn($this->currentPosition, "getSpecifiedLineTradeSettlement");
+        $account = $this->getObjectHelper()->getTradeAccountingAccountType($id, $typeCode);
+        $this->getObjectHelper()->tryCall($positionsettlement, "setReceivableSpecifiedTradeAccountingAccount", $account);
         return $this;
     }
 }

@@ -19,8 +19,8 @@ class OrderDocumentBaseTest extends TestCase
         $this->assertEquals(OrderProfiles::PROFILE_BASIC, $doc->getProfileId());
         $this->assertArrayHasKey("contextparameter", $doc->getProfileDefinition());
         $this->assertArrayHasKey("name", $doc->getProfileDefinition());
-        $this->assertEquals("urn:order-x.eu:1p0:basic", $doc->getProfileDefinition()["contextparameter"]);
-        $this->assertEquals("basic", $doc->getProfileDefinition()["name"]);
+        $this->assertEquals("urn:order-x.eu:1p0:basic", $doc->getProfileDefinitionParameter("contextparameter"));
+        $this->assertEquals("basic", $doc->getProfileDefinitionParameter("name"));
     }
 
     /**
@@ -33,8 +33,8 @@ class OrderDocumentBaseTest extends TestCase
         $this->assertEquals(OrderProfiles::PROFILE_COMFORT, $doc->getProfileId());
         $this->assertArrayHasKey("contextparameter", $doc->getProfileDefinition());
         $this->assertArrayHasKey("name", $doc->getProfileDefinition());
-        $this->assertEquals("urn:order-x.eu:1p0:comfort", $doc->getProfileDefinition()["contextparameter"]);
-        $this->assertEquals("comfort", $doc->getProfileDefinition()["name"]);
+        $this->assertEquals("urn:order-x.eu:1p0:comfort", $doc->getProfileDefinitionParameter("contextparameter"));
+        $this->assertEquals("comfort", $doc->getProfileDefinitionParameter("name"));
     }
 
     /**
@@ -47,8 +47,8 @@ class OrderDocumentBaseTest extends TestCase
         $this->assertEquals(OrderProfiles::PROFILE_EXTENDED, $doc->getProfileId());
         $this->assertArrayHasKey("contextparameter", $doc->getProfileDefinition());
         $this->assertArrayHasKey("name", $doc->getProfileDefinition());
-        $this->assertEquals("urn:order-x.eu:1p0:extended", $doc->getProfileDefinition()["contextparameter"]);
-        $this->assertEquals("extended", $doc->getProfileDefinition()["name"]);
+        $this->assertEquals("urn:order-x.eu:1p0:extended", $doc->getProfileDefinitionParameter("contextparameter"));
+        $this->assertEquals("extended", $doc->getProfileDefinitionParameter("name"));
     }
 
     /**

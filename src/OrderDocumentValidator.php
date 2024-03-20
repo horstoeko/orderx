@@ -71,7 +71,7 @@ class OrderDocumentValidator
         $validatorYamlFiles = PathUtils::combinePathWithFile(
             PathUtils::combineAllPaths(
                 OrderSettings::getValidationDirectory(),
-                $this->document->getProfileDefinition()['name']
+                $this->document->getProfileDefinitionParameter('name')
             ),
             '*.yml'
         );

@@ -72,7 +72,7 @@ class OrderDocumentPdfBuilder extends OrderDocumentPdfBuilderAbstract
      */
     protected function getXmlAttachmentFilename(): string
     {
-        return $this->documentBuilder->getProfileDefinition()['attachmentfilename'];
+        return $this->documentBuilder->getProfileDefinitionParameter('attachmentfilename');
     }
 
     /**
@@ -80,6 +80,6 @@ class OrderDocumentPdfBuilder extends OrderDocumentPdfBuilderAbstract
      */
     protected function getXmlAttachmentXmpName(): string
     {
-        return $this->documentBuilder->getProfileDefinition()["xmpname"];
+        return $this->documentBuilder->getProfileDefinitionParameter("xmpname");
     }
 }
