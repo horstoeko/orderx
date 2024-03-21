@@ -95,7 +95,7 @@ $document
     ->addDocumentAllowanceCharge(31.00, false, "S", "VAT", 20, null, 10.00, 310.00, null, null, "64", "SPECIAL AGREEMENT")
     ->addDocumentAllowanceCharge(21.00, true, "S", "VAT", 20, null, 10.00, 210.00, null, null, "FC", "FREIGHT SERVICES")
     ->setDocumentSummation(310, 360, 21, 31, 300, 60)
-    ->setDocumentReceivableSpecifiedTradeAccountingAccount("BUYER_ACCOUNT_REF", "BUYER_ACCOUNT_REF_TYPE")
+    ->setDocumentReceivableSpecifiedTradeAccountingAccount("4711", "1")
 
     ->addDocumentTax("S", "VAT", 300.00, 60.00, 20.00, "ExcReason-1", "ExcReasonCode-1", 300.00, 300.00, null)
 
@@ -129,7 +129,7 @@ $document
     ->addDocumentPositionAllowanceCharge(6.00, false, 10.0, 60.0, "64", "SPECIAL AGREEMENT")
     ->addDocumentPositionAllowanceCharge(6.00, true, 10.0, 60.0, "FC", "FREIGHT SERVICES")
     ->setDocumentPositionLineSummation(60.0)
-    ->setDocumentPositionReceivableTradeAccountingAccount("BUYER_ACCOUNTING_REF")
+    ->setDocumentPositionReceivableTradeAccountingAccount("4712")
     ->setDocumentPositionTax("S", "VAT", 19.0, 0.00, "Reason-1", "RC1")
     ->setDocumentPositionUltimateCustomerOrderReferencedDocument("ULTCUSTORDEREF-1", "1", $dt)
 
@@ -160,7 +160,7 @@ $document
     ->addDocumentPositionAllowanceCharge(1.00, false, 1.0, 100.0, "64", "SPECIAL AGREEMENT")
     ->addDocumentPositionAllowanceCharge(1.00, true, 1.0, 100.0, "FC", "FREIGHT SERVICES")
     ->setDocumentPositionLineSummation(100.0)
-    ->setDocumentPositionReceivableTradeAccountingAccount("BUYER_ACCOUNTING_REF")
+    ->setDocumentPositionReceivableTradeAccountingAccount("4713")
     ->setDocumentPositionUltimateCustomerOrderReferencedDocument("ULTCUSTORDEREF-1", "2", $dt)
 
     ->addNewPosition("3")
@@ -190,7 +190,7 @@ $document
     ->addDocumentPositionAllowanceCharge(15.00, false, 10.0, 150.0, "64", "SPECIAL AGREEMENT")
     ->addDocumentPositionAllowanceCharge(15.00, true, 10.0, 150.0, "FC", "FREIGHT SERVICES")
     ->setDocumentPositionLineSummation(150.0)
-    ->setDocumentPositionReceivableTradeAccountingAccount("BUYER_ACCOUNTING_REF")
+    ->setDocumentPositionReceivableTradeAccountingAccount("0816")
     ->setDocumentPositionUltimateCustomerOrderReferencedDocument("ULTCUSTORDEREF-1", "3", $dt)
 
     ->writeFile(getcwd() . "/order-x.xml");
