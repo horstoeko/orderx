@@ -9,6 +9,12 @@ on:
     paths-ignore:
       - '**.md'
       - '.github/**'
+  pull_request:
+    types:
+      - opened
+    branches:
+      - 'master'
+  workflow_dispatch:
 
 jobs:
   build:
