@@ -7,12 +7,10 @@
  * file that was distributed with this source code.
  */
 
-namespace horstoeko\orderx\exception;
-
-use Throwable;
+namespace horstoeko\zugferd\exception;
 
 /**
- * Class representing the exception if a profile can't be determained
+ * Class representing an exception for missing a file
  *
  * @category Order-X
  * @package  Order-X
