@@ -2,13 +2,15 @@
 
 namespace horstoeko\orderx\tests\testcases;
 
-use horstoeko\orderx\codelists\OrderDocumentTypes;
-use horstoeko\orderx\OrderDocumentPdfBuilder;
 use horstoeko\orderx\OrderSettings;
 use horstoeko\orderx\tests\TestCase;
-use horstoeko\orderx\tests\traits\HandlesCreateTestDocument;
 use horstoeko\stringmanagement\FileUtils;
 use horstoeko\stringmanagement\PathUtils;
+use horstoeko\orderx\OrderDocumentPdfBuilder;
+use setasign\Fpdi\PdfParser\PdfParserException;
+use horstoeko\orderx\codelists\OrderDocumentTypes;
+use horstoeko\orderx\exception\OrderFileNotFoundException;
+use horstoeko\orderx\tests\traits\HandlesCreateTestDocument;
 
 class OrderDocumentPdfBuilderTest extends TestCase
 {
@@ -265,5 +267,57 @@ class OrderDocumentPdfBuilderTest extends TestCase
         $orderDocumentPdfBuilder->saveDocument($destinationPdfFilename);
 
         $this->assertFileExists($destinationPdfFilename);
+    }
+
+    public function testFromPdfFile(): void
+    {
+        $sourcePdfFilename = PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), "empty.pdf");
+        $destinationPdfFilename = PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), "final.pdf");
+        $orderDocument = $this->createTestDocument(OrderDocumentTypes::ORDER);
+
+        $pdfBuilder = OrderDocumentPdfBuilder::fromPdfFile($orderDocument, $sourcePdfFilename);
+        $pdfBuilder->generateDocument();
+        $pdfBuilder->downloadString($destinationPdfFilename);
+
+        $this->assertIsString($destinationPdfFilename);
+    }
+
+    public function testFromNotExistingPdfFile(): void
+    {
+        $this->expectException(OrderFileNotFoundException::class);
+
+        $orderDocument = $this->createTestDocument(OrderDocumentTypes::ORDER);
+
+        $pdfBuilder = OrderDocumentPdfBuilder::fromPdfFile($orderDocument, '/tmp/anonexisting.pdf');
+    }
+
+    public function testFromPdfString(): void
+    {
+        $sourcePdfFilename = PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), "empty.pdf");
+        $destinationPdfFilename = PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), "final.pdf");
+        $orderDocument = $this->createTestDocument(OrderDocumentTypes::ORDER);
+
+        $pdfString = file_get_contents($sourcePdfFilename);
+
+        $pdfBuilder = OrderDocumentPdfBuilder::fromPdfString($orderDocument, $pdfString);
+        $pdfBuilder->generateDocument();
+        $pdfBuilder->downloadString($destinationPdfFilename);
+
+        $this->assertIsString($destinationPdfFilename);
+    }
+
+    public function testFromPdfStringWhichIsInvalid(): void
+    {
+        $orderDocument = $this->createTestDocument(OrderDocumentTypes::ORDER);
+        $destinationPdfFilename = PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), "final.pdf");
+
+        $this->expectException(PdfParserException::class);
+        $this->expectExceptionMessage('Unable to find PDF file header.');
+
+        $pdfString = 'this_is_not_a_pdf_string';
+
+        $pdfBuilder = OrderDocumentPdfBuilder::fromPdfString($orderDocument, $pdfString);
+        $pdfBuilder->generateDocument();
+        $pdfBuilder->downloadString($destinationPdfFilename);
     }
 }
