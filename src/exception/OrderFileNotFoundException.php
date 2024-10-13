@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace horstoeko\zugferd\exception;
+namespace horstoeko\orderx\exception;
 
 use Throwable;
 use horstoeko\orderx\exception\OrderBaseException;
