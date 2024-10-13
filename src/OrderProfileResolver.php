@@ -29,7 +29,7 @@ class OrderProfileResolver
     /**
      * Resolve profile id and profile definition by the content of $xmlContent
      *
-     * @param string $xmlContent
+     * @param  string $xmlContent
      * @return array
      * @throws OrderUnknownProfileException
      */
@@ -71,7 +71,7 @@ class OrderProfileResolver
     /**
      * Resolve profile id by the content of $xmlContent
      *
-     * @param string $xmlContent
+     * @param  string $xmlContent
      * @return int
      * @throws OrderUnknownXmlContentException
      * @throws OrderUnknownProfileException
@@ -84,7 +84,7 @@ class OrderProfileResolver
     /**
      * Resolve profile definition by the content of $xmlContent
      *
-     * @param string $xmlContent
+     * @param  string $xmlContent
      * @return array
      * @throws OrderUnknownXmlContentException
      * @throws OrderUnknownProfileException
@@ -97,7 +97,7 @@ class OrderProfileResolver
     /**
      * Resolve profile id and profile definition by it's id
      *
-     * @param int $profileId
+     * @param  int $profileId
      * @return array
      * @throws OrderUnknownProfileException
      */
@@ -113,7 +113,7 @@ class OrderProfileResolver
     /**
      * Resolve profile profile definition by it's id
      *
-     * @param int $profileId
+     * @param  int $profileId
      * @return array
      * @throws OrderUnknownProfileException
      */

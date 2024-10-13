@@ -12,6 +12,10 @@ namespace horstoeko\orderx;
 use Exception;
 use horstoeko\orderx\OrderProfileResolver;
 use horstoeko\orderx\OrderDocumentPdfBuilderAbstract;
+use horstoeko\orderx\exception\OrderUnknownProfileException;
+use horstoeko\orderx\exception\OrderFileNotReadableException;
+use horstoeko\orderx\exception\OrderUnknownXmlContentException;
+use horstoeko\orderx\exception\OrderUnknownProfileParameterException;
 
 /**
  * Class representing the facillity adding existing XML data (file or data-string)
@@ -126,7 +130,7 @@ class OrderDocumentPdfMerger extends OrderDocumentPdfBuilderAbstract
     /**
      * Get a parameter from profile definition
      *
-     * @param string $parameterName
+     * @param  string $parameterName
      * @return mixed
      * @throws OrderFileNotReadableException
      * @throws OrderUnknownXmlContentException

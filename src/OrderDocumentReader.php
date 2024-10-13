@@ -241,7 +241,7 @@ class OrderDocumentReader extends OrderDocument
      * @param  string $xmlcontent The XML content as a string to read the invoice data from
      * @return OrderDocumentReader
      */
-    private function readContent(string $xmlcontent): OrderDocumentReader
+    protected function readContent(string $xmlcontent): OrderDocumentReader
     {
         $this->deserialize($xmlcontent);
 

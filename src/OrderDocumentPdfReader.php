@@ -9,6 +9,7 @@
 
 namespace horstoeko\orderx;
 
+use Exception;
 use Smalot\PdfParser\Parser as PdfParser;
 use horstoeko\orderx\exception\OrderFileNotFoundException;
 use horstoeko\orderx\exception\OrderFileNotReadableException;
@@ -36,7 +37,7 @@ class OrderDocumentPdfReader
      * @param  string $pdfFilename Contains a full-qualified filename which must exist and must be readable
      * @return null|OrderDocumentReader
      * @throws OrderFileNotFoundException
-     * @throws Exception
+     * @throws OrderFileNotReadableException
      */
     public static function readAndGuessFromFile(string $pdfFilename): ?OrderDocumentReader
     {
@@ -58,8 +59,7 @@ class OrderDocumentPdfReader
      * If any erros occured or no attachments were found null is returned
      *
      * @param  string $pdfContent String Containing the binary pdf data
-     * @return OrderDocumentReader|null
-     * @throws Exception
+     * @return null|OrderDocumentReader
      */
     public static function readAndGuessFromContent(string $pdfContent): ?OrderDocumentReader
     {
@@ -79,12 +79,10 @@ class OrderDocumentPdfReader
     /**
      * Returns a XML content from a PDF file
      *
-     * @param  string $pdfFilename
-     * Contains a full-qualified filename which must exist and must be readable
-     * @return string|null
+     * @param  string $pdfFilename Contains a full-qualified filename which must exist and must be readable
+     * @return null|string
      * @throws OrderFileNotFoundException
      * @throws OrderFileNotReadableException
-     * @throws Exception
      */
     public static function getXmlFromFile(string $pdfFilename): ?string
     {
@@ -105,8 +103,7 @@ class OrderDocumentPdfReader
      * Returns a XML content from a PDF binary stream (string)
      *
      * @param  string $pdfContent String Containing the binary pdf data
-     * @return string|null
-     * @throws Exception
+     * @return null|string
      */
     public static function getXmlFromContent(string $pdfContent): ?string
     {
@@ -117,7 +114,7 @@ class OrderDocumentPdfReader
      * Get the attachment content from XML.
      * See the allowed filenames which are supported
      *
-     * @param  string $pdfContent
+     * @param  string $pdfContent String Containing the binary pdf data
      * @return null|string
      * @throws Exception
      */

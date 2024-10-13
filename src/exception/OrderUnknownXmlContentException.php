@@ -25,7 +25,6 @@ class OrderUnknownXmlContentException extends OrderBaseException
     /**
      * Constructor
      *
-     * @param string         $profileParameter
      * @param Throwable|null $previous
      */
     public function __construct(?Throwable $previous = null)

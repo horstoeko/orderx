@@ -20,7 +20,7 @@ use Throwable;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/orderx
  */
-class ZugferdUnknownProfileParameterException extends OrderBaseException
+class OrderUnknownProfileParameterException extends OrderBaseException
 {
     /**
      * Constructor

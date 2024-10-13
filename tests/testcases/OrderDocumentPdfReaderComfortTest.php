@@ -4,7 +4,6 @@ namespace horstoeko\orderx\tests\testcases;
 
 use horstoeko\orderx\codelists\OrderDocumentTypes;
 use horstoeko\orderx\exception\OrderFileNotFoundException;
-use horstoeko\orderx\exception\OrderNoValidAttachmentFoundInPdfException;
 use horstoeko\orderx\OrderDocumentPdfReader;
 use horstoeko\orderx\OrderProfiles;
 use horstoeko\orderx\tests\TestCase;

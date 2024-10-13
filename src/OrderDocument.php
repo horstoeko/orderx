@@ -155,7 +155,7 @@ class OrderDocument
     /**
      * Get a parameter from profile definition
      *
-     * @param string $parameterName
+     * @param  string $parameterName
      * @return mixed
      */
     public function getProfileDefinitionParameter(string $parameterName)
@@ -280,7 +280,7 @@ class OrderDocument
     /**
      * Deserialize XML content to internal invoice object
      *
-     * @param string $xmlContent
+     * @param  string $xmlContent
      * @return \horstoeko\orderx\entities\basic\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure
      */
     public function deserialize($xmlContent)

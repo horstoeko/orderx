@@ -210,7 +210,7 @@ class OrderSettings
     /**
      * Set the filename for the XMP meta data
      *
-     * @param string $xmpMetaDataFilename
+     * @param  string $xmpMetaDataFilename
      * @return void
      */
     public static function setXmpMetaDataFilename(string $xmpMetaDataFilename): void

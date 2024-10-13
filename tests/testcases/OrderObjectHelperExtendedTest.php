@@ -2,7 +2,7 @@
 
 namespace horstoeko\orderx\tests\testcases;
 
-use horstoeko\orderx\exception\OrderMimeTypeNotSupportedException;
+use Exception;
 use horstoeko\orderx\exception\OrderUnknownDateFormatException;
 use horstoeko\orderx\OrderObjectHelper;
 use horstoeko\orderx\OrderProfiles;
@@ -410,7 +410,7 @@ class OrderObjectHelperExtendedTest extends TestCase
         $this->assertEquals("reader-invalid.pdf", $refDoc2->getAttachmentBinaryObject()->getFilename());
         $this->assertEquals(FileUtils::fileToBase64($binaryDataFilenameValid), $refDoc2->getAttachmentBinaryObject()->value());
 
-        $this->expectException(OrderMimeTypeNotSupportedException::class);
+        $this->expectException(Exception::class);
 
         $refDoc3 = self::$objectHelper->getReferencedDocumentType("ID", null, null, null, null, null, null, $binaryDataFilenameInValid);
     }

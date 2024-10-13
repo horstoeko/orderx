@@ -10,7 +10,7 @@
 namespace horstoeko\orderx;
 
 use DateTime;
-use horstoeko\orderx\exception\OrderMimeTypeNotSupportedException;
+use Exception;
 use horstoeko\orderx\exception\OrderUnknownDateFormatException;
 use horstoeko\orderx\OrderProfileResolver;
 use horstoeko\stringmanagement\FileUtils;
@@ -560,7 +560,7 @@ class OrderObjectHelper
                         $this->getBinaryObjectType($content, $mimeType, FileUtils::getFilenameWithExtension($binarydatafilename))
                     );
                 } else {
-                    throw new OrderMimeTypeNotSupportedException($mimeType);
+                    throw new Exception($mimeType);
                 }
             }
         }

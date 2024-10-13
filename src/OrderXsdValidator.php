@@ -45,7 +45,7 @@ class OrderXsdValidator
      * Constructor
      *
      * @codeCoverageIgnore
-     * @param OrderDocument $document
+     * @param              OrderDocument $document
      */
     public function __construct(OrderDocument $document)
     {
@@ -182,7 +182,7 @@ class OrderXsdValidator
     /**
      * Add message to error bag
      *
-     * @param string|Exception|LibXMLError $error
+     * @param  string|Exception|LibXMLError $error
      * @return void
      */
     private function addToErrorBag($error): void
