@@ -10,6 +10,8 @@
 namespace horstoeko\orderx;
 
 use horstoeko\orderx\OrderDocumentBuilder;
+use horstoeko\orderx\OrderDocumentPdfBuilderAbstract;
+use horstoeko\orderx\exception\OrderFileNotFoundException;
 
 /**
  * Class representing the facillity adding XML data from OrderDocumentBuilder
@@ -38,6 +40,26 @@ class OrderDocumentPdfBuilder extends OrderDocumentPdfBuilderAbstract
     private $xmlDataCache = "";
 
     /**
+     * @see self::__construct
+     */
+    public static function fromPdfFile(OrderDocumentBuilder $documentBuilder, string $pdfFileName): self
+    {
+        if (!is_file($pdfFileName)) {
+            throw new OrderFileNotFoundException("The given PDF file does not exist.");
+        }
+
+        return new self($documentBuilder, $pdfFileName);
+    }
+
+    /**
+     * @see self::__construct
+     */
+    public static function fromPdfString(OrderDocumentBuilder $documentBuilder, string $pdfContent): self
+    {
+        return new self($documentBuilder, $pdfContent);
+    }
+
+    /**
      * Constructor
      *
      * @param OrderDocumentBuilder $documentBuilder
@@ -62,7 +84,7 @@ class OrderDocumentPdfBuilder extends OrderDocumentPdfBuilderAbstract
             return $this->xmlDataCache;
         }
 
-        $this->xmlDataCache = $this->documentBuilder->getContentAsDomDocument()->saveXML();
+        $this->xmlDataCache = $this->documentBuilder->getContent();
 
         return $this->xmlDataCache;
     }

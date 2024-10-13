@@ -9,13 +9,12 @@
 
 namespace horstoeko\orderx;
 
-use Exception;
-use horstoeko\orderx\OrderProfileResolver;
-use horstoeko\orderx\OrderDocumentPdfBuilderAbstract;
-use horstoeko\orderx\exception\OrderUnknownProfileException;
 use horstoeko\orderx\exception\OrderFileNotReadableException;
-use horstoeko\orderx\exception\OrderUnknownXmlContentException;
+use horstoeko\orderx\exception\OrderUnknownProfileException;
 use horstoeko\orderx\exception\OrderUnknownProfileParameterException;
+use horstoeko\orderx\exception\OrderUnknownXmlContentException;
+use horstoeko\orderx\OrderDocumentPdfBuilderAbstract;
+use horstoeko\orderx\OrderProfileResolver;
 
 /**
  * Class representing the facillity adding existing XML data (file or data-string)
@@ -72,7 +71,7 @@ class OrderDocumentPdfMerger extends OrderDocumentPdfBuilderAbstract
         if ($this->xmlDataIsFile()) {
             $xmlContent = file_get_contents($this->xmlDataOrFilename);
             if ($xmlContent === false) {
-                throw new Exception('Could read XML file...');
+                throw new OrderFileNotReadableException('Could not read XML file');
             }
         } else {
             $xmlContent = $this->xmlDataOrFilename;

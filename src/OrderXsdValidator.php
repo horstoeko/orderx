@@ -10,11 +10,13 @@
 namespace horstoeko\orderx;
 
 use Exception;
+use Throwable;
 use DOMDocument;
 use LibXMLError;
-use horstoeko\stringmanagement\PathUtils;
+use horstoeko\orderx\exception\OrderFileNotFoundException;
 use horstoeko\orderx\OrderDocument;
 use horstoeko\orderx\OrderSettings;
+use horstoeko\stringmanagement\PathUtils;
 
 /**
  * Class representing the validator against XSD for documents
@@ -88,11 +90,32 @@ class OrderXsdValidator
     /**
      * Returns true if validation failed otherwise false
      *
-     * @return boolean
+     * @deprecated 1.0.23 Use hasValidationErrors instead
+     * @return     boolean
      */
     public function validationFailed(): bool
     {
         return !$this->validationPased();
+    }
+
+    /**
+     * Returns true if validation passed otherwise false
+     *
+     * @return boolean
+     */
+    public function hasNoValidationErrors(): bool
+    {
+        return empty($this->errorBag);
+    }
+
+    /**
+     * Returns true if validation errors are present otherwise false
+     *
+     * @return boolean
+     */
+    public function hasValidationErrors(): bool
+    {
+        return !$this->hasNoValidationErrors();
     }
 
     /**
@@ -163,7 +186,7 @@ class OrderXsdValidator
         );
 
         if (!file_exists($xsdFilename)) {
-            throw new Exception(sprintf("XSD file '%s' not found", $xsdFilename));
+            throw new OrderFileNotFoundException($xsdFilename);
         }
 
         return $xsdFilename;
@@ -182,7 +205,7 @@ class OrderXsdValidator
     /**
      * Add message to error bag
      *
-     * @param  string|Exception|LibXMLError $error
+     * @param  string|Exception|Throwable|LibXMLError $error
      * @return void
      */
     private function addToErrorBag($error): void
@@ -190,6 +213,8 @@ class OrderXsdValidator
         if (is_string($error)) {
             $this->errorBag[] = $error;
         } elseif ($error instanceof Exception) {
+            $this->errorBag[] = $error->getMessage();
+        } elseif ($error instanceof Throwable) {
             $this->errorBag[] = $error->getMessage();
         } elseif ($error instanceof LibXMLError) {
             $this->errorBag[] = sprintf('[line %d] %s : %s', $error->line, $error->code, $error->message);

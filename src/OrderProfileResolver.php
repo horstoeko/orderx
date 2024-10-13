@@ -12,8 +12,9 @@ namespace horstoeko\orderx;
 use Throwable;
 use SimpleXMLElement;
 use horstoeko\orderx\OrderProfiles;
-use horstoeko\orderx\exception\OrderUnknownXmlContentException;
 use horstoeko\orderx\exception\OrderUnknownProfileException;
+use horstoeko\orderx\exception\OrderUnknownProfileIdException;
+use horstoeko\orderx\exception\OrderUnknownXmlContentException;
 
 /**
  * Class representing the profile resolver
@@ -104,7 +105,7 @@ class OrderProfileResolver
     public static function resolveById(int $profileId): array
     {
         if (!isset(OrderProfiles::PROFILEDEF[$profileId])) {
-            throw new OrderUnknownProfileException('Could not determine the profile...');
+            throw new OrderUnknownProfileIdException($profileId);
         }
 
         return [$profileId, OrderProfiles::PROFILEDEF[$profileId]];

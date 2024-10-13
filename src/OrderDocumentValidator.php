@@ -9,6 +9,7 @@
 
 namespace horstoeko\orderx;
 
+use horstoeko\orderx\OrderDocument;
 use horstoeko\stringmanagement\PathUtils;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
@@ -27,7 +28,7 @@ class OrderDocumentValidator
     /**
      * The invoice document reference
      *
-     * @var \horstoeko\orderx\OrderDocument
+     * @var OrderDocument
      */
     private $document;
 

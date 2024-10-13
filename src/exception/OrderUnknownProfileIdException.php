@@ -12,7 +12,7 @@ namespace horstoeko\orderx\exception;
 use Throwable;
 
 /**
- * Class representing an exception for unknown profile
+ * Class representing the exception if a profile can't be determained
  *
  * @category Order-X
  * @package  Order-X
@@ -20,15 +20,16 @@ use Throwable;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/orderx
  */
-class OrderUnknownXmlContentException extends OrderBaseException
+class OrderUnknownProfileIdException extends OrderBaseException
 {
     /**
      * Constructor
      *
+     * @param int            $profileId
      * @param Throwable|null $previous
      */
-    public function __construct(?Throwable $previous = null)
+    public function __construct(int $profileId, ?Throwable $previous = null)
     {
-        parent::__construct("The XML does not match the requirements for an XML in CII-Syntax", OrderExceptionCodes::UNKNOWNSYNTAX, $previous);
+        parent::__construct(sprintf("The profile id %s is uknown", $profileId), OrderExceptionCodes::UNKNOWNPROFILE, $previous);
     }
 }

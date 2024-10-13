@@ -2,11 +2,12 @@
 
 namespace horstoeko\orderx\tests\testcases;
 
+use horstoeko\orderx\exception\OrderUnknownProfileException;
+use horstoeko\orderx\exception\OrderUnknownProfileIdException;
+use horstoeko\orderx\exception\OrderUnknownXmlContentException;
+use horstoeko\orderx\OrderProfileResolver;
 use horstoeko\orderx\OrderProfiles;
 use horstoeko\orderx\tests\TestCase;
-use horstoeko\orderx\OrderProfileResolver;
-use horstoeko\orderx\exception\OrderUnknownProfileException;
-use horstoeko\orderx\exception\OrderUnknownXmlContentException;
 
 class OrderProfileResolverTest extends TestCase
 {
@@ -224,8 +225,8 @@ HDR;
 
     public function testResolveProfileDefByIdUnknown()
     {
-        $this->expectException(OrderUnknownProfileException::class);
-        $this->expectExceptionMessage('Could not determine the profile...');
+        $this->expectException(OrderUnknownProfileIdException::class);
+        $this->expectExceptionMessage('The profile id -1 is uknown');
 
         OrderProfileResolver::resolveProfileDefById(-1);
     }

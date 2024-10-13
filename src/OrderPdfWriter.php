@@ -184,7 +184,6 @@ class OrderPdfWriter extends PdfFpdi
     /**
      * Put files.
      *
-     * @throws \Exception
      * @return void
      *
      * @codingStandardsIgnoreStart
@@ -232,7 +231,6 @@ class OrderPdfWriter extends PdfFpdi
      * Put file stream.
      *
      * @param array $file_info
-     * @throws \Exception
      */
     protected function putFileStream(array $file_info): void
     {
@@ -320,7 +318,6 @@ class OrderPdfWriter extends PdfFpdi
      * Put resources including files and metadata descriptions.
      *
      * @return void
-     * @throws \Exception
      * @codingStandardsIgnoreStart
      */
     protected function _putresources(): void
@@ -394,11 +391,13 @@ class OrderPdfWriter extends PdfFpdi
             } else {
                 $this->_put(sprintf('/AF %s 0 R', $this->filesIndex));
             }
+        }
 
-            if (0 != $this->descriptionIndex) {
-                $this->_put(sprintf('/Metadata %s 0 R', $this->descriptionIndex));
-            }
+        if (0 != $this->descriptionIndex) {
+            $this->_put(sprintf('/Metadata %s 0 R', $this->descriptionIndex));
+        }
 
+        if (!empty($this->files)) {
             $this->_put('/Names <<');
             $this->_put('/EmbeddedFiles ');
             $this->_put(sprintf('%s 0 R', $this->filesIndex));
