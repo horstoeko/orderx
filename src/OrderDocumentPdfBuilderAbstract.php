@@ -61,7 +61,6 @@ abstract class OrderDocumentPdfBuilderAbstract
     public function __construct(string $pdfData)
     {
         $this->pdfData = $pdfData;
-
         $this->pdfWriter = new OrderPdfWriter();
     }
 
