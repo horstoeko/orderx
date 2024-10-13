@@ -11,6 +11,7 @@ namespace horstoeko\orderx;
 
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\BaseTypesHandler;
 use GoetasWebservices\Xsd\XsdToPhpRuntime\Jms\Handler\XmlSchemaDateHandler;
+use horstoeko\orderx\exception\OrderUnknownProfileParameterException;
 use horstoeko\orderx\jms\OrderTypesHandler;
 use horstoeko\orderx\OrderObjectHelper;
 use horstoeko\orderx\OrderProfileResolver;
@@ -32,43 +33,37 @@ class OrderDocument
 {
     /**
      * @internal
-     * Internal profile id (see OrderProfiles.php)
-     * @var      integer
+     * @var      integer    Internal profile id
      */
     private $profileId = -1;
 
     /**
      * @internal
-     * Internal profile definition (see OrderProfiles.php)
-     * @var      array
+     * @var      array  Internal profile definition
      */
     private $profileDefinition = [];
 
     /**
      * @internal
-     * Serializer builder
-     * @var      SerializerBuilder
+     * @var      SerializerBuilder  Serializer builder
      */
     private $serializerBuilder;
 
     /**
      * @internal
-     * Serializer
-     * @var      SerializerInterface
+     * @var      SerializerInterface    Serializer
      */
     private $serializer;
 
     /**
      * @internal
-     * The internal invoice object
-     * @var      \horstoeko\orderx\entities\basic\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure
+     * @return \horstoeko\orderx\entities\basic\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure
      */
     private $orderObject = null;
 
     /**
      * @internal
-     * Object Helper
-     * @var      OrderObjectHelper
+     * @var      OrderObjectHelper    Object Helper
      */
     private $objectHelper = null;
 
@@ -77,8 +72,6 @@ class OrderDocument
      *
      * @param integer $profile
      * The ID of the profile of the document
-     *
-     * @codeCoverageIgnore
      */
     final protected function __construct(int $profile)
     {
@@ -88,12 +81,10 @@ class OrderDocument
     }
 
     /**
-     * @internal
-     *
      * Returns the internal order object (created by the
      * serializer). This is used e.g. in the validator
      *
-     * @return object
+     * @return \horstoeko\orderx\entities\basic\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure
      */
     public function getOrderObject()
     {
@@ -166,7 +157,7 @@ class OrderDocument
             return $profileDefinition[$parameterName];
         }
 
-        throw new \Exception(sprintf("Unknown profile definition parameter %s", $parameterName));
+        throw new OrderUnknownProfileParameterException($parameterName);
     }
 
     /**
@@ -191,7 +182,6 @@ class OrderDocument
      * @internal
      *
      * Build the internal object helper
-     * @codeCoverageIgnore
      *
      * @return OrderDocument
      */
@@ -206,7 +196,6 @@ class OrderDocument
      * @internal
      *
      * Build the internal serialzer
-     * @codeCoverageIgnore
      *
      * @return OrderDocument
      */
@@ -225,7 +214,6 @@ class OrderDocument
                 $this->getProfileDefinitionParameter("name")
             )
         );
-
         $this->serializerBuilder->addMetadataDir(
             PathUtils::combineAllPaths(
                 OrderSettings::getYamlDirectory(),
@@ -237,7 +225,6 @@ class OrderDocument
                 $this->getProfileDefinitionParameter("name")
             )
         );
-
         $this->serializerBuilder->addMetadataDir(
             PathUtils::combineAllPaths(
                 OrderSettings::getYamlDirectory(),
@@ -249,7 +236,6 @@ class OrderDocument
                 $this->getProfileDefinitionParameter("name")
             )
         );
-
         $this->serializerBuilder->addMetadataDir(
             PathUtils::combineAllPaths(
                 OrderSettings::getYamlDirectory(),
@@ -277,6 +263,7 @@ class OrderDocument
 
         return $this;
     }
+
     /**
      * Deserialize XML content to internal invoice object
      *
