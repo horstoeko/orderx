@@ -1,8 +1,11 @@
 # Order-X
 
-[![Latest Stable Version](https://poser.pugx.org/horstoeko/orderx/v/stable.png)](https://packagist.org/packages/horstoeko/orderx) [![Total Downloads](https://poser.pugx.org/horstoeko/orderx/downloads.png)](https://packagist.org/packages/horstoeko/orderx) [![Latest Unstable Version](https://poser.pugx.org/horstoeko/orderx/v/unstable.png)](https://packagist.org/packages/horstoeko/orderx) [![License](https://poser.pugx.org/horstoeko/orderx/license.png)](https://packagist.org/packages/horstoeko/orderx) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/horstoeko/orderx)
+[![Latest Stable Version](https://img.shields.io/packagist/v/horstoeko/orderx.svg?style=plastic)](https://packagist.org/packages/horstoeko/orderx)
+[![PHP version](https://img.shields.io/packagist/php-v/horstoeko/orderx.svg?style=plastic)](https://packagist.org/packages/horstoeko/orderx)
+[![License](https://img.shields.io/packagist/l/horstoeko/orderx.svg?style=plastic)](https://packagist.org/packages/horstoeko/orderx)
 
-[![CI (Ant, PHP 7.3)](https://github.com/horstoeko/orderx/actions/workflows/build.php73.ant.yml/badge.svg)](https://github.com/horstoeko/orderx/actions/workflows/build.php73.ant.yml) [![CI (Ant, PHP 7.4)](https://github.com/horstoeko/orderx/actions/workflows/build.php74.ant.yml/badge.svg)](https://github.com/horstoeko/orderx/actions/workflows/build.php74.ant.yml) [![CI (PHP 8.0)](https://github.com/horstoeko/orderx/actions/workflows/build.php80.ant.yml/badge.svg)](https://github.com/horstoeko/orderx/actions/workflows/build.php80.ant.yml) [![CI (PHP 8.1)](https://github.com/horstoeko/orderx/actions/workflows/build.php81.ant.yml/badge.svg)](https://github.com/horstoeko/orderx/actions/workflows/build.php81.ant.yml) [![CI (PHP 8.2)](https://github.com/horstoeko/orderx/actions/workflows/build.php82.ant.yml/badge.svg)](https://github.com/horstoeko/orderx/actions/workflows/build.php82.ant.yml) [![CI (PHP 8.3)](https://github.com/horstoeko/orderx/actions/workflows/build.php83.ant.yml/badge.svg)](https://github.com/horstoeko/orderx/actions/workflows/build.php83.ant.yml)
+[![Build Status](https://github.com/horstoeko/orderx/actions/workflows/build.ci.yml/badge.svg)](https://github.com/horstoeko/orderx/actions/workflows/build.ci.yml)
+[![Release Status](https://github.com/horstoeko/orderx/actions/workflows/build.release.yml/badge.svg)](https://github.com/horstoeko/orderx/actions/workflows/build.release.yml)
 
 A simple Order-X Library
 
