@@ -9,11 +9,12 @@
 
 namespace horstoeko\orderx;
 
-use Exception;
+use Throwable;
+use SimpleXMLElement;
+use horstoeko\orderx\OrderProfiles;
+use horstoeko\orderx\exception\OrderUnknownXmlContentException;
 use horstoeko\orderx\exception\OrderCannotFindProfileString;
 use horstoeko\orderx\exception\OrderUnknownProfileException;
-use horstoeko\orderx\OrderProfiles;
-use SimpleXMLElement;
 
 /**
  * Class representing the profile resolver
@@ -29,14 +30,28 @@ class OrderProfileResolver
     /**
      * Resolve profile id and profile definition by the content of $xmlContent
      *
-     * @param  string $xmlContent
+     * @param string $xmlContent
      * @return array
-     * @throws Exception
+     * @throws OrderCannotFindProfileString
+     * @throws OrderUnknownProfileException
      */
     public static function resolve(string $xmlContent): array
     {
-        $xmldocument = new SimpleXMLElement($xmlContent);
-        $typeelement = $xmldocument->xpath('/rsm:SCRDMCCBDACIOMessageStructure/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID');
+        $prevUseInternalErrors = \libxml_use_internal_errors(true);
+
+        try {
+            libxml_clear_errors();
+            $xmldocument = new SimpleXMLElement($xmlContent);
+            $typeelement = $xmldocument->xpath('/rsm:SCRDMCCBDACIOMessageStructure/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID');
+            if (libxml_get_last_error()) {
+                throw new OrderUnknownXmlContentException();
+            }
+        } catch (Throwable $e) {
+            throw new OrderUnknownXmlContentException();
+        } finally {
+            libxml_clear_errors();
+            libxml_use_internal_errors($prevUseInternalErrors);
+        }
 
         if (!is_array($typeelement) || !isset($typeelement[0])) {
             throw new OrderCannotFindProfileString();
@@ -58,9 +73,10 @@ class OrderProfileResolver
     /**
      * Resolve profile id by the content of $xmlContent
      *
-     * @param  string $xmlContent
+     * @param string $xmlContent
      * @return int
-     * @throws Exception
+     * @throws OrderCannotFindProfileString
+     * @throws OrderUnknownProfileException
      */
     public static function resolveProfileId(string $xmlContent): int
     {
@@ -70,9 +86,10 @@ class OrderProfileResolver
     /**
      * Resolve profile definition by the content of $xmlContent
      *
-     * @param  string $xmlContent
+     * @param string $xmlContent
      * @return array
-     * @throws Exception
+     * @throws OrderCannotFindProfileString
+     * @throws OrderUnknownProfileException
      */
     public static function resolveProfileDef(string $xmlContent): array
     {
@@ -82,14 +99,14 @@ class OrderProfileResolver
     /**
      * Resolve profile id and profile definition by it's id
      *
-     * @param  integer $profileId
+     * @param int $profileId
      * @return array
-     * @throws Exception
+     * @throws OrderUnknownProfileException
      */
     public static function resolveById(int $profileId): array
     {
         if (!isset(OrderProfiles::PROFILEDEF[$profileId])) {
-            throw new Exception('Could not determine the profile...');
+            throw new OrderUnknownProfileException('Could not determine the profile...');
         }
 
         return [$profileId, OrderProfiles::PROFILEDEF[$profileId]];
@@ -98,9 +115,9 @@ class OrderProfileResolver
     /**
      * Resolve profile profile definition by it's id
      *
-     * @param  int $profileId
+     * @param int $profileId
      * @return array
-     * @throws Exception
+     * @throws OrderUnknownProfileException
      */
     public static function resolveProfileDefById(int $profileId): array
     {

@@ -22,9 +22,6 @@ class OrderSettingsTest extends TestCase
         OrderSettings::setIccProfileFilename("sRGB_v4_ICC.icc");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderSettings
-     */
     public function testAmountDecimals(): void
     {
         $this->assertEquals(2, OrderSettings::getAmountDecimals());
@@ -38,9 +35,6 @@ class OrderSettingsTest extends TestCase
         $this->assertEquals(3, $property->getValue());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderSettings
-     */
     public function testQuantityDecimals(): void
     {
         $this->assertEquals(2, OrderSettings::getQuantityDecimals());
@@ -54,9 +48,6 @@ class OrderSettingsTest extends TestCase
         $this->assertEquals(3, $property->getValue());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderSettings
-     */
     public function testPercentDecimals(): void
     {
         $this->assertEquals(2, OrderSettings::getPercentDecimals());
@@ -70,9 +61,6 @@ class OrderSettingsTest extends TestCase
         $this->assertEquals(3, $property->getValue());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderSettings
-     */
     public function testDecimalSeparator(): void
     {
         $this->assertEquals(".", OrderSettings::getDecimalSeparator());
@@ -86,9 +74,6 @@ class OrderSettingsTest extends TestCase
         $this->assertEquals(",", $property->getValue());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderSettings
-     */
     public function testThousandsSeparator(): void
     {
         $this->assertEquals("", OrderSettings::getThousandsSeparator());
@@ -102,9 +87,6 @@ class OrderSettingsTest extends TestCase
         $this->assertEquals(",", $property->getValue());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderSettings
-     */
     public function testIccProfileFilename(): void
     {
         $this->assertEquals("sRGB_v4_ICC.icc", OrderSettings::getIccProfileFilename());
@@ -116,9 +98,6 @@ class OrderSettingsTest extends TestCase
         $property = $this->getPrivatePropertyFromClassname(OrderSettings::class, "iccProfileFilename");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderSettings
-     */
     public function testGetRootDirectory(): void
     {
         $this->assertEquals(
@@ -127,9 +106,6 @@ class OrderSettingsTest extends TestCase
         );
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderSettings
-     */
     public function testGetSourceDirectory(): void
     {
         $this->assertEquals(
@@ -138,9 +114,6 @@ class OrderSettingsTest extends TestCase
         );
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderSettings
-     */
     public function testGetAssetDirectory(): void
     {
         $this->assertEquals(
@@ -149,9 +122,6 @@ class OrderSettingsTest extends TestCase
         );
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderSettings
-     */
     public function testGetYamlDirectory(): void
     {
         $this->assertEquals(
@@ -160,9 +130,6 @@ class OrderSettingsTest extends TestCase
         );
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderSettings
-     */
     public function testGetValidationDirectory(): void
     {
         $this->assertEquals(
@@ -171,9 +138,6 @@ class OrderSettingsTest extends TestCase
         );
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderSettings
-     */
     public function testGetFullIccProfileFilename(): void
     {
         $expected = PathUtils::combinePathWithFile(

@@ -15,9 +15,6 @@ class OrderObjectHelperBasicTest extends TestCase
      */
     protected static $objectHelper;
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testConstruct(): void
     {
         self::$objectHelper = new OrderObjectHelper(OrderProfiles::PROFILE_BASIC);
@@ -41,9 +38,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("BASIC", $property->getValue(self::$objectHelper)['altname']);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testCreateClassInstance(): void
     {
         $instance = self::$objectHelper->createClassInstance("Baum");
@@ -55,9 +49,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNotNull($instance);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testMethodExists(): void
     {
         $this->assertFalse(self::$objectHelper->methodExists(null, "test"));
@@ -65,9 +56,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertTrue(self::$objectHelper->methodExists(self::$objectHelper->createClassInstance("udt\IDType"), "getSchemeID"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testCheckArrayIndex(): void
     {
         $array = ["1", "2"];
@@ -81,9 +69,6 @@ class OrderObjectHelperBasicTest extends TestCase
         self::$objectHelper->checkArrayIndex($array, 3);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testEnsureArray(): void
     {
         $variable = "abc";
@@ -107,9 +92,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("abc", self::$objectHelper->ensureArray($variable)[0]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testEnsureStringArray(): void
     {
         $variable = 1.0;
@@ -134,9 +116,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("1.02", self::$objectHelper->ensureStringArray($variable)[0]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetArrayIndex(): void
     {
         $array = ["1", "2"];
@@ -150,9 +129,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("4", self::$objectHelper->getArrayIndex($array, 3));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testTryCall(): void
     {
         $instance = null;
@@ -169,9 +145,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNotNull(self::$objectHelper->tryCall($mock, "value", "1"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetIdType(): void
     {
         $this->assertNull(self::$objectHelper->getIdType());
@@ -188,9 +161,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("", self::$objectHelper->getIdType("123456789")->getSchemeID());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTextType(): void
     {
         $this->assertNull(self::$objectHelper->getTextType());
@@ -201,9 +171,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("Text", self::$objectHelper->getTextType("Text")->value());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetCodeType(): void
     {
         $this->assertNull(self::$objectHelper->getCodeType());
@@ -214,9 +181,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("Code", self::$objectHelper->getCodeType("Code")->value());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetCodeType2(): void
     {
         $this->assertNull(self::$objectHelper->getCodeType2());
@@ -240,9 +204,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("", self::$objectHelper->getCodeType2("Code")->getListVersionID());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetIndicatorType(): void
     {
         $this->assertNull(self::$objectHelper->getIndicatorType());
@@ -253,9 +214,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertFalse(self::$objectHelper->getIndicatorType(false)->getIndicator());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetNoteType(): void
     {
         $this->assertNull(self::$objectHelper->getNoteType());
@@ -283,9 +241,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("CC", self::$objectHelper->getNoteType("Content", "CC", null)->getContentCode());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetFormattedDateTimeType(): void
     {
         $dt = new \DateTime();
@@ -294,9 +249,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull(self::$objectHelper->getFormattedDateTimeType($dt));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDateTimeType(): void
     {
         $dt = new \DateTime();
@@ -308,9 +260,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("102", self::$objectHelper->getDateTimeType($dt)->getDateTimeString()->getFormat());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetAmountType(): void
     {
         $this->assertNull(self::$objectHelper->getAmountType(null));
@@ -324,18 +273,12 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("EUR", self::$objectHelper->getAmountType(200.0, "EUR")->getCurrencyID());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetPercentType(): void
     {
         $this->assertNull(self::$objectHelper->getPercentType(null));
         $this->assertNull(self::$objectHelper->getPercentType(100.0));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetQuantityType(): void
     {
         $this->assertNull(self::$objectHelper->getQuantityType(null));
@@ -349,9 +292,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("C62", self::$objectHelper->getQuantityType(200.0, "C62")->getUnitCode());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetMeasureType(): void
     {
         $this->assertNull(self::$objectHelper->getMeasureType(null));
@@ -360,9 +300,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull(self::$objectHelper->getMeasureType(100.0, "C62"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetNumericType(): void
     {
         $this->assertNull(self::$objectHelper->getNumericType());
@@ -370,9 +307,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull(self::$objectHelper->getNumericType(100.0));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTaxCategoryCodeType(): void
     {
         $this->assertNull(self::$objectHelper->getTaxCategoryCodeType());
@@ -380,9 +314,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull(self::$objectHelper->getTaxCategoryCodeType("CODE"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTaxTypeCodeType(): void
     {
         $this->assertNull(self::$objectHelper->getTaxTypeCodeType());
@@ -390,9 +321,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull(self::$objectHelper->getTaxTypeCodeType("CODE"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTimeReferenceCodeType(): void
     {
         $this->assertNull(self::$objectHelper->getTimeReferenceCodeType());
@@ -400,9 +328,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull(self::$objectHelper->getTimeReferenceCodeType("CODE"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetSpecifiedPeriodType(): void
     {
         $dt = new \DateTime();
@@ -424,9 +349,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals($dt->format("Ymd"), self::$objectHelper->getSpecifiedPeriodType($dt, $dt)->getEndDateTime()->getDateTimeString()->value());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetBinaryObjectType(): void
     {
         $this->assertNull(self::$objectHelper->getBinaryObjectType());
@@ -441,9 +363,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull(self::$objectHelper->getBinaryObjectType("data", "image/jpeg", "image.jpg"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetReferencedDocumentType(): void
     {
         $binaryDataFilenameValid = dirname(__FILE__) . "/../assets/reader-invalid.pdf";
@@ -460,9 +379,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("ID", $refDoc2->getIssuerAssignedID()->value());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetCountryIDType(): void
     {
         $this->assertNull(self::$objectHelper->getCountryIDType(null));
@@ -471,18 +387,12 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("DE", self::$objectHelper->getCountryIDType("DE")->value());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTradeCountryType(): void
     {
         $this->assertNull(self::$objectHelper->getTradeCountryType(null));
         $this->assertNull(self::$objectHelper->getTradeCountryType("DE"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetOrderX(): void
     {
         $oderx = self::$objectHelper->getOrderX();
@@ -500,9 +410,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNotNull($oderx->getSupplyChainTradeTransaction()->getApplicableHeaderTradeSettlement());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTradeParty(): void
     {
         $this->assertNull(self::$objectHelper->getTradeParty());
@@ -527,9 +434,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("DESC", self::$objectHelper->getTradeParty("NAME", "ID", "DESC")->getDescription()->value());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTradeLocation(): void
     {
         $this->assertNull(self::$objectHelper->getTradeLocation());
@@ -547,9 +451,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull(self::$objectHelper->getTradeLocation("NAME", "ID"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTradeAddress(): void
     {
         $this->assertNull(self::$objectHelper->getTradeAddress());
@@ -587,9 +488,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("SUBDIV", $address->getCountrySubDivisionName()->value());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetLegalOrganization(): void
     {
         $this->assertNull(self::$objectHelper->getLegalOrganization());
@@ -611,9 +509,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("NAME", $legalOrganization->getTradingBusinessName()->value());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTradeContact(): void
     {
         $this->assertNull(self::$objectHelper->getTradeContact());
@@ -644,9 +539,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("FAX", $contact->getFaxUniversalCommunication()->getCompleteNumber());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetUniversalCommunicationType(): void
     {
         $this->assertNull(self::$objectHelper->getUniversalCommunicationType());
@@ -666,9 +558,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("URITYPE", $comm->getURIID()->getSchemeID());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTaxRegistrationType(): void
     {
         $this->assertNull(self::$objectHelper->getTaxRegistrationType());
@@ -685,9 +574,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("FC", self::$objectHelper->getTaxRegistrationType("FC", "ID")->getID()->getSchemeID());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTradeDeliveryTermsType(): void
     {
         $this->assertNull(self::$objectHelper->getTradeDeliveryTermsType());
@@ -716,9 +602,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("LOCNAME", $devTermsType->getRelevantTradeLocation()->getName()->value());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetProcuringProjectType(): void
     {
         $this->assertNull(self::$objectHelper->getProcuringProjectType());
@@ -730,9 +613,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull(self::$objectHelper->getProcuringProjectType("ID", "NAME"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetSupplyChainEventType(): void
     {
         $dt = new \DateTime();
@@ -746,9 +626,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("102", self::$objectHelper->getSupplyChainEventType($dt)->getOccurrenceDateTime()->getDateTimeString()->getFormat());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDeliverySupplyChainEvent(): void
     {
         $dt = new \DateTime();
@@ -793,9 +670,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("102", $devSupplyChainEvent->getOccurrenceSpecifiedPeriod()->getEndDateTime()->getDateTimeString()->getFormat());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTradeSettlementPaymentMeansType(): void
     {
         $this->assertNull(self::$objectHelper->getTradeSettlementPaymentMeansType());
@@ -813,9 +687,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull($paymentMean);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTradePaymentTermsType(): void
     {
         $this->assertNull(self::$objectHelper->getTradePaymentTermsType());
@@ -827,9 +698,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull($paymentTerm);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTradeTaxType(): void
     {
         $this->assertNull(self::$objectHelper->getTradeTaxType());
@@ -839,9 +707,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull($tradeTax);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTradeAllowanceChargeType(): void
     {
         $this->assertNull(self::$objectHelper->getTradeAllowanceChargeType());
@@ -851,9 +716,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull($allowanceCharge);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetLogisticsServiceChargeType(): void
     {
         $this->assertNull(self::$objectHelper->getLogisticsServiceChargeType());
@@ -863,9 +725,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull($serviceCharge);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTradeSettlementHeaderMonetarySummationType(): void
     {
         $this->assertNull(self::$objectHelper->getTradeSettlementHeaderMonetarySummationType());
@@ -881,9 +740,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals(17.1, $summation->getTaxTotalAmount()->value());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTradeAccountingAccountType(): void
     {
         $this->assertNull(self::$objectHelper->getTradeAccountingAccountType());
@@ -899,9 +755,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("TYPECODE", self::$objectHelper->getTradeAccountingAccountType("ID", "TYPECODE")->getTypeCode()->value());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentLineDocumentType(): void
     {
         $this->assertNull(self::$objectHelper->getDocumentLineDocumentType());
@@ -913,9 +766,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("1", self::$objectHelper->getDocumentLineDocumentType("1")->getLineID()->value());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetSupplyChainTradeLineItemType(): void
     {
         $this->assertNull(self::$objectHelper->getSupplyChainTradeLineItemType());
@@ -931,9 +781,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("SC", $lineItemType->getAssociatedDocumentLineDocument()->getLineStatusCode()->value());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTradeProductType(): void
     {
         $this->assertNull(self::$objectHelper->getTradeProductType());
@@ -952,9 +799,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("BRANDNAME", $product->getBrandName()->value());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetProductCharacteristicType(): void
     {
         $this->assertNull(self::$objectHelper->getProductCharacteristicType());
@@ -973,9 +817,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull($characteristic);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetProductClassificationType(): void
     {
         $this->assertNull(self::$objectHelper->getProductClassificationType());
@@ -993,9 +834,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull($classification);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetReferencedProductType(): void
     {
         $this->assertNull(self::$objectHelper->getReferencedProductType());
@@ -1026,9 +864,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("C62", $product->getUnitQuantity()->getUnitCode());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTradeProductInstanceType(): void
     {
         $this->assertNull(self::$objectHelper->getTradeProductInstanceType());
@@ -1042,9 +877,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull($instance);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetSupplyChainPackagingType(): void
     {
         $this->assertNull(self::$objectHelper->getSupplyChainPackagingType());
@@ -1061,9 +893,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertNull($packaging);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTradePriceType(): void
     {
         $this->assertNull(self::$objectHelper->getTradePriceType());
@@ -1079,9 +908,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("C62", $price->getBasisQuantity()->getUnitCode());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetTradeSettlementLineMonetarySummationType(): void
     {
         $this->assertNull(self::$objectHelper->getTradeSettlementLineMonetarySummationType());
@@ -1096,9 +922,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals(50.0, $summation->getTotalAllowanceChargeAmount()->value());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentContextParameterType(): void
     {
         $this->assertNull(self::$objectHelper->getDocumentContextParameterType());
@@ -1106,9 +929,6 @@ class OrderObjectHelperBasicTest extends TestCase
         $this->assertEquals("ID", self::$objectHelper->getDocumentContextParameterType("ID")->getID()->value());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testToDateTime(): void
     {
         $this->assertNull(self::$objectHelper->toDateTime());
@@ -1124,9 +944,6 @@ class OrderObjectHelperBasicTest extends TestCase
         self::$objectHelper->toDateTime("20221231", "999");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetRateType(): void
     {
         $this->assertNull(self::$objectHelper->getRateType());

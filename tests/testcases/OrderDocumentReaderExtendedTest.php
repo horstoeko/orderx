@@ -24,19 +24,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         self::$document = OrderDocumentReader::readAndGuessFromFile(dirname(__FILE__) . '/../assets/reader-order-x-extended.xml');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testDocumentProperties(): void
     {
         $this->assertNotNull(self::$document->getOrderObject());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testDocumentProfile(): void
     {
         $this->assertNotEquals(OrderProfiles::PROFILE_BASIC, self::$document->getProfileId());
@@ -44,10 +36,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals(OrderProfiles::PROFILE_EXTENDED, self::$document->getProfileId());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentInformation(): void
     {
         self::$document->getDocumentInformation(
@@ -73,10 +61,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("AC", $documentRequestedResponseTypeCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetIsDocumentCopy(): void
     {
         self::$document->getIsDocumentCopy($documentIsCopy);
@@ -85,10 +69,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertFalse($documentIsCopy);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetIsTestDocument(): void
     {
         self::$document->getIsTestDocument($documentIsTest);
@@ -97,28 +77,16 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertFalse($documentIsTest);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentNote(): void
     {
         $this->assertTrue(self::$document->firstDocumentNote());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentNote(): void
     {
         $this->assertFalse(self::$document->nextDocumentNote());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentNote(): void
     {
         self::$document->firstDocumentNote();
@@ -131,10 +99,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("AAI", $contentCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentNoteNoNext(): void
     {
         $this->expectException(\OutOfRangeException::class);
@@ -143,10 +107,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         self::$document->getDocumentNote($content, $subjectCode, $contentCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentSummation(): void
     {
         self::$document->getDocumentSummation(
@@ -166,10 +126,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals(60.00, $taxTotalAmount);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyerReference(): void
     {
         self::$document->getDocumentBuyerReference($buyerReference);
@@ -177,10 +133,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("BUYER_REF_BU123", $buyerReference);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentSeller(): void
     {
         self::$document->getDocumentSeller($name, $id, $description);
@@ -192,10 +144,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("SELLER_ADD_LEGAL_INFORMATION", $description);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentSellerGlobalId(): void
     {
         self::$document->getDocumentSellerGlobalId($globalids);
@@ -205,10 +153,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("123654879", $globalids["0088"]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentSellerTaxRegistration(): void
     {
         self::$document->getDocumentSellerTaxRegistration($taxreg);
@@ -220,10 +164,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("SELLER_TAX_ID", $taxreg["FC"]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentSellerAddress(): void
     {
         self::$document->getDocumentSellerAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
@@ -237,10 +177,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $subdivision);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentSellerLegalOrganisation(): void
     {
         self::$document->getDocumentSellerLegalOrganisation($legalorgid, $legalorgtype, $legalorgname);
@@ -250,28 +186,16 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("SELLER_TRADING_NAME", $legalorgname);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentSellerContact(): void
     {
         $this->assertTrue(self::$document->firstDocumentSellerContact());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentSellerContact(): void
     {
         $this->assertFalse(self::$document->nextDocumentSellerContact());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentSellerContact(): void
     {
         self::$document->firstDocumentSellerContact();
@@ -292,10 +216,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("SR", $contacttypecode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentSellerContactNoNext(): void
     {
         $this->expectException(\OutOfRangeException::class);
@@ -311,10 +231,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         );
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentSellerElectronicAddress(): void
     {
         self::$document->getDocumentSellerElectronicAddress($uriType, $uriId);
@@ -323,10 +239,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("sales@seller.com", $uriId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyer(): void
     {
         self::$document->getDocumentBuyer($name, $id, $description);
@@ -338,10 +250,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $description);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyerGlobalId(): void
     {
         self::$document->getDocumentBuyerGlobalId($globalids);
@@ -351,10 +259,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("98765432179", $globalids["0088"]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyerTaxRegistration(): void
     {
         self::$document->getDocumentBuyerTaxRegistration($taxreg);
@@ -365,10 +269,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("FR 05 987 654 321", $taxreg["VA"]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyerAddress(): void
     {
         self::$document->getDocumentBuyerAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
@@ -382,10 +282,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $subdivision);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyerLegalOrganisation(): void
     {
         self::$document->getDocumentBuyerLegalOrganisation($legalorgid, $legalorgtype, $legalorgname);
@@ -395,28 +291,16 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("BUYER_TRADING_NAME", $legalorgname);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentBuyerContact(): void
     {
         $this->assertTrue(self::$document->firstDocumentBuyerContact());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentBuyerContact(): void
     {
         $this->assertFalse(self::$document->nextDocumentBuyerContact());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyerContact(): void
     {
         self::$document->firstDocumentBuyerContact();
@@ -437,10 +321,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("LB", $contacttypecode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyerContactNoNext(): void
     {
         $this->expectException(\OutOfRangeException::class);
@@ -456,10 +336,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         );
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyerElectronicAddress(): void
     {
         self::$document->getDocumentBuyerElectronicAddress($uriType, $uriId);
@@ -468,10 +344,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("operation@buyer.com", $uriId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyerRequisitioner(): void
     {
         self::$document->getDocumentBuyerRequisitioner($name, $id, $description);
@@ -483,10 +355,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $description);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyerRequisitionerGlobalId(): void
     {
         self::$document->getDocumentBuyerRequisitionerGlobalId($globalids);
@@ -496,10 +364,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("654987321", $globalids["0088"]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyerRequisitionerTaxRegistration(): void
     {
         self::$document->getDocumentBuyerRequisitionerTaxRegistration($taxreg);
@@ -510,10 +374,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("FR 92 654 987 321", $taxreg["VA"]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyerRequisitionerAddress(): void
     {
         self::$document->getDocumentBuyerRequisitionerAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
@@ -527,10 +387,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $subdivision);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyerRequisitionerLegalOrganisation(): void
     {
         self::$document->getDocumentBuyerRequisitionerLegalOrganisation($legalorgid, $legalorgtype, $legalorgname);
@@ -540,28 +396,16 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("BUYER_REQ_TRADING_NAME", $legalorgname);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentBuyerRequisitionerContact(): void
     {
         $this->assertTrue(self::$document->firstDocumentBuyerRequisitionerContact());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentBuyerRequisitionerContact(): void
     {
         $this->assertFalse(self::$document->nextDocumentBuyerRequisitionerContact());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyerRequisitionerContact(): void
     {
         self::$document->firstDocumentBuyerRequisitionerContact();
@@ -582,10 +426,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("PD", $contacttypecode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyerRequisitionerContactNoNext(): void
     {
         $this->expectException(\OutOfRangeException::class);
@@ -601,10 +441,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         );
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyerRequisitionerElectronicAddress(): void
     {
         self::$document->getDocumentBuyerRequisitionerElectronicAddress($uriType, $uriId);
@@ -613,10 +449,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("purchase@buyer.com", $uriId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentDeliveryTerms(): void
     {
         self::$document->getDocumentDeliveryTerms($code, $description, $functionCode, $locationId, $locationName);
@@ -628,10 +460,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("DEL_TERMS_LOC_Name", $locationName);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentSellerOrderReferencedDocument(): void
     {
         self::$document->getDocumentSellerOrderReferencedDocument($sellerOrderRefId, $sellerOrderRefDate);
@@ -640,10 +468,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertNull($sellerOrderRefDate);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBuyerOrderReferencedDocument(): void
     {
         self::$document->getDocumentBuyerOrderReferencedDocument($buyerOrderRefId, $buyerOrderRefDate);
@@ -652,10 +476,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertNull($buyerOrderRefDate);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentQuotationReferencedDocument(): void
     {
         self::$document->getDocumentQuotationReferencedDocument($quotationRefId, $quotationRefDate);
@@ -664,10 +484,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertNull($quotationRefDate);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentContractReferencedDocument(): void
     {
         self::$document->getDocumentContractReferencedDocument($contractRefId, $contractRefDate);
@@ -676,10 +492,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertNull($contractRefDate);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetGetDocumentRequisitionReferencedDocument(): void
     {
         self::$document->getDocumentRequisitionReferencedDocument($requisitionRefId, $requisitionRefDate);
@@ -688,19 +500,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertNull($requisitionRefDate);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentAdditionalReferencedDocument(): void
     {
         $this->assertTrue(self::$document->firstDocumentAdditionalReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentAdditionalReferencedDocument(): void
     {
         $this->assertTrue(self::$document->nextDocumentAdditionalReferencedDocument());
@@ -708,10 +512,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertFalse(self::$document->nextDocumentAdditionalReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentAdditionalReferencedDocument(): void
     {
         $this->assertTrue(self::$document->firstDocumentAdditionalReferencedDocument());
@@ -750,10 +550,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertFalse(self::$document->nextDocumentAdditionalReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentAdditionalReferencedDocumentBinaryData(): void
     {
         self::$document->setBinaryDataDirectory(dirname(__FILE__));
@@ -774,10 +570,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEmpty($additionalBinaryFilename);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentBlanketOrderReferencedDocument(): void
     {
         self::$document->getDocumentBlanketOrderReferencedDocument($blanketOrderRefId, $blanketOrderRefDate);
@@ -787,10 +579,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals($blanketOrderRefDate->format("d.m.Y"), "25.12.2022");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPreviousOrderChangeReferencedDocument(): void
     {
         self::$document->getDocumentPreviousOrderChangeReferencedDocument($prevOrderChangeRefId, $prevOrderChangeRefDate);
@@ -800,10 +588,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals($prevOrderChangeRefDate->format("d.m.Y"), "25.12.2022");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPreviousOrderResponseReferencedDocument(): void
     {
         self::$document->getDocumentPreviousOrderResponseReferencedDocument($prevOrderResponseRefId, $prevOrderResponseRefDate);
@@ -813,10 +597,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals($prevOrderResponseRefDate->format("d.m.Y"), "25.12.2022");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentProcuringProject(): void
     {
         self::$document->getDocumentProcuringProject($procuringProjectId, $procuringProjectName);
@@ -825,28 +605,16 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("Project Reference", $procuringProjectName);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentUltimateCustomerOrderReferencedDocument(): void
     {
         $this->assertTrue(self::$document->firstDocumentUltimateCustomerOrderReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentUltimateCustomerOrderReferencedDocument(): void
     {
         $this->assertFalse(self::$document->nextDocumentUltimateCustomerOrderReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentUltimateCustomerOrderReferencedDocument(): void
     {
         self::$document->firstDocumentUltimateCustomerOrderReferencedDocument();
@@ -856,10 +624,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("25.12.2022", $ultimateCustomerOrderRefDate->format("d.m.Y"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentShipTo(): void
     {
         self::$document->getDocumentShipTo($name, $id, $description);
@@ -871,10 +635,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $description);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentShipToGlobalId(): void
     {
         self::$document->getDocumentShipToGlobalId($globalids);
@@ -884,10 +644,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("5897546912", $globalids["0088"]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentShipToTaxRegistration(): void
     {
         self::$document->getDocumentShipToTaxRegistration($taxreg);
@@ -898,10 +654,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("FR 66 951 632 874", $taxreg["VA"]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentShipToAddress(): void
     {
         self::$document->getDocumentShipToAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
@@ -915,10 +667,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $subdivision);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentShipToLegalOrganisation(): void
     {
         self::$document->getDocumentShipToLegalOrganisation($legalorgid, $legalorgtype, $legalorgname);
@@ -928,28 +676,16 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("SHIP_TO_TRADING_NAME", $legalorgname);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentShipToContact(): void
     {
         $this->assertTrue(self::$document->firstDocumentShipToContact());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentShipToContact(): void
     {
         $this->assertFalse(self::$document->nextDocumentShipToContact());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentShipToContact(): void
     {
         self::$document->firstDocumentShipToContact();
@@ -970,10 +706,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("SD", $contacttypecode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentShipToContactNoNext(): void
     {
         $this->expectException(\OutOfRangeException::class);
@@ -989,10 +721,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         );
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentShipToElectronicAddress(): void
     {
         self::$document->getDocumentShipToElectronicAddress($uriType, $uriId);
@@ -1001,10 +729,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("delivery@buyer.com", $uriId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentShipFrom(): void
     {
         self::$document->getDocumentShipFrom($name, $id, $description);
@@ -1016,10 +740,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $description);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentShipFromGlobalId(): void
     {
         self::$document->getDocumentShipFromGlobalId($globalids);
@@ -1029,10 +749,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("875496123", $globalids["0088"]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentShipFromTaxRegistration(): void
     {
         self::$document->getDocumentShipFromTaxRegistration($taxreg);
@@ -1043,10 +759,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("FR 16 548 963 127", $taxreg["VA"]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentShipFromAddress(): void
     {
         self::$document->getDocumentShipFromAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
@@ -1060,10 +772,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $subdivision);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentShipFromLegalOrganisation(): void
     {
         self::$document->getDocumentShipFromLegalOrganisation($legalorgid, $legalorgtype, $legalorgname);
@@ -1073,28 +781,16 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("SHIP_FROM_TRADING_NAME", $legalorgname);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentShipFromContact(): void
     {
         $this->assertTrue(self::$document->firstDocumentShipFromContact());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentShipFromContact(): void
     {
         $this->assertFalse(self::$document->nextDocumentShipFromContact());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentShipFromContact(): void
     {
         self::$document->firstDocumentShipFromContact();
@@ -1115,10 +811,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("SD", $contacttypecode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentShipFromContactNoNext(): void
     {
         $this->expectException(\OutOfRangeException::class);
@@ -1134,10 +826,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         );
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentShipFromElectronicAddress(): void
     {
         self::$document->getDocumentShipFromElectronicAddress($uriType, $uriId);
@@ -1146,28 +834,16 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("warehouse@seller.com", $uriId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentRequestedDeliverySupplyChainEvent(): void
     {
         $this->assertTrue(self::$document->firstDocumentRequestedDeliverySupplyChainEvent());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentRequestedDeliverySupplyChainEvent(): void
     {
         $this->assertFalse(self::$document->nextDocumentRequestedDeliverySupplyChainEvent());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentRequestedDeliverySupplyChainEvent(): void
     {
         self::$document->firstDocumentRequestedDeliverySupplyChainEvent();
@@ -1181,10 +857,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("25.12.2022", $endDateTime->format('d.m.Y'));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentRequestedDeliverySupplyChainEventNoNext(): void
     {
         $this->expectException(\OutOfRangeException::class);
@@ -1193,28 +865,16 @@ class OrderDocumentReaderExtendedTest extends TestCase
         self::$document->getDocumentRequestedDeliverySupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstRequestedDespatchSupplyChainEvent(): void
     {
         $this->assertTrue(self::$document->firstDocumentRequestedDespatchSupplyChainEvent());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextRequestedDespatchSupplyChainEvent(): void
     {
         $this->assertFalse(self::$document->nextDocumentRequestedDespatchSupplyChainEvent());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextRequestedDespatchSupplyChainEventNoNext(): void
     {
         $this->expectException(\OutOfRangeException::class);
@@ -1223,10 +883,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         self::$document->getDocumentRequestedDespatchSupplyChainEvent($occurrenceDateTime, $startDateTime, $endDateTime);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentRequestedDespatchSupplyChainEvent(): void
     {
         self::$document->firstDocumentRequestedDeliverySupplyChainEvent();
@@ -1240,10 +896,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("25.12.2022", $endDateTime->format('d.m.Y'));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentInvoicee(): void
     {
         self::$document->getDocumentInvoicee($name, $id, $description);
@@ -1255,10 +907,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $description);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentInvoiceeGlobalId(): void
     {
         self::$document->getDocumentInvoiceeGlobalId($globalids);
@@ -1268,10 +916,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("98765432179", $globalids["0088"]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentInvoiceeTaxRegistration(): void
     {
         self::$document->getDocumentInvoiceeTaxRegistration($taxreg);
@@ -1283,10 +927,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("INVOICEE_TAX_ID", $taxreg["FC"]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentInvoiceeAddress(): void
     {
         self::$document->getDocumentInvoiceeAddress($lineone, $linetwo, $linethree, $postcode, $city, $country, $subdivision);
@@ -1300,10 +940,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $subdivision);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentInvoiceeLegalOrganisation(): void
     {
         self::$document->getDocumentInvoiceeLegalOrganisation($legalorgid, $legalorgtype, $legalorgname);
@@ -1313,28 +949,16 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("INVOICEE_TRADING_NAME", $legalorgname);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentInvoiceeContact(): void
     {
         $this->assertTrue(self::$document->firstDocumentInvoiceeContact());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentInvoiceeContact(): void
     {
         $this->assertFalse(self::$document->nextDocumentInvoiceeContact());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentInvoiceeContact(): void
     {
         self::$document->firstDocumentInvoiceeContact();
@@ -1355,10 +979,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("LB", $contacttypecode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentInvoiceeContactNoNext(): void
     {
         $this->expectException(\OutOfRangeException::class);
@@ -1374,10 +994,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         );
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentInvoiceeElectronicAddress(): void
     {
         self::$document->getDocumentInvoiceeElectronicAddress($uriType, $uriId);
@@ -1386,28 +1002,16 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("invoicee@buyer.com", $uriId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstGetDocumentPaymentMeans(): void
     {
         $this->assertTrue(self::$document->firstDocumentPaymentMeans());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextGetDocumentPaymentMeans(): void
     {
         $this->assertFalse(self::$document->nextDocumentPaymentMeans());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPaymentMeans(): void
     {
         self::$document->firstDocumentPaymentMeans();
@@ -1417,29 +1021,17 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("Credit Transfer", $paymentMeansInformation);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentAllowanceCharge(): void
     {
         $this->assertTrue(self::$document->firstDocumentAllowanceCharge());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentAllowanceCharge(): void
     {
         $this->assertTrue(self::$document->nextDocumentAllowanceCharge());
         $this->assertFalse(self::$document->nextDocumentAllowanceCharge());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentAllowanceCharge(): void
     {
         self::$document->firstDocumentAllowanceCharge();
@@ -1501,10 +1093,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("FREIGHT SERVICES", $reason);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentAllowanceChargeNoNext(): void
     {
         $this->expectException(\OutOfRangeException::class);
@@ -1526,28 +1114,16 @@ class OrderDocumentReaderExtendedTest extends TestCase
         );
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPaymentTerms(): void
     {
         $this->assertTrue(self::$document->firstDocumentPaymentTerms());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPaymentTerms(): void
     {
         $this->assertFalse(self::$document->nextDocumentPaymentTerms());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPaymentTerm(): void
     {
         self::$document->firstDocumentPaymentTerms();
@@ -1556,10 +1132,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("PAYMENT_TERMS_DESC", $paymentTermsDescription);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentReceivableSpecifiedTradeAccountingAccount(): void
     {
         self::$document->getDocumentReceivableSpecifiedTradeAccountingAccount($id, $typeCode);
@@ -1568,19 +1140,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("BUYER_ACCOUNT_REF_TYPE", $typeCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPosition(): void
     {
         $this->assertTrue(self::$document->firstDocumentPosition());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPosition(): void
     {
         $this->assertTrue(self::$document->nextDocumentPosition());
@@ -1588,10 +1152,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertFalse(self::$document->nextDocumentPosition());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionGenerals(): void
     {
         self::$document->firstDocumentPosition();
@@ -1601,67 +1161,39 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $lineStatusCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionNotePos1(): void
     {
         self::$document->firstDocumentPosition();
         $this->assertTrue(self::$document->firstDocumentPositionNote());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionNotePos1(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionNote());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionNotePos2(): void
     {
         self::$document->nextDocumentPosition();
         $this->assertTrue(self::$document->firstDocumentPositionNote());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionNotePos2(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionNote());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionNotePos3(): void
     {
         self::$document->nextDocumentPosition();
         $this->assertTrue(self::$document->firstDocumentPositionNote());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionNotePos3(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionNote());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionNotePos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -1672,10 +1204,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("TXD", $subjectCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionNotePos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -1686,10 +1214,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("TXD", $subjectCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionNotePos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -1700,10 +1224,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("AAI", $subjectCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductDetailsPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -1729,10 +1249,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("Product Brand Name", $brandName);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductDetailsPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -1758,10 +1274,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("Product Brand Name", $brandName);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductDetailsPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -1787,10 +1299,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("Product Brand Name", $brandName);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionProductCharacteristicPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -1798,19 +1306,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionProductCharacteristic());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionProductCharacteristicPos1(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionProductCharacteristic());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionProductCharacteristicPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -1818,19 +1318,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionProductCharacteristic());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionProductCharacteristicPos2(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionProductCharacteristic());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionProductCharacteristicPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -1838,19 +1330,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionProductCharacteristic());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionProductCharacteristicPos3(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionProductCharacteristic());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductCharacteristicPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -1866,10 +1350,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("Characteristic_Code", $typecode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductCharacteristicPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -1885,10 +1365,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("Characteristic_Code", $typecode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductCharacteristicPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -1904,10 +1380,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("Characteristic_Code", $typecode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionProductClassificationPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -1915,19 +1387,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionProductClassification());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionProductClassificationPos1(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionProductClassification());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionProductClassificationPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -1935,19 +1399,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionProductClassification());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionProductClassificationPos2(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionProductClassification());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionProductClassificationPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -1955,19 +1411,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionProductClassification());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionProductClassificationPos3(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionProductClassification());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductClassificationPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -1980,10 +1428,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $listVersionID);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductClassificationPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -1996,10 +1440,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $listVersionID);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductClassificationPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -2012,10 +1452,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $listVersionID);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionProductInstancePos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -2023,19 +1459,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionProductInstance());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionProductInstancePos1(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionProductInstance());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionProductInstancePos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -2043,19 +1471,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionProductInstance());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionProductInstancePos2(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionProductInstance());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionProductInstancePos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -2063,19 +1483,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionProductInstance());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionProductInstancePos3(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionProductInstance());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductInstancePos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -2086,10 +1498,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("Product Instances Supplier Serial ID", $serialId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductInstancePos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -2100,10 +1508,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("Product Instances Supplier Serial ID", $serialId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductInstancePos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -2114,10 +1518,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("Product Instances Supplier Serial ID", $serialId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionApplicableSupplyChainPackagingPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -2140,10 +1540,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("MTR", $heightUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionApplicableSupplyChainPackagingPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -2166,10 +1562,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("MTR", $heightUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionApplicableSupplyChainPackagingPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -2192,10 +1584,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("MTR", $heightUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductOriginTradeCountryPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -2204,10 +1592,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("FR", $country);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductOriginTradeCountryPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -2216,10 +1600,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("FR", $country);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductOriginTradeCountryPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -2228,10 +1608,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("FR", $country);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionProductReferencedDocumentPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -2239,19 +1615,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionProductReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionProductReferencedDocumentPos1(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionProductReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionProductReferencedDocumentPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -2259,19 +1627,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionProductReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionProductReferencedDocumentPos2(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionProductReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionProductReferencedDocumentPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -2279,19 +1639,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionProductReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionProductReferencedDocumentPos3(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionProductReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductReferencedDocumentPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -2315,10 +1667,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertNull($issueddate);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductReferencedDocumentPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -2342,10 +1690,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertNull($issueddate);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionProductReferencedDocumentPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -2369,10 +1713,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertNull($issueddate);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionBuyerOrderReferencedDocumentPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -2381,10 +1721,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("1", $buyerOrderRefLineId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionBuyerOrderReferencedDocumentPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -2393,10 +1729,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("3", $buyerOrderRefLineId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionBuyerOrderReferencedDocumentPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -2405,10 +1737,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("4", $buyerOrderRefLineId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionQuotationReferencedDocumentPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -2419,10 +1747,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertNull($quotationRefDate);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionQuotationReferencedDocumentPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -2433,10 +1757,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertNull($quotationRefDate);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionQuotationReferencedDocumentPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -2447,10 +1767,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertNull($quotationRefDate);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionAdditionalReferencedDocumentPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -2458,20 +1774,12 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionAdditionalReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionAdditionalReferencedDocumentPos1(): void
     {
         $this->assertTrue(self::$document->nextDocumentPositionAdditionalReferencedDocument());
         $this->assertFalse(self::$document->nextDocumentPositionAdditionalReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionAdditionalReferencedDocumentPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -2479,20 +1787,12 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionAdditionalReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionAdditionalReferencedDocumentPos2(): void
     {
         $this->assertTrue(self::$document->nextDocumentPositionAdditionalReferencedDocument());
         $this->assertFalse(self::$document->nextDocumentPositionAdditionalReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionAdditionalReferencedDocumentPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -2500,20 +1800,12 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionAdditionalReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionAdditionalReferencedDocumentPos3(): void
     {
         $this->assertTrue(self::$document->nextDocumentPositionAdditionalReferencedDocument());
         $this->assertFalse(self::$document->nextDocumentPositionAdditionalReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionAdditionalReferencedDocumentPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -2557,10 +1849,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertNull($issueddate);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionAdditionalReferencedDocumentPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -2604,10 +1892,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertNull($issueddate);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionAdditionalReferencedDocumentPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -2651,10 +1935,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertNull($issueddate);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionGrossPricePos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -2665,68 +1945,40 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("C62", $basisQuantityUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionGrossPriceAllowanceChargePos1(): void
     {
         self::$document->firstDocumentPosition();
         $this->assertTrue(self::$document->firstDocumentPositionGrossPriceAllowanceCharge());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionGrossPriceAllowanceChargePos1(): void
     {
         $this->assertTrue(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
         $this->assertFalse(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionGrossPriceAllowanceChargePos2(): void
     {
         self::$document->nextDocumentPosition();
         $this->assertTrue(self::$document->firstDocumentPositionGrossPriceAllowanceCharge());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionGrossPriceAllowanceChargePos2(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionGrossPriceAllowanceChargePos3(): void
     {
         self::$document->nextDocumentPosition();
         $this->assertTrue(self::$document->firstDocumentPositionGrossPriceAllowanceCharge());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionGrossPriceAllowanceChargePos3(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionGrossPriceAllowanceChargePos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -2765,10 +2017,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertFalse(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionGrossPriceAllowanceChargePos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -2791,10 +2039,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertFalse(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionGrossPriceAllowanceChargePos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -2817,10 +2061,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertFalse(self::$document->nextDocumentPositionGrossPriceAllowanceCharge());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionNetPricePos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -2831,10 +2071,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("C62", $basisQuantityUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionNetPricePos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -2845,10 +2081,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("C62", $basisQuantityUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionNetPricePos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -2859,10 +2091,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("C62", $basisQuantityUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionNetPriceTaxPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -2883,10 +2111,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $exemptionReasonCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionNetPriceTaxPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -2907,10 +2131,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $exemptionReasonCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionNetPriceTaxPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -2931,10 +2151,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $exemptionReasonCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionCatalogueReferencedDocumentPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -2944,10 +2160,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("2", $catalogueRefLineId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionCatalogueReferencedDocumentPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -2957,10 +2169,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("2", $catalogueRefLineId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionCatalogueReferencedDocumentPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -2970,10 +2178,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("5", $catalogueRefLineId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionBlanketOrderReferencedDocumentPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -2982,10 +2186,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("2", $blanketOrderRefLineId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionBlanketOrderReferencedDocumentPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -2994,10 +2194,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("3", $blanketOrderRefLineId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionBlanketOrderReferencedDocumentPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -3006,67 +2202,39 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("4", $blanketOrderRefLineId);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionUltimateCustomerOrderReferencedDocumentPos1(): void
     {
         self::$document->firstDocumentPosition();
         $this->assertTrue(self::$document->firstDocumentPositionUltimateCustomerOrderReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionUltimateCustomerOrderReferencedDocumentPos1(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionUltimateCustomerOrderReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionUltimateCustomerOrderReferencedDocumentPos2(): void
     {
         self::$document->nextDocumentPosition();
         $this->assertTrue(self::$document->firstDocumentPositionUltimateCustomerOrderReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionUltimateCustomerOrderReferencedDocumentPos2(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionUltimateCustomerOrderReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionUltimateCustomerOrderReferencedDocumentPos3(): void
     {
         self::$document->nextDocumentPosition();
         $this->assertTrue(self::$document->firstDocumentPositionUltimateCustomerOrderReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionUltimateCustomerOrderReferencedDocumentPos3(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionUltimateCustomerOrderReferencedDocument());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionUltimateCustomerOrderReferencedDocumentPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -3081,10 +2249,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("25.12.2022", $ultimateCustomerOrderRefDate->format("d.m.Y"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionUltimateCustomerOrderReferencedDocumentPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -3099,10 +2263,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("25.12.2022", $ultimateCustomerOrderRefDate->format("d.m.Y"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionUltimateCustomerOrderReferencedDocumentPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -3117,10 +2277,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("25.12.2022", $ultimateCustomerOrderRefDate->format("d.m.Y"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionPartialDeliveryPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -3129,10 +2285,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue($partialDelivery);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionPartialDeliveryPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -3141,10 +2293,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue($partialDelivery);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionPartialDeliveryPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -3153,10 +2301,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue($partialDelivery);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionDeliverReqQuantityPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -3166,10 +2310,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("C62", $requestedQuantityUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionDeliverReqQuantityPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -3179,10 +2319,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("C62", $requestedQuantityUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionDeliverReqQuantityPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -3192,10 +2328,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("C62", $requestedQuantityUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionDeliverPackageQuantityPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -3205,10 +2337,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("C62", $packageQuantityUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionDeliverPackageQuantityPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -3218,10 +2346,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("C62", $packageQuantityUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionDeliverPackageQuantityPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -3231,10 +2355,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("C62", $packageQuantityUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionDeliverPerPackageQuantityPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -3244,10 +2364,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("C62", $perPackageQuantityUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionDeliverPerPackageQuantityPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -3257,10 +2373,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("C62", $perPackageQuantityUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionDeliverPerPackageQuantityPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -3270,10 +2382,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("C62", $perPackageQuantityUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionDeliverAgreedQuantityPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -3283,10 +2391,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $agreedQuantityUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionDeliverAgreedQuantityPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -3296,10 +2400,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $agreedQuantityUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionDeliverAgreedQuantityPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -3309,67 +2409,39 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $agreedQuantityUnitCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionRequestedDeliverySupplyChainEventPos1(): void
     {
         self::$document->firstDocumentPosition();
         $this->assertTrue(self::$document->firstDocumentPositionRequestedDeliverySupplyChainEvent());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionRequestedDeliverySupplyChainEventPos1(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionRequestedDeliverySupplyChainEvent());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionRequestedDeliverySupplyChainEventPos2(): void
     {
         self::$document->nextDocumentPosition();
         $this->assertTrue(self::$document->firstDocumentPositionRequestedDeliverySupplyChainEvent());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionRequestedDeliverySupplyChainEventPos2(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionRequestedDeliverySupplyChainEvent());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionRequestedDeliverySupplyChainEventPos3(): void
     {
         self::$document->nextDocumentPosition();
         $this->assertTrue(self::$document->firstDocumentPositionRequestedDeliverySupplyChainEvent());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionRequestedDeliverySupplyChainEventPos3(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionRequestedDeliverySupplyChainEvent());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionRequestedDeliverySupplyChainEventPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -3380,10 +2452,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("25.12.2022", $endDateTime->format('d.m.Y'));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionRequestedDeliverySupplyChainEventPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -3394,10 +2462,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertNull($endDateTime);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionRequestedDeliverySupplyChainEventPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -3408,67 +2472,39 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("25.12.2022", $endDateTime->format('d.m.Y'));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionRequestedDespatchSupplyChainEventPos1(): void
     {
         self::$document->firstDocumentPosition();
         $this->assertTrue(self::$document->firstDocumentPositionRequestedDespatchSupplyChainEvent());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionRequestedDespatchSupplyChainEventPos1(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionRequestedDespatchSupplyChainEvent());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionRequestedDespatchSupplyChainEventPos2(): void
     {
         self::$document->nextDocumentPosition();
         $this->assertTrue(self::$document->firstDocumentPositionRequestedDespatchSupplyChainEvent());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionRequestedDespatchSupplyChainEventPos2(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionRequestedDespatchSupplyChainEvent());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionRequestedDespatchSupplyChainEventPos3(): void
     {
         self::$document->nextDocumentPosition();
         $this->assertTrue(self::$document->firstDocumentPositionRequestedDespatchSupplyChainEvent());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionRequestedDespatchSupplyChainEventPos3(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionRequestedDespatchSupplyChainEvent());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionRequestedDespatchSupplyChainEventPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -3479,10 +2515,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("25.12.2022", $endDateTime->format('d.m.Y'));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionRequestedDespatchSupplyChainEventPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -3493,10 +2525,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertNull($endDateTime);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionRequestedDespatchSupplyChainEventPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -3507,10 +2535,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("25.12.2022", $endDateTime->format('d.m.Y'));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionAllowanceChargePos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -3518,20 +2542,12 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionAllowanceCharge());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionAllowanceChargePos1(): void
     {
         $this->assertTrue(self::$document->nextDocumentPositionAllowanceCharge());
         $this->assertFalse(self::$document->nextDocumentPositionAllowanceCharge());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionAllowanceChargePos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -3539,20 +2555,12 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionAllowanceCharge());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionAllowanceChargePos2(): void
     {
         $this->assertTrue(self::$document->nextDocumentPositionAllowanceCharge());
         $this->assertFalse(self::$document->nextDocumentPositionAllowanceCharge());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionAllowanceChargePos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -3560,20 +2568,12 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionAllowanceCharge());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionAllowanceChargePos3(): void
     {
         $this->assertTrue(self::$document->nextDocumentPositionAllowanceCharge());
         $this->assertFalse(self::$document->nextDocumentPositionAllowanceCharge());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionAllowanceChargePos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -3611,10 +2611,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("FC", $reasonCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionAllowanceChargePos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -3653,10 +2649,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("FC", $reasonCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionAllowanceChargePos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -3695,10 +2687,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("FC", $reasonCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionLineSummationPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -3708,10 +2696,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals(0.00, $totalAllowanceChargeAmount);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionLineSummationPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -3721,10 +2705,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals(0.00, $totalAllowanceChargeAmount);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionLineSummationPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -3734,10 +2714,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals(0.00, $totalAllowanceChargeAmount);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionReceivableTradeAccountingAccountPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -3747,10 +2723,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $typeCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionReceivableTradeAccountingAccountPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -3760,10 +2732,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $typeCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionReceivableTradeAccountingAccountPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -3773,28 +2741,16 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $typeCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentTax(): void
     {
         $this->assertTrue(self::$document->firstDocumentTax());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentTax(): void
     {
         $this->assertFalse(self::$document->nextDocumentTax());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentTax(): void
     {
         self::$document->firstDocumentTax();
@@ -3823,10 +2779,6 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertEquals("", $dueDateTypeCode);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionTaxPos1(): void
     {
         self::$document->firstDocumentPosition();
@@ -3834,19 +2786,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertTrue(self::$document->firstDocumentPositionTax());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionTaxPos1(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionTax());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionTaxPos2(): void
     {
         self::$document->nextDocumentPosition();
@@ -3854,19 +2798,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertFalse(self::$document->firstDocumentPositionTax());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionTaxPos2(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionTax());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testFirstDocumentPositionTaxPos3(): void
     {
         self::$document->nextDocumentPosition();
@@ -3874,19 +2810,11 @@ class OrderDocumentReaderExtendedTest extends TestCase
         $this->assertFalse(self::$document->firstDocumentPositionTax());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testNextDocumentPositionTaxPos3(): void
     {
         $this->assertFalse(self::$document->nextDocumentPositionTax());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentReader
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetDocumentPositionTax(): void
     {
         self::$document->firstDocumentPosition();

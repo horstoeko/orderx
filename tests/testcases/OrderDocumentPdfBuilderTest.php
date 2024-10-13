@@ -14,11 +14,6 @@ class OrderDocumentPdfBuilderTest extends TestCase
 {
     use HandlesCreateTestDocument;
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderDocumentPdfBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testExtractOrderInformationsAsOrder(): void
     {
         $sourcePdfFilename = PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), "empty.pdf");
@@ -45,11 +40,6 @@ class OrderDocumentPdfBuilderTest extends TestCase
         $this->assertEquals('2022-12-31T00:00:00+00:00', $methodResult['date']);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderDocumentPdfBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testExtractOrderInformationsAsOrderChange(): void
     {
         $sourcePdfFilename = PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), "empty.pdf");
@@ -76,11 +66,6 @@ class OrderDocumentPdfBuilderTest extends TestCase
         $this->assertEquals('2022-12-31T00:00:00+00:00', $methodResult['date']);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderDocumentPdfBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testExtractOrderInformationsAsOrderResponse(): void
     {
         $sourcePdfFilename = PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), "empty.pdf");
@@ -107,11 +92,6 @@ class OrderDocumentPdfBuilderTest extends TestCase
         $this->assertEquals('2022-12-31T00:00:00+00:00', $methodResult['date']);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderDocumentPdfBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testExtractOrderInformationsAsUnknownDocumentType(): void
     {
         $sourcePdfFilename = PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), "empty.pdf");
@@ -138,11 +118,6 @@ class OrderDocumentPdfBuilderTest extends TestCase
         $this->assertEquals('2022-12-31T00:00:00+00:00', $methodResult['date']);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderDocumentPdfBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testPreparePdfMetadataAsOrder(): void
     {
         $sourcePdfFilename = PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), "empty.pdf");
@@ -172,11 +147,6 @@ class OrderDocumentPdfBuilderTest extends TestCase
         $this->assertEquals('2022-12-31T00:00:00+00:00', $methodResult['createdDate']);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderDocumentPdfBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testPreparePdfMetadataAsOrderChange(): void
     {
         $sourcePdfFilename = PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), "empty.pdf");
@@ -206,11 +176,6 @@ class OrderDocumentPdfBuilderTest extends TestCase
         $this->assertEquals('2022-12-31T00:00:00+00:00', $methodResult['createdDate']);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderDocumentPdfBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testPreparePdfMetadataAsOrderResponse(): void
     {
         $sourcePdfFilename = PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), "empty.pdf");
@@ -240,11 +205,6 @@ class OrderDocumentPdfBuilderTest extends TestCase
         $this->assertEquals('2022-12-31T00:00:00+00:00', $methodResult['createdDate']);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderDocumentPdfBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testPreparePdfMetadataAsUnknownDocumentType(): void
     {
         $sourcePdfFilename = PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), "empty.pdf");
@@ -274,11 +234,6 @@ class OrderDocumentPdfBuilderTest extends TestCase
         $this->assertEquals('2022-12-31T00:00:00+00:00', $methodResult['createdDate']);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderDocumentPdfBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testPdfSavingFromFileBasedPdf(): void
     {
         $sourcePdfFilename = PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), "empty.pdf");
@@ -295,11 +250,6 @@ class OrderDocumentPdfBuilderTest extends TestCase
         $this->assertFileExists($destinationPdfFilename);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderDocumentPdfBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testPdfSavingFromStringBasedPdf(): void
     {
         $sourcePdfFilename = PathUtils::combinePathWithFile(OrderSettings::getAssetDirectory(), "empty.pdf");

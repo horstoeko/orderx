@@ -9,9 +9,6 @@ use horstoeko\orderx\tests\TestCase;
 
 class OrderDocumentBaseTest extends TestCase
 {
-    /**
-     * @covers \horstoeko\orderx\OrderDocument
-     */
     public function testDocumentCreationBasic(): void
     {
         $doc = OrderDocumentBuilder::createNew(OrderProfiles::PROFILE_BASIC);
@@ -23,9 +20,6 @@ class OrderDocumentBaseTest extends TestCase
         $this->assertEquals("basic", $doc->getProfileDefinitionParameter("name"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocument
-     */
     public function testDocumentCreationComfort(): void
     {
         $doc = OrderDocumentBuilder::createNew(OrderProfiles::PROFILE_COMFORT);
@@ -37,9 +31,6 @@ class OrderDocumentBaseTest extends TestCase
         $this->assertEquals("comfort", $doc->getProfileDefinitionParameter("name"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocument
-     */
     public function testDocumentCreationExtended(): void
     {
         $doc = OrderDocumentBuilder::createNew(OrderProfiles::PROFILE_EXTENDED);
@@ -51,9 +42,6 @@ class OrderDocumentBaseTest extends TestCase
         $this->assertEquals("extended", $doc->getProfileDefinitionParameter("name"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocument
-     */
     public function testDocumentInternals(): void
     {
         $doc = OrderDocumentBuilder::createNew(OrderProfiles::PROFILE_EXTENDED);

@@ -74,9 +74,6 @@ HDR;
 HDR;
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderProfileResolver::resolve
-     */
     public function testResolveComfort()
     {
         $resolved = OrderProfileResolver::resolve($this->deliverComfortHeader());
@@ -106,9 +103,6 @@ HDR;
         $this->assertEquals(OrderProfiles::PROFILEDEF[OrderProfiles::PROFILE_COMFORT]['schematronfilename'], $resolved[1]["schematronfilename"]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderProfileResolver::resolveProfileId
-     */
     public function testResolveProfileIdComfort()
     {
         $resolved = OrderProfileResolver::resolveProfileId($this->deliverComfortHeader());
@@ -117,9 +111,6 @@ HDR;
         $this->assertEquals(OrderProfiles::PROFILE_COMFORT, $resolved);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderProfileResolver::resolveProfileDef
-     */
     public function testResolveProfileDefComfort()
     {
         $resolved = OrderProfileResolver::resolveProfileDef($this->deliverComfortHeader());
@@ -144,9 +135,6 @@ HDR;
         $this->assertEquals(OrderProfiles::PROFILEDEF[OrderProfiles::PROFILE_COMFORT]['schematronfilename'], $resolved["schematronfilename"]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderProfileResolver::resolve
-     */
     public function testResolveUnknownProfile()
     {
         $this->expectException(OrderUnknownProfileException::class);
@@ -155,9 +143,6 @@ HDR;
         OrderProfileResolver::resolveProfileId($this->deliverUnknownProfile());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderProfileResolver::resolve
-     */
     public function testResolveInvalidXml()
     {
         $this->expectException(OrderCannotFindProfileString::class);
@@ -166,9 +151,6 @@ HDR;
         OrderProfileResolver::resolveProfileId($this->deliverInvalidXml());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderProfileResolver::resolveById
-     */
     public function testResolveProfileByIdComfort()
     {
         $resolved = OrderProfileResolver::resolveById(OrderProfiles::PROFILE_COMFORT);
@@ -198,9 +180,6 @@ HDR;
         $this->assertEquals(OrderProfiles::PROFILEDEF[OrderProfiles::PROFILE_COMFORT]['schematronfilename'], $resolved[1]["schematronfilename"]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderProfileResolver::resolveProfileDefById
-     */
     public function testResolveProfileDefByIdComfort()
     {
         $resolved = OrderProfileResolver::resolveProfileDefById(OrderProfiles::PROFILE_COMFORT);
@@ -225,12 +204,9 @@ HDR;
         $this->assertEquals(OrderProfiles::PROFILEDEF[OrderProfiles::PROFILE_COMFORT]['schematronfilename'], $resolved["schematronfilename"]);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderProfileResolver::resolveProfileDefById
-     */
     public function testResolveProfileDefByIdUnknown()
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(OrderUnknownProfileException::class);
         $this->expectExceptionMessage('Could not determine the profile...');
 
         OrderProfileResolver::resolveProfileDefById(-1);

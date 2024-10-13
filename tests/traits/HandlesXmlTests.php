@@ -228,9 +228,6 @@ trait HandlesXmlTests
         $this->assertArrayNotHasKey($index, $xmlvalue);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder::writeFile
-     */
     public function debugWriteFile(): void
     {
         (self::$document)->writeFile(getcwd() . "/myfile_dbg.xml");

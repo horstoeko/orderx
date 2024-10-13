@@ -22,10 +22,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         self::$document = OrderDocumentBuilder::CreateNew(OrderProfiles::PROFILE_BASIC);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testDocumentProperties(): void
     {
         (self::$document)->initNewDocument();
@@ -41,30 +37,18 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertNotNull($property->getValue(self::$document));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetContentAsDomDocument(): void
     {
         $this->assertNotNull((self::$document)->getContentAsDomDocument());
         $this->assertEquals("DOMDocument", get_class((self::$document)->getContentAsDomDocument()));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testGetContentAsDomXPath(): void
     {
         $this->assertNotNull((self::$document)->getContentAsDomXPath());
         $this->assertEquals("DOMXPath", get_class((self::$document)->getContentAsDomXPath()));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testDocumentProfile(): void
     {
         $this->assertEquals(OrderProfiles::PROFILE_BASIC, self::$document->getProfileId());
@@ -72,10 +56,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertNotEquals(OrderProfiles::PROFILE_EXTENDED, self::$document->getProfileId());
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testXmlGenerals(): void
     {
         $xml = $this->getXml();
@@ -87,10 +67,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValue('/rsm:SCRDMCCBDACIOMessageStructure/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID', (self::$document)->getProfileDefinitionParameter("contextparameter"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetIsDocumentCopy(): void
     {
         (self::$document)->setIsDocumentCopy();
@@ -115,10 +91,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:ExchangedDocument/ram:CopyIndicator/udt:Indicator', 0, "true");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetIsTestDocument(): void
     {
         (self::$document)->setIsTestDocument();
@@ -140,10 +112,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:ExchangedDocumentContext/ram:TestIndicator/udt:Indicator', 0, "true");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentInformation(): void
     {
         (self::$document)->setDocumentInformation("471102", OrderDocumentTypes::ORDER, $this->getDummyDateTime(), "EUR", "Purchase Order", "de", $this->getDummyDateTime(), "9", "AC");
@@ -162,10 +130,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValue('/rsm:SCRDMCCBDACIOMessageStructure/rsm:ExchangedDocument/ram:RequestedResponseTypeCode', "AC");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentNote(): void
     {
         (self::$document)->addDocumentNote('Rechnung gemäß Bestellung vom 01.03.2018.');
@@ -186,10 +150,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:ExchangedDocument/ram:IncludedNote/ram:ContentCode', 2);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentSummation(): void
     {
         $this->disableRenderXmlContent();
@@ -239,10 +199,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrandTotalAmount', 0, "119.0");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentBuyerReference(): void
     {
         (self::$document)->setDocumentBuyerReference("buyerref");
@@ -251,10 +207,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValue('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerReference', "buyerref");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentSeller(): void
     {
         (self::$document)->setDocumentSeller("", "");
@@ -289,10 +241,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExists('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Description');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentSellerGlobalId(): void
     {
         (self::$document)->addDocumentSellerGlobalId("4000001123452", "0088");
@@ -301,10 +249,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndexAndAttribute('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:GlobalID', 0, "4000001123452", "schemeID", "0088");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentSellerTaxRegistration(): void
     {
         (self::$document)->setDocumentSellerTaxRegistration("", "");
@@ -326,10 +270,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndexAndAttribute('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID', 0, "201/113/40209", "schemeID", "FC");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentSellerAddress(): void
     {
         (self::$document)->setDocumentSellerAddress("", "", "", "", "", "");
@@ -364,10 +304,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExists('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentSellerLegalOrganisation(): void
     {
         (self::$document)->setDocumentSellerLegalOrganisation("", "", "");
@@ -389,10 +325,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName', 0);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentSellerContact(): void
     {
         (self::$document)->setDocumentSellerContact("Hans Müller", "Financials", "+49-111-2222222", "+49-111-3333333", "info@lieferant.de");
@@ -430,10 +362,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         (self::$document)->setDocumentSellerContact("Hans Müller", "Financials", "+49-111-2222222", "+49-111-3333333", "info@lieferant.de");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentSellerContact(): void
     {
         (self::$document)->addDocumentSellerContact("Hans Meier", "Bank", "+49-111-4444444", "+49-111-5555555", "info@meinseller.de");
@@ -446,10 +374,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentSellerElectronicAddress(): void
     {
         (self::$document)->setDocumentSellerElectronicAddress("", "");
@@ -466,10 +390,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndexAndAttribute('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication/ram:URIID', 0, "someone@nowhere.all", "schemeID", "EM");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentBuyer(): void
     {
         (self::$document)->setDocumentSeller("", "");
@@ -504,10 +424,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExists('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Description');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentBuyerGlobalId(): void
     {
         (self::$document)->addDocumentBuyerGlobalId("4000001123452", "0088");
@@ -521,10 +437,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndexAndAttribute('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:GlobalID', 1, "4000001123453", "schemeID", "0088");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetAndAddDocumentBuyerTaxRegistration(): void
     {
         (self::$document)->setDocumentBuyerTaxRegistration("", "");
@@ -546,10 +458,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndexAndAttribute('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedTaxRegistration/ram:ID', 0, "201/113/40209", "schemeID", "FC");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentBuyerAddress(): void
     {
         (self::$document)->setDocumentBuyerAddress("", "", "", "", "", "");
@@ -584,10 +492,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExists('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentBuyerLegalOrganisation(): void
     {
         (self::$document)->setDocumentBuyerLegalOrganisation("", "", "");
@@ -609,10 +513,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName', 0);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentBuyerContact(): void
     {
         (self::$document)->setDocumentBuyerContact("Otto Müller", "Financials", "+49-111-2222222", "+49-111-3333333", "info@kunde.de");
@@ -650,10 +550,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         (self::$document)->setDocumentBuyerContact("Otto Müller", "Financials", "+49-111-2222222", "+49-111-3333333", "info@kunde.de");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentBuyerContact(): void
     {
         $this->disableRenderXmlContent();
@@ -680,10 +576,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentBuyerElectronicAddress(): void
     {
         (self::$document)->setDocumentBuyerElectronicAddress("", "");
@@ -700,10 +592,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndexAndAttribute('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication/ram:URIID', 0, "someone@nowhere.all", "schemeID", "EM");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentBuyerRequisitioner(): void
     {
         (self::$document)->setDocumentSeller("", "");
@@ -738,10 +626,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExists('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerRequisitionerTradeParty/ram:Description');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentBuyerRequisitionerGlobalId(): void
     {
         (self::$document)->addDocumentBuyerRequisitionerGlobalId("4000001123452", "0088");
@@ -755,10 +639,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExists('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerRequisitionerTradeParty/ram:GlobalID');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetAndAddDocumentBuyerRequisitionerTaxRegistration(): void
     {
         (self::$document)->setDocumentBuyerRequisitionerTaxRegistration("", "");
@@ -779,10 +659,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerRequisitionerTradeParty/ram:SpecifiedTaxRegistration/ram:ID', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentBuyerRequisitionerAddress(): void
     {
         (self::$document)->setDocumentBuyerRequisitionerAddress("", "", "", "", "", "");
@@ -817,10 +693,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExists('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerRequisitionerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentBuyerRequisitionerLegalOrganisation(): void
     {
         (self::$document)->setDocumentBuyerRequisitionerLegalOrganisation("", "", "");
@@ -840,10 +712,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerRequisitionerTradeParty/ram:SpecifiedLegalOrganization/ram:ID', 0);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentBuyerRequisitionerContact(): void
     {
         (self::$document)->setDocumentBuyerRequisitionerContact("Otto Müller", "Financials", "+49-111-2222222", "+49-111-3333333", "info@kunde.de");
@@ -881,10 +749,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         (self::$document)->setDocumentBuyerRequisitionerContact("Otto Müller", "Financials", "+49-111-2222222", "+49-111-3333333", "info@kunde.de");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentBuyerRequisitionerContact(): void
     {
         $this->disableRenderXmlContent();
@@ -911,10 +775,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerRequisitionerTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentBuyerRequisitionerElectronicAddress(): void
     {
         (self::$document)->setDocumentBuyerRequisitionerElectronicAddress("", "");
@@ -930,10 +790,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerRequisitionerTradeParty/ram:URIUniversalCommunication/ram:URIID', 0);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentDeliveryTerms(): void
     {
         (self::$document)->setDocumentDeliveryTerms("term");
@@ -943,10 +799,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValue('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ApplicableTradeDeliveryTerms/ram:DeliveryTypeCode', 'term');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentSellerOrderReferencedDocument(): void
     {
         (self::$document)->setDocumentSellerOrderReferencedDocument('');
@@ -964,10 +816,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExists('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentBuyerOrderReferencedDocument(): void
     {
         (self::$document)->setDocumentBuyerOrderReferencedDocument('');
@@ -989,10 +837,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentQuotationReferencedDocument(): void
     {
         (self::$document)->setDocumentQuotationReferencedDocument('');
@@ -1014,10 +858,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:QuotationReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentContractReferencedDocument(): void
     {
         (self::$document)->setDocumentContractReferencedDocument('');
@@ -1039,10 +879,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ContractReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentContractReferencedDocument(): void
     {
         (self::$document)->addDocumentContractReferencedDocument('C-2021', $this->getDummyDateTime());
@@ -1057,10 +893,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ContractReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentRequisitionReferencedDocument(): void
     {
         (self::$document)->setDocumentRequisitionReferencedDocument('');
@@ -1078,10 +910,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExists('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:RequisitionReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentRequisitionReferencedDocument(): void
     {
         (self::$document)->addDocumentRequisitionReferencedDocument('REQ-2020', $this->getDummyDateTime());
@@ -1095,10 +923,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:RequisitionReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddAdditionalReferencedDocument(): void
     {
         (self::$document)->addDocumentAdditionalReferencedDocument('TYPECODE', 'REFID', 'URIID', 'REFNAME', 'REFREFTYPECODE', $this->getDummyDateTime());
@@ -1112,10 +936,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString', 0);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentBlanketOrderReferencedDocument(): void
     {
         (self::$document)->setDocumentBlanketOrderReferencedDocument('');
@@ -1134,10 +954,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BlanketOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString', 0);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentBlanketOrderReferencedDocument(): void
     {
         (self::$document)->addDocumentBlanketOrderReferencedDocument('BO-2021', $this->getDummyDateTime());
@@ -1152,10 +968,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BlanketOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPreviousOrderChangeReferencedDocument(): void
     {
         (self::$document)->setDocumentPreviousOrderChangeReferencedDocument('');
@@ -1174,10 +986,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:PreviousOrderChangeReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString', 0);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentPreviousOrderChangeReferencedDocument(): void
     {
         (self::$document)->addDocumentPreviousOrderChangeReferencedDocument('PREV-2021', $this->getDummyDateTime());
@@ -1192,10 +1000,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:PreviousOrderChangeReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPreviousOrderResponseReferencedDocument(): void
     {
         (self::$document)->setDocumentPreviousOrderResponseReferencedDocument('');
@@ -1214,10 +1018,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:PreviousOrderResponseReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString', 0);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentPreviousOrderResponseReferencedDocument(): void
     {
         (self::$document)->addDocumentPreviousOrderResponseReferencedDocument('PREV-RESP-2021', $this->getDummyDateTime());
@@ -1232,10 +1032,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:PreviousOrderResponseReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentProcuringProject()
     {
         (self::$document)->setDocumentProcuringProject("", "");
@@ -1253,10 +1049,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExists('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SpecifiedProcuringProject/ram:Name');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentUltimateCustomerOrderReferencedDocument()
     {
         $this->disableRenderXmlContent();
@@ -1277,10 +1069,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:UltimateCustomerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentUltimateCustomerOrderReferencedDocument()
     {
         $this->disableRenderXmlContent();
@@ -1301,10 +1089,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:UltimateCustomerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentShipTo(): void
     {
         (self::$document)->setDocumentShipTo("", "");
@@ -1339,10 +1123,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExists('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:Description');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentShipToGlobalId(): void
     {
         (self::$document)->addDocumentShipToGlobalId("4000001123452", "0088");
@@ -1351,10 +1131,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndexAndAttribute('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:GlobalID', 0, "4000001123452", "schemeID", "0088");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentShipToTaxRegistration(): void
     {
         (self::$document)->setDocumentShipToTaxRegistration("", "");
@@ -1376,10 +1152,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndexAndAttribute('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedTaxRegistration/ram:ID', 0, "201/113/40209", "schemeID", "FC");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentShipToAddress(): void
     {
         (self::$document)->setDocumentShipToAddress("", "", "", "", "", "");
@@ -1416,10 +1188,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExists('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentShipToLegalOrganisation(): void
     {
         (self::$document)->setDocumentShipToLegalOrganisation("", "", "");
@@ -1441,10 +1209,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName', 0);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentShipToContact(): void
     {
         (self::$document)->setDocumentShipToContact("Name 1", "Department 1", "+49-111-2222222", "+49-111-3333333", "mail1@nowhere.all");
@@ -1482,10 +1246,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         (self::$document)->setDocumentShipToContact("Name 1", "Department 1", "+49-111-2222222", "+49-111-3333333", "mail1@nowhere.all");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentShipToContact(): void
     {
         (self::$document)->addDocumentShipToContact("Name 3", "Department 3", "+49-111-4444444", "+49-111-5555555", "mail3@nowhere.all");
@@ -1498,10 +1258,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentShipToElectronicAddress(): void
     {
         (self::$document)->setDocumentShipToElectronicAddress("", "");
@@ -1518,10 +1274,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndexAndAttribute('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty/ram:URIUniversalCommunication/ram:URIID', 0, "someone@nowhere.all", "schemeID", "EM");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentShipFrom(): void
     {
         (self::$document)->setDocumentShipFrom("", "");
@@ -1556,10 +1308,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExists('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:Description');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentShipFromGlobalId(): void
     {
         (self::$document)->addDocumentShipFromGlobalId("4000001123452", "0088");
@@ -1568,10 +1316,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndexAndAttribute('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:GlobalID', 0, "4000001123452", "schemeID", "0088");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentShipFromTaxRegistration(): void
     {
         (self::$document)->setDocumentShipFromTaxRegistration("", "");
@@ -1593,10 +1337,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndexAndAttribute('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedTaxRegistration/ram:ID', 0, "201/113/40209", "schemeID", "FC");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentShipFromAddress(): void
     {
         (self::$document)->setDocumentShipFromAddress("", "", "", "", "", "");
@@ -1633,10 +1373,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExists('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentShipFromLegalOrganisation(): void
     {
         (self::$document)->setDocumentShipFromLegalOrganisation("", "", "");
@@ -1657,10 +1393,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName', 0);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentShipFromContact(): void
     {
         (self::$document)->setDocumentShipFromContact("Name 1", "Department 1", "+49-111-2222222", "+49-111-3333333", "mail1@nowhere.all");
@@ -1698,10 +1430,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         (self::$document)->setDocumentShipFromContact("Name 1", "Department 1", "+49-111-2222222", "+49-111-3333333", "mail1@nowhere.all");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentShipFromContact(): void
     {
         (self::$document)->addDocumentShipFromContact("Name 3", "Department 3", "+49-111-4444444", "+49-111-5555555", "mail3@nowhere.all");
@@ -1714,10 +1442,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentShipFromElectronicAddress(): void
     {
         (self::$document)->setDocumentShipFromElectronicAddress("", "");
@@ -1734,10 +1458,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndexAndAttribute('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty/ram:URIUniversalCommunication/ram:URIID', 0, "someone@nowhere.all", "schemeID", "EM");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentRequestedDeliverySupplyChainEvent(): void
     {
         $this->disableRenderXmlContent();
@@ -1765,10 +1485,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:RequestedDeliverySupplyChainEvent/ram:OccurrenceSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString', 0, $this->getDummyDateTime()->format("Ymd"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentRequestedDeliverySupplyChainEvent(): void
     {
         $this->disableRenderXmlContent();
@@ -1815,10 +1531,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:RequestedDeliverySupplyChainEvent/ram:OccurrenceSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString', 1, $this->getDummyDateTime()->format("Ymd"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetRequestedDespatchSupplyChainEvent(): void
     {
         (self::$document)->setDocumentRequestedDespatchSupplyChainEvent($this->getDummyDateTime(), $this->getDummyDateTime(), $this->getDummyDateTime());
@@ -1837,10 +1549,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:RequestedDespatchSupplyChainEvent/ram:OccurrenceSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString', 0, $this->getDummyDateTime()->format("Ymd"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddRequestedDespatchSupplyChainEvent(): void
     {
         $this->disableRenderXmlContent();
@@ -1886,10 +1594,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:RequestedDespatchSupplyChainEvent/ram:OccurrenceSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString', 1, $this->getDummyDateTime()->format("Ymd"));
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentInvoicee(): void
     {
         (self::$document)->setDocumentInvoicee("", "");
@@ -1924,10 +1628,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExists('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:Description');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentInvoiceeGlobalId(): void
     {
         (self::$document)->addDocumentInvoiceeGlobalId("4000001123452", "0088");
@@ -1936,10 +1636,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExists('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:GlobalID');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentInvoiceeTaxRegistration(): void
     {
         (self::$document)->setDocumentInvoiceeTaxRegistration("", "");
@@ -1961,10 +1657,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedTaxRegistration/ram:ID', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentInvoiceeAddress(): void
     {
         (self::$document)->setDocumentInvoiceeAddress("", "", "", "", "", "");
@@ -2001,10 +1693,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExists('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentInvoiceeLegalOrganisation(): void
     {
         (self::$document)->setDocumentInvoiceeLegalOrganisation("", "", "");
@@ -2026,10 +1714,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName', 0);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentInvoiceeContact(): void
     {
         (self::$document)->setDocumentInvoiceeContact("Name 1", "Department 1", "+49-111-2222222", "+49-111-3333333", "mail1@nowhere.all");
@@ -2067,10 +1751,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         (self::$document)->setDocumentInvoiceeContact("Name 1", "Department 1", "+49-111-2222222", "+49-111-3333333", "mail1@nowhere.all");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentInvoiceeContact(): void
     {
         (self::$document)->addDocumentInvoiceeContact("Name 3", "Department 3", "+49-111-4444444", "+49-111-5555555", "mail3@nowhere.all");
@@ -2083,10 +1763,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:DefinedTradeContact/ram:EmailURIUniversalCommunication/ram:URIID', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentInvoiceeElectronicAddress(): void
     {
         (self::$document)->setDocumentInvoiceeElectronicAddress("", "");
@@ -2102,10 +1778,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty/ram:URIUniversalCommunication/ram:URIID', 0);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPaymentMean(): void
     {
         (self::$document)->setDocumentPaymentMean("42", "Paying information");
@@ -2117,10 +1789,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:Information', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentPaymentMean(): void
     {
         (self::$document)->addDocumentPaymentMean("43", "Paying information 2");
@@ -2132,10 +1800,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans/ram:Information', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPaymentTerm(): void
     {
         (self::$document)->setDocumentPaymentTerm("Payment Term 1");
@@ -2145,10 +1809,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:Description', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentPaymentTerm(): void
     {
         (self::$document)->addDocumentPaymentTerm("Payment Term 2");
@@ -2158,10 +1818,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms/ram:Description', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentTax(): void
     {
         (self::$document)->addDocumentTax("S", "VAT", 10.0, 20.0, 30.0, "ExcReason-1", "ExcReasonCode-1", 100.0, 200.0, null);
@@ -2217,10 +1873,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax/ram:RateApplicablePercent', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentAllowanceCharge(): void
     {
         (self::$document)->setDocumentAllowanceCharge(10, false, "S", "VAT", 1, 1, 10, 100, 1, "C62", "RC", "Reason");
@@ -2230,10 +1882,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentAllowanceCharge(): void
     {
         (self::$document)->addDocumentAllowanceCharge(10, false, "S", "VAT", 1, 1, 10, 100, 1, "C62", "RC", "Reason");
@@ -2243,10 +1891,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentReceivableSpecifiedTradeAccountingAccount(): void
     {
         (self::$document)->setDocumentReceivableSpecifiedTradeAccountingAccount('ACC', 'ACCTYPE');
@@ -2258,10 +1902,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ReceivableSpecifiedTradeAccountingAccount/ram:TypeCode', 0);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddNewPosition(): void
     {
         $this->disableRenderXmlContent();
@@ -2304,10 +1944,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionNote(): void
     {
         (self::$document)->setDocumentPositionNote("Content", "CC", "SC");
@@ -2323,10 +1959,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:AssociatedDocumentLineDocument/ram:IncludedNote/ram:SubjectCode', 0, "SC");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionProductDetails(): void
     {
         $this->disableRenderXmlContent();
@@ -2349,10 +1981,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:Name', 0, "name");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionProductCharacteristic(): void
     {
         $this->disableRenderXmlContent();
@@ -2366,10 +1994,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableProductCharacteristic', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentPositionProductCharacteristic(): void
     {
         $this->disableRenderXmlContent();
@@ -2383,10 +2007,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableProductCharacteristic', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionProductClassification(): void
     {
         $this->disableRenderXmlContent();
@@ -2400,10 +2020,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:DesignatedProductClassification', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentPositionProductClassification(): void
     {
         $this->disableRenderXmlContent();
@@ -2417,10 +2033,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:DesignatedProductClassification', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionProductInstance(): void
     {
         $this->disableRenderXmlContent();
@@ -2434,10 +2046,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:IndividualTradeProductInstance', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentPositionProductInstance(): void
     {
         $this->disableRenderXmlContent();
@@ -2451,10 +2059,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:IndividualTradeProductInstance', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionApplicableSupplyChainPackaging(): void
     {
         $this->disableRenderXmlContent();
@@ -2468,10 +2072,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:ApplicableSupplyChainPackaging', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionProductOriginTradeCountry(): void
     {
         $this->disableRenderXmlContent();
@@ -2489,10 +2089,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:OriginTradeCountry/ram:ID', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionProductReferencedDocument(): void
     {
         $this->disableRenderXmlContent();
@@ -2506,10 +2102,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:AdditionalReferenceReferencedDocument', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentPositionProductReferencedDocument(): void
     {
         $this->disableRenderXmlContent();
@@ -2523,10 +2115,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedTradeProduct/ram:AdditionalReferenceReferencedDocument', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentPositionAdditionalReferencedDocument(): void
     {
         $this->disableRenderXmlContent();
@@ -2540,10 +2128,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:AdditionalReferencedDocument', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionBuyerOrderReferencedDocument(): void
     {
         $this->disableRenderXmlContent();
@@ -2559,10 +2143,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:BuyerOrderReferencedDocument/ram:LineID', 0, "1");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionQuotationReferencedDocument(): void
     {
         $this->disableRenderXmlContent();
@@ -2576,10 +2156,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:QuotationReferencedDocument', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionGrossPrice(): void
     {
         $this->disableRenderXmlContent();
@@ -2593,10 +2169,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentPositionGrossPriceAllowanceCharge(): void
     {
         $this->disableRenderXmlContent();
@@ -2614,10 +2186,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:GrossPriceProductTradePrice/ram:AppliedTradeAllowanceCharge', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionNetPrice(): void
     {
         $this->disableRenderXmlContent();
@@ -2636,10 +2204,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndexAndAttribute('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:BasisQuantity', 0, "1.00", "unitCode", "C62");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionNetPriceTax(): void
     {
         $this->disableRenderXmlContent();
@@ -2653,10 +2217,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:IncludedTradeTax', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentPositionNetPriceTax(): void
     {
         $this->disableRenderXmlContent();
@@ -2670,10 +2230,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:IncludedTradeTax', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionCatalogueReferencedDocument(): void
     {
         $this->disableRenderXmlContent();
@@ -2687,10 +2243,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:CatalogueReferencedDocument', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentPositionCatalogueReferencedDocument(): void
     {
         $this->disableRenderXmlContent();
@@ -2704,10 +2256,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:CatalogueReferencedDocument', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionBlanketOrderReferencedDocument(): void
     {
         $this->disableRenderXmlContent();
@@ -2723,10 +2271,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:BlanketOrderReferencedDocument', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionUltimateCustomerOrderReferencedDocument(): void
     {
         $this->disableRenderXmlContent();
@@ -2750,10 +2294,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:UltimateCustomerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentPositionUltimateCustomerOrderReferencedDocument(): void
     {
         $this->disableRenderXmlContent();
@@ -2777,10 +2317,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeAgreement/ram:UltimateCustomerOrderReferencedDocument/ram:FormattedIssueDateTime/qdt:DateTimeString', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionPartialDelivery(): void
     {
         $this->disableRenderXmlContent();
@@ -2812,10 +2348,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:PartialDeliveryAllowedIndicator/udt:Indicator', 0, "false");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionDeliverReqQuantity(): void
     {
         $this->disableRenderXmlContent();
@@ -2830,10 +2362,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndexAndAttribute('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:RequestedQuantity', 0, "10.0", "unitCode", "C62");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionDeliverPackageQuantity(): void
     {
         $this->disableRenderXmlContent();
@@ -2847,10 +2375,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:PackageQuantity', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionDeliverPerPackageQuantity(): void
     {
         $this->disableRenderXmlContent();
@@ -2864,10 +2388,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:PerPackageUnitQuantity', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionDeliverAgreedQuantity(): void
     {
         $this->disableRenderXmlContent();
@@ -2882,10 +2402,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndexAndAttribute('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:AgreedQuantity', 0, "1.0", "unitCode", "C62");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionRequestedDeliverySupplyChainEvent(): void
     {
         $this->disableRenderXmlContent();
@@ -2899,10 +2415,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:RequestedDeliverySupplyChainEvent', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentPositionRequestedDeliverySupplyChainEvent(): void
     {
         $this->disableRenderXmlContent();
@@ -2916,10 +2428,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:RequestedDeliverySupplyChainEvent', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionRequestedDespatchSupplyChainEvent(): void
     {
         $this->disableRenderXmlContent();
@@ -2934,10 +2442,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:RequestedDespatchSupplyChainEvent', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentPositionRequestedDespatchSupplyChainEvent(): void
     {
         $this->disableRenderXmlContent();
@@ -2952,10 +2456,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeDelivery/ram:RequestedDespatchSupplyChainEvent', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionTax(): void
     {
         $this->disableRenderXmlContent();
@@ -2969,10 +2469,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentPositionTax(): void
     {
         $this->disableRenderXmlContent();
@@ -2986,10 +2482,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionAllowanceCharge(): void
     {
         $this->disableRenderXmlContent();
@@ -3003,10 +2495,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testAddDocumentPositionAllowanceCharge(): void
     {
         $this->disableRenderXmlContent();
@@ -3020,10 +2508,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathNotExistsWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeAllowanceCharge', 1);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionLineSummation(): void
     {
         $this->disableRenderXmlContent();
@@ -3039,10 +2523,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
         $this->assertXPathValueWithIndex('/rsm:SCRDMCCBDACIOMessageStructure/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:LineTotalAmount', 0, "10.0");
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
-     */
     public function testSetDocumentPositionReceivableTradeAccountingAccount(): void
     {
         $this->disableRenderXmlContent();
@@ -3058,9 +2538,6 @@ class OrderDocumentBuilderBasicTest extends TestCase
 
     /**
      * This must be the last test
-     *
-     * @covers \horstoeko\orderx\OrderDocumentBuilder
-     * @covers \horstoeko\orderx\OrderObjectHelper
      */
     public function testRemoveLatestPosition()
     {

@@ -11,9 +11,6 @@ class OrderDocumentValidatorTest extends TestCase
 {
     use HandlesCreateTestDocument;
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentValidator
-     */
     public function testInitValidator(): void
     {
         $document = $this->createTestDocument(OrderDocumentTypes::ORDER);
@@ -25,9 +22,6 @@ class OrderDocumentValidatorTest extends TestCase
         $this->assertInstanceOf('Symfony\Component\Validator\Validator\ValidatorInterface', $propertyValue);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentValidator
-     */
     public function testValidateDocument(): void
     {
         $document = $this->createTestDocument(OrderDocumentTypes::ORDER);

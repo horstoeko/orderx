@@ -18,9 +18,6 @@ class OrderDocumentJsonExporterTest extends TestCase
         self::$document = OrderDocumentReader::readAndGuessFromFile(dirname(__FILE__) . '/../assets/reader-order-x-comfort.xml');
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentJsonExporter::toJsonString
-     */
     public function testToJsonString(): void
     {
         $exporter = new OrderDocumentJsonExporter(static::$document);
@@ -30,9 +27,6 @@ class OrderDocumentJsonExporterTest extends TestCase
         $this->assertStringContainsString('},"GuidelineSpecifiedDocumentContextParameter"', $jsonString);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentJsonExporter::toPrettyJsonString
-     */
     public function testToPrettyJsonString(): void
     {
         $exporter = new OrderDocumentJsonExporter(static::$document);
@@ -41,9 +35,6 @@ class OrderDocumentJsonExporterTest extends TestCase
         $this->assertStringStartsWith("{\n    \"ExchangedDocumentContext\":", $jsonString);
     }
 
-    /**
-     * @covers \horstoeko\orderx\OrderDocumentJsonExporter::toJsonObject
-     */
     public function testToJsonObject(): void
     {
         $exporter = new OrderDocumentJsonExporter(static::$document);
