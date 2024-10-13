@@ -124,18 +124,17 @@ class OrderTypesHandler implements SubscribingHandlerInterface
 
     /**
      * Serialize Anount type
-     * The amounts will be serialized with a precission of 2 digits
+     * The amounts will be serialized (by default) with a precission of 2 digits
      *
-     * @param  XmlSerializationVisitor $visitor
-     * @param  mixed                   $data
-     * @return DOMText|false
+     * @param XmlSerializationVisitor $visitor
+     * @param mixed                   $data
      */
     public function serializeAmountType(XmlSerializationVisitor $visitor, $data)
     {
         $node = $visitor->getDocument()->createTextNode(
             number_format(
                 $data->value(),
-                OrderSettings::getAmountDecimals(),
+                OrderSettings::getSpecialDecimalPlacesMap($visitor->getCurrentNode()->getNodePath(), OrderSettings::getAmountDecimals()),
                 OrderSettings::getDecimalSeparator(),
                 OrderSettings::getThousandsSeparator()
             )
@@ -152,18 +151,17 @@ class OrderTypesHandler implements SubscribingHandlerInterface
 
     /**
      * Serialize quantity type
-     * The quantity will be serialized with a precission of 4 digits
+     * The quantity will be serialized (by default) with a precission of 2 digits
      *
-     * @param  XmlSerializationVisitor $visitor
-     * @param  mixed                   $data
-     * @return DOMText|false
+     * @param XmlSerializationVisitor $visitor
+     * @param mixed                   $data
      */
     public function serializeQuantityType(XmlSerializationVisitor $visitor, $data)
     {
         $node = $visitor->getDocument()->createTextNode(
             number_format(
                 $data->value(),
-                OrderSettings::getQuantityDecimals(),
+                OrderSettings::getSpecialDecimalPlacesMap($visitor->getCurrentNode()->getNodePath(), OrderSettings::getQuantityDecimals()),
                 OrderSettings::getDecimalSeparator(),
                 OrderSettings::getThousandsSeparator()
             )
@@ -180,22 +178,22 @@ class OrderTypesHandler implements SubscribingHandlerInterface
 
     /**
      * Serialize a percantage value
-     * The valze will be serialized with a precission of 2 digits
+     * The valze will be serialized (by default) with a precission of 2 digits
      *
-     * @param  XmlSerializationVisitor $visitor
-     * @param  mixed                   $data
-     * @return DOMText|false
+     * @param XmlSerializationVisitor $visitor
+     * @param mixed                   $data
      */
     public function serializePercentType(XmlSerializationVisitor $visitor, $data)
     {
         $node = $visitor->getDocument()->createTextNode(
             number_format(
                 $data->value(),
-                OrderSettings::getPercentDecimals(),
+                OrderSettings::getSpecialDecimalPlacesMap($visitor->getCurrentNode()->getNodePath(), OrderSettings::getPercentDecimals()),
                 OrderSettings::getDecimalSeparator(),
                 OrderSettings::getThousandsSeparator()
             )
         );
+
         return $node;
     }
 
@@ -204,9 +202,8 @@ class OrderTypesHandler implements SubscribingHandlerInterface
      * False and true values will be serialized correctly (false won't be serialized
      * in the default implementation)
      *
-     * @param  XmlSerializationVisitor $visitor
-     * @param  mixed                   $data
-     * @return DOMElement|false
+     * @param XmlSerializationVisitor $visitor
+     * @param mixed                   $data
      */
     public function serializeIndicatorType(XmlSerializationVisitor $visitor, $data)
     {
