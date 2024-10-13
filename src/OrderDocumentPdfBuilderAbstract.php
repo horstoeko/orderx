@@ -84,6 +84,17 @@ abstract class OrderDocumentPdfBuilderAbstract
     }
 
     /**
+     * Returns the PDF as an inline file
+     *
+     * @param  string $toFilename
+     * @return string
+     */
+    public function saveDocumentInline(string $toFilename): string
+    {
+        return $this->pdfWriter->Output($toFilename, 'I');
+    }
+
+    /**
      * Returns the PDF as a string
      *
      * @param  string $toFilename
@@ -155,7 +166,7 @@ abstract class OrderDocumentPdfBuilderAbstract
         for ($pageNumber = 1; $pageNumber <= $pageCount; ++$pageNumber) {
             $pageContent = $this->pdfWriter->importPage($pageNumber, '/MediaBox');
             $this->pdfWriter->AddPage();
-            $this->pdfWriter->useTemplate($pageContent);
+            $this->pdfWriter->useTemplate($pageContent, 0, 0, null, null, true);
         }
 
         // Set PDF version 1.7 according to PDF/A-3 ISO 32000-1

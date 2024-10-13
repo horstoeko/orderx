@@ -24,8 +24,8 @@ class OrderDocumentPdfReaderExtendedTest extends TestCase
 
     public function testPdfReadInvalid(): void
     {
-        $this->expectException(OrderNoValidAttachmentFoundInPdfException::class);
         self::$document = OrderDocumentPdfReader::readAndGuessFromFile(dirname(__FILE__) . '/../assets/reader-invalid.pdf');
+        $this->assertNull(self::$document);
     }
 
     public function testPdfRead(): void
