@@ -9,6 +9,10 @@
 
 namespace horstoeko\zugferd\exception;
 
+use Throwable;
+use horstoeko\orderx\exception\OrderBaseException;
+use horstoeko\orderx\exception\OrderExceptionCodes;
+
 /**
  * Class representing an exception for missing a file
  *
