@@ -9,11 +9,13 @@
 
 namespace horstoeko\orderx;
 
-use \DOMDocument;
-use \DOMXpath;
-use horstoeko\orderx\codelists\OrderDocumentTypes;
-use horstoeko\orderx\OrderPackageVersion;
+use DOMXpath;
+use Throwable;
+use TypeError;
+use DOMDocument;
 use horstoeko\orderx\OrderPdfWriter;
+use horstoeko\orderx\OrderPackageVersion;
+use horstoeko\orderx\codelists\OrderDocumentTypes;
 use setasign\Fpdi\PdfParser\StreamReader as PdfStreamReader;
 
 /**
@@ -29,6 +31,13 @@ use setasign\Fpdi\PdfParser\StreamReader as PdfStreamReader;
 abstract class OrderDocumentPdfBuilderAbstract
 {
     /**
+     * Additional creator tool (e.g. the ERP software that called the PHP library)
+     *
+     * @var string
+     */
+    private $additionalCreatorTool = "";
+
+    /**
      * Instance of the pdfwriter
      *
      * @var OrderPdfWriter
@@ -36,7 +45,7 @@ abstract class OrderDocumentPdfBuilderAbstract
     private $pdfWriter = null;
 
     /**
-     * Contains the data of the original PDF documjent
+     * Contains the data of the original PDF document
      *
      * @var string
      */
@@ -103,6 +112,34 @@ abstract class OrderDocumentPdfBuilderAbstract
     public function downloadString(string $toFilename): string
     {
         return $this->pdfWriter->Output($toFilename, 'S');
+    }
+
+    /**
+     * Sets an additional creator tool (e.g. the ERP software that called the PHP library)
+     *
+     * @param  string $additionalCreatorTool
+     * The name of the creator
+     * @return self
+     */
+    public function setAdditionalCreatorTool(string $additionalCreatorTool)
+    {
+        $this->additionalCreatorTool = $additionalCreatorTool;
+
+        return $this;
+    }
+
+    /**
+     * Returns the creator tool name (the PHP library, and if given also the additional creator tool)
+     *
+     * @return string
+     */
+    public function getCreatorToolName(): string
+    {
+        $toolName = sprintf('Order-X PHP library %s by HorstOeko', OrderPackageVersion::getInstalledVersion());
+        if ($this->additionalCreatorTool) {
+            return $this->additionalCreatorTool . ' / ' . $toolName;
+        }
+        return $toolName;
     }
 
     /**
@@ -204,7 +241,7 @@ abstract class OrderDocumentPdfBuilderAbstract
         $descPdfNodes->{'Producer'} = 'FPDF';
 
         $descXmpNodes = $descNode->children('xmp', true);
-        $descXmpNodes->{'CreatorTool'} = sprintf('Order-X PHP library %s by HorstOeko', OrderPackageVersion::getInstalledVersion());
+        $descXmpNodes->{'CreatorTool'} = $this->getCreatorToolName();
         $descXmpNodes->{'CreateDate'} = $pdfMetadataInfos['createdDate'];
         $descXmpNodes->{'ModifyDate'} = $pdfMetadataInfos['modifiedDate'];
 
@@ -221,11 +258,11 @@ abstract class OrderDocumentPdfBuilderAbstract
         $orderInformations = $this->extractOrderInformations();
 
         $dateString = date('Y-m-d', strtotime($orderInformations['date']));
-        $title = sprintf('%s, %s %s', $orderInformations['sellerName'], $orderInformations['docTypeName'], $orderInformations['orderId']);
-        $subject = sprintf('Order-X %s %s dated %s issued by %s', $orderInformations['docTypeName'], $orderInformations['orderId'], $dateString, $orderInformations['sellerName']);
+        $title = sprintf('%s, %s %s', $orderInformations['seller'], $orderInformations['docTypeName'], $orderInformations['orderId']);
+        $subject = sprintf('Order-X %s %s dated %s issued by %s', $orderInformations['docTypeName'], $orderInformations['orderId'], $dateString, $orderInformations['seller']);
 
         $pdfMetadata = array(
-            'author' => $orderInformations['sellerName'],
+            'author' => $orderInformations['seller'],
             'keywords' => sprintf('%s, Order-X', $orderInformations['docTypeName']),
             'title' => $title,
             'subject' => $subject,
@@ -279,7 +316,7 @@ abstract class OrderDocumentPdfBuilderAbstract
         $orderInformation = array(
             'orderId' => $orderId,
             'docTypeName' => $docTypeName,
-            'sellerName' => $sellerName,
+            'seller' => $sellerName,
             'date' => $dateReformatted,
         );
 
@@ -297,7 +334,9 @@ abstract class OrderDocumentPdfBuilderAbstract
     {
         try {
             return @is_file($pdfData);
-        } catch (\TypeError $ex) {
+        } catch (TypeError $ex) {
+            return false;
+        } catch (Throwable $ex) {
             return false;
         }
     }

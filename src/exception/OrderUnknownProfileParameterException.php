@@ -12,7 +12,7 @@ namespace horstoeko\orderx\exception;
 use Throwable;
 
 /**
- * Class representing the exception if a profile can't be determained
+ * Class representing an exception for unknown profile parameter
  *
  * @category Order-X
  * @package  Order-X
@@ -20,15 +20,16 @@ use Throwable;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/orderx
  */
-class OrderCannotFindProfileString extends OrderBaseException
+class ZugferdUnknownProfileParameterException extends OrderBaseException
 {
     /**
      * Constructor
      *
+     * @param string         $profileParameter
      * @param Throwable|null $previous
      */
-    public function __construct(?Throwable $previous = null)
+    public function __construct(string $profileParameter, ?Throwable $previous = null)
     {
-        parent::__construct("The string containing the profile was not found", OrderExceptionCodes::CANNOTFINDPROFILESTRING, $previous);
+        parent::__construct(sprintf("The profile parameter %s is uknown", $profileParameter), OrderExceptionCodes::UNKNOWNPROFILEPARAMETER, $previous);
     }
 }

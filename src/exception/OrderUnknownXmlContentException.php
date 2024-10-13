@@ -7,9 +7,8 @@
  * file that was distributed with this source code.
  */
 
- namespace horstoeko\orderx\exception;
+namespace horstoeko\orderx\exception;
 
-use Exception;
 use Throwable;
 
 /**
@@ -21,31 +20,16 @@ use Throwable;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://github.com/horstoeko/zugferd
  */
-class OrderUnknownXmlContentException extends Exception
+class OrderUnknownXmlContentException extends OrderBaseException
 {
     /**
      * Constructor
-     */
-    public function __construct()
-    {
-        parent::__construct($this->buildMessage());
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function __toString()
-    {
-        return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
-    }
-
-    /**
-     * Build the message
      *
-     * @return string
+     * @param string         $profileParameter
+     * @param Throwable|null $previous
      */
-    private function buildMessage(): string
+    public function __construct(?Throwable $previous = null)
     {
-        return "The XML does not match the requirements for an XML in CII-Syntax";
+        parent::__construct("The XML does not match the requirements for an XML in CII-Syntax", OrderExceptionCodes::UNKNOWNSYNTAX, $previous);
     }
 }

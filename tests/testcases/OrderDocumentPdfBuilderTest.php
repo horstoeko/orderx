@@ -31,12 +31,12 @@ class OrderDocumentPdfBuilderTest extends TestCase
 
         $this->assertArrayHasKey("orderId", $methodResult);
         $this->assertArrayHasKey("docTypeName", $methodResult);
-        $this->assertArrayHasKey("sellerName", $methodResult);
+        $this->assertArrayHasKey("seller", $methodResult);
         $this->assertArrayHasKey("date", $methodResult);
 
         $this->assertEquals('PO123456789', $methodResult['orderId']);
         $this->assertEquals('Order', $methodResult['docTypeName']);
-        $this->assertEquals('SELLER_NAME', $methodResult['sellerName']);
+        $this->assertEquals('SELLER_NAME', $methodResult['seller']);
         $this->assertEquals('2022-12-31T00:00:00+00:00', $methodResult['date']);
     }
 
@@ -57,12 +57,12 @@ class OrderDocumentPdfBuilderTest extends TestCase
 
         $this->assertArrayHasKey("orderId", $methodResult);
         $this->assertArrayHasKey("docTypeName", $methodResult);
-        $this->assertArrayHasKey("sellerName", $methodResult);
+        $this->assertArrayHasKey("seller", $methodResult);
         $this->assertArrayHasKey("date", $methodResult);
 
         $this->assertEquals('PO123456789', $methodResult['orderId']);
         $this->assertEquals('Order Change', $methodResult['docTypeName']);
-        $this->assertEquals('SELLER_NAME', $methodResult['sellerName']);
+        $this->assertEquals('SELLER_NAME', $methodResult['seller']);
         $this->assertEquals('2022-12-31T00:00:00+00:00', $methodResult['date']);
     }
 
@@ -83,12 +83,12 @@ class OrderDocumentPdfBuilderTest extends TestCase
 
         $this->assertArrayHasKey("orderId", $methodResult);
         $this->assertArrayHasKey("docTypeName", $methodResult);
-        $this->assertArrayHasKey("sellerName", $methodResult);
+        $this->assertArrayHasKey("seller", $methodResult);
         $this->assertArrayHasKey("date", $methodResult);
 
         $this->assertEquals('PO123456789', $methodResult['orderId']);
         $this->assertEquals('Order Response', $methodResult['docTypeName']);
-        $this->assertEquals('SELLER_NAME', $methodResult['sellerName']);
+        $this->assertEquals('SELLER_NAME', $methodResult['seller']);
         $this->assertEquals('2022-12-31T00:00:00+00:00', $methodResult['date']);
     }
 
@@ -109,12 +109,12 @@ class OrderDocumentPdfBuilderTest extends TestCase
 
         $this->assertArrayHasKey("orderId", $methodResult);
         $this->assertArrayHasKey("docTypeName", $methodResult);
-        $this->assertArrayHasKey("sellerName", $methodResult);
+        $this->assertArrayHasKey("seller", $methodResult);
         $this->assertArrayHasKey("date", $methodResult);
 
         $this->assertEquals('PO123456789', $methodResult['orderId']);
         $this->assertEquals('Order', $methodResult['docTypeName']);
-        $this->assertEquals('SELLER_NAME', $methodResult['sellerName']);
+        $this->assertEquals('SELLER_NAME', $methodResult['seller']);
         $this->assertEquals('2022-12-31T00:00:00+00:00', $methodResult['date']);
     }
 

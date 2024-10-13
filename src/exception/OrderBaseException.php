@@ -9,8 +9,6 @@
 
 namespace horstoeko\orderx\exception;
 
-use Throwable;
-
 /**
  * Class representing the Order-X-Exception base class
  *

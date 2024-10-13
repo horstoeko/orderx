@@ -2,11 +2,11 @@
 
 namespace horstoeko\orderx\tests\testcases;
 
-use horstoeko\orderx\exception\OrderCannotFindProfileString;
-use horstoeko\orderx\exception\OrderUnknownProfileException;
-use horstoeko\orderx\OrderProfileResolver;
 use horstoeko\orderx\OrderProfiles;
 use horstoeko\orderx\tests\TestCase;
+use horstoeko\orderx\OrderProfileResolver;
+use horstoeko\orderx\exception\OrderUnknownProfileException;
+use horstoeko\orderx\exception\OrderUnknownXmlContentException;
 
 class OrderProfileResolverTest extends TestCase
 {
@@ -145,8 +145,8 @@ HDR;
 
     public function testResolveInvalidXml()
     {
-        $this->expectException(OrderCannotFindProfileString::class);
-        $this->expectExceptionMessage('The string containing the profile was not found');
+        $this->expectException(OrderUnknownXmlContentException::class);
+        $this->expectExceptionMessage('The XML does not match the requirements for an XML in CII-Syntax');
 
         OrderProfileResolver::resolveProfileId($this->deliverInvalidXml());
     }

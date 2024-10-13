@@ -25,5 +25,8 @@ class OrderExceptionCodes
     public const MIMETYPENOTSUPPORTED = -1103;
     public const UNKNOWNDATEFORMAT = -1104;
     public const NOVALIDATTACHMENTFOUNDINPDF = -1105;
+    public const UNKNOWNPROFILEPARAMETER = -1106;
+    public const UNKNOWNSYNTAX = -1107;
     public const FILENOTFOUND = -2000;
+    public const FILENOTREADABLE = -2001;
 }

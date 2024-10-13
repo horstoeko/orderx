@@ -113,10 +113,10 @@ class OrderDocumentPdfMerger extends OrderDocumentPdfBuilderAbstract
     /**
      * Guess the profile type of the readden xml document
      *
-     * @codeCoverageIgnore
-     *
      * @return array
-     * @throws Exception
+     * @throws OrderFileNotReadableException
+     * @throws OrderUnknownXmlContentException
+     * @throws OrderUnknownProfileException
      */
     private function getProfileDefinition(): array
     {
@@ -128,8 +128,12 @@ class OrderDocumentPdfMerger extends OrderDocumentPdfBuilderAbstract
      *
      * @param string $parameterName
      * @return mixed
+     * @throws OrderFileNotReadableException
+     * @throws OrderUnknownXmlContentException
+     * @throws OrderUnknownProfileException
+     * @throws OrderUnknownProfileParameterException
      */
-    private function getProfileDefinitionParameter(string $parameterName)
+    public function getProfileDefinitionParameter(string $parameterName)
     {
         $profileDefinition = $this->getProfileDefinition();
 
@@ -137,6 +141,6 @@ class OrderDocumentPdfMerger extends OrderDocumentPdfBuilderAbstract
             return $profileDefinition[$parameterName];
         }
 
-        throw new Exception(sprintf("Unknown profile definition parameter %s", $parameterName));
+        throw new OrderUnknownProfileParameterException($parameterName);
     }
 }

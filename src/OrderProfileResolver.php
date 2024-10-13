@@ -13,7 +13,6 @@ use Throwable;
 use SimpleXMLElement;
 use horstoeko\orderx\OrderProfiles;
 use horstoeko\orderx\exception\OrderUnknownXmlContentException;
-use horstoeko\orderx\exception\OrderCannotFindProfileString;
 use horstoeko\orderx\exception\OrderUnknownProfileException;
 
 /**
@@ -32,7 +31,6 @@ class OrderProfileResolver
      *
      * @param string $xmlContent
      * @return array
-     * @throws OrderCannotFindProfileString
      * @throws OrderUnknownProfileException
      */
     public static function resolve(string $xmlContent): array
@@ -54,7 +52,7 @@ class OrderProfileResolver
         }
 
         if (!is_array($typeelement) || !isset($typeelement[0])) {
-            throw new OrderCannotFindProfileString();
+            throw new OrderUnknownXmlContentException();
         }
 
         /**
@@ -75,7 +73,7 @@ class OrderProfileResolver
      *
      * @param string $xmlContent
      * @return int
-     * @throws OrderCannotFindProfileString
+     * @throws OrderUnknownXmlContentException
      * @throws OrderUnknownProfileException
      */
     public static function resolveProfileId(string $xmlContent): int
@@ -88,7 +86,7 @@ class OrderProfileResolver
      *
      * @param string $xmlContent
      * @return array
-     * @throws OrderCannotFindProfileString
+     * @throws OrderUnknownXmlContentException
      * @throws OrderUnknownProfileException
      */
     public static function resolveProfileDef(string $xmlContent): array
