@@ -26,8 +26,8 @@ class OrderDocumentBuilderExtendedTest extends TestCase
     {
         (self::$document)->initNewDocument();
 
-        $this->assertNotNull($this->invokePivateMethodFromObject(self::$document, 'getOrderObject'));
-        $this->assertEquals('horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure', get_class($this->invokePivateMethodFromObject(self::$document, 'getOrderObject')));
+        $this->assertNotNull($this->invokePrivateMethodFromObject(self::$document, 'getOrderObject'));
+        $this->assertEquals('horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure', get_class($this->invokePrivateMethodFromObject(self::$document, 'getOrderObject')));
         $property = $this->getPrivatePropertyFromObject(self::$document, 'headerTradeAgreement');
         $this->assertNotNull($property->getValue(self::$document));
         $property = $this->getPrivatePropertyFromObject(self::$document, 'headerTradeDelivery');

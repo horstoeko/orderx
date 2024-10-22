@@ -26,8 +26,8 @@ class OrderDocumentReaderComfortTest extends TestCase
 
     public function testDocumentProperties(): void
     {
-        $this->assertNotNull($this->invokePivateMethodFromObject(self::$document, 'getOrderObject'));
-        $this->assertEquals('horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructure', get_class($this->invokePivateMethodFromObject(self::$document, 'getOrderObject')));
+        $this->assertNotNull($this->invokePrivateMethodFromObject(self::$document, 'getOrderObject'));
+        $this->assertEquals('horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructure', get_class($this->invokePrivateMethodFromObject(self::$document, 'getOrderObject')));
     }
 
     public function testDocumentProfile(): void
