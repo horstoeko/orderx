@@ -57,7 +57,7 @@ class OrderDocumentValidator
      */
     public function validateDocument(): ConstraintViolationListInterface
     {
-        return $this->validator->validate($this->document->getOrderObject(), null, ['xsd_rules']);
+        return $this->validator->validate($this->getDocumentOrderObject(), null, ['xsd_rules']);
     }
 
     /**
@@ -102,5 +102,20 @@ class OrderDocumentValidator
         }
 
         return $files;
+    }
+
+    /**
+     * Returns the internal invoice object from the document
+     *
+     * @return object
+     */
+    private function getDocumentOrderObject()
+    {
+        $reflector = new \ReflectionClass($this->document);
+
+        $method = $reflector->getMethod('getOrderObject');
+        $method->setAccessible(true);
+
+        return $method->invoke($this->document);
     }
 }

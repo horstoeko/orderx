@@ -57,7 +57,7 @@ class OrderDocument
 
     /**
      * @internal
-     * @return \horstoeko\orderx\entities\basic\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure
+     * @return   \horstoeko\orderx\entities\basic\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure
      */
     private $orderObject = null;
 
@@ -86,7 +86,7 @@ class OrderDocument
      *
      * @return \horstoeko\orderx\entities\basic\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\comfort\rsm\SCRDMCCBDACIOMessageStructure|\horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure
      */
-    public function getOrderObject()
+    protected function getOrderObject()
     {
         return $this->orderObject;
     }
@@ -108,7 +108,7 @@ class OrderDocument
      *
      * @return SerializerInterface
      */
-    public function getSerializer()
+    protected function getSerializer()
     {
         return $this->serializer;
     }
@@ -118,7 +118,7 @@ class OrderDocument
      *
      * @return OrderObjectHelper
      */
-    public function getObjectHelper()
+    protected function getObjectHelper()
     {
         return $this->objectHelper;
     }

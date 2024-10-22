@@ -26,7 +26,8 @@ class OrderDocumentReaderExtendedTest extends TestCase
 
     public function testDocumentProperties(): void
     {
-        $this->assertNotNull(self::$document->getOrderObject());
+        $this->assertNotNull($this->invokePivateMethodFromObject(self::$document, 'getOrderObject'));
+        $this->assertEquals('horstoeko\orderx\entities\extended\rsm\SCRDMCCBDACIOMessageStructure', get_class($this->invokePivateMethodFromObject(self::$document, 'getOrderObject')));
     }
 
     public function testDocumentProfile(): void
