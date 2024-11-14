@@ -71,7 +71,7 @@ class OrderDocumentPdfMerger extends OrderDocumentPdfBuilderAbstract
         if ($this->xmlDataIsFile()) {
             $xmlContent = file_get_contents($this->xmlDataOrFilename);
             if ($xmlContent === false) {
-                throw new OrderFileNotReadableException('Could not read XML file');
+                throw new OrderFileNotReadableException($this->xmlDataOrFilename);
             }
         } else {
             $xmlContent = $this->xmlDataOrFilename;
