@@ -11,11 +11,15 @@ namespace horstoeko\orderx;
 
 use DOMXpath;
 use Throwable;
-use TypeError;
 use DOMDocument;
-use horstoeko\orderx\OrderPdfWriter;
-use horstoeko\orderx\OrderPackageVersion;
+use InvalidArgumentException;
+use horstoeko\mimedb\MimeDb;
 use horstoeko\orderx\codelists\OrderDocumentTypes;
+use horstoeko\orderx\exception\OrderFileNotFoundException;
+use horstoeko\orderx\exception\OrderUnknownMimetype;
+use horstoeko\orderx\OrderPackageVersion;
+use horstoeko\orderx\OrderPdfWriter;
+use horstoeko\stringmanagement\FileUtils;
 use setasign\Fpdi\PdfParser\StreamReader as PdfStreamReader;
 
 /**
@@ -31,11 +35,28 @@ use setasign\Fpdi\PdfParser\StreamReader as PdfStreamReader;
 abstract class OrderDocumentPdfBuilderAbstract
 {
     /**
+     * Constants for Relationship types
+     * 'Data', 'Alternative', 'Source', 'Supplement', 'Unspecified'
+     */
+    public const AF_RELATIONSHIP_DATA = "Data";
+    public const AF_RELATIONSHIP_ALTERNATIVE = "Alternative";
+    public const AF_RELATIONSHIP_SOURCE = "Source";
+    public const AF_RELATIONSHIP_SUPPLEMENT = "Supplement";
+    public const AF_RELATIONSHIP_UNSPECIFIED = "Unspecified";
+
+    /**
      * Additional creator tool (e.g. the ERP software that called the PHP library)
      *
      * @var string
      */
     private $additionalCreatorTool = "";
+
+    /**
+     * The relationship type to use for the XML attachment. Detault is Data
+     *
+     * @var string
+     */
+    private $attachmentRelationshipType = 'Data';
 
     /**
      * Instance of the pdfwriter
@@ -50,6 +71,13 @@ abstract class OrderDocumentPdfBuilderAbstract
      * @var string
      */
     private $pdfData = "";
+
+    /**
+     * List of files which should be additionally attached to PDF
+     *
+     * @var array
+     */
+    private $additionalFilesToAttach = [];
 
     /**
      * Constructor
@@ -67,7 +95,7 @@ abstract class OrderDocumentPdfBuilderAbstract
     /**
      * Generates the final document
      *
-     * @return self
+     * @return static
      */
     public function generateDocument()
     {
@@ -82,7 +110,7 @@ abstract class OrderDocumentPdfBuilderAbstract
      * @param  string $toFilename
      * The full qualified filename to which the generated PDF (with attachment)
      * is stored
-     * @return self
+     * @return static
      */
     public function saveDocument(string $toFilename)
     {
@@ -118,7 +146,7 @@ abstract class OrderDocumentPdfBuilderAbstract
      *
      * @param  string $additionalCreatorTool
      * The name of the creator
-     * @return self
+     * @return static
      */
     public function setAdditionalCreatorTool(string $additionalCreatorTool)
     {
@@ -135,10 +163,170 @@ abstract class OrderDocumentPdfBuilderAbstract
     public function getCreatorToolName(): string
     {
         $toolName = sprintf('Order-X PHP library %s by HorstOeko', OrderPackageVersion::getInstalledVersion());
+
         if ($this->additionalCreatorTool) {
             return $this->additionalCreatorTool . ' / ' . $toolName;
         }
+
         return $toolName;
+    }
+
+    /**
+     * Set the type of relationship for the XML attachment. Allowed
+     * types are 'Data', 'Alternative'
+     *
+     * @param  string $relationshipType
+     * @return static
+     */
+    public function setAttachmentRelationshipType(string $relationshipType)
+    {
+        if (!in_array($relationshipType, [static::AF_RELATIONSHIP_DATA, static::AF_RELATIONSHIP_ALTERNATIVE, static::AF_RELATIONSHIP_SOURCE])) {
+            $relationshipType = static::AF_RELATIONSHIP_DATA;
+        }
+
+        $this->attachmentRelationshipType = $relationshipType;
+
+        return $this;
+    }
+
+    /**
+     * Returns the relationship type for the XML attachment. This
+     * can return 'Data', 'Alternative'
+     *
+     * @return string
+     */
+    public function getAttachmentRelationshipType(): string
+    {
+        return $this->attachmentRelationshipType;
+    }
+
+    /**
+     * Set the type of relationship for the XML attachment to "Data"
+     *
+     * @return static
+     */
+    public function setAttachmentRelationshipTypeToData()
+    {
+        return $this->setAttachmentRelationshipType(static::AF_RELATIONSHIP_DATA);
+    }
+
+    /**
+     * Set the type of relationship for the XML attachment to "Alternative"
+     *
+     * @return static
+     */
+    public function setAttachmentRelationshipTypeToAlternative()
+    {
+        return $this->setAttachmentRelationshipType(static::AF_RELATIONSHIP_ALTERNATIVE);
+    }
+
+    /**
+     * Set the type of relationship for the XML attachment to "Source"
+     *
+     * @return static
+     */
+    public function setAttachmentRelationshipTypeToSource()
+    {
+        return $this->setAttachmentRelationshipType(static::AF_RELATIONSHIP_SOURCE);
+    }
+
+    /**
+     * Attach an additional file to PDF. The file that is specified in $fullFilename
+     * must exists
+     *
+     * @param  string $fullFilename
+     * @param  string $displayName
+     * @param  string $relationshipType
+     * @return static
+     * @throws OrderFileNotFoundException
+     * @throws OrderUnknownMimetype
+     */
+    public function attachAdditionalFileByRealFile(string $fullFilename, string $displayName = "", string $relationshipType = "")
+    {
+        // Checks that the file really exists
+
+        if (empty($fullFilename)) {
+            throw new InvalidArgumentException("You must specify a filename for the content to attach");
+        }
+
+        if (!file_exists($fullFilename)) {
+            throw new OrderFileNotFoundException($fullFilename);
+        }
+
+        // Load content
+
+        $content = file_get_contents($fullFilename);
+
+        // Add attachment
+
+        $this->attachAdditionalFileByContent(
+            $content,
+            $fullFilename,
+            $displayName,
+            $relationshipType,
+        );
+
+        return $this;
+    }
+
+    /**
+     * Attach an additional file to PDF by a content string
+     *
+     * @param  string $content
+     * @param  string $filename
+     * @param  string $displayName
+     * @param  string $relationshipType
+     * @return static
+     */
+    public function attachAdditionalFileByContent(string $content, string $filename, string $displayName = "", string $relationshipType = "")
+    {
+        // Check content. The content must not be empty
+
+        if (empty($content)) {
+            throw new InvalidArgumentException("You must specify a content to attach");
+        }
+
+        // Check filename. The filename must not be empty
+
+        if (empty($filename)) {
+            throw new InvalidArgumentException("You must specify a filename for the content to attach");
+        }
+
+        // Mimetype for the file must exist
+
+        $mimeType = (new MimeDb())->findFirstMimeTypeByExtension(FileUtils::getFileExtension($filename));
+
+        if (is_null($mimeType)) {
+            throw new OrderUnknownMimetype();
+        }
+
+        // Sanatize relationship type
+
+        if (empty($relationshipType)) {
+            $relationshipType = static::AF_RELATIONSHIP_SUPPLEMENT;
+        }
+
+        if (!in_array($relationshipType, [static::AF_RELATIONSHIP_DATA, static::AF_RELATIONSHIP_ALTERNATIVE, static::AF_RELATIONSHIP_SOURCE, static::AF_RELATIONSHIP_SUPPLEMENT, static::AF_RELATIONSHIP_UNSPECIFIED])) {
+            $relationshipType = static::AF_RELATIONSHIP_SUPPLEMENT;
+        }
+
+        // Sanatize displayname
+
+        if (empty($displayName)) {
+            $displayName = FileUtils::getFilenameWithExtension($filename);
+        }
+
+        // Add to attachment list
+
+        $this->additionalFilesToAttach[] = [
+            PdfStreamReader::createByString($content),
+            FileUtils::getFilenameWithExtension($filename),
+            $displayName,
+            $relationshipType,
+            str_replace('/', '#2F', $mimeType)
+        ];
+
+        return $this;
     }
 
     /**
@@ -173,7 +361,7 @@ abstract class OrderDocumentPdfBuilderAbstract
 
         $pdfDataRef = null;
 
-        if ($this->pdfDataIsFile($this->pdfData)) {
+        if ($this->isFile($this->pdfData)) {
             $pdfDataRef = $this->pdfData;
         } elseif (is_string($this->pdfData)) {
             $pdfDataRef = PdfStreamReader::createByString($this->pdfData);
@@ -189,9 +377,23 @@ abstract class OrderDocumentPdfBuilderAbstract
             $documentBuilderXmlDataRef,
             $this->getXmlAttachmentFilename(),
             'Order-X XML File',
-            'Data',
+            $this->getAttachmentRelationshipType(),
             'text#2Fxml'
         );
+
+        // Add additional attachments
+
+        foreach ($this->additionalFilesToAttach as $fileToAttach) {
+            $this->pdfWriter->attach(
+                $fileToAttach[0],
+                $fileToAttach[1],
+                $fileToAttach[2],
+                $fileToAttach[3],
+                $fileToAttach[4],
+            );
+        }
+
+        // Set flag to always show the attachment pane
 
         $this->pdfWriter->openAttachmentPane();
 
@@ -200,7 +402,7 @@ abstract class OrderDocumentPdfBuilderAbstract
         $pageCount = $this->pdfWriter->setSourceFile($pdfDataRef);
 
         for ($pageNumber = 1; $pageNumber <= $pageCount; ++$pageNumber) {
-            $pageContent = $this->pdfWriter->importPage($pageNumber, '/MediaBox');
+            $pageContent = $this->pdfWriter->importPage($pageNumber, '/MediaBox', true, true);
             $this->pdfWriter->AddPage();
             $this->pdfWriter->useTemplate($pageContent, 0, 0, null, null, true);
         }
@@ -329,12 +531,10 @@ abstract class OrderDocumentPdfBuilderAbstract
      * @param  string $pdfData
      * @return boolean
      */
-    private function pdfDataIsFile($pdfData): bool
+    private function isFile($pdfData): bool
     {
         try {
             return @is_file($pdfData);
-        } catch (TypeError $ex) {
-            return false;
         } catch (Throwable $ex) {
             return false;
         }

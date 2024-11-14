@@ -38,7 +38,8 @@
         "setasign/fpdf": "^1",
         "setasign/fpdi": "^2",
         "symfony/yaml": "^5|^6",
-        "horstoeko/stringmanagement": "^1"
+        "horstoeko/stringmanagement": "^1",
+        "horstoeko/mimedb": "^1"
     },
     "require-dev": {
         "goetas-webservices/xsd2php": "^0",

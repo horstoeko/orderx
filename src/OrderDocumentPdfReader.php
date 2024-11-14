@@ -13,6 +13,7 @@ use Exception;
 use Smalot\PdfParser\Parser as PdfParser;
 use horstoeko\orderx\exception\OrderFileNotFoundException;
 use horstoeko\orderx\exception\OrderFileNotReadableException;
+use horstoeko\orderx\exception\OrderNoPdfAttachmentFoundException;
 
 /**
  * Class representing the document reader for incoming PDF/A-Documents with
@@ -35,11 +36,11 @@ class OrderDocumentPdfReader
      * Load a PDF file (Order-X)
      *
      * @param  string $pdfFilename Contains a full-qualified filename which must exist and must be readable
-     * @return null|OrderDocumentReader
+     * @return OrderDocumentReader
      * @throws OrderFileNotFoundException
      * @throws OrderFileNotReadableException
      */
-    public static function readAndGuessFromFile(string $pdfFilename): ?OrderDocumentReader
+    public static function readAndGuessFromFile(string $pdfFilename): OrderDocumentReader
     {
         if (!file_exists($pdfFilename)) {
             throw new OrderFileNotFoundException($pdfFilename);
@@ -59,32 +60,24 @@ class OrderDocumentPdfReader
      * If any erros occured or no attachments were found null is returned
      *
      * @param  string $pdfContent String Containing the binary pdf data
-     * @return null|OrderDocumentReader
+     * @return OrderDocumentReader
      */
-    public static function readAndGuessFromContent(string $pdfContent): ?OrderDocumentReader
+    public static function readAndGuessFromContent(string $pdfContent): OrderDocumentReader
     {
         $xmlContent = static::internalExtractXMLFromPdfContent($pdfContent);
 
-        if (is_null($xmlContent)) {
-            return null;
-        }
-
-        try {
-            return OrderDocumentReader::readAndGuessFromContent($xmlContent);
-        } catch (\Exception $e) {
-            return null;
-        }
+        return OrderDocumentReader::readAndGuessFromContent($xmlContent);
     }
 
     /**
      * Returns a XML content from a PDF file
      *
      * @param  string $pdfFilename Contains a full-qualified filename which must exist and must be readable
-     * @return null|string
+     * @return string
      * @throws OrderFileNotFoundException
      * @throws OrderFileNotReadableException
      */
-    public static function getXmlFromFile(string $pdfFilename): ?string
+    public static function getXmlFromFile(string $pdfFilename): string
     {
         if (!file_exists($pdfFilename)) {
             throw new OrderFileNotFoundException($pdfFilename);
@@ -103,9 +96,9 @@ class OrderDocumentPdfReader
      * Returns a XML content from a PDF binary stream (string)
      *
      * @param  string $pdfContent String Containing the binary pdf data
-     * @return null|string
+     * @return string
      */
-    public static function getXmlFromContent(string $pdfContent): ?string
+    public static function getXmlFromContent(string $pdfContent): string
     {
         return static::internalExtractXMLFromPdfContent($pdfContent);
     }
@@ -115,10 +108,11 @@ class OrderDocumentPdfReader
      * See the allowed filenames which are supported
      *
      * @param  string $pdfContent String Containing the binary pdf data
-     * @return null|string
+     * @return string
      * @throws Exception
+     * @throws OrderNoPdfAttachmentFoundException
      */
-    protected static function internalExtractXMLFromPdfContent(string $pdfContent): ?string
+    protected static function internalExtractXMLFromPdfContent(string $pdfContent): string
     {
         $pdfParser = new PdfParser();
         $pdfParsed = $pdfParser->parseContent($pdfContent);
@@ -127,35 +121,29 @@ class OrderDocumentPdfReader
         $attachmentFound = false;
         $attachmentIndex = 0;
         $embeddedFileIndex = 0;
-        $returnValue = null;
 
-        try {
-            foreach ($filespecs as $filespec) {
-                $filespecDetails = $filespec->getDetails();
-                if (in_array($filespecDetails['F'], static::ATTACHMENT_FILENAMES)) {
-                    $attachmentFound = true;
-                    break;
-                }
-                $attachmentIndex++;
+        foreach ($filespecs as $filespec) {
+            $filespecDetails = $filespec->getDetails();
+            if (in_array($filespecDetails['F'], static::ATTACHMENT_FILENAMES)) {
+                $attachmentFound = true;
+                break;
             }
-
-            if (true == $attachmentFound) {
-                /**
-                 * @var array<\Smalot\PdfParser\PDFObject>
-                 */
-                $embeddedFiles = $pdfParsed->getObjectsByType('EmbeddedFile');
-                foreach ($embeddedFiles as $embeddedFile) {
-                    if ($attachmentIndex == $embeddedFileIndex) {
-                        $returnValue = $embeddedFile->getContent();
-                        break;
-                    }
-                    $embeddedFileIndex++;
-                }
-            }
-        } catch (\Exception $e) {
-            $returnValue = null;
+            $attachmentIndex++;
         }
 
-        return $returnValue;
+        if (true == $attachmentFound) {
+            /**
+             * @var array<\Smalot\PdfParser\PDFObject>
+             */
+            $embeddedFiles = $pdfParsed->getObjectsByType('EmbeddedFile');
+            foreach ($embeddedFiles as $embeddedFile) {
+                if ($attachmentIndex == $embeddedFileIndex) {
+                    return $embeddedFile->getContent();
+                }
+                $embeddedFileIndex++;
+            }
+        }
+
+        throw new OrderNoPdfAttachmentFoundException();
     }
 }

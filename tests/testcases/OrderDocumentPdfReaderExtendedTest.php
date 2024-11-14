@@ -2,11 +2,12 @@
 
 namespace horstoeko\orderx\tests\testcases;
 
-use horstoeko\orderx\codelists\OrderDocumentTypes;
-use horstoeko\orderx\exception\OrderFileNotFoundException;
-use horstoeko\orderx\OrderDocumentPdfReader;
 use horstoeko\orderx\OrderProfiles;
 use horstoeko\orderx\tests\TestCase;
+use horstoeko\orderx\OrderDocumentPdfReader;
+use horstoeko\orderx\codelists\OrderDocumentTypes;
+use horstoeko\orderx\exception\OrderFileNotFoundException;
+use horstoeko\orderx\exception\OrderNoPdfAttachmentFoundException;
 
 class OrderDocumentPdfReaderExtendedTest extends TestCase
 {
@@ -18,13 +19,15 @@ class OrderDocumentPdfReaderExtendedTest extends TestCase
     public function testPdfReadNotExists(): void
     {
         $this->expectException(OrderFileNotFoundException::class);
+        $this->expectExceptionMessage(sprintf('The file %s was not found', dirname(__FILE__) . '/../assets/reader-notexists.pdf'));
         self::$document = OrderDocumentPdfReader::readAndGuessFromFile(dirname(__FILE__) . '/../assets/reader-notexists.pdf');
     }
 
     public function testPdfReadInvalid(): void
     {
+        $this->expectException(OrderNoPdfAttachmentFoundException::class);
+        $this->expectExceptionMessage('No PDF attachment found');
         self::$document = OrderDocumentPdfReader::readAndGuessFromFile(dirname(__FILE__) . '/../assets/reader-invalid.pdf');
-        $this->assertNull(self::$document);
     }
 
     public function testPdfRead(): void
