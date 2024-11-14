@@ -46,7 +46,7 @@ class OrderXsdValidator
     /**
      * Constructor
      *
-     * @param              OrderDocument $document
+     * @param OrderDocument $document
      */
     public function __construct(OrderDocument $document)
     {
@@ -80,7 +80,7 @@ class OrderXsdValidator
      * Returns true if validation passed otherwise false
      *
      * @deprecated 1.0.23 Use hasNoValidationErrors instead
-     * @return boolean
+     * @return     boolean
      */
     public function validationPased(): bool
     {
