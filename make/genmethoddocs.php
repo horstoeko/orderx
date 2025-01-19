@@ -18,7 +18,7 @@ use phpDocumentor\Reflection\DocBlockFactory;
 use phpDocumentor\Reflection\Exception\PcreException;
 use Webmozart\Assert\InvalidArgumentException;
 
-require dirname(__FILE__) . "/../vendor/autoload.php";
+require __DIR__ . "/../vendor/autoload.php";
 
 class CustomPhpPrinter extends Printer
 {
@@ -113,9 +113,9 @@ class ExtractClass
             $classDocBlock = $docBlockFactory->create($classDocComment);
             $deprecatedTag = $classDocBlock->getTagsByName('deprecated');
             $result['class'] = [
-                'summary' => $classDocBlock->getSummary() ?: '',
-                'description' => (string)$classDocBlock->getDescription() ?: '',
-                'deprecated' => !empty($deprecatedTag) ? (string)$deprecatedTag[0] : ''
+                'summary' => in_array($classDocBlock->getSummary(), ['', '0'], true) ? '' : $classDocBlock->getSummary(),
+                'description' => (string)$classDocBlock->getDescription() !== '' && (string)$classDocBlock->getDescription() !== '0' ? (string)$classDocBlock->getDescription() : '',
+                'deprecated' => $deprecatedTag === [] ? '' : (string)$deprecatedTag[0]
             ];
         } else {
             $result['class'] = [
@@ -126,10 +126,8 @@ class ExtractClass
         }
 
         foreach ($methods as $method) {
-            if ($method->getDeclaringClass()->getName() != $this->className) {
-                if (!in_array(sprintf('%s::%s', $this->className, $method->getName()), $this->ignoreInheritance)) {
-                    continue;
-                }
+            if ($method->getDeclaringClass()->getName() != $this->className && !in_array(sprintf('%s::%s', $this->className, $method->getName()), $this->ignoreInheritance)) {
+                continue;
             }
 
             $docComment = $method->getDocComment();
@@ -152,14 +150,14 @@ class ExtractClass
                 $docBlock = $docBlockFactory->create($docComment);
 
                 // Extract summary and description
-                $methodDetails['summary'] = $docBlock->getSummary() ?: 'No summary available.';
-                $methodDetails['description'] = (string)$docBlock->getDescription() ?: '';
+                $methodDetails['summary'] = in_array($docBlock->getSummary(), ['', '0'], true) ? 'No summary available.' : $docBlock->getSummary();
+                $methodDetails['description'] = (string)$docBlock->getDescription() !== '' && (string)$docBlock->getDescription() !== '0' ? (string)$docBlock->getDescription() : '';
                 $methodDetails['static'] = $method->isStatic();
                 $methodDetails['abstract'] = $method->isAbstract();
                 $methodDetails['final'] = $method->isFinal();
                 $methodDetails['hasadditional'] = $method->isStatic() || $method->isAbstract() || $method->isFinal();
                 $deprecatedTag = $docBlock->getTagsByName('deprecated');
-                if (!empty($deprecatedTag)) {
+                if ($deprecatedTag !== []) {
                     $methodDetails['deprecated'] = (string)$deprecatedTag[0];
                 }
 
@@ -176,7 +174,7 @@ class ExtractClass
 
                 // Parse @return tag
                 $returnTag = $docBlock->getTagsByName('return');
-                if (!empty($returnTag) && $returnTag[0] instanceof Return_) {
+                if ($returnTag !== [] && $returnTag[0] instanceof Return_) {
                     $returnDetails['type'] = (string) $returnTag[0]->getType();
                     $returnDetails['description'] = (string) $returnTag[0]->getDescription();
                 }
@@ -193,6 +191,7 @@ class ExtractClass
                     foreach ($types as $type) {
                         $parameterTypeString .= $type->getName() . '|';
                     }
+
                     $parameterTypeString = rtrim($parameterTypeString, '|');
                 } elseif ($parameterType instanceof ReflectionNamedType) {
                     $parameterTypeString = $parameterType->getName();
@@ -202,9 +201,9 @@ class ExtractClass
 
                 $parameters[] = [
                     'name' => $parameterName,
-                    'type' => $parameterTypeString ? $parameterTypeString : 'mixed',
+                    'type' => $parameterTypeString ?: 'mixed',
                     'isNullable' => $parameterType && $parameterType->allowsNull(),
-                    'defaultValueavailable' => $parameter->isOptional() ? ($parameter->isDefaultValueAvailable() ? true : false) : false,
+                    'defaultValueavailable' => $parameter->isOptional() && $parameter->isDefaultValueAvailable(),
                     'defaultValue' => $parameter->isOptional() ? ($parameter->isDefaultValueAvailable() ? $parameter->getDefaultValue() : null) : null,
                     'description' => $paramDescriptions[$parameterName]['description'] ?? ''
                 ];
@@ -253,7 +252,7 @@ class MarkDownGenerator
      *
      * @var ExtractClass
      */
-    protected $extractor = null;
+    protected $extractor;
 
     /**
      * The lines for the MD
@@ -300,7 +299,7 @@ class MarkDownGenerator
             $this->addEmptyLine();
         }
 
-        $this->addExample(dirname(__FILE__) . sprintf('/md/%s.md', $this->extractor->getClassBasename()), true);
+        $this->addExample(__DIR__ . sprintf('/md/%s.md', $this->extractor->getClassBasename()), true);
 
         if (!empty($metaData['methods'])) {
             $this->addLineH2("Methods");
@@ -392,7 +391,7 @@ class MarkDownGenerator
                 $this->addEmptyLine();
             }
 
-            $this->addExample(dirname(__FILE__) . sprintf('/md/%s_%s.md', $this->extractor->getClassBasename(), $methodName));
+            $this->addExample(__DIR__ . sprintf('/md/%s_%s.md', $this->extractor->getClassBasename(), $methodName));
         }
 
         return $this;
@@ -448,20 +447,6 @@ class MarkDownGenerator
     }
 
     /**
-     * Add a line to internal container
-     *
-     * @param string $string
-     * @param mixed ...$args
-     * @return MarkDownGenerator
-     */
-    private function addLineRawAllowEmpty(string $string, ...$args): MarkDownGenerator
-    {
-        $this->lines[] = sprintf($string, ...$args);
-
-        return $this;
-    }
-
-    /**
      * Add an empty line to internal container
      *
      * @return MarkDownGenerator
@@ -469,24 +454,6 @@ class MarkDownGenerator
     private function addEmptyLine(): MarkDownGenerator
     {
         $this->lines[] = "";
-
-        return $this;
-    }
-
-    /**
-     * Add an H1-Line to internal container
-     *
-     * @param string $string
-     * @param boolean $newLine
-     * @return MarkDownGenerator
-     */
-    private function addLineH1(string $string, bool $newLine = true): MarkDownGenerator
-    {
-        $this->addLine("# %s", $string);
-
-        if ($newLine) {
-            $this->addEmptyLine();
-        }
 
         return $this;
     }
@@ -555,7 +522,7 @@ class MarkDownGenerator
      */
     private function addToLastLine(string $string, string $delimiter = "", ...$args): MarkDownGenerator
     {
-        if (empty($this->lines)) {
+        if ($this->lines === []) {
             return $this->addLine($string, ...$args);
         }
 
@@ -578,18 +545,6 @@ class MarkDownGenerator
     }
 
     /**
-     * Add line as bold formatted
-     *
-     * @param string $string
-     * @param mixed ...$args
-     * @return MarkDownGenerator
-     */
-    private function addLineBold(string $string, ...$args): MarkDownGenerator
-    {
-        return $this->addLine(sprintf("__%s__", $string), ...$args);
-    }
-
-    /**
      * Import an example from a markdown file
      *
      * @param string $exampleFilename
@@ -608,13 +563,13 @@ class MarkDownGenerator
             return $this;
         }
 
-        if ($isClass === true) {
+        if ($isClass) {
             $this->addLineH2("Example");
         } else {
             $this->addLineH4("Example");
         }
 
-        $exampleFileContent = str_replace(array("\r\n", "\r", "\n"), "\n", $exampleFileContent);
+        $exampleFileContent = str_replace(["\r\n", "\r", "\n"], "\n", $exampleFileContent);
 
         foreach (explode("\n", $exampleFileContent) as $exampleFileContentLine) {
             $this->lines[] = $exampleFileContentLine;
@@ -636,9 +591,8 @@ class MarkDownGenerator
         $string = str_replace("\n", "<br/>", $string);
         $string = str_replace("__BT-, From __", "", $string);
         $string = str_replace("__BT-, From", "__BT-??, From", $string);
-        $string = trim($string);
 
-        return $string;
+        return trim($string);
     }
 
     /**
@@ -649,9 +603,7 @@ class MarkDownGenerator
      */
     private function removeSprintfPlaceholder(string $string): string
     {
-        $string = str_replace("%", "", $string);
-
-        return $string;
+        return str_replace("%", "", $string);
     }
 
     /**
@@ -665,11 +617,13 @@ class MarkDownGenerator
         if (stripos($string, '[]') !== false) {
             $string = 'array';
         }
+
         if (stripos($string, 'array<') === 0) {
             $string = 'array';
         }
-        if ($string == '$this') {
-            $string = 'static';
+
+        if ($string === '$this') {
+            return 'static';
         }
 
         return $string;
