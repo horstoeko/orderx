@@ -617,7 +617,7 @@ class OrderDocumentPdfBuilderTest extends TestCase
         $this->assertArrayHasKey("Type", $pdfFilespecDetailsEF_F);
         $this->assertArrayHasKey("Length", $pdfFilespecDetailsEF_F);
         $this->assertEquals("FlateDecode", $pdfFilespecDetailsEF_F["Filter"]);
-        $this->assertEquals("text#2Fplain", $pdfFilespecDetailsEF_F["Subtype"]);
+        $this->assertEquals("text/plain", $pdfFilespecDetailsEF_F["Subtype"]);
         $this->assertEquals("EmbeddedFile", $pdfFilespecDetailsEF_F["Type"]);
         $this->assertEquals(195, $pdfFilespecDetailsEF_F["Length"]);
 
@@ -628,7 +628,7 @@ class OrderDocumentPdfBuilderTest extends TestCase
         $this->assertArrayHasKey("Type", $pdfFilespecDetailsEF_UF);
         $this->assertArrayHasKey("Length", $pdfFilespecDetailsEF_UF);
         $this->assertEquals("FlateDecode", $pdfFilespecDetailsEF_UF["Filter"]);
-        $this->assertEquals("text#2Fplain", $pdfFilespecDetailsEF_UF["Subtype"]);
+        $this->assertEquals("text/plain", $pdfFilespecDetailsEF_UF["Subtype"]);
         $this->assertEquals("EmbeddedFile", $pdfFilespecDetailsEF_UF["Type"]);
         $this->assertEquals(195, $pdfFilespecDetailsEF_UF["Length"]);
     }
@@ -729,7 +729,7 @@ class OrderDocumentPdfBuilderTest extends TestCase
         $this->assertArrayHasKey("Type", $pdfFilespecDetailsEF_F);
         $this->assertArrayHasKey("Length", $pdfFilespecDetailsEF_F);
         $this->assertEquals("FlateDecode", $pdfFilespecDetailsEF_F["Filter"]);
-        $this->assertEquals("text#2Fplain", $pdfFilespecDetailsEF_F["Subtype"]);
+        $this->assertEquals("text/plain", $pdfFilespecDetailsEF_F["Subtype"]);
         $this->assertEquals("EmbeddedFile", $pdfFilespecDetailsEF_F["Type"]);
         $this->assertEquals(195, $pdfFilespecDetailsEF_F["Length"]);
 
@@ -740,7 +740,7 @@ class OrderDocumentPdfBuilderTest extends TestCase
         $this->assertArrayHasKey("Type", $pdfFilespecDetailsEF_UF);
         $this->assertArrayHasKey("Length", $pdfFilespecDetailsEF_UF);
         $this->assertEquals("FlateDecode", $pdfFilespecDetailsEF_UF["Filter"]);
-        $this->assertEquals("text#2Fplain", $pdfFilespecDetailsEF_UF["Subtype"]);
+        $this->assertEquals("text/plain", $pdfFilespecDetailsEF_UF["Subtype"]);
         $this->assertEquals("EmbeddedFile", $pdfFilespecDetailsEF_UF["Type"]);
         $this->assertEquals(195, $pdfFilespecDetailsEF_UF["Length"]);
     }
