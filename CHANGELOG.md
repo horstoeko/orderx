@@ -1,3 +1,18 @@
+## v1.0.26
+
+``Previous version v1.0.25``
+
+| Type | Hash    | Date    | Author  | Subject  | Issue(s)
+| :--- | :------ | :------ | :------ | :------- | :-----------: 
+| :new:  | [fa8b01a](https://github.com/horstoeko/orderx/commit/fa8b01a) | 2025-03-15 08:54:56 CET | HorstOeko | [ENH] Update build and cs config | 
+| :new:  | [07284fc](https://github.com/horstoeko/orderx/commit/07284fc) | 2025-03-15 08:53:02 CET | HorstOeko | [ENH] Update build and cs config | 
+| :new:  | [3402ec1](https://github.com/horstoeko/orderx/commit/3402ec1) | 2025-03-14 18:35:33 CET | HorstOeko | [ENH] Update build and cs config | 
+| :new:  | [7b7cc50](https://github.com/horstoeko/orderx/commit/7b7cc50) | 2025-03-14 18:00:52 CET | HorstOeko | [ENH] Update build and cs config | 
+| :new:  | [3b75f71](https://github.com/horstoeko/orderx/commit/3b75f71) | 2025-03-14 17:47:53 CET | HorstOeko | [ENH] Update build and cs config | 
+| :new_moon:  | [5dda40d](https://github.com/horstoeko/orderx/commit/5dda40d) | 2024-11-14 16:32:57 CET | HorstOeko | Fix code style | 
+
+:exclamation: _There are 5 internal commit(s)_
+
 ## v1.0.25
 
 ``Previous version v1.0.24``
@@ -16,7 +31,6 @@
 | Type | Hash    | Date    | Author  | Subject  | Issue(s)
 | :--- | :------ | :------ | :------ | :------- | :-----------: 
 | :new_moon:  | [c2e66e8](https://github.com/horstoeko/orderx/commit/c2e66e8) | 2024-10-22 05:24:53 CEST | HorstOeko | Fixed typo in TestCase method | 
-| :new_moon:  | [bdd2533](https://github.com/horstoeko/orderx/commit/bdd2533) | 2024-10-22 05:19:51 CEST | HorstOeko | Merged PR | [#5](https://github.com/horstoeko/orderx/issues/5)
 | :new_moon:  | [f5335cf](https://github.com/horstoeko/orderx/commit/f5335cf) | 2024-10-22 05:12:59 CEST | HorstOeko | Sealed class OrderDocument | 
 | :new_moon:  | [5db8ac8](https://github.com/horstoeko/orderx/commit/5db8ac8) | 2024-10-13 15:48:13 CEST | HorstOeko | Improved test coverage | 
 | :new_moon:  | [d0cc000](https://github.com/horstoeko/orderx/commit/d0cc000) | 2024-10-13 14:57:41 CEST | HorstOeko | Fix namespace | 
@@ -40,10 +54,9 @@
 | :new_moon:  | [e427371](https://github.com/horstoeko/orderx/commit/e427371) | 2024-10-13 11:31:39 CEST | HorstOeko | Merged some minor improvements from horstoeko/zugferd | 
 | :new_moon:  | [64245e9](https://github.com/horstoeko/orderx/commit/64245e9) | 2024-10-13 11:16:40 CEST | HorstOeko | Improved tests | 
 | :new_moon:  | [757263d](https://github.com/horstoeko/orderx/commit/757263d) | 2024-10-13 10:32:22 CEST | HorstOeko | Removed PHP8.4 from workflow | 
-| :new_moon:  | [fc320b2](https://github.com/horstoeko/orderx/commit/fc320b2) | 2024-06-15 09:24:38 CEST | HorstOeko | Merged PR | [#1](https://github.com/horstoeko/orderx/issues/1)
 | :new_moon:  | [92b5f71](https://github.com/horstoeko/orderx/commit/92b5f71) | 2024-05-26 23:58:53 CEST | David Bomba | add symfony 7 validator to composer | 
 
-:exclamation: _There are 3 internal commit(s)_
+:exclamation: _There are 2 internal commit(s)_
 
 ## v1.0.22
 
@@ -119,7 +132,7 @@
 | :new_moon:  | [1430af1](https://github.com/horstoeko/orderx/commit/1430af1) | 2023-09-25 06:18:59 CEST | HorstOeko | Exclude .github-folder from action run | 
 | :new_moon:  | [72fb469](https://github.com/horstoeko/orderx/commit/72fb469) | 2023-09-24 08:25:19 CEST | HorstOeko | Added community standards | 
 
-:exclamation: _There are 5 internal commit(s)_
+:exclamation: _There are 4 internal commit(s)_
 
 ## v1.0.15
 
