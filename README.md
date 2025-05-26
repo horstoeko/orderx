@@ -12,7 +12,7 @@ A simple Order-X Library
 With `horstoeko/orderx` you can read and write xml files containing electronic orders data in all Profiles.
 
 Information about...
-* [OrderX](https://www.ferd-net.de/standards/order-x/index.html) (German)
+* [OrderX](https://www.ferd-net.de/standards/order-x) (German)
 
 This package makes use of [JMS Serializer](http://jmsyst.com/libs/serializer), [Xsd2Php](https://github.com/goetas-webservices/xsd2php), [FPDF](https://github.com/Setasign/FPDF) and  [FPDI](https://github.com/Setasign/FPDI).
 
